@@ -20,6 +20,7 @@ import tripleo.elijah.comp.notation.GN_Env;
 import tripleo.elijah.comp.notation.GN_Notable;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
+import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
@@ -235,6 +236,11 @@ public class CR_State {
 		@Override
 		public void resolvePipelinePromise(final PipelineLogic aPipelineLogic) {
 			this._ab.resolvePipelineLogic(aPipelineLogic);
+		}
+
+		@Override
+		public DeducePhase getDeducePhase() {
+			return getCompilationEnclosure().getPipelineLogic().dp;
 		}
 
 		@Override
