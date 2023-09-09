@@ -9,5 +9,4 @@ class DeduceTypes2_deduceFunctions_Request(
         val listOfEvaFunctions: MutableIterable<EvaNode>,
         val b: Boolean,
         val deducePhase: DeducePhase,
-) {
-}
+)

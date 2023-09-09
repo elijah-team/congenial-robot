@@ -65,14 +65,16 @@ import static tripleo.elijah.util.Helpers.List_of;
  * Created 12/24/20 3:59 AM
  */
 public class DeducePhase extends _RegistrationTarget implements ReactiveDimension {
+	private @NotNull
+	final DeducePhaseInjector __inj = new DeducePhaseInjector();
+
+
 	public final @NotNull  ICodeRegistrar                               codeRegistrar;
 	public final @NotNull  GeneratedClasses                             generatedClasses;
 	public final @NotNull  GeneratePhase                                generatePhase;
 	@NotNull
 	public final           List<IFunctionMapHook>                       functionMapHooks        = _inj().new_ArrayList__IFunctionMapHook();
 	private final String PHASE = "DeducePhase";
-	private @NotNull
-	final DeducePhaseInjector __inj = new DeducePhaseInjector();
 	final Multimap<OS_Module, Consumer<DeduceTypes2>> iWantModules = ArrayListMultimap.create();
 	private final @NotNull ICompilationAccess                           ca;
 	private final          Map<NamespaceStatement, NamespaceInvocation> namespaceInvocationMap  = _inj().new_HashMap__NamespaceInvocationMap();
@@ -201,7 +203,6 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	}
 
 	public void addLog(ElLog aLog) {
-		//deduceLogs.add(aLog);
 		pipelineLogic.addLog(aLog);
 	}
 
