@@ -81,7 +81,7 @@ public class DeduceTypesTest2 {
 		assert c.getCompilationEnclosure().getCompilationRunner().crState != null; // always true
 
 		final DeducePhase  dp = b.getDeducePhase();
-		final DeduceTypes2 d  = dp.deduceModule(new DeducePhase_deduceModule_Request(mod, dp.generatedClasses, Compilation.gitlabCIVerbosity()));
+		final DeduceTypes2 d  = dp.deduceModule(new DeducePhase_deduceModule_Request(mod, dp.generatedClasses, Compilation.gitlabCIVerbosity(), dp));
 
 		final GenType x = DeduceLookupUtils.deduceExpression(d, x1, fc);
 		tripleo.elijah.util.Stupidity.println_out_2("-- deduceExpression >>" + x);

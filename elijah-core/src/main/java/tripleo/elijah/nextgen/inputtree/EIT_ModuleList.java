@@ -149,7 +149,9 @@ public class EIT_ModuleList {
 		}
 
 		public void deduceModule() {
-			deducePhase.deduceModule(new DeducePhase_deduceModule_Request(mod, getLgc(), getVerbosity()));
+			final DeducePhase_deduceModule_Request rq = new DeducePhase_deduceModule_Request(mod, getLgc(), getVerbosity(), deducePhase);
+
+			deducePhase.deduceModule(rq);
 		}
 
 		@Contract(pure = true)

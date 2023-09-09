@@ -12,9 +12,20 @@ data class DeducePhase_deduceModule_Request(
         val module: OS_Module,
         val listOfEvaFunctions: MutableIterable<EvaNode>,
         val verbosity: ElLog.Verbosity,
+        val deducePhase: DeducePhase
 ) {
-    fun createDeduceTypes2(aDeducePhase: DeducePhase): DeduceTypes2 {
-        val deduceTypes2Request = DeduceTypes2Request(module = module, deducePhase = aDeducePhase, verbosity = verbosity)
+    private lateinit var createdDeduceTypes2: DeduceTypes2
+
+    fun createDeduceTypes2(): DeduceTypes2 {
+        val deduceTypes2Request = DeduceTypes2Request(module = module, deducePhase = deducePhase, verbosity = verbosity)
         return Rosetta.create(deduceTypes2Request)
+    }
+
+    fun createDeduceTypes2_singleton(): DeduceTypes2 {
+        if (this.createdDeduceTypes2 == null) {
+            this.createdDeduceTypes2 = createDeduceTypes2()
+        }
+
+        return createdDeduceTypes2
     }
 }

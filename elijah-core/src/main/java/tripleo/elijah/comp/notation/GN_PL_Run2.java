@@ -70,7 +70,7 @@ public class GN_PL_Run2 implements GN_Notable {
 			__processResolvedNodes(resolved_nodes, cr);
 
 			ElLog.Verbosity verbosity = pipelineLogic.getVerbosity();
-			pipelineLogic.dp.deduceModule(new DeducePhase_deduceModule_Request(mod, lgc, verbosity));
+			pipelineLogic.dp.deduceModule(new DeducePhase_deduceModule_Request(mod, lgc, verbosity, pipelineLogic.dp));
 
 			worldConsumer.accept(worldModule);
 		});
