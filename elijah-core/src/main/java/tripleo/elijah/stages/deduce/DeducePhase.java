@@ -29,12 +29,15 @@ import tripleo.elijah.lang.types.OS_UnknownType;
 import tripleo.elijah.nextgen.ClassDefinition;
 import tripleo.elijah.nextgen.diagnostic.CouldntGenerateClass;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
+import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
+import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah.stages.deduce.declarations.DeferredMember;
 import tripleo.elijah.stages.deduce.declarations.DeferredMemberFunction;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.nextgen.DR_Item;
 import tripleo.elijah.stages.deduce.nextgen.DR_ProcCall;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
+import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VariableTableEntry;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.logging.ElLog;
@@ -188,7 +191,12 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		// create more
 		generatedClasses = _inj().new_GeneratedClasses(this);
 
-		//
+		extracted_ST_registers_for_annotation();
+	}
+
+	private void extracted_ST_registers_for_annotation() {
+		IStateRunnable.ST.register(this);
+		DeduceElement3_VariableTableEntry.ST.register(this);
 		DeduceElement3_IdentTableEntry.ST.register(this);
 	}
 
@@ -205,10 +213,6 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 	public void addDeferredMember(final DeferredMemberFunction aDeferredMemberFunction) {
 		deferredMemberFunctions.add(aDeferredMemberFunction);
-	}
-
-	public @NotNull DeduceTypes2 deduceModule(final @NotNull OS_Module aMod) {
-		return deduceModule(aMod, this.generatedClasses, Compilation.gitlabCIVerbosity());
 	}
 
 	public void addFunctionMapHook(final IFunctionMapHook aFunctionMapHook) {
@@ -245,7 +249,11 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 //	public List<ElLog> deduceLogs = new ArrayList<ElLog>();
 
-	public @NotNull DeduceTypes2 deduceModule(@NotNull OS_Module m, @NotNull Iterable<EvaNode> lgf, ElLog.Verbosity verbosity) {
+	public @NotNull DeduceTypes2 deduceModule(DeducePhase_deduceModule_Request aRequest) {
+		OS_Module         m         = aRequest.getModule();
+		Iterable<EvaNode> lgf       = aRequest.getListOfEvaFunctions();
+		ElLog.Verbosity   verbosity = aRequest.getVerbosity();
+
 		final @NotNull DeduceTypes2 deduceTypes2 = _inj().new_DeduceTypes2(m, this, verbosity);
 //		LOG.err("196 DeduceTypes "+deduceTypes2.getFileName());
 		{
@@ -1106,7 +1114,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		}
 
 		public DeduceTypes2 new_DeduceTypes2(final OS_Module aM, final DeducePhase aDeducePhase, final ElLog.Verbosity aVerbosity) {
-			return new DeduceTypes2(aM, aDeducePhase, aVerbosity);
+			return new DeduceTypes2(new DeduceTypes2Request(aM, aDeducePhase, aVerbosity));
 		}
 
 		public List<EvaNode> new_ArrayList__EvaNode() {

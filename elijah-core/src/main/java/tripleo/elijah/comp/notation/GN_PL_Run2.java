@@ -7,10 +7,12 @@ import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.lang.i.OS_Module;
+import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.inter.ModuleThing;
+import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.world.i.WorldModule;
 import tripleo.elijah.world.impl.DefaultWorldModule;
 
@@ -67,7 +69,8 @@ public class GN_PL_Run2 implements GN_Notable {
 			__processNodes(lgc, resolved_nodes, cr);
 			__processResolvedNodes(resolved_nodes, cr);
 
-			pipelineLogic.dp.deduceModule(mod, lgc, pipelineLogic.getVerbosity());
+			ElLog.Verbosity verbosity = pipelineLogic.getVerbosity();
+			pipelineLogic.dp.deduceModule(new DeducePhase_deduceModule_Request(mod, lgc, verbosity));
 
 			worldConsumer.accept(worldModule);
 		});
