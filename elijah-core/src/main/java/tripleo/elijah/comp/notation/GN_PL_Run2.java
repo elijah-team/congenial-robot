@@ -8,7 +8,8 @@ import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.DeducePhase;
-import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.stages.gen_fn.DefaultClassGenerator;
+import tripleo.elijah.stages.gen_fn.IClassGenerator;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.world.i.WorldModule;
@@ -65,81 +66,6 @@ public class GN_PL_Run2 implements GN_Notable {
 
 			worldConsumer.accept(worldModule);
 		});
-	}
-
-	@SuppressWarnings("TypeMayBeWeakened")
-	private void __processNodes(final DeducePhase.@NotNull GeneratedClasses lgc,
-								final @NotNull List<EvaNode> resolved_nodes,
-								final @NotNull ICodeRegistrar cr) {
-		for (final EvaNode evaNode : lgc) {
-			if (!(evaNode instanceof final @NotNull GNCoded coded)) {
-				throw new IllegalStateException("node must be coded");
-			}
-
-			switch (coded.getRole()) {
-			case FUNCTION -> {
-				cr.registerFunction1((BaseEvaFunction) evaNode);
-			}
-			case CLASS -> {
-				final EvaClass evaClass = (EvaClass) evaNode;
-
-				//assert (evaClass.getCode() != 0);
-				if (evaClass.getCode() == 0) {
-					cr.registerClass1(evaClass);
-				}
-
-//					if (generatedClass.getCode() == 0)
-//						generatedClass.setCode(mod.getCompilation().nextClassCode());
-				for (EvaClass evaClass2 : evaClass.classMap.values()) {
-					if (evaClass2.getCode() == 0) {
-						//evaClass2.setCode(mod.getCompilation().nextClassCode());
-						cr.registerClass1(evaClass2);
-					}
-				}
-				for (EvaFunction generatedFunction : evaClass.functionMap.values()) {
-					for (IdentTableEntry identTableEntry : generatedFunction.idte_list) {
-						if (identTableEntry.isResolved()) {
-							EvaNode node = identTableEntry.resolvedType();
-							resolved_nodes.add(node);
-						}
-					}
-				}
-			}
-			case NAMESPACE -> {
-				final EvaNamespace evaNamespace = (EvaNamespace) evaNode;
-				if (coded.getCode() == 0) {
-					//coded.setCode(mod.getCompilation().nextClassCode());
-					cr.registerNamespace(evaNamespace);
-				}
-				for (EvaClass evaClass3 : evaNamespace.classMap.values()) {
-					if (evaClass3.getCode() == 0) {
-						//evaClass.setCode(mod.getCompilation().nextClassCode());
-						cr.registerClass1(evaClass3);
-					}
-				}
-				for (EvaFunction generatedFunction : evaNamespace.functionMap.values()) {
-					for (IdentTableEntry identTableEntry : generatedFunction.idte_list) {
-						if (identTableEntry.isResolved()) {
-							EvaNode node = identTableEntry.resolvedType();
-							resolved_nodes.add(node);
-						}
-					}
-				}
-			}
-			default -> throw new IllegalStateException("Unexpected value: " + coded.getRole());
-			}
-		}
-	}
-
-	private void __processResolvedNodes(final @NotNull List<EvaNode> resolved_nodes, final ICodeRegistrar cr) {
-		resolved_nodes.stream()
-				.filter(evaNode -> evaNode instanceof GNCoded)
-				.map(evaNode -> (GNCoded) evaNode)
-				.filter(coded -> coded.getCode() == 0)
-				.forEach(coded -> {
-					System.err.println("-*-*- __processResolvedNodes [NOT CODED] " + coded);
-					coded.register(cr);
-				});
 	}
 
 	public record GenerateFunctionsRequest(@NotNull List<EntryPoint> entryPoints,
