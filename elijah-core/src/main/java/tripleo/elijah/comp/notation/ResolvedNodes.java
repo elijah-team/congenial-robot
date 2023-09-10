@@ -34,9 +34,11 @@ class ResolvedNodes {
 			case CLASS -> {
 				final EvaClass evaClass = (EvaClass) evaNode;
 
-				//assert (evaClass.getCode() != 0);
 				if (evaClass.getCode() == 0) {
 					cr.registerClass1(evaClass);
+				} else {
+					// FIXME 09/10 enable this
+					// complain
 				}
 
 //					if (generatedClass.getCode() == 0)
