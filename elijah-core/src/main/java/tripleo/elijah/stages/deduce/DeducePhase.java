@@ -968,7 +968,13 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	}
 
 	public class GeneratedClasses implements Iterable<EvaNode> {
-		@NotNull List<EvaNode> generatedClasses = _inj().new_ArrayList__EvaNode();
+		private @NotNull List<EvaNode> generatedClasses = new ArrayList<>();//new ConcurrentLinkedQueue<>();
+		private  int           generation;
+
+		@Override
+		public String toString() {
+			return "GeneratedClasses{size=%d, generation=%d}".formatted(generatedClasses.size(), generation);
+		}
 
 		public void add(EvaNode aClass) {
 			pa._send_GeneratedClass(aClass);
@@ -982,7 +988,8 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		}
 
 		public @NotNull List<EvaNode> copy() {
-			return _inj().new_ArrayList__EvaNode(generatedClasses);
+			++generation;
+			return new ArrayList<>(generatedClasses);
 		}
 
 		@Override
