@@ -11,7 +11,6 @@ package tripleo.elijah.comp;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.CompilationEnclosure;
-import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
@@ -24,7 +23,6 @@ import tripleo.elijah.lang.i.OS_Element2;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.DoubleLatch;
@@ -104,7 +102,6 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 
 		EOT_OutputFile.FileNameProvider filename1;
 
-		final @NotNull EOT_OutputTree cot = pa.getCompilation().getOutputTree();
 		for (EvaNode evaNode : aLgc) {
 			String             filename = null;
 			final StringBuffer sb       = new StringBuffer();
@@ -134,7 +131,6 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 
 				pa.activeClass(aEvaClass);
 			} else if (evaNode instanceof EvaNamespace aEvaNamespace) {
-				filename = "N_" + aEvaNamespace.getCode() + aEvaNamespace.getName();
 				sb.append("NAMESPACE %d %s\n".formatted(aEvaNamespace.getCode(),
 														aEvaNamespace.getName()));
 				for (EvaContainer.VarTableEntry varTableEntry : aEvaNamespace.varTable) {

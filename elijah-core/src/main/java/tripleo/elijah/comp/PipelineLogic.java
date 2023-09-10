@@ -8,14 +8,10 @@
  */
 package tripleo.elijah.comp;
 
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
+import com.google.common.base.Preconditions;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.comp.diagnostic.ExceptionDiagnostic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
@@ -68,9 +64,12 @@ public class PipelineLogic {
 
 				gfm.generateFromEntryPoints(module.rq());
 
-				final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses;
+				final var modMapEventual = modMap.get(mod);
 
-				modMap.get(mod).resolve(lgc);
+				Preconditions.checkNotNull(modMapEventual);
+
+				final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses;
+				modMapEventual.resolve(lgc);
 			}
 		});
 	}
@@ -82,14 +81,14 @@ public class PipelineLogic {
 
 	public Promise<DeducePhase.GeneratedClasses, Void, Void> handle(final GN_PL_Run2.@NotNull GenerateFunctionsRequest rq) {
 		final OS_Module          mod         = rq.mod();
-		final DefaultWorldModule worldModule = new DefaultWorldModule(mod, rq);
+		final DefaultWorldModule worldModule = rq.worldModule();
 
-		final DeferredObject<DeducePhase.GeneratedClasses, Void, Void> p = new DeferredObject<>();
-		modMap.put(mod, p);
+		final DeferredObject<DeducePhase.GeneratedClasses, Void, Void> modMapEventual = new DeferredObject<>();
+		modMap.put(mod, modMapEventual);
 
 		pa.getCompilationEnclosure().addModule(worldModule);
 
-		return p.promise();
+		return modMapEventual.promise();
 	}
 
 	public void addLog(ElLog aLog) {

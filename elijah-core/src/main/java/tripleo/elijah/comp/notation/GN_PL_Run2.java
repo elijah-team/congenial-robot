@@ -64,7 +64,7 @@ public class GN_PL_Run2 implements GN_Notable {
 
 		plgc.then(lgc -> {
 			final List<EvaNode>  resolved_nodes = new ArrayList<EvaNode>();
-			final ICodeRegistrar cr             = dcg.getCodeRegistrar();
+			final ICodeRegistrar cr             = rq.classGenerator().getCodeRegistrar();
 
 			__processNodes(lgc, resolved_nodes, cr);
 			__processResolvedNodes(resolved_nodes, cr);

@@ -93,7 +93,7 @@ public class CR_State {
 
 		private final @NotNull Map<Provenance, Pair<Class, Class>> installs = new HashMap<>();
 
-		private final DeferredObject<List<EvaNode>, Void, Void> nlp = new DeferredObject<>();
+		private final DeferredObject<List<EvaNode>, Void, Void> nodeListPromise = new DeferredObject<>();
 
 		private final List<NG_OutputItem> outputs = new ArrayList<NG_OutputItem>();
 
@@ -264,7 +264,7 @@ public class CR_State {
 
 		@Override
 		public void registerNodeList(final DoneCallback<List<EvaNode>> done) {
-			nlp.then(done);
+			nodeListPromise.then(done);
 		}
 
 		@Override
@@ -291,7 +291,7 @@ public class CR_State {
 
 		@Override
 		public void setNodeList(final @NotNull List<EvaNode> aEvaNodeList) {
-			nlp/*;)*/.resolve(new ArrayList<>(aEvaNodeList));
+			nodeListPromise.resolve(aEvaNodeList);
 		}
 
 		@Override
