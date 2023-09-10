@@ -9,9 +9,9 @@
 package tripleo.elijah.comp;
 
 import com.google.common.base.Preconditions;
-import org.jdeferred2.Promise;
-import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
+import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
@@ -35,13 +35,14 @@ import java.util.function.Consumer;
 /**
  * Created 12/30/20 2:14 AM
  */
-public class PipelineLogic {
+public class PipelineLogic implements EventualRegister {
 	public final          List<ElLog>                                                              elLogs         = new LinkedList<>();
 	public final @NotNull DeducePhase                                                              dp;
 	public final @NotNull GeneratePhase                                                            generatePhase;
+	public final ModuleCompletableProcess mcp = new ModuleCompletableProcess();
 	private final         List<OS_Module>                                                          __mods_BACKING = new ArrayList<>();
 	private final         EIT_ModuleList                                                           mods           = new EIT_ModuleList(__mods_BACKING);
-	private final         Map<OS_Module, DeferredObject<DeducePhase.GeneratedClasses, Void, Void>> modMap         = new HashMap<>();
+	private final         Map<OS_Module, Eventual<DeducePhase.GeneratedClasses>> modMap         = new HashMap<>();
 	private final         IPipelineAccess                                                          pa;
 	private final         ElLog.Verbosity                                                          verbosity;
 
@@ -78,18 +79,7 @@ public class PipelineLogic {
 	public GenerateFunctions getGenerateFunctions(@NotNull OS_Module mod) {
 		return generatePhase.getGenerateFunctions(mod);
 	}
-
-	public Promise<DeducePhase.GeneratedClasses, Void, Void> handle(final GN_PL_Run2.@NotNull GenerateFunctionsRequest rq) {
-		final OS_Module          mod         = rq.mod();
-		final DefaultWorldModule worldModule = rq.worldModule();
-
-		final DeferredObject<DeducePhase.GeneratedClasses, Void, Void> modMapEventual = new DeferredObject<>();
-		modMap.put(mod, modMapEventual);
-
-		pa.getCompilationEnclosure().addModule(worldModule);
-
-		return modMapEventual.promise();
-	}
+	private final List<Eventual<?>> _eventuals = new ArrayList<>();
 
 	public void addLog(ElLog aLog) {
 		elLogs.add(aLog);
@@ -106,8 +96,6 @@ public class PipelineLogic {
 	public @NotNull EIT_ModuleList mods() {
 		return mods;
 	}
-
-	public final ModuleCompletableProcess mcp = new ModuleCompletableProcess();
 
 	public final class ModuleCompletableProcess implements CompletableProcess<OS_Module> {
 
@@ -142,6 +130,35 @@ public class PipelineLogic {
 
 		}
 	}
+
+	public Eventual<DeducePhase.GeneratedClasses> handle(final GN_PL_Run2.@NotNull GenerateFunctionsRequest rq) {
+		final OS_Module          mod         = rq.mod();
+		final DefaultWorldModule worldModule = rq.worldModule();
+
+		final Eventual<DeducePhase.GeneratedClasses> modMapEventual = new Eventual<>();
+		modMap.put(mod, modMapEventual);
+
+		pa.getCompilationEnclosure().addModule(worldModule);
+
+		return modMapEventual;
+	}
+
+	@Override
+	public <P> void register(final Eventual<P> e) {
+		_eventuals.add(e);
+	}
+
+	@Override
+	public void checkFinishEventuals() {
+		int y = 0;
+		for (Eventual<?> eventual : _eventuals) {
+			if (eventual.isResolved()) {
+			} else {
+				System.err.println("[PipelineLogic::checkEventual] failed for " + eventual.description());
+			}
+		}
+	}
+
 }
 
 //
