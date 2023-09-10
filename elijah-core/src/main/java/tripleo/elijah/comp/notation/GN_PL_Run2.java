@@ -1,22 +1,19 @@
 package tripleo.elijah.comp.notation;
 
-import org.jdeferred2.Promise;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.lang.i.OS_Module;
-import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.inter.ModuleThing;
-import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.world.i.WorldModule;
 import tripleo.elijah.world.impl.DefaultWorldModule;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -40,42 +37,6 @@ public class GN_PL_Run2 implements GN_Notable {
 		dcg = new DefaultClassGenerator(pipelineLogic.dp);
 	}
 
-	public record GenerateFunctionsRequest(@NotNull List<EntryPoint> entryPoints,
-										   IClassGenerator classGenerator,
-										   DefaultWorldModule worldModule
-	) {
-		public ModuleThing mt() {
-			return worldModule.thing();
-		}
-
-		public OS_Module mod() {
-			return worldModule.module();
-		}
-	}
-
-	@Override
-	public void run() {
-		final DefaultWorldModule       worldModule = new DefaultWorldModule(mod, ce);
-		final GenerateFunctionsRequest rq          = new GenerateFunctionsRequest(mod.entryPoints(), dcg, worldModule);
-
-		worldModule.setRq(rq);
-
-		final Promise<DeducePhase.GeneratedClasses, Void, Void> plgc = pipelineLogic.handle(rq);
-
-		plgc.then(lgc -> {
-			final List<EvaNode>  resolved_nodes = new ArrayList<EvaNode>();
-			final ICodeRegistrar cr             = rq.classGenerator().getCodeRegistrar();
-
-			__processNodes(lgc, resolved_nodes, cr);
-			__processResolvedNodes(resolved_nodes, cr);
-
-			ElLog.Verbosity verbosity = pipelineLogic.getVerbosity();
-			pipelineLogic.dp.deduceModule(new DeducePhase_deduceModule_Request(mod, lgc, verbosity, pipelineLogic.dp));
-
-			worldConsumer.accept(worldModule);
-		});
-	}
-
 	@Contract("_ -> new")
 	@SuppressWarnings("unused")
 	public static @NotNull GN_PL_Run2 getFactoryEnv(GN_Env env1) {
@@ -83,15 +44,27 @@ public class GN_PL_Run2 implements GN_Notable {
 		return new GN_PL_Run2(env.pipelineLogic(), env.mod(), env.ce(), env.worldConsumer());
 	}
 
-	private void __processResolvedNodes(final @NotNull List<EvaNode> resolved_nodes, final ICodeRegistrar cr) {
-		resolved_nodes.stream()
-				.filter(evaNode -> evaNode instanceof GNCoded)
-				.map(evaNode -> (GNCoded) evaNode)
-				.filter(coded -> coded.getCode() == 0)
-				.forEach(coded -> {
-					System.err.println("-*-*- __processResolvedNodes [NOT CODED] " + coded);
-					coded.register(cr);
-				});
+
+	@Override
+	public void run() {
+		final DefaultWorldModule       worldModule = (DefaultWorldModule) mod;
+		final GenerateFunctionsRequest rq          = new GenerateFunctionsRequest(mod.entryPoints(), dcg, worldModule);
+
+		worldModule.setRq(rq);
+
+		final Eventual<DeducePhase.GeneratedClasses> plgc = pipelineLogic.handle(rq);
+		plgc.register(pipelineLogic);
+
+		plgc.then(lgc -> {
+			final ICodeRegistrar cr              = dcg.getCodeRegistrar();
+			final ResolvedNodes  resolved_nodes2 = new ResolvedNodes(cr);
+
+			resolved_nodes2.init(lgc);
+			resolved_nodes2.part2();
+			resolved_nodes2.part3(pipelineLogic, worldModule, lgc);
+
+			worldConsumer.accept(worldModule);
+		});
 	}
 
 	@SuppressWarnings("TypeMayBeWeakened")
@@ -155,6 +128,30 @@ public class GN_PL_Run2 implements GN_Notable {
 			}
 			default -> throw new IllegalStateException("Unexpected value: " + coded.getRole());
 			}
+		}
+	}
+
+	private void __processResolvedNodes(final @NotNull List<EvaNode> resolved_nodes, final ICodeRegistrar cr) {
+		resolved_nodes.stream()
+				.filter(evaNode -> evaNode instanceof GNCoded)
+				.map(evaNode -> (GNCoded) evaNode)
+				.filter(coded -> coded.getCode() == 0)
+				.forEach(coded -> {
+					System.err.println("-*-*- __processResolvedNodes [NOT CODED] " + coded);
+					coded.register(cr);
+				});
+	}
+
+	public record GenerateFunctionsRequest(@NotNull List<EntryPoint> entryPoints,
+										   IClassGenerator classGenerator,
+										   DefaultWorldModule worldModule
+	) {
+		public ModuleThing mt() {
+			return worldModule.thing();
+		}
+
+		public OS_Module mod() {
+			return worldModule.module();
 		}
 	}
 }
