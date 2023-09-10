@@ -18,10 +18,14 @@ import tripleo.elijah.lang.i.AccessNotation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.i.VariableStatement;
+import tripleo.elijah.nextgen.hooper.GCN;
+import tripleo.elijah.nextgen.hooper.GCN_1;
 import tripleo.elijah.stages.deduce.FunctionMapDeferred;
 import tripleo.elijah.stages.deduce.RegisterClassInvocation_env;
-import tripleo.elijah.stages.gen_generic.*;
-import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
+import tripleo.elijah.stages.gen_generic.CodeGenerator;
+import tripleo.elijah.stages.gen_generic.Dependency;
+import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
+import tripleo.elijah.stages.gen_generic.IDependencyReferent;
 import tripleo.elijah.util.Maybe;
 
 import java.io.PrintStream;
@@ -41,7 +45,8 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 	public          boolean                                    generatedAlready     = false;
 	public @NotNull List<VarTableEntry>                        varTable             = new ArrayList<VarTableEntry>();
 	@NotNull        Multimap<FunctionDef, FunctionMapDeferred> functionMapDeferreds = ArrayListMultimap.create();
-	private         int                                        code                 = 0;
+	private GNCoded __coded;
+	private GCN_1 gcn;
 
 	public void addVarTableEntry(@Nullable AccessNotation an, @NotNull VariableStatement vs, final RegisterClassInvocation_env aPassthruEnv) {
 		// TODO dont ignore AccessNotationImpl
@@ -67,10 +72,6 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 
 	public abstract void generateCode(GenerateResultEnv aFileGen, CodeGenerator aGgc);
 
-	public int getCode() {
-		return code;
-	}
-
 	public @NotNull Dependency getDependency() {
 		return dependency;
 	}
@@ -92,6 +93,11 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 	 */
 	public EvaFunction getFunction(FunctionDef fd) {
 		return functionMap.get(fd);
+	}
+
+	@Override
+	public void __setCoded(final GNCoded aCoded) {
+
 	}
 
 	static class VarNotFound implements Diagnostic {
@@ -121,8 +127,21 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		}
 	}
 
+	@Override
+	public GCN gcn() {
+		if (gcn == null) {
+			this.gcn= new GCN_1(this);
+			__coded = gcn.getCoded();
+		}
+		return gcn;
+	}
+
+	public int getCode() {
+		return gcn().getCoded().getCode();
+	}
+
 	public void setCode(int aCode) {
-		code = aCode;
+		__coded.setCode(aCode);
 	}
 }
 

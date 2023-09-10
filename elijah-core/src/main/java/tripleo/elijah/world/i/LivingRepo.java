@@ -6,6 +6,7 @@ import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.lang.i.OS_Package;
 import tripleo.elijah.lang.i.Qualident;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
@@ -41,6 +42,8 @@ public interface LivingRepo {
 	boolean hasPackage(String aPackageName);
 
 	LivingFunction getFunction(BaseEvaFunction aBaseEvaFunction);
+
+	void addFunction2(GCN aGcn, Add aAdd);
 
 	enum Add {MAIN_CLASS, MAIN_FUNCTION, NONE}
 

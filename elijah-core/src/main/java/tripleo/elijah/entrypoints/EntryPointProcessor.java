@@ -5,6 +5,7 @@ import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
@@ -127,6 +128,11 @@ public interface EntryPointProcessor {
 		@Override
 		public void registerNamespace(final EvaNamespace aNamespace) {
 			compilation.livingRepo().addNamespace(aNamespace, LivingRepo.Add.NONE);
+		}
+
+		@Override
+		public void registerFunction2(final GCN aGcn) {
+
 		}
 	}
 

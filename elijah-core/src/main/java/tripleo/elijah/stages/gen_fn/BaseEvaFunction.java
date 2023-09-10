@@ -14,6 +14,8 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
+import tripleo.elijah.nextgen.hooper.GCN;
+import tripleo.elijah.nextgen.hooper.GCN_1;
 import tripleo.elijah.nextgen.reactive.DefaultReactive;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.deduce.nextgen.*;
@@ -42,9 +44,6 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 
 	public @NotNull List<DR_Item>                       drs               = new ArrayList<>();
 	private final   List<Label>                         labelList         = new ArrayList<Label>();
-	//
-	// region INSTRUCTIONS
-	//
 	private final   DeferredObject<GenType, Void, Void> _p_assignGenType  = new DeferredObject<GenType, Void, Void>();
 	public          DefaultLivingFunction               _living;
 	public @NotNull List<ConstantTableEntry>            cte_list          = new ArrayList<ConstantTableEntry>();
@@ -59,7 +58,6 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	@NotNull        Map<OS_Element, DeduceElement>      elements          = new HashMap<OS_Element, DeduceElement>();
 	private         int                                 _nextTemp         = 0;
 	private         __Reactive                          _reactive;
-	private         int                                 code              = 0;
 	private         EvaNode                             genClass;
 	private         int                                 instruction_index = 0;
 	private         int                                 label_count       = 0;
@@ -68,6 +66,8 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	// region Ident-IA
 	//
 	private         EvaContainerNC                      parent;
+	private GNCoded __coded;
+	private GCN gcn;
 
 	@Override
 	public void addContext(final Context context, final Range r) {
@@ -157,7 +157,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 
 	@Override
 	public int getCode() {
-		return code;
+		return __coded.getCode();
 	}
 
 	@Override
@@ -546,7 +546,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 
 	@Override
 	public void setCode(int aCode) {
-		code = aCode;
+		__coded.setCode(aCode);
 	}
 
 	@Override
@@ -650,6 +650,20 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		var r = new DR_Type(this, aNonGenericTypeName);
 		r.build();
 		return r;
+	}
+
+	@Override
+	public void __setCoded(final GNCoded aCoded) {
+		__coded = aCoded;
+	}
+
+	@Override
+	public GCN gcn() {
+		if (gcn == null) {
+			gcn=new GCN_1(this);
+			__coded = gcn.getCoded();
+		}
+		return gcn;
 	}
 
 	public class __Reactive extends DefaultReactive {

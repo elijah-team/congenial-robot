@@ -1,6 +1,7 @@
 package tripleo.elijah.stages.post_deduce;
 
 import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
@@ -37,5 +38,10 @@ public class DefaultCodeRegistrar implements ICodeRegistrar {
 	@Override
 	public void registerNamespace(final EvaNamespace aNamespace) {
 		compilation.livingRepo().addNamespace(aNamespace, LivingRepo.Add.NONE);
+	}
+
+	@Override
+	public void registerFunction2(final GCN aGcn) {
+		compilation.livingRepo().addFunction2(aGcn, LivingRepo.Add.NONE);
 	}
 }

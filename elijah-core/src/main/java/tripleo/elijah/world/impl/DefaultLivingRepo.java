@@ -10,6 +10,7 @@ import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.OS_PackageImpl;
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
@@ -29,13 +30,8 @@ public class DefaultLivingRepo implements LivingRepo {
 	public @NotNull DefaultLivingClass addClass(final @NotNull EvaClass aClass, final @NotNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
-			if (aClass.getCode() == 0) {
-				aClass.setCode(nextClassCode());
-			} else {
-				if (2 == 3) {
-					assert true;
-				}
-			}
+			final GCN gcn = aClass.gcn();
+			addClass2(aClass, gcn);
 		}
 		case MAIN_FUNCTION -> {
 			throw new IllegalArgumentException("not a function");
@@ -55,6 +51,14 @@ public class DefaultLivingRepo implements LivingRepo {
 		repo.add(living);
 
 		return living;
+	}
+
+	private void addClass2(final @NotNull EvaClass aClass, final GCN gcn) {
+		if (gcn.getCoded().getCode() == 0) {
+			aClass.setCode(nextClassCode());
+		} else {
+			assert true;
+		}
 	}
 
 	@Override
@@ -182,6 +186,11 @@ public class DefaultLivingRepo implements LivingRepo {
 			return c.iterator().next();
 
 		return null;
+	}
+
+	@Override
+	public void addFunction2(final GCN aGcn, final Add aAdd) {
+
 	}
 
 	@Override

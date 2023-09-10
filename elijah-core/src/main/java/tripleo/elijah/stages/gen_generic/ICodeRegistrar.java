@@ -10,6 +10,7 @@
 
 package tripleo.elijah.stages.gen_generic;
 
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
@@ -29,6 +30,8 @@ public interface ICodeRegistrar {
 	void registerFunction1(BaseEvaFunction aFunction);
 
 	void registerNamespace(EvaNamespace aNamespace);
+
+	void registerFunction2(GCN aGcn);
 }
 
 //

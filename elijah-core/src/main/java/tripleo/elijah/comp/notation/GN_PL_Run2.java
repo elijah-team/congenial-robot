@@ -7,6 +7,7 @@ import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.lang.i.OS_Module;
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.*;
@@ -95,28 +96,33 @@ public class GN_PL_Run2 implements GN_Notable {
 	}
 
 	@SuppressWarnings("TypeMayBeWeakened")
-	private void __processNodes(final DeducePhase.@NotNull GeneratedClasses lgc,
+	private void __processNodes(final DeducePhase.@NotNull GeneratedClasses lgc1,
 								final @NotNull List<EvaNode> resolved_nodes,
 								final @NotNull ICodeRegistrar cr) {
-		for (final EvaNode evaNode : lgc) {
-			if (!(evaNode instanceof final @NotNull GNCoded coded)) {
+		for (final GCN gcn : lgc1.gcnIterable()) {
+			final EvaNode evaNode = gcn.getEvaNode();
+			final GNCoded coded = gcn.getCoded();
+
+			//evaNode.__setCoded(coded);
+
+			if (coded == null) {
 				throw new IllegalStateException("node must be coded");
 			}
 
 			switch (coded.getRole()) {
 			case FUNCTION -> {
-				cr.registerFunction1((BaseEvaFunction) evaNode);
+				cr.registerFunction2(gcn);
 			}
 			case CLASS -> {
 				final EvaClass evaClass = (EvaClass) evaNode;
 
-				//assert (evaClass.getCode() != 0);
 				if (evaClass.getCode() == 0) {
 					cr.registerClass1(evaClass);
+				} else {
+					// FIXME 09/10 enable this
+					// complain
 				}
 
-//					if (generatedClass.getCode() == 0)
-//						generatedClass.setCode(mod.getCompilation().nextClassCode());
 				for (EvaClass evaClass2 : evaClass.classMap.values()) {
 					if (evaClass2.getCode() == 0) {
 						//evaClass2.setCode(mod.getCompilation().nextClassCode());

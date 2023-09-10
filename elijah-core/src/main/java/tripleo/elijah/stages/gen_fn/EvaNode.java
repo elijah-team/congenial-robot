@@ -9,6 +9,7 @@
 package tripleo.elijah.stages.gen_fn;
 
 import tripleo.elijah.lang.i.OS_Module;
+import tripleo.elijah.nextgen.hooper.GCN;
 
 /**
  * Created 10/29/20 4:51 AM
@@ -17,6 +18,10 @@ public interface EvaNode {
 	String identityString();
 
 	OS_Module module();
+
+	void __setCoded(GNCoded aCoded);
+
+	GCN gcn();
 
 	//BaseEvaFunction _definedFunction();
 

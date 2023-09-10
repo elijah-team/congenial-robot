@@ -29,6 +29,7 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.types.OS_UnknownType;
 import tripleo.elijah.nextgen.ClassDefinition;
 import tripleo.elijah.nextgen.diagnostic.CouldntGenerateClass;
+import tripleo.elijah.nextgen.hooper.GCN;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_Request;
@@ -65,17 +66,15 @@ import static tripleo.elijah.util.Helpers.List_of;
  * Created 12/24/20 3:59 AM
  */
 public class DeducePhase extends _RegistrationTarget implements ReactiveDimension {
-	private @NotNull
-	final DeducePhaseInjector __inj = new DeducePhaseInjector();
-
-
 	public final @NotNull  ICodeRegistrar                               codeRegistrar;
 	public final @NotNull  GeneratedClasses                             generatedClasses;
 	public final @NotNull  GeneratePhase                                generatePhase;
+	final                  Multimap<OS_Module, Consumer<DeduceTypes2>>  iWantModules            = ArrayListMultimap.create();
+	private @NotNull
+	final DeducePhaseInjector __inj = new DeducePhaseInjector();
 	@NotNull
 	public final           List<IFunctionMapHook>                       functionMapHooks        = _inj().new_ArrayList__IFunctionMapHook();
-	private final String PHASE = "DeducePhase";
-	final Multimap<OS_Module, Consumer<DeduceTypes2>> iWantModules = ArrayListMultimap.create();
+	private final          String                                       PHASE                   = "DeducePhase";
 	private final @NotNull ICompilationAccess                           ca;
 	private final          Map<NamespaceStatement, NamespaceInvocation> namespaceInvocationMap  = _inj().new_HashMap__NamespaceInvocationMap();
 	private final          ExecutorService                              classGenerator          = Executors.newCachedThreadPool();
@@ -223,9 +222,9 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	private void logProgress(final @NotNull DeducePhaseProvenance aProvenance, final Object o) {
 		switch (aProvenance) {
 		case DeduceTypes_create -> {
-			List<? extends Object> l = (List<? extends Object>) o;
-			DeduceTypes2 deduceTypes2 = (DeduceTypes2) l.get(0);
-			List<EvaNode> lgf = (List<EvaNode>) l.get(1);
+			List<? extends Object> l            = (List<? extends Object>) o;
+			DeduceTypes2           deduceTypes2 = (DeduceTypes2) l.get(0);
+			List<EvaNode>          lgf          = (List<EvaNode>) l.get(1);
 			LOG.info("196 DeduceTypes " + deduceTypes2.getFileName());
 			{
 				final List<EvaNode> p = _inj().new_ArrayList__EvaNode();
@@ -239,15 +238,12 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 	@ElijahInternal
 	public void __DeduceTypes2_deduceFunctions_Request__run(final boolean b,
-																	final DeducePhase_deduceModule_Request aRequest) {
-
+															final DeducePhase_deduceModule_Request aRequest) {
 
 
 		// TODO @ElijahInternal annotation prob a smell:
 		//  - create an object, call out of package, then come back in...
 		//    firgive me, trying something new
-
-
 
 
 		final @NotNull DeduceTypes2 deduceTypes2 = aRequest.createDeduceTypes2_singleton();
@@ -968,8 +964,13 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	}
 
 	public class GeneratedClasses implements Iterable<EvaNode> {
-		private @NotNull List<EvaNode> generatedClasses = new ArrayList<>();//new ConcurrentLinkedQueue<>();
-		private  int           generation;
+		private @NotNull List<EvaNode> generatedClasses = new ArrayList<>();
+		private          int           generation;
+		private          List<GCN>     gcn_list         = new ArrayList<>();
+
+		public Iterable<GCN> gcnIterable() {
+			return gcn_list;
+		}
 
 		@Override
 		public String toString() {
@@ -980,11 +981,17 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 			pa._send_GeneratedClass(aClass);
 
 			generatedClasses.add(aClass);
+
+			gcn_list.add((aClass.gcn()));
 		}
 
 		public void addAll(@NotNull List<EvaNode> lgc) {
 			// TODO is this method really needed
 			generatedClasses.addAll(lgc);
+
+			for (EvaNode evaNode : lgc) {
+				gcn_list.add(evaNode.gcn());
+			}
 		}
 
 		public @NotNull List<EvaNode> copy() {
