@@ -42,6 +42,7 @@
 			<module>annotations</module>
 		-->
 		<module>tripleo-small</module>
+		<module>elijah-nextgen-outputstatement</module>
 		<module>elijah-stateful</module>
 		<module>tripleo-reactive</module>
 		<module>elijah-core</module>
