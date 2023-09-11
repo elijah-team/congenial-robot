@@ -225,7 +225,7 @@ public class USE {
 
 				parseElijjahFile(inp);
 
-				c.reports().addOutput(inp, Finally.Out2.ELIJAH);
+				c.reports().addInput(inp, Finally.Out2.ELIJAH);
 			}
 		}
 	}

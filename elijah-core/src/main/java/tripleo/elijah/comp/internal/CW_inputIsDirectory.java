@@ -56,7 +56,7 @@ public class CW_inputIsDirectory {
 			break;
 		}
 
-		c.reports().addOutput(input, Finally.Out2.EZ);
+		c.reports().addInput(input, Finally.Out2.EZ);
 	}
 
 	private List<CompilerInstructions> searchEzFiles(final @NotNull File directory, final @NotNull CompilationClosure ccl) {

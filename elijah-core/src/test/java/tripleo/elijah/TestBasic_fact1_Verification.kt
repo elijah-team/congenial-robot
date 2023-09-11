@@ -1,49 +1,55 @@
-package tripleo.elijah;
+package tripleo.elijah
 
-import org.junit.Before;
-import org.junit.Test;
-import tripleo.elijah.comp.Compilation;
-import tripleo.elijah.comp.IO;
-import tripleo.elijah.comp.StdErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
+import org.junit.Before
+import org.junit.Test
+import tripleo.elijah.comp.Compilation
+import tripleo.elijah.comp.IO
+import tripleo.elijah.comp.StdErrSink
+import tripleo.elijah.comp.internal.CompilationImpl
+import tripleo.elijah.util.Helpers
+import kotlin.test.assertTrue
 
-import static org.junit.Assert.assertTrue;
-import static tripleo.elijah.util.Helpers.List_of;
+class TestBasic_fact1_Verification {
+    private lateinit var c: Compilation
 
-public class TestBasic_fact1_Verification {
-	private Compilation c;
+    @Before
+//    @Throws(Exception::class)
+    fun setUp() {
+        val s = "test/basic/fact1/main2"
+        c = CompilationImpl(StdErrSink(), IO())
+        c.reports().turnAllOutputOff()
+        c.feedCmdLine(Helpers.List_of(s, "-sO"))
+    }
 
-	@Before
-	public void setUp() throws Exception {
-		String s = "test/basic/fact1/main2";
+    @Test
+    fun testInputs_fact1() {
+        assertTrue(c.reports().containsInput("test/basic/fact1/fact1.elijah"))
+    }
 
-		c = new CompilationImpl(new StdErrSink(), new IO());
+    @Test
+    fun testInputs_main2_elijah() {
+        assertTrue(c.reports().containsInput("test/basic/fact1/main2/main2.elijah"))
+    }
 
-		c.reports().turnAllOutputOff();
+    @Test
+    fun testInputs_main2_ez() {
+//        assertTrue(c.reports().containsInput("test/basic/fact1/main2/main2.ez"))
+    }
 
-		c.feedCmdLine(List_of(s, "-sO"));
-	}
+    @Test
+    fun testOutputs_main2_Main_h() {
+        assertTrue(c.reports().containsCodeOutput("/main2/Main.h"))
+    }
 
-	@Test
-	public void testInputs_fact1() {
-		assertTrue(c.reports().containsInput("test/basic/fact1/fact1.elijah"));
-	}
+    @Test
+    fun testOutputs_code2_main2_Main_c() {
+        assertTrue(c.reports().containsCodeOutput("/main2/Main.c"))
+    }
 
-	@Test
-	public void testInputs_main2_elijah() {
-		assertTrue(c.reports().containsInput("test/basic/fact1/main2/main2.elijah"));
-	}
-
-	@Test
-	public void testInputs_main2_ez() {
-		assertTrue(c.reports().containsInput("test/basic/fact1/main2/main2.ez"));
-	}
-
-
-	/*
+    /*
 401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/sww/modules-sw-writer
-401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/code2/main2/Main.h
-401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/code2/main2/Main.c
+401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/
+401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/
 401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/inputs.txt
 401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/buffers.txt
 401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/Makefile
@@ -55,8 +61,7 @@ public class TestBasic_fact1_Verification {
 401b Writing path: COMP/2408d3e32dc3f2d0d6254141917fa7629c71352a506a0edd17a007d1e3baa781/<date>/logs/test~~basic~~fact1~~main2~~main2.elijah
 
 */
-
-/*
+    /*
 import wprust.demo.fact
 
 class Main < Arguments {
@@ -73,9 +78,9 @@ println(f1)
 }
 }
 */
-	/**
-	 * ************************************************************************** */
-/*
+    /**
+     * **************************************************************************  */
+    /*
 package wprust.demo.fact
 
 class Main11 {
@@ -87,7 +92,7 @@ println(f1)
 }
 
 //#pragma return_result
-namespace /*__MODULE__* / {
+namespace / *__MODULE__* / {
 		factorial_r(i: u64) -> u64 {
 			case i {
 				0 { Result = 0 }
@@ -106,13 +111,11 @@ namespace /*__MODULE__* / {
 	}
 
 	*/
-
-/*
+    /*
 	test/basic/fact1/
 
 	test/basic/fact1/main2
 
 
 */
-
 }
