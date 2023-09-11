@@ -184,8 +184,8 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 				throw new IllegalStateException("Can't determine node");
 			}
 
-			final EG_Statement   seq = EG_Statement.of(sb.toString(), EX_Explanation.withMessage("dump"));
-			final EOT_OutputFile off = new EOT_OutputFile(List_of(), filename1, EOT_OutputType.DUMP, seq);
+			//final EG_Statement   seq = EG_Statement.of(sb.toString(), EX_Explanation.withMessage("dump"));
+			//final EOT_OutputFile off = new EOT_OutputFile(List_of(), filename1, EOT_OutputType.DUMP, seq);
 			//cot.add(off);
 		}
 
