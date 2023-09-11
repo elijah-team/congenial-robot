@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.elijah.elijah-nextgen-outputstatemen</artifactId>
+			<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
 			<version>0.9.1-SNAPSHOT </version>
 		</dependency>
 
