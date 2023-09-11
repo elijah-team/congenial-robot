@@ -632,7 +632,11 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			return dc4.promiseExpectation(aBgf, aFunctionResultType);
 		}
 
-		public DeduceTypes2.DeduceTypes2Injector _deduceTypes2() {
+		public DeduceTypes2 _deduceTypes2() {
+			return dc4.get();
+		}
+
+		public DeduceTypes2.DeduceTypes2Injector _inj() {
 			return dc4.get()._inj();
 		}
 	}

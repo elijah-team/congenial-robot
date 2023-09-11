@@ -222,10 +222,11 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	private void logProgress(final @NotNull DeducePhaseProvenance aProvenance, final Object o) {
 		switch (aProvenance) {
 		case DeduceTypes_create -> {
-			List<? extends Object> l            = (List<? extends Object>) o;
-			DeduceTypes2           deduceTypes2 = (DeduceTypes2) l.get(0);
-			List<EvaNode>          lgf          = (List<EvaNode>) l.get(1);
-			LOG.info("196 DeduceTypes " + deduceTypes2.getFileName());
+			List<? extends Object> l = (List<? extends Object>) o;
+			DeduceTypes2 deduceTypes2 = (DeduceTypes2) l.get(0);
+			List<EvaNode> lgf = ((GeneratedClasses) l.get(1)).generatedClasses;
+
+      LOG.info("196 DeduceTypes " + deduceTypes2.getFileName());
 			{
 				final List<EvaNode> p = _inj().new_ArrayList__EvaNode();
 				Iterables.addAll(p, lgf);

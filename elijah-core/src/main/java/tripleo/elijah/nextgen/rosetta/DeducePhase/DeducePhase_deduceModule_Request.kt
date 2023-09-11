@@ -14,7 +14,7 @@ data class DeducePhase_deduceModule_Request(
         val verbosity: ElLog.Verbosity,
         val deducePhase: DeducePhase
 ) {
-    private lateinit var createdDeduceTypes2: DeduceTypes2
+    private var createdDeduceTypes2: DeduceTypes2? = null
 
     fun createDeduceTypes2(): DeduceTypes2 {
         val deduceTypes2Request = DeduceTypes2Request(module = module, deducePhase = deducePhase, verbosity = verbosity)
@@ -26,6 +26,6 @@ data class DeducePhase_deduceModule_Request(
             this.createdDeduceTypes2 = createDeduceTypes2()
         }
 
-        return createdDeduceTypes2
+        return createdDeduceTypes2!!
     }
 }
