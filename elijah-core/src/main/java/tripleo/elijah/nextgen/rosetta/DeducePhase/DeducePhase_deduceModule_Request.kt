@@ -1,6 +1,5 @@
 package tripleo.elijah.nextgen.rosetta.DeducePhase
 
-import javafx.beans.property.SimpleObjectProperty
 import tripleo.elijah.lang.i.OS_Module
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request
 import tripleo.elijah.nextgen.rosetta.Rosetta
@@ -15,7 +14,6 @@ data class DeducePhase_deduceModule_Request(
         val verbosity: ElLog.Verbosity,
         val deducePhase: DeducePhase
 ) {
-//    private lateinit var createdDeduceTypes2: SimpleObjectProperty<DeduceTypes2?>
     private var createdDeduceTypes2: DeduceTypes2? = null
 
     fun createDeduceTypes2(): DeduceTypes2 {
