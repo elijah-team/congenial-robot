@@ -15,10 +15,8 @@
 package tripleo.elijah.lang.impl;
 
 import antlr.Token;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import org.eclipse.jdt.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.contexts.ModuleContext;
@@ -26,12 +24,15 @@ import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang2.ElElementVisitor;
+import tripleo.elijah.stages.deduce.fluffy.impl.FluffyModuleImpl;
 import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.util.Stupidity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.lang.i.OS_Module {
 
@@ -44,6 +45,7 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	private         String               _fileName;
 	private         LibraryStatementPart lsp;
 	private         Compilation          parent;
+	private         FluffyModuleImpl     _fluffy;
 
 	@Override
 	public void add(final OS_Element anElement) {
@@ -57,18 +59,9 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 
 	@Override // OS_Container
 	public @NotNull List<OS_Element2> items() {
-		final Collection<ModuleItem> c = Collections2.filter(getItems(), new Predicate<ModuleItem>() {
-			@Override
-			public boolean apply(@org.checkerframework.checker.nullness.qual.Nullable final ModuleItem input) {
-				final boolean b = input instanceof OS_Element2;
-				return b;
-			}
-		});
-		final ArrayList<OS_Element2> a = new ArrayList<OS_Element2>();
-		for (final ModuleItem moduleItem : c) {
-			a.add((OS_Element2) moduleItem);
-		}
-		return a;
+		final var c = getItems().stream().filter(input -> input instanceof OS_Element2);
+
+		return c.collect(Collectors.toList());
 	}
 
 	@Override
@@ -97,8 +90,14 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 //		parent.put_module(_fileName, this);
 	}
 
-	private void find_multiple_items() {
-		getCompilation().getFluffy().find_multiple_items(this);
+	private FluffyModuleImpl getFluffy() {
+		if (_fluffy == null) {
+			_fluffy = new FluffyModuleImpl(this, getCompilation());
+		}
+		return _fluffy;
+	}	@Override
+	public @NotNull Compilation getCompilation() {
+		return parent;
 	}
 
 	@Override
@@ -138,49 +137,68 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	}
 
 	@Override
+	public void serializeTo(final @NotNull SmallWriter sw) {
+		// TODO Auto-generated method stub
+
+		//public @NotNull Attached             _a             = new AttachedImpl();
+		//private final   Stack<Qualident>     packageNames_q = new Stack<Qualident>();
+		//public @NotNull List<EntryPoint>     entryPoints    = new ArrayList<EntryPoint>();
+		//private         IndexingStatement    indexingStatement;
+		//private LibraryStatementPart lsp;
+
+
+		sw.fieldString("filename", _fileName);
+		sw.fieldString("prelude", prelude != null ? prelude.getFileName() : "<unknown>");
+		sw.fieldString("parent", getCompilation().getCompilationNumberString());
+
+
+		//var l = sw.createList();int i=1;
+		//for (ModuleItem item : items) {
+		//	var r = sw.createRef(item);
+		//	sw.fieldRef("item%i".formatted(i++), r);
+		//}
+		sw.fieldList("items", items);
+	}	@Override
 	public void postConstruct() {
+		//var fluffy = getFluffy();
+
 		find_multiple_items();
 		//
 		// FIND ALL ENTRY POINTS (should only be one per module)
 		//
 		for (final ModuleItem item : items) {
-			if (item instanceof ClassStatement) {
-				ClassStatement classStatement = (ClassStatement) item;
+			if (item instanceof final ClassStatement classStatement) {
 				if (MainClassEntryPoint.isMainClass(classStatement)) {
 					Collection<ClassItem> x = classStatement.findFunction("main");
-					Collection<ClassItem> found = Collections2.filter(x, new Predicate<ClassItem>() {
-						@Override
-						public boolean apply(@org.checkerframework.checker.nullness.qual.Nullable ClassItem input) {
-							assert input != null;
-							FunctionDef fd = (FunctionDef) input;
-							return MainClassEntryPoint.is_main_function_with_no_args(fd);
-						}
-					});
-//					Iterator<ClassStatement> zz = x.stream()
-//							.filter(ci -> ci instanceof FunctionDef)
-//							.filter(fd -> is_main_function_with_no_args((FunctionDef) fd))
-//							.map(found1 -> (ClassStatement) found1.getParent())
-//							.iterator();
 
-					/*
-					 * List<ClassStatement> entrypoints_stream = x.stream() .filter(ci -> ci
-					 * instanceof FunctionDef) .filter(fd ->
-					 * is_main_function_with_no_args((FunctionDef) fd)) .map(found1 ->
-					 * (ClassStatement) found1.getParent()) .collect(Collectors.toList());
-					 */
+					List<ClassStatement> found = x.stream()
+							.filter(ci -> ci instanceof FunctionDef)
+							.filter(fd -> MainClassEntryPoint.is_main_function_with_no_args((FunctionDef) fd))
+							.map(found1 -> (ClassStatement) found1.getParent())
+							.collect(Collectors.toList());
 
 					final int eps = entryPoints.size();
-					for (ClassItem classItem : found) {
-						entryPoints.add(new MainClassEntryPoint((ClassStatement) classItem.getParent()));
+
+					for (ClassStatement classItem : found) {
+						final OS_Element classItemParent = classItem.getParent();
+						if (classItemParent instanceof ClassStatement cipcs) {
+							entryPoints.add(new MainClassEntryPoint(cipcs));
+						}
 					}
 					assert entryPoints.size() == eps || entryPoints.size() == eps + 1; // TODO this will fail one day
 
-					tripleo.elijah.util.Stupidity.println_out_2("243 " + entryPoints + " " + _fileName);
+					Stupidity.println_out_2("243 " + entryPoints + " " + _fileName);
 //					break; // allow for "extend" class
 				}
 			}
 
 		}
+	}
+
+
+
+	private void find_multiple_items() {
+		getCompilation().getFluffy().find_multiple_items(this);
 	}
 
 	@Override
@@ -206,30 +224,6 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	public OS_Package pushPackageNamed(final Qualident aPackageName) {
 		packageNames_q.push(aPackageName);
 		return parent.makePackage(aPackageName);
-	}
-
-	@Override
-	public void serializeTo(final @NotNull SmallWriter sw) {
-		// TODO Auto-generated method stub
-
-		//public @NotNull Attached             _a             = new AttachedImpl();
-		//private final   Stack<Qualident>     packageNames_q = new Stack<Qualident>();
-		//public @NotNull List<EntryPoint>     entryPoints    = new ArrayList<EntryPoint>();
-		//private         IndexingStatement    indexingStatement;
-		//private LibraryStatementPart lsp;
-
-
-		sw.fieldString("filename", _fileName);
-		sw.fieldString("prelude", prelude != null ? prelude.getFileName() : "<unknown>");
-		sw.fieldString("parent", getCompilation().getCompilationNumberString());
-
-
-		//var l = sw.createList();int i=1;
-		//for (ModuleItem item : items) {
-		//	var r = sw.createRef(item);
-		//	sw.fieldRef("item%i".formatted(i++), r);
-		//}
-		sw.fieldList("items", items);
 	}
 
 	@Override
@@ -278,10 +272,7 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 		visit.addModule(this); // visitModule
 	}
 
-	@Override
-	public @NotNull Compilation getCompilation() {
-		return parent;
-	}
+
 
 	@Override
 	public void setContext(final ModuleContext mctx) {
