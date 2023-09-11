@@ -376,8 +376,10 @@ public class OutputStrategyC {
 			StringBuilder sb = new StringBuilder();
 			sb.append("/");
 			sb.append(lsp);
-			sb.append("/");
-			sb.append(dir);
+			if (!dir.equals("")) {
+				sb.append("/");
+				sb.append(dir);
+			}
 			if (!(basename.equals(""))) {
 				sb.append("/");
 				sb.append(basename);
