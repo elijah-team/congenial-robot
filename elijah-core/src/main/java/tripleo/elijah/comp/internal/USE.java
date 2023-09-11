@@ -11,6 +11,7 @@ import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.diagnostic.ExceptionDiagnostic;
 import tripleo.elijah.comp.diagnostic.FileNotFoundDiagnostic;
 import tripleo.elijah.comp.diagnostic.UnknownExceptionDiagnostic;
+import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.queries.QuerySourceFileToModule;
 import tripleo.elijah.comp.queries.QuerySourceFileToModuleParams;
@@ -53,7 +54,8 @@ public class USE {
 	}
 
 	public void addModule(final OS_Module aModule, final String aFn) {
-		final WorldModule module = new DefaultWorldModule(aModule);
+		final @NotNull CompilationEnclosure ce = c.getCompilationEnclosure();
+		final WorldModule                   module = new DefaultWorldModule(aModule, ce);
 		fn2m.put(aFn, module);
 	}
 
@@ -159,7 +161,8 @@ public class USE {
 				return Operation.failure(e);
 			}
 
-			final WorldModule R = new DefaultWorldModule(om.success());
+			@NotNull final CompilationEnclosure ce = c.getCompilationEnclosure();
+			final WorldModule                   R = new DefaultWorldModule(om.success(), ce);
 			fn2m.put(absolutePath, R);
 			s.close();
 			return Operation.success(R);

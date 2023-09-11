@@ -19,6 +19,12 @@ class ResolvedNodes {
 		cr = aCr;
 	}
 
+	public void do_better(final DeducePhase.GeneratedClasses lgc, final @NotNull PipelineLogic pipelineLogic, final @NotNull WorldModule worldModule) {
+		this.init(lgc);
+		this.part2();
+		this.part3(pipelineLogic, worldModule, lgc);
+	}
+
 	public void init(final DeducePhase.@NotNull GeneratedClasses c) {
 		System.err.println("2222 " + c);
 
@@ -41,11 +47,8 @@ class ResolvedNodes {
 					// complain
 				}
 
-//					if (generatedClass.getCode() == 0)
-//						generatedClass.setCode(mod.getCompilation().nextClassCode());
 				for (EvaClass evaClass2 : evaClass.classMap.values()) {
 					if (evaClass2.getCode() == 0) {
-						//evaClass2.setCode(mod.getCompilation().nextClassCode());
 						cr.registerClass1(evaClass2);
 					}
 				}

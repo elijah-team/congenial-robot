@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
-import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.DefaultClassGenerator;
@@ -15,11 +14,10 @@ import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.world.i.WorldModule;
 import tripleo.elijah.world.impl.DefaultWorldModule;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class GN_PL_Run2 implements GN_Notable {
-	private final @NotNull OS_Module             mod;
+	private final @NotNull WorldModule mod;
 	private final          PipelineLogic         pipelineLogic;
 	private final          CompilationEnclosure  ce;
 	private final          DefaultClassGenerator dcg;
@@ -27,7 +25,7 @@ public class GN_PL_Run2 implements GN_Notable {
 
 	@Contract(pure = true)
 	public GN_PL_Run2(final PipelineLogic aPipelineLogic,
-					  final @NotNull OS_Module aMod,
+					  final @NotNull WorldModule aMod,
 					  final CompilationEnclosure aCe,
 					  final Consumer<WorldModule> aWorldConsumer) {
 		pipelineLogic = aPipelineLogic;
@@ -41,7 +39,7 @@ public class GN_PL_Run2 implements GN_Notable {
 	@Contract("_ -> new")
 	@SuppressWarnings("unused")
 	public static @NotNull GN_PL_Run2 getFactoryEnv(GN_Env env1) {
-		var env = (GN_PL_Run2_Env) env1;
+		GN_PL_Run2_Env env = (GN_PL_Run2_Env) env1;
 		return new GN_PL_Run2(env.pipelineLogic(), env.mod(), env.ce(), env.worldConsumer());
 	}
 
@@ -49,7 +47,7 @@ public class GN_PL_Run2 implements GN_Notable {
 	@Override
 	public void run() {
 		final DefaultWorldModule       worldModule = (DefaultWorldModule) mod;
-		final GenerateFunctionsRequest rq          = new GenerateFunctionsRequest(mod.entryPoints(), dcg, worldModule);
+		final GenerateFunctionsRequest rq          = new GenerateFunctionsRequest(dcg, worldModule);
 
 		worldModule.setRq(rq);
 
@@ -60,16 +58,13 @@ public class GN_PL_Run2 implements GN_Notable {
 			final ICodeRegistrar cr              = dcg.getCodeRegistrar();
 			final ResolvedNodes  resolved_nodes2 = new ResolvedNodes(cr);
 
-			resolved_nodes2.init(lgc);
-			resolved_nodes2.part2();
-			resolved_nodes2.part3(pipelineLogic, worldModule, lgc);
+			resolved_nodes2.do_better(lgc, pipelineLogic, worldModule);
 
 			worldConsumer.accept(worldModule);
 		});
 	}
 
-	public record GenerateFunctionsRequest(@NotNull List<EntryPoint> entryPoints,
-										   IClassGenerator classGenerator,
+	public record GenerateFunctionsRequest(IClassGenerator classGenerator,
 										   DefaultWorldModule worldModule
 	) {
 		public ModuleThing mt() {

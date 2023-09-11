@@ -16,6 +16,8 @@ import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.DeducePhase;
+import tripleo.elijah.world.i.LivingRepo;
+import tripleo.elijah.world.i.WorldModule;
 
 /**
  * Created 8/21/21 10:10 PM
@@ -46,14 +48,19 @@ public class DeducePipeline implements PipelineMember {
 			pipelineLogic.addModule(m);
 		}
 
-		final PipelineLogic.ModuleCompletableProcess mcp = pipelineLogic.mcp;
+		final PipelineLogic.ModuleCompletableProcess mcp = pipelineLogic._mcp();
 
 		Preconditions.checkNotNull(mcp);
 
 		mcp.start();
 
+		final CompilationEnclosure ce    = pipelineLogic._pa().getCompilationEnclosure();
+		final LivingRepo           world = ce.getCompilation().world();
+		world.addModuleProcess(mcp);
+
 		for (final OS_Module mod : pipelineLogic.mods().getMods()) {
-			mcp.add(mod);
+			final WorldModule mod1    = c.con().createWorldModule(mod);
+			world.addModule2(mod1);
 		}
 
 		mcp.preComplete();
