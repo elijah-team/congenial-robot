@@ -8,13 +8,14 @@ import java.util.Set;
 public class Finally {
 	Set<Outs> outputOffs = new HashSet<>();
 	private List<Input> inputs = new ArrayList<>();
+	private boolean turnAllOutputOff;
 
 	public void turnOutputOff(final Outs aOut) {
 		outputOffs.add(aOut);
 	}
 
 	public boolean outputOn(final Outs aOuts) {
-		return !outputOffs.contains(aOuts);
+		return !turnAllOutputOff || !outputOffs.contains(aOuts);
 	}
 
 	public void addOutput(final CompilerInput aInp, final Out2 ty) {
@@ -23,6 +24,10 @@ public class Finally {
 
 	public boolean containsInput(final String aS) {
 		return inputs.stream().anyMatch(i -> i.name().equals(aS));
+	}
+
+	public void turnAllOutputOff() {
+		turnAllOutputOff = true;
 	}
 
 	public enum Outs {Out_6262, Out_727, Out_350, Out_364, Out_252, Out_2121, Out_486, Out_5757, Out_1069, Out_401b}
