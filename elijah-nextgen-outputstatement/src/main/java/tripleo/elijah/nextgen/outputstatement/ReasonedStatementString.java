@@ -1,7 +1,5 @@
 package tripleo.elijah.nextgen.outputstatement;
 
-import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-
 public class ReasonedStatementString implements IReasonedString {
 	private final EG_Statement text;
 	private final String reason;

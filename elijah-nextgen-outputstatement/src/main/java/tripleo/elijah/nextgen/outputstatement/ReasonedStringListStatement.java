@@ -1,9 +1,5 @@
 package tripleo.elijah.nextgen.outputstatement;
 
-import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -15,7 +11,7 @@ public class ReasonedStringListStatement implements EG_Statement {
 	}
 
 	@Override
-	public @Nullable String getText() {
+	public String getText() {
 		final StringBuilder sb2 = new StringBuilder();
 		for (IReasonedString reasonedString : rss) {
 			sb2.append(reasonedString.text());
