@@ -42,6 +42,7 @@
 			<module>annotations</module>
 		-->
 		<module>tripleo-small</module>
+		<module>elijah-nextgen-outputstatement</module>
 		<module>elijah-stateful</module>
 		<module>tripleo-reactive</module>
 		<module>elijah-core</module>
@@ -84,6 +85,11 @@
 			<artifactId>slf4j-simple</artifactId>
 			<version>2.0.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.5</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jdeferred.v2</groupId>
@@ -99,11 +105,13 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.annotation -->
+<!--
 		<dependency>
 			<groupId>org.eclipse.jdt</groupId>
 			<artifactId>org.eclipse.jdt.annotation</artifactId>
 			<version>2.2.600</version>
 		</dependency>
+-->
 
 		<!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
 		<dependency>
@@ -163,10 +171,12 @@
 					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 				</repository>
 		-->
+<!--
 		<repository>
 			<id>gitlab-maven-elijah</id>
 			<url>https://gitlab.com/api/v4/projects/10309690/packages/maven</url>
 		</repository>
+-->
 		<repository>
 			<id>gitlab-maven-buffers</id>
 			<url>https://gitlab.com/api/v4/projects/20346374/packages/maven</url>
@@ -189,6 +199,7 @@
 			</repository>
 		-->
 
+<!--
 		<repository>
 			<id>gitlab-maven</id>
 			<url>https://gitlab.com/api/v4/projects/10309690/packages/maven</url>
@@ -197,6 +208,7 @@
 			<id>gitlab-maven</id>
 			<url>https://gitlab.com/api/v4/projects/10309690/packages/maven</url>
 		</snapshotRepository>
+-->
 	</distributionManagement>
 
 	<build>

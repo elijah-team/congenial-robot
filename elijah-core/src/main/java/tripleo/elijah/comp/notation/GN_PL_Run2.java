@@ -56,7 +56,7 @@ public class GN_PL_Run2 implements GN_Notable {
 
 		plgc.then(lgc -> {
 			final ICodeRegistrar cr              = dcg.getCodeRegistrar();
-			final ResolvedNodes  resolved_nodes2 = new ResolvedNodes(cr);
+			final ResolvedNodes  resolved_nodes2 = new ResolvedNodes(cr, ce.getCompilation());
 
 			resolved_nodes2.do_better(lgc, pipelineLogic, worldModule);
 

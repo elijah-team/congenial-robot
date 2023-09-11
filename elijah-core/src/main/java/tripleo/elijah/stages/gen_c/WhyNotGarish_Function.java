@@ -4,6 +4,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
@@ -51,8 +52,12 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 	public void resolveFileGenPromise(final GenerateResultEnv aFileGen) {
 		if (!fileGenPromise.isResolved())
 			fileGenPromise.resolve(aFileGen);
-		else
-			System.out.println("twice for " + generateC);
+		else {
+			var c = generateC._ce().getCompilation();
+			if (c.reports().outputOn(Finally.Outs.Out_5757)) {
+				System.out.println("twice for " + generateC);
+			}
+		}
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.EvaPipeline;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.notation.GN_PL_Run2;
@@ -1064,7 +1065,11 @@ public class GenerateFunctions implements ReactiveDimension {
 		final WorkList wl = dcg.wl();
 
 		if (!wl.isEmpty()) {
-			System.err.println("** 1070 WorkList not empty");
+			var c = module.getCompilation();
+			if (c.reports().outputOn(Finally.Outs.Out_1069)) {
+				System.err.println("** 1070 WorkList not empty");
+			}
+
 			wm.addJobs(wl);
 			wm.drain();
 		}
