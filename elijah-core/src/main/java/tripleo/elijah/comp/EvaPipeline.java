@@ -189,12 +189,12 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 			//cot.add(off);
 		}
 
-		for (FunctionStatement functionStatement : functionStatements) {
-			final String         filename = functionStatement.getFilename(pa);
-			final EG_Statement   seq      = EG_Statement.of(functionStatement.getText(), EX_Explanation.withMessage("dump2"));
-			final EOT_OutputFile off      = new EOT_OutputFile(List_of(), filename, EOT_OutputType.DUMP, seq);
+		//for (FunctionStatement functionStatement : functionStatements) {
+			//final String         filename = functionStatement.getFilename(pa);
+			//final EG_Statement   seq      = EG_Statement.of(functionStatement.getText(), EX_Explanation.withMessage("dump2"));
+			//final EOT_OutputFile off      = new EOT_OutputFile(List_of(), filename, EOT_OutputType.DUMP, seq);
 			//cot.add(off);
-		}
+		//}
 
 		final CompilationEnclosure compilationEnclosure = pa.getCompilationEnclosure();
 
