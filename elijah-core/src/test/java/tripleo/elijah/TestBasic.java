@@ -262,6 +262,8 @@ public class TestBasic {
 
 			c = CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 
+			c.reports().turnAllOutputOff();;
+
 			c.feedCmdLine(List_of(s, "-sO"));
 
 			if (c.errorCount() != 0)
