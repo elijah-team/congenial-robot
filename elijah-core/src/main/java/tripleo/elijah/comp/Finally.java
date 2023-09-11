@@ -30,23 +30,47 @@ public class Finally {
 		turnAllOutputOff = true;
 	}
 
+	public void addOutput(final CompFactory.InputRequest aInp, final Out2 ty) {
+		inputs.add(new Input(aInp, ty));
+	}
+
 	public enum Outs {Out_6262, Out_727, Out_350, Out_364, Out_252, Out_2121, Out_486, Out_5757, Out_1069, Out_401b}
 
 	public enum Out2 {
 		EZ, ELIJAH
 	}
 
+	interface Nameable {
+		String getName();
+	}
+
 	public class Input {
-		private final CompilerInput inp;
+
+		private final Nameable nameable;
 		private final Out2 ty;
 
 		public Input(final CompilerInput aInp, final Out2 aTy) {
-			inp = aInp;
+			nameable = new Nameable() {
+				@Override
+				public String getName() {
+					return aInp.getInp();
+				}
+			};
 			ty  = aTy;
 		}
 
+		public Input(final CompFactory.InputRequest aInp, final Out2 aTy) {
+			nameable = new Nameable() {
+				@Override
+				public String getName() {
+					return aInp.file().toString();
+				}
+			};
+			ty = aTy;
+		}
+
 		public String name() {
-			return inp.getInp();
+			return nameable.getName();
 		}
 	}
 }

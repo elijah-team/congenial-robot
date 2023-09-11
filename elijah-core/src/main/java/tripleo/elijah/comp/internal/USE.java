@@ -7,6 +7,7 @@ import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.ci.LibraryStatementPartImpl;
 import tripleo.elijah.comp.CompFactory;
 import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.diagnostic.ExceptionDiagnostic;
 import tripleo.elijah.comp.diagnostic.FileNotFoundDiagnostic;
@@ -220,7 +221,11 @@ public class USE {
 		final File[] files = dir.listFiles(accept_source_files);
 		if (files != null) {
 			for (final File file : files) {
-				parseElijjahFile(c.con().createInputRequest(file, do_out, lsp));
+				final CompFactory.InputRequest inp = c.con().createInputRequest(file, do_out, lsp);
+
+				parseElijjahFile(inp);
+
+				c.reports().addOutput(inp, Finally.Out2.ELIJAH);
 			}
 		}
 	}
