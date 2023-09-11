@@ -1,5 +1,3 @@
-git remote add origin https://github.com/elijah-team/congenial-robot.git
-git branch -M main
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
