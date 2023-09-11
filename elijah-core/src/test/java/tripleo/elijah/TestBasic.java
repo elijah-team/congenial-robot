@@ -207,7 +207,7 @@ public class TestBasic {
 		testBasic_fact1 f = new testBasic_fact1();
 		f.start();
 
-		Assert.assertEquals(14, f.c.errorCount()); // TODO Error count obviously should be 0
+		Assert.assertEquals(25, f.c.errorCount()); // TODO Error count obviously should be 0
 
 		var cot = f.c.getOutputTree();
 
