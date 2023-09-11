@@ -228,9 +228,10 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 						statement = statement0;
 					}
 
-					st.c.reports().addCodeOutput(filename);
-
 					var off = new EOT_OutputFile(writable.inputs(), filename, EOT_OutputType.SOURCES, statement);
+
+					st.c.reports().addCodeOutput(filename, off);
+
 					cot.add(off);
 				}
 			}
