@@ -68,12 +68,18 @@ public class PipelineLogic implements EventualRegister {
 				final OS_Module         mod = module.module();
 				final GenerateFunctions gfm = getGenerateFunctions(mod);
 
+				final Compilation c = pa.getCompilationEnclosure().getCompilation();
+
 				final GN_PL_Run2.GenerateFunctionsRequest rq = module.rq();
 				if (rq != null) {
-					System.err.println("7270 **GOT** request for " + mod.getFileName());
+					if (c.reports().outputOn(Finally.Outs.Out_727)) {
+						System.err.println("7270 **GOT** request for " + mod.getFileName());
+					}
 					gfm.generateFromEntryPoints(rq);
 				} else {
-					System.err.println("7272 **NO**  request for " + mod.getFileName());
+					if (c.reports().outputOn(Finally.Outs.Out_727)) {
+						System.err.println("7272 **NO**  request for " + mod.getFileName());
+					}
 					NotImplementedException.raise_stop();
 				}
 

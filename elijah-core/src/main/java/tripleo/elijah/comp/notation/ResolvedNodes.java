@@ -1,6 +1,8 @@
 package tripleo.elijah.comp.notation;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
 import tripleo.elijah.stages.deduce.DeducePhase;
@@ -14,9 +16,11 @@ import java.util.List;
 class ResolvedNodes {
 	final         List<EvaNode>  resolved_nodes = new ArrayList<EvaNode>();
 	private final ICodeRegistrar cr;
+	private final Compilation cc;
 
-	public ResolvedNodes(final ICodeRegistrar aCr) {
+	public ResolvedNodes(final ICodeRegistrar aCr, final Compilation aCc) {
 		cr = aCr;
+		cc = aCc;
 	}
 
 	public void do_better(final DeducePhase.GeneratedClasses lgc, final @NotNull PipelineLogic pipelineLogic, final @NotNull WorldModule worldModule) {
@@ -26,7 +30,9 @@ class ResolvedNodes {
 	}
 
 	public void init(final DeducePhase.@NotNull GeneratedClasses c) {
-		System.err.println("2222 " + c);
+		if (cc.reports().outputOn(Finally.Outs.Out_6262)) {
+			System.err.println("2222 " + c);
+		}
 
 		for (final EvaNode evaNode : c) {
 			if (!(evaNode instanceof final @NotNull GNCoded coded)) {

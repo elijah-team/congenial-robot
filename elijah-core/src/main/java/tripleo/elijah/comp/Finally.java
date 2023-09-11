@@ -25,7 +25,7 @@ public class Finally {
 		return inputs.stream().anyMatch(i -> i.name().equals(aS));
 	}
 
-	public enum Outs {Out_6262, Out_401b}
+	public enum Outs {Out_6262, Out_727, Out_350, Out_364, Out_252, Out_2121, Out_486, Out_5757, Out_1069, Out_401b}
 
 	public enum Out2 {
 		EZ, ELIJAH
