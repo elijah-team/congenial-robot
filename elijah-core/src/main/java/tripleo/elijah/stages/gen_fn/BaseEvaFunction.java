@@ -157,7 +157,14 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 
 	@Override
 	public int getCode() {
-		return __coded.getCode();
+		return getCoded().getCode();
+	}
+
+	private GNCoded getCoded() {
+		if (gcn == null) {
+			gcn = new GCN_1(this);
+		}
+		return gcn.getCoded();
 	}
 
 	@Override
