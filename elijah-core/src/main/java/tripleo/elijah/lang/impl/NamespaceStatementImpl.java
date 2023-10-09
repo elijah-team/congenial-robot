@@ -62,8 +62,9 @@ public class NamespaceStatementImpl extends _CommonNC
 
 	@Override
 	public NamespaceTypes getKind() {
-		if (_kind == null && name().equals("__MODULE__"))
-			return NamespaceTypes.MODULE; // semi HACK
+		if (_kind == null && name().sameName("__MODULE__")) {
+            return NamespaceTypes.MODULE; // semi HACK
+        }
 
 		return _kind;
 	}

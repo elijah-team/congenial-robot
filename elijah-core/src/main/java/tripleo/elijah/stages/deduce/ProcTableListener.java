@@ -110,7 +110,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 
 	private static void resolved_element_pte_ClassStatement_EvaClass(final EvaClass result, final @NotNull ClassStatement e, final @NotNull Constructable co, final @NotNull DG_ClassStatement dcs) {
 		//System.err.println("828282 "+((ClassStatement) e).name());
-		if ((e.name()).equals("Foo")) {
+		if ((e.name()).sameName("Foo")) {
 			System.out.println("828282 Foo found");
 		}
 

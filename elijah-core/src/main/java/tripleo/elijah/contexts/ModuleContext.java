@@ -68,7 +68,7 @@ public class ModuleContext extends ContextImpl implements Context {
 			) continue;
 			if (item instanceof OS_NamedElement) {
 //				LogEvent.logEvent(102, ((OS_Element2) item).name());
-				if (((OS_NamedElement) item).name().equals(name)) {
+				if (((OS_NamedElement) item).name().sameName(name)) {
 					Result.add(name, level, item, this);
 				}
 			}

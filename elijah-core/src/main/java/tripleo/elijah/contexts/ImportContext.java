@@ -78,7 +78,7 @@ public class ImportContext extends ContextImpl implements Context {
 						alreadySearched.add(namespaceContext);
 						namespaceContext.lookup(name, level, Result, alreadySearched, true);
 					} else if (element instanceof final @NotNull OS_NamedElement element2) {
-						if (element2.name().equals(name)) {
+						if (element2.name().sameName(name)) {
 							Result.add(name, level, element, this);
 							break; // shortcut: should only have one in scope
 						}

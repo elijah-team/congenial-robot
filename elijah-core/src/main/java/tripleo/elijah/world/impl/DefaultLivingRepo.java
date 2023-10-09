@@ -259,7 +259,7 @@ public class DefaultLivingRepo implements LivingRepo {
 
 		for (LivingNode livingNode : repo) {
 			if (livingNode instanceof final @NotNull LivingClass livingClass) {
-				if (livingClass.getElement().name().equals(className))
+				if (livingClass.getElement().name().sameName(className))
 					lcs.add(livingClass);
 			}
 		}

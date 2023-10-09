@@ -51,7 +51,7 @@ public class FunctionContext extends ContextImpl implements Context {
 					!(item instanceof VariableSequenceImpl)
 			) continue;
 			if (item instanceof OS_NamedElement) {
-				if (((OS_NamedElement) item).name().equals(name)) {
+				if (((OS_NamedElement) item).name().sameName(name)) {
 					Result.add(name, level, item, this);
 				}
 			} else if (item instanceof VariableSequenceImpl) {
@@ -63,7 +63,7 @@ public class FunctionContext extends ContextImpl implements Context {
 			}
 		}
 		for (final FormalArgListItem arg : carrier.getArgs()) {
-			if (arg.name().equals(name)) {
+			if (arg.name().sameName(name)) {
 				Result.add(name, level, arg, this);
 			}
 		}

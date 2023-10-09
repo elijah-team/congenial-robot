@@ -34,7 +34,7 @@ public class PackageContext extends ContextImpl {
 		alreadySearched.add(this);
 		for (OS_Element element : carrier.getElements()) {
 			if (element instanceof final @NotNull OS_NamedElement element2) {
-				if (element2.name().equals(name)) {
+				if (element2.name().sameName(name)) {
 					Result.add(name, level, element, this);
 				}
 			}

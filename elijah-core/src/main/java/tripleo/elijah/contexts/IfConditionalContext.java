@@ -51,7 +51,7 @@ public class IfConditionalContext extends ContextImpl implements Context {
 					!(item instanceof AliasStatementImpl)
 			) continue;
 			if (item instanceof OS_NamedElement) {
-				if (((OS_NamedElement) item).name().equals(name)) {
+				if (((OS_NamedElement) item).name().sameName(name)) {
 					Result.add(name, level, item, this);
 				}
 			}
