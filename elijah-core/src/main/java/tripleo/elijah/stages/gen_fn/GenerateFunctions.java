@@ -1056,6 +1056,8 @@ public class GenerateFunctions implements ReactiveDimension {
 		final @NotNull IClassGenerator  dcg = rq.classGenerator();
 		final @NotNull ModuleThing      mt  = rq.mt();
 
+		if (epl.isEmpty()) return;
+
 		epl.forEach(entryPoint -> pa.getCompilationEnclosure().addEntryPoint(getMirrorEntryPoint(entryPoint, mt), dcg));
 
 		// FIXME looking too hard into phase...
