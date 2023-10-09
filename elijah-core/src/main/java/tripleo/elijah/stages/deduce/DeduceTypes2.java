@@ -3060,7 +3060,7 @@ public class DeduceTypes2 {
 		private void do_assign_normal_ident_deferred_FALI(final @NotNull BaseEvaFunction generatedFunction, final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull FormalArgListItem fali) {
 			final GenType            genType            = _inj().new_GenTypeImpl();
 			final FunctionInvocation functionInvocation = generatedFunction.fi;
-			final String             fali_name          = fali.name();
+			final String             fali_name          = fali.name().asString();
 
 			IInvocation invocation = null;
 			if (functionInvocation.getClassInvocation() != null) {

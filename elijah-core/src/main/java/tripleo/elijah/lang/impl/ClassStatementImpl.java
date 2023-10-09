@@ -44,7 +44,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 		switch (x) {
 		case MODULE:
 			final OS_Module module = (OS_Module) parentElement;
-			//
+
 			this.setPackageName(module.pullPackageName());
 			_packageName.addElement(this);
 			module.add(this);
@@ -53,12 +53,11 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 			// do nothing
 			break;
 		default:
-			// we kind of fail the switch test here because OS_Container is not an
-			// OS_Element,
+			// we kind of fail the switch test here because OS_Container is not an OS_Element,
 			// so we have to test explicitly, messing up the pretty flow we had.
 			// hey sh*t happens.
 			if (parentElement instanceof OS_Container) {
-				((OS_Container) parentElement).add(this);
+				((OS_Container) parentElement).addToContainer(this);
 			} else {
 				throw new IllegalStateException(String.format("Cant add ClassStatement to %s", parentElement));
 			}
@@ -179,7 +178,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	@Override
 	public @NotNull PropertyStatement prop() {
 		PropertyStatement propertyStatement = new PropertyStatementImpl(this, getContext());
-		add(propertyStatement);
+		addToContainer(propertyStatement);
 		return propertyStatement;
 	}
 
@@ -188,7 +187,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	// region annotations
 
 	@Override // OS_Container
-	public void add(final OS_Element anElement) {
+	public void addToContainer(final OS_Element anElement) {
 		if (!(anElement instanceof ClassItem))
 			throw new IllegalStateException(String.format("Cant add %s to ClassStatement", anElement));
 		items.add((ClassItem) anElement);

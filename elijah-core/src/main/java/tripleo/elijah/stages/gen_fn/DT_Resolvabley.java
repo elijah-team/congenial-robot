@@ -21,6 +21,7 @@ public class DT_Resolvabley {
 
 		for (DT_Resolvable resolvable : x) {
 			final OS_Element element = resolvable.element();
+
 			if (element == null && resolvable.deduceItem() instanceof FunctionInvocation fi) {
 				var fd = fi.getFunction();
 				rr.add("%s".formatted(fd.getNameNode().getText()));
@@ -28,7 +29,10 @@ public class DT_Resolvabley {
 				continue;
 			}
 
-			if (element instanceof ClassStatement cs) {
+			switch (DecideElObjectType.getElObjectType(element)) {
+			case CLASS -> {
+				final ClassStatement cs = (ClassStatement) element;
+
 				if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
 					if (fi.getFunction() instanceof ConstructorDef cd) {
 						rr.add("%s()".formatted(cs.getName()));
@@ -36,29 +40,36 @@ public class DT_Resolvabley {
 					}
 				}
 			}
-			if (element instanceof FunctionDef fd) {
-				if (resolvable.deduceItem() == null) {
-					// when ~ is folders.forEach, this is null (fi not set yet) 
-					rr.add("%s".formatted(fd.getNameNode().getText()));
-					continue;
-				}
+			case FUNCTION -> {
+				final FunctionDef fd = (FunctionDef) element;
 
-				if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
-					if (fi.getFunction() == fd) {
-						rr.add("%s".formatted(fd.getNameNode().getText()));
+                if (resolvable.deduceItem() == null) {
+                    // when ~ is folders.forEach, this is null (fi not set yet)
+                    rr.add("%s".formatted(fd.getNameNode().getText()));
+                    continue;
+                }
+
+                if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
+                    if (fi.getFunction() == fd) {
+                        rr.add("%s".formatted(fd.getNameNode().getText()));
 //						rr.add("%s(...)".formatted(fd.getNameNode().getText()));
-						continue;
-					}
-				}
+                        continue;
+                    }
+                }
+            }
+			case VAR -> {
+				VariableStatement vs = (VariableStatement) element;
+                rr.add(vs.getName());
+                continue;
+            }
+			case FORMAL_ARG_LIST_ITEM -> {
+				FormalArgListItem fali = (FormalArgListItem) element;
+                rr.add(fali.name().asString());
+                continue;
+            }
+
 			}
-			if (element instanceof VariableStatement vs) {
-				rr.add(vs.getName());
-				continue;
-			}
-			if (element instanceof FormalArgListItem fali) {
-				rr.add(fali.name());
-				continue;
-			}
+
 			if (resolvable.instructionArgument() instanceof IdentIA identIA2) {
 				var ite = identIA2.getEntry();
 
@@ -80,9 +91,18 @@ public class DT_Resolvabley {
 		//assert r.equals(z);
 		if (!r.equals(z)) {
 			//08/13
-			System.err.println("----- 67 Should be " + z);
+			logProgress(67, ""+z);
 		}
 
 		return r;
+	}
+
+	private void logProgress(int code, String message) {
+		switch (code) {
+		case 67 -> {
+			System.err.println("[DT_Resolvabley >> mismatch] 67 Should be " + message);
+		}
+		default -> throw new IllegalStateException("Unexpected value: " + code);
+		}
 	}
 }

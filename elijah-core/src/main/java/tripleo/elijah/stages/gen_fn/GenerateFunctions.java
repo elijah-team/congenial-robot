@@ -413,7 +413,7 @@ public class GenerateFunctions implements ReactiveDimension {
 				final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
 //				assert attached != null; // TODO this fails
 
-				gf.addVariableTableEntry(fali.name(), VariableTableType.ARG, tte, fali);
+				gf.addVariableTableEntry(fali.name().asString(), VariableTableType.ARG, tte, fali);
 			}
 		}
 
@@ -635,7 +635,7 @@ public class GenerateFunctions implements ReactiveDimension {
 				final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
 //				assert attached != null; // TODO this fails
 
-				gf.addVariableTableEntry(fali.name(), VariableTableType.ARG, tte, fali);
+				gf.addVariableTableEntry(fali.name().asString(), VariableTableType.ARG, tte, fali);
 			}
 		}
 
