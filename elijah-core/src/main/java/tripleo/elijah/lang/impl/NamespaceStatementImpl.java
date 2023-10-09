@@ -114,6 +114,7 @@ public class NamespaceStatementImpl extends _CommonNC
 		}
 	}
 
+	@Override
 	public void setContext(final NamespaceContext ctx) {
 		_a.setContext(ctx);
 	}
