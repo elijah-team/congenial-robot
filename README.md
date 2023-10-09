@@ -9,7 +9,7 @@ The elijah-lang compiler.
 git clone https://github.com/elijah-team/congenial-robot
 cd congenial-robot
 mkdir COMP
-# nix-shell -p maven jdk17
+# nix-shell -p maven jdk17 --pure --command "mvn test"
 mvn test
 ```
 
