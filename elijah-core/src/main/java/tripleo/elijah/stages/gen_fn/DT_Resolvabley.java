@@ -29,45 +29,47 @@ public class DT_Resolvabley {
 				continue;
 			}
 
-			switch (DecideElObjectType.getElObjectType(element)) {
-			case CLASS -> {
-				final ClassStatement cs = (ClassStatement) element;
+			if (element != null) {
+				switch (DecideElObjectType.getElObjectType(element)) {
+				case CLASS -> {
+					final ClassStatement cs = (ClassStatement) element;
 
-				if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
-					if (fi.getFunction() instanceof ConstructorDef cd) {
-						rr.add("%s()".formatted(cs.getName()));
-						continue;
+					if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
+						if (fi.getFunction() instanceof ConstructorDef cd) {
+							rr.add("%s()".formatted(cs.getName()));
+							continue;
+						}
 					}
 				}
-			}
-			case FUNCTION -> {
-				final FunctionDef fd = (FunctionDef) element;
+				case FUNCTION -> {
+					final FunctionDef fd = (FunctionDef) element;
 
-                if (resolvable.deduceItem() == null) {
-                    // when ~ is folders.forEach, this is null (fi not set yet)
-                    rr.add("%s".formatted(fd.getNameNode().getText()));
-                    continue;
-                }
+					if (resolvable.deduceItem() == null) {
+						// when ~ is folders.forEach, this is null (fi not set yet)
+						rr.add("%s".formatted(fd.getNameNode().getText()));
+						continue;
+					}
 
-                if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
-                    if (fi.getFunction() == fd) {
-                        rr.add("%s".formatted(fd.getNameNode().getText()));
-//						rr.add("%s(...)".formatted(fd.getNameNode().getText()));
-                        continue;
-                    }
-                }
-            }
-			case VAR -> {
-				VariableStatement vs = (VariableStatement) element;
-                rr.add(vs.getName());
-                continue;
-            }
-			case FORMAL_ARG_LIST_ITEM -> {
-				FormalArgListItem fali = (FormalArgListItem) element;
-                rr.add(fali.name().asString());
-                continue;
-            }
+					if (resolvable.deduceItem() instanceof FunctionInvocation fi) {
+						if (fi.getFunction() == fd) {
+							rr.add("%s".formatted(fd.getNameNode().getText()));
+	//						rr.add("%s(...)".formatted(fd.getNameNode().getText()));
+							continue;
+						}
+					}
+				}
+				case VAR -> {
+					VariableStatement vs = (VariableStatement) element;
+					rr.add(vs.getName());
+					continue;
+				}
+				case FORMAL_ARG_LIST_ITEM -> {
+					FormalArgListItem fali = (FormalArgListItem) element;
+					rr.add(fali.name().asString());
+					continue;
+				}
 
+				}
 			}
 
 			if (resolvable.instructionArgument() instanceof IdentIA identIA2) {
