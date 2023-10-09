@@ -71,13 +71,13 @@ public abstract class _CommonNC {
 	}
 
 	// OS_Container
-	public @NotNull List<OS_Element2> items() {
-		final ArrayList<OS_Element2> a = new ArrayList<OS_Element2>();
-		for (final ClassItem functionItem : getItems()) {
-			final boolean b = functionItem instanceof OS_Element2;
-			if (b)
-				a.add((OS_Element2) functionItem);
-		}
+	public @NotNull List<OS_NamedElement> items() {
+		final ArrayList<OS_NamedElement> a = new ArrayList<>();
+
+		getItems().stream()
+				.filter(functionItem -> functionItem instanceof OS_NamedElement)
+				.forEach(functionItem -> a.add((OS_NamedElement) functionItem));
+
 		return a;
 	}
 
