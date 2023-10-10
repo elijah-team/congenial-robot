@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface OS_Module extends OS_Element {
-	void add(OS_Element anElement);
+	void add(ModuleItem anElement);
 
 	@NotNull List<EntryPoint> entryPoints();
 

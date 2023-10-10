@@ -11,7 +11,7 @@ import tripleo.elijah.lang.nextgen.names.i.EN_Name;
  * <p>
  * Created Mar 23, 2020 at 12:40:27 AM
  */
-public interface OS_Element2 {
+public interface OS_NamedElement {
 
 	/**
 	 * The name of the element TODO Should this be a {@link IdentExpression}?
@@ -19,7 +19,7 @@ public interface OS_Element2 {
 	 * @return a String
 	 */
 	@Contract(pure = true)
-	String name();
+	OS_ElementName name();
 
 	EN_Name getEnName();
 }

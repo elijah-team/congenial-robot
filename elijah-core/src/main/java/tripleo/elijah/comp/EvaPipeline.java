@@ -19,11 +19,10 @@ import tripleo.elijah.comp.notation.GN_GenerateNodesIntoSink;
 import tripleo.elijah.comp.notation.GN_GenerateNodesIntoSinkEnv;
 import tripleo.elijah.lang.i.FormalArgListItem;
 import tripleo.elijah.lang.i.FunctionDef;
-import tripleo.elijah.lang.i.OS_Element2;
+import tripleo.elijah.lang.i.OS_NamedElement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.DoubleLatch;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
@@ -34,8 +33,6 @@ import tripleo.elijah.stages.instructions.Instruction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static tripleo.elijah.util.Helpers.List_of;
 
 /**
  * Created 8/21/21 10:16 PM
@@ -177,7 +174,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 
 				final String str = "FUNCTION %d %s %s\n".formatted(code,
 																   functionName,
-																   ((OS_Element2) evaFunction.getFD().getParent()).name());
+																   ((OS_NamedElement) evaFunction.getFD().getParent()).name());
 				sb.append(str);
 				pa.activeFunction(evaFunction);
 			} else {
@@ -233,7 +230,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 
 			final String str = "FUNCTION %d %s %s\n".formatted(evaFunction.getCode(),
 															   evaFunction.getFunctionName(),
-															   ((OS_Element2) evaFunction.getFD().getParent()).name());
+															   ((OS_NamedElement) evaFunction.getFD().getParent()).name());
 			sb.append(str);
 
 			final EvaFunction gf = (EvaFunction) evaFunction;
