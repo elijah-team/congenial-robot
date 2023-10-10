@@ -413,7 +413,7 @@ public class GenerateFunctions implements ReactiveDimension {
 				final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
 //				assert attached != null; // TODO this fails
 
-				gf.addVariableTableEntry(fali.name(), VariableTableType.ARG, tte, fali);
+				gf.addVariableTableEntry(fali.name().asString(), VariableTableType.ARG, tte, fali);
 			}
 		}
 
@@ -635,7 +635,7 @@ public class GenerateFunctions implements ReactiveDimension {
 				final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
 //				assert attached != null; // TODO this fails
 
-				gf.addVariableTableEntry(fali.name(), VariableTableType.ARG, tte, fali);
+				gf.addVariableTableEntry(fali.name().asString(), VariableTableType.ARG, tte, fali);
 			}
 		}
 
@@ -1055,6 +1055,8 @@ public class GenerateFunctions implements ReactiveDimension {
 		final @NotNull List<EntryPoint> epl = rq.mod().entryPoints();
 		final @NotNull IClassGenerator  dcg = rq.classGenerator();
 		final @NotNull ModuleThing      mt  = rq.mt();
+
+		if (epl.isEmpty()) return;
 
 		epl.forEach(entryPoint -> pa.getCompilationEnclosure().addEntryPoint(getMirrorEntryPoint(entryPoint, mt), dcg));
 

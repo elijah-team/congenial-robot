@@ -44,7 +44,8 @@ public class EG_SyntheticStatement implements EG_Statement {
 		final String s1 = aNaming.s1;
 
 		if (ss.equals("include")) {
-			if (s1.equals("local")) {
+            assert s1 != null;
+            if (s1.equals("local")) {
 				final String text1 = ((ES_String) aS).getText();
 				text = String.format("#include \"%s\"", text1);
 			} else if (s1.equals("system") && ((ES_Symbol) aS).getText().equals("Prelude")) {

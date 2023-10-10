@@ -168,7 +168,7 @@ public class TypeOfTypeNameTest {
 		rtn_y.setName(Helpers.string_to_qualident(typeNameString));
 		var_y.setTypeName(rtn_y);
 
-		st_af.add(vs);
+		st_af.addToContainer(vs);
 
 		VariableStatementImpl var_x = new VariableStatementImpl(null);
 		var_x.setName(Helpers.string_to_ident("x")); // not necessary
@@ -243,7 +243,7 @@ public class TypeOfTypeNameTest {
 		rtn_y.setName(Helpers.string_to_qualident(typeNameString));
 		var_y.setTypeName(rtn_y);
 
-		st_af.add(vs);
+		st_af.addToContainer(vs);
 
 		VariableStatementImpl var_x = new VariableStatementImpl(null);
 		var_x.setName(Helpers.string_to_ident("x")); // not necessary
