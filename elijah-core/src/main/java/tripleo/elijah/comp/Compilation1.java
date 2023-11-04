@@ -79,7 +79,6 @@ public abstract class Compilation1 implements Compilation {
 	private IPipelineAccess      _pa;
 	private CompilationEnclosure compilationEnclosure = new CompilationEnclosure(this);
 	private IO                   io;
-	private Finally _f = new Finally();
 
 	// TODO remove this 04/20
 	@Override
@@ -371,11 +370,6 @@ public abstract class Compilation1 implements Compilation {
 	@Override
 	public CompilerBeginning beginning(final @NotNull CompilationRunner aCompilationRunner) {
 		return new CompilerBeginning(this, rootCI, _inputs, aCompilationRunner.progressSink, cfg());
-	}
-
-	@Override
-	public Finally reports() {
-		return _f;
 	}
 
 }

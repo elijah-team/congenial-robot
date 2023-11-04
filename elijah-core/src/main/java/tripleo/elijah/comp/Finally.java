@@ -84,6 +84,14 @@ public class Finally {
 		public String name() {
 			return nameable.getName();
 		}
+
+		@Override
+		public String toString() {
+			return "Input{" +
+					"nameable=" + nameable.getName().toString() +
+					", ty=" + ty +
+					'}';
+		}
 	}
 
 	class Output {
@@ -97,6 +105,13 @@ public class Finally {
 
 		public String name() {
 			return fileNameProvider.getFilename();
+		}
+
+		@Override
+		public String toString() {
+			return "Output{" +
+					"fileNameProvider=" + fileNameProvider.getFilename().toString() +
+					'}';
 		}
 	}
 }

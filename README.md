@@ -9,7 +9,7 @@ The elijah-lang compiler.
 git clone https://github.com/elijah-team/congenial-robot
 cd congenial-robot
 mkdir COMP
-# nix-shell -p maven openjdk-17 (or something)
+# nix-shell -p maven jdk17 --pure --command "mvn test"
 mvn test
 ```
 
@@ -28,7 +28,7 @@ GOALS
 PLACEHOLDER 1
 --------------
 
-> What seems to work best is leaning into annoyance or anger, and hate-fixing it.
+> What seems to work best is leaning into annoyance or anger, and ❤-fixing it.
 
 LINEAGE
 --------
@@ -37,4 +37,4 @@ LINEAGE
 
 `Rosetta` - Encapsulating state/environment. Pull model.
 
-`Congenial` - Testablility/verification 
+`Congenial` - Testability/verification

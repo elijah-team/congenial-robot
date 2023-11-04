@@ -407,7 +407,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					//				tte.attached = _inj().new_OS_FuncType((FunctionDef) best); // TODO: what is this??
 					//vte.addPotentialType(instructionIndex, tte);
 				} else if (best instanceof final @Nullable FormalArgListItem fali) {
-					String                        s      = fali.name();
+					String                        s      = fali.name().asString();
 					@Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(s);
 					if (vte_ia != null) {
 						@NotNull VariableTableEntry vte2 = generatedFunction.getVarTableEntry(to_int(vte_ia));
