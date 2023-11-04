@@ -29,6 +29,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.8.2
+
       - name: Cache maven
         uses: actions/cache@v1
         with:
