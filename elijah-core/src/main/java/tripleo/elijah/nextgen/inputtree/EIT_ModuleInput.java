@@ -2,16 +2,13 @@ package tripleo.elijah.nextgen.inputtree;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.ci.CompilerInstructions;
-import tripleo.elijah.ci.LibraryStatementPart;
-import tripleo.elijah.comp.Compilation;
-import tripleo.elijah.lang.i.ModuleItem;
-import tripleo.elijah.lang.i.OS_Module;
-import tripleo.elijah.nextgen.model.SM_Module;
-import tripleo.elijah.nextgen.model.SM_ModuleItem;
 
-import java.util.ArrayList;
-import java.util.List;
+import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.lang.i.OS_Module;
+
+import tripleo.elijah.nextgen.model.SM_Module;
+
+import tripleo.elijah.nextgen.model.impl.SM_Module_;
 
 public class EIT_ModuleInput implements EIT_Input {
 	private final Compilation c;
@@ -24,21 +21,7 @@ public class EIT_ModuleInput implements EIT_Input {
 	}
 
 	public @NotNull SM_Module computeSourceModel() {
-		final SM_Module sm = new SM_Module() {
-			@Override
-			public @NotNull List<SM_ModuleItem> items() {
-				final List<SM_ModuleItem> items = new ArrayList<>();
-				for (final ModuleItem item : module.getItems()) {
-					items.add(new SM_ModuleItem() {
-						@Override
-						public ModuleItem _carrier() {
-							return item;
-						}
-					});
-				}
-				return items;
-			}
-		};
+		final SM_Module sm = new SM_Module_(this);
 		return sm;
 	}
 
@@ -63,12 +46,6 @@ public class EIT_ModuleInput implements EIT_Input {
 		// 4. tail process results
 		resultConsumer.accept(gr2);
 	}
-*/
-
-	@Override
-	public @NotNull EIT_InputType getType() {
-		return EIT_InputType.ELIJAH_SOURCE;
-	}
 
 	@NotNull
 	private String langOfModule() {
@@ -77,5 +54,15 @@ public class EIT_ModuleInput implements EIT_Input {
 		final String               lang = ci.genLang() == null ? Compilation.CompilationAlways.defaultPrelude() : ci.genLang();
 		// DEFAULT(compiler-default), SPECIFIED(gen-clause: codePoint), INHERITED(cp) // CodePoint??
 		return lang;
+	}
+*/
+
+	@Override
+	public @NotNull EIT_InputType getType() {
+		return EIT_InputType.ELIJAH_SOURCE;
+	}
+
+	public OS_Module module() {
+		return this.module;
 	}
 }
