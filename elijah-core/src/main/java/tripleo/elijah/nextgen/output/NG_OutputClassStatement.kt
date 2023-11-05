@@ -1,52 +1,51 @@
-package tripleo.elijah.nextgen.output;
+package tripleo.elijah.nextgen.output
 
-import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.lang.i.OS_Module;
-import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput;
-import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
-import tripleo.elijah.stages.gen_generic.GenerateResult.TY;
-import tripleo.elijah.util.BufferTabbedOutputStream;
+import tripleo.elijah.lang.i.OS_Module
+import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput
+import tripleo.elijah.nextgen.outputstatement.EX_Explanation
+import tripleo.elijah.stages.gen_generic.GenerateResult.TY
+import tripleo.elijah.util.BufferTabbedOutputStream
 
-public class NG_OutputClassStatement implements NG_OutputStatement {
-	private final          String                   text;
-	private final          TY                       ty;
-	private final @NotNull NG_OutDep                moduleDependency;
-	private final @NotNull BufferTabbedOutputStream __tos;
+data class NG_OutputClassStatement(
+		private val __tos: BufferTabbedOutputStream,
+		private val aModuleDependency: OS_Module,
+		private val ty: TY,
+) : NG_OutputStatement {
+	private val text: String
+//    private val moduleDependency: NG_OutDep
 
-	public NG_OutputClassStatement(final @NotNull BufferTabbedOutputStream aText, final @NotNull OS_Module aModuleDependency, final TY aTy) {
-		__tos = aText;
-
-		text = aText.getBuffer().getText();
-		ty   = aTy;
-
-		moduleDependency = new NG_OutDep(aModuleDependency);
+	init {
+		text = __tos.buffer.text
+//        moduleDependency    = NG_OutDep(aModuleDependency)
 	}
 
-	@Override
-	public @NotNull EX_Explanation getExplanation() {
-		return EX_Explanation.withMessage("NG_OutputClassStatement");
+	override fun getExplanation(): EX_Explanation {
+		return EX_Explanation.withMessage("NG_OutputClassStatement")
 	}
 
-	@Override
-	public String getText() {
-		return text;
+	override fun getText(): String {
+		return text
 	}
 
-	@Override
-	public @NotNull TY getTy() {
-		return ty;
+	override fun getTy(): TY {
+		return ty
 	}
 
-	@Override
-	@NotNull
-	public EIT_ModuleInput getModuleInput() {
-		var m = moduleDependency().module();
-
-		final EIT_ModuleInput moduleInput = new EIT_ModuleInput(m, m.getCompilation());
-		return moduleInput;
+	override fun getModuleInput(): EIT_ModuleInput {
+//		val m = this.moduleDependency.module
+//
+//		return EIT_ModuleInput(m, m.getCompilation())
+		return moduleInput_
 	}
 
-	public NG_OutDep moduleDependency() {
-		return moduleDependency;
+	private val moduleInput_: EIT_ModuleInput by lazy {
+		val m = this.moduleDependency.module
+
+		EIT_ModuleInput(m, m.getCompilation())
 	}
+
+	private val moduleDependency: NG_OutDep by lazy {
+//		get() {
+			/*return*/ NG_OutDep(aModuleDependency)
+		}
 }
