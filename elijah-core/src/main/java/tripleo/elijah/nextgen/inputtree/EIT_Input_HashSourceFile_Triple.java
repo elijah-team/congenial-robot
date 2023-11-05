@@ -31,7 +31,8 @@ public record EIT_Input_HashSourceFile_Triple(String hash,
 				throw new IllegalStateException("Error"); // Operation??
 			}
 
-			EIT_Input_HashSourceFile_Triple yy2 = new EIT_Input_HashSourceFile_Triple(hh, x, fn);
+			//noinspection UnnecessaryLocalVariable
+			final EIT_Input_HashSourceFile_Triple yy2 = new EIT_Input_HashSourceFile_Triple(hh, x, fn);
 			return yy2;
 		}
 		throw new IllegalStateException("hash failure"); // Operation??
