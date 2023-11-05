@@ -127,6 +127,8 @@ public interface Compilation {
 
 	Finally reports();
 
+	ICompilationAccess2 getCompilationAccess2();
+
 	enum CompilationAlways {
 		;
 

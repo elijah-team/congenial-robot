@@ -18,6 +18,7 @@ import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.i.CompilationFlow;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.i.ICompilationAccess;
+import tripleo.elijah.comp.i.ICompilationAccess2;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.stages.deduce.IFunctionMapHook;
@@ -81,6 +82,11 @@ public class CompilationImpl extends Compilation1 {
 	@Override
 	public Finally reports() {
 		return _f;
+	}
+
+	@Override
+	public ICompilationAccess2 getCompilationAccess2() {
+		return new CompilationAccess2Impl(this);
 	}
 
 	public void testMapHooks(final List<IFunctionMapHook> aMapHooks) {
