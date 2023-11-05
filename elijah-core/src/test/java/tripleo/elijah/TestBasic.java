@@ -119,14 +119,16 @@ public class TestBasic {
 			}
 		}
 
-		assertEquals(6, c.reports().codeOutputSize());
+		final Finally REPORTS = c.reports();
 
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.h"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/Main.h"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.c"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/Main.c"));
-		assertTrue(c.reports().containsCodeOutput("/Prelude/Prelude.c"));
-		assertTrue(c.reports().containsCodeOutput("/Prelude/Prelude.h"));
+		assertEquals(6, REPORTS.codeOutputSize());
+
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.h"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/Main.h"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.c"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/Main.c"));
+		assertTrue(REPORTS.containsCodeOutput("/Prelude/Prelude.c"));
+		assertTrue(REPORTS.containsCodeOutput("/Prelude/Prelude.h"));
 	}
 
 	@Test
@@ -150,23 +152,25 @@ public class TestBasic {
 
 		//
 
-		assertEquals(6, c.reports().codeInputSize());
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.collections/collections.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.math/math.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.io/Directory.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/Prelude.elijjah"));
-		assertTrue(c.reports().containsCodeInput("test/basic/import_demo.elijjah"));
-		assertTrue(c.reports().containsCodeInput("test/basic/listfolders3/listfolders3.elijah"));
+		final Finally REPORTS = c.reports();
+
+		assertEquals(6, REPORTS.codeInputSize());
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.collections/collections.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.math/math.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.io/Directory.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/Prelude.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/import_demo.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/listfolders3/listfolders3.elijah"));
 
 		//
 
-		assertEquals(6, c.reports().codeOutputSize());
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.h"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/Main.h"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.c"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders3/Main.c"));
-		assertTrue(c.reports().containsCodeOutput("/Prelude/Prelude.c"));
-		assertTrue(c.reports().containsCodeOutput("/Prelude/Prelude.h"));
+		assertEquals(6, REPORTS.codeOutputSize());
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.h"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/Main.h"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/wpkotlin_c.demo.list_folders/MainLogic.c"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders3/Main.c"));
+		assertTrue(REPORTS.containsCodeOutput("/Prelude/Prelude.c"));
+		assertTrue(REPORTS.containsCodeOutput("/Prelude/Prelude.h"));
 	}
 
 	@Ignore
@@ -184,23 +188,25 @@ public class TestBasic {
 
 		assertEquals(4, c.errorCount()); // TODO Error count obviously should be 0
 
-		assertEquals(6, c.reports().codeInputSize());
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.collections/collections.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.math/math.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.io/Directory.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/Prelude.elijjah"));
-		assertTrue(c.reports().containsCodeInput("test/basic/import_demo.elijjah"));
-		assertTrue(c.reports().containsCodeInput("test/basic/listfolders4/listfolders3.elijah"));
+		final Finally REPORTS = c.reports();
+
+		assertEquals(6, REPORTS.codeInputSize());
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.collections/collections.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.math/math.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.io/Directory.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/Prelude.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/import_demo.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/listfolders4/listfolders3.elijah"));
 
 		//
 
-		assertEquals(6, c.reports().codeOutputSize());
-		assertTrue(c.reports().containsCodeOutput("/listfolders4/wpkotlin_c.demo.list_folders/MainLogic.h"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders4/Main.h"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders4/wpkotlin_c.demo.list_folders/MainLogic.c"));
-		assertTrue(c.reports().containsCodeOutput("/listfolders4/Main.c"));
-		assertTrue(c.reports().containsCodeOutput("/Prelude/Prelude.c"));
-		assertTrue(c.reports().containsCodeOutput("/Prelude/Prelude.h"));
+		assertEquals(6, REPORTS.codeOutputSize());
+		assertTrue(REPORTS.containsCodeOutput("/listfolders4/wpkotlin_c.demo.list_folders/MainLogic.h"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders4/Main.h"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders4/wpkotlin_c.demo.list_folders/MainLogic.c"));
+		assertTrue(REPORTS.containsCodeOutput("/listfolders4/Main.c"));
+		assertTrue(REPORTS.containsCodeOutput("/Prelude/Prelude.c"));
+		assertTrue(REPORTS.containsCodeOutput("/Prelude/Prelude.h"));
 
 	}
 
@@ -255,13 +261,13 @@ public class TestBasic {
 
 		assertEquals(7, REPORTS.codeInputSize());
 
-		assertTrue(c.reports().containsCodeInput("test/basic/fact1/main2"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.collections/collections.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.math/math.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/std.io/Directory.elijjah"));
-		assertTrue(c.reports().containsCodeInput("lib_elijjah/lib-c/Prelude.elijjah"));
-		assertTrue(c.reports().containsCodeInput("test/basic/fact1/fact1.elijah"));
-		assertTrue(c.reports().containsCodeInput("test/basic/fact1/main2/main2.elijah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/fact1/main2"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.collections/collections.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.math/math.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/std.io/Directory.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("lib_elijjah/lib-c/Prelude.elijjah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/fact1/fact1.elijah"));
+		assertTrue(REPORTS.containsCodeInput("test/basic/fact1/main2/main2.elijah"));
 
 		assertEquals(4, REPORTS.codeOutputSize());
 
