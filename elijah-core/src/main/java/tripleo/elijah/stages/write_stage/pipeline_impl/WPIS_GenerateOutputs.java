@@ -3,6 +3,7 @@ package tripleo.elijah.stages.write_stage.pipeline_impl;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.nextgen.CP_Paths;
 import tripleo.elijah.lang.i.OS_Module;
@@ -15,6 +16,8 @@ import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
+import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
+import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
@@ -100,7 +103,7 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 		this.st.pa.waitGenC(mod, cb);
 	}
 
-	interface Writable {
+	interface Writeable {
 		String filename();
 
 		EG_Statement statement();
@@ -116,14 +119,19 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 	}
 
 	// TODO 09/04 Duplication madness
-	private static class MyWritable implements Writable {
+	private static class MyWriteable implements Writeable {
 		final          Collection<EG_Statement>        value;
 		final          EOT_OutputFile.FileNameProvider filename;
 		final @NotNull List<EG_Statement>              list;
 		final @NotNull EG_SequenceStatement     statement;
-		private final  NG_OutputRequest         outputRequest;
 
-		public MyWritable(final Map.@NotNull Entry<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
+		public NG_OutputRequest getOutputRequest() {
+			return outputRequest;
+		}
+
+		private final NG_OutputRequest outputRequest;
+
+		public MyWriteable(final @NotNull Pair<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
 			this.outputRequest = aEntry.getKey();
 			filename           = outputRequest.fileName();
 			value              = aEntry.getValue();
@@ -194,20 +202,40 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 				}
 
 				final Multimap<NG_OutputRequest, EG_Statement> mfss = ArrayListMultimap.create();
-				var                                            cot  = st.c.getOutputTree();
+				final Multimap<NG_OutputRequest, EG_Statement> mfss2 = ArrayListMultimap.create();
+				final EOT_OutputTree                           cot  = st.c.getOutputTree();
 
 				// README combine output requests into file requests
 				for (NG_OutputRequest or : ors1) {
 					mfss.put(or, or.statement());
 				}
 
-				final List<Writable> writables = new ArrayList<>();
-
-				for (Map.Entry<NG_OutputRequest, Collection<EG_Statement>> entry : mfss.asMap().entrySet()) {
-					writables.add(new MyWritable(entry));
+				final ArrayListMultimap<String, NG_OutputRequest> mfsm = ArrayListMultimap.create();
+				//new HashMap<>();//mfss.asMap();
+				for (NG_OutputRequest or : ors1) {
+					mfsm.put(or.fileName().getFilename(), or);
 				}
 
-				for (Writable writable : writables) {
+				for (Map.Entry<String, Collection<NG_OutputRequest>> entry : mfsm.asMap().entrySet()) {
+					final Collection<NG_OutputRequest> value = entry.getValue();
+					NG_OutputRequest                   or2   = value.iterator().next();
+
+					EG_Statement new_st = recombine(entry.getValue());
+
+					mfss2.put(or2, new_st);
+				}
+
+
+				final List<Writeable> writables = new ArrayList<>();
+
+				for (Map.Entry<NG_OutputRequest, Collection<EG_Statement>> entry : mfss2.asMap().entrySet()) {
+					writables.add(new MyWriteable(Pair.of(entry.getKey(), entry.getValue())));
+				}
+
+				final List<Writeable> writables2 = new ArrayList<>(writables.size());
+				final Multimap<String, Writeable> w3 = ArrayListMultimap.create();
+
+				for (Writeable writable : writables) {
 					final EOT_OutputFile.FileNameProvider filename   = writable.getFilenameProvider();
 					final EG_Statement                    statement0 = writable.statement();
 					final List<EG_Statement> list2      = relist3(statement0);
@@ -228,6 +256,42 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 						statement = statement0;
 					}
 
+					//w3.put(filename.getFilename(), writable);
+				//}
+				//
+				//for (Map.Entry<String, Collection<Writeable>> entry : w3.asMap().entrySet()) {
+				//	if (entry.getValue().size() > 1) {
+				//		//writables2.add(entry.getValue().iterator().next());
+						//var es = entry.getValue();
+						//var ss = new ArrayList<EG_Statement>();
+						//
+						//NG_OutputRequest ex = null;
+						//
+						//for (Writeable e : es) {
+				//			int y=2;
+				//			final NG_OutputRequest outputRequest = ((MyWriteable) e).getOutputRequest();
+				//
+				//			if (ex == null) {
+				//				ex = outputRequest;
+				//			} else {
+				//				int yyy=2;
+				//				Preconditions.checkState(Objects.equals(ex, outputRequest));
+				//			}
+				//
+				//			ss.add(e.statement());
+				//		}
+				//
+				//		//var stmt = new EG_SequenceStatement(new EG_Naming("Rewritten"), ss);
+				//		writables2.add(new MyWriteable(Pair.of(ex, ss)));
+				//	} else {
+				//		writables2.add(entry.getValue().iterator().next());
+				//	}
+				//}
+				//
+				//for (Writeable writable : writables/*2*/) {
+				//	var filename = writable.getFilenameProvider();
+				//	var statement = writable.statement();
+
 					var off = new EOT_OutputFile(writable.inputs(), filename, EOT_OutputType.SOURCES, statement);
 
 					st.c.reports().addCodeOutput(filename, off);
@@ -235,6 +299,14 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 					cot.add(off);
 				}
 			}
+		}
+
+		private @NotNull EG_Statement recombine(final @NotNull Collection<NG_OutputRequest> aValue) {
+			final List<EG_Statement> list = aValue.stream()
+					.map(NG_OutputRequest::statement)
+					.toList();
+
+			return new EG_SequenceStatement(new EG_Naming("recombined"), list);
 		}
 
 		private static @NotNull List<EG_Statement> relist3(final EG_Statement sequence) {
