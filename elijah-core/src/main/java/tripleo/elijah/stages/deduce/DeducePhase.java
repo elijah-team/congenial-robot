@@ -210,7 +210,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		OS_Module         m   = aRequest.getModule();
 		Iterable<EvaNode> lgf = aRequest.getListOfEvaFunctions();
 
-		final @NotNull DeduceTypes2 deduceTypes2 = aRequest.createDeduceTypes2_singleton();
+		final @NotNull DeduceTypes2 deduceTypes2 = DeducePhase_deduceModule_Request.Companion.createDeduceTypes2Singleton(aRequest);
 
 		logProgress(DeducePhaseProvenance.DeduceTypes_create, List.of(deduceTypes2, lgf));
 
@@ -250,7 +250,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 
 
-		final @NotNull DeduceTypes2 deduceTypes2 = aRequest.createDeduceTypes2_singleton();
+		final @NotNull DeduceTypes2 deduceTypes2 = DeducePhase_deduceModule_Request.Companion.createDeduceTypes2Singleton(aRequest);
 
 		OS_Module         m   = aRequest.getModule();
 		Iterable<EvaNode> lgf = aRequest.getListOfEvaFunctions();
