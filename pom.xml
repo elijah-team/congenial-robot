@@ -92,12 +92,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jdeferred.v2</groupId>
-			<artifactId>jdeferred-core</artifactId>
-			<version>${jdeferred.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>5.2.0</version>
@@ -158,8 +152,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-test</artifactId>
-			<version>${kotlin.version}</version>
+			<artifactId>kotlin-test-junit</artifactId>
+			<version>1.8.20</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
