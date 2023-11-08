@@ -11,6 +11,8 @@ package tripleo.elijah.stages.gen_fn;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.stages.deduce.ClassInvocation;
@@ -21,7 +23,6 @@ import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.util.Holder;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkManager;
-import tripleo.elijah.world.WorldGlobals;
 
 /**
  * Created 5/31/21 2:26 AM
@@ -74,7 +75,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 			assert genClass != null;
 
 			ConstructorDef cd = new ConstructorDefImpl(null, (_CommonNC) klass, klass.getContext());
-			cd.setName(WorldGlobals.emptyConstructorName);
+			cd.setName(LangGlobals.emptyConstructorName);
 			Scope3Impl scope3 = new Scope3Impl(cd);
 			cd.scope(scope3);
 			for (EvaContainer.VarTableEntry varTableEntry : genClass.varTable) {

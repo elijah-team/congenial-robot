@@ -25,6 +25,7 @@ import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.lang.nextgen.names.i.EN_Name;
@@ -62,7 +63,6 @@ import tripleo.elijah.util.Operation;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
-import tripleo.elijah.world.WorldGlobals;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -2308,7 +2308,7 @@ public class DeduceTypes2 {
 			final FunctionDef        function = aDependentFunction.getFunction();
 			WorkJob                  gen;
 			final @NotNull OS_Module mod;
-			if (function == WorldGlobals.defaultVirtualCtor) {
+			if (function == LangGlobals.defaultVirtualCtor) {
 				ClassInvocation ci = aDependentFunction.getClassInvocation();
 				if (ci == null) {
 					NamespaceInvocation ni = aDependentFunction.getNamespaceInvocation();

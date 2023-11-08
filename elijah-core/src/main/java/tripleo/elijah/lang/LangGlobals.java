@@ -1,15 +1,17 @@
-package tripleo.elijah.world;
+package tripleo.elijah.lang;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.lang.i.ConstructorDef;
+
 import tripleo.elijah.lang.i.IdentExpression;
+import tripleo.elijah.lang.i.ConstructorDef;
 import tripleo.elijah.lang.i.OS_Package;
+
 import tripleo.elijah.lang.impl.ConstructorDefImpl;
 import tripleo.elijah.lang.impl.OS_PackageImpl;
+
 import tripleo.elijah.util.Helpers;
 
-public enum WorldGlobals {
-	;
+public class LangGlobals {
 
 	public final static IdentExpression emptyConstructorName = Helpers.string_to_ident("<>");
 

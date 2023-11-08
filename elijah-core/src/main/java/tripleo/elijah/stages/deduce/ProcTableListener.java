@@ -10,6 +10,8 @@ package tripleo.elijah.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.post_bytecode.DG_ClassStatement;
@@ -19,7 +21,6 @@ import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.world.WorldGlobals;
 
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 
 		ci = dcs.classInvocation();
 		ci = dc.registerClassInvocation(ci);
-		fi = dc.newFunctionInvocation(WorldGlobals.defaultVirtualCtor, pte, ci); // TODO might not be virtual ctor, so check
+		fi = dc.newFunctionInvocation(LangGlobals.defaultVirtualCtor, pte, ci); // TODO might not be virtual ctor, so check
 		pte.setFunctionInvocation(fi);
 
 		final IdentTableEntry entry = ((IdentIA) pte.expression_num).getEntry();

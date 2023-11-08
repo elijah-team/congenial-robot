@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
+import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.MatchConditionalImpl;
@@ -32,7 +33,6 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.Holder;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.work.WorkList;
-import tripleo.elijah.world.WorldGlobals;
 
 import java.text.MessageFormat;
 import java.util.Collection;
@@ -97,7 +97,7 @@ public class Resolve_Ident_IA {
 				final @NotNull WorkList          wl                = dt2._inj().new_WorkList();
 				final @NotNull OS_Module         module            = ci.getKlass().getContext().module();
 				final @NotNull GenerateFunctions generateFunctions = dc.getGenerateFunctions(module);
-				if (pte.getFunctionInvocation().getFunction() == WorldGlobals.defaultVirtualCtor)
+				if (pte.getFunctionInvocation().getFunction() == LangGlobals.defaultVirtualCtor)
 					wl.addJob(dt2._inj().new_WlGenerateDefaultCtor(generateFunctions, fi, dc.deduceTypes2.creationContext(), phase.codeRegistrar));
 				else
 					wl.addJob(dt2._inj().new_WlGenerateCtor(generateFunctions, fi, null, dc.deduceTypes2.phase.codeRegistrar));
@@ -120,7 +120,7 @@ public class Resolve_Ident_IA {
 		if (pte.getArgs().size() == 0 && cs.size() == 0) {
 			// TODO use a virtual default ctor
 			LOG.info("2262 use a virtual default ctor for " + pte.__debug_expression);
-			selected_constructor = WorldGlobals.defaultVirtualCtor;
+			selected_constructor = LangGlobals.defaultVirtualCtor;
 		} else {
 			// TODO find a ctor that matches prte.getArgs()
 			final List<TypeTableEntry> x  = pte.getArgs();

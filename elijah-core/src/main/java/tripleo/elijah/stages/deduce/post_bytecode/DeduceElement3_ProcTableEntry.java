@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
+import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.types.OS_FuncType;
@@ -17,7 +18,6 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
-import tripleo.elijah.world.WorldGlobals;
 
 import java.util.Collection;
 import java.util.Map;
@@ -231,7 +231,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 			ci = fi.pte.getClassInvocation();
 		}
 		FunctionDef fd3 = fi.getFunction();
-		if (fd3 == WorldGlobals.defaultVirtualCtor) {
+		if (fd3 == LangGlobals.defaultVirtualCtor) {
 			if (ci == null) {
 				if (/*fi.getClassInvocation() == null &&*/ fi.getNamespaceInvocation() == null) {
 					// Assume default constructor
@@ -373,7 +373,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		//de3.set
 
 
-		@NotNull FunctionInvocation fi2 = aDeduceTypes2._phase().newFunctionInvocation(WorldGlobals.defaultVirtualCtor, pte, invocation);
+		@NotNull FunctionInvocation fi2 = aDeduceTypes2._phase().newFunctionInvocation(LangGlobals.defaultVirtualCtor, pte, invocation);
 
 		// FIXME use `q'
 		final WlGenerateDefaultCtor wldc = aDeduceTypes2._inj().new_WlGenerateDefaultCtor(aDeduceTypes2.getGenerateFunctions(invocation.getKlass().getContext().module()), fi2, aDeduceTypes2.creationContext(), aDeduceTypes2._phase().codeRegistrar);
@@ -403,7 +403,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		final FunctionDef fd2   = fi.getFunction();
 		int               state = 0;
 
-		if (fd2 == WorldGlobals.defaultVirtualCtor) {
+		if (fd2 == LangGlobals.defaultVirtualCtor) {
 			if (fi.pte.getArgs().size() == 0)
 				state = 1;
 			else

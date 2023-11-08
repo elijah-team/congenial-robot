@@ -2,6 +2,8 @@ package tripleo.elijah.stages.gen_c;
 
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
+
+import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.gen_fn.*;
@@ -11,7 +13,6 @@ import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.work.WorkList;
-import tripleo.elijah.world.WorldGlobals;
 
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		final IdentExpression constructorName = gf.getFD().getNameNode();
 
 		final String constructorNameText;
-		if (constructorName == WorldGlobals.emptyConstructorName) {
+		if (constructorName == LangGlobals.emptyConstructorName) {
 			constructorNameText = "";
 		} else {
 			constructorNameText = constructorName.getText();
