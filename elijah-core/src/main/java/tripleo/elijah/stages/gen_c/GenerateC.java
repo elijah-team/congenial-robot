@@ -67,10 +67,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		LOG = new ElLog(mod.getFileName(), verbosity, PHASE);
 
 		ce = aParams.getCompilationEnclosure();
-		ce.getAccessBusPromise()
-				.then(ab -> {
-					ab.subscribePipelineLogic(pl -> pl.addLog(LOG));
-				});
+		ce.addLog(LOG);
 
 		ce.addReactiveDimension(this);
 

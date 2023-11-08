@@ -24,6 +24,7 @@ import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 import tripleo.elijah.pre_world.Mirror_EntryPoint;
 import tripleo.elijah.stages.gen_fn.IClassGenerator;
 import tripleo.elijah.stages.inter.ModuleThing;
+import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.util.ArrayList;
@@ -364,6 +365,14 @@ public class CompilationEnclosure {
 
 	public void addEntryPoint(final @NotNull Mirror_EntryPoint aMirrorEntryPoint, final IClassGenerator dcg) {
 		aMirrorEntryPoint.generate(dcg);
+	}
+
+	public void addLog(final ElLog aLOG) {
+		var ce = this;
+		ce.getAccessBusPromise()
+				.then(ab -> {
+					ab.subscribePipelineLogic(pl -> pl.addLog(aLOG));
+				});
 	}
 
 	public interface ModuleListener {
