@@ -22,14 +22,21 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class ContextImpl implements tripleo.elijah.lang.i.Context {
+public abstract class ContextImpl implements Context {
 	private final List<Expectation> expectations = new ArrayList<>();
 	private final List<EN_Name>     names        = new LinkedList<>();
 
 	//public ContextImpl() {
 	//}
 
-	public List<Expectation> getExpectations() {
+	@Override
+	public Expectation expect(final String aName, final OS_Element aElement) {
+		final Expectation result = new Expectation(aName, aElement);
+		expectations.add(result);
+		return result;
+	}
+
+	@Override public List<Expectation> getExpectations() {
 		return expectations;
 	}
 
