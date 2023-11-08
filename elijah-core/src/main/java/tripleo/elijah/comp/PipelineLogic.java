@@ -27,6 +27,7 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn.GeneratePhase;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.stages.logging.ElLog.Verbosity;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
@@ -181,6 +182,9 @@ public class PipelineLogic implements EventualRegister {
 		}
 	}
 
+	public Verbosity getVerbosity() {
+		return this.verbosity;
+	}
 }
 
 //
