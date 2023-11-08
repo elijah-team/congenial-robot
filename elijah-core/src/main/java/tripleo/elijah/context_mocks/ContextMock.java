@@ -44,30 +44,10 @@ public class ContextMock extends ContextImpl implements Context {
 		_parent = null;
 	}
 
-	//@Override
-	//public @NotNull Compilation compilation() {
-	//	throw new UnintendedUseException();
-	//}
-	//
-	//@Override
-	//public LookupResultList lookup(@NotNull final String name) {
-	//	throw new UnintendedUseException();
-	//}
-
 	@Override
 	public Context getParent() {
 		return _parent;
 	}
-
-	//@Override
-	//public @NotNull OS_Module module() {
-	//	throw new UnintendedUseException();
-	//}
-
-	//@Override
-	//public void addName(final EN_Name aName) {
-	//	throw new UnintendedUseException();
-	//}
 
 	@Override
 	public LookupResultList lookup(final String name, final int level, final LookupResultList Result, final SearchList alreadySearched, final boolean one) {
