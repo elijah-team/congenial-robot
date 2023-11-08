@@ -1104,6 +1104,35 @@ public class GenerateFunctions implements ReactiveDimension {
 		return Result;
 	}
 
+	@SuppressWarnings("TypeMayBeWeakened")
+	public GFS_ProcedureCall scheme(final ProcedureCallExpression aPce, final EvaFunction aGeneratedFunction, final Context aCtx2) {
+		return new GFS_ProcedureCall() {
+
+			@Override
+			public List<InstructionArgument> getIdentIAPathList() {
+				final InstructionArgument s = simplify();
+				return BaseEvaFunction._getIdentIAPathList(s);
+			}
+
+			private @Nullable InstructionArgument simplifed = null;
+
+			@Override
+			public InstructionArgument simplify() {
+				if (simplifed == null) {
+					simplifed = simplify_expression(aPce, aGeneratedFunction, aCtx2);
+				}
+				return simplifed;
+			}
+		};
+	}
+
+	interface GFS_ProcedureCall {
+
+		List<InstructionArgument> getIdentIAPathList();
+
+		InstructionArgument simplify();
+	}
+
 	static class __GenerateClass {
 		private final ElLog LOG;
 		private final RegisterClassInvocation_env passthruEnv;
