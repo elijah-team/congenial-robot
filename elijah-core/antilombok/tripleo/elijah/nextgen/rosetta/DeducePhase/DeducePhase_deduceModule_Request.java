@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.rosetta.DeducePhase;
 
-import kotlin.Metadata;
+//import kotlin.Metadata;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import org.jetbrains.annotations.NotNull;
@@ -12,13 +12,13 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.logging.ElLog;
 
-@Metadata(
-   mv = {1, 9, 0},
-   k = 1,
-   xi = 48,
-   d1 = {"\u0000F\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u001d\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u000f\n\u0002\u0010\u000b\n\u0002\b\u0002\n\u0002\u0010\b\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u0002\b\u0086\b\u0018\u0000 #2\u00020\u0001:\u0001#B+\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u0012\f\u0010\u0004\u001a\b\u0012\u0004\u0012\u00020\u00060\u0005\u0012\u0006\u0010\u0007\u001a\u00020\b\u0012\u0006\u0010\t\u001a\u00020\n¢\u0006\u0002\u0010\u000bJ\t\u0010\u0016\u001a\u00020\u0003HÆ\u0003J\u000f\u0010\u0017\u001a\b\u0012\u0004\u0012\u00020\u00060\u0005HÆ\u0003J\t\u0010\u0018\u001a\u00020\bHÆ\u0003J\t\u0010\u0019\u001a\u00020\nHÆ\u0003J7\u0010\u001a\u001a\u00020\u00002\b\b\u0002\u0010\u0002\u001a\u00020\u00032\u000e\b\u0002\u0010\u0004\u001a\b\u0012\u0004\u0012\u00020\u00060\u00052\b\b\u0002\u0010\u0007\u001a\u00020\b2\b\b\u0002\u0010\t\u001a\u00020\nHÆ\u0001J\u0006\u0010\u001b\u001a\u00020\rJ\u0013\u0010\u001c\u001a\u00020\u001d2\b\u0010\u001e\u001a\u0004\u0018\u00010\u0001HÖ\u0003J\t\u0010\u001f\u001a\u00020 HÖ\u0001J\t\u0010!\u001a\u00020\"HÖ\u0001R\u0010\u0010\f\u001a\u0004\u0018\u00010\rX\u0082\u000e¢\u0006\u0002\n\u0000R\u0011\u0010\t\u001a\u00020\n¢\u0006\b\n\u0000\u001a\u0004\b\u000e\u0010\u000fR\u0017\u0010\u0004\u001a\b\u0012\u0004\u0012\u00020\u00060\u0005¢\u0006\b\n\u0000\u001a\u0004\b\u0010\u0010\u0011R\u0011\u0010\u0002\u001a\u00020\u0003¢\u0006\b\n\u0000\u001a\u0004\b\u0012\u0010\u0013R\u0011\u0010\u0007\u001a\u00020\b¢\u0006\b\n\u0000\u001a\u0004\b\u0014\u0010\u0015¨\u0006$"},
-   d2 = {"Ltripleo/elijah/nextgen/rosetta/DeducePhase/DeducePhase_deduceModule_Request;", "", "module", "Ltripleo/elijah/lang/i/OS_Module;", "listOfEvaFunctions", "", "Ltripleo/elijah/stages/gen_fn/EvaNode;", "verbosity", "Ltripleo/elijah/stages/logging/ElLog$Verbosity;", "deducePhase", "Ltripleo/elijah/stages/deduce/DeducePhase;", "(Ltripleo/elijah/lang/i/OS_Module;Ljava/lang/Iterable;Ltripleo/elijah/stages/logging/ElLog$Verbosity;Ltripleo/elijah/stages/deduce/DeducePhase;)V", "createdDeduceTypes2", "Ltripleo/elijah/stages/deduce/DeduceTypes2;", "getDeducePhase", "()Ltripleo/elijah/stages/deduce/DeducePhase;", "getListOfEvaFunctions", "()Ljava/lang/Iterable;", "getModule", "()Ltripleo/elijah/lang/i/OS_Module;", "getVerbosity", "()Ltripleo/elijah/stages/logging/ElLog$Verbosity;", "component1", "component2", "component3", "component4", "copy", "createDeduceTypes2", "equals", "", "other", "hashCode", "", "toString", "", "Companion", "tripleo.elijah.core"}
-)
+//@Metadata(
+//   mv = {1, 9, 0},
+//   k = 1,
+//   xi = 48,
+//   d1 = {"\u0000F\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u001d\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u000f\n\u0002\u0010\u000b\n\u0002\b\u0002\n\u0002\u0010\b\n\u0000\n\u0002\u0010\u000e\n\u0002\b\u0002\b\u0086\b\u0018\u0000 #2\u00020\u0001:\u0001#B+\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u0012\f\u0010\u0004\u001a\b\u0012\u0004\u0012\u00020\u00060\u0005\u0012\u0006\u0010\u0007\u001a\u00020\b\u0012\u0006\u0010\t\u001a\u00020\n¢\u0006\u0002\u0010\u000bJ\t\u0010\u0016\u001a\u00020\u0003HÆ\u0003J\u000f\u0010\u0017\u001a\b\u0012\u0004\u0012\u00020\u00060\u0005HÆ\u0003J\t\u0010\u0018\u001a\u00020\bHÆ\u0003J\t\u0010\u0019\u001a\u00020\nHÆ\u0003J7\u0010\u001a\u001a\u00020\u00002\b\b\u0002\u0010\u0002\u001a\u00020\u00032\u000e\b\u0002\u0010\u0004\u001a\b\u0012\u0004\u0012\u00020\u00060\u00052\b\b\u0002\u0010\u0007\u001a\u00020\b2\b\b\u0002\u0010\t\u001a\u00020\nHÆ\u0001J\u0006\u0010\u001b\u001a\u00020\rJ\u0013\u0010\u001c\u001a\u00020\u001d2\b\u0010\u001e\u001a\u0004\u0018\u00010\u0001HÖ\u0003J\t\u0010\u001f\u001a\u00020 HÖ\u0001J\t\u0010!\u001a\u00020\"HÖ\u0001R\u0010\u0010\f\u001a\u0004\u0018\u00010\rX\u0082\u000e¢\u0006\u0002\n\u0000R\u0011\u0010\t\u001a\u00020\n¢\u0006\b\n\u0000\u001a\u0004\b\u000e\u0010\u000fR\u0017\u0010\u0004\u001a\b\u0012\u0004\u0012\u00020\u00060\u0005¢\u0006\b\n\u0000\u001a\u0004\b\u0010\u0010\u0011R\u0011\u0010\u0002\u001a\u00020\u0003¢\u0006\b\n\u0000\u001a\u0004\b\u0012\u0010\u0013R\u0011\u0010\u0007\u001a\u00020\b¢\u0006\b\n\u0000\u001a\u0004\b\u0014\u0010\u0015¨\u0006$"},
+//   d2 = {"Ltripleo/elijah/nextgen/rosetta/DeducePhase/DeducePhase_deduceModule_Request;", "", "module", "Ltripleo/elijah/lang/i/OS_Module;", "listOfEvaFunctions", "", "Ltripleo/elijah/stages/gen_fn/EvaNode;", "verbosity", "Ltripleo/elijah/stages/logging/ElLog$Verbosity;", "deducePhase", "Ltripleo/elijah/stages/deduce/DeducePhase;", "(Ltripleo/elijah/lang/i/OS_Module;Ljava/lang/Iterable;Ltripleo/elijah/stages/logging/ElLog$Verbosity;Ltripleo/elijah/stages/deduce/DeducePhase;)V", "createdDeduceTypes2", "Ltripleo/elijah/stages/deduce/DeduceTypes2;", "getDeducePhase", "()Ltripleo/elijah/stages/deduce/DeducePhase;", "getListOfEvaFunctions", "()Ljava/lang/Iterable;", "getModule", "()Ltripleo/elijah/lang/i/OS_Module;", "getVerbosity", "()Ltripleo/elijah/stages/logging/ElLog$Verbosity;", "component1", "component2", "component3", "component4", "copy", "createDeduceTypes2", "equals", "", "other", "hashCode", "", "toString", "", "Companion", "tripleo.elijah.core"}
+//)
 public final class DeducePhase_deduceModule_Request {
    @NotNull
    public static final Companion Companion = new Companion((DefaultConstructorMarker)null);
@@ -38,7 +38,7 @@ public final class DeducePhase_deduceModule_Request {
       Intrinsics.checkNotNullParameter(listOfEvaFunctions, "listOfEvaFunctions");
       Intrinsics.checkNotNullParameter(verbosity, "verbosity");
       Intrinsics.checkNotNullParameter(deducePhase, "deducePhase");
-      super();
+//      super();
       this.module = module;
       this.listOfEvaFunctions = listOfEvaFunctions;
       this.verbosity = verbosity;
@@ -155,13 +155,13 @@ public final class DeducePhase_deduceModule_Request {
       }
    }
 
-   @Metadata(
-      mv = {1, 9, 0},
-      k = 1,
-      xi = 48,
-      d1 = {"\u0000\u0018\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\b\u0086\u0003\u0018\u00002\u00020\u0001B\u0007\b\u0002¢\u0006\u0002\u0010\u0002J\u000e\u0010\u0003\u001a\u00020\u00042\u0006\u0010\u0005\u001a\u00020\u0006¨\u0006\u0007"},
-      d2 = {"Ltripleo/elijah/nextgen/rosetta/DeducePhase/DeducePhase_deduceModule_Request$Companion;", "", "()V", "createDeduceTypes2Singleton", "Ltripleo/elijah/stages/deduce/DeduceTypes2;", "moduleRequest", "Ltripleo/elijah/nextgen/rosetta/DeducePhase/DeducePhase_deduceModule_Request;", "tripleo.elijah.core"}
-   )
+//   @Metadata(
+//      mv = {1, 9, 0},
+//      k = 1,
+//      xi = 48,
+//      d1 = {"\u0000\u0018\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\b\u0086\u0003\u0018\u00002\u00020\u0001B\u0007\b\u0002¢\u0006\u0002\u0010\u0002J\u000e\u0010\u0003\u001a\u00020\u00042\u0006\u0010\u0005\u001a\u00020\u0006¨\u0006\u0007"},
+//      d2 = {"Ltripleo/elijah/nextgen/rosetta/DeducePhase/DeducePhase_deduceModule_Request$Companion;", "", "()V", "createDeduceTypes2Singleton", "Ltripleo/elijah/stages/deduce/DeduceTypes2;", "moduleRequest", "Ltripleo/elijah/nextgen/rosetta/DeducePhase/DeducePhase_deduceModule_Request;", "tripleo.elijah.core"}
+//   )
    public static final class Companion {
       private Companion() {
       }

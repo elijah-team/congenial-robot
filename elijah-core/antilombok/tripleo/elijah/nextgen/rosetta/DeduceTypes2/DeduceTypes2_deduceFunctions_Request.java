@@ -26,7 +26,7 @@ public final class DeduceTypes2_deduceFunctions_Request {
       Intrinsics.checkNotNullParameter(request, "request");
       Intrinsics.checkNotNullParameter(listOfEvaFunctions, "listOfEvaFunctions");
       Intrinsics.checkNotNullParameter(deducePhase, "deducePhase");
-      super();
+//      super();
       this.request = request;
       this.listOfEvaFunctions = listOfEvaFunctions;
       this.b = b;

@@ -27,7 +27,7 @@ public final class DeduceTypes2Request {
       Intrinsics.checkNotNullParameter(module, "module");
       Intrinsics.checkNotNullParameter(deducePhase, "deducePhase");
       Intrinsics.checkNotNullParameter(verbosity, "verbosity");
-      super();
+//      super();
       this.module = module;
       this.deducePhase = deducePhase;
       this.verbosity = verbosity;
