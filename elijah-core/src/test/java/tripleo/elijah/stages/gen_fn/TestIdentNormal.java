@@ -11,6 +11,7 @@ package tripleo.elijah.stages.gen_fn;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Ignore;
 import org.junit.Test;
+import tripleo.elijah.context_mocks.ContextMock;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
@@ -19,10 +20,11 @@ import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.test_help.Boilerplate;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.test_help.XX;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static tripleo.elijah.util.Helpers.List_of;
@@ -32,65 +34,65 @@ import static tripleo.elijah.util.Helpers.List_of;
  */
 public class TestIdentNormal {
 
-	@Ignore
+	//@Ignore
 	@Test(expected = IllegalStateException.class) // TODO proves nothing
 	public void test() {
-
-		final FunctionDef fd   = mock(FunctionDef.class);
-		final Context     ctx1 = mock(Context.class);
-		final Context     ctx2 = mock(Context.class);
-
 		final Boilerplate boilerplate = new Boilerplate();
 		boilerplate.get();
 		boilerplate.getGenerateFiles(boilerplate.defaultMod());
 
-		final GeneratePhase generatePhase = boilerplate.pipelineLogic().generatePhase;
+		final FunctionDef fd                = mock(FunctionDef.class);
+		final Context     ctx1              = mock(Context.class);
+		final Context     ctx2              = new ContextMock();
+		final XX          factory           = new XX();
+		final EvaFunction generatedFunction = new EvaFunction(fd);
 
-		final GenerateFunctions generateFunctions = new GenerateFunctions(boilerplate.defaultMod(), boilerplate.pipelineLogic, boilerplate.comp.pa());
+		//
 
-		final EvaFunction       generatedFunction = new EvaFunction(fd);
-		final VariableSequence  seq               = new VariableSequenceImpl(ctx1);
-		final VariableStatement vs                = new VariableStatementImpl(seq);
-		final IdentExpression   x                 = IdentExpression.forString("x");
-		vs.setName(x);
-		final IdentExpression         foo = IdentExpression.forString("foo");
-		final ProcedureCallExpression pce = new ProcedureCallExpressionImpl();
-		pce.setLeft(new DotExpressionImpl(x, foo));
+		final IdentExpression   x  = factory.makeIdent("x");
+		final VariableStatement vs = factory.sequenceAndVarNamed(x);
 
-		final InstructionArgument                s = generateFunctions.simplify_expression(pce, generatedFunction, ctx2);
-		@NotNull final List<InstructionArgument> l = BaseEvaFunction._getIdentIAPathList(s);
-		tripleo.elijah.util.Stupidity.println_out_2(String.valueOf(l));
+		//
+
+		final IdentExpression         foo = factory.makeIdent("foo");
+		final ProcedureCallExpression pce = factory.makeDottedProcedureCall(x, foo);
+
+		//
+
+		final GenerateFunctions                   generateFunctions = boilerplate.defaultGenerateFunctions();
+		final GenerateFunctions.GFS_ProcedureCall gfs               = generateFunctions.scheme(pce, generatedFunction, ctx2);
+		final @NotNull List<InstructionArgument>  l                 = gfs.getIdentIAPathList();
+		tripleo.elijah.util.Stupidity.println_out_2("8999-66" + String.valueOf(l));
 //      tripleo.elijah.util.Stupidity.println_out_2(generatedFunction.getIdentIAPathNormal());
 
 		//
-		//
-		//
 
-		final LookupResultList lrl = new LookupResultListImpl();
-		lrl.add("x", 1, vs, ctx2);
-		when(ctx2.lookup("x")).thenReturn(lrl);
+		ctx2.expect(x.getText(), vs).andContributeResolve(ctx2);
 
-		//
-		//
 		//
 
 		final IdentIA identIA = new IdentIA(1, generatedFunction);
 
 		final DeducePhase  phase = boilerplate.getDeducePhase();
-		final DeduceTypes2 d2    = new DeduceTypes2(new DeduceTypes2Request(boilerplate.defaultMod(), phase, ElLog.Verbosity.VERBOSE));
+		final DeduceTypes2 d2    = boilerplate.defaultDeduceTypes2(boilerplate.defaultMod());
 
-		final List<InstructionArgument> ss = BaseEvaFunction._getIdentIAPathList(identIA);
+		final List<InstructionArgument> ss       = BaseEvaFunction._getIdentIAPathList(identIA);
+		final boolean[]                 ss_found = {false};
 		d2.resolveIdentIA2_(ctx2, null, ss/*identIA*/, generatedFunction, new FoundElement(phase) {
 			@Override
 			public void foundElement(final OS_Element e) {
-				System.err.println(e);
+				System.err.println("8999-87 " + e);
+				ss_found[0] = true;
 			}
 
 			@Override
 			public void noFoundElement() {
-				NotImplementedException.raise();
+//				NotImplementedException.raise();
+				ss_found[0] = false;
 			}
 		});
+
+		assertTrue(ss_found[0]);
 	}
 
 	@Ignore

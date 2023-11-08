@@ -18,24 +18,14 @@ import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.ClassStatementImpl;
 import tripleo.elijah.lang.impl.FunctionDefImpl;
-import tripleo.elijah.lang.impl.LookupResultListImpl;
 import tripleo.elijah.lang.impl.OS_ModuleImpl;
-import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
-import tripleo.elijah.stages.deduce.DeducePhase;
-import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.gen_fn.EvaFunction;
-import tripleo.elijah.stages.gen_fn.GenType;
-import tripleo.elijah.stages.gen_fn.GenTypeImpl;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.VariableTableType;
-import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.test_help.Boilerplate;
 import tripleo.elijah.test_help.XX;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class GetRealTargetNameTest {
 	private EvaFunction gf;
@@ -62,8 +52,10 @@ public class GetRealTargetNameTest {
 	@Ignore
 	@Test // too complicated
 	public void testManualXDotFoo() {
-		final XX              factory   = new XX();
-		final IdentExpression x_ident   = factory.makeIdent("x");
+		Emit.emitting = false;
+
+		final XX              factory = new XX();
+		final IdentExpression x_ident = factory.makeIdent("x");
 
 		final Context foo_ctx = new ContextMock();
 
@@ -83,34 +75,17 @@ public class GetRealTargetNameTest {
 		final IntegerIA         integerIA = new IntegerIA(int_index, gf);
 		ident_ia.setPrev(integerIA);
 
-		Emit.emitting = false;
+		final Context ctx = new ContextMock();
+		// TODO 11/08 specify times can be called as well? (as was with Mockito)
+		ctx.expect(x_ident.getText(), x_var).andContributeResolve(null);
 
-		//
-
-		// TODO do we want silent?
-		final OS_Module mod = boilerPlate.defaultMod();
-		//assert mod.getCompilation() == boilerPlate.comp;
-		//mod.setParent(boilerPlate.comp);
-
-		final DeducePhase  phase        = boilerPlate.getDeducePhase();
-		final DeduceTypes2 deduceTypes2 = new DeduceTypes2(new DeduceTypes2Request(mod, phase, ElLog.Verbosity.VERBOSE));
-		final Context      ctx          = mock(Context.class);
+		final OS_Module   mod   = boilerPlate.defaultMod();
 
 		//ident_ia.getEntry().setDeduceTypes2(deduceTypes2, foo_ctx, gf); // TODO 11/08 doesn't work??
-		ident_ia.getEntry()._fix_table(deduceTypes2, gf);
+		ident_ia.getEntry()._fix_table(boilerPlate.defaultDeduceTypes2(mod), gf);
 
-		(gf.getIdentTableEntry(0)).setDeduceTypes2(deduceTypes2, ctx, gf);
-
-		final LookupResultList lrl = new LookupResultListImpl();
-		lrl.add(x_ident.getText(), 1, x_var, null);
-
-//		when(ctx.lookup(foo_ident.getText())).thenReturn(lrl);
-		when(ctx.lookup(x_ident.getText())).thenReturn(lrl);
-		when(ctx.lookup(x_ident.getText())).thenReturn(lrl);
-
-		final GenType genType = new GenTypeImpl();
-		genType.setTypeName(tte.getAttached());
-		integerIA.getEntry().resolveType(genType);
+		//final GenType genType = factory.makeGenType(tte);
+		//integerIA.getEntry().resolveType(genType);
 
 		//
 		//
