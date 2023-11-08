@@ -26,15 +26,17 @@ public abstract class ContextImpl implements tripleo.elijah.lang.i.Context {
 	private final List<Expectation> expectations = new ArrayList<>();
 	private final List<EN_Name>     names        = new LinkedList<>();
 
-	public ContextImpl() {
-	}
-
-//	public Context(OS_Container attached) {
-//		this.attached = attached;
-//	}
+	//public ContextImpl() {
+	//}
 
 	public List<Expectation> getExpectations() {
 		return expectations;
+	}
+
+	@Override
+	public @NotNull Compilation compilation() {
+		OS_Module module = module();
+		return module.getCompilation();
 	}
 
 	@Override
@@ -43,39 +45,17 @@ public abstract class ContextImpl implements tripleo.elijah.lang.i.Context {
 		return lookup(name, 0, Result, new SearchList(), false);
 	}
 
-//	@Deprecated public void add(OS_Element element, String name) {
-//		add(element, new IdentExpressionImpl(Helpers.makeToken(name)));
-//	}
-//
-//	@Deprecated public void add(OS_Element element, String name, OS_Type dtype) {
-//		add(element, new IdentExpressionImpl(Helpers.makeToken(name)), dtype);
-//	}
-//
-//	public void add(OS_Element element, IExpression name) {
-//		tripleo.elijah.util.Stupidity.println_out_2(String.format("104 Context.add: %s %s %s", this, element, name));
-//		members.put(name, element);
-//	}
-
-//
-//	Map<IExpression, OS_Element> members = new HashMap<IExpression, OS_Element>();
-//	private NameTable nameTable = new NameTable();
-//
-//	public void add(OS_Element element, IExpression name, OS_Type dtype) {
-//		tripleo.elijah.util.Stupidity.println_out_2(String.format("105 Context.add: %s %s %s %s", this, element, name, dtype));
-////		element.setType(dtype);
-//		members.put(name, element);
-//	}
-//
-//	public NameTable nameTable() {
-//		return this.nameTable ;
-//	}
-
 	@Override
 	public @NotNull OS_Module module() {
 		Context ctx = this;// getParent();
-		while (!(ctx instanceof ModuleContext))
+		while (!(ctx instanceof ModuleContext)) {
 			ctx = ctx.getParent();
-		return ((ModuleContext) ctx).getCarrier();
+		}
+		if (ctx != null) {
+			return ((ModuleContext) ctx).getCarrier();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
