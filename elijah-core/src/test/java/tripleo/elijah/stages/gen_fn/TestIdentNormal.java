@@ -35,11 +35,13 @@ import static tripleo.elijah.util.Helpers.List_of;
 public class TestIdentNormal {
 
 	//@Ignore
-	@Test(expected = IllegalStateException.class) // TODO proves nothing
-	public void test() {
+	//@Test(expected = IllegalStateException.class) // TODO proves nothing
+	@Test public void test() {
 		final Boilerplate boilerplate = new Boilerplate();
 		boilerplate.get();
-		boilerplate.getGenerateFiles(boilerplate.defaultMod());
+
+		final OS_Module mod = boilerplate.defaultMod();
+		//boilerplate.getGenerateFiles(mod);
 
 		final FunctionDef fd                = mock(FunctionDef.class);
 		final Context     ctx1              = mock(Context.class);
@@ -60,6 +62,12 @@ public class TestIdentNormal {
 		//
 
 		final GenerateFunctions                   generateFunctions = boilerplate.defaultGenerateFunctions();
+
+		final GenerateFunctions.GDM_IdentExpression gdm = generateFunctions.monitor(x);
+		gdm.onIdentTableEntry(ite -> {
+int y=2;
+		});
+
 		final GenerateFunctions.GFS_ProcedureCall gfs               = generateFunctions.scheme(pce, generatedFunction, ctx2);
 		final @NotNull List<InstructionArgument>  l                 = gfs.getIdentIAPathList();
 		tripleo.elijah.util.Stupidity.println_out_2("8999-66" + String.valueOf(l));
@@ -74,9 +82,12 @@ public class TestIdentNormal {
 		final IdentIA identIA = new IdentIA(1, generatedFunction);
 
 		final DeducePhase  phase = boilerplate.getDeducePhase();
-		final DeduceTypes2 d2    = boilerplate.defaultDeduceTypes2(boilerplate.defaultMod());
+		final DeduceTypes2 d2    = boilerplate.defaultDeduceTypes2(mod);
 
 		final List<InstructionArgument> ss       = BaseEvaFunction._getIdentIAPathList(identIA);
+
+		identIA.getEntry()._fix_table(d2, identIA.gf);
+
 		final boolean[]                 ss_found = {false};
 		d2.resolveIdentIA2_(ctx2, null, ss/*identIA*/, generatedFunction, new FoundElement(phase) {
 			@Override

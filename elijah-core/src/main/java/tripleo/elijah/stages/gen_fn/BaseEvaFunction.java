@@ -211,6 +211,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		switch (expression.getKind()) {
 		case DOT_EXP: {
 			final DotExpression       de        = (DotExpression) expression;
+			var dem = generateFunctions.monitor(de);
 			final InstructionArgument left_part = get_assignment_path(de.getLeft(), generateFunctions, context);
 			return get_assignment_path(left_part, de.getRight(), generateFunctions, context);
 		}
@@ -231,6 +232,8 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 			throw new NotImplementedException();
 		case IDENT: {
 			final IdentExpression     ie     = (IdentExpression) expression;
+			var im = generateFunctions.monitor(ie);
+
 			final String              text   = ie.getText();
 			final InstructionArgument lookup = vte_lookup(text); // IntegerIA(variable) or ConstTableIA or null
 			if (lookup != null)
