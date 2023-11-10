@@ -13,6 +13,8 @@ import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.Eventual;
+import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.IExpression;
@@ -122,7 +124,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 			break;
 		case 3:
 			if (_p_completeDeferred.isPending())
-				_p_completeDeferred.resolve(new Ok());
+				_p_completeDeferred.resolve(Ok.instance());
 			break;
 		default:
 			throw new NotImplementedException();
@@ -263,16 +265,17 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 
 	public void resolveType(final GenType aResult) {
 		if (typeDeferred().isResolved()) {
-			typeDeferred().reset(); // !! 07/20
+			//typeDeferred().reset(); // !! 07/20
+			return; // README 11/10
 		}
 		typeDeferred().resolve(aResult);
 	}
 
-	public DeferredObject2<GenType, ResolveError, Void> typeDeferred() {
-		return typeResolve.getDeferred();
+	public Eventual<GenType> typeDeferred() {
+		return typeResolve.typeResolution();
 	}
 
-	public Promise<GenType, ResolveError, Void> typePromise() {
+	public Eventual<GenType> typePromise() {
 		return typeResolvePromise();
 	}
 
@@ -282,6 +285,10 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 
 	public DeduceTypes2.DeduceTypes2Injector _inj() {
 		return _deduceTypes2()._inj();
+	}
+
+	public void typePromise_setRegister(final EventualRegister aRegister) {
+		typePromise();
 	}
 
 	public enum ECT {exp, exp_num}

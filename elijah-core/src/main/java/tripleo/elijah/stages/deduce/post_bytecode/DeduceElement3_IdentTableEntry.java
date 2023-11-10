@@ -570,6 +570,14 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 	}
 
+	public DeduceElement3_IdentTableEntry getZero() {
+		return deduceTypes2._zero_getIdent(principal, generatedFunction, deduceTypes2);
+	}
+
+	public DR_Ident getDR() {
+		return principal.get_ident();
+	}
+
 	public enum ST {
 		;
 
@@ -610,7 +618,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 
 				public void setBacklinkCallback(BaseTableEntry backlink) {
 					if (backlink instanceof final ProcTableEntry procTableEntry) {
-						procTableEntry.typeResolvePromise().done((final @NotNull GenType result) -> {
+						procTableEntry.typeResolvePromise().then((final @NotNull GenType result) -> {
 							final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
 
 							if (result.getCi() == null && result.getNode() == null)

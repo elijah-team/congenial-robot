@@ -14,6 +14,7 @@ import org.jdeferred2.FailCallback;
 import org.jdeferred2.Promise;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.*;
@@ -54,6 +55,8 @@ public abstract class BaseTableEntry {
 	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull BaseEvaFunction aEvaFunction) {
 		__dt2 = aDeduceTypes2;
 		__gf  = aEvaFunction;
+
+		//aEvaFunction._informGF((GenerateFunctions gf11)->{});
 	}
 
 	public Status getStatus() {
@@ -97,7 +100,7 @@ public abstract class BaseTableEntry {
 
 	// endregion resolved_element
 
-	public Promise<GenType, ResolveError, Void> typeResolvePromise() {
+	public Eventual<GenType> typeResolvePromise() {
 		return typeResolve.typeResolution();
 	}
 

@@ -14,7 +14,11 @@ import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah.nextgen.rosetta.Rosetta;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
+import tripleo.elijah.stages.gdm.GDM_IdentExpression;
+import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.EvaFunction;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
+import tripleo.elijah.stages.gen_fn_c.GenFnC;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.OutputFileFactory;
@@ -93,6 +97,31 @@ public class Boilerplate {
 
 	@NotNull
 	public GenerateFunctions defaultGenerateFunctions() {
-		return new GenerateFunctions(defaultMod(), pipelineLogic(), comp.pa());
+		final GenFnC bc = new GenFnC();
+		bc.set(pipelineLogic());
+		bc.set(comp.pa());
+		return new GenerateFunctions(defaultMod(), bc);
+	}
+
+	//public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod, final @NotNull BaseEvaFunction aBaseEvaFunction) {
+	//	gdm.onIdentTableEntry(ite -> {
+	//		fixTables(gdm, aMod, ite._generatedFunction());
+	//	});
+	//}
+
+	public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod, final EvaFunction aGeneratedFunction) {
+		var d2 = defaultDeduceTypes2(aMod);
+
+		gdm.onIdentTableEntry(ite -> {
+			ite._fix_table(d2, aGeneratedFunction);
+		});
+	}
+
+	public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod) {
+		var d2 = defaultDeduceTypes2(aMod);
+
+		gdm.onIdentTableEntry(ite -> {
+			ite._fix_table(d2, ite._generatedFunction());
+		});
 	}
 }

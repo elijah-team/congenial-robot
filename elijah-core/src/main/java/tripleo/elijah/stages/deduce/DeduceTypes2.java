@@ -50,6 +50,8 @@ import tripleo.elijah.stages.deduce.declarations.DeferredMemberFunction;
 import tripleo.elijah.stages.deduce.nextgen.*;
 import tripleo.elijah.stages.deduce.post_bytecode.*;
 import tripleo.elijah.stages.deduce.tastic.*;
+import tripleo.elijah.stages.gdm.GDM_IdentExpression;
+import tripleo.elijah.stages.gdm.GDM_VariableTableEntry;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
@@ -284,10 +286,22 @@ public class DeduceTypes2 {
 		aDeducePhase.addFunction(aGeneratedFunction, aGeneratedFunction.getFD());
 
 		for (IdentTableEntry identTableEntry : aGeneratedFunction.idte_list) {
-			aGeneratedFunction._idents.add(aGeneratedFunction.getIdent(identTableEntry));
+			final DR_Ident drIdent = aGeneratedFunction.getIdent(identTableEntry);
+			aGeneratedFunction.onInformGF(gf-> {
+				final GDM_IdentExpression mie = gf.monitor(identTableEntry.getIdent());
+				mie.resolveIdentTableEntry(identTableEntry);
+				mie.resolveDrIdent(drIdent);
+
+			});
+			aGeneratedFunction.drs.add(drIdent);
 		}
 		for (VariableTableEntry variableTableEntry : aGeneratedFunction.vte_list) {
-			aGeneratedFunction._idents.add(aGeneratedFunction.getIdent(variableTableEntry));
+			final DR_Ident drIdent = aGeneratedFunction.getIdent(variableTableEntry);
+			aGeneratedFunction.onInformGF(gf-> {
+				final GDM_VariableTableEntry mie = gf.monitor(variableTableEntry);
+				mie.resolveDrIdent(drIdent);
+			});
+			aGeneratedFunction.drs.add(drIdent);
 		}
 
 
@@ -881,7 +895,10 @@ public class DeduceTypes2 {
 				ENU_ResolveToFunction rtf = null;
 				var                   x   = identTableEntry.getIdent().getName();
 
-				for (EN_Understanding understanding : x.getUnderstandings()) {
+				List<EN_Understanding> understandings = x.getUnderstandings();
+				// README 11/10 optimized, better than streams
+				for (int i = 0, understandingsSize = understandings.size(); i < understandingsSize; i++) {
+					final EN_Understanding understanding = understandings.get(i);
 					if (understanding instanceof ENU_ResolveToFunction rtf1) {
 						rtf = rtf1;
 					}
@@ -1338,20 +1355,6 @@ public class DeduceTypes2 {
 		ria.action();
 	}
 
-	public void resolveIdentIA2_(@NotNull Context context, @NotNull IdentIA identIA, @NotNull EvaFunction generatedFunction, @NotNull FoundElement foundElement) {
-		final @NotNull List<InstructionArgument> s = BaseEvaFunction._getIdentIAPathList(identIA);
-		resolveIdentIA2_(context, identIA, s, generatedFunction, foundElement);
-	}
-
-	public void resolveIdentIA2_(@NotNull final Context ctx,
-								 @Nullable IdentIA identIA,
-								 @Nullable List<InstructionArgument> s,
-								 @NotNull final BaseEvaFunction generatedFunction,
-								 @NotNull final FoundElement foundElement) {
-		@NotNull Resolve_Ident_IA2 ria2 = _inj().new_Resolve_Ident_IA2(this, errSink, phase, generatedFunction, foundElement);
-		ria2.resolveIdentIA2_(ctx, identIA, s);
-	}
-
 	public DeduceElement3_ProcTableEntry zeroGet(final ProcTableEntry aPte, final BaseEvaFunction aEvaFunction) {
 		return _p_zero.get(aPte, aEvaFunction, this);
 	}
@@ -1650,10 +1653,23 @@ public class DeduceTypes2 {
 
 		public void resolveIdentIA2_(final @NotNull Context aEctx,
 									 final IdentIA aIdentIA,
-									 final @Nullable List<InstructionArgument> aInstructionArgumentList,
+									 final @Nullable List<InstructionArgument> ss,
 									 final @NotNull BaseEvaFunction aGeneratedFunction,
 									 final @NotNull FoundElement aFoundElement) {
-			deduceTypes2.resolveIdentIA2_(aEctx, aIdentIA, aInstructionArgumentList, aGeneratedFunction, aFoundElement);
+			// README 11/10 overcomplication, but nicer
+			MonitorRequest_IdentTableEntry mr = new MonitorRequest_IdentTableEntry(aIdentIA);
+			mr.trigger(aEctx, ss, aFoundElement, deduceTypes2);
+			aGeneratedFunction.monitorRequest_IdentTableEntry(mr);
+/*
+			//  overcomplication b/c we don't need gf
+			//  nicer b/c we never not have gf
+			aGeneratedFunction.onInformGF(gf -> {
+				@NotNull final IdentTableEntry entry = aIdentIA.getEntry();
+				final GDM_IdentExpression      mie   = gf.monitor(entry.getIdent());
+				mie.trigger_resolve(aEctx, ss, aFoundElement, deduceTypes2, aGeneratedFunction);
+			});
+*/
+//			deduceTypes2.resolveIdentIA2_(aEctx, aIdentIA, ss, aGeneratedFunction, aFoundElement);
 		}
 
 		public DeduceTypes2 _deduceTypes2() {

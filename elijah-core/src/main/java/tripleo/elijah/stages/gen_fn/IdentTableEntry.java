@@ -19,10 +19,13 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.reactive.DefaultReactive;
+import tripleo.elijah.nextgen.reactive.Reactivable;
+import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.deduce.Resolve_Ident_IA.DeduceElementIdent;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
+import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
@@ -98,8 +101,23 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 			_reactiveEventual.then((_Reactive_IDTE rct) -> {
 				rct.join(gf);
 			});
+			reactive().addResolveListener((IdentTableEntry x) -> {
+				int y=2;
+										  });
 			var im = gf.monitor(ident);
 			im.resolveIdentTableEntry(this);
+
+			//__gf = gf; //!!
+		});
+
+		reactive().add(new Reactivable() {
+			@Override
+			public void respondTo(final ReactiveDimension aDimension) {
+				if (aDimension instanceof GenerateFunctions gf) {
+					final GDM_IdentExpression mie = gf.monitor(ident);
+					mie.resolveIdentTableEntry(IdentTableEntry.this);
+				}
+			}
 		});
 	}
 
@@ -334,6 +352,10 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return __gf;
 	}
 
+	public void onBacklinkSet(final DoneCallback<? super InstructionArgument> cb) {
+		backlinkSet().then(cb);
+	}
+
 	public class _Reactive_IDTE extends DefaultReactive {
 		@Override
 		public <IdentTableEntry> void addListener(final Consumer<IdentTableEntry> t) {
@@ -373,11 +395,12 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		assert this._deduceTypes2() != null;
 
 		if (element instanceof FunctionDef fd) {
-			NotImplementedException.raise();
+			NotImplementedException.raise_stop();
 		}
 
 		_p_elementPromise.then(x -> {
-			NotImplementedException.raise();
+			NotImplementedException.raise_stop();
+			assert x == element;
 		});
 	}
 

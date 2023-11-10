@@ -9,13 +9,16 @@
 package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
-import org.junit.Ignore;
 import org.junit.Test;
+import tripleo.elijah.PromiseReadySupplier;
+import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.context_mocks.ContextMock;
+import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah.stages.deduce.*;
+import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.logging.ElLog;
@@ -26,7 +29,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static tripleo.elijah.util.Helpers.List_of;
 
 /**
@@ -44,7 +46,6 @@ public class TestIdentNormal {
 		//boilerplate.getGenerateFiles(mod);
 
 		final FunctionDef fd                = mock(FunctionDef.class);
-		final Context     ctx1              = mock(Context.class);
 		final Context     ctx2              = new ContextMock();
 		final XX          factory           = new XX();
 		final EvaFunction generatedFunction = new EvaFunction(fd);
@@ -61,15 +62,9 @@ public class TestIdentNormal {
 
 		//
 
-		final GenerateFunctions                   generateFunctions = boilerplate.defaultGenerateFunctions();
-
-		final GenerateFunctions.GDM_IdentExpression gdm = generateFunctions.monitor(x);
-		gdm.onIdentTableEntry(ite -> {
-int y=2;
-		});
-
-		final GenerateFunctions.GFS_ProcedureCall gfs               = generateFunctions.scheme(pce, generatedFunction, ctx2);
-		final @NotNull List<InstructionArgument>  l                 = gfs.getIdentIAPathList();
+		final GenerateFunctions                  generateFunctions = boilerplate.defaultGenerateFunctions();
+		final GFS_ProcedureCall                  gfs               = generateFunctions.scheme(pce, generatedFunction, ctx2);
+		final @NotNull List<InstructionArgument> l                 = gfs.getIdentIAPathList();
 		tripleo.elijah.util.Stupidity.println_out_2("8999-66" + String.valueOf(l));
 //      tripleo.elijah.util.Stupidity.println_out_2(generatedFunction.getIdentIAPathNormal());
 
@@ -86,10 +81,13 @@ int y=2;
 
 		final List<InstructionArgument> ss       = BaseEvaFunction._getIdentIAPathList(identIA);
 
-		identIA.getEntry()._fix_table(d2, identIA.gf);
+		final GDM_IdentExpression gdm = generateFunctions.monitor(x);
+		boilerplate.fixTables(gdm, mod);
+		final GDM_IdentExpression gdm_foo = generateFunctions.monitor(foo);
+		boilerplate.fixTables(gdm_foo, mod);
 
 		final boolean[]                 ss_found = {false};
-		d2.resolveIdentIA2_(ctx2, null, ss/*identIA*/, generatedFunction, new FoundElement(phase) {
+		final FoundElement foundElement = new FoundElement(phase) {
 			@Override
 			public void foundElement(final OS_Element e) {
 				System.err.println("8999-87 " + e);
@@ -101,12 +99,15 @@ int y=2;
 //				NotImplementedException.raise();
 				ss_found[0] = false;
 			}
-		});
+		};
+
+		gdm.trigger_resolve(ctx2, ss, foundElement, d2, generatedFunction);
+		gdm_foo.trigger_resolve(ctx2, ss, foundElement, d2, generatedFunction);
 
 		assertTrue(ss_found[0]);
 	}
 
-	@Ignore
+	//@Ignore
 	@Test // TODO just a mess
 	public void test2() {
 		final Boilerplate boilerplate = new Boilerplate();
@@ -114,12 +115,14 @@ int y=2;
 		final OS_Module mod = boilerplate.defaultMod();
 		boilerplate.getGenerateFiles(mod);
 
-		final Context     ctx2  = mock(Context.class);
+		final Context     ctx2  = new ContextMock();
 		final DeducePhase phase = boilerplate.getDeducePhase();
 
 		//
 		//
 		//
+
+		mod.setContext(new ModuleContext(mod));
 
 		ClassStatement        cs       = new ClassStatementImpl(mod, mod.getContext());
 		final IdentExpression capitalX = IdentExpression.forString("X");
@@ -151,17 +154,21 @@ int y=2;
 		ProcedureCallExpression pce = new ProcedureCallExpressionImpl();
 		pce.setLeft(new DotExpressionImpl(x, foo));
 
-		fd.scope(new Scope3Impl(fd));
-		fd.add(seq);
-		fd.add(new StatementWrapperImpl(pce2, ctx1, fd));
-		fd2.scope(new Scope3Impl(fd2));
+		final Scope3Impl sco = new Scope3Impl(fd);
+		sco.add(seq);
+		sco.add(new StatementWrapperImpl(pce2, ctx1, fd));
+		fd.scope(sco);
+
+		final Scope3Impl sco1 = new Scope3Impl(fd2);
 
 		final GeneratePhase     generatePhase     = boilerplate.pipelineLogic().generatePhase;
 		final GenerateFunctions generateFunctions = boilerplate.pipelineLogic().generatePhase.getGenerateFunctions(mod);
 
-		fd2.add(new StatementWrapperImpl(pce, ctx2, fd2));
+		sco1.add(new StatementWrapperImpl(pce, ctx2, fd2));
+		fd2.scope(sco1);
 
 		final ClassHeader ch = new ClassHeaderImpl(false, List_of());
+		ch.setName(capitalX);
 		cs.setHeader(ch);
 
 		ClassInvocation    ci   = phase.registerClassInvocation(cs);
@@ -184,23 +191,30 @@ int y=2;
 		//
 		//
 
+/*
 		LookupResultList lrl = new LookupResultListImpl();
 		lrl.add("foo", 1, fd2, ctx2);
 
 		when(ctx2.lookup("foo")).thenReturn(lrl);
+*/
+		ctx2.expect("foo", fd2).andContributeResolve(ctx2);
 
+/*
 		LookupResultList lrl2 = new LookupResultListImpl();
 		lrl2.add("X", 1, cs, ctx1);
 
 		when(ctx2.lookup("X")).thenReturn(lrl2);
+*/
+		ctx2.expect("X", cs).andContributeResolve(ctx1);
 
 		//
 		//
 		//
 
+		DeduceTypes2 d2 = new DeduceTypes2(new DeduceTypes2Request(mod, phase, ElLog.Verbosity.VERBOSE));
 
-		final DeduceTypes2 aDeduceTypes2 = null; // !! 08/28
-		ClassInvocation    invocation2   = new ClassInvocation(cs, null, new NULL_DeduceTypes2());
+
+		ClassInvocation    invocation2   = new ClassInvocation(cs, null, new ReadySupplier_1<>(d2));
 		invocation2 = phase.registerClassInvocation(invocation2);
 		ProcTableEntry     pte3               = null;
 		FunctionInvocation fi2                = new FunctionInvocation(fd2, pte3, invocation2, generatePhase);
@@ -215,12 +229,11 @@ int y=2;
 
 		IdentIA identIA = new IdentIA(0, generatedFunction);
 
-		DeduceTypes2 d2 = new DeduceTypes2(new DeduceTypes2Request(mod, phase, ElLog.Verbosity.VERBOSE));
 
 		generatedFunction.getVarTableEntry(0).setConstructable(generatedFunction.getProcTableEntry(0));
 		identIA.getEntry().setCallablePTE(generatedFunction.getProcTableEntry(1));
 
-		d2.resolveIdentIA2_(ctx2, identIA, generatedFunction, new FoundElement(phase) {
+		@NotNull FoundElement foundElement = new FoundElement(phase) {
 			@Override
 			public void foundElement(OS_Element e) {
 				assert e == fd2;
@@ -230,7 +243,15 @@ int y=2;
 			public void noFoundElement() {
 				assert false;
 			}
-		});
+		};
+
+		final @NotNull List<InstructionArgument> s = BaseEvaFunction._getIdentIAPathList(identIA);
+
+		final GDM_IdentExpression mix = generateFunctions.monitor(x);
+		boilerplate.fixTables(mix, mod, generatedFunction);
+		mix.trigger_resolve(ctx2, s, foundElement, d2, generatedFunction);
+
+		//d2.resolveIdentIA2_(ctx2, identIA, s, generatedFunction, foundElement);
 	}
 
 }
