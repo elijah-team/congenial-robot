@@ -90,7 +90,9 @@ public class DeduceTypeResolve {
 	private void _inj_then(final DoneCallback<DeduceTypes2.DeduceTypes2Injector> i) {
 		if (_dt2s instanceof PromiseReadySupplier<DeduceTypes2> prs) {
 			prs.then(q -> i.onDone(q._inj()));
-		}
+		} else if (_dt2s instanceof NULL_DeduceTypes2 ndt) {
+			// do nothing case
+		} else assert false;
 	}
 
 	private DeduceTypes2.DeduceTypes2Injector _inj() {
