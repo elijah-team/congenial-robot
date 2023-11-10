@@ -744,10 +744,6 @@ public class GenerateFunctions implements ReactiveDimension {
 		return R;
 	}
 
-	//
-	// region add-table-entries
-	//
-
 	private @NotNull TypeTableEntry getType(@NotNull final IExpression arg, final @NotNull BaseEvaFunction gf) {
 		final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, arg.getType(), arg);
 		return tte;
@@ -1290,8 +1286,6 @@ public class GenerateFunctions implements ReactiveDimension {
 		}
 
 	}
-
-	// endregion
 
 	class Generate_Item {
 		void generate_alias_statement(AliasStatement as) {
