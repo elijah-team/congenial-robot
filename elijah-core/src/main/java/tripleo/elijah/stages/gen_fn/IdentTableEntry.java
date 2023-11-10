@@ -34,6 +34,7 @@ import java.util.function.Consumer;
 /**
  * Created 9/12/20 10:27 PM
  */
+@SuppressWarnings("TypeMayBeWeakened")
 public class IdentTableEntry extends BaseTableEntry1 implements Constructable, TableEntryIV, DeduceTypes2.ExpectationBase, IDeduceResolvable {
 	public final           DeferredObject<OS_Element, ResolveError, Void>  _p_resolvedElementPromise  = new DeferredObject<>();
 	protected final        DeferredObject<InstructionArgument, Void, Void> _p_backlinkSet             = new DeferredObject<InstructionArgument, Void, Void>();
@@ -91,6 +92,14 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		typeResolve.typeResolution().then(gt -> {
 			if (type != null && type.genType != null) // !! 07/30
 				type.genType.copy(gt);
+		});
+
+		aBaseEvaFunction.onInformGF(gf -> {
+			_reactiveEventual.then((_Reactive_IDTE rct) -> {
+				rct.join(gf);
+			});
+			var im = gf.monitor(ident);
+			im.resolveIdentTableEntry(this);
 		});
 	}
 
