@@ -750,6 +750,9 @@ public class GenerateFunctions implements ReactiveDimension {
 	}
 
 	InstructionArgument simplify_expression(@NotNull final IExpression expression, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+		// TODO 11/10 this double resolves, ie cache the result??
+		gf._informGF(this);
+
 		final ExpressionKind expressionKind = expression.getKind();
 		switch (expressionKind) {
 		case PROCEDURE_CALL:
@@ -1115,7 +1118,9 @@ public class GenerateFunctions implements ReactiveDimension {
 			@Override
 			public InstructionArgument simplify() {
 				if (simplifed == null) {
-					simplifed = simplify_expression(aPce, aGeneratedFunction, aCtx2);
+					//simplifed = simplify_expression(aPce, aGeneratedFunction, aCtx2);
+					aGeneratedFunction._informGF(GenerateFunctions.this);
+					simplifed = simplify_expression_procedure_call(aPce, aGeneratedFunction, aCtx2);
 				}
 				return simplifed;
 			}
@@ -1123,7 +1128,6 @@ public class GenerateFunctions implements ReactiveDimension {
 	}
 
 	interface GFS_ProcedureCall {
-
 		List<InstructionArgument> getIdentIAPathList();
 
 		InstructionArgument simplify();
