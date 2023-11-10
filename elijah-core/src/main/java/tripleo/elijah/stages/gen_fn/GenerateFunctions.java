@@ -14,6 +14,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.EvaPipeline;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.PipelineLogic;
@@ -51,7 +52,10 @@ import tripleo.util.range.Range;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 import static tripleo.elijah.util.Helpers.List_of;
@@ -1125,6 +1129,65 @@ public class GenerateFunctions implements ReactiveDimension {
 				return simplifed;
 			}
 		};
+	}
+
+	public GDM_IdentExpression monitor(final IdentExpression aIdentExpression) {
+		if (_gdm_monitors.containsKey(aIdentExpression)) {
+			return (GDM_IdentExpression) _gdm_monitors.get(aIdentExpression);
+		}
+		GDM_IdentExpression R = new GDM_IdentExpression(this, aIdentExpression);
+		_gdm_monitors.put(aIdentExpression, R);
+		return R;
+	}
+
+	private final Map<Object, GDM_Item> _gdm_monitors = new HashMap<>();
+
+	public GDM_DotExpression monitor(final DotExpression aDotExpression) {
+		if (_gdm_monitors.containsKey(aDotExpression)) {
+			return (GDM_DotExpression) _gdm_monitors.get(aDotExpression);
+		}
+		GDM_DotExpression R = new GDM_DotExpression(this, aDotExpression);
+		_gdm_monitors.put(aDotExpression, R);
+		return R;
+	}
+
+	public interface GDM_Item {}
+	public class GDM_IdentExpression implements GDM_Item {
+		private final GenerateFunctions generateFunctions;
+		private final IdentExpression     identExpression;
+		private Eventual<IdentTableEntry> _p_IdentTableEntry = new Eventual<>();
+
+		public GDM_IdentExpression(final GenerateFunctions aGenerateFunctions, final IdentExpression aIdentExpression) {
+			generateFunctions = aGenerateFunctions;
+			identExpression   = aIdentExpression;
+		}
+
+		public void onIdentTableEntry(final Consumer<IdentTableEntry> ic) {
+			_p_IdentTableEntry.then(ic::accept);
+		}
+
+		public void resolveIdentTableEntry(final IdentTableEntry ite) {
+			_p_IdentTableEntry.resolve(ite);
+		}
+	}
+
+	public class GDM_DotExpression implements GDM_Item {
+		private final GenerateFunctions generateFunctions;
+		private final DotExpression dotExpression;
+		private Eventual<IdentTableEntry> _p_IdentTableEntry = new Eventual<>();
+
+		public GDM_DotExpression(final GenerateFunctions aGenerateFunctions, final DotExpression aDotExpression) {
+			generateFunctions = aGenerateFunctions;
+			dotExpression     = aDotExpression;
+		}
+
+		public void onIdentTableEntry(final Consumer<IdentTableEntry> ic) {
+			_p_IdentTableEntry.then(ic::accept);
+		}
+
+		public void resolveIdentTableEntry(final IdentTableEntry ite) {
+			_p_IdentTableEntry.resolve(ite);
+		}
 	}
 
 	interface GFS_ProcedureCall {

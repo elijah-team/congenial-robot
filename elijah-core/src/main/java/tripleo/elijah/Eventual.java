@@ -34,4 +34,8 @@ public class Eventual<P> {
 	public String description() {
 		return "GENERIC-DESCRIPTION";
 	}
+
+	public boolean isPending() {
+		return prom.isPending();
+	}
 }
