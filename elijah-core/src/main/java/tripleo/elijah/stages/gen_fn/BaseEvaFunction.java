@@ -14,6 +14,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.reactive.DefaultReactive;
@@ -68,7 +69,8 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	//
 	// region Ident-IA
 	//
-	private         EvaContainerNC                      parent;
+	private         EvaContainerNC      parent;
+	private Eventual<GenerateFunctions> _p_informGF = new Eventual<>();
 
 	@Override
 	public void addContext(final Context context, final Range r) {
@@ -651,6 +653,18 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		var r = new DR_Type(this, aNonGenericTypeName);
 		r.build();
 		return r;
+	}
+
+	public void _informGF(final GenerateFunctions aGenerateFunctions) {
+		if (_p_informGF.isPending()) {
+			_p_informGF.resolve(aGenerateFunctions);
+		} else {
+			NotImplementedException.raise_stop();
+		}
+	}
+
+	public void onInformGF(final DoneCallback<GenerateFunctions> sgf) {
+		_p_informGF.then(sgf);
 	}
 
 	public class __Reactive extends DefaultReactive {
