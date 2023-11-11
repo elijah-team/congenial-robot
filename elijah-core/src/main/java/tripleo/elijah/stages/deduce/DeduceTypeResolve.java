@@ -26,6 +26,7 @@ import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.function.Supplier;
 
@@ -219,7 +220,7 @@ public class DeduceTypeResolve {
 		}
 
 		public void logProgress(int ignoredCode, String message) {
-			tripleo.elijah.util.Stupidity.println_err_2(message);
+			SimplePrintLoggerToRemoveSoon.println_err_2(message);
 		}
 	}
 
