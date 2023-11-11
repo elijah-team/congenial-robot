@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+//@Deprecated
 public class Sub_GenerateResult implements GenerateResult {
 	final         List<Old_GenerateResultItem> _res           = new ArrayList<Old_GenerateResultItem>();
 	private final List<IGenerateResultWatcher> _watchers      = new ArrayList<>();

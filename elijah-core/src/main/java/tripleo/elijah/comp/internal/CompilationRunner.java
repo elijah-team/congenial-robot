@@ -1,7 +1,6 @@
 package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
 import tripleo.elijah.ci.CompilerInstructions;
 import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.i.*;

@@ -121,7 +121,8 @@ public class Boilerplate {
 		var d2 = defaultDeduceTypes2(aMod);
 
 		gdm.onIdentTableEntry(ite -> {
-			ite._fix_table(d2, ite._generatedFunction());
+			final BaseEvaFunction evaFunction = ite._generatedFunction();
+			ite._fix_table(d2, evaFunction);
 		});
 	}
 }

@@ -10,7 +10,6 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import tripleo.elijah.PromiseReadySupplier;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.context_mocks.ContextMock;
 import tripleo.elijah.contexts.ModuleContext;
@@ -83,7 +82,7 @@ public class TestIdentNormal {
 		final List<InstructionArgument> ss       = BaseEvaFunction._getIdentIAPathList(identIA);
 
 		final GDM_IdentExpression gdm = generateFunctions.monitor(x);
-		boilerplate.fixTables(gdm, mod);
+		boilerplate.fixTables(gdm, mod, generatedFunction);
 		final GDM_IdentExpression gdm_foo = generateFunctions.monitor(foo);
 		boilerplate.fixTables(gdm_foo, mod);
 

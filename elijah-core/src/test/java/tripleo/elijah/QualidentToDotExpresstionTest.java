@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
-import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
