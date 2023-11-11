@@ -12,6 +12,7 @@ import antlr.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 /**
  * Created 8/30/20 2:54 PM
@@ -31,7 +32,7 @@ public abstract class AbstractBlockScope implements Scope {
 		if (aItem instanceof FunctionItem)
 			_element.add((OS_Element) aItem);
 		else
-			tripleo.elijah.util.Stupidity
+			SimplePrintLoggerToRemoveSoon
 					.println_err_2(String.format("adding false FunctionItem %s", aItem.getClass().getName()));
 	}
 

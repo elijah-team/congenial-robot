@@ -12,7 +12,7 @@ import tripleo.elijah.stages.gen_generic.Sub_GenerateResult;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNode1;
-import tripleo.elijah.util.Stupidity;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 
@@ -51,7 +51,7 @@ public class GM_GenerateModule {
 				processedNode.processFunctions(ggc, fileGen);
 				processedNode.processClassMap(ggc, fileGen);
 			} else {
-				Stupidity.println_out_2("2009 " + evaNode.getClass().getName());
+				SimplePrintLoggerToRemoveSoon.println_out_2("2009 " + evaNode.getClass().getName());
 			}
 		}
 
