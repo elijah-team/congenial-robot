@@ -35,6 +35,11 @@ public class Operation<T> {
 		assert succ != exc;
 	}
 
+	public static <T> @NotNull Operation<T> failure_simple(final String aS) {
+		Operation<T> R = new Operation<T>(null, new Exception(aS), FAILURE);
+		return R;
+	}
+
 	public Exception failure() {
 		return exc;
 	}
