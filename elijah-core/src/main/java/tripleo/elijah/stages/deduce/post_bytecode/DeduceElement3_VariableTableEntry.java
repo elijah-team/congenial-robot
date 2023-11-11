@@ -37,6 +37,7 @@ import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.Operation2;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -325,7 +326,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 			if (ci != null) {
 				pte.setClassInvocation(ci);
 			} else
-				tripleo.elijah.util.Stupidity.println_err2("542 Null ClassInvocation");
+				SimplePrintLoggerToRemoveSoon.println_err2("542 Null ClassInvocation");
 		}
 
 		pte.setFunctionInvocation(fi);

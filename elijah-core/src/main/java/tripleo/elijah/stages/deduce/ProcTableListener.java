@@ -19,6 +19,7 @@ import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.world.WorldGlobals;
 
 import java.util.Map;
@@ -229,7 +230,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 						if (parent instanceof ClassStatement) {
 							// TODO might be wrong in the case of generics. check.
 							typeName = null;//_inj().new_OS_Type((ClassStatement) parent);
-							tripleo.elijah.util.Stupidity.println_err_2("NOTE ineresting in genericA/__preinc__");
+							SimplePrintLoggerToRemoveSoon.println_err_2("NOTE ineresting in genericA/__preinc__");
 						}
 					}
 				}
@@ -296,7 +297,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 
 		if (depTracker != null) {
 			if (aGenType == null)
-				tripleo.elijah.util.Stupidity.println_err_2("247 genType is null");
+				SimplePrintLoggerToRemoveSoon.println_err_2("247 genType is null");
 
 			if (/*aGenType == null &&*/ aFi.getFunction() instanceof ConstructorDef) {
 				final @NotNull ClassStatement c        = aFi.getClassInvocation().getKlass();

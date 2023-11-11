@@ -22,6 +22,7 @@ import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Reque
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.test_help.Boilerplate;
 import tripleo.elijah.util.Helpers;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.Objects;
 
@@ -84,7 +85,7 @@ public class DeduceTypesTest2 {
 		final DeduceTypes2 d  = dp.deduceModule(new DeducePhase_deduceModule_Request(mod, dp.generatedClasses, Compilation.gitlabCIVerbosity(), dp));
 
 		final GenType x = DeduceLookupUtils.deduceExpression(d, x1, fc);
-		tripleo.elijah.util.Stupidity.println_out_2("-- deduceExpression >>" + x);
+		SimplePrintLoggerToRemoveSoon.println_out_2("-- deduceExpression >>" + x);
 //		Assert.assertEquals(new OS_BuiltInType(BuiltInTypes..SystemInteger).getBType(), x.getBType());
 //		final RegularTypeName tn = new RegularTypeNameImpl();
 		final VariableTypeName tn  = new VariableTypeNameImpl();

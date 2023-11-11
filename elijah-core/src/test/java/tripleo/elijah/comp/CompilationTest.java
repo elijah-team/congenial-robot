@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.internal.CompilationImpl;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.io.File;
 import java.util.List;
@@ -39,7 +40,7 @@ public class CompilationTest {
 
 		c.modules()
 				.stream()
-				.forEach(mod -> tripleo.elijah.util.Stupidity.println_out_2(String.format("**48** %s %s", mod, mod.getFileName())));
+				.forEach(mod -> SimplePrintLoggerToRemoveSoon.println_out_2(String.format("**48** %s %s", mod, mod.getFileName())));
 //		Assert.assertThat(c.modules.size(), new IsEqual<Integer>(3));
 		Assert.assertTrue(c.modules().size() > 2);
 	}
