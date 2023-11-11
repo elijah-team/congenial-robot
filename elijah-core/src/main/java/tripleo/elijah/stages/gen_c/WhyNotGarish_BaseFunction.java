@@ -106,7 +106,8 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getGf().vte_lookup(aText);
 	}
 
-	@NotNull List<String> getArgumentStrings(final @NotNull Instruction instruction/*, final GenerateC aGenerateC*/) {
+	@NotNull Pair<java.util.List<String>, java.util.List<ArgumentString>>
+	getArgumentStrings(final @NotNull Instruction instruction) {
 		final GenerateC generateC = getGenerateC();
 		Preconditions.checkNotNull(generateC);
 
@@ -144,7 +145,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 				throw new IllegalStateException("Invalid InstructionArgument");
 			}
 		}
-		return sl3;
+		return Pair.of(sl3,sl4);
 	}
 
 	public abstract GenerateC getGenerateC();
