@@ -19,17 +19,17 @@ public class NotImplementedException extends RuntimeException {
 	@Contract(pure = true)
 	public static void raise() {
 		final int y = 2;
-		Stupidity.println_err_2("Should not be here");
+		SimplePrintLoggerToRemoveSoon.println_err_2("Should not be here");
 	}
 
 	public NotImplementedException() {
 		final int y = 2;
-		Stupidity.println_err_2("Should not be here 2");
+		SimplePrintLoggerToRemoveSoon.println_err_2("Should not be here 2");
 	}
 
 	public static void raise_stop() {
 		final int y = 2;
-		Stupidity.println_err_2("Should not be here");
+		SimplePrintLoggerToRemoveSoon.println_err_2("Should not be here");
 	}
 }
 

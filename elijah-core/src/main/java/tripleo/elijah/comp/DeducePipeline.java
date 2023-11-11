@@ -16,6 +16,7 @@ import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.DeducePhase;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.world.i.LivingRepo;
 import tripleo.elijah.world.i.WorldModule;
 
@@ -27,7 +28,7 @@ public class DeducePipeline implements PipelineMember {
 	}
 
 	protected void logProgress(final String g) {
-		tripleo.elijah.util.Stupidity.println_err_2(g);
+		SimplePrintLoggerToRemoveSoon.println_err_2(g);
 	}
 
 	@Override
