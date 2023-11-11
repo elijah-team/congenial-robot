@@ -498,6 +498,22 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		return this.errSink;
 	}
 
+	public GI_Repo get_repo() {
+		return _repo;
+	}
+
+	public Zone get_zone() {
+		return _zone;
+	}
+
+	public GenerateResultSink getResultSink() {
+		return resultSink;
+	}
+
+	public void setResultSink(GenerateResultSink aResultSink) {
+		resultSink = aResultSink;
+	}
+
 	enum GetTypeName {
 		;
 
@@ -839,7 +855,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 		public @NotNull String IdentIA(@NotNull IdentIA identIA, BaseEvaFunction gf) {
 			assert gf == identIA.gf; // yup
-			final CReference reference = new CReference(_repo, ce);
+			final CReference reference = new CReference(gc.get_repo(), gc._ce());
 			reference.getIdentIAPath(identIA, Generate_Code_For_Method.AOG.GET, null);
 			return reference.build();
 		}

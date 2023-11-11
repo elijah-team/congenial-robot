@@ -159,7 +159,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	public ZoneVTE zoneHelper(final IntegerIA ia) {
 		final @NotNull BaseEvaFunction gf            = this.getGf();
 		final VariableTableEntry       varTableEntry = this.getVarTableEntry(ia.getIndex());
-		final ZoneVTE                  zone_vte      = getGenerateC()._zone.get(varTableEntry, gf);
+		final ZoneVTE                  zone_vte      = getGenerateC().get_zone().get(varTableEntry, gf);
 
 		return zone_vte;
 	}
@@ -174,7 +174,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 
 	public ZoneVTE zoneHelper(final VariableTableEntry       varTableEntry ) {
 		final @NotNull BaseEvaFunction gf            = this.getGf();
-		final ZoneVTE                  zone_vte      = getGenerateC()._zone.get(varTableEntry, gf);
+		final ZoneVTE                  zone_vte      = getGenerateC().get_zone().get(varTableEntry, gf);
 		return zone_vte;
 	}
 

@@ -77,7 +77,7 @@ public class GCX_FunctionCall implements EG_Statement {
 			System.out.println(ss);
 		}
 		case exp -> {
-			final CReference reference = new CReference(gc.repo(), gc.ce);
+			final CReference reference = new CReference(gc.repo(), gc._ce());
 			final IdentIA    ia2       = (IdentIA) pte.expression_num;
 			reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
 			final List<String> sl3 = gc.getArgumentStrings(gf, instruction);
@@ -104,7 +104,7 @@ public class GCX_FunctionCall implements EG_Statement {
 				sb.append(Helpers.String_join(", ", sl3));
 				sb.append(");");
 			} else {
-				final CReference reference = new CReference(gc.repo(), gc.ce);
+				final CReference reference = new CReference(gc.repo(), gc._ce());
 				final IdentIA    ia2       = (IdentIA) pte.expression_num;
 				reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
 				final List<String> sl3 = gc.getArgumentStrings(gf, instruction);

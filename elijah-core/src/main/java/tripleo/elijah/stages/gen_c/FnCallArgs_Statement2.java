@@ -65,7 +65,7 @@ class FnCallArgs_Statement2 implements EG_Statement {
 			}
 
 			if (idte.getStatus() == BaseTableEntry.Status.KNOWN) {
-				final CReference         reference          = new CReference(aGenerateC._repo, aGenerateC.ce);
+				final CReference         reference          = new CReference(generateC.get_repo(), generateC._ce());
 				final FunctionInvocation functionInvocation = pte.getFunctionInvocation();
 				if (functionInvocation == null || functionInvocation.getFunction() == LangGlobals.defaultVirtualCtor) {
 					reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
@@ -84,7 +84,7 @@ class FnCallArgs_Statement2 implements EG_Statement {
 					sb.append(Emit.emit("/*827*/") + path);
 				}
 			} else {
-				ZonePath zone_path = aGenerateC._zone.getPath(ia2);
+				ZonePath zone_path = generateC.get_zone().getPath(ia2);
 
 				//08/13 System.out.println("763 " + zone_path);
 

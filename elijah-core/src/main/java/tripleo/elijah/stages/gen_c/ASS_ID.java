@@ -21,7 +21,8 @@ public class ASS_ID extends WhyNotGarish_BaseFunction.ArgumentStringStatement {
 
 	@Override
 	public String getText() {
-		final CReference reference = new CReference(yf.getGenerateC()._repo, yf.getGenerateC().ce);
+		GenerateC        generateC = yf.getGenerateC();
+		final CReference reference = new CReference(yf.getGenerateC().get_repo(), generateC._ce());
 		reference.getIdentIAPath(ia, aog, null);
 		final String text = reference.build();
 		final String t    = (Emit.emit("/*673*/") + text);

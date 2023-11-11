@@ -58,7 +58,7 @@ public class GCX_FunctionCall_Special {
 			sb.append(Emit.emit("/*460*/") + xxx);
 		} else {
 			final IdentIA ia2 = (IdentIA) pte.expression_num;
-			reference = new CReference(gc.repo(), gc.ce);
+			reference = new CReference(gc.repo(), gc._ce());
 			reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
 			final List<String> sl3;
 			{

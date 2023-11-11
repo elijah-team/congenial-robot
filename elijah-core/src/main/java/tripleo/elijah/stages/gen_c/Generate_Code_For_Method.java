@@ -333,7 +333,7 @@ public class Generate_Code_For_Method {
 		final InstructionArgument _arg0 = aInstruction.getArg(0);
 		assert _arg0 instanceof ProcIA;
 
-		final GI_ProcIA gi_proc = gc._repo.itemFor((ProcIA) _arg0);
+		final GI_ProcIA gi_proc = gc.get_repo().itemFor((ProcIA) _arg0);
 
 		final GCX_Construct gcx_construct = new GCX_Construct(gi_proc, aInstruction, gc);
 

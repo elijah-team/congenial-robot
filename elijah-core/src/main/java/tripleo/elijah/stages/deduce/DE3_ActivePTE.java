@@ -73,12 +73,12 @@ class DE3_ActivePTE implements DE3_Active {
 			if (pte.getClassInvocation() != null)
 				(pte.getClassInvocation()).resolvePromise()
 						.then(node -> {
-							if (generateC.resultSink == null) {
-								//assert false;
-								generateC.resultSink = _inj().new_DefaultGenerateResultSink(deduceTypes2.phase.pa);
+							if (generateC.getResultSink() == null) {
+								assert false;
+								generateC.setResultSink(_inj().new_DefaultGenerateResultSink(deduceTypes2.phase.pa));
 							}
 
-							var resultSink = generateC.resultSink;
+							var resultSink = generateC.getResultSink();
 
 							var fg         = getResultEnv(generateC, resultSink);
 
