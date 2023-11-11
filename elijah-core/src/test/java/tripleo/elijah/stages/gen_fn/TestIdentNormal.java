@@ -24,6 +24,7 @@ import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.test_help.Boilerplate;
 import tripleo.elijah.test_help.XX;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class TestIdentNormal {
 		final GenerateFunctions                  generateFunctions = boilerplate.defaultGenerateFunctions();
 		final GFS_ProcedureCall                  gfs               = generateFunctions.scheme(pce, generatedFunction, ctx2);
 		final @NotNull List<InstructionArgument> l                 = gfs.getIdentIAPathList();
-		tripleo.elijah.util.Stupidity.println_out_2("8999-66" + String.valueOf(l));
+		SimplePrintLoggerToRemoveSoon.println_out_2("8999-66" + String.valueOf(l));
 //      tripleo.elijah.util.Stupidity.println_out_2(generatedFunction.getIdentIAPathNormal());
 
 		//

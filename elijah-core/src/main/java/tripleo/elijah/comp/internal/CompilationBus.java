@@ -3,7 +3,7 @@ package tripleo.elijah.comp.internal;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.i.*;
-import tripleo.elijah.util.Stupidity;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class CompilationBus implements ICompilationBus {
 	private final @NotNull IProgressSink    _defaultProgressSink = new IProgressSink() {
 		@Override
 		public void note(final Codes aCode, final @NotNull ProgressSinkComponent aProgressSinkComponent, final int aType, final Object[] aParams) {
-			Stupidity.println_err_2(aProgressSinkComponent.printErr(aCode, aType, aParams));
+			SimplePrintLoggerToRemoveSoon.println_err_2(aProgressSinkComponent.printErr(aCode, aType, aParams));
 		}
 	};
 	public                 CB_FindCIs              cb_findCIs;

@@ -9,7 +9,6 @@
 package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
-import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +28,7 @@ import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.Ok;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -117,10 +117,10 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		case 0:
 			throw new IllegalStateException();
 		case 1:
-			tripleo.elijah.util.Stupidity.println_err_2("136 pte not finished resolving " + this);
+			SimplePrintLoggerToRemoveSoon.println_err_2("136 pte not finished resolving " + this);
 			break;
 		case 2:
-			tripleo.elijah.util.Stupidity.println_err_2("138 Internal compiler error");
+			SimplePrintLoggerToRemoveSoon.println_err_2("138 Internal compiler error");
 			break;
 		case 3:
 			if (_p_completeDeferred.isPending())

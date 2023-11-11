@@ -63,6 +63,7 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.Holder;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.Operation;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
@@ -171,7 +172,7 @@ public class DeduceTypes2 {
 			try {
 				cte.getTypeTableEntry().setAttached(resolve_type(_inj().new_OS_BuiltinType(aBuiltInType), aContext));
 			} catch (ResolveError resolveError) {
-				tripleo.elijah.util.Stupidity.println_out_2("117 Can't be here");
+				SimplePrintLoggerToRemoveSoon.println_out_2("117 Can't be here");
 				resolveError.printStackTrace(); // TODO print diagnostic
 			}
 		}
@@ -1173,7 +1174,7 @@ public class DeduceTypes2 {
 
 	public void found_element_for_ite(BaseEvaFunction generatedFunction, @NotNull IdentTableEntry ite, @Nullable OS_Element y, Context ctx, final DeduceCentral central) {
 		if (y != ite.getResolvedElement()) {
-			tripleo.elijah.util.Stupidity.println_err_2(String.format("2571 Setting FoundElement for ite %s to %s when it is already %s", ite, y, ite.getResolvedElement()));
+			SimplePrintLoggerToRemoveSoon.println_err_2(String.format("2571 Setting FoundElement for ite %s to %s when it is already %s", ite, y, ite.getResolvedElement()));
 		}
 
 		var env = _inj().new_DT_Env(LOG, errSink, central);

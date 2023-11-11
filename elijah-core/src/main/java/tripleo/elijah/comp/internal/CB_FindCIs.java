@@ -8,7 +8,7 @@ import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.i.CB_OutputString;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.comp.i.ICompilationBus;
-import tripleo.elijah.util.Stupidity;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ class CB_FindCIs implements ICompilationBus.CB_Action {
 
 		for (final CB_OutputString outputString : o.get()) {
 			//08/13
-			Stupidity.println_out_3("** CB_FindCIs :: outputString :: " + outputString.getText());
+			SimplePrintLoggerToRemoveSoon.println_out_3("** CB_FindCIs :: outputString :: " + outputString.getText());
 		}
 	}
 

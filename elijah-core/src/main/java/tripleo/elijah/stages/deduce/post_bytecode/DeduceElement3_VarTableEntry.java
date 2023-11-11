@@ -11,7 +11,7 @@ import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Stupidity;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 
@@ -229,10 +229,10 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 	}
 
 	private static void noteNonsense(int code, String message) {
-		Stupidity.println_out_2(String.format("%d %s%n", code, message));
+		SimplePrintLoggerToRemoveSoon.println_out_2(String.format("%d %s%n", code, message));
 	}
 
 	private static void noteNonsenseErr(int code, String message) {
-		Stupidity.println_err2(String.format("** [noteNonsenseErr] %d %s%n", code, message));
+		SimplePrintLoggerToRemoveSoon.println_err2(String.format("** [noteNonsenseErr] %d %s%n", code, message));
 	}
 }

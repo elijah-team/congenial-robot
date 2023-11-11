@@ -10,6 +10,7 @@ import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;
 import tripleo.elijah.stateful._RegistrationTarget;
 import tripleo.elijah.util.Operation;
+import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.function.Supplier;
 
@@ -70,7 +71,7 @@ public class CompilationRunner extends _RegistrationTarget {
 	public void logProgress(final int number, final String text) {
 		if (number == 130) return;
 
-		tripleo.elijah.util.Stupidity.println_err_3("%d %s".formatted(number, text));
+		SimplePrintLoggerToRemoveSoon.println_err_3("%d %s".formatted(number, text));
 	}
 
 	public @NotNull Operation<CompilerInstructions> parseEzFile(final @NotNull SourceFileParserParams p) {
