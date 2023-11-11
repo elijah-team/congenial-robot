@@ -10,4 +10,8 @@ public class RegisterClassInvocation_resp {
 	public void onSuccess(final DoneCallback<ClassInvocation> cb) {
 		ciPromise.then(cb);
 	}
+
+	public void succeed(final ClassInvocation aCi2) {
+		ciPromise.resolve(aCi2);
+	}
 }

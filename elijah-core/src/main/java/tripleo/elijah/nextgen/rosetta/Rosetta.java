@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_Request;
+import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
@@ -44,8 +45,8 @@ public class Rosetta {
 
 		@Override
 		public void apply() {
-			assert false;
-
+			final @NotNull ClassInvocation ci2 = env.phase().registerClassInvocation(env.ci());
+			resp.succeed(ci2);
 		}
 	}
 
