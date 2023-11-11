@@ -203,15 +203,13 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 	public void lfoe_action(final @NotNull DeduceTypes2 aDeduceTypes2,
 							final @NotNull WorkList wl,
 							final @NotNull Consumer<WorkList> addJobs) {
-		var pte = principal;
-
 		//assert aDeduceTypes2 == deduceTypes2; interesting
 
 		final __LFOE_Q q = new __LFOE_Q(aDeduceTypes2.wm, wl, aDeduceTypes2);
 
-		FunctionInvocation fi = pte.getFunctionInvocation();
+		FunctionInvocation fi = principal.getFunctionInvocation();
 		if (fi == null) {
-			fi = __lfoe_action__getFunctionInvocation(pte, aDeduceTypes2);
+			fi = __lfoe_action__getFunctionInvocation(principal, aDeduceTypes2);
 			if (fi == null) return;
 		}
 
@@ -236,7 +234,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 			if (ci == null) {
 				if (/*fi.getClassInvocation() == null &&*/ fi.getNamespaceInvocation() == null) {
 					// Assume default constructor
-					ci = aDeduceTypes2.phase.registerClassInvocation((ClassStatement) pte.getResolvedElement());
+					ci = aDeduceTypes2.phase.registerClassInvocation((ClassStatement) principal.getResolvedElement());
 					fi.setClassInvocation(ci);
 				} else
 					throw new NotImplementedException();
@@ -267,10 +265,10 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		if (fd3 != null) {
 			parent = fd3.getParent();
 			if (parent instanceof ClassStatement) {
-				if (ci != pte.getClassInvocation()) {
+				if (ci != principal.getClassInvocation()) {
 					ci = _inj().new_ClassInvocation((ClassStatement) parent, null, new ReadySupplier_1<>(deduceTypes2()));
 					{
-						final ClassInvocation classInvocation = pte.getClassInvocation();
+						final ClassInvocation classInvocation = principal.getClassInvocation();
 						if (classInvocation != null) {
 							Map<TypeName, OS_Type> gp = classInvocation.genericPart().getMap();
 							if (gp != null) {
@@ -290,7 +288,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		} else {
 			parent = ci.getKlass();
 			{
-				final ClassInvocation classInvocation = pte.getClassInvocation();
+				final ClassInvocation classInvocation = principal.getClassInvocation();
 				if (classInvocation != null && classInvocation.genericPart().hasGenericPart()) {
 					Map<TypeName, OS_Type> gp = classInvocation.genericPart().getMap();
 					int                    i  = 0;
