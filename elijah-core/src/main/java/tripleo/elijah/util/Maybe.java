@@ -1,5 +1,6 @@
 package tripleo.elijah.util;
 
+import com.google.common.base.MoreObjects;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.diagnostic.Diagnostic;
 
@@ -24,5 +25,27 @@ public class Maybe<T> {
 
 	public boolean isException() {
 		return exc != null;
+	}
+
+	//@Override
+
+	@Override
+	public String toString() {
+		int st=0;
+		if (o == null && exc == null) { st=1; }
+		if (o != null && exc == null) { st=2; }
+		if (o == null && exc != null) { st=3; }
+		switch (st) {
+		case 1, 2, 3 -> {
+		}
+		default -> {assert false;}
+		}
+
+		var existential = st;
+		return MoreObjects.toStringHelper(this)
+				.add("!E", existential)
+				.add("exc", exc)
+				.add("o", o)
+				.toString();
 	}
 }
