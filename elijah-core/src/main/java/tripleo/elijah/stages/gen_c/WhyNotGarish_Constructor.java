@@ -3,6 +3,7 @@ package tripleo.elijah.stages.gen_c;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 
+import tripleo.elijah.DebugFlags;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
@@ -46,7 +47,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 
 		gf.reactive().add(gcfc);
 
-		if (!GenerateC.MANUAL_DISABLED) {
+		if (!DebugFlags.GenerateC_MANUAL_DISABLED) {
 			gcfc.respondTo(generateC);
 		}
 
