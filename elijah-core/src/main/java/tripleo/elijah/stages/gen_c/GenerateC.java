@@ -507,25 +507,22 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 			//
 			String z;
 			switch (ty.getType()) {
-			case USER_CLASS:
+			case USER_CLASS -> {
 				final ClassStatement el = ty.getClassOf();
-				final String name;
+				final String         name;
 				if (ty instanceof NormalTypeName)
 					name = ((NormalTypeName) ty).getName();
 				else
 					name = el.getName();
 				z = Emit.emit("/*443*/") + String.format("Z%d/*%s*/", -4 /*el._a.getCode()*/, name);//.getName();
-				break;
-			case FUNCTION:
-				z = "<function>";
-				break;
-			case FUNC_EXPR: {
+			}
+			case FUNCTION -> z = "<function>";
+			case FUNC_EXPR -> {
 				z = "<function>";
 				OS_FuncExprType fe = (OS_FuncExprType) ty;
 				int             y  = 2;
 			}
-			break;
-			case USER:
+			case USER -> {
 				final TypeName typeName = ty.getTypeName();
 				LOG.err("Warning: USER TypeName in GenerateC " + typeName);
 				final String s = typeName.toString();
@@ -533,16 +530,14 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 					z = "void";
 				else
 					z = String.format("Z<Unknown_USER_Type /*%s*/>", s);
-				break;
-			case BUILT_IN:
+			}
+			case BUILT_IN -> {
 				LOG.err("Warning: BUILT_IN TypeName in GenerateC");
 				z = "Z" + ty.getBType().getCode();  // README should not even be here, but look at .name() for other code gen schemes
-				break;
-			case UNIT_TYPE:
-				z = "void";
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + ty.getType());
+			}
+			case UNIT_TYPE -> z = "void";
+			case UNKNOWN -> z = "/*THIS IS AN ERROR: UNDEDUCED VARIABLE */" + ty;
+			default -> throw new IllegalStateException("Unexpected value: " + ty.getType());
 			}
 			return z;
 		}
