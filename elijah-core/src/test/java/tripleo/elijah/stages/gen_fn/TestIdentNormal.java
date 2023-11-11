@@ -84,7 +84,7 @@ public class TestIdentNormal {
 		final GDM_IdentExpression gdm = generateFunctions.monitor(x);
 		boilerplate.fixTables(gdm, mod, generatedFunction);
 		final GDM_IdentExpression gdm_foo = generateFunctions.monitor(foo);
-		boilerplate.fixTables(gdm_foo, mod);
+		boilerplate.fixTables(gdm_foo, mod, generatedFunction);
 
 		final boolean[]                 ss_found = {false};
 		final FoundElement foundElement = new FoundElement(phase) {
