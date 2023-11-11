@@ -71,12 +71,12 @@ public class CompilationImpl extends Compilation1 {
 
 	@Override
 	public List<OS_Module> modules() {
-		return modules;
+		return getModules();
 	}
 
 	@Override
 	public CompilerBeginning beginning(final @NotNull CompilationRunner compilationRunner) {
-		return new CompilerBeginning(this, rootCI, getInputs(), compilationRunner.progressSink, cfg());
+		return new CompilerBeginning(this, getRootCI(), getInputs(), compilationRunner.progressSink, cfg());
 	}
 
 	@Override
@@ -95,17 +95,17 @@ public class CompilationImpl extends Compilation1 {
 
 	@Override
 	public Map<String, CompilerInstructions> fn2ci() {
-		return fn2ci;
+		return getFn2ci();
 	}
 
 	@Override
 	public USE use() {
-		return use;
+		return getUse();
 	}
 
 	@Override
 	public CIS _cis() {
-		return _cis;
+		return get_cis();
 	}
 }
 
