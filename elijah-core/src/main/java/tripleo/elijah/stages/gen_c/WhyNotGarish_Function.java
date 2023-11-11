@@ -13,6 +13,7 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaFunction;
+import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 
 public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
@@ -29,7 +30,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 
 	private void onFileGen(final @NotNull GenerateResultEnv aFileGen) {
 		if (gf.getFD() == null) assert false; //return; // FIXME why? when?
-		Generate_Code_For_Method gcfm = new Generate_Code_For_Method(generateC, generateC.LOG);
+		Generate_Code_For_Method gcfm = new Generate_Code_For_Method(generateC, generateC.elLog());
 		gcfm.generateCodeForMethod(deduced(gf), aFileGen);
 	}
 
@@ -68,6 +69,17 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 	@Override
 	public void provideFileGen(final GenerateResultEnv fg) {
 		fileGenPromise.resolve(fg);
+	}
+
+	@Override
+	public GenerateC getGenerateC() {
+		if (!fileGenPromise.isResolved())
+			return null;
+		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
+		fileGenPromise.then(fg -> {
+			xx[0] = fg.generateModule().gmr().getGenerateFiles(null);
+		});
+		return (GenerateC) xx[0];
 	}
 
 	@Override

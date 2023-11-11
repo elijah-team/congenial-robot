@@ -1,5 +1,6 @@
 package tripleo.elijah.stages.gen_c;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -7,10 +8,13 @@ import tripleo.elijah.lang.i.ConstructorDef;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang.i.TypeName;
+import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.instructions.*;
+import tripleo.elijah.util.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +23,10 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getGf().instructions();
 	}
 
+	public abstract BaseEvaFunction getGf();
+
 	@Override
 	public abstract void provideFileGen(GenerateResultEnv fg);
-
-	public abstract BaseEvaFunction getGf();
 
 	public @Nullable Label findLabel(final int aIndex) {
 		return getGf().findLabel(aIndex);
@@ -86,10 +90,6 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getGf().getVarTableEntry(aIndex);
 	}
 
-	public @NotNull ConstantTableEntry getConstTableEntry(final int aIndex) {
-		return getGf().getConstTableEntry(aIndex);
-	}
-
 	public @NotNull ProcTableEntry getProcTableEntry(final int aIndex) {
 		return getGf().getProcTableEntry(aIndex);
 	}
@@ -104,5 +104,71 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 
 	public @Nullable InstructionArgument vte_lookup(final String aText) {
 		return getGf().vte_lookup(aText);
+	}
+
+	@NotNull List<String> getArgumentStrings(final @NotNull Instruction instruction/*, final GenerateC aGenerateC*/) {
+		final GenerateC generateC = getGenerateC();
+		Preconditions.checkNotNull(generateC);
+
+		final List<String>         sl3 = new ArrayList<String>();
+		final List<ArgumentString> sl4 = new ArrayList<>();
+
+		final int args_size = instruction.getArgsSize();
+		for (int i = 1; i < args_size; i++) {
+			final InstructionArgument ia = instruction.getArg(i);
+			if (ia instanceof IntegerIA) {
+				final ASS_IA st = new ASS_IA(this, (IntegerIA) ia, Generate_Code_For_Method.AOG.GET);
+				sl4.add(new ArgumentString(ia, st, null));
+				sl3.add(st.getText());
+			} else if (ia instanceof IdentIA) {
+				final ASS_ID st = new ASS_ID(this, (IdentIA) ia, Generate_Code_For_Method.AOG.GET);
+				sl4.add(new ArgumentString(ia, st, null));
+				sl3.add(st.getText());
+			} else if (ia instanceof final @NotNull ConstTableIA c) {
+				final ASS_CONSTIA st = new ASS_CONSTIA(this, (ConstTableIA) ia, Generate_Code_For_Method.AOG.GET);
+				sl4.add(new ArgumentString(ia, st, null));
+				sl3.add(st.getText());
+			} else if (ia instanceof ProcIA) {
+				logProgress(740, "ProcIA");
+
+				//@NotNull final EG_Statement st = EG_Statement.of(realTargetName, EX_Explanation.withMessage("ArgumentString::integerIA"));
+				sl4.add(new ArgumentString(ia, null, "ProcIA"));
+
+				throw new NotImplementedException();
+			} else {
+				logProgress(131, ia.getClass().getName());
+
+				//@NotNull final EG_Statement st = EG_Statement.of(realTargetName, EX_Explanation.withMessage("ArgumentString::integerIA"));
+				sl4.add(new ArgumentString(ia, null, "Invalid InstructionArgument"));
+
+				throw new IllegalStateException("Invalid InstructionArgument");
+			}
+		}
+		return sl3;
+	}
+
+	public abstract GenerateC getGenerateC();
+
+	private void logProgress(final int code, final String message) {
+		getGenerateC().elLog().err(code + " " + message);
+	}
+
+	public @NotNull ConstantTableEntry getConstTableEntry(final int aIndex) {
+		return getGf().getConstTableEntry(aIndex);
+	}
+
+	public ZoneVTE zoneHelper(final IntegerIA ia) {
+		final @NotNull BaseEvaFunction gf            = this.getGf();
+		final VariableTableEntry       varTableEntry = this.getVarTableEntry(ia.getIndex());
+		final ZoneVTE                  zone_vte      = getGenerateC()._zone.get(varTableEntry, gf);
+
+		return zone_vte;
+	}
+
+	public record ArgumentString(InstructionArgument ia, EG_Statement statement, String error) {
+	}
+
+	@SuppressWarnings("EmptyClass")
+	public abstract static class ArgumentStringStatement implements EG_Statement {
 	}
 }

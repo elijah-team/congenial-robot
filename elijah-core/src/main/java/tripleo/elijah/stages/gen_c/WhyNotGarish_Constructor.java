@@ -7,6 +7,7 @@ import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
@@ -83,6 +84,17 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		return gf;
 	}
 
+	@Override
+	public GenerateC getGenerateC() {
+		if (!fileGenPromise.isResolved())
+			return null;
+		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
+		fileGenPromise.then(fg -> {
+			xx[0] = fg.generateModule().gmr().getGenerateFiles(null);
+		});
+		return (GenerateC) xx[0];
+	}
+
 	@NotNull String getConstructorNameText() {
 		final IdentExpression constructorName = gf.getFD().getNameNode();
 
@@ -134,7 +146,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		} else if (x instanceof final EvaFunction evaFunction) {
 			wl.addJob(new GenerateC.WlGenerateFunctionC(aFileGen, evaFunction, generateC));
 		} else {
-			generateC.LOG.err(x.toString());
+			generateC.elLog().err(x.toString());
 			throw new NotImplementedException();
 		}
 	}

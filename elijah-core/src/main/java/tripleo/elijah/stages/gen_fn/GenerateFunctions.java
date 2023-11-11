@@ -38,7 +38,6 @@ import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
-import tripleo.elijah.stages.deduce.RegisterClassInvocation_env;
 
 import tripleo.elijah.stages.gdm.GDM_DotExpression;
 import tripleo.elijah.stages.gdm.GDM_IdentExpression;
@@ -1118,19 +1117,6 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			wm.drain();
 		}
 
-	}
-
-	public EvaClass generateClass(final ClassStatement aClassStatement, final ClassInvocation aClassInvocation, final RegisterClassInvocation_env aPassthruEnv) {
-		final EvaClass        gc   = new EvaClass(aClassStatement, module);
-		final __GenerateClass gcgc = new __GenerateClass(LOG, aPassthruEnv);
-
-		for (final ClassItem item : new ArrayList<>(aClassStatement.getItems())) {
-			gcgc.processItem(aClassStatement, item, gc);
-		}
-
-		@NotNull EvaClass Result = gc;
-		Result.ci = aClassInvocation;
-		return Result;
 	}
 
 	@SuppressWarnings("TypeMayBeWeakened")

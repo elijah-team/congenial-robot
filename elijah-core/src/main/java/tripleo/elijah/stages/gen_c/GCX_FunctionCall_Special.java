@@ -45,7 +45,7 @@ public class GCX_FunctionCall_Special {
 				xxx = gc.getRealTargetName(gf, (IntegerIA) xx, Generate_Code_For_Method.AOG.GET);
 			} else {
 				xxx = text;
-				gc.LOG.err("xxx is null " + text);
+				gc.elLog().err("xxx is null " + text);
 			}
 			sb.append(Emit.emit("/*460*/") + xxx);
 		} else {

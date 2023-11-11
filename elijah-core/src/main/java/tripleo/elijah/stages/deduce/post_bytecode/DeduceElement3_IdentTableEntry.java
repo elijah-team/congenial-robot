@@ -9,12 +9,10 @@ import tripleo.elijah.comp.Finally;
 import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
+import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.lang.imports.NormalImportStatement;
 import tripleo.elijah.nextgen.query.Mode;
-import tripleo.elijah.stages.deduce.DeduceTypeResolve;
-import tripleo.elijah.stages.deduce.DeduceTypes2;
-import tripleo.elijah.stages.deduce.FoundElement;
-import tripleo.elijah.stages.deduce.ResolveError;
+import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.post_bytecode.DED.DED_ITE;
 import tripleo.elijah.stages.gen_fn.*;
@@ -209,11 +207,11 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			//throw new IllegalStateException("Error");
 		}
 
-		if (principal.getResolvedElement() instanceof ClassStatement) {
+		if (principal.getResolvedElement() instanceof final ClassStatement classStatement) {
 			// README but skip this and get the evaClass saved from earlier to
 			// Grande [T168-089] when all these objects are being created and
 			// manipulated (dern video yttv)
-			final DG_ClassStatement dcs = principal._deduceTypes2().DG_ClassStatement((ClassStatement) principal.getResolvedElement());
+			final DG_ClassStatement dcs = principal._deduceTypes2().DG_ClassStatement(classStatement);
 
 			// README fixup GenType
 			//   Still ignoring TypeName and nonGenericTypeName
@@ -576,6 +574,32 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 
 	public DR_Ident getDR() {
 		return principal.get_ident();
+	}
+
+	public void stipulate_ResolvedVariable(final @NotNull DeducePhase aDeducePhase,
+										   final @NotNull IdentTableEntry identTableEntry,
+										   final @NotNull VariableStatement vs,
+										   final @NotNull IEvaFunctionBase evaFunction) {
+		assert identTableEntry == principal;
+
+		final OS_Element parent = vs.getParent();
+		final OS_Element el;
+		if (parent == null) {
+			assert false;
+		} else {
+			el = parent.getParent();
+
+			final OS_Element el2 = evaFunction.getFD().getParent();
+
+			if (el != el2) {
+				if (!(el instanceof ClassStatement) && !(el instanceof NamespaceStatement)) {
+					return;
+				}
+
+				// NOTE there is no concept of gf here
+				aDeducePhase.registerResolvedVariable(identTableEntry, el, vs.getName());
+			}
+		}
 	}
 
 	public enum ST {

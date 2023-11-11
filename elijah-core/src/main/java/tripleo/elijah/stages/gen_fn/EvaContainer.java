@@ -18,7 +18,7 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.types.OS_UserType;
 import tripleo.elijah.nextgen.query.Mode;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
-import tripleo.elijah.stages.deduce.RegisterClassInvocation_env;
+import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VarTableEntry;
 import tripleo.elijah.util.Maybe;
 import tripleo.elijah.util.Operation;

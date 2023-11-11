@@ -45,7 +45,7 @@ class FnCallArgs_Statement implements EG_Statement {
 		sb.append(Emit.emit("/*671*/") + "(");
 
 		// VERIFY alias evaluation
-		final List<String> sll = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.LOG);
+		final List<String> sll = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.elLog());
 		// VERIFY template usage
 		sb.append(Helpers.String_join(", ", sll));
 

@@ -9,6 +9,7 @@
 package tripleo.elijah.comp;
 
 import io.reactivex.rxjava3.core.Observer;
+import io.smallrye.mutiny.Uni;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.CompilerInstructions;
@@ -133,6 +134,14 @@ public abstract class Compilation1 implements Compilation {
 			return;
 		}
 
+		{
+			Uni.createFrom().item("hello")
+					.onItem().transform(item -> item + " mutiny")
+					.onItem().transform(String::toUpperCase)
+					.subscribe().with(item -> System.out.println(">> " + item));
+			int y=2;
+		}
+
 		_inputs = inputs; // !!
 		compilationEnclosure.setCompilerInput(inputs);
 
@@ -148,29 +157,19 @@ public abstract class Compilation1 implements Compilation {
 
 	@Override
 	public void feedCmdLine(final @NotNull List<String> args) throws Exception {
-		final CompilerController controller = new DefaultCompilerController();
-
-		if (args.size() == 0) {
-			controller.printUsage();
-			//System.err.println("Usage: eljc [--showtree] [-sE|O] <directory or .ez file names>");
-			return;
-		}
-
 		final List<CompilerInput> inputs = args.stream()
 				.map(s -> {
 					final CompilerInput input = new CompilerInput(s);
 					if (s.equals(input.getInp())) {
 						input.setSourceRoot();
+					} else {
+						assert false;
 					}
 					return input;
 				})
 				.collect(Collectors.toList());
 
-		_inputs = inputs;
-
-		controller._setInputs(this, inputs);
-		controller.processOptions();
-		controller.runner();
+		feedInputs(inputs, new DefaultCompilerController());
 	}
 
 	@Override

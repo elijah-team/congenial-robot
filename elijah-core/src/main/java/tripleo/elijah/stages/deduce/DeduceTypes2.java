@@ -53,6 +53,7 @@ import tripleo.elijah.stages.deduce.tastic.*;
 import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.gdm.GDM_VariableTableEntry;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
@@ -490,7 +491,7 @@ public class DeduceTypes2 {
 			if (genType.getCi() instanceof ClassInvocation) {
 				WlGenerateClass gen = _inj().new_WlGenerateClass(getGenerateFunctions(module), (ClassInvocation) genType.getCi(), phase.generatedClasses, phase.codeRegistrar);
 				gen.run(null);
-				genType.setNode(gen.getResult());
+				gen.resultPromise(genType::setNode);
 			} else if (genType.getCi() instanceof NamespaceInvocation) {
 				WlGenerateNamespace gen = _inj().new_WlGenerateNamespace(getGenerateFunctions(module), (NamespaceInvocation) genType.getCi(), phase.generatedClasses, phase.codeRegistrar);
 				gen.run(null);
@@ -1522,9 +1523,10 @@ public class DeduceTypes2 {
 			return deduceTypes2.newFunctionInvocation(constructorDef, pte, ci, deduceTypes2.phase);
 		}
 
-		public @Nullable ClassInvocation registerClassInvocation(@NotNull ClassInvocation ci) {
-			return deduceTypes2.phase.registerClassInvocation(new RegisterClassInvocation_env(ci, deduceTypes2, deduceTypes2.phase));
-		}
+		// TODO 11/10 begging for promiseification
+		//public @Nullable ClassInvocation registerClassInvocation(@NotNull ClassInvocation ci) {
+		//	return deduceTypes2.phase.registerClassInvocation(new RegisterClassInvocation_env(ci, deduceTypes2, deduceTypes2.phase));
+		//}
 
 		public NamespaceInvocation registerNamespaceInvocation(NamespaceStatement namespaceStatement) {
 			return deduceTypes2.phase.registerNamespaceInvocation(namespaceStatement);
@@ -2407,7 +2409,7 @@ public class DeduceTypes2 {
 					ci = (ClassInvocation) genType.getCi();
 				}
 
-				final Promise<ClassDefinition, Diagnostic, Void> pcd = phase.generateClass(gf, ci);
+				final Eventual<ClassDefinition> pcd = phase.generateClass(gf, ci);
 
 				pcd.then(result -> {
 					final EvaClass genclass = result.getNode();

@@ -1,5 +1,6 @@
 package tripleo.elijah;
 
 public class DebugFlags {
-	public static boolean skip_DUMPS = true;
+	public final static boolean GCFM_MANUAL_DISABLED = false;
+	public static       boolean skip_DUMPS           = true;
 }

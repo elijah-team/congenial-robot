@@ -69,7 +69,7 @@ class FnCallArgs_Statement2 implements EG_Statement {
 				final FunctionInvocation functionInvocation = pte.getFunctionInvocation();
 				if (functionInvocation == null || functionInvocation.getFunction() == LangGlobals.defaultVirtualCtor) {
 					reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
-					final List<String> sll = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.LOG);
+					final List<String> sll = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.elLog());
 					reference.args(sll);
 					String path = reference.build();
 					sb.append(Emit.emit("/*829*/") + path);
@@ -78,7 +78,7 @@ class FnCallArgs_Statement2 implements EG_Statement {
 					if (idte.resolvedType() == null && pte_generated != null)
 						idte.resolveTypeToClass(pte_generated);
 					reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
-					final List<String> sll = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.LOG);
+					final List<String> sll = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.elLog());
 					reference.args(sll);
 					String path = reference.build();
 					sb.append(Emit.emit("/*827*/") + path);

@@ -44,8 +44,6 @@ public class PipelineLogic implements EventualRegister {
 	public final @NotNull DeducePhase                                            dp;
 	public final @NotNull GeneratePhase                                          generatePhase;
 	public final          ModuleCompletableProcess                               mcp                     = new ModuleCompletableProcess();
-	private final         List<OS_Module>                                        __mods_BACKING          = new ArrayList<>();
-	private final         EIT_ModuleList                                         mods                    = new EIT_ModuleList(__mods_BACKING);
 	private final         Map<OS_Module, Eventual<DeducePhase.GeneratedClasses>> modMap                  = new HashMap<>();
 	private final         IPipelineAccess                                        pa;
 	@Getter
@@ -63,42 +61,7 @@ public class PipelineLogic implements EventualRegister {
 		generatePhase = new GeneratePhase(verbosity, pa, this);
 		dp            = new DeducePhase(ca, pa, this);
 
-		pa.getCompilationEnclosure().addModuleListener(new CompilationEnclosure.ModuleListener() {
-			@Override
-			public void listen(final WorldModule module) {
-				final OS_Module         mod = module.module();
-				final GenerateFunctions gfm = getGenerateFunctions(mod);
-
-				final Compilation c = pa.getCompilationEnclosure().getCompilation();
-
-				final GN_PL_Run2.GenerateFunctionsRequest rq = module.rq();
-				if (rq != null) {
-					if (c.reports().outputOn(Finally.Outs.Out_727)) {
-						System.err.println("7270 **GOT** request for " + mod.getFileName());
-					}
-					gfm.generateFromEntryPoints(rq);
-				} else {
-					if (c.reports().outputOn(Finally.Outs.Out_727)) {
-						System.err.println("7272 **NO**  request for " + mod.getFileName());
-					}
-					NotImplementedException.raise_stop();
-				}
-
-				final var modMapEventual = modMap.get(mod);
-
-				if (modMapEventual != null && !modMapEventual.isResolved()) {
-					Preconditions.checkNotNull(modMapEventual);
-
-					final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses;
-					modMapEventual.resolve(lgc);
-				}
-			}
-
-			@Override
-			public void close() {
-
-			}
-		});
+		pa.getCompilationEnclosure().addModuleListener(new _PipelineLogic__ModuleListener());
 	}
 
 	@NotNull
@@ -111,11 +74,11 @@ public class PipelineLogic implements EventualRegister {
 	}
 
 	public void addModule(OS_Module m) {
-		mods.add(m);
+		pa._ModuleList_add(m);
 	}
 
 	public @NotNull EIT_ModuleList mods() {
-		return mods;
+		return pa.getModuleList();
 	}
 
 	public @NonNull IPipelineAccess _pa() {
@@ -180,10 +143,48 @@ public class PipelineLogic implements EventualRegister {
 		public void start() {
 
 		}
+
 	}
 
 	public Verbosity getVerbosity() {
 		return this.verbosity;
+	}
+
+	private class _PipelineLogic__ModuleListener implements CompilationEnclosure.ModuleListener {
+		@Override
+		public void listen(final WorldModule module) {
+			final OS_Module         mod = module.module();
+			final GenerateFunctions gfm = getGenerateFunctions(mod);
+
+			final Compilation c = pa.getCompilationEnclosure().getCompilation();
+
+			final GN_PL_Run2.GenerateFunctionsRequest rq = module.rq();
+			if (rq != null) {
+				if (c.reports().outputOn(Finally.Outs.Out_727)) {
+					System.err.println("7270 **GOT** request for " + mod.getFileName());
+				}
+				gfm.generateFromEntryPoints(rq);
+			} else {
+				if (c.reports().outputOn(Finally.Outs.Out_727)) {
+					System.err.println("7272 **NO**  request for " + mod.getFileName());
+				}
+				NotImplementedException.raise_stop();
+			}
+
+			final var modMapEventual = modMap.get(mod);
+
+			if (modMapEventual != null && !modMapEventual.isResolved()) {
+				Preconditions.checkNotNull(modMapEventual);
+
+				final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses;
+				modMapEventual.resolve(lgc);
+			}
+		}
+
+		@Override
+		public void close() {
+
+		}
 	}
 }
 

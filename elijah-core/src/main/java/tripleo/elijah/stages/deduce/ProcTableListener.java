@@ -13,9 +13,13 @@ import org.jetbrains.annotations.Nullable;
 
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
+import tripleo.elijah.nextgen.rosetta.Rosetta;
+import tripleo.elijah.nextgen.rosetta.RosettaApplyable;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.post_bytecode.DG_ClassStatement;
+import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
@@ -86,28 +90,39 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 	private void resolved_element_pte_ClassStatement(final @Nullable Constructable co,
 													 final @NotNull ClassStatement e,
 													 final @NotNull ProcTableEntry pte) {
-		FunctionInvocation        fi;
-		@Nullable ClassInvocation ci;
+		final DeduceTypes2              deduceTypes2 = dc.deduceTypes2();
+		final DG_ClassStatement         dcs          = deduceTypes2.DG_ClassStatement(e);
+		final @Nullable ClassInvocation ci           = dcs.classInvocation();
+		//ci = dc.registerClassInvocation(ci);
 
-		final DG_ClassStatement dcs = dc.deduceTypes2().DG_ClassStatement(e);
+		final RegisterClassInvocation_env  env          = new RegisterClassInvocation_env(ci, deduceTypes2, deduceTypes2.phase);
+		final RegisterClassInvocation_resp resp         = new RegisterClassInvocation_resp();
+		final RosettaApplyable             rosetta      = Rosetta.create(env, resp);
+		rosetta.apply();
+		resp.onSuccess(ci2 -> {
+			// TODO might not be virtual ctor, so check
+			@NotNull final FunctionInvocation fi2 = dc.newFunctionInvocation(LangGlobals.defaultVirtualCtor, pte, ci2);
+			pte.setFunctionInvocation(fi2);
 
-		ci = dcs.classInvocation();
-		ci = dc.registerClassInvocation(ci);
-		fi = dc.newFunctionInvocation(LangGlobals.defaultVirtualCtor, pte, ci); // TODO might not be virtual ctor, so check
-		pte.setFunctionInvocation(fi);
+			final IdentTableEntry entry = ((IdentIA) pte.expression_num).getEntry();
+			generatedFunction.getIdent(entry).resolve(dcs);
 
-		final IdentTableEntry entry = ((IdentIA) pte.expression_num).getEntry();
-		generatedFunction.getIdent(entry).resolve(dcs);
+			dcs.attach(fi2, pte);
 
-		dcs.attach(fi, pte);
+			if (co != null) {
+				co.setConstructable(pte);
+				ci2.resolvePromise().then((EvaClass evaClass) -> {
+					resolved_element_pte_ClassStatement_EvaClass(evaClass, e, co, dcs);
+				});
+			}
 
-		if (co != null) {
-			co.setConstructable(pte);
-			ci.resolvePromise().done((EvaClass result) -> {
-				resolved_element_pte_ClassStatement_EvaClass(result, e, co, dcs);
-			});
-		}
+			//__setFi(fi2);
+		});
 	}
+
+	//private void __setFi(final FunctionInvocation aFi2) {
+	//	this.fi = aFi2;
+	//}
 
 	private static void resolved_element_pte_ClassStatement_EvaClass(final EvaClass result, final @NotNull ClassStatement e, final @NotNull Constructable co, final @NotNull DG_ClassStatement dcs) {
 		//System.err.println("828282 "+((ClassStatement) e).name());
@@ -117,7 +132,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 
 		co.resolveTypeToClass(result);
 
-		dcs.attachClass(result); // T168-089
+		dcs.attachClass(result); // [T168-089]
 	}
 
 	private void resolved_element_pte_FunctionDef(Constructable co, @NotNull ProcTableEntry pte, AbstractDependencyTracker depTracker, @NotNull FunctionDef fd) {

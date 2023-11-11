@@ -6,6 +6,12 @@ import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_Request;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
+import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
+import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.GenerateFunctions2;
+import tripleo.elijah.stages.gen_fn_r.GenerateEvaClassRequest;
+import tripleo.elijah.stages.gen_fn_r.GenerateEvaClassResponse;
+import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 
 @SuppressWarnings({"UtilityClassCanBeEnum", "ClassWithOnlyPrivateConstructors", "NonFinalUtilityClass"})
 public class Rosetta {
@@ -20,5 +26,49 @@ public class Rosetta {
 		final DeducePhase deducePhase = rq.getDeducePhase();
 
 		deducePhase.__DeduceTypes2_deduceFunctions_Request__run(rq.getB(), rq.getRequest());
+	}
+
+	public static RCIE create(final RegisterClassInvocation_env aEnv, final RegisterClassInvocation_resp aResp) {
+		return new RCIE(aEnv, aResp);
+	}
+
+	@SuppressWarnings("FinalClass")
+	public static final class RCIE implements RosettaApplyable {
+		private final RegisterClassInvocation_env env;
+		private final RegisterClassInvocation_resp resp;
+
+		public RCIE(final RegisterClassInvocation_env aEnv, final RegisterClassInvocation_resp aResp) {
+			env = aEnv;
+			resp = aResp;
+		}
+
+		@Override
+		public void apply() {
+			assert false;
+
+		}
+	}
+
+	@SuppressWarnings("FinalClass")
+	public static final class GECR implements RosettaApplyable {
+		private final GenerateEvaClassRequest rq;
+		private final GenerateEvaClassResponse rsp;
+
+		public GECR(final GenerateEvaClassRequest aRq, final GenerateEvaClassResponse aRsp) {
+			rq = aRq;
+			rsp = aRsp;
+		}
+
+		@Override
+		public void apply() {
+			@NotNull EvaClass kl = new GenerateFunctions2(rq.getGenerateFunctions()).generateClass(rq.getClassStatement(), rq.getClassInvocation(), rq.getPassthruEnv());
+			rsp.getEvaClassPromise().resolve(kl);
+		}
+	}
+
+	@Contract(pure = true)
+	public static @NotNull GECR create(final GenerateEvaClassRequest aRq, final GenerateEvaClassResponse aRsp) {
+		GECR gecr = new GECR(aRq, aRsp);
+		return gecr;
 	}
 }

@@ -19,6 +19,8 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.world.i.LivingRepo;
 import tripleo.elijah.world.i.WorldModule;
 
+import java.util.List;
+
 /**
  * Created 8/21/21 10:10 PM
  */
@@ -26,51 +28,51 @@ public class DeducePipeline implements PipelineMember {
 	public DeducePipeline(final IPipelineAccess aPipelineAccess) {
 	}
 
-	protected void logProgress(final String g) {
-		tripleo.elijah.util.Stupidity.println_err_2(g);
-	}
+	// NOTES 11/10
+	//  1. #createWorldModule is only created here
+	//    - this is contrary to other branches where there are more than one location
+	//  2. mcp is a bit involved
+	//  3. We loop modules
 
 	@Override
 	public void run(final @NotNull CR_State aSt, final CB_Output aOutput) {
 		logProgress("***** Hit DeducePipeline #run");
 
-		final IPipelineAccess      pa                   = aSt.ca().getCompilation().getCompilationEnclosure().getPipelineAccess();
-		final Compilation          c                    = pa.getCompilation();
-		final CompilationEnclosure compilationEnclosure = c.getCompilationEnclosure();
-		final PipelineLogic        pipelineLogic        = compilationEnclosure.getPipelineLogic();
+		final CompilationEnclosure                   ce                   = aSt.ca().getCompilation().getCompilationEnclosure();
+		final IPipelineAccess                        pa                   = ce.getPipelineAccess();
+		final LivingRepo                             world                = ce.ca2().world();
+		final PipelineLogic                          pipelineLogic        = ce.getPipelineLogic();
+		final DeducePhase                            deducePhase          = pipelineLogic.dp;
+		final PipelineLogic.ModuleCompletableProcess mcp                  = pipelineLogic._mcp();
 
 		Preconditions.checkNotNull(pa);
-		Preconditions.checkNotNull(c);
-		Preconditions.checkNotNull(compilationEnclosure);
+		Preconditions.checkNotNull(ce);
 		Preconditions.checkNotNull(pipelineLogic);
+		Preconditions.checkNotNull(deducePhase);
+		Preconditions.checkNotNull(mcp);
 
-		for (final OS_Module m : c.modules()) {
+		final @NotNull List<OS_Module> modules        = pa.getCompilation().modules();
+		for (final OS_Module m : modules) {
 			pipelineLogic.addModule(m);
 		}
 
-		final PipelineLogic.ModuleCompletableProcess mcp = pipelineLogic._mcp();
-
-		Preconditions.checkNotNull(mcp);
-
 		mcp.start();
 
-		final CompilationEnclosure ce    = pipelineLogic._pa().getCompilationEnclosure();
-		final LivingRepo           world = ce.getCompilation().world();
 		world.addModuleProcess(mcp);
 
 		for (final OS_Module mod : pipelineLogic.mods().getMods()) {
-			final WorldModule mod1    = c.con().createWorldModule(mod);
-			world.addModule2(mod1);
+			final WorldModule worldModule = ce.ca2().createWorldModule(mod);
+			world.addModule2(worldModule);
 		}
 
 		mcp.preComplete();
 		mcp.complete();
 
-		final DeducePhase deducePhase = pipelineLogic.dp;
-
-		Preconditions.checkNotNull(deducePhase);
-
 		deducePhase.country().sendClasses(pa::setNodeList);
+	}
+
+	protected void logProgress(final String g) {
+		tripleo.elijah.util.Stupidity.println_err_2(g);
 	}
 }
 

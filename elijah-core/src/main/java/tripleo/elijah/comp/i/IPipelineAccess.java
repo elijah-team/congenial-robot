@@ -1,13 +1,14 @@
 package tripleo.elijah.comp.i;
 
 import org.jdeferred2.DoneCallback;
-import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.Provenance;
 import tripleo.elijah.comp.notation.GN_Env;
 import tripleo.elijah.comp.notation.GN_Notable;
 import tripleo.elijah.lang.i.OS_Module;
+import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_c.GenerateC;
@@ -44,7 +45,7 @@ public interface IPipelineAccess {
 
 	//List<NG_OutputItem> getOutputs();
 
-	DeferredObject/* Promise */<PipelineLogic, Void, Void> getPipelineLogicPromise();
+	@NotNull Eventual<PipelineLogic> getPipelineLogicPromise();
 
 	ProcessRecord getProcessRecord();
 
@@ -89,4 +90,8 @@ public interface IPipelineAccess {
 	void resolvePipelinePromise(PipelineLogic aPipelineLogic);
 
 	DeducePhase getDeducePhase();
+
+	EIT_ModuleList getModuleList();
+
+	void _ModuleList_add(OS_Module aM);
 }
