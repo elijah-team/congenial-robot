@@ -4,13 +4,11 @@ import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.stages.instructions.IntegerIA;
 
 public class ASS_PROCIA extends WhyNotGarish_BaseFunction.ArgumentStringStatement {
-	private final WhyNotGarish_BaseFunction    whyNotGarishBaseFunction;
 	private final WhyNotGarish_BaseFunction    yf;
 	private final IntegerIA                    ia;
 	private final Generate_Code_For_Method.AOG aog;
 
 	public ASS_PROCIA(final WhyNotGarish_BaseFunction aWhyNotGarishBaseFunction, final IntegerIA aIa, final Generate_Code_For_Method.AOG aAOG) {
-		whyNotGarishBaseFunction = aWhyNotGarishBaseFunction;
 		yf                       = aWhyNotGarishBaseFunction;
 		ia                       = aIa;
 		aog                      = aAOG;
@@ -23,7 +21,7 @@ public class ASS_PROCIA extends WhyNotGarish_BaseFunction.ArgumentStringStatemen
 
 	@Override
 	public String getText() {
-		final String realTargetName = whyNotGarishBaseFunction.getGenerateC().getRealTargetName(yf, ia, Generate_Code_For_Method.AOG.GET);
+		final String realTargetName = yf.getGenerateC().getRealTargetName(yf, ia, Generate_Code_For_Method.AOG.GET);
 		final String t              = (Emit.emit("/*669*/") + realTargetName);
 		return t;
 	}

@@ -83,7 +83,7 @@ class GI_ProcIA implements GenerateC_Item {
 
 		final CtorReference reference = new CtorReference();
 		reference.getConstructorPath(pte.expression_num, gf);
-		@NotNull List<String> x = gav.getAssignmentValueArgs(aInstruction, gf, gc.elLog());
+		@NotNull List<String> x = gav.getAssignmentValueArgs(aInstruction, gf, gc.elLog()).stringList();
 		reference.args(x);
 		final String build = reference.build(clsinv);
 		return build;
