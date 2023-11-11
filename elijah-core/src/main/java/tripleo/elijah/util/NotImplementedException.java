@@ -32,4 +32,3 @@ public class NotImplementedException extends RuntimeException {
 		SimplePrintLoggerToRemoveSoon.println_err_2("Should not be here");
 	}
 }
-

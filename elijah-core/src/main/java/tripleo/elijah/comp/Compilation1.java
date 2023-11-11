@@ -277,7 +277,7 @@ public abstract class Compilation1 implements Compilation {
 
 		//pa.setCompilerInput(pa.getCompilation().getInputs());
 
-		assert  pa.getCompilerInput().size() > 0;
+		assert !pa.getCompilerInput().isEmpty();
 
 		ce.getCompilationRunner().start(rootCI, pa);
 	}
