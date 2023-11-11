@@ -287,7 +287,6 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 	@NotNull
 	List<String> getArgumentStrings(final @NotNull BaseEvaFunction gf, final @NotNull Instruction instruction) {
 		final WhyNotGarish_Function yf = a_lookup(gf);
-		//return getArgumentStrings(yf, instruction);
 		return yf.getArgumentStrings(instruction).getLeft();
 	}
 

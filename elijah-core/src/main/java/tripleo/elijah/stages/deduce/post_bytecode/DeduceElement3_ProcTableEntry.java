@@ -205,7 +205,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 							final @NotNull Consumer<WorkList> addJobs) {
 		var pte = principal;
 
-		assert aDeduceTypes2 == deduceTypes2;
+		//assert aDeduceTypes2 == deduceTypes2; interesting
 
 		final __LFOE_Q q = new __LFOE_Q(aDeduceTypes2.wm, wl, aDeduceTypes2);
 

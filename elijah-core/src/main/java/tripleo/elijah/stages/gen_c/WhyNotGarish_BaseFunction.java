@@ -4,11 +4,9 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.lang.i.ConstructorDef;
-import tripleo.elijah.lang.i.FunctionDef;
-import tripleo.elijah.lang.i.OS_Type;
-import tripleo.elijah.lang.i.TypeName;
+import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
+import tripleo.elijah.stages.deduce.DeduceElement;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.instructions.*;
@@ -163,6 +161,20 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		final VariableTableEntry       varTableEntry = this.getVarTableEntry(ia.getIndex());
 		final ZoneVTE                  zone_vte      = getGenerateC()._zone.get(varTableEntry, gf);
 
+		return zone_vte;
+	}
+
+	public Map<OS_Element, DeduceElement> pt_elements() {
+		return this.getGf().elements();
+	}
+
+	public InstructionArgument pt_vte_lookup(final String aText) {
+		return getGf().vte_lookup(aText);
+	}
+
+	public ZoneVTE zoneHelper(final VariableTableEntry       varTableEntry ) {
+		final @NotNull BaseEvaFunction gf            = this.getGf();
+		final ZoneVTE                  zone_vte      = getGenerateC()._zone.get(varTableEntry, gf);
 		return zone_vte;
 	}
 
