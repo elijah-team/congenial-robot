@@ -9,7 +9,9 @@
 package tripleo.elijah.comp;
 
 import io.reactivex.rxjava3.core.Observer;
+import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.subscription.MultiEmitter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.CompilerInstructions;
@@ -39,47 +41,31 @@ import java.util.stream.Collectors;
 
 public abstract class Compilation1 implements Compilation {
 
-	public final    CIS                               _cis    = new CIS();
-	public final    CompilationConfig                 cfg     = new CompilationConfig();
-	public final    Map<String, CompilerInstructions> fn2ci   = new HashMap<String, CompilerInstructions>();
-	public final    List<OS_Module>                   modules = new ArrayList<OS_Module>();
-	public final    USE                               use     = new USE(this);
-	final           ErrSink                           errSink;
-	private final   int                               _compilationNumber;
-	private final   CompFactory                       _con    = new CompFactory() {
-		@Override
-		public @NotNull EIT_ModuleInput createModuleInput(final OS_Module aModule) {
-			return new EIT_ModuleInput(aModule, Compilation1.this);
-		}
+	private final CIS                               _cis                 = new CIS();
+	private final CompilationConfig                 cfg                  = new CompilationConfig();
+	private final Map<String, CompilerInstructions> fn2ci                = new HashMap<String, CompilerInstructions>();
+	private final List<OS_Module>                   modules              = new ArrayList<OS_Module>();
+	private final USE                               use                  = new USE(this);
+	private final ErrSink                           errSink;
+	private final int                               _compilationNumber;
+	private final CP_Paths                          paths;
+	private final EIT_InputTree                     _input_tree          = new EIT_InputTree();
+	private final CompFactory                       _con                 = new DefaultCompFactory();
+	@NotNull
+	private       LivingRepo                        _repo                = new DefaultLivingRepo();
+	private       CompilerInstructions              rootCI;
+	private       List<CompilerInput>               _inputs;
+	private       IPipelineAccess                   _pa;
+	private       CompilationEnclosure              compilationEnclosure = new CompilationEnclosure(this);
+	private       IO                                io;
 
-		@Override
-		public @NotNull Qualident createQualident(final @NotNull List<String> sl) {
-			var R = new QualidentImpl();
-			for (String s : sl) {
-				R.append(Helpers.string_to_ident(s));
-			}
-			return R;
-		}
+	public Compilation1(final ErrSink errSink, final IO io) {
+		this.errSink            = errSink;
+		this.io                 = io;
+		this._compilationNumber = new Random().nextInt(Integer.MAX_VALUE);
 
-		@Override
-		public @NotNull InputRequest createInputRequest(final File aFile, final boolean aDo_out, final @Nullable LibraryStatementPart aLsp) {
-			return new InputRequest(aFile, aDo_out, aLsp);
-		}
-
-		@Override
-		public @NotNull WorldModule createWorldModule(final OS_Module m) {
-			CompilationEnclosure ce = getCompilationEnclosure();
-			final WorldModule    R  = new DefaultWorldModule(m, ce);
-
-			return R;
-		}
-	};
-	public @NotNull LivingRepo                        _repo   = new DefaultLivingRepo();
-	public          CompilerInstructions rootCI;
-	private List<CompilerInput>  _inputs;
-	private IPipelineAccess      _pa;
-	private CompilationEnclosure compilationEnclosure = new CompilationEnclosure(this);
-	private IO                   io;
+		this.paths = new CP_Paths(this);
+	}
 
 	// TODO remove this 04/20
 	@Override
@@ -96,8 +82,6 @@ public abstract class Compilation1 implements Compilation {
 	public void setCompilationEnclosure(final CompilationEnclosure aCompilationEnclosure) {
 		compilationEnclosure = aCompilationEnclosure;
 	}
-
-	private final CP_Paths paths;
 
 	@Override
 	public void addModule__(final @NotNull OS_Module module, final @NotNull String fn) {
@@ -135,11 +119,27 @@ public abstract class Compilation1 implements Compilation {
 		}
 
 		{
-			Uni.createFrom().item("hello")
-					.onItem().transform(item -> item + " mutiny")
-					.onItem().transform(String::toUpperCase)
+			//Uni.createFrom().item("hello")
+			//		.onItem().transform(item -> item + " mutiny")
+			//		.onItem().transform(String::toUpperCase)
+			//		.subscribe().with(item -> System.out.println(">> " + item))
+			//;
+
+			Multi.createFrom().items(1, 2, 3, 4)
+					//Multi.<Integer>createFrom()
+
+/*
+							//.emitter(em -> { new MultiEmitter<>() })
+
+							//.deferred(() -> Multi.createFrom()
+									.item(Helpers.List_of(1,2,3))
+							//)
+*/
+
+					.onItem().transform(item -> item)
 					.subscribe().with(item -> System.out.println(">> " + item));
-			int y=2;
+
+			int y = 2;
 		}
 
 		_inputs = inputs; // !!
@@ -255,15 +255,13 @@ public abstract class Compilation1 implements Compilation {
 	}
 
 	@Override
-	public IPipelineAccess pa() {
-		//assert _pa != null;
-
-		return _pa;
-	}
-
-	@Override
 	public void hasInstructions(final @NotNull List<CompilerInstructions> cis,
 								final @NotNull IPipelineAccess pa) {
+
+		//this.signals().hasInstructions()
+		//		.signal(this.con().createSignal_hasInstructions(pa, cis)); // this is wrong
+		//		.signal(pa, List_of(cis.get(0)));
+
 		assert cis.size() > 0; // FIXME this is corect. below is wrong (allows cis.size()==2)
 		//assert cis.size() == 1; // FIXME this is corect. below is wrong (allows cis.size()==2)
 
@@ -275,9 +273,13 @@ public abstract class Compilation1 implements Compilation {
 
 		rootCI = cis.get(0);
 
-		pa.setCompilerInput(pa.getCompilation().getInputs());
+		final CompilationEnclosure ce = getCompilationEnclosure();
 
-		getCompilationEnclosure().getCompilationRunner().start(rootCI, pa);
+		//pa.setCompilerInput(pa.getCompilation().getInputs());
+
+		assert  pa.getCompilerInput().size() > 0;
+
+		ce.getCompilationRunner().start(rootCI, pa);
 	}
 
 	@Override
@@ -296,29 +298,28 @@ public abstract class Compilation1 implements Compilation {
 		return _repo.makePackage(pkg_name);
 	}
 
-	// endregion
-
-	//
-	// region CLASS AND FUNCTION CODES
-	//
-
 	@Override
 	public @NotNull ModuleBuilder moduleBuilder() {
 		return new ModuleBuilder(this);
 	}
 
 	@Override
-	public void pushItem(CompilerInstructions aci) {
-		_cis.onNext(aci);
-	}
+	public IPipelineAccess pa() {
+		assert _pa != null;
 
-	// endregion
+		return _pa;
+	}
 
 	@Override
 	public void set_pa(IPipelineAccess a_pa) {
 		_pa = a_pa;
 
 		compilationEnclosure.pipelineAccessPromise.resolve(_pa);
+	}
+
+	@Override
+	public void pushItem(CompilerInstructions aci) {
+		_cis.onNext(aci);
 	}
 
 	@Override
@@ -336,12 +337,9 @@ public abstract class Compilation1 implements Compilation {
 		return _repo;
 	}
 
-	public Compilation1(final ErrSink errSink, final IO io) {
-		this.errSink            = errSink;
-		this.io                 = io;
-		this._compilationNumber = new Random().nextInt(Integer.MAX_VALUE);
-
-		this.paths = new CP_Paths(this);
+	@Override
+	public LivingRepo livingRepo() {
+		return _repo;
 	}
 
 	@Override
@@ -349,16 +347,9 @@ public abstract class Compilation1 implements Compilation {
 		return paths;
 	}
 
-	private final EIT_InputTree _input_tree = new EIT_InputTree();
-
 	@Override
 	public @NotNull EIT_InputTree getInputTree() {
 		return _input_tree;
-	}
-
-	@Override
-	public LivingRepo livingRepo() {
-		return _repo;
 	}
 
 	@Override
@@ -371,6 +362,66 @@ public abstract class Compilation1 implements Compilation {
 		return new CompilerBeginning(this, rootCI, _inputs, aCompilationRunner.progressSink, cfg());
 	}
 
+	public CIS get_cis() {
+		return _cis;
+	}
+
+	public CompilationConfig getCfg() {
+		return cfg;
+	}
+
+	public Map<String, CompilerInstructions> getFn2ci() {
+		return fn2ci;
+	}
+
+	public List<OS_Module> getModules() {
+		return modules;
+	}
+
+	public USE getUse() {
+		return use;
+	}
+
+	public int get_compilationNumber() {
+		return _compilationNumber;
+	}
+
+	public CompilerInstructions getRootCI() {
+		return rootCI;
+	}
+
+	public void setRootCI(CompilerInstructions aRootCI) {
+		rootCI = aRootCI;
+	}
+
+	private class DefaultCompFactory implements CompFactory {
+		@Override
+		public @NotNull EIT_ModuleInput createModuleInput(final OS_Module aModule) {
+			return new EIT_ModuleInput(aModule, Compilation1.this);
+		}
+
+		@Override
+		public @NotNull Qualident createQualident(final @NotNull List<String> sl) {
+			var R = new QualidentImpl();
+			for (String s : sl) {
+				R.append(Helpers.string_to_ident(s));
+			}
+			return R;
+		}
+
+		@Override
+		public @NotNull InputRequest createInputRequest(final File aFile, final boolean aDo_out, final @Nullable LibraryStatementPart aLsp) {
+			return new InputRequest(aFile, aDo_out, aLsp);
+		}
+
+		@Override
+		public @NotNull WorldModule createWorldModule(final OS_Module m) {
+			CompilationEnclosure ce = getCompilationEnclosure();
+			final WorldModule    R  = new DefaultWorldModule(m, ce);
+
+			return R;
+		}
+	}
 }
 
 //
