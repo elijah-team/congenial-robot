@@ -11,6 +11,7 @@ import tripleo.elijah.comp.internal.CompilationBus.SingleActionProcess
 import tripleo.elijah.util.Mode
 import tripleo.elijah.util.Ok
 import tripleo.elijah.util.Operation
+import java.awt.SystemColor.text
 
 //import javax.swing.text.html.HTML.Tag.P
 
@@ -23,15 +24,16 @@ internal class CB_FindStdLibAction(private val ce: CompilationEnclosure, private
 
 	init {
 		//findStdLib =
-		val yy = obtain()
-		logProgress(Prov.obtain, yy)
+		val op = obtain()
+		logProgress(Prov.obtain, op)
 	}
 
-	private fun obtain() {
+	private fun obtain(): Operation<CompilerDriven> {
 		val x = ce.compilationDriver[Compilation.CompilationAlways.Tokens.COMPILATION_RUNNER_FIND_STDLIB2]
 		if (x.mode() == Mode.SUCCESS) {
 			findStdLib = x.success() as CD_FindStdLib
 		}
+		return x
 	}
 
 	override fun execute() {
@@ -85,10 +87,11 @@ internal class CB_FindStdLibAction(private val ce: CompilationEnclosure, private
 				outputStrings().add(os)
 			}
 			Prov.get_push_item -> {
-				o ?: throw NullPointerException("Expression 'yy' must not be null")
+				val op = o as Operation<CompilerInstructions>
+				op ?: throw NullPointerException("Expression 'yy' must not be null")
 			}
 			Prov.obtain -> {
-				val op = o as Operation<CompilerInstructions>
+				val op = o as Operation<CompilerDriven> //Operation<CompilerInstructions>
 				val text = op.toString()
 				val os: CB_OutputString = COutputString(text)
 				outputStrings().add(os)
@@ -97,8 +100,12 @@ internal class CB_FindStdLibAction(private val ce: CompilationEnclosure, private
 //			else -> {
 //				throw IllegalStateException("Unexpected value: $code")
 //			}
-			Prov.execute_end -> TODO()
-			Prov.execute_begin -> TODO()
+			Prov.execute_end -> {
+				// TODO 11/12 say something
+			}
+			Prov.execute_begin -> {
+				// TODO 11/12 say something
+			}
 		}
 	}
 
