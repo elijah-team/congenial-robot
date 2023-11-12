@@ -3,10 +3,12 @@ package tripleo.elijah.nextgen.rosetta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
+import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request_TWO;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_Request;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
+import tripleo.elijah.stages.deduce.DeduceTypes2_TWO;
 import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions2;
@@ -21,6 +23,10 @@ public class Rosetta {
 	@Contract("_ -> new")
 	public static @NotNull DeduceTypes2 create(final DeduceTypes2Request aDeduceTypes2Request) {
 		return new DeduceTypes2(aDeduceTypes2Request);
+	}
+
+	public static DeduceTypes2_TWO create(final DeduceTypes2Request aDeduceTypes2Request, final DeduceTypes2Request_TWO aTWO) {
+		return new DeduceTypes2_TWO(aDeduceTypes2Request);
 	}
 
 	public static void create_call(final @NotNull DeduceTypes2_deduceFunctions_Request rq) {
