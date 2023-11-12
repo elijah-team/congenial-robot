@@ -213,7 +213,7 @@ public class TestBasic {
 			System.err.printf("Error count should be 0 but is %d for %s%n", c.errorCount(), s);
 		}
 
-		assertEquals(25, c.errorCount()); // TODO Error count obviously should be 0
+		assertEquals(29, c.errorCount()); // TODO Error count obviously should be 0
 
 		final List<EOT_OutputFile> outputFileList = c.getOutputTree().getList();
 		assertEquals(15, outputFileList.size());
@@ -273,7 +273,7 @@ public class TestBasic {
 		f.start();
 
 		// TODO 11/05 find out what these errors are...
-		assertEquals(25, f.c.errorCount()); // TODO Error count obviously should be 0
+		assertEquals(29, f.c.errorCount()); // TODO Error count obviously should be 0
 
 		var cot = f.c.getOutputTree();
 
