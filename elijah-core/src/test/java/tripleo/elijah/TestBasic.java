@@ -78,10 +78,10 @@ public class TestBasic {
 
 	//@Ignore
 	@Test
-	public final void testBasic_listfolders3() throws Exception {
+	public final void testBasic_listfolders3() {
 		String s = "test/basic/listfolders3/listfolders3.ez";
 
-		final Compilation c = CompilationFactory.mkCompilation(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		Emit.emitting = false;
 
