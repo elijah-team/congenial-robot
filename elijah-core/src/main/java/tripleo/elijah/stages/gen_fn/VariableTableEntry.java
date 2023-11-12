@@ -166,7 +166,6 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 
 	@Override
 	public void resolveTypeToClass(final @NotNull EvaNode aNode) {
-		_p_resolvedTypePromise.resolve(aNode);
 		if (!_p_resolvedTypePromise.isResolved()) {
 			_p_resolvedTypePromise.resolve(aNode);
 		} else {

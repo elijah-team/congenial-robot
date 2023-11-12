@@ -1,6 +1,5 @@
 package tripleo.elijah.stages.gen_c;
 
-import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.DebugFlags;
@@ -17,11 +16,11 @@ import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.work.WorkList;
 
 import java.util.List;
+import java.util.Optional;
 
 public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	private final EvaConstructor                                gf;
 	private final GenerateC                                     generateC;
-	private final DeferredObject<GenerateResultEnv, Void, Void> fileGenPromise = new DeferredObject<>();
 
 	public WhyNotGarish_Constructor(final EvaConstructor aGf, final GenerateC aGenerateC) {
 		gf        = aGf;
@@ -61,20 +60,6 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		}
 	}
 
-	public void resolveFileGenPromise(final GenerateResultEnv aFileGen) {
-		fileGenPromise.resolve(aFileGen);
-	}
-
-	@Override
-	public boolean hasFileGen() {
-		return fileGenPromise.isResolved();
-	}
-
-	@Override
-	public void provideFileGen(final GenerateResultEnv fg) {
-		fileGenPromise.resolve(fg);
-	}
-
 	@Override
 	public BaseEvaFunction getGf() {
 		return gf;
@@ -86,14 +71,14 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 	}
 
 	@Override
-	public GenerateC getGenerateC() {
-		if (!fileGenPromise.isResolved())
+	public Optional<GenerateC> getGenerateC() {
+		if (!hasFileGen())
 			return null;
 		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
 		fileGenPromise.then(fg -> {
 			xx[0] = fg.generateModule().gmr().getGenerateFiles(null);
 		});
-		return (GenerateC) xx[0];
+		return Optional.of((GenerateC) xx[0]);
 	}
 
 	@NotNull String getConstructorNameText() {

@@ -29,6 +29,6 @@ public class ASS_CONSTIA extends WhyNotGarish_BaseFunction.ArgumentStringStateme
 	}
 
 	private GenerateC gc() {
-		return yf.getGenerateC();
+		return yf.getGenerateC().get();
 	}
 }

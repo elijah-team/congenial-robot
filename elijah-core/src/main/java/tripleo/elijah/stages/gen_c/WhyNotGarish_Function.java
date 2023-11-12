@@ -1,9 +1,9 @@
 package tripleo.elijah.stages.gen_c;
 
-import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
@@ -17,12 +17,13 @@ import tripleo.elijah.stages.gen_fn.EvaFunction;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
-	private final BaseEvaFunction                               gf;
-	private final GenerateC                                     generateC;
-	private final DeferredObject<GenerateResultEnv, Void, Void> fileGenPromise = new DeferredObject<>();
+	private final BaseEvaFunction             gf;
+	private final GenerateC                   generateC;
+	private final Eventual<GenerateResultEnv> fileGenPromise = new Eventual<>();
 
 	public WhyNotGarish_Function(final BaseEvaFunction aGf, final GenerateC aGenerateC) {
 		gf        = aGf;
@@ -35,7 +36,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 		if (gf.getFD() == null) assert false; //return; // FIXME why? when?
 		Generate_Code_For_Method gcfm = new Generate_Code_For_Method(generateC, generateC.elLog());
 
-		deduced(gf, (DeducedBaseEvaFunction dgf)->{
+		deduced(gf, (DeducedBaseEvaFunction dgf) -> {
 			gcfm.generateCodeForMethod((BaseEvaFunction) dgf.getCarrier(), aFileGen);
 		});
 	}
@@ -69,6 +70,12 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 		return aEvaFunction;
 	}
 
+	@Override
+	public BaseEvaFunction getGf() {
+		return gf;
+	}
+
+	@Override
 	public void resolveFileGenPromise(final GenerateResultEnv aFileGen) {
 		if (!fileGenPromise.isResolved()) {
 			fileGenPromise.resolve(aFileGen);
@@ -82,28 +89,17 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 	}
 
 	@Override
-	public boolean hasFileGen() {
-		return fileGenPromise.isResolved();
-	}
+	public Optional<GenerateC> getGenerateC() {
+		if (!fileGenPromise.isResolved()) {
+			return Optional.empty();
+		}
 
-	@Override
-	public void provideFileGen(final GenerateResultEnv fg) {
-		fileGenPromise.resolve(fg);
-	}
-
-	@Override
-	public GenerateC getGenerateC() {
-		if (!fileGenPromise.isResolved())
-			return null;
 		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
 		fileGenPromise.then(fg -> {
-			xx[0] = fg.generateModule().gmr().getGenerateFiles(null);
+			xx[0] = fg.generateModule().gmr().getGenerateFiles(()->fg);
 		});
-		return (GenerateC) xx[0];
-	}
 
-	@Override
-	public BaseEvaFunction getGf() {
-		return gf;
+		return Optional.of((GenerateC) xx[0]);
+		//return fileGenPromise.getOptional();//() -> fg.generateModule().gmr().getGenerateFiles(null));
 	}
 }

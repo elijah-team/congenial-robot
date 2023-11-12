@@ -60,7 +60,12 @@ public class GCX_FunctionCall implements EG_Statement {
 
 			sb.append(Emit.emit("/*424*/") + realTargetName);
 			sb.append('(');
-			final List<String> sl3 = gc.getArgumentStrings(gf, instruction);
+
+			final List<String> sl3;
+			//sl3 = gc.getArgumentStrings(gf, instruction);
+			final WhyNotGarish_Function yf = (WhyNotGarish_Function) gf;
+			sl3 = yf.getArgumentStrings(instruction).getLeft();
+
 			sb.append(Helpers.String_join(", ", sl3));
 			sb.append(");");
 

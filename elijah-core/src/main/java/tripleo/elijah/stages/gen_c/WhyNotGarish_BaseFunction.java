@@ -2,6 +2,7 @@ package tripleo.elijah.stages.gen_c;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
@@ -15,16 +16,30 @@ import tripleo.elijah.util.NotImplementedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
+	protected final DeferredObject<GenerateResultEnv, Void, Void> fileGenPromise = new DeferredObject<>();
+
 	public @NotNull List<Instruction> instructions() {
 		return getGf().instructions();
 	}
 
 	public abstract BaseEvaFunction getGf();
 
+	public void resolveFileGenPromise(final GenerateResultEnv aFileGen) {
+		fileGenPromise.resolve(aFileGen);
+	}
+
 	@Override
-	public abstract void provideFileGen(GenerateResultEnv fg);
+	public boolean hasFileGen() {
+		return fileGenPromise.isResolved();
+	}
+
+	@Override
+	public void provideFileGen(final GenerateResultEnv fg) {
+		fileGenPromise.resolve(fg);
+	}
 
 	public @Nullable Label findLabel(final int aIndex) {
 		return getGf().findLabel(aIndex);
@@ -106,7 +121,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 
 	@NotNull Pair<java.util.List<String>, java.util.List<ArgumentString>>
 	getArgumentStrings(final @NotNull Instruction instruction) {
-		final GenerateC generateC = getGenerateC();
+		final GenerateC generateC = getGenerateC().get();
 		Preconditions.checkNotNull(generateC);
 
 		final List<String>         sl3 = new ArrayList<String>();
@@ -146,10 +161,11 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return Pair.of(sl3,sl4);
 	}
 
-	public abstract GenerateC getGenerateC();
+	public abstract Optional<GenerateC> getGenerateC();
 
 	private void logProgress(final int code, final String message) {
-		getGenerateC().elLog().err(code + " " + message);
+		getGenerateC().get().elLog().err(code + " " + message);
+		//fileGenPromise in subclass
 	}
 
 	public @NotNull ConstantTableEntry getConstTableEntry(final int aIndex) {
@@ -159,7 +175,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	public ZoneVTE zoneHelper(final IntegerIA ia) {
 		final @NotNull BaseEvaFunction gf            = this.getGf();
 		final VariableTableEntry       varTableEntry = this.getVarTableEntry(ia.getIndex());
-		final ZoneVTE                  zone_vte      = getGenerateC().get_zone().get(varTableEntry, gf);
+		final ZoneVTE                  zone_vte      = getGenerateC().get().get_zone().get(varTableEntry, gf);
 
 		return zone_vte;
 	}
@@ -174,7 +190,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 
 	public ZoneVTE zoneHelper(final VariableTableEntry       varTableEntry ) {
 		final @NotNull BaseEvaFunction gf            = this.getGf();
-		final ZoneVTE                  zone_vte      = getGenerateC().get_zone().get(varTableEntry, gf);
+		final ZoneVTE                  zone_vte      = getGenerateC().get().get_zone().get(varTableEntry, gf);
 		return zone_vte;
 	}
 

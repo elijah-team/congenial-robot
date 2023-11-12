@@ -21,7 +21,7 @@ public class ASS_PROCIA extends WhyNotGarish_BaseFunction.ArgumentStringStatemen
 
 	@Override
 	public String getText() {
-		final String realTargetName = yf.getGenerateC().getRealTargetName(yf, ia, Generate_Code_For_Method.AOG.GET);
+		final String realTargetName = yf.getGenerateC().get().getRealTargetName(yf, ia, Generate_Code_For_Method.AOG.GET);
 		final String t              = Emit.emit("/*669*/") + realTargetName;
 		return t;
 	}

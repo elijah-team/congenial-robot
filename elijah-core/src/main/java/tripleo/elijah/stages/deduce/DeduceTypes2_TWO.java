@@ -13,12 +13,8 @@ public class DeduceTypes2_TWO extends DeduceTypes2 {
 		super(aDeduceTypes2Request);
 	}
 
-	public void pass(final BaseEvaFunction aEvaFunction) {
-		deduceOneFunction((EvaFunction) aEvaFunction, this.phase);
-	}
-
 	public void pass(final BaseEvaFunction aEvaFunction, final Consumer<DeducedBaseEvaFunction> c) {
-		pass(aEvaFunction);
+		deduceOneFunction((EvaFunction) aEvaFunction, this._phase());
 		c.accept(new DefaultDeducedBaseEvaFunction(aEvaFunction));
 	}
 }
