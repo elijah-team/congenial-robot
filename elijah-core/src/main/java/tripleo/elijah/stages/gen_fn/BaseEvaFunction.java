@@ -9,12 +9,12 @@
 package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
-import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import tripleo.elijah.Eventual;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.reactive.DefaultReactive;
@@ -49,7 +49,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	//
 	// region INSTRUCTIONS
 	//
-	private final   DeferredObject<GenType, Void, Void> _p_assignGenType  = new DeferredObject<GenType, Void, Void>();
+	private final   Eventual<GenType> _p_assignGenType  = new Eventual<>();
 	public @NotNull List<DR_Item>                       drs               = new ArrayList<>();
 	public          DefaultLivingFunction               _living;
 	public @NotNull List<ConstantTableEntry>            cte_list          = new ArrayList<ConstantTableEntry>();
@@ -500,14 +500,12 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		parent = aGeneratedContainerNC;
 	}
 
-	@Override
-	public @NotNull DeferredObject<GenType, Void, Void> typeDeferred() {
+	public Eventual<GenType> typeDeferred() {
 		return _p_assignGenType;
 	}
 
-	@Override
-	public Promise<GenType, Void, Void> typePromise() {
-		return _p_assignGenType.promise();
+	public Eventual<GenType> typePromise() {
+		return _p_assignGenType;
 	}
 
 	/**
@@ -723,18 +721,18 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		aMr.backstage_trigger(this);
 	}
 
-	public class __Reactive extends DefaultReactive {
-		@Override
-		public <T> void addListener(final Consumer<T> t) {
-			int y = 2;
-		}
-	}
-
 	public class _EvaCreationDimension implements ReactiveDimension {
 		private final BaseEvaFunction baseEvaFunction;
 
 		public _EvaCreationDimension(final BaseEvaFunction aBaseEvaFunction) {
 			baseEvaFunction = aBaseEvaFunction;
+		}
+	}
+
+	public class __Reactive extends DefaultReactive implements BaseEvaFunction_Reactive {
+		@Override
+		public <T> void addListener(final Consumer<T> t) {
+			throw new UnintendedUseException();
 		}
 	}
 }
