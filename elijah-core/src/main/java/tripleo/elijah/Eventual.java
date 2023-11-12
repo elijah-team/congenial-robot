@@ -6,6 +6,9 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.diagnostic.Diagnostic;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+
 public class Eventual<P> {
 	private final DeferredObject<P, Diagnostic, Void> prom = new DeferredObject<>();
 
@@ -46,5 +49,27 @@ public class Eventual<P> {
 
 	public void onFail(final FailCallback<? super Diagnostic> aO) {
 		prom.fail(aO);
+	}
+
+	public Optional<P> getOptional() {
+		if (!prom.isResolved()) {
+			return Optional.empty();
+		}
+		final @NotNull P[] xx = (P[]) new Object[]{null};
+		prom.then(fg -> {
+			xx[0] = fg;
+		});
+		return Optional.of((P) xx[0]);
+	}
+
+	public Optional<P> getOptional(Supplier<P> s) {
+		if (!prom.isResolved()) {
+			return Optional.empty();
+		}
+		final @NotNull P[] xx = (P[]) new Object[]{null};
+		prom.then(fg -> {
+			xx[0] = s.get();
+		});
+		return Optional.of((P) xx[0]);
 	}
 }
