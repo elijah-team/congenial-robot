@@ -23,8 +23,12 @@ public class ASS_CONSTIA extends WhyNotGarish_BaseFunction.ArgumentStringStateme
 	@Override
 	public String getText() {
 		final ConstantTableEntry cte = yf.getConstTableEntry(ia.getIndex());
-		final String             t   = yf.getGenerateC().new GetAssignmentValue().const_to_string(cte.initialValue);
+		final String             t   = new GenerateC.GetAssignmentValue(gc()).const_to_string(cte.initialValue);
 
 		return t;
+	}
+
+	private GenerateC gc() {
+		return yf.getGenerateC();
 	}
 }

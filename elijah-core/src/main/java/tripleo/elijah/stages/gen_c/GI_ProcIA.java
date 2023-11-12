@@ -75,8 +75,10 @@ class GI_ProcIA implements GenerateC_Item {
 
 		//return gc.getAssignmentValue(gf.getSelf(), aInstruction, clsinv, gf);
 
-		GenerateC.GetAssignmentValue gav = gc.new GetAssignmentValue();
-//		return gav.forClassInvocation(aInstruction, clsinv, gf, gc.LOG);
+		GenerateC.GetAssignmentValue gav = /*gc.*/new GenerateC.GetAssignmentValue(gc);
+		if (false) {
+			return gav.forClassInvocation(aInstruction, clsinv, gf, gc._LOG());
+		}
 
 		InstructionArgument     _arg0 = aInstruction.getArg(0);
 		@NotNull ProcTableEntry pte   = carrier.getEntry();

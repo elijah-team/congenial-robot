@@ -45,8 +45,6 @@ class FnCallArgs_Statement2 implements EG_Statement {
 	public @NotNull String getText() {
 		final StringBuilder sb = new StringBuilder();
 
-		var aGenerateC = generateC;
-
 		if (pte.expression_num instanceof IntegerIA) {
 		} else if (pte.expression_num instanceof IdentIA ia2) {
 			final IdentTableEntry idte = ia2.getEntry();
