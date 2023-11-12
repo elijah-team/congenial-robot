@@ -2,6 +2,7 @@ package tripleo.elijah.factory.comp;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.StdErrSink;
 import tripleo.elijah.comp.i.ErrSink;
@@ -26,6 +27,12 @@ public enum CompilationFactory {
 
 		c.testMapHooks(aMapHooks);
 
+		return c;
+	}
+
+	public static @NotNull Compilation mkCompilationSilent(final StdErrSink aStdErrSink, final IO aIO) {
+		final Compilation c = mkCompilation(aStdErrSink, aIO);
+		c.reports().turnAllOutputOff();
 		return c;
 	}
 }
