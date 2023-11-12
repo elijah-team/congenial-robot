@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>tripleo.elijah</groupId>
-	<artifactId>elijah-v2</artifactId>
+	<artifactId>congenial-robot</artifactId>
 	<packaging>pom</packaging>
-	<version>0.91.1-SNAPSHOT</version>
+	<version>2023.congenial.11.something-after-rosetta</version>
 
 	<name>eljc-almost</name>
 	<url>http://git.sr.ht/~tripleo/el-almost</url>

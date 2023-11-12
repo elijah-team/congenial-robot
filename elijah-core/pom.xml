@@ -12,36 +12,36 @@
 	<name>elijah-core</name>
 	<description>elijah-core</description>
 	<packaging>jar</packaging>
-	<version>0.9.1-SNAPSHOT</version>
+	<version>2023.congenial.11.something-after-rosetta</version>
 
 	<dependencies>
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
-			<version>0.9.1-SNAPSHOT</version>
-<!--
-			<scope>compile</scope>
--->
+			<version>2023.congenial.11.something-after-rosetta</version>
+			<!--
+						<scope>compile</scope>
+			-->
 		</dependency>
 
-<!--
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.small</artifactId>
-			<version>0.9.1-SNAPSHOT</version>
-		</dependency>
--->
+		<!--
+				<dependency>
+					<groupId>tripleo.elijah</groupId>
+					<artifactId>tripleo.small</artifactId>
+					<version>2023.congenial.11.something-after-rosetta</version>
+				</dependency>
+		-->
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.reactive</artifactId>
-			<version>0.9.1-SNAPSHOT</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.stateful</artifactId>
-			<version>0.9.1-SNAPSHOT</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 			<scope>compile</scope>
 		</dependency>
 
