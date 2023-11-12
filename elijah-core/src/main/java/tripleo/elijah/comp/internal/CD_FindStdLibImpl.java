@@ -7,6 +7,7 @@ import tripleo.elijah.comp.i.CD_FindStdLib;
 import tripleo.elijah.comp.i.CompilationClosure;
 import tripleo.elijah.comp.queries.QuerySourceFileParser;
 import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
 import java.io.File;
@@ -15,16 +16,17 @@ import java.util.function.Consumer;
 
 public class CD_FindStdLibImpl implements CD_FindStdLib {
 	@Override
-	public void findStdLib(final @NotNull CR_State crState,
-						   final @NotNull String aPreludeName,
-						   final @NotNull Consumer<Operation<CompilerInstructions>> coci) {
+	public @NotNull Operation<Ok> findStdLib(final @NotNull CR_State crState,
+											 final @NotNull String aPreludeName,
+											 final @NotNull Consumer<Operation<CompilerInstructions>> coci) {
 		try {
 			final CompilationRunner compilationRunner = crState.runner();
 
 			@NotNull final Operation<CompilerInstructions> oci = _____findStdLib(aPreludeName, compilationRunner._accessCompilation().getCompilationClosure(), compilationRunner);
 			coci.accept(oci);
+			return Operation.success(Ok.instance());
 		} catch (Exception aE) {
-			throw new RuntimeException(aE);
+			return Operation.failure(aE);
 		}
 	}
 

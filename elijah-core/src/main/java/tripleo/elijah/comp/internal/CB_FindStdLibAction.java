@@ -7,6 +7,7 @@ import tripleo.elijah.ci.CompilerInstructions;
 import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.i.*;
 import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
 import java.util.ArrayList;
@@ -38,8 +39,16 @@ class CB_FindStdLibAction implements ICompilationBus.CB_Action {
 	public void execute() {
 		final String preludeName = Compilation.CompilationAlways.defaultPrelude();
 
-		if (findStdLib != null)
-			findStdLib.findStdLib(crState, preludeName, this::getPushItem);
+		if (findStdLib != null) {
+			@NotNull final Operation<Ok> op = findStdLib.findStdLib(crState, preludeName, this::getPushItem);
+
+			// TODO 11/12 do that outputstrings thing here maybe
+			switch (op.mode()) {
+			case SUCCESS -> {}
+			case FAILURE -> {}
+			default -> throw new IllegalStateException("Unexpected value: " + op.mode());
+			}
+		}
 	}
 
 	private void getPushItem(final @NotNull Operation<CompilerInstructions> oci) {
