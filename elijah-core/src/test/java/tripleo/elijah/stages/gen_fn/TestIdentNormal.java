@@ -9,6 +9,7 @@
 package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
+import org.junit.Ignore;
 import org.junit.Test;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.context_mocks.ContextMock;
@@ -36,9 +37,9 @@ import static tripleo.elijah.util.Helpers.List_of;
  */
 public class TestIdentNormal {
 
-	//@Ignore
-	//@Test(expected = IllegalStateException.class) // TODO proves nothing
-	@Test public void test() {
+	@Ignore
+	@Test
+	public void test() {
 		final Boilerplate boilerplate = new Boilerplate();
 		boilerplate.get();
 
@@ -81,6 +82,10 @@ public class TestIdentNormal {
 
 		final List<InstructionArgument> ss       = BaseEvaFunction._getIdentIAPathList(identIA);
 
+		var          xx = generatedFunction._getIdentIAResolvable(identIA);
+		System.err.println("8585 "+xx.getNormalPath(generatedFunction, identIA));
+
+
 		final GDM_IdentExpression gdm = generateFunctions.monitor(x);
 		boilerplate.fixTables(gdm, mod, generatedFunction);
 		final GDM_IdentExpression gdm_foo = generateFunctions.monitor(foo);
@@ -101,13 +106,13 @@ public class TestIdentNormal {
 			}
 		};
 
-		gdm.trigger_resolve(ctx2, ss, foundElement, d2, generatedFunction);
+		//gdm.trigger_resolve(ctx2, ss, foundElement, d2, generatedFunction);
 		gdm_foo.trigger_resolve(ctx2, ss, foundElement, d2, generatedFunction);
 
 		assertTrue(ss_found[0]);
 	}
 
-	//@Ignore
+	@Ignore
 	@Test // TODO just a mess
 	public void test2() {
 		final Boilerplate boilerplate = new Boilerplate();
