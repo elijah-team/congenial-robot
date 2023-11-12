@@ -31,11 +31,25 @@ public class CompilationTest {
 
 		c.feedCmdLine(args);
 
-		Assert.assertTrue(c.getIO().recordedRead(new File("test/comp_test/main3/main3.ez")));
-		Assert.assertTrue(c.getIO().recordedRead(new File("test/comp_test/main3/main3.elijah")));
-		Assert.assertTrue(c.getIO().recordedRead(new File("test/comp_test/fact1.elijah")));
+		final String pathname = "test/comp_test/main3/main3.ez";
+		final String pathname1 = "test/comp_test/main3/main3.elijah";
+		final String pathname2 = "test/comp_test/fact1.elijah";
 
-		Assert.assertTrue(c.instructionCount() > 0);
+		assertTrue(c.getIO().recordedRead(new File(pathname)));
+		assertTrue(c.getIO().recordedRead(new File(pathname1)));
+		assertTrue(c.getIO().recordedRead(new File(pathname2)));
+
+		// ListAssertions.assertThat(c.reports().codeOutputs()).containsExactlyInAnyOrder(pathname, pathname1, pathname2);
+
+		//assertTrue(c.reports().containsCodeInput(pathname));
+		assertTrue(c.reports().containsCodeInput(pathname1));
+		assertTrue(c.reports().containsCodeInput(pathname2));
+
+		final int[] module_count_from_compilation = {0};
+		c.eachModule((mod -> {
+			SimplePrintLoggerToRemoveSoon.println_out_2(String.format("**48** %s %s", mod, mod.getFileName()));
+			module_count_from_compilation[0]++;
+		}));
 
 		c.modules()
 				.stream()

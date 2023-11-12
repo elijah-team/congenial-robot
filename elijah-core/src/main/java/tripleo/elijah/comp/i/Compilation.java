@@ -90,9 +90,6 @@ public interface Compilation {
 	void hasInstructions(@NotNull List<CompilerInstructions> cis,
 						 @NotNull IPipelineAccess pa);
 
-	@Deprecated
-	int instructionCount();
-
 	boolean isPackage(@NotNull String pkg);
 
 	OS_Package makePackage(Qualident pkg_name);

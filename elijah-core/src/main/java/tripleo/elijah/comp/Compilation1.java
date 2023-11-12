@@ -281,12 +281,6 @@ public abstract class Compilation1 implements Compilation {
 	}
 
 	@Override
-	@Deprecated
-	public int instructionCount() {
-		return 4; // TODO shim !!!cis.size();
-	}
-
-	@Override
 	public boolean isPackage(final @NotNull String pkg) {
 		return _repo.hasPackage(pkg);
 	}
