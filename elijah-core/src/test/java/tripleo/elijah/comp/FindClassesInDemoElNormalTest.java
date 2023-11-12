@@ -10,9 +10,8 @@ package tripleo.elijah.comp;
 
 import org.junit.Assert;
 import org.junit.Test;
-import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.entrypoints.MainClassEntryPoint;
+import tripleo.elijah.factory.comp.CompilationFactory;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
@@ -22,13 +21,12 @@ import java.util.List;
 /**
  * @author Tripleo
  */
-public class FindClassesInDemoElNormal {
+public class FindClassesInDemoElNormalTest {
 
 	@Test
 	public final void testParseFile() throws Exception {
 		final List<String> args = tripleo.elijah.util.Helpers.List_of("test/demo-el-normal", "test/demo-el-normal/main2", "-sE");
-		final ErrSink      eee  = new StdErrSink();
-		final Compilation  c    = new CompilationImpl(eee, new IO());
+		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(args);
 
@@ -43,8 +41,7 @@ public class FindClassesInDemoElNormal {
 	@Test
 	public final void testListFolders() throws Exception {
 		final List<String> args = Helpers.List_of("test/demo-el-normal/listfolders/", "-sE");
-		final ErrSink      eee  = new StdErrSink();
-		final Compilation  c    = new CompilationImpl(eee, new IO());
+		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(args);
 

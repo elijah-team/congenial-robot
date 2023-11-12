@@ -34,7 +34,25 @@ public class Boilerplate {
 	OS_Module module;
 
 	public void get() {
+//		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 		comp = new CompilationImpl(new StdErrSink(), new IO());
+
+
+
+
+
+
+
+
+
+		comp.reports().turnAllOutputOff();
+
+
+
+
+
+
+
 		final ICompilationAccess aca1 = ((CompilationImpl) comp)._access();
 		if (aca1 != null) {
 			aca = aca1;

@@ -17,7 +17,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.comp.internal.DefaultCompilerController;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.factory.comp.CompilationFactory;
@@ -47,8 +46,7 @@ public class TestBasic {
 		final List<String> args     = new ArrayList<String>();
 		args.addAll(ez_files);
 		args.add("-sE");
-		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new CompilationImpl(eee, new IO());
+		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(args);
 
@@ -62,8 +60,7 @@ public class TestBasic {
 
 		for (String s : ez_files) {
 //			List<String> args = List_of("test/basic", "-sO"/*, "-out"*/);
-			final ErrSink     eee = new StdErrSink();
-			final Compilation c   = new CompilationImpl(eee, new IO());
+			final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 			c.feedCmdLine(List_of(s, "-sO"));
 
@@ -174,8 +171,7 @@ public class TestBasic {
 	public final void testBasic_listfolders4() throws Exception {
 		String s = "test/basic/listfolders4/listfolders4.ez";
 
-		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new CompilationImpl(eee, new IO());
+		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of(s, "-sO"));
 
