@@ -132,16 +132,18 @@ class GI_ProcIA implements GenerateC_Item {
 		}
 
 		if (generated instanceof EvaConstructor ec) {
-			final WhyNotGarish_Constructor ac = gc.a_lookup(ec);
+			final WhyNotGarish_Constructor yf = gc.a_lookup(ec);
 
-			final String constructorNameText = ac.getConstructorNameText();
+			final String constructorNameText = yf.getConstructorNameText();
 
-			generated.onGenClass(genClass -> {
+			yf.pt_onGenClass(genClass -> {
 				text[0] = String.format("ZC%d%s", genClass.getCode(), constructorNameText);
 				addRef.accept(Pair.of(text[0], CReference.Ref.CONSTRUCTOR));
 			});
 		} else {
-			final IdentExpression functionName = generated.getFD().getNameNode();
+			final WhyNotGarish_Function yf     = gc.a_lookup(generated);
+
+			final IdentExpression functionName = yf.pt_getNameNode();
 			generated.onGenClass(genClass -> {
 				text[0] = String.format("z%d%s", genClass.getCode(), functionName.getText());
 				addRef.accept(Pair.of(text[0], CReference.Ref.FUNCTION));

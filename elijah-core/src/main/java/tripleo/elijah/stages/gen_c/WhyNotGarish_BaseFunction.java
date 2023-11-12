@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.stages.deduce.DeduceElement;
+import tripleo.elijah.stages.deduce.OnGenClass;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.instructions.*;
@@ -178,6 +179,14 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		final ZoneVTE                  zone_vte      = getGenerateC().get().get_zone().get(varTableEntry, gf);
 
 		return zone_vte;
+	}
+
+	public IdentExpression pt_getNameNode() {
+		return getFD().getNameNode();
+	}
+
+	public void pt_onGenClass(final @NotNull OnGenClass ogc) {
+		getGf().onGenClass(ogc);
 	}
 
 	public Map<OS_Element, DeduceElement> pt_elements() {
