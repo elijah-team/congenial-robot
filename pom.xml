@@ -156,6 +156,7 @@
 			<artifactId>range-v1</artifactId>
 			<version>${range.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -167,21 +168,10 @@
 			<version>1.8.20</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<repositories>
-		<!--
-				<repository>
-					<id>ossrh</id>
-					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-		-->
-<!--
-		<repository>
-			<id>gitlab-maven-elijah</id>
-			<url>https://gitlab.com/api/v4/projects/10309690/packages/maven</url>
-		</repository>
--->
 		<repository>
 			<id>gitlab-maven-buffers</id>
 			<url>https://gitlab.com/api/v4/projects/20346374/packages/maven</url>
@@ -192,65 +182,16 @@
 		</repository>
 	</repositories>
 
-	<distributionManagement>
-		<!--
-			<snapshotRepository>
-				<id>ossrh</id>
-				<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			</snapshotRepository>
-			<repository>
-				<id>ossrh</id>
-				<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-			</repository>
-		-->
-
-<!--
-		<repository>
-			<id>gitlab-maven</id>
-			<url>https://gitlab.com/api/v4/projects/10309690/packages/maven</url>
-		</repository>
-		<snapshotRepository>
-			<id>gitlab-maven</id>
-			<url>https://gitlab.com/api/v4/projects/10309690/packages/maven</url>
-		</snapshotRepository>
--->
-	</distributionManagement>
-
 	<build>
 		<plugins>
-			<!--
-			<plugin>
-					<groupId>org.antlr</groupId>
-					<artifactId>antlr4-maven-plugin</artifactId>
-					<version>4.7.1</version>
-					<executions>
-							<execution>
-									<goals>
-											<goal>antlr4</goal>
-									</goals>
-							</execution>
-					</executions>
-			</plugin>
-			-->
-
-			<!-- Setup Javadoc jar -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>3.0.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
-			</plugin>
-
 			<!-- To use the plugin goals in your POM or parent POM -->
+<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>3.0.0-M5</version>
 			</plugin>
+-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -327,26 +268,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>3.0.0-M5</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven-javadoc-plugin.version}</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>javadoc</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>
