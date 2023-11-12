@@ -10,6 +10,7 @@ package tripleo.elijah.comp;
 
 import org.junit.Assert;
 import org.junit.Test;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.factory.comp.CompilationFactory;
 import tripleo.elijah.lang.i.ClassStatement;

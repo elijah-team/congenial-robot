@@ -13,7 +13,7 @@ import org.jdeferred2.DoneCallback;
 import org.jdeferred2.Promise;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.FunctionDef;

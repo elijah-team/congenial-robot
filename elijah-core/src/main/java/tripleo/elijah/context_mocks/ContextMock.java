@@ -10,16 +10,10 @@ package tripleo.elijah.context_mocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import tripleo.elijah.UnintendedUseException;
-
-import tripleo.elijah.comp.Compilation;
-
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.LookupResultList;
-import tripleo.elijah.lang.nextgen.names.i.EN_Name;
 
 import tripleo.elijah.lang.i.OS_Element;
-import tripleo.elijah.lang.i.OS_Module;
 
 import tripleo.elijah.lang.impl.ContextImpl;
 

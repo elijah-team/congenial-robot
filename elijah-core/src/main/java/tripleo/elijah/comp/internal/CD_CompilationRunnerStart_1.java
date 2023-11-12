@@ -1,12 +1,12 @@
 package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.ci.CompilerInstructions;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.ci.i.CompilerInstructions;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CD_CompilationRunnerStart;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.comp.i.IPipelineAccess;
-import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.util.Mode;
 import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 

@@ -3,7 +3,7 @@ package tripleo.elijah.lang.i;
 import com.google.common.collect.ImmutableList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.impl.ContextImpl;
 import tripleo.elijah.lang.nextgen.names.i.EN_Name;
 

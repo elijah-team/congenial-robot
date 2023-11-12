@@ -10,11 +10,9 @@ package tripleo.elijah.comp;
 
 import io.reactivex.rxjava3.core.Observer;
 import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.Uni;
-import io.smallrye.mutiny.subscription.MultiEmitter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ci.CompilerInstructions;
+import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.comp.i.*;
 import tripleo.elijah.comp.internal.*;

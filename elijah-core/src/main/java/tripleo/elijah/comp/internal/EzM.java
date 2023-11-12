@@ -2,8 +2,8 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ci.CompilerInstructions;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.ci.i.CompilerInstructions;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.queries.QueryEzFileToModule;
@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static tripleo.elijah.nextgen.query.Mode.SUCCESS;
+import static tripleo.elijah.util.Mode.SUCCESS;
 
 class EzM {
 	@NotNull Operation<CompilerInstructions> parseEzFile1(final @NotNull SourceFileParserParams p) {

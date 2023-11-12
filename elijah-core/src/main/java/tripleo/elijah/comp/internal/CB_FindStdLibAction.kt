@@ -1,82 +1,121 @@
-package tripleo.elijah.comp.internal;
+package tripleo.elijah.comp.internal
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ci.CompilerInstructions;
-import tripleo.elijah.comp.Compilation;
-import tripleo.elijah.comp.i.*;
-import tripleo.elijah.nextgen.query.Mode;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import org.jetbrains.annotations.Contract
 
-import java.util.ArrayList;
-import java.util.List;
+import tripleo.elijah.ci.i.CompilerInstructions
+import tripleo.elijah.comp.i.*
+import tripleo.elijah.comp.i.ICompilationBus.*
 
-class CB_FindStdLibAction implements ICompilationBus.CB_Action {
-	private final     CompilationEnclosure  ce;
-	private final     CR_State              crState;
-	private final     List<CB_OutputString> o = new ArrayList<>(); // FIXME 07/01 how is this modified?
-	private @Nullable CD_FindStdLib         findStdLib;
+import tripleo.elijah.comp.internal.CompilationBus.SingleActionProcess
 
-	public CB_FindStdLibAction(final CompilationEnclosure aCe, final CR_State aCrState) {
-		ce      = aCe;
-		crState = aCrState;
+import tripleo.elijah.util.Mode
+import tripleo.elijah.util.Ok
+import tripleo.elijah.util.Operation
 
+//import javax.swing.text.html.HTML.Tag.P
+
+internal class CB_FindStdLibAction(private val ce: CompilationEnclosure, private val crState: CR_State) : CB_Action {
+	private var findStdLib: CD_FindStdLib? = null
+
+	private val o: MutableList<CB_OutputString> = ArrayList() // FIXME 07/01 how is this modified?
+
+	private val _process: CB_Process by lazy { SingleActionProcess(this) }
+
+	init {
 		//findStdLib =
-		obtain();
+		val yy = obtain()
+		logProgress(Prov.obtain, yy)
 	}
 
-	private void obtain() {
-		final Operation<CompilerDriven> x = ce.getCompilationDriver().get(Compilation.CompilationAlways.Tokens.COMPILATION_RUNNER_FIND_STDLIB2);
-
+	private fun obtain() {
+		val x = ce.compilationDriver[Compilation.CompilationAlways.Tokens.COMPILATION_RUNNER_FIND_STDLIB2]
 		if (x.mode() == Mode.SUCCESS) {
-			findStdLib = (CD_FindStdLib) x.success();
+			findStdLib = x.success() as CD_FindStdLib
 		}
 	}
 
-	@Override
-	public void execute() {
-		final String preludeName = Compilation.CompilationAlways.defaultPrelude();
+	override fun execute() {
+		logProgress(Prov.execute_begin, null)
 
+		val preludeName = Compilation.CompilationAlways.defaultPrelude()
 		if (findStdLib != null) {
-			@NotNull final Operation<Ok> op = findStdLib.findStdLib(crState, preludeName, this::getPushItem);
+			val op = findStdLib!!
+				.findStdLib(crState, preludeName)
+					{ oci: Operation<CompilerInstructions> -> getPushItem(oci) }
 
-			// TODO 11/12 do that outputstrings thing here maybe
-			switch (op.mode()) {
-			case SUCCESS -> {}
-			case FAILURE -> {}
-			default -> throw new IllegalStateException("Unexpected value: " + op.mode());
+			logProgress(Prov.find_stdlib, op)
+			when (op.mode()) {
+				Mode.SUCCESS -> {
+				}
+
+				Mode.FAILURE -> {
+				}
+
+				else -> throw IllegalStateException("Unexpected value: " + op.mode())
 			}
 		}
+
+		logProgress(Prov.execute_end, null)
 	}
 
-	private void getPushItem(final @NotNull Operation<CompilerInstructions> oci) {
+	private fun getPushItem(oci: Operation<CompilerInstructions>) {
+		logProgress(Prov.get_push_item, oci)
+
 		if (oci.mode() == Mode.SUCCESS) {
-			final Compilation c = ce.getCompilation();
+			val c = ce.compilation
 
 			// README 09/09 not double
 			//c.pushItem(oci.success());
-			c.use(oci.success(), true);
+			c.use(oci.success(), true)
 		} else {
-			throw new IllegalStateException(oci.failure());
+			throw IllegalStateException(oci.failure())
 		}
 	}
 
-	@Contract(pure = true)
-	@Override
-	public @NotNull String name() {
-		return "find std lib";
+	private fun logProgress(code: Prov, o: Any?) {
+		val name = name()
+		when (code) {
+			Prov.find_stdlib -> {
+//				when o {
+//					is Operation<Ok> {}
+//				}
+				val op = o as Operation<Ok>
+				val text = op.toString()
+				val os: CB_OutputString = COutputString(text)
+				outputStrings().add(os)
+			}
+			Prov.get_push_item -> {
+				o ?: throw NullPointerException("Expression 'yy' must not be null")
+			}
+			Prov.obtain -> {
+				val op = o as Operation<CompilerInstructions>
+				val text = op.toString()
+				val os: CB_OutputString = COutputString(text)
+				outputStrings().add(os)
+			}
+
+//			else -> {
+//				throw IllegalStateException("Unexpected value: $code")
+//			}
+			Prov.execute_end -> TODO()
+			Prov.execute_begin -> TODO()
+		}
+	}
+
+	enum class Prov {
+		obtain,
+		find_stdlib,
+		get_push_item,
+		execute_end,
+		execute_begin
 	}
 
 	@Contract(pure = true)
-	@Override
-	public @NotNull List<CB_OutputString> outputStrings() {
-		return o;
-	}
+	override fun name(): String = "find std lib"
+
+	@Contract(pure = true)
+	override fun outputStrings(): MutableList<CB_OutputString> = o
 
 	@Contract(value = " -> new", pure = true)
-	public ICompilationBus.@NotNull CB_Process process() {
-		return new CompilationBus.SingleActionProcess(this);
-	}
+	fun process(): CB_Process = this._process
 }

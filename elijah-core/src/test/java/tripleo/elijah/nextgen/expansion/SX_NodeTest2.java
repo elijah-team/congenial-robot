@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Ignore;
 import org.junit.Test;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.StdErrSink;

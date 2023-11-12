@@ -10,7 +10,7 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ci.CompilerInstructions;
+import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.Compilation1;
 import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.Finally;

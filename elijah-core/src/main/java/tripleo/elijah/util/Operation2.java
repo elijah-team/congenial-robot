@@ -2,7 +2,6 @@ package tripleo.elijah.util;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.nextgen.query.Mode;
 
 /**
  * An emulation of Rust's Result type

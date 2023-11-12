@@ -16,6 +16,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Ignore;
 import org.junit.Test;
 import tripleo.elijah.comp.*;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.internal.DefaultCompilerController;
 import tripleo.elijah.diagnostic.Diagnostic;
@@ -46,7 +47,7 @@ public class TestBasic {
 		final List<String> args     = new ArrayList<String>();
 		args.addAll(ez_files);
 		args.add("-sE");
-		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(args);
 

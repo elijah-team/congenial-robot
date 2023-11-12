@@ -8,7 +8,7 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.lang.types.OS_FuncType;
-import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.util.Mode;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry.ITE_Resolver_Result;
 import tripleo.elijah.stages.instructions.IdentIA;
