@@ -44,17 +44,19 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
  * Created 10/8/20 7:13 AM
  */
 public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimension {
-	static final           boolean                         MANUAL_DISABLED = false;
-	private static final   String                          PHASE           = "GenerateC";
-	final                  GI_Repo                         _repo           = new GI_Repo(this);
-	final                  CompilationEnclosure            ce;
-	private final                  ErrSink                         errSink;
-	final                  Zone                            _zone           = new Zone();
-	private final @NotNull ElLog                           LOG;
+	private static final   String               PHASE = "GenerateC";
+
+	private final          GI_Repo              _repo = new GI_Repo(this);
 	private final          Map<EvaNode, WhyNotGarish_Item> a_directory     = new HashMap<>();
-	private final @NotNull GenerateResultEnv               _fileGen;
+	private final          Zone                 _zone = new Zone();
+
 	final private GenerateResultProgressive generateResultProgressive = new GenerateResultProgressive();
-	public                 GenerateResultSink              resultSink;
+
+	private final          CompilationEnclosure ce;
+	private final          ErrSink              errSink;
+	private final @NotNull ElLog                LOG;
+	private final @NotNull GenerateResultEnv               _fileGen;
+	private       GenerateResultSink        resultSink;
 
 	public GenerateC(final @NotNull OutputFileFactoryParams aParams,
 					 final @NotNull GenerateResultEnv aFileGen) {
@@ -345,9 +347,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		var ncn = new WhyNotGarish_Namespace(en, this);
 		a_directory.put(en, ncn);
 		return ncn;
-	}	@Override
-	public void finishUp(final GenerateResult aGenerateResult, final WorkManager wm, final WorkList aWorkList) {
-		assert _fileGen != null;
+	}
 
 		for (WhyNotGarish_Item value : new ArrayList<>(a_directory.values())) {
 			if (!value.hasFileGen())
