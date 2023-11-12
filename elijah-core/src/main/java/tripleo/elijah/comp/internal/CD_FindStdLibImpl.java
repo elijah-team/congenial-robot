@@ -2,6 +2,7 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.CompilerInstructions;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.CD_FindStdLib;
 import tripleo.elijah.comp.i.CompilationClosure;
 import tripleo.elijah.comp.queries.QuerySourceFileParser;
@@ -36,7 +37,9 @@ public class CD_FindStdLibImpl implements CD_FindStdLib {
 		var sle = pl.child("stdlib.ez");
 
 		var local_stdlib_1 = sle.toFile();
-		System.err.println("3939 "+local_stdlib_1);
+		if (cc.getCompilation().reports().outputOn(Finally.Outs.Out_40)) {
+			System.err.println("3939 " + local_stdlib_1);
+		}
 
 		// TODO stdlib path here
 		final File local_stdlib = new File("lib_elijjah/lib-" + prelude_name + "/stdlib.ez");

@@ -3,6 +3,7 @@ package tripleo.elijah.stages.gen_c;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.diagnostic.ExceptionDiagnostic;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.diagnostic.Diagnostic.Severity;
@@ -115,7 +116,10 @@ class GI_ProcIA implements GenerateC_Item {
 		final DeduceElement3_ProcTableEntry de_pte    = (DeduceElement3_ProcTableEntry) pte.getDeduceElement3();
 
 		if (generated == null) {
-			System.err.println("6464 " + fi.pte);
+			var c = gc._ce().getCompilation();
+			if (c.reports().outputOn(Finally.Outs.Out_120)) {
+				System.err.println("6464 " + fi.pte);
+			}
 
 			final WlGenerateCtor wlgf = new WlGenerateCtor(de_pte.deduceTypes2().getGenerateFunctions(de_pte.getPrincipal().getContext().module()),
 														   fi,

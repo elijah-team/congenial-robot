@@ -349,7 +349,10 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 				de3_ite_holder.commitGenTypeActions();
 			}
 		} else {
-			System.err.printf("DeduceElement3_IdentTableEntry >> cant sneakResolve %s based on %s%n", ident.getText(), "" + el/*((IdentExpression)el).getText()*/);
+			var c = dt2._phase().pa.getCompilation();
+			if (c.reports().outputOn(Finally.Outs.Out_353)) {
+				System.err.printf("DeduceElement3_IdentTableEntry >> cant sneakResolve %s based on %s%n", ident.getText(), "" + el/*((IdentExpression)el).getText()*/);
+			}
 		}
 	}
 
