@@ -120,11 +120,13 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 		if (true) {
 			ite.addStatusListener(new BaseTableEntry.StatusListener() {
 				@Override
-				public void onChange(final @NotNull IElementHolder eh, final BaseTableEntry.Status newStatus) {
+				public void onChange(final @Nullable IElementHolder eh, final BaseTableEntry.Status newStatus) {
 					if (newStatus != BaseTableEntry.Status.KNOWN) return;
 
-					final OS_Element e = eh.getElement();
-					dt2.found_element_for_ite(generatedFunction, ite, e, ctx, dt2.central());
+					if (eh != null) {
+						final OS_Element e = eh.getElement();
+						dt2.found_element_for_ite(generatedFunction, ite, e, ctx, dt2.central());
+					}
 				}
 			});
 		}

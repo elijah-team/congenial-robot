@@ -82,10 +82,9 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 
 		this._definedFunction = aBaseEvaFunction;
 
-		addStatusListener(new StatusListener() {
-			@Override
-			public void onChange(@NotNull IElementHolder eh, Status newStatus) {
-				if (newStatus == Status.KNOWN) {
+		addStatusListener((eh, newStatus) -> {
+			if (newStatus == Status.KNOWN) {
+				if (eh != null) {
 					setResolvedElement(eh.getElement());
 				}
 			}

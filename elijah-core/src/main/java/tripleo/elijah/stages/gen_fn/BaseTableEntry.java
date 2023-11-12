@@ -65,14 +65,22 @@ public abstract class BaseTableEntry {
 
 	public void setStatus(Status newStatus, /*@NotNull*/ IElementHolder eh) {
 		status = newStatus;
-		assert newStatus != Status.KNOWN || eh != null && eh.getElement() != null;
+		if (newStatus == Status.KNOWN) {
+			if (eh == null || eh.getElement() == null) {
+				throw new AssertionError();
+			}
+		}
+
 		for (int i = 0; i < statusListenerList.size(); i++) {
 			final StatusListener statusListener = statusListenerList.get(i);
 			statusListener.onChange(eh, newStatus);
 		}
-		if (newStatus == Status.UNKNOWN)
-			if (!_p_elementPromise.isRejected())
+
+		if (newStatus == Status.UNKNOWN) {
+			if (_p_elementPromise.isPending()) {
 				_p_elementPromise.reject(new ResolveUnknown());
+			}
+		}
 	}
 
 	public void addStatusListener(StatusListener sl) {

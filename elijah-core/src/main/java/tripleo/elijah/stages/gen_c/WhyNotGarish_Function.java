@@ -70,12 +70,13 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 	}
 
 	public void resolveFileGenPromise(final GenerateResultEnv aFileGen) {
-		if (!fileGenPromise.isResolved())
+		if (!fileGenPromise.isResolved()) {
 			fileGenPromise.resolve(aFileGen);
-		else {
+		} else {
+			//assert false; // FIXME 11/11
 			var c = generateC._ce().getCompilation();
-			if (c.reports().outputOn(Finally.Outs.Out_5757)) {
-				System.out.println("twice for " + generateC);
+			if (true || c.reports().outputOn(Finally.Outs.Out_5757)) {
+				System.out.println("[WhyNotGarish_Function#resolveFileGenPromise] twice for " + generateC);
 			}
 		}
 	}

@@ -67,9 +67,14 @@ public class __Add_Proc_Table_Listeners {
 		}
 
 		@Override
-		public void onChange(@NotNull IElementHolder eh, BaseTableEntry.Status newStatus) {
-			if (newStatus != BaseTableEntry.Status.KNOWN)
+		public void onChange(IElementHolder eh, BaseTableEntry.Status newStatus) {
+			if (newStatus != BaseTableEntry.Status.KNOWN) {
 				return;
+			}
+
+			if (eh == null) {
+				return;
+			}
 
 			final OS_Element el = eh.getElement();
 

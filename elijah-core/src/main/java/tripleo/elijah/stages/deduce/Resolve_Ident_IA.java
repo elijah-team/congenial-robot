@@ -676,12 +676,9 @@ public class Resolve_Ident_IA {
 				}
 			}
 
-			identTableEntry.addStatusListener(new BaseTableEntry.StatusListener() {
-				@Override
-				public void onChange(final @NotNull IElementHolder eh, final BaseTableEntry.Status newStatus) {
-					if (newStatus == BaseTableEntry.Status.KNOWN) {
-						resolveElement(eh.getElement());
-					}
+			identTableEntry.addStatusListener((eh, newStatus) -> {
+				if (newStatus == BaseTableEntry.Status.KNOWN) {
+					resolveElement(eh.getElement());
 				}
 			});
 		}
