@@ -11,7 +11,6 @@ import tripleo.elijah.comp.internal.CompilationBus.SingleActionProcess
 import tripleo.elijah.util.Mode
 import tripleo.elijah.util.Ok
 import tripleo.elijah.util.Operation
-import java.awt.SystemColor.text
 
 //import javax.swing.text.html.HTML.Tag.P
 

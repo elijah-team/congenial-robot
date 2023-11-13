@@ -43,6 +43,7 @@ public class CompilationImpl extends Compilation1 {
 		return new DefaultCompilationAccess(this);
 	}
 
+/*
 	@Override
 	public void fakeFlow(final List<CompilerInput> aInputs, final @NotNull CompilationFlow aFlow) {
 		getCompilationEnclosure().getPipelineAccessPromise()
@@ -52,6 +53,7 @@ public class CompilationImpl extends Compilation1 {
 					aFlow.run(this);
 				});
 	}
+*/
 
 	@Override
 	public @NotNull FluffyComp getFluffy() {
