@@ -12,7 +12,7 @@ on:
   push:
     branches: [ "2023-09-rosetta" ]
   pull_request:
-    branches: [ "2023-09-rosetta" ]
+    branches: [ "2023-11-rosetta2" ]
 
 jobs:
   build:
