@@ -239,7 +239,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 	@ElijahInternal
 	public void __DeduceTypes2_deduceFunctions_Request__run(final boolean b,
-																	final DeducePhase_deduceModule_Request aRequest) {
+															final DeducePhase_deduceModule_Request aRequest) {
 
 
 
@@ -969,7 +969,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 	public class GeneratedClasses implements Iterable<EvaNode> {
 		private @NotNull List<EvaNode> generatedClasses = new ArrayList<>();//new ConcurrentLinkedQueue<>();
-		private  int           generation;
+		private          int           generation;
 
 		@Override
 		public String toString() {
