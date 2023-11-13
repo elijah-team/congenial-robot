@@ -38,15 +38,15 @@ public interface Compilation {
 	}
 
 	// TODO remove this 04/20
-	void addFunctionMapHook(IFunctionMapHook aFunctionMapHook);
+	//void addFunctionMapHook(IFunctionMapHook aFunctionMapHook);
 
 	CompilationEnclosure getCompilationEnclosure();
 
-	void setCompilationEnclosure(CompilationEnclosure aCompilationEnclosure);
+	//void setCompilationEnclosure(CompilationEnclosure aCompilationEnclosure);
 
 	void addModule__(@NotNull OS_Module module, @NotNull String fn);
 
-	int compilationNumber();
+	//int compilationNumber();
 
 	CompFactory con();
 
@@ -56,7 +56,7 @@ public interface Compilation {
 
 	void feedInputs(@NotNull List<CompilerInput> inputs, CompilerController controller);
 
-	void fakeFlow(List<CompilerInput> aInputs, CompilationFlow aFlow);
+	//void fakeFlow(List<CompilerInput> aInputs, CompilationFlow aFlow);
 
 	void feedCmdLine(@NotNull List<String> args) throws Exception;
 
