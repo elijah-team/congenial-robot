@@ -7,7 +7,9 @@ import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 
+@SuppressWarnings({"UtilityClassCanBeEnum", "ClassWithOnlyPrivateConstructors", "NonFinalUtilityClass"})
 public class Rosetta {
+	private Rosetta() { }
 
 	@Contract("_ -> new")
 	public static @NotNull DeduceTypes2 create(final DeduceTypes2Request aDeduceTypes2Request) {

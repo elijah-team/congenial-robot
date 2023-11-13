@@ -241,7 +241,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	public void __DeduceTypes2_deduceFunctions_Request__run(final boolean b,
 															final DeducePhase_deduceModule_Request aRequest) {
 
-
+    
 		// TODO @ElijahInternal annotation prob a smell:
 		//  - create an object, call out of package, then come back in...
 		//    firgive me, trying something new
