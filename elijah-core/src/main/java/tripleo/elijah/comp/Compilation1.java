@@ -66,20 +66,24 @@ public abstract class Compilation1 implements Compilation {
 	}
 
 	// TODO remove this 04/20
+/*
 	@Override
 	public void addFunctionMapHook(final IFunctionMapHook aFunctionMapHook) {
 		getCompilationEnclosure().getCompilationAccess().addFunctionMapHook(aFunctionMapHook);
 	}
+*/
 
 	@Override
 	public CompilationEnclosure getCompilationEnclosure() {
 		return compilationEnclosure;
 	}
 
+/*
 	@Override
 	public void setCompilationEnclosure(final CompilationEnclosure aCompilationEnclosure) {
 		compilationEnclosure = aCompilationEnclosure;
 	}
+*/
 
 	@Override
 	public void addModule__(final @NotNull OS_Module module, final @NotNull String fn) {
@@ -87,10 +91,12 @@ public abstract class Compilation1 implements Compilation {
 		use.addModule(module, fn);
 	}
 
+/*
 	@Override
 	public int compilationNumber() {
 		return _compilationNumber;
 	}
+*/
 
 	@Override
 	public @NotNull CompFactory con() {
