@@ -8,8 +8,11 @@
  */
 package tripleo.elijah.comp;
 
+import org.hamcrest.core.IsEqual;
+import static org.junit.Assert.assertTrue;
 import org.junit.Assert;
 import org.junit.Test;
+
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.factory.comp.CompilationFactory;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
