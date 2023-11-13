@@ -37,4 +37,4 @@ LINEAGE
 
 `Rosetta` - Encapsulating state/environment. Pull model.
 
-`Congenial` - Testablility/verification
+`Congenial` - Testability/verification

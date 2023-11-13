@@ -1,5 +1,6 @@
 package tripleo.elijah.nextgen.expansion;
 
+import com.google.common.base.Preconditions;
 import junit.framework.TestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Ignore;
@@ -14,6 +15,7 @@ import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.util.Helpers;
+import tripleo.elijah.util.NotImplementedException;
 import tripleo.small.ES_Symbol;
 
 import java.util.List;
@@ -90,11 +92,13 @@ public class SX_NodeTest2 extends TestCase {
 		System.out.println();
 
 		final List<EOT_OutputFile> l = rt.getList();
-		assert l != null;
 
-		final int yyy = 2;
+		Preconditions.checkNotNull(l);
+
+		NotImplementedException.raise_stop();
+
 		final List<EOT_OutputFile> wmainl = l.stream()
-				.filter(eof -> eof.getFilename().replace("//", "/").equals("/while100/Main.c"))
+				.filter(eof -> eof.getFilename().equals("/while100/Main.c"))
 				.collect(Collectors.toList());
 
 		assert wmainl.size() > 0;
