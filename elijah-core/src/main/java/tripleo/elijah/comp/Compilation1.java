@@ -366,10 +366,6 @@ public abstract class Compilation1 implements Compilation {
 		return fn2ci;
 	}
 
-	public List<OS_Module> getModules() {
-		return modules;
-	}
-
 	public USE getUse() {
 		return use;
 	}

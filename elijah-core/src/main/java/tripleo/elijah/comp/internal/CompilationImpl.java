@@ -70,11 +70,6 @@ public class CompilationImpl extends Compilation1 {
 	}
 
 	@Override
-	public List<OS_Module> modules() {
-		return getModules();
-	}
-
-	@Override
 	public CompilerBeginning beginning(final @NotNull CompilationRunner compilationRunner) {
 		return new CompilerBeginning(this, getRootCI(), getInputs(), compilationRunner.progressSink, cfg());
 	}

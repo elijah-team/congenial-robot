@@ -51,11 +51,10 @@ public class CompilationTest {
 			module_count_from_compilation[0]++;
 		}));
 
-		c.modules()
-				.stream()
-				.forEach(mod -> SimplePrintLoggerToRemoveSoon.println_out_2(String.format("**48** %s %s", mod, mod.getFileName())));
-//		Assert.assertThat(c.modules.size(), new IsEqual<Integer>(3));
-		Assert.assertTrue(c.modules().size() > 2);
+
+		// README 11/12 module_count_from_compilation == c.modules().size()
+		Assert.<Integer>assertThat(module_count_from_compilation[0], new IsEqual<Integer>(6));
+		assertTrue(module_count_from_compilation[0] > 2);
 	}
 
 }

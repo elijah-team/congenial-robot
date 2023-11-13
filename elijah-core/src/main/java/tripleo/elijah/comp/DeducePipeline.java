@@ -52,19 +52,16 @@ public class DeducePipeline implements PipelineMember {
 		Preconditions.checkNotNull(deducePhase);
 		Preconditions.checkNotNull(mcp);
 
-		final @NotNull List<OS_Module> modules        = pa.getCompilation().modules();
-		for (final OS_Module m : modules) {
+		pa.getCompilation().eachModule(m -> {
 			pipelineLogic.addModule(m);
-		}
+
+			final WorldModule worldModule = ce.ca2().createWorldModule(m);
+			world.addModule2(worldModule);
+		});
 
 		mcp.start();
 
 		world.addModuleProcess(mcp);
-
-		for (final OS_Module mod : pipelineLogic.mods().getMods()) {
-			final WorldModule worldModule = ce.ca2().createWorldModule(mod);
-			world.addModule2(worldModule);
-		}
 
 		mcp.preComplete();
 		mcp.complete();
