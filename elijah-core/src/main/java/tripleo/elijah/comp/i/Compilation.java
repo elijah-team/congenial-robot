@@ -116,8 +116,6 @@ public interface Compilation {
 
 	@NotNull EOT_OutputTree getOutputTree();
 
-	List<OS_Module> modules();
-
 	CompilationConfig cfg();
 
 	CompilerBeginning beginning(final CompilationRunner compilationRunner);
