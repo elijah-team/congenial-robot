@@ -3,16 +3,16 @@ package tripleo.elijah.comp.internal;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.CompilerInput;
+import tripleo.elijah.comp.i.CB_Action;
 import tripleo.elijah.comp.i.CB_OutputString;
 import tripleo.elijah.comp.i.CR_Action;
-import tripleo.elijah.comp.i.ICompilationBus;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 
 import static tripleo.elijah.util.Helpers.List_of;
 
-class CB_FindCIs implements ICompilationBus.CB_Action {
+class CB_FindCIs implements CB_Action {
 	private final CompilationRunner   compilationRunner;
 	private final List<CompilerInput> _inputs;
 

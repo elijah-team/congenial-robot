@@ -37,8 +37,8 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class CR_State {
-	public ICompilationBus.CB_Action cur;
-	public ProcessRecord             pr;
+	public CB_Action     cur;
+	public ProcessRecord pr;
 	public RuntimeProcesses          rt;
 	public boolean                   started;
 	ICompilationAccess ca;

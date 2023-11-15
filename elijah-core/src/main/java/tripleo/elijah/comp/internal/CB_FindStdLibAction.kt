@@ -6,8 +6,6 @@ import tripleo.elijah.ci.i.CompilerInstructions
 import tripleo.elijah.comp.i.*
 import tripleo.elijah.comp.i.ICompilationBus.*
 
-import tripleo.elijah.comp.internal.CompilationBus.SingleActionProcess
-
 import tripleo.elijah.util.Mode
 import tripleo.elijah.util.Ok
 import tripleo.elijah.util.Operation
@@ -18,8 +16,6 @@ internal class CB_FindStdLibAction(private val ce: CompilationEnclosure, private
 	private var findStdLib: CD_FindStdLib? = null
 
 	private val o: MutableList<CB_OutputString> = ArrayList() // FIXME 07/01 how is this modified?
-
-	private val _process: CB_Process by lazy { SingleActionProcess(this) }
 
 	init {
 		//findStdLib =
@@ -121,7 +117,4 @@ internal class CB_FindStdLibAction(private val ce: CompilationEnclosure, private
 
 	@Contract(pure = true)
 	override fun outputStrings(): MutableList<CB_OutputString> = o
-
-	@Contract(value = " -> new", pure = true)
-	fun process(): CB_Process = this._process
 }
