@@ -350,7 +350,6 @@ public class CompilationImpl implements Compilation {
 	@Override
 	public void hasInstructions(final @NotNull List<CompilerInstructions> cis,
 								final @NotNull IPipelineAccess pa) {
-
 		//this.signals().hasInstructions()
 		//		.signal(this.con().createSignal_hasInstructions(pa, cis)); // this is wrong
 		//		.signal(pa, List_of(cis.get(0)));
@@ -368,7 +367,7 @@ public class CompilationImpl implements Compilation {
 
 		final CompilationEnclosure ce = getCompilationEnclosure();
 
-		assert ce.getCompilerInput().isEmpty();
+		assert !ce.getCompilerInput().isEmpty();
 
 		ce.getCompilationRunner().start(rootCI, pa);
 	}
