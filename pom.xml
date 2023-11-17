@@ -30,18 +30,20 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-<!--		<kotlin.version>1.9.10</kotlin.version> -->
+
+		<!-- for edu 2022.2 -->
+		<!--		<kotlin.version>1.9.10</kotlin.version> -->
 		<kotlin.version>1.7.10</kotlin.version>
 	</properties>
 
 	<modules>
-
 		<!--
 			<module>annotation-processing</module>
 			<module>annotation-user</module>
 			<module>elijah-compiler-gen</module>
 			<module>annotations</module>
 		-->
+
 		<module>tripleo-small</module>
 		<module>elijah-nextgen-outputstatement</module>
 		<module>elijah-stateful</module>
@@ -50,7 +52,7 @@
 		<module>elijah-sourcemodel-impl</module>
 		<module>elijah-good-api</module>
 		<module>elijah-core</module>
-<!--		<module>typeinf</module>-->
+		<!--		<module>typeinf</module>-->
 	</modules>
 
 	<dependencies>
@@ -69,13 +71,13 @@
 			<scope>provided</scope>
 		</dependency>
 
-<!--
-		<dependency>
-			<groupId>com.github.dritter-hd</groupId>
-			<artifactId>dlog</artifactId>
-			<version>1.0.0</version>
-		</dependency>
--->
+		<!--
+				<dependency>
+					<groupId>com.github.dritter-hd</groupId>
+					<artifactId>dlog</artifactId>
+					<version>1.0.0</version>
+				</dependency>
+		-->
 
 		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
 		<dependency>
@@ -110,32 +112,32 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.annotation -->
-<!--
-		<dependency>
-			<groupId>org.eclipse.jdt</groupId>
-			<artifactId>org.eclipse.jdt.annotation</artifactId>
-			<version>2.2.600</version>
-		</dependency>
--->
+		<!--
+				<dependency>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>org.eclipse.jdt.annotation</artifactId>
+					<version>2.2.600</version>
+				</dependency>
+		-->
 
 		<!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
-<!--
-		<dependency>
-			<groupId>org.jetbrains</groupId>
-			<artifactId>annotations</artifactId>
-			<version>24.0.1</version>
-		</dependency>
--->
+		<!--
+				<dependency>
+					<groupId>org.jetbrains</groupId>
+					<artifactId>annotations</artifactId>
+					<version>24.0.1</version>
+				</dependency>
+		-->
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
-<!--
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
--->
+		<!--
+				<dependency>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+					<version>4.13.2</version>
+					<scope>test</scope>
+				</dependency>
+		-->
 
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
@@ -189,13 +191,13 @@
 	<build>
 		<plugins>
 			<!-- To use the plugin goals in your POM or parent POM -->
-<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>3.0.0-M5</version>
-			</plugin>
--->
+			<!--
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-report-plugin</artifactId>
+							<version>3.0.0-M5</version>
+						</plugin>
+			-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

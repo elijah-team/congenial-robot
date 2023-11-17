@@ -9,44 +9,31 @@
 	</parent>
 
 	<artifactId>tripleo.elijah.core</artifactId>
-	<name>elijah-core</name>
+<!--	<name>elijah-core</name> -->
+	<name>tripleo.elijah.core</name>
 	<description>elijah-core</description>
 	<packaging>jar</packaging>
 	<version>2023.congenial.11.something-after-rosetta</version>
 
 	<dependencies>
 
-<!--
-		<dependency>
-			<groupId>com.github.TNG</groupId>
-			<artifactId>ArchUnit</artifactId>
-why not??
-these two same - nov 06 release
-			<version>v1.20.0</version>
-			<version>12e8fb1</version>
 
-master as of 11.12.23
-			<version>789706f</version>
-			<version>789706f07b605fb2404d877052ac583b2b77a501</version>
-		</dependency>
--->
 
-		<!-- https://mvnrepository.com/artifact/com.tngtech.archunit/archunit-junit4 -->
+
+
 		<dependency>
-			<groupId>com.tngtech.archunit</groupId>
-			<artifactId>archunit-junit4</artifactId>
-			<version>1.2.0</version>
-			<scope>test</scope>
+			<groupId>tripleo.elijah</groupId>
+			<artifactId>tripleo.elijah.good-api</artifactId>
+			<version>2023.congenial.11.something-after-rosetta</version>
+			<scope>compile</scope>
 		</dependency>
 
-	<!--
+
 		<dependency>
-			<groupId>com.tngtech.archunit</groupId>
-			<artifactId>archunit</artifactId>
-			<version>1.10</version>
-			<scope>test</scope>
+			<groupId>tripleo.elijah</groupId>
+			<artifactId>tripleo.elijah.sourcemodel-impl</artifactId>
+			<version>2023.congenial.11.something-after-rosetta</version>
 		</dependency>
--->
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
@@ -77,6 +64,48 @@ master as of 11.12.23
 			<version>2023.congenial.11.something-after-rosetta</version>
 			<scope>compile</scope>
 		</dependency>
+
+
+
+
+
+
+
+
+
+
+<!--
+		<dependency>
+			<groupId>com.github.TNG</groupId>
+			<artifactId>ArchUnit</artifactId>
+why not??
+these two same - nov 06 release
+			<version>v1.20.0</version>
+			<version>12e8fb1</version>
+
+master as of 11.12.23
+			<version>789706f</version>
+			<version>789706f07b605fb2404d877052ac583b2b77a501</version>
+		</dependency>
+-->
+
+
+		<!-- https://mvnrepository.com/artifact/com.tngtech.archunit/archunit-junit4 -->
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit4</artifactId>
+			<version>1.2.0</version>
+			<scope>test</scope>
+		</dependency>
+
+	<!--
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit</artifactId>
+			<version>1.10</version>
+			<scope>test</scope>
+		</dependency>
+-->
 
 		<!-- https://search.maven.org/artifact/io.reactivex.rxjava3/rxjava/3.1.0/jar -->
 		<dependency>
