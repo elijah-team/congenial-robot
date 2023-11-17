@@ -48,6 +48,7 @@
 		<module>tripleo-reactive</module>
 		<module>elijah-sourcemodel-api</module>
 		<module>elijah-sourcemodel-impl</module>
+		<module>elijah-good-api</module>
 		<module>elijah-core</module>
 <!--		<module>typeinf</module>-->
 	</modules>
