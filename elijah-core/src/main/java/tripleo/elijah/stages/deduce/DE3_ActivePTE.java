@@ -43,6 +43,7 @@ class DE3_ActivePTE implements DE3_Active {
 	private final          ClassInvocation                   ci;
 	private final @NotNull List<Reactivable>                 ables;
 	private final          DeduceTypes2.DeduceTypes2Injector __inj;
+	private                boolean                           __do_001_called;
 
 	public DE3_ActivePTE(final @NotNull DeduceTypes2 aDeduceTypes2,
 						 final @NotNull ProcTableEntry pte,
@@ -136,25 +137,38 @@ class DE3_ActivePTE implements DE3_Active {
 		return fg;
 	}
 
+	@SuppressWarnings("unused")
 	private void __do_001(final @NotNull GenerateFiles generateC,
 						  final EvaClass node,
 						  final DeducePhase deducePhase,
 						  final GenerateResultSink resultSink,
 						  final GenerateResultEnv fg) {
-		final DeducePhase.GeneratedClasses classes = deducePhase.generatedClasses;
-		final int                          size1   = classes.size();
-		final GenerateResult               x       = generateC.resultsFromNodes(List_of(node), _inj().new_WorkManager(), resultSink, fg);
-		final int                          size2   = classes.size();
+
 		assert resultSink == fg.resultSink();
 
-		if (size2 > size1) {
-			logProgress(3047, "" + (size2 - size1) + " results generated for " + node.identityString());
-		} else {
-			logProgress(3046, "no results generated for " + node.identityString());
-		}
+		if (!__do_001_called) {
+			__do_001_called = true;
 
-		for (Old_GenerateResultItem result : x.results()) {
-			logProgress(3045, "" + result);
+			final DeducePhase.GeneratedClasses classes = deducePhase.generatedClasses;
+
+			final var classes0 = deducePhase.generatedClasses.copy();
+
+			final int size1 = classes.size();
+			final GenerateResult x = generateC.resultsFromNodes(List_of(node), _inj().new_WorkManager(), resultSink,
+					fg);
+			final int size2 = classes.size();
+
+			final var classes1 = deducePhase.generatedClasses.copy();
+
+			if (size2 > size1) {
+				logProgress(3047, "" + (size2 - size1) + " results generated for " + node.identityString());
+			} else {
+				logProgress(3046, "no results generated for " + node.identityString());
+			}
+
+			for (Old_GenerateResultItem result : x.results()) {
+				logProgress(3045, "" + result);
+			}
 		}
 	}
 
