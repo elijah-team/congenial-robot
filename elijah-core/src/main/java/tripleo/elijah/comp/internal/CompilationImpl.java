@@ -354,14 +354,15 @@ public class CompilationImpl implements Compilation {
 		//		.signal(this.con().createSignal_hasInstructions(pa, cis)); // this is wrong
 		//		.signal(pa, List_of(cis.get(0)));
 
-		assert cis.size() > 0; // FIXME this is corect. below is wrong (allows cis.size()==2)
-		//assert cis.size() == 1; // FIXME this is corect. below is wrong (allows cis.size()==2)
+		assert cis.size() == 1;
 
+/*
 		if (cis.size() == 0) {
 			// README IDEA misconfiguration
 			System.err.println("No CIs found. Current dir is " + new File(".").getAbsolutePath());
 			return;
 		}
+*/
 
 		rootCI = cis.get(0);
 
