@@ -42,10 +42,6 @@ public interface IPipelineAccess {
 
 	CompilationEnclosure getCompilationEnclosure();
 
-	List<CompilerInput> getCompilerInput();
-
-	void setCompilerInput(List<CompilerInput> aInputs);
-
 	GenerateResultSink getGenerateResultSink();
 
 	//List<NG_OutputItem> getOutputs();

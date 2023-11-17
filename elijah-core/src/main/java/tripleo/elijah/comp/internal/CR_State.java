@@ -223,7 +223,7 @@ public class CR_State {
 		}
 	}
 
-	class ProcessRecord_PipelineAccess implements IPipelineAccess, @NotNull EventualRegister {
+	class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRegister {
 		private final @NotNull List<EvaNode>                                         _l_classes       = new ArrayList<>();
 		private final @NotNull List<EvaClass>                                        activeClasses    = new ArrayList<>();
 		private final @NotNull List<BaseEvaFunction>                                 activeFunctions  = new ArrayList<>();
@@ -281,16 +281,6 @@ public class CR_State {
 		@Override
 		public CompilationEnclosure getCompilationEnclosure() {
 			return getCompilation().getCompilationEnclosure();
-		}
-
-		@Override
-		public List<CompilerInput> getCompilerInput() {
-			return getCompilationEnclosure().getCompilerInput();
-		}
-
-		@Override
-		public void setCompilerInput(final List<CompilerInput> aInputs) {
-			getCompilationEnclosure().setCompilerInput(aInputs);
 		}
 
 		@Override
