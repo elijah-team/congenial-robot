@@ -18,18 +18,32 @@ public class Lang_ArchUnit_Test {
 	public void langTest(JavaClasses importedClasses) {
 
 		ArchRule rule = noClasses().that() // see next section
+				//.haveSimpleNameContaining("Test")
+				//.should()
 				.resideInAPackage("tripleo.elijah.lang")
 				.should()
-
-				.onlyDependOnClassesThat()
-					.resideOutsideOfPackage("tripleo.elijah.lang")
+					.onlyDependOnClassesThat()
+						.resideOutsideOfPackage("tripleo.elijah.lang")
+				.orShould()
+					.onlyDependOnClassesThat()
+						.resideInAPackage("tripleo.elijah.lang.impl")
 				.orShould()
 					.onlyDependOnClassesThat()
 						.resideInAPackage("tripleo.elijah.comp.internal")
+				.orShould()
+					.onlyDependOnClassesThat()
+						.resideInAPackage("java.*")
+				.orShould()
+					.onlyDependOnClassesThat()
+						.resideInAPackage("org.junit.*")
 				;
 
-		if (true || false) {
-			rule.check(importedClasses);
+		if (false) {
+			final JavaClasses importedClasses1 = importedClasses;
+			//var importedClasses2 = importedClasses1.stream().filter(jc -> !jc.getSimpleName().contains("Test"));
+			//final JavaClasses importedClasses3 = new JavaClasses();
+
+			rule.check(importedClasses1);
 		}
 	}
 }
