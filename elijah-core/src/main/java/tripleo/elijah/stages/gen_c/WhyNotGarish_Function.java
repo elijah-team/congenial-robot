@@ -42,13 +42,10 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 	}
 
 	private void deduced(final BaseEvaFunction aEvaFunction, final Consumer<DeducedBaseEvaFunction> c) {
-		final GM_GenerateModule  generateModule    = generateC.getFileGen().generateModule();
-		final DeducePhase        deducePhase       = generateModule.pa().getDeducePhase();
-		final ICompilationAccess compilationAccess = generateModule.pa().getCompilationEnclosure().getCompilationAccess();
-
+		final GM_GenerateModule generateModule = generateC.getFileGen().generateModule();
 		final DeduceTypes2Request deduceTypes2Request = new DeduceTypes2Request(aEvaFunction.module(),
-																				deducePhase,
-																				compilationAccess.testSilence());
+																				generateModule.getDeducePhase(),
+																				generateModule.testSilence());
 		Rosetta.create(deduceTypes2Request, new DeduceTypes2Request_TWO())
 				.pass(aEvaFunction, c);
 	}
@@ -95,9 +92,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 		}
 
 		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
-		fileGenPromise.then(fg -> {
-			xx[0] = fg.generateModule().gmr().getGenerateFiles(()->fg);
-		});
+		fileGenPromise.then(fg -> xx[0] = fg.getGenerateFiles());
 
 		return Optional.of((GenerateC) xx[0]);
 		//return fileGenPromise.getOptional();//() -> fg.generateModule().gmr().getGenerateFiles(null));
