@@ -279,9 +279,7 @@ public abstract class Compilation1 implements Compilation {
 
 		final CompilationEnclosure ce = getCompilationEnclosure();
 
-		//pa.setCompilerInput(pa.getCompilation().getInputs());
-
-		assert !pa.getCompilerInput().isEmpty();
+		assert ce.getCompilerInput().isEmpty();
 
 		ce.getCompilationRunner().start(rootCI, pa);
 	}
