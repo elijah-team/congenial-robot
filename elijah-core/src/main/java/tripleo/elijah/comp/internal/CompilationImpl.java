@@ -344,32 +344,20 @@ public class CompilationImpl implements Compilation {
 
 	@Override
 	public void hasInstructions(final @NotNull List<CompilerInstructions> cis) {
-		hasInstructions(cis, pa());
+		assert cis.size() == 1;
+		final CompilationEnclosure ce = getCompilationEnclosure();
+		assert !ce.getCompilerInput().isEmpty();
+		hasInstructions(cis.get(0), pa(), ce);
 	}
 
-	@Override
-	public void hasInstructions(final @NotNull List<CompilerInstructions> cis,
-								final @NotNull IPipelineAccess pa) {
+	public void hasInstructions(final @NotNull CompilerInstructions aRootCI,
+								final @NotNull IPipelineAccess pa,
+								final CompilationEnclosure ce) {
 		//this.signals().hasInstructions()
 		//		.signal(this.con().createSignal_hasInstructions(pa, cis)); // this is wrong
 		//		.signal(pa, List_of(cis.get(0)));
 
-		assert cis.size() == 1;
-
-/*
-		if (cis.size() == 0) {
-			// README IDEA misconfiguration
-			System.err.println("No CIs found. Current dir is " + new File(".").getAbsolutePath());
-			return;
-		}
-*/
-
-		rootCI = cis.get(0);
-
-		final CompilationEnclosure ce = getCompilationEnclosure();
-
-		assert !ce.getCompilerInput().isEmpty();
-
+		rootCI = aRootCI;
 		ce.getCompilationRunner().start(rootCI, pa);
 	}
 

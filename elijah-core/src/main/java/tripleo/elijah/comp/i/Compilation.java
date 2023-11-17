@@ -87,9 +87,6 @@ public interface Compilation {
 
 	void hasInstructions(List<CompilerInstructions> cis);
 
-	void hasInstructions(@NotNull List<CompilerInstructions> cis,
-						 @NotNull IPipelineAccess pa);
-
 	boolean isPackage(@NotNull String pkg);
 
 	OS_Package makePackage(Qualident pkg_name);
