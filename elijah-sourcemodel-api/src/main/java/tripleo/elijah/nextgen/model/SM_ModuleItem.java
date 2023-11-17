@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.model;
 
-import tripleo.elijah.lang.i.ModuleItem;
+//import tripleo.elijah.lang.i.ModuleItem;
 
 
 // namespace
@@ -9,5 +9,5 @@ import tripleo.elijah.lang.i.ModuleItem;
 // import
 
 public interface SM_ModuleItem extends SM_Node {
-	ModuleItem _carrier();
+	//ModuleItem _carrier();
 }
