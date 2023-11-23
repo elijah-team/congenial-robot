@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/congenial-robot-build.iml" filepath="$PROJECT_DIR$/.idea/modules/congenial-robot-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_10.iml" filepath="$PROJECT_DIR$/.idea/modules/module_10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_11.iml" filepath="$PROJECT_DIR$/.idea/modules/module_11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_12.iml" filepath="$PROJECT_DIR$/.idea/modules/module_12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_13.iml" filepath="$PROJECT_DIR$/.idea/modules/module_13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_4.iml" filepath="$PROJECT_DIR$/.idea/modules/module_4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_5.iml" filepath="$PROJECT_DIR$/.idea/modules/module_5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_6.iml" filepath="$PROJECT_DIR$/.idea/modules/module_6.iml" group="elijah-sourcemodel-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_7.iml" filepath="$PROJECT_DIR$/.idea/modules/module_7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_8.iml" filepath="$PROJECT_DIR$/.idea/modules/module_8.iml" group="elijah-sourcemodel-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module_9.iml" filepath="$PROJECT_DIR$/.idea/modules/module_9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
     </modules>
   </component>
 </project>
