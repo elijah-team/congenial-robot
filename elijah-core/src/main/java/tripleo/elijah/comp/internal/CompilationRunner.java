@@ -102,6 +102,10 @@ public class CompilationRunner extends _RegistrationTarget {
 		return this.cr_find_cis;
 	}
 
+	public CompilationEnclosure getCompilationEnclosure() {
+		return _accessCompilation().getCompilationEnclosure();
+	}
+
 	public enum ST {
 		;
 
