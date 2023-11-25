@@ -32,8 +32,8 @@
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
 		<!-- for edu 2022.2 -->
-		<!--		<kotlin.version>1.9.10</kotlin.version> -->
-		<kotlin.version>1.7.10</kotlin.version>
+<!--		<kotlin.version>1.7.10</kotlin.version>-->
+		<kotlin.version>1.9.21</kotlin.version>
 	</properties>
 
 	<modules>
@@ -170,8 +170,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-test-junit</artifactId>
-			<version>1.8.20</version>
+			<artifactId>kotlin-test</artifactId>
+			<version>${kotlin.version}</version>
 			<scope>test</scope>
 		</dependency>
 
