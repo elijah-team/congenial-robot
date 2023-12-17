@@ -16,7 +16,6 @@
 	<version>2023.congenial.11.something-after-rosetta</version>
 
 	<dependencies>
-<!--
     <dependency>
       <groupId>com.squareup.retrofit2</groupId>
       <artifactId>retrofit</artifactId>
@@ -59,7 +58,6 @@
       <version>2.9.0</version>
       <scope>runtime</scope>
     </dependency>
--->
 
 
 
