@@ -256,7 +256,9 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 	@NotNull String getTypeName(@NotNull TypeTableEntry tte) {
 		return GetTypeName.forTypeTableEntry(tte);
-	}	@Override
+	}
+
+	@Override
 	public void generate_constructor(@NotNull EvaConstructor aEvaConstructor, GenerateResult gr, @NotNull WorkList wl, final GenerateResultSink aResultSink, final WorkManager aWorkManager, final @NotNull GenerateResultEnv aFileGen) {
 		generateCodeForConstructor(aEvaConstructor, gr, wl, aFileGen);
 		postGenerateCodeForConstructor(aEvaConstructor, wl, aFileGen);
@@ -269,7 +271,9 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 	public @NotNull GI_Repo repo() {
 		return _repo;
-	}	@Override
+	}
+
+	@Override
 	public void generate_function(@NotNull EvaFunction aEvaFunction, GenerateResult gr, @NotNull WorkList wl, final GenerateResultSink aResultSink) {
 		generateCodeForMethod(_fileGen, aEvaFunction);
 		_post_generate_function(aEvaFunction, wl, _fileGen);
