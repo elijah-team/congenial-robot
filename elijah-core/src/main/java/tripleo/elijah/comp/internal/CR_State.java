@@ -26,14 +26,9 @@ import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.CompilerInput;
-import tripleo.elijah.comp.DeducePipeline;
 import tripleo.elijah.comp.EvaPipeline;
-import tripleo.elijah.comp.HooliganPipeline;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.PipelineMember;
-import tripleo.elijah.comp.WriteMakefilePipeline;
-import tripleo.elijah.comp.WriteMesonPipeline;
-import tripleo.elijah.comp.WriteOutputTreePipeline;
 import tripleo.elijah.comp.WritePipeline;
 import tripleo.elijah.comp.i.CB_Action;
 import tripleo.elijah.comp.i.Compilation;
@@ -88,42 +83,6 @@ public class CR_State {
 		String name();
 	}
 
-	public static class DeducePipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new DeducePipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "DeducePipeline";
-		}
-	}
-
-	public static class EvaPipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new EvaPipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "EvaPipeline";
-		}
-	}
-
-	public static class HooliganPipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new HooliganPipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "HooliganPipeline";
-		}
-	}
-
 	private static class ProcessRecordImpl implements ProcessRecord {
 		//private final DeducePipeline                             dpl;
 		private final @NotNull ICompilationAccess ca;
@@ -172,54 +131,6 @@ public class CR_State {
 		@Override
 		public void writeLogs() {
 			ca.getCompilation().cfg().stage.writeLogs(ca);
-		}
-	}
-
-	public static class WriteMakefilePipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new WriteMakefilePipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "WriteMakefilePipeline";
-		}
-	}
-
-	public static class WriteMesonPipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new WriteMesonPipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "WriteMesonPipeline";
-		}
-	}
-
-	public static class WriteOutputTreePipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new WriteOutputTreePipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "WriteOutputTreePipeline";
-		}
-	}
-
-	public static class WritePipelinePlugin implements PipelinePlugin {
-		@Override
-		public @NotNull PipelineMember instance(final @NotNull AccessBus ab0) {
-			return new WritePipeline(ab0.getPipelineAccess());
-		}
-
-		@Override
-		public @NotNull String name() {
-			return "WritePipeline";
 		}
 	}
 
