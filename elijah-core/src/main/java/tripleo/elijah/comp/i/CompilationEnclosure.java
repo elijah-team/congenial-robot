@@ -14,6 +14,7 @@ import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.CompilerDriver;
+import tripleo.elijah.comp.internal.__Plugins;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.reactive.Reactivable;
 import tripleo.elijah.nextgen.reactive.Reactive;
@@ -100,13 +101,13 @@ public class CompilationEnclosure {
 
 			accessBusPromise.resolve(ab);
 
-			ab.addPipelinePlugin(new CR_State.HooliganPipelinePlugin());
-			ab.addPipelinePlugin(new CR_State.EvaPipelinePlugin());
-			ab.addPipelinePlugin(new CR_State.DeducePipelinePlugin());
-			ab.addPipelinePlugin(new CR_State.WritePipelinePlugin());
-			ab.addPipelinePlugin(new CR_State.WriteMakefilePipelinePlugin());
-			ab.addPipelinePlugin(new CR_State.WriteMesonPipelinePlugin());
-			ab.addPipelinePlugin(new CR_State.WriteOutputTreePipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.HooliganPipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.EvaPipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.DeducePipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.WritePipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.WriteMakefilePipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.WriteMesonPipelinePlugin());
+			ab.addPipelinePlugin(new __Plugins.WriteOutputTreePipelinePlugin());
 
 			pa._setAccessBus(ab);
 
