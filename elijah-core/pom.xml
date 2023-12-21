@@ -65,31 +65,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-
-
-
-
-
-
-
-
-
-<!--
-		<dependency>
-			<groupId>com.github.TNG</groupId>
-			<artifactId>ArchUnit</artifactId>
-why not??
-these two same - nov 06 release
-			<version>v1.20.0</version>
-			<version>12e8fb1</version>
-
-master as of 11.12.23
-			<version>789706f</version>
-			<version>789706f07b605fb2404d877052ac583b2b77a501</version>
-		</dependency>
--->
-
-
 		<!-- https://mvnrepository.com/artifact/com.tngtech.archunit/archunit-junit4 -->
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>
