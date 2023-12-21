@@ -14,7 +14,7 @@ import java.nio.file.Path;
 // TODO 09/04 Duplication madness
 public enum ER_Node_ { ;
 	@Contract(value = "_, _ -> new", pure = true)
-	static @NotNull ER_Node of(@NotNull CP_Path p, @NotNull EG_Statement seq) {
+	public static @NotNull ER_Node of(@NotNull CP_Path p, @NotNull EG_Statement seq) {
 		return new ER_Node() {
 			@Override
 			public @NotNull String toString() {

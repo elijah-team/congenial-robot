@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.stages.gen_c.OutputFileC;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.stages.pp.IPP_Function;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.util.buffer.Buffer;
@@ -73,7 +74,7 @@ public class Sub_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addFunction(tripleo.elijah.stages.gen_fn.BaseEvaFunction, tripleo.util.buffer.Buffer, tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addFunction(@NotNull BaseEvaFunction aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
+	public void addFunction(IPP_Function aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
 		add(aBuffer, aGeneratedFunction, aTY, aLsp, aGeneratedFunction.getDependency());
 	}
 

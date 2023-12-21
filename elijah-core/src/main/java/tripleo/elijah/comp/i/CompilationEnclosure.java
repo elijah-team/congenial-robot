@@ -11,7 +11,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CB_Output;
-import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.CompilerDriver;
 import tripleo.elijah.comp.internal.__Plugins;
@@ -34,14 +33,14 @@ import java.util.Map;
 
 public class CompilationEnclosure {
 	public final  DeferredObject<IPipelineAccess, Void, Void> pipelineAccessPromise = new DeferredObject<>();
-	private final CB_Output _cbOutput = new CB_Output();
-	private final Compilation compilation;
+	private final CB_Output                                   _cbOutput             = new CB_Output();
+	private final Compilation                                 compilation;
 	private final DeferredObject<AccessBus, Void, Void>       accessBusPromise      = new DeferredObject<>();
-	private final Map<OS_Module, ModuleThing> moduleThings = new HashMap<>();
-	private final Subject<ReactiveDimension> dimensionSubject   = ReplaySubject.<ReactiveDimension>create();
-	private final Subject<Reactivable>       reactivableSubject = ReplaySubject.<Reactivable>create();
-	private final List<ModuleListener> _moduleListeners = new ArrayList<>();
-	Observer<ReactiveDimension> dimensionObserver = new Observer<ReactiveDimension>() {
+	private final Map<OS_Module, ModuleThing>                 moduleThings          = new HashMap<>();
+	private final Subject<ReactiveDimension>                  dimensionSubject      = ReplaySubject.<ReactiveDimension>create();
+	private final Subject<Reactivable>                        reactivableSubject    = ReplaySubject.<Reactivable>create();
+	private final List<ModuleListener>                        _moduleListeners      = new ArrayList<>();
+	Observer<ReactiveDimension> dimensionObserver   = new Observer<ReactiveDimension>() {
 		@Override
 		public void onSubscribe(@NonNull final Disposable d) {
 
@@ -63,7 +62,7 @@ public class CompilationEnclosure {
 
 		}
 	};
-	Observer<Reactivable> reactivableObserver = new Observer<Reactivable>() {
+	Observer<Reactivable>       reactivableObserver = new Observer<Reactivable>() {
 
 		@Override
 		public void onSubscribe(@NonNull final Disposable d) {
@@ -115,39 +114,6 @@ public class CompilationEnclosure {
 
 			this.pa = pa;
 		});
-	//
-	//	compilation.world().addModuleProcess(new CompletableProcess<WorldModule>() {
-	//		@Override
-	//		public void add(final WorldModule item) {
-	//			// TODO Reactive pattern (aka something ala ReplaySubject)
-	//			for (final ModuleListener moduleListener : _moduleListeners) {
-	//				moduleListener.listen(item);
-	//			}
-	//		}
-	//
-	//		@Override
-	//		public void complete() {
-	//			// TODO Reactive pattern (aka something ala ReplaySubject)
-	//			for (final ModuleListener moduleListener : _moduleListeners) {
-	//				moduleListener.close();
-	//			}
-	//		}
-	//
-	//		@Override
-	//		public void error(final Diagnostic d) {
-	//
-	//		}
-	//
-	//		@Override
-	//		public void preComplete() {
-	//
-	//		}
-	//
-	//		@Override
-	//		public void start() {
-	//
-	//		}
-	//	});
 	}
 
 	@Contract(pure = true)
@@ -319,7 +285,7 @@ public class CompilationEnclosure {
 	public void setPipelineLogic(final PipelineLogic aPipelineLogic) {
 		pipelineLogic = aPipelineLogic;
 
-		getPipelineAccessPromise().then(pa->pa.resolvePipelinePromise(aPipelineLogic));
+		getPipelineAccessPromise().then(pa -> pa.resolvePipelinePromise(aPipelineLogic));
 	}
 
 	private void _resolvePipelineAccess(final PipelineLogic aPipelineLogic) {

@@ -9,6 +9,7 @@ import tripleo.elijah.comp.nextgen.CP_Path;
 import tripleo.elijah.comp.nextgen.CP_Paths;
 import tripleo.elijah.comp.nextgen.i.CP_RootType;
 import tripleo.elijah.nextgen.ER_Node;
+import tripleo.elijah.nextgen.ER_Node_;
 import tripleo.elijah.nextgen.outputstatement.EG_Naming;
 import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
@@ -59,27 +60,33 @@ public class WriteOutputTreePipeline implements PipelineMember {
 		CP_Path r = paths.outputRoot();
 
 		for (final EOT_OutputFile outputFile : l) {
-			final String       path0 = outputFile.getFilename();
-			final EG_Statement seq   = outputFile.getStatementSequence();
-
-			CP_Path pp;
-
-			switch (outputFile.getType()) {
-			case SOURCES -> pp = r.child("code2").child(path0);
-			case LOGS -> pp = r.child("logs").child(path0);
-			case INPUTS, BUFFERS -> pp = r.child(path0);
-			case DUMP -> pp = r.child("dump").child(path0);
-			case BUILD -> pp = r.child(path0);
-			case SWW -> pp = r.child("sww").child(path0);
-			default -> throw new IllegalStateException("Unexpected value: " + outputFile.getType());
-			}
-
-			//System.err.println("106 " + pp);
-
-			paths.addNode(CP_RootType.OUTPUT, ER_Node.of(pp, seq));
+			run_each(outputFile, r, paths);
 		}
 
 		paths.renderNodes();
+	}
+
+	private void run_each(final EOT_OutputFile outputFile, final CP_Path r, final CP_Paths paths) {
+		final String       path0 = outputFile.getFilename();
+		final EG_Statement seq   = outputFile.getStatementSequence();
+
+		CP_Path pp;
+
+		switch (outputFile.getType()) {
+		case SOURCES -> pp = r.child("code2").child(path0);
+		case LOGS -> pp = r.child("logs").child(path0);
+		case INPUTS, BUFFERS -> pp = r.child(path0);
+		case DUMP -> pp = r.child("dump").child(path0);
+		case BUILD -> pp = r.child(path0);
+		case SWW -> pp = r.child("sww").child(path0);
+		default -> throw new IllegalStateException("Unexpected value: " + outputFile.getType());
+		}
+
+		var ce = pa.getCompilation().getCompilationEnclosure();
+//ce.lo
+		//System.err.println("106 " + pp);
+
+		paths.addNode(CP_RootType.OUTPUT, ER_Node_.of(pp, seq));
 	}
 
 	private static void addLogs(final @NotNull List<EOT_OutputFile> l, final @NotNull IPipelineAccess aPa) {

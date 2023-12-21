@@ -16,6 +16,8 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.stages.gen_c.OutputFileC;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.stages.pp.IPP_Function;
+import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.util.buffer.Buffer;
 
@@ -68,15 +70,15 @@ public class Old_GenerateResult implements GenerateResult {
 
 	@Override
 	public void addConstructor(@NotNull EvaConstructor aEvaConstructor, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
-		addFunction(aEvaConstructor, aBuffer, aTY, aLsp);
+		addFunction(new PP_Constructor(aEvaConstructor), aBuffer, aTY, aLsp);
 	}
 
 	/* (non-Javadoc)
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addFunction(tripleo.elijah.stages.gen_fn.BaseEvaFunction, tripleo.util.buffer.Buffer, tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addFunction(@NotNull BaseEvaFunction aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
-		add(aBuffer, aGeneratedFunction, aTY, aLsp, aGeneratedFunction.getDependency());
+	public void addFunction(IPP_Function aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
+		add(aBuffer, aGeneratedFunction.get2Carrier().getEvaNodeEscapeHatch(), aTY, aLsp, aGeneratedFunction.get2Carrier().getDependency());
 	}
 
 	/* (non-Javadoc)
