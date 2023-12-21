@@ -37,7 +37,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 		Generate_Code_For_Method gcfm = new Generate_Code_For_Method(generateC, generateC.elLog());
 
 		deduced(gf, (DeducedBaseEvaFunction dgf) -> {
-			gcfm.generateCodeForMethod((BaseEvaFunction) dgf.getCarrier(), aFileGen);
+			dgf.generateCodeForMethod(gcfm, aFileGen);
 		});
 	}
 

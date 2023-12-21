@@ -5,12 +5,12 @@ import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.garish.GarishNamespace;
 import tripleo.elijah.stages.gen_c.C2C_Result;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
+import tripleo.elijah.stages.pp.IPP_Function;
 import tripleo.elijah.world.i.LivingClass;
 import tripleo.elijah.world.i.LivingNamespace;
 import tripleo.util.buffer.Buffer;
@@ -24,7 +24,7 @@ public interface GenerateResultSink {
 
 	void addClass_1(GarishClass aGarishClass, GenerateResult aGenerateResult, GenerateC aGenerateC);
 
-	void addFunction(BaseEvaFunction aGf, List<C2C_Result> aRs, GenerateFiles aGenerateFiles);
+	void addFunction(IPP_Function aIPPFunction, List<C2C_Result> aRs, GenerateFiles aGenerateFiles);
 
 	void additional(GenerateResult aGenerateResult);
 

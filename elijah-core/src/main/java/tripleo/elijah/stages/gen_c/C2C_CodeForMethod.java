@@ -1,9 +1,10 @@
 package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
+
 import tripleo.elijah.util.BufferTabbedOutputStream;
 import tripleo.util.buffer.Buffer;
 
@@ -20,7 +21,9 @@ public class C2C_CodeForMethod implements Generate_Code_For_Method.C2C_Results {
 	private       C2C_Result               bufHdr;
 	private final WhyNotGarish_Function    whyNotGarishFunction;
 
-	public C2C_CodeForMethod(final @NotNull Generate_Code_For_Method aGenerateCodeForMethod, final BaseEvaFunction aGf, final GenerateResultEnv aFileGen) {
+	public C2C_CodeForMethod(final @NotNull Generate_Code_For_Method aGenerateCodeForMethod,
+							 final @NotNull DeducedBaseEvaFunction aGf,
+							 final GenerateResultEnv aFileGen) {
 		generateCodeForMethod = aGenerateCodeForMethod;
 		fileGen               = aFileGen;
 		gr                    = fileGen.gr();

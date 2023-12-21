@@ -22,6 +22,7 @@ import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.stages.pp.IPP_Function;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 import tripleo.elijah.world.i.LivingClass;
@@ -111,8 +112,8 @@ class AmazingFunction implements Amazing {
 		}
 
 		@Override
-		public void addFunction(final BaseEvaFunction aGf, final List<C2C_Result> aRs, final GenerateFiles aGenerateFiles) {
-			of.setFunction(aGf, aGenerateFiles, aRs);
+		public void addFunction(final IPP_Function aIPPFunction, final List<C2C_Result> aRs, final GenerateFiles aGenerateFiles) {
+			of.setFunction(aIPPFunction, aGenerateFiles, aRs);
 		}
 
 		@Override

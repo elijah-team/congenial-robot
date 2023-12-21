@@ -12,6 +12,7 @@ import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
+import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.work.WorkList;
 
@@ -54,7 +55,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		final GenerateResultSink sink = aFileGen.resultSink();
 
 		if (sink != null) {
-			sink.addFunction(gf, rs, generateC);
+			sink.addFunction(new PP_Constructor(gf), rs, generateC);
 		} else {
 			System.err.println("sink failed");
 		}

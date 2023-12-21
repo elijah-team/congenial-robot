@@ -20,6 +20,7 @@ import tripleo.elijah.lang.types.OS_UnitType;
 import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.pp.PP_Function;
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.nextgen.DR_Item;
@@ -585,16 +586,14 @@ public class Generate_Code_For_Method {
 		}
 	}
 
-	void generateCodeForMethod(final @NotNull BaseEvaFunction gf, final @NotNull GenerateResultEnv aFileGen) {
+	void generateCodeForMethod(final @NotNull DeducedBaseEvaFunction gf, final @NotNull GenerateResultEnv aFileGen) {
 		// TODO separate into method and method_header??
-		C2C_CodeForMethod cfm = new C2C_CodeForMethod(this, gf, aFileGen);
+		final C2C_CodeForMethod cfm = new C2C_CodeForMethod(this, gf, aFileGen);
 
 		//cfm.calculate();
-		var rs = cfm.getResults();
-
-		GenerateResult gr = cfm.getGenerateResult();
-
-		final GCFM gcfm = new GCFM(rs, gf, gr);
+		final List<C2C_Result> rs   = cfm.getResults();
+		final GenerateResult   gr   = cfm.getGenerateResult();
+		final GCFM             gcfm = new GCFM(rs, gf, gr);
 
 		gf.reactive().add(gcfm);
 
@@ -605,10 +604,11 @@ public class Generate_Code_For_Method {
 		// FIXME 06/17
 		final GenerateResultSink sink = aFileGen.resultSink();
 
-		if (sink != null)
-			sink.addFunction(gf, rs, gc);
-		else
+		if (sink != null) {
+			sink.addFunction(new PP_Function(gf), rs, gc);
+		} else {
 			System.err.println("sink failed");
+		}
 	}
 
 	public GenerateC _gc() {
