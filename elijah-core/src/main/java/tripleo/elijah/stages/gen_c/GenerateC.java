@@ -18,6 +18,8 @@ import tripleo.elijah.lang2.BuiltInTypes;
 import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
+import tripleo.elijah.nextgen.spi.SPI_Loggable;
+import tripleo.elijah.nextgen.spi.SPI_ReactiveDimension;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_ProcTableEntry;
@@ -46,7 +48,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 /**
  * Created 10/8/20 7:13 AM
  */
-public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimension {
+public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimension, SPI_Loggable, SPI_ReactiveDimension {
 	private static final   String               PHASE = "GenerateC";
 
 	private final          GI_Repo              _repo = new GI_Repo(this);
@@ -56,10 +58,12 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 	final private GenerateResultProgressive generateResultProgressive = new GenerateResultProgressive();
 
 	private final          CompilationEnclosure ce;
-	private final          ErrSink              errSink;
-	private final @NotNull ElLog                LOG;
-	private final @NotNull GenerateResultEnv               _fileGen;
+	private final          ErrSink           errSink;
+	private @NotNull       ElLog             LOG;
+	private final @NotNull GenerateResultEnv _fileGen;
 	private       GenerateResultSink        resultSink;
+
+	private __SPI_Save spi_save;
 
 	public GenerateC(final @NotNull OutputFileFactoryParams aParams,
 					 final @NotNull GenerateResultEnv aFileGen) {
@@ -70,16 +74,20 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 		// provided 2
 		final OS_Module       mod       = aParams.getMod();
-		final ElLog.Verbosity verbosity = aParams.getVerbosity();
+		//final ElLog.Verbosity verbosity = aParams.getVerbosity();
+
+		spi_save = new __SPI_Save(aParams, aFileGen, ce);
 
 		// created
-		LOG = new ElLog(mod.getFileName(), verbosity, PHASE);
+		//LOG = new ElLog(mod.getFileName(), verbosity, PHASE);
 
 		// registration
-		ce.addLog(LOG);
-		ce.addReactiveDimension(this);
+		//ce.addLog(LOG);
+		//ce.addReactiveDimension(this);
 		ce.getPipelineAccess().resolveWaitGenC(mod, this);
-	}	WhyNotGarish_Function a_lookup(final BaseEvaFunction aGf) {
+	}
+
+	WhyNotGarish_Function a_lookup(final BaseEvaFunction aGf) {
 		if (a_directory.containsKey(aGf)) {
 			return (WhyNotGarish_Function) a_directory.get(aGf);
 		}
@@ -433,7 +441,8 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 				typeName = "void*/*null*/";
 		}
 		return typeName;
-	}	@Override
+	}
+	@Override
 	public void generate_namespace(final @NotNull EvaNamespace x, final GenerateResult gr, final @NotNull GenerateResultSink aResultSink) {
 		final LivingNamespace ln = aResultSink.getLivingNamespaceForEva(x); // TODO could also add _living property
 		ln.garish(this, gr, aResultSink);
@@ -529,6 +538,25 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 	public ElLog _LOG() {
 		return LOG;
+	}
+
+	@Override
+	public ElLog spiGetLog() {
+		final OS_Module       mod       = spi_save.params().getMod();
+		final ElLog.Verbosity verbosity = spi_save.params().getVerbosity();
+
+		LOG = new ElLog(mod.getFileName(), verbosity, PHASE);
+
+		return LOG;
+	}
+
+	@Override
+	public ReactiveDimension spiGetReactiveDimension() {
+		return this;
+	}
+
+	public WhyNotGarish_Function a_lookup(final DeducedBaseEvaFunction aGf) {
+		return a_lookup((BaseEvaFunction) aGf.getCarrier());
 	}
 
 	enum GetTypeName {
@@ -941,6 +969,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 
 
+	private record __SPI_Save(OutputFileFactoryParams params, GenerateResultEnv aFileGen, CompilationEnclosure aCe){}
 
 }
 

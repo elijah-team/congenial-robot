@@ -19,6 +19,8 @@ import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.reactive.Reactivable;
 import tripleo.elijah.nextgen.reactive.Reactive;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
+import tripleo.elijah.nextgen.spi.SPI_Loggable;
+import tripleo.elijah.nextgen.spi.SPI_ReactiveDimension;
 import tripleo.elijah.pre_world.Mirror_EntryPoint;
 import tripleo.elijah.stages.gen_fn.IClassGenerator;
 import tripleo.elijah.stages.inter.ModuleThing;
@@ -363,6 +365,15 @@ public class CompilationEnclosure {
 
 	public void addEntryPoint(final @NotNull Mirror_EntryPoint aMirrorEntryPoint, final IClassGenerator dcg) {
 		aMirrorEntryPoint.generate(dcg);
+	}
+
+	public void spi(final Object spiable) {
+		if (spiable instanceof SPI_Loggable) {
+			addLog(((SPI_Loggable) spiable).spiGetLog());
+		}
+		if (spiable instanceof SPI_ReactiveDimension) {
+			addReactiveDimension(((SPI_ReactiveDimension) spiable).spiGetReactiveDimension());
+		}
 	}
 
 	public void addLog(final ElLog aLOG) {
