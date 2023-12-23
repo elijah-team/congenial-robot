@@ -320,27 +320,7 @@ public class GenerateC
     return yf.getArgumentStrings(instruction).getLeft();
   }
 
-  WhyNotGarish_Function a_lookup(final BaseEvaFunction aGf) {
-    if (a_directory.containsKey(aGf)) {
-      return (WhyNotGarish_Function) a_directory.get(aGf);
-    }
 
-    var ncf = new WhyNotGarish_Function(aGf, this);
-    a_directory.put(aGf, ncf);
-    return ncf;
-  }
-
-  // @Override
-  public void generate_constructor(
-      @NotNull DefaultDeducedEvaConstructor aEvaConstructor,
-      GenerateResult gr,
-      @NotNull WorkList wl,
-      final GenerateResultSink aResultSink,
-      final WorkManager aWorkManager,
-      final @NotNull GenerateResultEnv aFileGen) {
-    generateCodeForConstructor(aEvaConstructor, gr, wl, aFileGen);
-    postGenerateCodeForConstructor(aEvaConstructor, wl, aFileGen);
-  }
 
   private void generateCodeForConstructor(
       @NotNull DefaultDeducedEvaConstructor aEvaConstructor,
