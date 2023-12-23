@@ -204,7 +204,9 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 		return zone_vte.getRealTargetName();
 
-	}	@Override
+	}
+
+	@Override
 	public ElLog elLog() {
 		return this.LOG;
 	}
@@ -918,7 +920,9 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 	}
 
 	private record __SPI_Save(OutputFileFactoryParams params, GenerateResultEnv aFileGen, CompilationEnclosure aCe) {
-	}	private DeducedBaseEvaFunction deduced(final EvaFunction aGeneratedFunction) {
+	}
+
+	private DeducedBaseEvaFunction deduced(final EvaFunction aGeneratedFunction) {
 		throw new UnintendedUseException();
 	}
 
