@@ -359,8 +359,4 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	public @Nullable VariableTableEntry getSelf() {
 		return carrier.getSelf();
 	}
-
-	public WhyNotGarish_Constructor a_lookup(final GenerateC aGc) {
-		return aGc.a_lookup(carrier);
-	}
 }
