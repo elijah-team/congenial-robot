@@ -559,7 +559,7 @@ public class Generate_Code_For_Method {
 		return Operation2.failure(new Diagnostic_8886());
 	}
 
-	void generateCodeForConstructor(final @NotNull DefaultDeducedEvaConstructor gf,
+	void generateCodeForConstructor(final @NotNull DeducedEvaConstructor gf,
 									final GenerateResult gr__,
 									final WorkList aWorkList__,
 									final @NotNull GenerateResultEnv fileGen
@@ -568,7 +568,7 @@ public class Generate_Code_For_Method {
 		var gr        = fileGen.gr();
 		var aWorkList = fileGen.wl();
 
-		var yf = gf.a_lookup(gc);
+		var yf = gf.getWhyNotGarishFunction(gc);
 
 		final C2C_CodeForConstructor cfm = new C2C_CodeForConstructor(this, /*gc.deduced*/((EvaConstructor) gf.getCarrier()), fileGen, yf);
 
