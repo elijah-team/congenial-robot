@@ -29,7 +29,7 @@ import tripleo.elijah.nextgen.spi.SPI_ReactiveDimension;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_ProcTableEntry;
-import tripleo.elijah.stages.gen_c.internal_t._GenerateC_T;
+//import tripleo.elijah.stages.gen_c.internal_t._GenerateC_T;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
@@ -983,7 +983,7 @@ public class GenerateC
   private record __SPI_Save(
       OutputFileFactoryParams params, GenerateResultEnv aFileGen, CompilationEnclosure aCe) {}
 
-  private DeducedBaseEvaFunction deduced(final EvaFunction aGeneratedFunction) {
+  public DeducedBaseEvaFunction deduced(final EvaFunction aGeneratedFunction) {
     throw new UnintendedUseException();
   }
 

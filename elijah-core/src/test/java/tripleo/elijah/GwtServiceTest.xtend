@@ -1,10 +1,7 @@
 package tripleo.elijah
 
-import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 import org.junit.Test
-
-import java.io.File;
-import java.util.List;
+import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 
 class GwtServiceTest {
 
