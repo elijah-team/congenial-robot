@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "2023-11-rosetta2" ]
+    branches: [ "2023-congenial-12w" ]
   pull_request:
-    branches: [ "2023-11-rosetta2" ]
+    branches: [ "2023-congenial-12w" ]
 
 jobs:
   build:
