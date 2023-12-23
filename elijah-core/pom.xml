@@ -5,7 +5,9 @@
 	<parent>
 		<groupId>tripleo.elijah</groupId>
 		<artifactId>congenial-robot</artifactId>
-		<version>2023.congenial.12</version>
+<!--		<version>2023.congenial.12</version>-->
+		<version>2023.congenial.11.something-after-rosetta</version>
+
 	</parent>
 
 	<artifactId>tripleo.elijah.core</artifactId>
@@ -23,7 +25,7 @@
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.good-api</artifactId>
-			<version>2023.congenial.12</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -31,13 +33,13 @@
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.sourcemodel-impl</artifactId>
-			<version>2023.congenial.12</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
-			<version>2023.congenial.12</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 			<!--
 						<scope>compile</scope>
 			-->
@@ -54,13 +56,13 @@
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.reactive</artifactId>
-			<version>2023.congenial.12</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.stateful</artifactId>
-			<version>2023.congenial.12</version>
+			<version>2023.congenial.11.something-after-rosetta</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -117,13 +119,13 @@
 			<version>24.0.1</version>
 			<scope>compile</scope>
 		</dependency>
-<!--
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>elijah-core-elevated-potential</artifactId>
-			<version>2023.11.elevated-potential.4</version>
-		</dependency>
--->
+		<!--
+				<dependency>
+					<groupId>tripleo.elijah</groupId>
+					<artifactId>elijah-core-elevated-potential</artifactId>
+					<version>2023.11.elevated-potential.4</version>
+				</dependency>
+		-->
 	</dependencies>
 
 	<build>

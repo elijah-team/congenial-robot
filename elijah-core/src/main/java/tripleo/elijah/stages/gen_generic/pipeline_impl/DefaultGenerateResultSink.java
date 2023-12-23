@@ -2,6 +2,7 @@ package tripleo.elijah.stages.gen_generic.pipeline_impl;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.nextgen.output.NG_OutputClass;
 import tripleo.elijah.nextgen.output.NG_OutputFunction;
@@ -16,6 +17,7 @@ import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.pp.IPP_Function;
+import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.world.i.LivingClass;
 import tripleo.elijah.world.i.LivingNamespace;
 import tripleo.util.buffer.Buffer;
@@ -83,5 +85,10 @@ public class DefaultGenerateResultSink implements GenerateResultSink {
 	@Override
 	public LivingNamespace getLivingNamespaceForEva(final EvaNamespace aEvaNamespace) {
 		return pa.getCompilation().livingRepo().getNamespace(aEvaNamespace);
+	}
+
+	@Override
+	public void addFunction(final PP_Constructor aPPConstructor, final List<C2C_Result> aRs, final GenerateC aGenerateC) {
+		throw new UnintendedUseException();
 	}
 }

@@ -307,8 +307,13 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		throw new IllegalStateException("Must be class or namespace.");
 	}
 
-	public void generate_constructor(final IPP_Constructor aGf, final GenerateResult aGr, final WorkList aWl, final GenerateResultSink aResultSink, final WorkManager aWorkManager, final GenerateResultEnv aFileGen) {
-		generate_constructor(deduced(aGf.get2Carrier(), aGr, aWl, aResultSink, aWorkManager, aFileGen);
+	//public void generate_constructor(final IPP_Constructor aGf, final GenerateResult aGr, final WorkList aWl, final GenerateResultSink aResultSink, final WorkManager aWorkManager, final GenerateResultEnv aFileGen) {
+	//	generate_constructor(deduced(aGf.get2Carrier()), aGr, aWl, aResultSink, aWorkManager, aFileGen);
+	//}
+
+	@Override
+	public void generate_constructor(final IPP_Constructor aGf, final GenerateResult aGr, final WorkList aWl, final GenerateResultSink aResultSink, final WorkManager aWorkManager, final @NotNull GenerateResultEnv aFileGen) {
+throw new UnintendedUseException();
 	}
 
 	@Override
@@ -316,7 +321,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		var aEvaFunction = ipf.get2Carrier().getCarrier();
 
 		generateCodeForMethod(_fileGen, aEvaFunction);
-		_post_generate_function(aEvaFunction, wl, _fileGen);
+		_post_generate_function((EvaFunction) aEvaFunction, wl, _fileGen);
 	}
 
 	WhyNotGarish_Class a_lookup(final EvaClass aGc) {
@@ -539,7 +544,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 
 		for (final EvaNode evaNode : lgn) {
 			if (evaNode instanceof final @NotNull EvaFunction generatedFunction) {
-				generate_function(generatedFunction, gr, wl, aResultSink);
+				generate_function(new PP_Function(deduced(generatedFunction)), gr, wl, aResultSink);
 				if (!wl.isEmpty())
 					wm.addJobs(wl);
 			} else if (evaNode instanceof final @NotNull EvaContainerNC containerNC) {
@@ -554,6 +559,10 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		}
 
 		return gr;
+	}
+
+	private DeducedBaseEvaFunction deduced(final EvaFunction aGeneratedFunction) {
+		throw new UnintendedUseException();
 	}
 
 	enum GetTypeName {
@@ -709,14 +718,14 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		public void run(WorkManager aWorkManager) {
 			if (gf instanceof EvaFunction) {
 				final EvaFunction evaFunction = (EvaFunction) gf;
-				final PP_Function ppFunction = new PP_Function(deduced(evaFunction), (DeducedBaseEvaFunction dgf) -> {
+				final PP_Function ppFunction = new PP_Function(((GenerateC)generateC).deduced(evaFunction), (DeducedBaseEvaFunction dgf) -> {
 					//dgf.generateCodeForMethod(gcfm, aFileGen);
 					throw new UnintendedUseException();
 				});
 				generateC.generate_function(ppFunction, gr, wl, resultSink);
 			} else {
 				final EvaConstructor evaConstructor = (EvaConstructor) gf;
-				final PP_Constructor ppConstructor  = new PP_Constructor(deduced(evaConstructor), (DeducedBaseEvaFunction dgf) -> {
+				final PP_Constructor ppConstructor  = new PP_Constructor(((GenerateC)generateC).deduced(evaConstructor), (DeducedBaseEvaFunction dgf) -> {
 					//dgf.generateCodeForMethod(gcfm, aFileGen);
 					throw new UnintendedUseException();
 				});
@@ -724,6 +733,10 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 			}
 			_isDone = true;
 		}
+	}
+
+	public DeducedEvaConstructor deduced(final EvaConstructor aEvaConstructor) {
+		throw new UnintendedUseException();
 	}
 
 	@Override
@@ -947,7 +960,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles, ReactiveDimensio
 		public void addConstructor_lagging(final DeducedEvaConstructor gf, final Buffer buf, final GenerateResult.TY aTY, final GenerateResult gr) {
 			final LibraryStatementPart lsp = gf.evaLayer_module_lsp();
 
-			addFunction(gf, buf, aTY);
+			addConstructor(gf, buf, aTY);
 
 			gr.addConstructor(new PP_Constructor(gf), buf, aTY, lsp);
 		}

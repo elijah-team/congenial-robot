@@ -23,6 +23,7 @@ import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.pp.IPP_Function;
+import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 import tripleo.elijah.world.i.LivingClass;
@@ -138,6 +139,11 @@ class AmazingFunction implements Amazing {
 
 		@Override
 		public @Nullable LivingNamespace getLivingNamespaceForEva(final EvaNamespace aEvaClass) {
+			throw new UnintendedUseException();
+		}
+
+		@Override
+		public void addFunction(final PP_Constructor aPPConstructor, final List<C2C_Result> aRs, final GenerateC aGenerateC) {
 			throw new UnintendedUseException();
 		}
 	}

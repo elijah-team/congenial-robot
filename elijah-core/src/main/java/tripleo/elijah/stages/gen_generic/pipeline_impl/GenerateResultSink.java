@@ -11,6 +11,7 @@ import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.pp.IPP_Function;
+import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.world.i.LivingClass;
 import tripleo.elijah.world.i.LivingNamespace;
 import tripleo.util.buffer.Buffer;
@@ -35,4 +36,6 @@ public interface GenerateResultSink {
 	@Nullable LivingClass getLivingClassForEva(EvaClass aEvaClass);
 
 	@Nullable LivingNamespace getLivingNamespaceForEva(EvaNamespace aEvaClass);
+
+	void addFunction(PP_Constructor aPPConstructor, List<C2C_Result> aRs, GenerateC aGenerateC);
 }

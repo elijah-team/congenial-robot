@@ -275,7 +275,7 @@ public class DefaultDeducedBaseEvaFunction implements DeducedBaseEvaFunction {
 	}
 
 	@Override
-	public WhyNotGarish_Constructor getWhyNotGarishFunction(final @NotNull GenerateC aGc) {
+	public WhyNotGarish_Function getWhyNotGarishFunction(final @NotNull GenerateC aGc) {
 		return aGc.a_lookup(carrier);
 	}
 

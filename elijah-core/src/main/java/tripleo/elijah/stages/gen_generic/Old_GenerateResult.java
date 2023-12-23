@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.subjects.ReplaySubject;
 import io.reactivex.rxjava3.subjects.Subject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.stages.gen_c.OutputFileC;
 import tripleo.elijah.stages.gen_fn.*;
@@ -85,6 +86,11 @@ public class Old_GenerateResult implements GenerateResult {
 		// TODO find something better
 		//results()
 		_res.addAll(aGenerateResult.results());
+	}
+
+	@Override
+	public void addConstructor(final PP_Constructor aEvaConstructor, final Buffer aBuffer, final TY aTY, final LibraryStatementPart aLsp) {
+throw new UnintendedUseException();
 	}
 
 	/* (non-Javadoc)

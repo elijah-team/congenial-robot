@@ -568,9 +568,9 @@ public class Generate_Code_For_Method {
 		var gr        = fileGen.gr();
 		var aWorkList = fileGen.wl();
 
-		var yf = gc.a_lookup(gf);
+		var yf = gf.a_lookup(gc);
 
-		final C2C_CodeForConstructor cfm = new C2C_CodeForConstructor(this, gf, fileGen, yf);
+		final C2C_CodeForConstructor cfm = new C2C_CodeForConstructor(this, /*gc.deduced*/((EvaConstructor) gf.getCarrier()), fileGen, yf);
 
 		//cfm.calculate();
 		var rs = cfm.getResults();
@@ -586,14 +586,14 @@ public class Generate_Code_For_Method {
 		}
 	}
 
-	void generateCodeForMethod(final @NotNull DeducedBaseEvaFunction gf, final @NotNull GenerateResultEnv aFileGen) {
+	void generateCodeForMethod(final @NotNull DeducedEvaFunctionBase gf, final @NotNull GenerateResultEnv aFileGen) {
 		// TODO separate into method and method_header??
-		final C2C_CodeForMethod cfm = new C2C_CodeForMethod(this, gf, aFileGen);
+		final C2C_CodeForMethod cfm = new C2C_CodeForMethod(this, (DeducedBaseEvaFunction) gf, aFileGen);
 
 		//cfm.calculate();
 		final List<C2C_Result> rs   = cfm.getResults();
 		final GenerateResult   gr   = cfm.getGenerateResult();
-		final GCFM             gcfm = new GCFM(rs, gf, gr);
+		final GCFM             gcfm = new GCFM(rs, (DeducedBaseEvaFunction) gf, gr);
 
 		gf.reactive().add(gcfm);
 
@@ -605,7 +605,7 @@ public class Generate_Code_For_Method {
 		final GenerateResultSink sink = aFileGen.resultSink();
 
 		if (sink != null) {
-			sink.addFunction(new PP_Function(gf), rs, gc);
+			sink.addFunction(new PP_Function((DeducedBaseEvaFunction) gf), rs, gc);
 		} else {
 			System.err.println("sink failed");
 		}

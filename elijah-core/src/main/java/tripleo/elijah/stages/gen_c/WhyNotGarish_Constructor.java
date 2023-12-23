@@ -3,6 +3,7 @@ package tripleo.elijah.stages.gen_c;
 import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.DebugFlags;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
@@ -43,7 +44,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		//cfm.calculate();
 		final List<C2C_Result> rs   = cfm.getResults();
 		final GenerateResult   gr   = new Old_GenerateResult();
-		final GCFC             gcfc = new GCFC(rs, gf, gr); // TODO 08/12 preload this??
+		final GCFC             gcfc = new GCFC(rs, generateC.deduced(gf), gr); // TODO 08/12 preload this??
 
 		gf.reactive().add(gcfc);
 
@@ -55,7 +56,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		final GenerateResultSink sink = aFileGen.resultSink();
 
 		if (sink != null) {
-			sink.addFunction(new PP_Constructor(deduced(gf), rs, generateC);
+			sink.addFunction(new PP_Constructor(deduced(gf)), rs, generateC);
 		} else {
 			System.err.println("sink failed");
 		}
@@ -64,7 +65,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 	private DeducedEvaConstructor deduced(EvaConstructor gf2) {
 		// TODO Auto-generated method stub
 //		return null;
-		throw new  
+		throw new UnintendedUseException();
 	}
 
 	@Override

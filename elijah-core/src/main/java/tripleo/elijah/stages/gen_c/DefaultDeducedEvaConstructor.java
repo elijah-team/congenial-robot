@@ -259,6 +259,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		carrier.place(label);
 	}
 
+	//@Override
 	@Override
 	public BaseEvaFunction.@NotNull __Reactive reactive() {
 		return carrier.reactive();
@@ -357,5 +358,9 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	@Override
 	public @Nullable VariableTableEntry getSelf() {
 		return carrier.getSelf();
+	}
+
+	public WhyNotGarish_Constructor a_lookup(final GenerateC aGc) {
+		return aGc.a_lookup(carrier);
 	}
 }
