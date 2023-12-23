@@ -48,7 +48,7 @@ public class C2C_CodeForMethod implements Generate_Code_For_Method.C2C_Results {
 			final BufferTabbedOutputStream tosHdr = generateCodeForMethod.tosHdr;
 
 
-			_write_nad_flush(tos, tosHdr);
+			_write_and_flush(tos, tosHdr);
 			final Buffer buf1    = tos.getBuffer();
 			final Buffer bufHdr1 = tosHdr.getBuffer();
 
@@ -59,7 +59,7 @@ public class C2C_CodeForMethod implements Generate_Code_For_Method.C2C_Results {
 		}
 	}
 
-	private void _write_nad_flush(final BufferTabbedOutputStream tos, final BufferTabbedOutputStream tosHdr) {
+	private void _write_and_flush(final BufferTabbedOutputStream tos, final BufferTabbedOutputStream tosHdr) {
 		final Generate_Method_Header gmh = new Generate_Method_Header(whyNotGarishFunction.cheat(), generateCodeForMethod._gc(), generateCodeForMethod.LOG);
 
 		tos.put_string_ln(String.format("%s {", gmh.header_string));

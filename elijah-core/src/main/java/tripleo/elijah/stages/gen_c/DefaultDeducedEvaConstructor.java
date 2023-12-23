@@ -22,10 +22,10 @@ import tripleo.util.range.Range;
 import java.util.List;
 import java.util.Map;
 
-public class DefaultDeducedBaseEvaFunction implements DeducedBaseEvaFunction {
-	private final BaseEvaFunction carrier;
+public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
+	private final EvaConstructor carrier;
 
-	public DefaultDeducedBaseEvaFunction(final BaseEvaFunction aEvaFunction) {
+	public DefaultDeducedEvaConstructor(final EvaConstructor aEvaFunction) {
 		carrier = aEvaFunction;
 	}
 

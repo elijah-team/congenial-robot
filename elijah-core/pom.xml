@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>tripleo.elijah</groupId>
 		<artifactId>congenial-robot</artifactId>
-		<version>2023.congenial.11.something-after-rosetta</version>
+		<version>2023.congenial.12</version>
 	</parent>
 
 	<artifactId>tripleo.elijah.core</artifactId>
@@ -13,7 +13,6 @@
 	<name>tripleo.elijah.core</name>
 	<description>elijah-core</description>
 	<packaging>jar</packaging>
-	<version>2023.congenial.11.something-after-rosetta</version>
 
 	<dependencies>
 
@@ -24,7 +23,7 @@
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.good-api</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
+			<version>2023.congenial.12</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -32,13 +31,13 @@
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.sourcemodel-impl</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
+			<version>2023.congenial.12</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
+			<version>2023.congenial.12</version>
 			<!--
 						<scope>compile</scope>
 			-->
@@ -48,20 +47,20 @@
 				<dependency>
 					<groupId>tripleo.elijah</groupId>
 					<artifactId>tripleo.small</artifactId>
-					<version>2023.congenial.11.something-after-rosetta</version>
+					<version>2023.congenial.12</version>
 				</dependency>
 		-->
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.reactive</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
+			<version>2023.congenial.12</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.stateful</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
+			<version>2023.congenial.12</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -72,15 +71,6 @@
 			<version>1.2.0</version>
 			<scope>test</scope>
 		</dependency>
-
-	<!--
-		<dependency>
-			<groupId>com.tngtech.archunit</groupId>
-			<artifactId>archunit</artifactId>
-			<version>1.10</version>
-			<scope>test</scope>
-		</dependency>
--->
 
 		<!-- https://search.maven.org/artifact/io.reactivex.rxjava3/rxjava/3.1.0/jar -->
 		<dependency>
@@ -127,10 +117,23 @@
 			<version>24.0.1</version>
 			<scope>compile</scope>
 		</dependency>
+<!--
+		<dependency>
+			<groupId>tripleo.elijah</groupId>
+			<artifactId>elijah-core-elevated-potential</artifactId>
+			<version>2023.11.elevated-potential.4</version>
+		</dependency>
+-->
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>2.31.0</version>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

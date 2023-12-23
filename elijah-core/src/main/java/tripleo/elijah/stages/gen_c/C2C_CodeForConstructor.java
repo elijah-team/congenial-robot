@@ -35,6 +35,19 @@ class C2C_CodeForConstructor implements Generate_Code_For_Method.C2C_Results {
 		gr      = fileGen.gr();
 	}
 
+	public C2C_CodeForConstructor(
+			@NotNull Generate_Code_For_Method aGenerateCodeForMethod,
+			@NotNull DeducedEvaConstructor gf2, 
+			@NotNull GenerateResultEnv aFileGen, 
+			@NotNull WhyNotGarish_Constructor aYf) {
+		generateCodeForMethod = aGenerateCodeForMethod;
+
+		yf 		= aYf;
+		gf      = yf.cheat();
+		fileGen = aFileGen;
+		gr      = fileGen.gr();
+	}
+
 	@Override
 	public @NotNull List<C2C_Result> getResults() {
 		calculate();

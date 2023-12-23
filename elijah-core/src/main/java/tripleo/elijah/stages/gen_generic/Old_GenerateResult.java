@@ -18,6 +18,7 @@ import tripleo.elijah.stages.gen_c.OutputFileC;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.pp.IPP_Function;
 import tripleo.elijah.stages.pp.PP_Constructor;
+import tripleo.elijah.stages.pp.PP_Function;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.util.buffer.Buffer;
 
@@ -66,11 +67,6 @@ public class Old_GenerateResult implements GenerateResult {
 	@Override
 	public void addClass(@NotNull TY ty, @NotNull EvaClass aClass, @NotNull Buffer aBuf, LibraryStatementPart aLsp) {
 		add(aBuf, aClass, ty, aLsp, aClass.getDependency());
-	}
-
-	@Override
-	public void addConstructor(@NotNull EvaConstructor aEvaConstructor, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
-		addFunction(new PP_Constructor(aEvaConstructor), aBuffer, aTY, aLsp);
 	}
 
 	/* (non-Javadoc)

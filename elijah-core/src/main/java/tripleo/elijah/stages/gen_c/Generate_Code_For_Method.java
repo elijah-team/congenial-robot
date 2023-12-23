@@ -559,7 +559,7 @@ public class Generate_Code_For_Method {
 		return Operation2.failure(new Diagnostic_8886());
 	}
 
-	void generateCodeForConstructor(final @NotNull EvaConstructor gf,
+	void generateCodeForConstructor(final @NotNull DefaultDeducedEvaConstructor gf,
 									final GenerateResult gr__,
 									final WorkList aWorkList__,
 									final @NotNull GenerateResultEnv fileGen

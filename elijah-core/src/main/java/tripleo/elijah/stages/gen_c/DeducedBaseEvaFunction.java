@@ -19,7 +19,7 @@ public interface DeducedBaseEvaFunction extends IEvaFunctionBase {
 
 	OS_Module getModule__();
 
-	WhyNotGarish_Function getWhyNotGarishFunction(GenerateC aGc);
+	WhyNotGarish_Constructor getWhyNotGarishFunction(GenerateC aGc);
 
 	Eventual<GenType> typeDeferred();
 

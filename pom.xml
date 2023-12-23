@@ -156,7 +156,7 @@
 		<dependency>
 			<groupId>tripleo.buffers</groupId>
 			<artifactId>buffers-v1</artifactId>
-			<version>${buffers.version}</version>
+			<version>0.0.3</version>
 		</dependency>
 
 		<dependency>

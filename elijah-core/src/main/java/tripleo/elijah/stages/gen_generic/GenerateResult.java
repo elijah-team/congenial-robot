@@ -6,6 +6,7 @@ import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.stages.gen_c.OutputFileC;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.pp.IPP_Function;
+import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.stages.pp.PP_Function;
 import tripleo.util.buffer.Buffer;
 
@@ -28,9 +29,7 @@ public interface GenerateResult {
 
 	void additional(GenerateResult aGenerateResult);
 
-	void addConstructor(EvaConstructor aEvaConstructor, Buffer aBuffer, TY aTY, LibraryStatementPart aLsp);
-
-	void addFunction(PP_Function aGeneratedFunction, Buffer aBuffer, TY aTY, LibraryStatementPart aLsp);
+	void addConstructor(PP_Constructor aEvaConstructor, Buffer aBuffer, TY aTY, LibraryStatementPart aLsp);
 
 	void completeItem(GenerateResultItem aGenerateResultItem);
 

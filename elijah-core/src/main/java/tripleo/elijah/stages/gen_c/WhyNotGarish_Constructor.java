@@ -55,10 +55,16 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		final GenerateResultSink sink = aFileGen.resultSink();
 
 		if (sink != null) {
-			sink.addFunction(new PP_Constructor(gf), rs, generateC);
+			sink.addFunction(new PP_Constructor(deduced(gf), rs, generateC);
 		} else {
 			System.err.println("sink failed");
 		}
+	}
+
+	private DeducedEvaConstructor deduced(EvaConstructor gf2) {
+		// TODO Auto-generated method stub
+//		return null;
+		throw new  
 	}
 
 	@Override
