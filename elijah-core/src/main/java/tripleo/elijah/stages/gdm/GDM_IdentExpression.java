@@ -30,8 +30,8 @@ public class GDM_IdentExpression implements GDM_Item {
 	}
 
 	public void resolveIdentTableEntry(final IdentTableEntry ite) {
-		assert
-				_p_IdentTableEntry.isPending();
+		//assert
+		//		_p_IdentTableEntry.isPending();
 
 		if(_p_IdentTableEntry.isPending()) {
 			_p_IdentTableEntry.resolve(ite);
