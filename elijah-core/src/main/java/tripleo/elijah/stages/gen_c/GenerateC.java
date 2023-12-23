@@ -323,7 +323,7 @@ public class GenerateC
 
 
   private void generateCodeForConstructor(
-      @NotNull DefaultDeducedEvaConstructor aEvaConstructor,
+      @NotNull DeducedEvaConstructor aEvaConstructor,
       GenerateResult aGenerateResult,
       WorkList aWorkList,
       final @NotNull GenerateResultEnv aFileGen) {
@@ -333,7 +333,7 @@ public class GenerateC
   }
 
   private void postGenerateCodeForConstructor(
-      final @NotNull DefaultDeducedEvaConstructor aEvaConstructor,
+      final @NotNull DeducedEvaConstructor aEvaConstructor,
       final @NotNull WorkList wl,
       final @NotNull GenerateResultEnv aFileGen) {
     for (IdentTableEntry identTableEntry :
@@ -395,12 +395,15 @@ public class GenerateC
   @Override
   public void generate_constructor(
       final IPP_Constructor aGf,
-      final GenerateResult aGr,
-      final WorkList aWl,
+      final GenerateResult gr,
+      final WorkList wl,
       final GenerateResultSink aResultSink,
       final WorkManager aWorkManager,
       final @NotNull GenerateResultEnv aFileGen) {
-    throw new UnintendedUseException();
+    var aEvaConstructor = aGf.get2Carrier();
+
+	  generateCodeForConstructor(aEvaConstructor, gr, wl, aFileGen);
+	  postGenerateCodeForConstructor(aEvaConstructor, wl, aFileGen);
   }
 
   @Override
@@ -929,6 +932,7 @@ public class GenerateC
       InstructionArgument _arg0 = aInstruction.getArg(0);
       @NotNull ProcTableEntry pte = gf.getProcTableEntry(((ProcIA) _arg0).index());
       final CtorReference reference = new CtorReference();
+      assert pte.expression_num != null;
       reference.getConstructorPath(pte.expression_num, gf);
       @NotNull List<String> x = getAssignmentValueArgs(aInstruction, gf, LOG).stringList();
       reference.args(x);
@@ -951,7 +955,8 @@ public class GenerateC
 
   @Override
   public @NotNull GenerateResult generateCode(
-      final @NotNull Collection<EvaNode> lgn, final @NotNull GenerateResultEnv aFileGen) {
+      final @NotNull Collection<EvaNode> lgn,
+      final @NotNull GenerateResultEnv aFileGen) {
     GenerateResult gr = new Old_GenerateResult();
     WorkList wl = new WorkList();
 
@@ -965,7 +970,7 @@ public class GenerateC
       } else if (evaNode instanceof final @NotNull EvaContainerNC containerNC) {
         containerNC.generateCode(_fileGen, this);
       } else if (evaNode instanceof final @NotNull EvaConstructor evaConstructor) {
-        final DefaultDeducedEvaConstructor ddec = new DefaultDeducedEvaConstructor(evaConstructor);
+        final DeducedEvaConstructor ddec = deduced(evaConstructor);
         final PP_Constructor cc = new PP_Constructor(ddec);
         generate_constructor(cc, gr, wl, aResultSink, wm, aFileGen);
         if (!wl.isEmpty()) wm.addJobs(wl);
