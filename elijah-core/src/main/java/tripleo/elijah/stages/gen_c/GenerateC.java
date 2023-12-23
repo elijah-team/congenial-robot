@@ -29,6 +29,7 @@ import tripleo.elijah.nextgen.spi.SPI_ReactiveDimension;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_ProcTableEntry;
+import tripleo.elijah.stages.gen_c.internal_t._GenerateC_T;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
@@ -65,16 +66,18 @@ import tripleo.util.buffer.Buffer;
 
 /** Created 10/8/20 7:13 AM */
 public class GenerateC
-    implements CodeGenerator,
+   extends _GenerateC_T
+   implements CodeGenerator,
         GenerateFiles,
         ReactiveDimension,
         SPI_Loggable,
         SPI_ReactiveDimension {
+
+
   private static final String PHASE = "GenerateC";
 
   private final GI_Repo _repo = new GI_Repo(this);
-  private final Map<EvaNode, WhyNotGarish_Item> a_directory = new HashMap<>();
-  private final Zone _zone = new Zone();
+  private final  Zone _zone = new Zone();
 
   private final GenerateResultProgressive generateResultProgressive =
       new GenerateResultProgressive();
@@ -136,16 +139,6 @@ public class GenerateC
     final WhyNotGarish_Constructor cc = this.a_lookup(gf);
 
     cc.resolveFileGenPromise(aFileGen);
-  }
-
-  WhyNotGarish_Constructor a_lookup(final EvaConstructor aGf) {
-    if (a_directory.containsKey(aGf)) {
-      return (WhyNotGarish_Constructor) a_directory.get(aGf);
-    }
-
-    var ncc1907 = new WhyNotGarish_Constructor(aGf, this);
-    a_directory.put(aGf, ncc1907);
-    return ncc1907;
   }
 
   @NotNull
@@ -474,25 +467,7 @@ public class GenerateC
     throw new IllegalStateException("Must be class or namespace.");
   }
 
-  WhyNotGarish_Class a_lookup(final EvaClass aGc) {
-    if (a_directory.containsKey(aGc)) {
-      return (WhyNotGarish_Class) a_directory.get(aGc);
-    }
 
-    var ncc = new WhyNotGarish_Class(aGc, this);
-    a_directory.put(aGc, ncc);
-    return ncc;
-  }
-
-  public WhyNotGarish_Namespace a_lookup(final EvaNamespace en) {
-    if (a_directory.containsKey(en)) {
-      return (WhyNotGarish_Namespace) a_directory.get(en);
-    }
-
-    var ncn = new WhyNotGarish_Namespace(en, this);
-    a_directory.put(en, ncn);
-    return ncn;
-  }
 
   public @NotNull String getAssignmentValue(
       final VariableTableEntry aSelf,
@@ -632,12 +607,13 @@ public class GenerateC
     return this;
   }
 
-  public WhyNotGarish_Function a_lookup(final DeducedBaseEvaFunction aGf) {
-    return a_lookup((BaseEvaFunction) aGf.getCarrier());
-  }
-
   public DeducedEvaConstructor deduced(final EvaConstructor aEvaConstructor) {
     throw new UnintendedUseException();
+  }
+
+  @Override
+  public GenerateC _this() {
+    return this;
   }
 
   enum GetTypeName {
