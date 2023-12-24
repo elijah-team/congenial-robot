@@ -981,11 +981,21 @@ public class GenerateC
   }
 
   private record __SPI_Save(
-      OutputFileFactoryParams params, GenerateResultEnv aFileGen, CompilationEnclosure aCe) {}
+          OutputFileFactoryParams params,
+          GenerateResultEnv fileGen,
+          CompilationEnclosure compilationEnclosure
+  ) {}
 
   public DeducedBaseEvaFunction deduced(final EvaFunction aGeneratedFunction) {
-    throw new UnintendedUseException();
+    if (_m_deduced.containsKey(aGeneratedFunction)) {
+      return (DeducedBaseEvaFunction) _m_deduced.get(aGeneratedFunction);
+    }
+    final DefaultDeducedBaseEvaFunction R = new DefaultDeducedBaseEvaFunction(/*a_lookup*/(aGeneratedFunction));
+    _m_deduced.put(aGeneratedFunction, R);
+    return R;
   }
+
+  private final Map<EvaNode, IGC_Deduced> _m_deduced = new HashMap<>();
 
   public class GenerateResultProgressive {
     GenerateResult _gr = new Old_GenerateResult();
