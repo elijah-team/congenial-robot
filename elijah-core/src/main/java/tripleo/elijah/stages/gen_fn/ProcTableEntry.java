@@ -297,7 +297,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		@Override
 		public void onChange(/*@NotNull*/ IElementHolder eh, Status newStatus) {
 			if (newStatus == Status.KNOWN) {
-				setResolvedElement(eh.getElement());
+				setResolvedElement(eh.getElement(), new GG_ResolveEvent() {String id="_StatusListener_PTE_67::onChange";});
 			}
 		}
 	}

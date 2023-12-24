@@ -413,7 +413,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 				@Nullable OS_Element best = lrl.chooseBest(null);
 //							ite.setStatus(BaseTableEntry.Status.KNOWN, best);
 				assert best != null;
-				ite.setResolvedElement(best);
+				ite.setResolvedElement(best, new GG_ResolveEvent() {String id="Unnamed_ITE_Resolver1::vte_pot_size_is_1_USER_CLASS_TYPE";});
 
 				final @NotNull GenType          genType  = dt2._inj().new_GenTypeImpl(klass);
 				final TypeName                  typeName = vte.getType().genType.getNonGenericTypeName();

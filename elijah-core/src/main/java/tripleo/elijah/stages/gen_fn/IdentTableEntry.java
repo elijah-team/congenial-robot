@@ -85,7 +85,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		addStatusListener((eh, newStatus) -> {
 			if (newStatus == Status.KNOWN) {
 				if (eh != null) {
-					setResolvedElement(eh.getElement());
+					setResolvedElement(eh.getElement(), new GG_ResolveEvent() {String id="IdentTableEntry::ctor";});
 				}
 			}
 		});

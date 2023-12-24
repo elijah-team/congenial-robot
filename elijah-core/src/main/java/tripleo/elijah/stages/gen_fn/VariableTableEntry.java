@@ -61,7 +61,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 			assert vtt == VariableTableType.VAR;
 
 			this._vs = vs;
-			this.setResolvedElement(vs.getNameToken());
+			this.setResolvedElement(vs.getNameToken(), new GG_ResolveEvent() {String id="VariableTableEntry::ctor";});
 		} else {
 			switch (vtt) {
 			case ARG -> {
@@ -70,7 +70,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 			case SELF, RESULT, TEMP -> {
 			}
 			}
-			this.setResolvedElement(el);
+			this.setResolvedElement(el, new GG_ResolveEvent() {String id="VariableTableEntry::ctor";});
 			this._vs = null;
 		}
 		setupResolve();

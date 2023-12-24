@@ -463,7 +463,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 
 				final @Nullable OS_Element best = lrl.chooseBest(null);
 				if (best != null)
-					pte.setResolvedElement(best); // TODO do we need to add a dependency for class?
+					pte.setResolvedElement(best, new GG_ResolveEvent() {String id="FT_FCA_IdentIA::loop2";}); // TODO do we need to add a dependency for class?
 				else {
 					dac.errSink.reportError("Cant resolve " + text);
 				}
@@ -480,7 +480,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 				@Override
 				public void foundElement(OS_Element el) {
 					if (pte.getResolvedElement() == null)
-						pte.setResolvedElement(el);
+						pte.setResolvedElement(el, new GG_ResolveEvent() {String id="FT_FCA_IdentIA::loop2/resolveIdentIA_";});
 					final DeduceTypes2 deduceTypes2 = dac.dc.get();
 					if (el instanceof FunctionDef) {
 						final FT_FCA_FunctionDef fcafd = deduceTypes2._inj().new_FT_FCA_FunctionDef((FunctionDef) el, deduceTypes2);
