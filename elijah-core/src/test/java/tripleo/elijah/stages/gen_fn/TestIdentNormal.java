@@ -168,7 +168,7 @@ public class TestIdentNormal {
 		final Scope3Impl sco1 = new Scope3Impl(fd2);
 
 		final GeneratePhase     generatePhase     = boilerplate.pipelineLogic().generatePhase;
-		final GenerateFunctions generateFunctions = boilerplate.pipelineLogic().generatePhase.getGenerateFunctions(mod);
+		final GenerateFunctions generateFunctions = generatePhase.getGenerateFunctions(mod);
 
 		sco1.add(new StatementWrapperImpl(pce, ctx2, fd2));
 		fd2.scope(sco1);
@@ -181,6 +181,8 @@ public class TestIdentNormal {
 		ProcTableEntry     pte2 = null;
 
 		final var dp = boilerplate.pipelineLogic().dp;
+
+		assert dp == phase;
 
 		FunctionInvocation fi   = dp._inj().new_FunctionInvocation(fd, pte2, ci, generatePhase);
 //		when(fd.returnType()).thenReturn(null);
