@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.good-api</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
+			<version>congenial.2023-12</version>
 			<scope>compile</scope>
 		</dependency>
 
