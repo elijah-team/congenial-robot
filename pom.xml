@@ -32,7 +32,7 @@
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
 		<!-- for edu 2022.2 -->
-<!--		<kotlin.version>1.7.10</kotlin.version>-->
+		<!--		<kotlin.version>1.7.10</kotlin.version>-->
 		<kotlin.version>1.9.21</kotlin.version>
 	</properties>
 
@@ -48,11 +48,11 @@
 		<module>elijah-nextgen-outputstatement</module>
 		<module>elijah-stateful</module>
 		<module>tripleo-reactive</module>
-<!--
-		<module>elijah-sourcemodel-api</module>
-		<module>elijah-sourcemodel-impl</module>
-		<module>elijah-good-api</module>
--->
+		<!--
+				<module>elijah-sourcemodel-api</module>
+				<module>elijah-sourcemodel-impl</module>
+				<module>elijah-good-api</module>
+		-->
 		<module>elijah-core</module>
 		<!--		<module>typeinf</module>-->
 	</modules>
@@ -183,6 +183,10 @@
 		<repository>
 			<id>gitlab-maven-buffers</id>
 			<url>https://gitlab.com/api/v4/projects/20346374/packages/maven</url>
+		</repository>
+		<repository>
+			<id>gitlab-good-api</id>
+			<url>https://gitlab.com/api/v4/projects/52876826/packages/maven</url>
 		</repository>
 		<repository>
 			<id>gitlab-maven-range</id>
