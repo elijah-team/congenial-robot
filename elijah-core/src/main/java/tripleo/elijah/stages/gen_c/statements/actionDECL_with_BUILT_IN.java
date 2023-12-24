@@ -1,10 +1,12 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.gen_c.GenerateC;
+import tripleo.elijah.stages.gen_c.WhyNotGarish_BaseFunction;
 
 public class actionDECL_with_BUILT_IN implements EG_Statement {
 	private final WhyNotGarish_BaseFunction gf;

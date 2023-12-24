@@ -1,9 +1,11 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.gen_c.*;
+import tripleo.elijah.stages.gen_c.statements.ArgumentStringStatement;
 import tripleo.elijah.stages.instructions.IdentIA;
 
-public class ASS_ID extends WhyNotGarish_BaseFunction.ArgumentStringStatement {
+public class ASS_ID extends ArgumentStringStatement {
 	private final WhyNotGarish_BaseFunction    yf;
 	private final IdentIA                      ia;
 	private final Generate_Code_For_Method.AOG aog;

@@ -1,10 +1,13 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
+import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
+import tripleo.elijah.util.NotImplementedException;
 
-class GCFM_Inst_AGNK {
+public class GCFM_Inst_AGNK implements GenerateC_Statement {
 
 	private final GenerateC                 gc;
 	private final Generate_Code_For_Method  generateCodeForMethod;
@@ -18,6 +21,7 @@ class GCFM_Inst_AGNK {
 		instruction           = aInstruction;
 	}
 
+	@Override
 	public String getText() {
 		final InstructionArgument target = instruction.getArg(0);
 		final InstructionArgument value  = instruction.getArg(1);
@@ -27,5 +31,11 @@ class GCFM_Inst_AGNK {
 		final String s               = String.format(Emit.emit("/*278*/") + "%s = %s;", realTarget, assignmentValue);
 
 		return s;
+	}
+
+	@Override
+	public GCR_Rule rule() {
+		//return null;
+		throw new NotImplementedException();
 	}
 }

@@ -1,14 +1,16 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.gen_c.GI_ProcIA;
+import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.util.Operation2;
 
-class GCX_Construct implements EG_Statement {
+public class GCX_Construct implements EG_Statement {
 
 	private final GI_ProcIA   gi_proc;
 	private final Instruction instruction1;

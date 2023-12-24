@@ -1,8 +1,8 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 
-interface GCR_Rule {
+public interface GCR_Rule {
 	public static @NotNull GCR_Rule withMessage(@NotNull String message) {
 		return new GCR_Rule() {
 			@Override

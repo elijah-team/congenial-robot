@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static tripleo.elijah.stages.gen_c.CReference._getIdentIAPathList;
 
-class Zone {
+public class Zone {
 	private final Map<Object, ZoneMember> members = new HashMap<Object, ZoneMember>();
 
 	public ZoneVTE get(final VariableTableEntry aVarTableEntry, final BaseEvaFunction aGf) {

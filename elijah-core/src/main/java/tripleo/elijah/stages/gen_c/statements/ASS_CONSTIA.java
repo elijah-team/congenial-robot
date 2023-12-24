@@ -1,10 +1,14 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.gen_c.GenerateC;
+import tripleo.elijah.stages.gen_c.Generate_Code_For_Method;
+import tripleo.elijah.stages.gen_c.WhyNotGarish_BaseFunction;
+import tripleo.elijah.stages.gen_c.statements.ArgumentStringStatement;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah.stages.instructions.ConstTableIA;
 
-public class ASS_CONSTIA extends WhyNotGarish_BaseFunction.ArgumentStringStatement {
+public class ASS_CONSTIA extends ArgumentStringStatement {
 	private final WhyNotGarish_BaseFunction    yf;
 	private final ConstTableIA                 ia;
 	private final Generate_Code_For_Method.AOG aog;

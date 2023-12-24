@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.DeduceElement;
+import tripleo.elijah.stages.gen_c.*;
+import tripleo.elijah.stages.gen_c.statements.ArgumentString;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.Instruction;
@@ -17,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class GCX_FunctionCall_Special {
-	private final GenerateC       gc;
+	private final GenerateC   gc;
 	//private final BaseEvaFunction gf;
-	private final Instruction     instruction;
+	private final Instruction instruction;
 	private final ProcTableEntry  pte;
 
 	public GCX_FunctionCall_Special(final ProcTableEntry aPte, final @NotNull WhyNotGarish_BaseFunction aGf, final GenerateC aGc, final Instruction aInstruction) {
@@ -71,8 +73,8 @@ public class GCX_FunctionCall_Special {
 		if (reference == null) {
 			sb.append('(');
 
-			final Pair<List<String>, List<WhyNotGarish_BaseFunction.ArgumentString>> argumentStrings = yf.getArgumentStrings(instruction);
-			final List<String>                                                       sl3             = argumentStrings.getLeft();
+			final Pair<List<String>, List<ArgumentString>> argumentStrings = yf.getArgumentStrings(instruction);
+			final List<String>                             sl3             = argumentStrings.getLeft();
 			sb.append(Helpers.String_join(", ", sl3));
 
 			sb.append(");");

@@ -1,10 +1,12 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
+import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
 import tripleo.elijah.stages.instructions.*;
+import tripleo.elijah.util.NotImplementedException;
 
-class GCFM_Inst_JE {
+public class GCFM_Inst_JE implements GenerateC_Statement {
 
 	private final GenerateC                 gc;
 	private final Generate_Code_For_Method  generateCodeForMethod;
@@ -18,6 +20,7 @@ class GCFM_Inst_JE {
 		instruction           = aInstruction;
 	}
 
+	@Override
 	public String getText() {
 		final InstructionArgument lhs    = instruction.getArg(0);
 		final InstructionArgument rhs    = instruction.getArg(1);
@@ -47,5 +50,10 @@ class GCFM_Inst_JE {
 		}
 
 		return String.format("%s%n%s%n", s1, s2);
+	}
+
+	@Override
+	public GCR_Rule rule() {
+		throw new NotImplementedException();
 	}
 }

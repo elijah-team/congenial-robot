@@ -1,9 +1,13 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.gen_c.Emit;
+import tripleo.elijah.stages.gen_c.Generate_Code_For_Method;
+import tripleo.elijah.stages.gen_c.WhyNotGarish_BaseFunction;
+import tripleo.elijah.stages.gen_c.statements.ArgumentStringStatement;
 import tripleo.elijah.stages.instructions.IntegerIA;
 
-public class ASS_PROCIA extends WhyNotGarish_BaseFunction.ArgumentStringStatement {
+public class ASS_PROCIA extends ArgumentStringStatement {
 	private final WhyNotGarish_BaseFunction    yf;
 	private final IntegerIA                    ia;
 	private final Generate_Code_For_Method.AOG aog;

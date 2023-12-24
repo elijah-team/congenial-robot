@@ -1,10 +1,12 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputstatement.ReasonedStringListStatement;
+import tripleo.elijah.stages.gen_c.Emit;
+import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.stages.instructions.Instruction;
@@ -12,8 +14,8 @@ import tripleo.elijah.util.Helpers;
 
 import java.util.List;
 
-class FnCallArgs_Statement implements EG_Statement {
-	private final GenerateC generateC;
+public class FnCallArgs_Statement implements EG_Statement {
+	private final GenerateC                    generateC;
 	private final GenerateC.GetAssignmentValue getAssignmentValue;
 	private final Instruction inst;
 	private final BaseEvaFunction gf;
@@ -52,7 +54,7 @@ class FnCallArgs_Statement implements EG_Statement {
 
 		// VERIFY alias evaluation
 		final GetAssignmentValueArgsStatement ava = getAssignmentValue.getAssignmentValueArgs(inst, gf, generateC.elLog());
-		final List<String> sll = ava.stringList();
+		final List<String>                    sll = ava.stringList();
 		// VERIFY template usage
 		z.append(Helpers.String_join(", ", sll), "get-assignment-value-args");
 

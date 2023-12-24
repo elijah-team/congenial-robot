@@ -6,9 +6,12 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
-import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.stages.deduce.DeduceElement;
 import tripleo.elijah.stages.deduce.OnGenClass;
+import tripleo.elijah.stages.gen_c.statements.ASS_CONSTIA;
+import tripleo.elijah.stages.gen_c.statements.ASS_IA;
+import tripleo.elijah.stages.gen_c.statements.ASS_ID;
+import tripleo.elijah.stages.gen_c.statements.ArgumentString;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.instructions.*;
@@ -120,12 +123,14 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getGf().vte_lookup(aText);
 	}
 
-	@NotNull Pair<java.util.List<String>, java.util.List<ArgumentString>>
+	@NotNull
+	public Pair<java.util.List<String>, java.util.List<ArgumentString>>
 	getArgumentStrings(final @NotNull Instruction instruction) {
+		Preconditions.checkState(getGenerateC().isPresent());
 		final GenerateC generateC = getGenerateC().get();
 		Preconditions.checkNotNull(generateC);
 
-		final List<String>         sl3 = new ArrayList<String>();
+		final List<String>         sl3 = new ArrayList<>();
 		final List<ArgumentString> sl4 = new ArrayList<>();
 
 		final int args_size = instruction.getArgsSize();
@@ -201,12 +206,5 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		final @NotNull BaseEvaFunction gf            = this.getGf();
 		final ZoneVTE                  zone_vte      = getGenerateC().get().get_zone().get(varTableEntry, gf);
 		return zone_vte;
-	}
-
-	public record ArgumentString(InstructionArgument ia, EG_Statement statement, String error) {
-	}
-
-	@SuppressWarnings("EmptyClass")
-	public abstract static class ArgumentStringStatement implements EG_Statement {
 	}
 }

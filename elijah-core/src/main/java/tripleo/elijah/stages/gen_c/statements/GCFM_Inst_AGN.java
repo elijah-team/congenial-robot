@@ -1,13 +1,14 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 
-class GCFM_Inst_AGN implements GenerateC_Statement {
+public class GCFM_Inst_AGN implements GenerateC_Statement {
 
 	private final GenerateC                 gc;
 	private final Generate_Code_For_Method  generateCodeForMethod;
@@ -35,7 +36,7 @@ class GCFM_Inst_AGN implements GenerateC_Statement {
 
 		final String realTarget, s;
 		if (target instanceof IntegerIA) {
-			realTarget = gc.getRealTargetName(gf, (IntegerIA) target, Generate_Code_For_Method.AOG.ASSIGN);
+			realTarget = gc.getRealTargetName(gc.a_lookup(gf), (IntegerIA) target, Generate_Code_For_Method.AOG.ASSIGN);
 			final String assignmentValue = gc.getAssignmentValue(gf.getSelf(), value, gf);
 			s = String.format(Emit.emit("/*267*/") + "%s = %s;", realTarget, assignmentValue);
 		} else {

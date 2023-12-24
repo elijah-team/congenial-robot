@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.UnintendedUseException;

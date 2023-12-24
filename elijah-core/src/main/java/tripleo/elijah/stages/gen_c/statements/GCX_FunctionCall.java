@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +13,7 @@ import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 
 import tripleo.elijah.stages.deduce.ExpressionConfession;
 
+import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 
 import tripleo.elijah.stages.instructions.IdentIA;

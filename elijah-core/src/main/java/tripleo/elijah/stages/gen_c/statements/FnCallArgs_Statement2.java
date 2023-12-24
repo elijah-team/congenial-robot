@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -8,6 +8,7 @@ import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
+import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
@@ -19,9 +20,9 @@ import tripleo.elijah.stages.logging.ElLog;
 
 import java.util.List;
 
-class FnCallArgs_Statement2 implements EG_Statement {
-	private final GenerateC                    generateC;
-	private final ProcTableEntry               pte;
+public class FnCallArgs_Statement2 implements EG_Statement {
+	private final GenerateC      generateC;
+	private final ProcTableEntry pte;
 	private final GenerateC.GetAssignmentValue getAssignmentValue;
 	private final Instruction                  inst;
 	private final BaseEvaFunction              gf;

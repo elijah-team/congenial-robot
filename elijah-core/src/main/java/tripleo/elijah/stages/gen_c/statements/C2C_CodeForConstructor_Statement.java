@@ -1,12 +1,13 @@
-package tripleo.elijah.stages.gen_c;
+package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
+import tripleo.elijah.stages.gen_c.CClassDecl;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.util.BufferTabbedOutputStream;
 
-class C2C_CodeForConstructor_Statement implements EG_Statement {
+public class C2C_CodeForConstructor_Statement implements EG_Statement {
 
 	private final String     class_name;
 	private final int        class_code;
@@ -14,11 +15,11 @@ class C2C_CodeForConstructor_Statement implements EG_Statement {
 	private final CClassDecl decl;
 	private final EvaClass   x;
 
-	C2C_CodeForConstructor_Statement(final String aClassName,
-									 final int aClassCode,
-									 final String aConstructorName,
-									 final CClassDecl aDecl,
-									 final EvaClass aX) {
+	public C2C_CodeForConstructor_Statement(final String aClassName,
+											final int aClassCode,
+											final String aConstructorName,
+											final CClassDecl aDecl,
+											final EvaClass aX) {
 		class_name      = aClassName;
 		class_code      = aClassCode;
 		constructorName = aConstructorName;

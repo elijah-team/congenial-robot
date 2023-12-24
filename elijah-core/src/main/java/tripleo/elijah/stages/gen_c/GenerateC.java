@@ -30,6 +30,10 @@ import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_ProcTableEntry;
 import tripleo.elijah.stages.gen_c.internal_t._GenerateC_T;
+import tripleo.elijah.stages.gen_c.statements.FnCallArgs_Statement;
+import tripleo.elijah.stages.gen_c.statements.FnCallArgs_Statement2;
+import tripleo.elijah.stages.gen_c.statements.GCX_ConstantString;
+import tripleo.elijah.stages.gen_c.statements.GetAssignmentValueArgsStatement;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
@@ -142,11 +146,11 @@ public class GenerateC
   }
 
   @NotNull
-  String getRealTargetName(
-      final @NotNull BaseEvaFunction gf,
-      final @NotNull IdentIA target,
-      final Generate_Code_For_Method.AOG aog,
-      final String value) {
+  public String getRealTargetName(
+          final @NotNull BaseEvaFunction gf,
+          final @NotNull IdentIA target,
+          final Generate_Code_For_Method.AOG aog,
+          final String value) {
     int state = 0, code = -1;
     IdentTableEntry identTableEntry = gf.getIdentTableEntry(target.getIndex());
     LinkedList<String> ls = new LinkedList<String>();
@@ -453,10 +457,10 @@ public class GenerateC
   }
 
   @NotNull
-  String getAssignmentValue(
-      VariableTableEntry value_of_this,
-      final InstructionArgument value,
-      final @NotNull BaseEvaFunction gf) {
+  public String getAssignmentValue(
+          VariableTableEntry value_of_this,
+          final InstructionArgument value,
+          final @NotNull BaseEvaFunction gf) {
     GetAssignmentValue gav = new GetAssignmentValue(this);
     if (value instanceof final @NotNull FnCallArgs fca) {
       return gav.FnCallArgs(fca, gf, LOG).success().getText();
@@ -540,7 +544,7 @@ public class GenerateC
   }
 
   @Deprecated
-  String getTypeName(final @NotNull OS_Type ty) {
+  public String getTypeName(final @NotNull OS_Type ty) {
     return GetTypeName.forOSType(ty, LOG);
   }
 
@@ -756,7 +760,7 @@ public class GenerateC
     }
   }
 
-  static class GetAssignmentValue {
+  public static class GetAssignmentValue {
 
     private final GenerateC gc;
 
@@ -781,7 +785,7 @@ public class GenerateC
       }
     }
 
-    String const_to_string(final IExpression expression) {
+    public String const_to_string(final IExpression expression) {
       final GCX_ConstantString cs = new GCX_ConstantString(gc, GetAssignmentValue.this, expression);
 
       return cs.getText();
@@ -863,8 +867,8 @@ public class GenerateC
       }
     }
 
-    GetAssignmentValueArgsStatement getAssignmentValueArgs(
-        final @NotNull Instruction inst, final @NotNull BaseEvaFunction gf, @NotNull ElLog LOG) {
+    public GetAssignmentValueArgsStatement getAssignmentValueArgs(
+            final @NotNull Instruction inst, final @NotNull BaseEvaFunction gf, @NotNull ElLog LOG) {
       var gavas = new GetAssignmentValueArgsStatement(inst);
 
       final int args_size = inst.getArgsSize();
