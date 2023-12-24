@@ -34,11 +34,10 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 
 	@Override
 	public void act(final @NotNull WritePipelineSharedState st, final WP_State_Control sc) {
-		Preconditions.checkState(st.getGr() != null);
-		Preconditions.checkState(st.sys != null);
+		Preconditions.checkNotNull(st.getGr());
+		Preconditions.checkNotNull(st.sys);
 
-		GenerateResult result = st.getGr();
-
+		final GenerateResult result = st.getGr();
 		final SPrintStream sps = new SPrintStream();
 		//DebugBuffersLogic.debug_buffers_logic(result, sps);
 
@@ -54,7 +53,11 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 		act0(st, result, cs, ns, fs);
 	}
 
-	private void act0(final @NotNull WritePipelineSharedState st, final GenerateResult result, final @NotNull List<EvaClass> cs, final @NotNull List<EvaNamespace> ns, final @NotNull List<BaseEvaFunction> fs) {
+	private void act0(final @NotNull WritePipelineSharedState st,
+					  final GenerateResult result,
+					  final @NotNull List<EvaClass> cs,
+					  final @NotNull List<EvaNamespace> ns,
+					  final @NotNull List<BaseEvaFunction> fs) {
 		final CP_Paths paths = st.c.paths();
 		paths.signalCalculateFinishParse(); // TODO maybe move this 06/22
 

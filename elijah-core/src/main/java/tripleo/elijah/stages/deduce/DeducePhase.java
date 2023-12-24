@@ -9,6 +9,7 @@
  */
 package tripleo.elijah.stages.deduce;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
@@ -965,14 +966,11 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		}
 
 		public void add(EvaNode aClass) {
+			Preconditions.checkArgument(aClass instanceof EvaClass);
+
 			pa._send_GeneratedClass(aClass);
 
 			generatedClasses.add(aClass);
-		}
-
-		public void addAll(@NotNull List<EvaNode> lgc) {
-			// TODO is this method really needed
-			generatedClasses.addAll(lgc);
 		}
 
 		public @NotNull List<EvaNode> copy() {

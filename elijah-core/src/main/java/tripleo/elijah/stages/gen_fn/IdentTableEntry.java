@@ -394,9 +394,9 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		//assert __gf != null;
 		//assert this._deduceTypes2() != null;
 		//
-		//if (element instanceof FunctionDef fd) {
-		//	NotImplementedException.raise_stop();
-		//}
+		if (element instanceof FunctionDef fd) {
+			NotImplementedException.raise_stop();
+		}
 		//
 		//_p_elementPromise.then(x -> {
 		//	NotImplementedException.raise_stop();

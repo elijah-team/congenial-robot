@@ -13,10 +13,14 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.VariableTableType;
 
 public class DT_Function {
+	public BaseEvaFunction getGeneratedFunction() {
+		return generatedFunction;
+	}
+
 	private final BaseEvaFunction generatedFunction;
-	private final DeduceTypes2 d;
-	private boolean            deducedAlready;
-	private DeducePhase __state_dp;
+	private final DeduceTypes2    d;
+	private       boolean         deducedAlready;
+	private       DeducePhase     __state_dp;
 
 	public DT_Function(final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aD) {
 		generatedFunction = aGeneratedFunction;

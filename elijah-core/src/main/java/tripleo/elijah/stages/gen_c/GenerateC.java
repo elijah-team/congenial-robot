@@ -364,13 +364,6 @@ public class GenerateC
     }
   }
 
-  // public void generate_constructor(final IPP_Constructor aGf, final GenerateResult aGr, final
-  // WorkList aWl, final GenerateResultSink aResultSink, final WorkManager aWorkManager, final
-  // GenerateResultEnv aFileGen) {
-  //	generate_constructor(deduced(aGf.get2Carrier()), aGr, aWl, aResultSink, aWorkManager,
-  // aFileGen);
-  // }
-
   private void generateIdent(@NotNull IdentTableEntry identTableEntry) {
     assert identTableEntry.isResolved();
 

@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.i.IPipelineAccess;
@@ -496,8 +497,8 @@ public class DeduceTypes2 {
 			}
 		}
 /*
-				if (i2 instanceof IntegerIA) {
-					int i2i = to_int(i2);
+				if (constTableIA instanceof IntegerIA) {
+					int i2i = to_int(constTableIA);
 					VariableTableEntry vte = generatedFunction.getVarTableEntry(i2i);
 					int y =2;
 				} else
@@ -569,7 +570,7 @@ public class DeduceTypes2 {
 	void do_call(final @NotNull BaseEvaFunction generatedFunction, final @NotNull FunctionDef fd, final @NotNull Instruction instruction, final @NotNull Context context) {
 		final int                     pte_num = ((ProcIA) instruction.getArg(0)).index();
 		final @NotNull ProcTableEntry pte     = generatedFunction.getProcTableEntry(pte_num);
-//				final InstructionArgument i2 = (instruction.getArg(1));
+//				final InstructionArgument constTableIA = (instruction.getArg(1));
 		{
 			final @NotNull IdentIA identIA = (IdentIA) pte.expression_num;
 
@@ -730,8 +731,9 @@ public class DeduceTypes2 {
 				de3_ite.dan(generatedFunction, instruction, aContext, vte, identIA, idte, this);
 			} else if (i2 instanceof ProcIA) {
 				throw new NotImplementedException();
-			} else
+			} else {
 				throw new NotImplementedException();
+			}
 		} else if (agn_lhs instanceof IdentIA arg) {
 			final @NotNull IdentTableEntry agn_lhs_ite = arg.getEntry();
 			final InstructionArgument      agn_rhs_ia  = instruction.getArg(1);
@@ -741,19 +743,38 @@ public class DeduceTypes2 {
 			} else if (agn_rhs_ia instanceof final @NotNull FnCallArgs fca) {
 				tasticFor(agn_rhs_ia).do_assign_call(generatedFunction, aFd_ctx, agn_lhs_ite, instruction.getIndex());
 			} else if (agn_rhs_ia instanceof IdentIA identIA) {
-				if (agn_lhs_ite.getResolvedElement() instanceof VariableStatementImpl) {
-					do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_lhs_ite);
-				}
-				@NotNull IdentTableEntry agn_rhs_ite = identIA.getEntry();
-				do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_rhs_ite);
-				agn_lhs_ite.addPotentialType(instruction.getIndex(), agn_rhs_ite.type);
+				do_assign_ident(new DM_DoAssignIdent(generatedFunction, aFd_ctx, instruction, identIA, agn_lhs_ite));
 			} else if (agn_rhs_ia instanceof ConstTableIA) {
-				do_assign_constant(generatedFunction, instruction, agn_lhs_ite, (ConstTableIA) agn_rhs_ia);
+				do_assign_constant(new DM_DoAssignConstant(generatedFunction, instruction, agn_lhs_ite, (ConstTableIA) agn_rhs_ia));
 			} else if (agn_rhs_ia instanceof ProcIA) {
 				throw new NotImplementedException();
-			} else
+			} else {
 				throw new NotImplementedException();
+			}
 		}
+	}
+
+	public record DM_DoAssignIdent(
+			BaseEvaFunction generatedFunction,
+			Context fd_ctx,
+			Instruction instruction,
+			IdentIA identIA,
+			IdentTableEntry agn_lhs_ite
+	) {}
+
+	private void do_assign_ident(final DM_DoAssignIdent dai) {
+		final @NotNull BaseEvaFunction generatedFunction = dai.generatedFunction();
+		final @NotNull Context         aFd_ctx           = dai.fd_ctx();
+		final @NotNull Instruction     instruction       = dai.instruction();
+		final IdentIA                  identIA           = dai.identIA();
+		final @NotNull IdentTableEntry agn_lhs_ite       = dai.agn_lhs_ite();
+
+		if (agn_lhs_ite.getResolvedElement() instanceof VariableStatementImpl) {
+			do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_lhs_ite);
+		}
+		@NotNull IdentTableEntry agn_rhs_ite = identIA.getEntry();
+		do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_rhs_ite);
+		agn_lhs_ite.addPotentialType(instruction.getIndex(), agn_rhs_ite.type);
 	}
 
 	public static int to_int(@NotNull final InstructionArgument arg) {
@@ -1162,11 +1183,26 @@ public class DeduceTypes2 {
 	}
 
 	public void found_element_for_ite(BaseEvaFunction generatedFunction, @NotNull IdentTableEntry ite, @Nullable OS_Element y, Context ctx, final DeduceCentral central) {
-		if (y != ite.getResolvedElement()) {
-			SimplePrintLoggerToRemoveSoon.println_err_2(String.format("2571 Setting FoundElement for ite %s to %s when it is already %s", ite, y, ite.getResolvedElement()));
-		}
+		final DT_Env env = central.getEnv();
 
-		var env = _inj().new_DT_Env(LOG, errSink, central);
+		found_element_for_ite(generatedFunction, ite, y, ctx, central, env);
+	}
+
+	public void found_element_for_ite(BaseEvaFunction generatedFunction,
+									  @NotNull IdentTableEntry ite,
+									  @Nullable OS_Element y,
+									  Context ctx,
+									  final DeduceCentral central,
+									  final DT_Env env) {
+		if (y != ite.getResolvedElement()) {
+			final Finally REPORTS = module.getCompilation().reports();
+
+			final String s = String.format("2571 Setting FoundElement for ite %s to %s when it is already %s", ite, y, ite.getResolvedElement());
+			if (REPORTS.outputOn(Finally.Outs.Out_6011189)) {
+				SimplePrintLoggerToRemoveSoon.println_err_2(s);
+			}
+			LOG.info(s);
+		}
 
 		@NotNull Found_Element_For_ITE fefi = _inj().new_Found_Element_For_ITE(generatedFunction, ctx, env, _inj().new_DeduceClient1(this));
 		fefi.action(ite);
@@ -1212,50 +1248,23 @@ public class DeduceTypes2 {
 		return aType.getResolved() != null ? aType.getResolved() : aType.getTypeName();
 	}
 
-	void implement_construct(BaseEvaFunction generatedFunction, Instruction instruction, final Context aContext) {
-		final @NotNull Implement_construct ic = _inj().new_Implement_construct(this, generatedFunction, instruction);
-		try {
-			ic.action(aContext);
-		} catch (FCA_Stop e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	@NotNull List<TypeTableEntry> getPotentialTypesVte(@NotNull VariableTableEntry vte) {
 		return _inj().new_ArrayList__TypeTableEntry(vte.potentialTypes());
 	}
+	
+	public record DM_DoAssignConstant(
+			@NotNull BaseEvaFunction generatedFunction,
+			@NotNull Instruction instruction,
+			@NotNull IdentTableEntry idte,
+			@NotNull ConstTableIA constTableIA
+	) {}
+	
+	private void do_assign_constant(DM_DoAssignConstant dac) {
+		final @NotNull BaseEvaFunction generatedFunction = dac.generatedFunction();
+		final @NotNull Instruction     instruction       = dac.instruction();
+		final @NotNull IdentTableEntry idte              = dac.idte();
+		final @NotNull ConstTableIA    i2                = dac.constTableIA();
 
-	private void __post_deferred_calls(final @NotNull BaseEvaFunction generatedFunction, final @NotNull Context fd_ctx) {
-		//
-		// NOW CALCULATE DEFERRED CALLS
-		//
-		for (final Integer deferred_call : generatedFunction.deferred_calls) {
-			final Instruction instruction = generatedFunction.getInstruction(deferred_call);
-
-			final int                     i1  = to_int(instruction.getArg(0));
-			final InstructionArgument     i2  = (instruction.getArg(1));
-			final @NotNull ProcTableEntry fn1 = generatedFunction.getProcTableEntry(i1);
-			{
-//				generatedFunction.deferred_calls.remove(deferred_call);
-				Implement_Calls_ ic = _inj().new_Implement_Calls_(generatedFunction, fd_ctx, i2, fn1, instruction.getIndex(), this);
-				ic.action();
-			}
-		}
-	}
-
-//	private GeneratedNode makeNode(GenType aGenType) {
-//		if (aGenType.ci instanceof ClassInvocation) {
-//			final ClassInvocation ci = (ClassInvocation) aGenType.ci;
-//			@NotNull GenerateFunctions gen = phase.generatePhase.getGenerateFunctions(ci.getKlass().getContext().module());
-//			WlGenerateClass wlgc = _inj().new_WlGenerateClass(gen, ci, phase.generatedClasses);
-//			wlgc.run(null);
-//			return wlgc.getResult();
-//		}
-//		return null;
-//	}
-
-	private void do_assign_constant(final @NotNull BaseEvaFunction generatedFunction, final @NotNull Instruction instruction, final @NotNull IdentTableEntry idte, final @NotNull ConstTableIA i2) {
 		if (idte.type != null && idte.type.getAttached() != null) {
 			// TODO check types
 		}
@@ -2181,7 +2190,7 @@ public class DeduceTypes2 {
 
 		private boolean action_dunder(String pn) {
 			assert Pattern.matches("__[a-z]+__", pn);
-//			LOG.info(String.format("i2 is not IntegerIA (%s)",i2.getClass().getName()));
+//			LOG.info(String.format("constTableIA is not IntegerIA (%s)",constTableIA.getClass().getName()));
 			//
 			// try to get dunder method from class
 			//
