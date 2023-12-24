@@ -29,7 +29,7 @@ import tripleo.elijah.nextgen.spi.SPI_ReactiveDimension;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_ProcTableEntry;
-//import tripleo.elijah.stages.gen_c.internal_t._GenerateC_T;
+import tripleo.elijah.stages.gen_c.internal_t._GenerateC_T;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
@@ -1071,14 +1071,15 @@ public class GenerateC
       if (generatedNode instanceof final @NotNull EvaContainerNC nc) {
 
         nc.generateCode(_fileGen, this);
-        final @NotNull Collection<EvaNode> gn1 =
-            (nc.functionMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
+
+        final @NotNull Collection<EvaNode> gn1 = (nc.functionMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
         final GenerateResult gr3 = this.generateCode(gn1, fg);
         grs.additional(gr3);
-        final @NotNull Collection<EvaNode> gn2 =
-            (nc.classMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
+
+        final @NotNull Collection<EvaNode> gn2 = (nc.classMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
         final GenerateResult gr4 = this.generateCode(gn2, fg);
         grs.additional(gr4);
+
       } else {
         LOG.info("2009 " + generatedNode.getClass().getName());
       }
