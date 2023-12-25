@@ -167,11 +167,15 @@ public class DR_Ident implements DR_Item {
 		}
 		//u.add(aUnderstanding);
 
-		var i1 = ident.getName();
-		var i2 = ((IdentExpression) vteBl1.getResolvedElement()).getName();
+		var i1 = ident != null ? ident.getName() : null;
+		final IdentExpression osElement = vteBl1 != null ? (IdentExpression) vteBl1.getResolvedElement() : null;
+		var i2 = osElement != null ? (osElement).getName() : null;
 
 		if (i1 != null) {
 			i1.addUnderstanding(aUnderstanding.getENU());
+		}
+		if (i2 != null) {
+			i2.addUnderstanding(aUnderstanding.getENU());
 		}
 	}
 
