@@ -1,7 +1,10 @@
 package tripleo.elijah.stateful.annotation.processor;
 
 import com.google.auto.service.AutoService;
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.stateful.DefaultStateful;
+import tripleo.elijah.stateful.StateRegistrationToken;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -89,11 +92,38 @@ public class StatefulProcessor extends AbstractProcessor {
 		out.println("import tripleo.elijah.stateful.*;\n");
 		out.println();
 
-		out.print("/*public*/ enum ");
+		out.print("public class ");
 		out.print(builderSimpleClassName);
 		out.println(" {");
-		out.println("  ;");
+		//out.println("  ;");
 		out.println();
+		out.println();
+
+		var s = "public static class " + simpleClassName + "__STX" + " implements State {" +
+				"""
+							private StateRegistrationToken identity;
+									
+							@Override
+							public void apply(final DefaultStateful element) {
+								//implementation here
+							}
+									
+							@Override
+							public boolean checkState(final DefaultStateful aElement3) {
+								return true;
+							}
+									
+							@Override
+							public void setIdentity(final StateRegistrationToken aId) {
+								identity = aId;
+							}
+						}
+							""";
+
+		out.println(s);
+		out.println();
+		out.println();
+
 
 		out.print("    public static State __");
 		out.print(simpleClassName);
@@ -106,7 +136,9 @@ public class StatefulProcessor extends AbstractProcessor {
 		out.print(" = aRegistrationTarget.registerState(new ");
 
 		out.print(simpleClassName);
-		out.println("());");
+		out.println("__STX());");
+		out.println();
+		out.println('}');
 
 		setterMap.entrySet().forEach(setter -> {
 			String methodName   = setter.getKey();
@@ -114,22 +146,24 @@ public class StatefulProcessor extends AbstractProcessor {
 
 			out.print("    public ");
 			out.print(builderSimpleClassName);
-			out.print(" ");
+			out.print("X ");
 			out.print(methodName);
 
 			out.print("(");
 
 			out.print(argumentType);
 			out.println(" value) {");
+			out.print("    " + builderSimpleClassName + "X object = new ");
+			out.print(" " + builderSimpleClassName + "X();");
 			out.print("        object.");
-			out.print(methodName);
-			out.println("(value);");
-			out.println("        return this;");
+			//out.print(methodName);
+			out.print("apply");
+			out.println("(null);");
+			out.println("        return object;");
 			out.println("    }");
 			out.println();
 		});
 
-		out.println("}");
 		out.println("}");
 	}
 
