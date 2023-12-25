@@ -1,5 +1,6 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
+import io.reactivex.rxjava3.core.CompletableConverter;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +27,7 @@ import tripleo.elijah.util.Operation2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class DeduceElement3_IdentTableEntry extends DefaultStateful implements IDeduceElement3 {
 
@@ -621,44 +623,46 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 
 		@Override
 		public void apply(final DefaultStateful element) {
-			final DeduceElement3_IdentTableEntry ite_de          = ((DeduceElement3_IdentTableEntry) element);
-			final IdentTableEntry                identTableEntry = ite_de.principal;
+			if (element instanceof DeduceElement3_IdentTableEntry ite_de) {
+				final IdentTableEntry identTableEntry = ite_de.principal;
 
-			identTableEntry.backlinkSet().then(new DoneCallback<InstructionArgument>() {
-				@Override
-				public void onDone(final InstructionArgument backlink0) {
-					BaseTableEntry backlink;
+				identTableEntry.backlinkSet().then((InstructionArgument backlink0) -> {
+					final Consumer<BaseTableEntry> setBacklinkCallback2 = (BaseTableEntry backlink) -> {
+						if (backlink instanceof final ProcTableEntry procTableEntry) {
+							procTableEntry.typeResolvePromise().then((final @NotNull GenType result) -> {
+								final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
+
+								if (result.getCi() == null && result.getNode() == null)
+									result.genCIForGenType2(de3_ite.deduceTypes2());
+
+								for (EvaContainer.VarTableEntry entry : ((EvaContainerNC) result.getNode()).varTable) {
+									if (!entry.isResolved()) {
+										System.err.println("629 entry not resolved " + entry.nameToken);
+									}
+								}
+							});
+						}
+					};
+
+					@Nullable BaseTableEntry backlink;
 
 					if (backlink0 instanceof IdentIA) {
 						backlink = ((IdentIA) backlink0).getEntry();
-						setBacklinkCallback(backlink);
+						setBacklinkCallback2.accept(backlink);
 					} else if (backlink0 instanceof IntegerIA) {
 						backlink = ((IntegerIA) backlink0).getEntry();
-						setBacklinkCallback(backlink);
+						setBacklinkCallback2.accept(backlink);
 					} else if (backlink0 instanceof ProcIA) {
 						backlink = ((ProcIA) backlink0).getEntry();
-						setBacklinkCallback(backlink);
-					} else
+						setBacklinkCallback2.accept(backlink);
+					} else {
+						//noinspection UnusedAssignment
 						backlink = null;
-				}
-
-				public void setBacklinkCallback(BaseTableEntry backlink) {
-					if (backlink instanceof final ProcTableEntry procTableEntry) {
-						procTableEntry.typeResolvePromise().then((final @NotNull GenType result) -> {
-							final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
-
-							if (result.getCi() == null && result.getNode() == null)
-								result.genCIForGenType2(de3_ite.deduceTypes2());
-
-							for (EvaContainer.VarTableEntry entry : ((EvaContainerNC) result.getNode()).varTable) {
-								if (!entry.isResolved()) {
-									System.err.println("629 entry not resolved " + entry.nameToken);
-								}
-							}
-						});
 					}
-				}
-			});
+				});
+			} else {
+				throw new NotImplementedException();
+			}
 		}
 
 		@Override
