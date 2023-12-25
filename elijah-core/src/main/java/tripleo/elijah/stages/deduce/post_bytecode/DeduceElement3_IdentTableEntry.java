@@ -667,7 +667,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 
 		@Override
 		public boolean checkState(final DefaultStateful aElement3) {
-			return true;
+			return aElement3 instanceof DeduceElement3_IdentTableEntry;
 		}
 
 		@Override
