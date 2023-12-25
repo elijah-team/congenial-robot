@@ -45,7 +45,9 @@
 		-->
 
 		<module>tripleo-small</module>
+<!--
 		<module>elijah-nextgen-outputstatement</module>
+-->
 		<module>elijah-stateful</module>
 		<module>tripleo-reactive</module>
 		<!--
