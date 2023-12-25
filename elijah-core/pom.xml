@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>tripleo.elijah</groupId>
 		<artifactId>congenial-robot</artifactId>
-<!--		<version>2023.congenial.12</version>-->
+		<!--		<version>2023.congenial.12</version>-->
 		<version>2023.congenial.11.something-after-rosetta</version>
 
 	</parent>
 
 	<artifactId>tripleo.elijah.core</artifactId>
-<!--	<name>elijah-core</name> -->
+	<!--	<name>elijah-core</name> -->
 	<name>tripleo.elijah.core</name>
 	<description>elijah-core</description>
 	<properties>
@@ -33,14 +33,20 @@
 		</dependency>
 
 
-
-
 		<dependency>
 			<groupId>tripleo.elijah</groupId>
 			<artifactId>tripleo.elijah.good-api</artifactId>
 			<version>congenial.2023-12</version>
 			<scope>compile</scope>
 		</dependency>
+<!--
+		<dependency>
+			<groupId>tripleo.elijah</groupId>
+			<artifactId>elijah-core-api</artifactId>
+			<version>2023.congenial.2ep4</version>
+			<scope>compile</scope>
+		</dependency>
+-->
 
 
 		<dependency>
