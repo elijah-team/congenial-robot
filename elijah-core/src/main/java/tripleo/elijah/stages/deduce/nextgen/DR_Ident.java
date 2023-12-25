@@ -185,6 +185,7 @@ public class DR_Ident implements DR_Item {
 			case FORMAL_ARG_LIST_ITEM -> {
 				yield ((FormalArgListItem) osElement).getEnName();
 			}
+			case UNKNOWN -> null;
 			default -> {
 				throw new IllegalStateException("Unexpected value: " + DecideElObjectType.getElObjectType(osElement));
 				//yield null;
