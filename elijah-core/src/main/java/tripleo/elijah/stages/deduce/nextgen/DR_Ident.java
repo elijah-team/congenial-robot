@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.*;
+import tripleo.elijah.lang.nextgen.names.i.EN_Name;
 import tripleo.elijah.lang.nextgen.names.i.EN_Understanding;
 import tripleo.elijah.stages.deduce.DT_Function;
 import tripleo.elijah.stages.deduce.post_bytecode.DG_ClassStatement;
@@ -167,9 +168,28 @@ public class DR_Ident implements DR_Item {
 		}
 		//u.add(aUnderstanding);
 
-		var i1 = ident != null ? ident.getName() : null;
-		final IdentExpression osElement = vteBl1 != null ? (IdentExpression) vteBl1.getResolvedElement() : null;
-		var i2 = osElement != null ? (osElement).getName() : null;
+		final EN_Name i1 = ident != null ? ident.getName() : null;
+
+		final var osElement = vteBl1 != null ? vteBl1.getResolvedElement() : null;
+
+		//IdentExpression i2 = osElement != null ? switch (DecideElObjectType.getElObjectType(osElement)) {
+		//	case FORMAL_ARG_LIST_ITEM -> {
+		//		yield ((FormalArgListItem) osElement).getNameToken();
+		//	}
+		//	default -> {
+		//		//throw new IllegalStateException("Unexpected value: " + DecideElObjectType.getElObjectType(osElement));
+		//		yield null;
+		//	}
+		//} : null;
+		final EN_Name i2 = osElement != null ? switch (DecideElObjectType.getElObjectType(osElement)) {
+			case FORMAL_ARG_LIST_ITEM -> {
+				yield ((FormalArgListItem) osElement).getEnName();
+			}
+			default -> {
+				throw new IllegalStateException("Unexpected value: " + DecideElObjectType.getElObjectType(osElement));
+				//yield null;
+			}
+		} : null;
 
 		if (i1 != null) {
 			i1.addUnderstanding(aUnderstanding.getENU());
