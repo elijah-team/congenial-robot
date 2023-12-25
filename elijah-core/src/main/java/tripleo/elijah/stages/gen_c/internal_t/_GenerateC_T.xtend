@@ -2,18 +2,18 @@ package tripleo.elijah.stages.gen_c.internal_t;
 
 import java.util.HashMap
 import java.util.Map
+import tripleo.elijah.stages.gen_c.DeducedBaseEvaFunction
+import tripleo.elijah.stages.gen_c.GenerateC
+import tripleo.elijah.stages.gen_c.WhyNotGarish_Class
+import tripleo.elijah.stages.gen_c.WhyNotGarish_Constructor
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Function
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Item
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Namespace
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction
+import tripleo.elijah.stages.gen_fn.EvaClass
+import tripleo.elijah.stages.gen_fn.EvaConstructor
 import tripleo.elijah.stages.gen_fn.EvaNamespace
 import tripleo.elijah.stages.gen_fn.EvaNode
-import tripleo.elijah.stages.gen_c.GenerateC
-import tripleo.elijah.stages.gen_c.WhyNotGarish_Constructor
-import tripleo.elijah.stages.gen_fn.EvaConstructor
-import tripleo.elijah.stages.gen_fn.EvaClass
-import tripleo.elijah.stages.gen_c.WhyNotGarish_Class
-import tripleo.elijah.stages.gen_c.DeducedBaseEvaFunction
 
 abstract class _GenerateC_T {
 	protected final Map<EvaNode, WhyNotGarish_Item> a_directory = new HashMap();
