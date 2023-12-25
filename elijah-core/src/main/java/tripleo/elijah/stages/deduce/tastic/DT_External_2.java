@@ -198,7 +198,7 @@ public class DT_External_2 implements DT_External {
 			});
 		});
 
-		ite1._p_resolvedElementPromise.fail(aResolveError -> {
+		ite1._p_resolvedElementPromise.onFail(aResolveError -> {
 			// TODO create Diagnostic and quit
 			LOG.info("1005 Can't find element for " + aResolveError);
 		});
