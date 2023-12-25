@@ -625,6 +625,8 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		public void apply(final DefaultStateful element) {
 			if (element instanceof DeduceElement3_IdentTableEntry ite_de) {
 				final IdentTableEntry identTableEntry = ite_de.principal;
+			assert element instanceof DeduceElement3_IdentTableEntry;
+
 
 				identTableEntry.backlinkSet().then((InstructionArgument backlink0) -> {
 					final Consumer<BaseTableEntry> setBacklinkCallback2 = (BaseTableEntry backlink) -> {
