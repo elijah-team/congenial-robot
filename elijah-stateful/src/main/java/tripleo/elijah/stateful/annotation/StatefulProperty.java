@@ -1,4 +1,4 @@
-package tripleo.elijah.stateful.annotation.processor;
+package tripleo.elijah.stateful.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
