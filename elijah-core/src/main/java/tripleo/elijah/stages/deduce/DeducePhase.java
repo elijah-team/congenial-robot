@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ElijahInternal;
 import tripleo.elijah.Eventual;
+import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
@@ -67,7 +68,7 @@ import static tripleo.elijah.util.Helpers.List_of;
 /**
  * Created 12/24/20 3:59 AM
  */
-public class DeducePhase extends _RegistrationTarget implements ReactiveDimension {
+public class DeducePhase extends _RegistrationTarget implements ReactiveDimension, EventualRegister {
 	private @NotNull
 	final DeducePhaseInjector __inj = new DeducePhaseInjector();
 
@@ -784,6 +785,14 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		return functionMap;
 	}
 
+	public <T> Eventual<T> new_Eventual() {
+		final Eventual<T> R = new Eventual<>();
+
+		R.register(this);
+
+		return R;
+	}
+
 	enum DeducePhaseProvenance {
 		DeduceTypes_create // 196
 	}
@@ -1208,6 +1217,60 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 			return new WlGenerateClass(aGenerateFunctions, aClassInvocation, aGeneratedClasses, aCodeRegistrar, aEnv);
 		}
 	}
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//public class DefaultEventualRegister implements EventualRegister {
+		final List<Eventual<?>> _eventuals = new ArrayList<Eventual<?>>();
+
+		//public DefaultEventualRegister() {
+		//}
+
+		@Override
+		public <P> void register(final Eventual<P> e) {
+			_eventuals.add(e);
+		}
+
+		@Override
+		public void checkFinishEventuals() {
+			int y = 0;
+			for (Eventual<?> eventual : _eventuals) {
+				if (eventual.isResolved()) {
+				} else {
+					System.err.println("[PipelineLogic::checkEventual] failed for " + eventual.description());
+				}
+			}
+		}
+	//}
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
 }
 
 //
