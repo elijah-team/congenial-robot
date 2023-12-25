@@ -7,7 +7,12 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.ICompilationAccess2;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
 import tripleo.elijah.nextgen.output.NG_OutputStatement;
-import tripleo.elijah.nextgen.outputstatement.*;
+import tripleo.elijah.nextgen.outputstatement.EG_CompoundStatement;
+import tripleo.elijah.nextgen.outputstatement.EG_Naming;
+import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
+import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
+import tripleo.elijah.nextgen.outputstatement.EG_Statement;
+import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
@@ -21,8 +26,8 @@ public enum WPIS_GenerateOutputsFinalizer {
 	static void _finalizeItems(final @NotNull List<NG_OutputItem> aItms,
 							   final List<NG_OutputRequest> aOrs1,
 							   final OutputStrategyC aOutputStrategyC,
-							   final ICompilationAccess2 ca) {
-		var cot  = ca.getOutputTree();
+							   final ICompilationAccess2 ca2) {
+		var cot  = ca2.getOutputTree();
 		var aCot = cot;
 		for (NG_OutputItem o : aItms) {
 			var oxs = o.getOutputs();
@@ -63,14 +68,14 @@ public enum WPIS_GenerateOutputsFinalizer {
 		for (WPIS_GenerateOutputs.Writeable writable : writables) {
 			final EOT_OutputFile.FileNameProvider filename   = writable.getFilenameProvider();
 			final EG_Statement                    statement0 = writable.statement();
-			final List<EG_Statement>              list2      = relist3(statement0);
+			final List<EG_Statement>              list2     = relist3(statement0);
 			final EG_Statement                    statement;
 
 			if (filename.getFilename().endsWith(".h")) {
 				final String uuid = "elinc_%s".formatted(UUID.randomUUID().toString().replace('-', '_'));
 
-				final EG_Statement b = EG_Statement.of("#ifndef %s\n#define %s 1\n\n".formatted(uuid, uuid), EX_Explanation.withMessage("Header file prefix"));
-				final EG_Statement e = EG_Statement.of("\n#endif\n", EX_Explanation.withMessage("Header file postfix"));
+				final EG_SingleStatement b = new EG_SingleStatement("#ifndef %s\n#define %s 1\n\n".formatted(uuid, uuid), EX_Explanation.withMessage("Header file prefix"));
+				final EG_SingleStatement e = new EG_SingleStatement("\n#endif\n", EX_Explanation.withMessage("Header file postfix"));
 
 				if (false) {
 					//final List<EG_Statement> list3 = new ArrayList<>(list2.size() + 2);
@@ -80,14 +85,17 @@ public enum WPIS_GenerateOutputsFinalizer {
 					//
 					//statement = new EG_SequenceStatement(new EG_Naming("relist3"), list3);
 				} else {
-					statement = new EG_CompoundStatement(b, e, list2, false, EX_Explanation.withMessage("djksaldnsajlkda"));
+					var m = new EG_SequenceStatement(new EG_Naming("relist2"), list2);
+					var msg = EX_Explanation.withMessage("djksaldnsajlkda");
+					statement = new EG_CompoundStatement(b, e, m, false, msg);
 				}
 			} else {
 				statement = statement0;
 			}
 
-			final EOT_OutputFile off = ca.createOutputFile(writable.inputs(), filename, EOT_OutputType.SOURCES, statement);
-			ca.addCodeOutput(filename, off, true);
+			// eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+			final EOT_OutputFile off = ca2.createOutputFile(writable.inputs(), filename, EOT_OutputType.SOURCES, statement);
+			ca2.addCodeOutput(filename, off, true);
 		}
 	}
 
