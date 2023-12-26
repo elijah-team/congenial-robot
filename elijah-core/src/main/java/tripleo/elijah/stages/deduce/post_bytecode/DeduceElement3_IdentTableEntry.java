@@ -628,43 +628,46 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			final DeduceElement3_IdentTableEntry ite_de          = (DeduceElement3_IdentTableEntry) element;
 			final IdentTableEntry                identTableEntry = ite_de.principal;
 
-				identTableEntry.backlinkSet().then((InstructionArgument backlink0) -> {
-					final Consumer<BaseTableEntry> setBacklinkCallback2 = (BaseTableEntry backlink) -> {
-						if (backlink instanceof final ProcTableEntry procTableEntry) {
-							procTableEntry.typeResolvePromise().then((final @NotNull GenType result) -> {
-								final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
+			identTableEntry.backlinkSet().then((InstructionArgument backlink0) -> {
+				final Consumer<BaseTableEntry> setBacklinkCallback2 = (BaseTableEntry backlink) -> {
+					if (backlink instanceof final ProcTableEntry procTableEntry) {
+						procTableEntry.typeResolvePromise().then((final @NotNull GenType result) -> {
+							final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
 
-								if (result.getCi() == null && result.getNode() == null)
-									result.genCIForGenType2(de3_ite.deduceTypes2());
 
-								for (EvaContainer.VarTableEntry entry : ((EvaContainerNC) result.getNode()).varTable) {
-									if (!entry.isResolved()) {
-										System.err.println("629 entry not resolved " + entry.nameToken);
-									}
+
+							assert de3_ite == ite_de;
+
+
+
+							if (result.getCi() == null && result.getNode() == null)
+								result.genCIForGenType2(de3_ite.deduceTypes2());
+
+							for (EvaContainer.VarTableEntry entry : ((EvaContainerNC) result.getNode()).varTable) {
+								if (!entry.isResolved()) {
+									System.err.println("629 entry not resolved " + entry.nameToken);
 								}
-							});
-						}
-					};
-
-					@Nullable BaseTableEntry backlink;
-
-					if (backlink0 instanceof IdentIA) {
-						backlink = ((IdentIA) backlink0).getEntry();
-						setBacklinkCallback2.accept(backlink);
-					} else if (backlink0 instanceof IntegerIA) {
-						backlink = ((IntegerIA) backlink0).getEntry();
-						setBacklinkCallback2.accept(backlink);
-					} else if (backlink0 instanceof ProcIA) {
-						backlink = ((ProcIA) backlink0).getEntry();
-						setBacklinkCallback2.accept(backlink);
-					} else {
-						//noinspection UnusedAssignment
-						backlink = null;
+							}
+						});
 					}
-				});
-			} else {
-				throw new NotImplementedException();
-			}
+				};
+
+				@Nullable BaseTableEntry backlink;
+
+				if (backlink0 instanceof IdentIA) {
+					backlink = ((IdentIA) backlink0).getEntry();
+					setBacklinkCallback2.accept(backlink);
+				} else if (backlink0 instanceof IntegerIA) {
+					backlink = ((IntegerIA) backlink0).getEntry();
+					setBacklinkCallback2.accept(backlink);
+				} else if (backlink0 instanceof ProcIA) {
+					backlink = ((ProcIA) backlink0).getEntry();
+					setBacklinkCallback2.accept(backlink);
+				} else {
+					//noinspection UnusedAssignment
+					backlink = null;
+				}
+			});
 		}
 
 		@Override
