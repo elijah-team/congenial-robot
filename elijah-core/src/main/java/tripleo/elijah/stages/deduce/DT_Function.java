@@ -196,9 +196,10 @@ public class DT_Function {
 				OS_Element el  = vs.getParent().getParent();
 				OS_Element el2 = aEvaConstructor.getFD().getParent();
 				if (el != el2) {
-					if (el instanceof ClassStatement || el instanceof NamespaceStatement)
+					if (el instanceof ClassStatement || el instanceof NamespaceStatement) {
 						// NOTE there is no concept of gf here
 						aDeducePhase.registerResolvedVariable(identTableEntry, el, vs.getName());
+					}
 				}
 			}
 		}
