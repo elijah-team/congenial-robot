@@ -7,7 +7,7 @@ The elijah-lang compiler.
 
 ```shell
 E=`mktemp -d`
-git clone https://github.com/elijah-team/congenial-robot -b 2023-11-rosetta-w $E
+git clone https://github.com/elijah-team/congenial-robot -b 2023-congenial-12wp $E
 mkdir $E/COMP
 #cd congenial-robot
 #mkdir COMP
