@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gen_generic;
 
 import io.reactivex.rxjava3.core.Observer;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.stages.gen_c.OutputFileC;
 import tripleo.elijah.stages.gen_fn.*;

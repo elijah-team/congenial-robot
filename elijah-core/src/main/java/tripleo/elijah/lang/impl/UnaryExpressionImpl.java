@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.ExpressionKind;
 import tripleo.elijah.lang.i.IExpression;
 import tripleo.elijah.lang.i.OS_Type;

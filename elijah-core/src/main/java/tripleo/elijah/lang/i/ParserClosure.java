@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.i;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public interface ParserClosure extends ProgramClosure {
 	OS_Package defaultPackageName(Qualident aPackageName);

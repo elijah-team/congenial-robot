@@ -20,7 +20,7 @@
  */
 package tripleo.vendor.thinlet.objectwrapper;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.awt.*;
 import java.io.IOException;

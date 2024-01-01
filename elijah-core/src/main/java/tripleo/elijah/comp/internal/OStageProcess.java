@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.internal;
 
 import com.google.common.base.Preconditions;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.Pipeline;

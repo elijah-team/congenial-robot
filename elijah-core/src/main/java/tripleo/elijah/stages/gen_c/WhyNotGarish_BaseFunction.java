@@ -3,8 +3,8 @@ package tripleo.elijah.stages.gen_c;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.impl.DeferredObject;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.*;

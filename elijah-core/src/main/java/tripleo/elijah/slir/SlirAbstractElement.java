@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.slir;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.OS_Element;
 
 /**

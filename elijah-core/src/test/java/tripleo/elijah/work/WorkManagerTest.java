@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.work;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.junit.Ignore;
 import org.junit.Test;
 

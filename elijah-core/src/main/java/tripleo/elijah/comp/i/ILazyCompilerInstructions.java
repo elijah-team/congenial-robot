@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.i;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.internal.SourceFileParserParams;

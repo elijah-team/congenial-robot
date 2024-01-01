@@ -12,7 +12,7 @@ import antlr.Token;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.lang.i.IExpression;
 import tripleo.elijah.lang.i.StringExpression;

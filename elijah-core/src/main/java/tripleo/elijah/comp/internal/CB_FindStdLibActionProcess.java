@@ -3,7 +3,7 @@ package tripleo.elijah.comp.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import tripleo.elijah.comp.i.CB_Action;
 import tripleo.elijah.comp.i.CB_OutputString;

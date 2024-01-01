@@ -11,7 +11,7 @@ package tripleo.elijah.stages.gen_fn;
 import org.jdeferred2.Deferred;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.AbstractPromise;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Created 9/2/21 12:09 AM

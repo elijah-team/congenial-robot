@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.nextgen;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.nextgen.names.i.EN_Understanding;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 

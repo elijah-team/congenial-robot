@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.output;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.generate.OutputStrategyC;

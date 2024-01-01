@@ -1,6 +1,6 @@
 package tripleo.elijah.comp;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 
 import java.util.ArrayList;

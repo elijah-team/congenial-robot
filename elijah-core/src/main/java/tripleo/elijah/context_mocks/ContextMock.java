@@ -7,8 +7,8 @@
  */
 package tripleo.elijah.context_mocks;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.LookupResultList;

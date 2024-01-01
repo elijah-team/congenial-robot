@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.lang.i;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang2.ElElementVisitor;
 
 public interface OS_Element {

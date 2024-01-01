@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.nextgen;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.nextgen.composable.IComposable;
 import tripleo.elijah.stages.deduce.ClassInvocation;

@@ -10,7 +10,7 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;

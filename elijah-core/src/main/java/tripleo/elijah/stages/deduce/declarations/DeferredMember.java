@@ -11,7 +11,7 @@ package tripleo.elijah.stages.deduce.declarations;
 import lombok.Getter;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.lang.i.VariableStatement;

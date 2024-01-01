@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gdm;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.IdentExpression;

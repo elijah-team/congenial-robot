@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_c;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.util.Helpers;

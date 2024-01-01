@@ -1,7 +1,7 @@
 package tripleo.vendor.mal;
 
 import com.google.common.collect.ImmutableMap;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.vendor.mal.types.*;
 
 import java.io.File;

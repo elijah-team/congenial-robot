@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_fn_c;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.EvaPipeline;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.IPipelineAccess;

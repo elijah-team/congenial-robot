@@ -1,7 +1,7 @@
 package tripleo.elijah.lang.i;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.contexts.FuncExprContext;
 
 import java.util.List;

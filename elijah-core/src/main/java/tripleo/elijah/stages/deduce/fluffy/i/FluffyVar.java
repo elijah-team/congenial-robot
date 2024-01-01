@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.fluffy.i;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.diagnostic.Locatable;
 import tripleo.elijah.nextgen.composable.IComposable;
 

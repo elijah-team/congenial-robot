@@ -1,6 +1,6 @@
 package tripleo.elijah;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 

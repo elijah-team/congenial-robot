@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gen_c;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.InstructionArgument;

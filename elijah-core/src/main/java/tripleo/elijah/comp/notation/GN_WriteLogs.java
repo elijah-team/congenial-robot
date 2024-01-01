@@ -3,7 +3,7 @@ package tripleo.elijah.comp.notation;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.functionality.f202.F202;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.stages.logging.ElLog;

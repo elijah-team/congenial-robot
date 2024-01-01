@@ -1,7 +1,7 @@
 package tripleo.elijah.world.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;

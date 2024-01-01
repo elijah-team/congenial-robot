@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.IExpression;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_ConstantTableEntry;
 

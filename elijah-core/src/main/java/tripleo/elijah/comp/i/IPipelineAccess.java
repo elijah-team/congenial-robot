@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.jdeferred2.DoneCallback;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.AccessBus;

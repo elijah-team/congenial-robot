@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.internal;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.i.IProgressSink;
 import tripleo.elijah.comp.i.ProgressSinkComponent;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;

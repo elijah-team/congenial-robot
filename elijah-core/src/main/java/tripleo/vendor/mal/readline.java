@@ -4,8 +4,8 @@ package tripleo.vendor.mal;
 //import com.sun.jna.Library;
 //import com.sun.jna.Native;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.io.*;
 //import java.nio.charset.StandardCharsets;

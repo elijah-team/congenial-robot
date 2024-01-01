@@ -11,8 +11,8 @@ package tripleo.elijah.stages.deduce;
 
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.Promise;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.lang.i.Context;

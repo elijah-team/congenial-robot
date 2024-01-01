@@ -1,7 +1,7 @@
 package tripleo.elijah.nextgen.expansion;
 
 import junit.framework.TestCase;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.junit.Ignore;
 import org.junit.Test;
 import tripleo.elijah.comp.i.Compilation;

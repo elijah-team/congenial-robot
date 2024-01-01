@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.pp;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.stages.gen_c.DeducedBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;

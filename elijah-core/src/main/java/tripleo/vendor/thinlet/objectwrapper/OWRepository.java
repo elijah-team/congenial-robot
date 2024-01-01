@@ -20,7 +20,7 @@
  */
 package tripleo.vendor.thinlet.objectwrapper;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.vendor.thinlet.ThinletConstants;
 
 import java.lang.reflect.Constructor;

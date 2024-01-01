@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.i;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public enum ProgressSinkComponent {
 	CCI {

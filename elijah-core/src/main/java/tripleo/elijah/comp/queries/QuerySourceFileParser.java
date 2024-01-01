@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.queries;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.SourceFileParserParams;

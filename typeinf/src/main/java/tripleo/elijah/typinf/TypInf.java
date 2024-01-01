@@ -15,7 +15,7 @@ package tripleo.elijah.typinf;
 
 import lombok.Data;
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.NotImplementedException;
 

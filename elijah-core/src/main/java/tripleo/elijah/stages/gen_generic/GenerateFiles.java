@@ -2,8 +2,8 @@ package tripleo.elijah.stages.gen_generic;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaConstructor;
 import tripleo.elijah.stages.gen_fn.EvaFunction;

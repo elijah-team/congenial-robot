@@ -10,7 +10,7 @@
 //
 //import org.jdeferred2.impl.DeferredObject;
 //import org.jetbrains.annotations.Contract;
-//import org.jetbrains.annotations.NotNull;
+//import org.jspecify.annotations.NonNull;
 //import org.junit.Assert;
 //import org.junit.Ignore;
 //import org.junit.Test;

@@ -11,7 +11,7 @@
  */
 package tripleo.elijah.gen.nodes;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * @author Tripleo(sb)

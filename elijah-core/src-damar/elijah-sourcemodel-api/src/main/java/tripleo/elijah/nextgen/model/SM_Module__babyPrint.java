@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.model;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public enum SM_Module__babyPrint {
 	;
