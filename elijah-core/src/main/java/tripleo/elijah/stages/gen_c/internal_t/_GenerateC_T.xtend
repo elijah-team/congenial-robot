@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.gen_c.internal_t;
+package tripleo.elijah.stages.gen_c.internal_t
 
 import java.util.HashMap
 import java.util.Map
@@ -14,10 +14,13 @@ import tripleo.elijah.stages.gen_fn.EvaClass
 import tripleo.elijah.stages.gen_fn.EvaConstructor
 import tripleo.elijah.stages.gen_fn.EvaNamespace
 import tripleo.elijah.stages.gen_fn.EvaNode
+import java.util.Collection
 
 abstract class _GenerateC_T {
 	protected final Map<EvaNode, WhyNotGarish_Item> a_directory = new HashMap();
-
+	
+	def Collection<WhyNotGarish_Item> __directoryValues() { a_directory.values() }
+	
 	def WhyNotGarish_Constructor a_lookup(/*final*/ EvaConstructor aGf) {
 	  if (a_directory.containsKey(aGf)) {
 		return a_directory.get(aGf) as WhyNotGarish_Constructor;

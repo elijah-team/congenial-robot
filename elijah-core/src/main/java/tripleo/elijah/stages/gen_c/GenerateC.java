@@ -1046,12 +1046,12 @@ public class GenerateC
       final GenerateResult aGenerateResult, final WorkManager wm, final WorkList aWorkList) {
     assert _fileGen != null;
 
-    for (WhyNotGarish_Item value : new ArrayList<>(a_directory.values())) {
+    for (WhyNotGarish_Item value : new ArrayList<>(__directoryValues())) {
       if (!value.hasFileGen()) value.provideFileGen(_fileGen);
     }
   }
 
-  @Override
+@Override
   public GenerateResultEnv getFileGen() {
     return this._fileGen;
   }
