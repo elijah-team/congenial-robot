@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.slir;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.ImportStatement;
 import tripleo.elijah.lang.i.OS_Package;

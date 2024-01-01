@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.i;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.diagnostic.Locatable;
 import tripleo.elijah.lang2.ElElementVisitor;
 

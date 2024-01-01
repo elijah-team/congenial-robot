@@ -1,6 +1,6 @@
 package tripleo.elijah.u;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import tripleo.elijah.comp.i.CD_FindStdLib;
 import tripleo.elijah.lang.i.OS_Module;

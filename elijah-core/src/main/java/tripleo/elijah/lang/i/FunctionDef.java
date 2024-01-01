@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.i;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.contexts.FunctionContext;
 import tripleo.elijah.lang.types.OS_FuncType;
 import tripleo.elijah.lang2.ElElementVisitor;

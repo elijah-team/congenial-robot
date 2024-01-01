@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.stages.deduce.DeduceTypes2;

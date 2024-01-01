@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_c;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.diagnostic.Locatable;
 import tripleo.elijah.stages.deduce.post_bytecode.GCFM_Diagnostic;
 

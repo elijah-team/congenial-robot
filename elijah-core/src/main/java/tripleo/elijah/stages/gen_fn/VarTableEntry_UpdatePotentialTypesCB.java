@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.Context;

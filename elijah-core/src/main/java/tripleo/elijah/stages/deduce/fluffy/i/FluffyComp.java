@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.fluffy.i;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.OS_Module;
 
 public interface FluffyComp {

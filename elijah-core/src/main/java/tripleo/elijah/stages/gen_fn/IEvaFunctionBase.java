@@ -2,8 +2,8 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.reactive.Reactive;
 import tripleo.elijah.stages.deduce.DeduceElement;

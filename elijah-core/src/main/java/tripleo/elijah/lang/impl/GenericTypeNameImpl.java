@@ -11,7 +11,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.Qualident;
 import tripleo.elijah.lang.i.TypeModifiers;

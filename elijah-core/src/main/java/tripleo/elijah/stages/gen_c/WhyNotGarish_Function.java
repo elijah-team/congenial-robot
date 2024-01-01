@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.ICompilationAccess;

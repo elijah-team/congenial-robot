@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_generic;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.gen_fn.AbstractDependencyTracker;

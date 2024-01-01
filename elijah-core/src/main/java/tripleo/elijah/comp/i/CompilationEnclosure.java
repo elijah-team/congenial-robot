@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.subjects.Subject;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CompilationRunner;

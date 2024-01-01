@@ -9,7 +9,7 @@
 package tripleo.elijah.ci;
 
 import antlr.Token;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.lang.i.ExpressionList;
 import tripleo.elijah.lang.i.OS_Module;

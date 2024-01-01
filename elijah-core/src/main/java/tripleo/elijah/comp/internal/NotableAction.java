@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.internal;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.i.CB_Action;
 import tripleo.elijah.comp.i.CB_OutputString;
 import tripleo.elijah.comp.notation.GN_Notable;

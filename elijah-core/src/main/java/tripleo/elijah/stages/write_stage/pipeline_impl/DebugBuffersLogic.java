@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.write_stage.pipeline_impl;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.Old_GenerateResultItem;
 

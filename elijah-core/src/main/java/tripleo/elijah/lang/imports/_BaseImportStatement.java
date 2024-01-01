@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.lang.imports;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.AccessNotation;
 import tripleo.elijah.lang.i.El_Category;
 import tripleo.elijah.lang.i.ImportStatement;

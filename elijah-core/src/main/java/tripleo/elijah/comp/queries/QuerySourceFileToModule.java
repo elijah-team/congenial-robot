@@ -2,7 +2,7 @@ package tripleo.elijah.comp.queries;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.internal.Out;
 import tripleo.elijah.lang.i.OS_Module;

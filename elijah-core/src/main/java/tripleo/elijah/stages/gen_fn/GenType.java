@@ -2,8 +2,8 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.contexts.ClassContext;
 import tripleo.elijah.lang.i.*;

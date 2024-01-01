@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.garish;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang.i.TypeName;

@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.FormalArgList;
 import tripleo.elijah.lang.i.NormalTypeName;
 import tripleo.elijah.lang.i.Scope;

@@ -17,7 +17,7 @@
 
 package tripleo.vendor.org.apache.commons.cli;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Thrown when more than one option in an option group has been provided.

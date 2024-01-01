@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.deduce;
 
 import org.jdeferred2.DoneCallback;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.contexts.FunctionContext;
 import tripleo.elijah.diagnostic.Diagnostic;

@@ -1,6 +1,6 @@
 package tripleo.elijah.stateful;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

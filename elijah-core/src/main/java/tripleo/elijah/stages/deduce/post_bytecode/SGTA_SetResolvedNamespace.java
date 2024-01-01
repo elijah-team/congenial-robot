@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.stages.gen_fn.GenType;
 

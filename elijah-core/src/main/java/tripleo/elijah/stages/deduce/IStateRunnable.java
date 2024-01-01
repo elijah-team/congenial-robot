@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.stateful.DefaultStateful;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;

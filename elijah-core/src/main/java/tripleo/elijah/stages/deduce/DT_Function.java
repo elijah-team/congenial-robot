@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.deduce;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VariableTableEntry;

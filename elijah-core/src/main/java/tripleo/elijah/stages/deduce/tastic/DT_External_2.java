@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.lang.i.*;

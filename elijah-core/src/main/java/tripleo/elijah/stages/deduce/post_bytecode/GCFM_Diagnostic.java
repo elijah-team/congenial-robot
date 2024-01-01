@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.diagnostic.Locatable;
 

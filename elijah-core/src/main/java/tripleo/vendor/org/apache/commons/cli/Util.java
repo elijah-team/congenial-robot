@@ -17,8 +17,8 @@
 
 package tripleo.vendor.org.apache.commons.cli;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Contains useful helper methods for classes within this package.

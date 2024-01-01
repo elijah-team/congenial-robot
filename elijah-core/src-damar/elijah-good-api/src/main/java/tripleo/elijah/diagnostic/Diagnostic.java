@@ -9,8 +9,8 @@
 
 package tripleo.elijah.diagnostic;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.io.PrintStream;
 import java.util.List;

@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.*;
 
 public abstract class ProgramClosureImpl implements tripleo.elijah.lang.i.ProgramClosure {

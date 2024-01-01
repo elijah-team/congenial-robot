@@ -4,7 +4,7 @@ package tripleo.elijjah;
 
 import antlr.*;
 import antlr.collections.impl.BitSet;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.comp.internal.Out;
 import tripleo.elijah.contexts.*;
 import tripleo.elijah.lang.builder.TypeAliasBuilder;

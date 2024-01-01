@@ -10,8 +10,8 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.NamespaceInvocation;

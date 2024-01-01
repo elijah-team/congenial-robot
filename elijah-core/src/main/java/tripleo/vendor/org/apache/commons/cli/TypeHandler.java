@@ -17,7 +17,7 @@
 
 package tripleo.vendor.org.apache.commons.cli;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce_c;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.lang.i.OS_Element;

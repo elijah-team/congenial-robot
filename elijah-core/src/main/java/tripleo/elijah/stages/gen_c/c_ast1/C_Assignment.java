@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_c.c_ast1;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.text.MessageFormat;
 

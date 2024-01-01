@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.stages.deduce;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.ClassStatement;
 
 import java.util.function.Supplier;

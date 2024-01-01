@@ -1,7 +1,7 @@
 package tripleo.elijah.comp;
 
 import com.google.common.collect.Multimap;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.nextgen.CP_Path;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;

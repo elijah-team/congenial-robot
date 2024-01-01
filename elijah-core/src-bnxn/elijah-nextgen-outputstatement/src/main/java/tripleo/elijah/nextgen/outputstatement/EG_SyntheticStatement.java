@@ -4,8 +4,8 @@
  */
 package tripleo.elijah.nextgen.outputstatement;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import tripleo.small.ES_Item;
 import tripleo.small.ES_String;
 import tripleo.small.ES_Symbol;

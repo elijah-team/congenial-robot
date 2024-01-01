@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.stages.deduce.NamespaceInvocation;
 import tripleo.elijah.stages.gen_fn.GenType;
 

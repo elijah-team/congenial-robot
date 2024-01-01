@@ -8,7 +8,7 @@
 // */
 //package tripleo.elijah.typinf.typing;
 //
-//import org.jetbrains.annotations.NotNull;
+//import org.jspecify.annotations.NonNull;
 //import org.junit.Test;
 //import tripleo.elijah.typinf.*;
 //import tripleo.elijah.typinf.parser.ParseError;

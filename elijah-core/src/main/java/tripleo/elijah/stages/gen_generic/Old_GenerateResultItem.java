@@ -8,7 +8,7 @@
 package tripleo.elijah.stages.gen_generic;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.util.buffer.Buffer;

@@ -9,7 +9,7 @@
 package tripleo.elijah.lang.i;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.contexts.ClassContext;
 
 /**

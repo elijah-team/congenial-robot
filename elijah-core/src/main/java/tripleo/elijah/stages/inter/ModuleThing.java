@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.inter;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.entrypoints.EntryPoint;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.gen_fn.EvaFunction;

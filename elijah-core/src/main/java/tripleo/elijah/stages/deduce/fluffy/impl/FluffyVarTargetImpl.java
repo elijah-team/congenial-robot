@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.fluffy.impl;
 
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyVarTarget;
 
 public class FluffyVarTargetImpl implements FluffyVarTarget {

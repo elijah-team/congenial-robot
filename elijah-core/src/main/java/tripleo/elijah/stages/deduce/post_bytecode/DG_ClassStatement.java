@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.ClassInvocation;

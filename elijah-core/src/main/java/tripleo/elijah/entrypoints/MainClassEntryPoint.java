@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.entrypoints;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.lang.i.*;
 
 import java.util.Collection;

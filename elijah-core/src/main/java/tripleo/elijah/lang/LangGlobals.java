@@ -1,6 +1,6 @@
 package tripleo.elijah.lang;
 
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.lang.i.ConstructorDef;

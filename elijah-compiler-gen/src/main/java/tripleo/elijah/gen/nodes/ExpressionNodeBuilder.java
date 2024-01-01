@@ -20,7 +20,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import tripleo.elijah.gen.CompilerContext;
 import tripleo.elijah.gen.Node;
 import tripleo.elijah.gen.TypeRef;
