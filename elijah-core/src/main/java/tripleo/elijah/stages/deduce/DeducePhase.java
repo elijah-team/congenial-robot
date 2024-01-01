@@ -69,17 +69,15 @@ import static tripleo.elijah.util.Helpers.List_of;
  * Created 12/24/20 3:59 AM
  */
 public class DeducePhase extends _RegistrationTarget implements ReactiveDimension, EventualRegister {
-	private @NotNull
-	final DeducePhaseInjector __inj = new DeducePhaseInjector();
+	private @NotNull final DeducePhaseInjector __inj = new DeducePhaseInjector();
+	private static final   String              PHASE = "DeducePhase";
 
 
 	public final @NotNull  ICodeRegistrar                               codeRegistrar;
 	public final @NotNull  GeneratedClasses                             generatedClasses;
 	public final @NotNull  GeneratePhase                                generatePhase;
-	@NotNull
-	public final           List<IFunctionMapHook>                       functionMapHooks        = _inj().new_ArrayList__IFunctionMapHook();
-	private final String PHASE = "DeducePhase";
-	final Multimap<OS_Module, Consumer<DeduceTypes2>> iWantModules = ArrayListMultimap.create();
+	public final @NotNull  List<IFunctionMapHook>                       functionMapHooks        = _inj().new_ArrayList__IFunctionMapHook();
+	final                  Multimap<OS_Module, Consumer<DeduceTypes2>>  iWantModules            = ArrayListMultimap.create();
 	private final @NotNull ICompilationAccess                           ca;
 	private final          Map<NamespaceStatement, NamespaceInvocation> namespaceInvocationMap  = _inj().new_HashMap__NamespaceInvocationMap();
 	private final          ExecutorService                              classGenerator          = Executors.newCachedThreadPool();
