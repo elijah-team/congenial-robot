@@ -1,11 +1,11 @@
 package tripleo.elijah.stages.gen_fn_r;
 
-import kotlin.jvm.internal.Intrinsics;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
+import tripleo.elijah.u.ElIntrinsics;
 
 public final class RegisterClassInvocation_env {
    private final @NotNull ClassInvocation ci;
@@ -13,7 +13,7 @@ public final class RegisterClassInvocation_env {
    private final @Nullable DeducePhase phase;
 
    public RegisterClassInvocation_env(@NotNull ClassInvocation ci, @Nullable DeduceTypes2 deduceTypes2, @Nullable DeducePhase phase) {
-      Intrinsics.checkNotNullParameter(ci, "ci");
+      ElIntrinsics.checkNotNullParameter(ci, "ci");
       this.ci = ci;
       this.deduceTypes2 = deduceTypes2;
       this.phase = phase;
@@ -37,13 +37,13 @@ public final class RegisterClassInvocation_env {
 
    public final @NotNull DeduceTypes2 deduceTypes2() {
       DeduceTypes2 var10000 = this.deduceTypes2;
-      Intrinsics.checkNotNull(var10000);
+      ElIntrinsics.checkNotNull(var10000);
       return var10000;
    }
 
    public final @NotNull DeducePhase phase() {
       DeducePhase var10000 = this.phase;
-      Intrinsics.checkNotNull(var10000);
+      ElIntrinsics.checkNotNull(var10000);
       return var10000;
    }
 
@@ -60,7 +60,7 @@ public final class RegisterClassInvocation_env {
    }
 
    public final @NotNull RegisterClassInvocation_env copy(@NotNull ClassInvocation ci, @Nullable DeduceTypes2 deduceTypes2, @Nullable DeducePhase phase) {
-      Intrinsics.checkNotNullParameter(ci, "ci");
+      ElIntrinsics.checkNotNullParameter(ci, "ci");
       return new RegisterClassInvocation_env(ci, deduceTypes2, phase);
    }
 
@@ -99,10 +99,10 @@ public final class RegisterClassInvocation_env {
          return false;
       } else {
          RegisterClassInvocation_env var2 = (RegisterClassInvocation_env)other;
-         if (!Intrinsics.areEqual(this.ci, var2.ci)) {
+         if (!ElIntrinsics.areEqual(this.ci, var2.ci)) {
             return false;
          } else {
-            return !Intrinsics.areEqual(this.deduceTypes2, var2.deduceTypes2) ? false : Intrinsics.areEqual(this.phase, var2.phase);
+            return !ElIntrinsics.areEqual(this.deduceTypes2, var2.deduceTypes2) ? false : ElIntrinsics.areEqual(this.phase, var2.phase);
          }
       }
    }
