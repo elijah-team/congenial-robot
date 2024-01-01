@@ -148,6 +148,31 @@
 					<target>17</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>./src-damar/elijah-sourcemodel-api/src/main/java</source>
+								<source>./src-damar/elijah-sourcemodel-impl/src/main/java</source>
+								<source>./src-damar/elijah-good-api/src/main/java</source>
+								<source>./src-bnxn/elijah-nextgen-outputstatement/src/main/java</source>
+								<source>./src-bnxn/elijah-stateful/src/main/java</source>
+								<source>./src-bnxn/tripleo-small/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
