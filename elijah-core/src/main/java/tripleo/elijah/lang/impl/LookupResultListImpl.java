@@ -90,11 +90,11 @@ public class LookupResultListImpl implements LookupResultList {
 	}
 
 	@Override
-	public @NotNull List<LookupResult> results() { // TODO want ImmutableList
+	public @NonNull List<LookupResult> results() { // TODO want ImmutableList
 		return _results;
 	}
 
-	private @NotNull List<LookupResult> getMaxScoredResults1(final @NotNull List<Predicate<OS_Element>> l) {
+	private @NonNull List<LookupResult> getMaxScoredResults1(final @NonNull List<Predicate<OS_Element>> l) {
 		final Map<LookupResult, Integer> new_results = new HashMap<LookupResult, Integer>();
 		int                              maxScore    = 0;
 

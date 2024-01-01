@@ -46,7 +46,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	private final          DeferredObject<GenType, Void, Void>             _p_fefiDone                = new DeferredObject<GenType, Void, Void>();
 	private final          DeferredObject<IdentTableEntry, Void, Void>     _p_resolveListenersPromise = new DeferredObject<>();
 	private final          DeduceElementIdent                              dei                        = new DeduceElementIdent(this);
-	private final @NotNull EvaExpression<IdentExpression>                  ident;
+	private final @NonNull EvaExpression<IdentExpression>                  ident;
 	private final          int                                             index;
 	private final          Context                                         pc;
 	private final          BaseEvaFunction                                 _definedFunction;
@@ -54,7 +54,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	private                EvaNode                                         resolvedType;
 	public                 ProcTableEntry                                  constructable_pte;
 	public                 boolean                                         fefi                       = false;
-	public @NotNull        Map<Integer, TypeTableEntry>                    potentialTypes             = new HashMap<Integer, TypeTableEntry>();
+	public @NonNull        Map<Integer, TypeTableEntry>                    potentialTypes             = new HashMap<Integer, TypeTableEntry>();
 	public                 boolean                                         preUpdateStatusListenerAdded;
 	public                 DeduceTypes2.PromiseExpectation<String>         resolveExpectation;
 	public                 TypeTableEntry                                  type;
@@ -136,8 +136,8 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return _p_backlinkSet.promise();
 	}
 
-	public @NotNull DeducePath buildDeducePath(BaseEvaFunction generatedFunction) {
-		@NotNull List<InstructionArgument> x = BaseEvaFunction._getIdentIAPathList(new IdentIA(index, generatedFunction));
+	public @NonNull DeducePath buildDeducePath(BaseEvaFunction generatedFunction) {
+		@NonNull List<InstructionArgument> x = BaseEvaFunction._getIdentIAPathList(new IdentIA(index, generatedFunction));
 		return new DeducePath(this, x);
 	}
 
@@ -151,7 +151,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	}
 
 	@Override
-	public @NotNull String expectationString() {
+	public @NonNull String expectationString() {
 		return "IdentTableEntry{" +
 				"index=" + index +
 				", ident=" + ident.get() +
@@ -176,7 +176,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return getDeduceElement3(this._deduceTypes2(), __gf);
 	}
 
-	public @NotNull DeduceElement3_IdentTableEntry getDeduceElement3(DeduceTypes2 aDeduceTypes2, BaseEvaFunction aGeneratedFunction) {
+	public @NonNull DeduceElement3_IdentTableEntry getDeduceElement3(DeduceTypes2 aDeduceTypes2, BaseEvaFunction aGeneratedFunction) {
 		if (_de3 == null) {
 			_de3                   = new DeduceElement3_IdentTableEntry(this);
 			_de3.deduceTypes2      = aDeduceTypes2;
@@ -185,7 +185,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return _de3;
 	}
 
-	public @NotNull DeduceElementIdent getDeduceElement() {
+	public @NonNull DeduceElementIdent getDeduceElement() {
 		return dei;
 	}
 
@@ -234,11 +234,11 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return resolvedType != null;
 	}
 
-	public void makeType(final @NotNull BaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NotNull Type aType, final IExpression aExpression) {
+	public void makeType(final @NonNull BaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NonNull Type aType, final IExpression aExpression) {
 		type = aGeneratedFunction.newTypeTableEntry(aType, null, aExpression, this);
 	}
 
-	public void makeType(final @NotNull BaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NotNull Type aType, final OS_Type aOS_Type) {
+	public void makeType(final @NonNull BaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NonNull Type aType, final OS_Type aOS_Type) {
 		type = aGeneratedFunction.newTypeTableEntry(aType, aOS_Type, getIdent(), this);
 	}
 
@@ -246,7 +246,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		_p_fefiDone.then(aCallback);
 	}
 
-	public void onType(@NotNull DeducePhase phase, OnType callback) {
+	public void onType(@NonNull DeducePhase phase, OnType callback) {
 		phase.onType(this, callback);
 	}
 
@@ -255,7 +255,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	}
 
 	//@SuppressFBWarnings("NP_NONNULL_RETURN_VIOLATION")
-	public @NotNull Collection<TypeTableEntry> potentialTypes() {
+	public @NonNull Collection<TypeTableEntry> potentialTypes() {
 		return potentialTypes.values();
 	}
 
@@ -315,7 +315,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		_p_backlinkSet.resolve(backlink);
 	}
 
-	public void setDeduceTypes2(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext, final @NotNull BaseEvaFunction aGeneratedFunction) {
+	public void setDeduceTypes2(final @NonNull DeduceTypes2 aDeduceTypes2, final Context aContext, final @NonNull BaseEvaFunction aGeneratedFunction) {
 		dei.setDeduceTypes2(aDeduceTypes2, aContext, aGeneratedFunction);
 	}
 
@@ -348,7 +348,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		}
 	}
 
-	public @NotNull BaseEvaFunction _generatedFunction() {
+	public @NonNull BaseEvaFunction _generatedFunction() {
 		return __gf;
 	}
 
@@ -362,13 +362,13 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 			throw new IllegalStateException("Error");
 		}
 
-		public <IdentTableEntry> void addResolveListener(final @NotNull Consumer<IdentTableEntry> t) {
+		public <IdentTableEntry> void addResolveListener(final @NonNull Consumer<IdentTableEntry> t) {
 			_p_resolveListenersPromise.then((DoneCallback<? super tripleo.elijah.stages.gen_fn.IdentTableEntry>) result -> t.accept((IdentTableEntry) result));
 		}
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "IdentTableEntry{" +
 				"index=" + index +
 				", ident=" + ident.get() +

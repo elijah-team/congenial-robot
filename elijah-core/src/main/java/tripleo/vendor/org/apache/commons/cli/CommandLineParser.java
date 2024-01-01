@@ -67,7 +67,7 @@ public interface CommandLineParser {
 	 */
 	CommandLine parse(Options options, String[] arguments, boolean stopAtNonOption) throws ParseException;
 
-	CommandLine parse(Options options, @NotNull List<CompilerInput> aInputs) throws ParseException;
+	CommandLine parse(Options options, @NonNull List<CompilerInput> aInputs) throws ParseException;
 
 	/**
 	 * Parses the arguments according to the specified options and properties.

@@ -15,14 +15,14 @@ import tripleo.elijah.lang.i.OS_Element;
  * Created 6/30/21 2:31 AM
  */
 public class GenericElementHolder implements IElementHolder {
-	private final @NotNull OS_Element element;
+	private final @NonNull OS_Element element;
 
-	public GenericElementHolder(final @NotNull OS_Element aElement) {
+	public GenericElementHolder(final @NonNull OS_Element aElement) {
 		element = aElement;
 	}
 
 	@Override
-	public @NotNull OS_Element getElement() {
+	public @NonNull OS_Element getElement() {
 		return element;
 	}
 }

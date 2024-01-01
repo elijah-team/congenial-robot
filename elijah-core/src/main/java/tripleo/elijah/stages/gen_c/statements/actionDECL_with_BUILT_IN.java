@@ -22,7 +22,7 @@ public class actionDECL_with_BUILT_IN implements EG_Statement {
 	}
 
 	@Override
-	public @NotNull EX_Explanation getExplanation() {
+	public @NonNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("actionDECL with BUILT_IN");
 	}
 

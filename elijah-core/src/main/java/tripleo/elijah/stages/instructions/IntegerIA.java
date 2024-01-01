@@ -30,7 +30,7 @@ public class IntegerIA implements InstructionArgument, Constructable {
 		return getEntry().constructablePromise();
 	}
 
-	public @NotNull VariableTableEntry getEntry() {
+	public @NonNull VariableTableEntry getEntry() {
 		return gf.getVarTableEntry(index);
 	}
 
@@ -40,7 +40,7 @@ public class IntegerIA implements InstructionArgument, Constructable {
 	}
 
 	@Override
-	public void resolveTypeToClass(@NotNull EvaNode aNode) {
+	public void resolveTypeToClass(@NonNull EvaNode aNode) {
 		getEntry().resolveTypeToClass(aNode);
 	}
 
@@ -49,12 +49,12 @@ public class IntegerIA implements InstructionArgument, Constructable {
 	}
 
 	@Override
-	public void setGenType(@NotNull GenType aGenType) {
+	public void setGenType(@NonNull GenType aGenType) {
 		getEntry().setGenType(aGenType);
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "IntegerIA{" +
 				"index=" + index +
 				'}';

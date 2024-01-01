@@ -14,7 +14,7 @@ public class CP_SubFile {
 	private final           _CP_RootPath rootPath;
 	private final @Nullable CP_Path      parentPath;
 	private final           String       file;
-	private final @NotNull  CP_Path      _path;
+	private final @NonNull  CP_Path      _path;
 
 	public CP_SubFile(final _CP_RootPath aCPOutputPath, final String aFile) {
 		rootPath   = aCPOutputPath;
@@ -34,7 +34,7 @@ public class CP_SubFile {
 		_path      = new CP_Path1(rootPath, file);
 	}
 
-	public @NotNull File toFile() {
+	public @NonNull File toFile() {
 		return new File(file);
 	}
 
@@ -64,19 +64,19 @@ public class CP_SubFile {
 		}
 
 		@Override
-		public @NotNull CP_SubFile subFile(final String aFile) {
+		public @NonNull CP_SubFile subFile(final String aFile) {
 			x = aFile;
 			return new CP_SubFile((_CP_RootPath) null /*this*/, aFile);
 		}
 
 		@Override
-		public @NotNull CP_Path child(final String aPath0) {
+		public @NonNull CP_Path child(final String aPath0) {
 			x = aPath0;
 			return new CP_Path1(this, aPath0);
 		}
 
 		@Override
-		public @NotNull Path getPath() {
+		public @NonNull Path getPath() {
 			final String s;
 			if (parent != null)
 				s = parent.toFile().toString();
@@ -88,12 +88,12 @@ public class CP_SubFile {
 		}
 
 		@Override
-		public @NotNull Promise<Path, Void, Void> getPathPromise() {
+		public @NonNull Promise<Path, Void, Void> getPathPromise() {
 			return _pathPromise;
 		}
 
 		@Override
-		public @NotNull File toFile() {
+		public @NonNull File toFile() {
 			if (op != null)
 				return new File(op.toFile(), childName);
 
@@ -152,7 +152,7 @@ public class CP_SubFile {
 			return toFile().toString();
 		}
 
-		private String getString(final @NotNull String parentName) {
+		private String getString(final @NonNull String parentName) {
 			String result;
 			if (true || x == null) {
 				result = Path.of(parentName, childName).toFile().toString();

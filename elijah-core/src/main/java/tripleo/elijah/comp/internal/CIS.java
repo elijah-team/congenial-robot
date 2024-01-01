@@ -41,7 +41,7 @@ public class CIS implements Observer<CompilerInstructions> {
 		//compilerInstructionsSubject.onComplete();
 	}
 
-	public void subscribe(final @NotNull Observer<CompilerInstructions> aCio) {
+	public void subscribe(final @NonNull Observer<CompilerInstructions> aCio) {
 		compilerInstructionsSubject.subscribe(aCio);
 	}
 }

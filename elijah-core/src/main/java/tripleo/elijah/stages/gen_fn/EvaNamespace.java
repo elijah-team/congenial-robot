@@ -77,12 +77,12 @@ public class EvaNamespace extends EvaContainerNC implements GNCoded {
 	}
 
 	@Override
-	public @NotNull Role getRole() {
+	public @NonNull Role getRole() {
 		return Role.NAMESPACE;
 	}
 
 	@Override
-	public void register(final @NotNull ICodeRegistrar aCr) {
+	public void register(final @NonNull ICodeRegistrar aCr) {
 		aCr.registerNamespace(this);
 	}
 
@@ -92,7 +92,7 @@ public class EvaNamespace extends EvaContainerNC implements GNCoded {
 	}
 
 	@Override
-	public @NotNull Maybe<VarTableEntry> getVariable(String aVarName) {
+	public @NonNull Maybe<VarTableEntry> getVariable(String aVarName) {
 		for (VarTableEntry varTableEntry : varTable) {
 			if (varTableEntry.nameToken.getText().equals(aVarName))
 				return new Maybe<>(varTableEntry, null);

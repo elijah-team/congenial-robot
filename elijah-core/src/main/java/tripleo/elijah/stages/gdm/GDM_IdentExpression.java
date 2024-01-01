@@ -47,7 +47,7 @@ public class GDM_IdentExpression implements GDM_Item {
 			_p_bef.resolve(aEvaFunction);
 		}
 		_p_bef.then(bef -> {
-			@NotNull Resolve_Ident_IA2 ria2 = aDeduceTypes2._inj().new_Resolve_Ident_IA2(aDeduceTypes2, aDeduceTypes2._errSink(), aDeduceTypes2._phase(), bef, aFoundElement);
+			@NonNull Resolve_Ident_IA2 ria2 = aDeduceTypes2._inj().new_Resolve_Ident_IA2(aDeduceTypes2, aDeduceTypes2._errSink(), aDeduceTypes2._phase(), bef, aFoundElement);
 			ria2.resolveIdentIA2_(aContext, null, aSs);
 		});
 	}

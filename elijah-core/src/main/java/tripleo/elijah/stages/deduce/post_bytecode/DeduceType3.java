@@ -21,7 +21,7 @@ class DeduceType3 implements DED {
 		diagnostic     = aDiagnostic;
 	}
 
-	public static IDeduceElement3 dispatch(final @NotNull IdentTableEntry aIdentTableEntry, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public static IDeduceElement3 dispatch(final @NonNull IdentTableEntry aIdentTableEntry, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
 		return aIdentTableEntry.getDeduceElement3(aDeduceTypes2, aGeneratedFunction);
 	}
 
@@ -31,15 +31,15 @@ class DeduceType3 implements DED {
 		diagnostic     = aDiagnostic1;
 	}
 
-//	public static IDeduceElement3 dispatch(final @NotNull IdentTableEntry aIdentTableEntry) {
+//	public static IDeduceElement3 dispatch(final @NonNull IdentTableEntry aIdentTableEntry) {
 //		return aIdentTableEntry.getDeduceElement3(null/*aDeduceTypes2*/, null/*aGeneratedFunction*/);
 //	}
 
-//	public static IDeduceElement3 dispatch(final @NotNull ConstantTableEntry aConstantTableEntry) {
+//	public static IDeduceElement3 dispatch(final @NonNull ConstantTableEntry aConstantTableEntry) {
 //		return aConstantTableEntry.getDeduceElement3();
 //	}
 
-	public static IDeduceElement3 dispatch(final @NotNull VariableTableEntry aVariableTableEntry) {
+	public static IDeduceElement3 dispatch(final @NonNull VariableTableEntry aVariableTableEntry) {
 		return aVariableTableEntry.getDeduceElement3();
 	}
 
@@ -58,11 +58,11 @@ class DeduceType3 implements DED {
 	}
 
 	@Override
-	public @NotNull Kind kind() {
+	public @NonNull Kind kind() {
 		return Kind.DED_Kind_Type;
 	}
 
-	public void reportDiagnostic(final @NotNull ErrSink aErrSink) {
+	public void reportDiagnostic(final @NonNull ErrSink aErrSink) {
 		assert isException();
 
 		aErrSink.reportDiagnostic(diagnostic);

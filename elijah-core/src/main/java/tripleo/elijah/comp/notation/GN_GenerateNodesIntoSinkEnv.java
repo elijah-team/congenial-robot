@@ -28,7 +28,7 @@ public record GN_GenerateNodesIntoSinkEnv(List<ProcessedNode> lgc,
 										  CompilationEnclosure ce) implements GN_Env {
 
 	@org.jetbrains.annotations.Nullable
-	public static String getLang(final @NotNull OS_Module mod) {
+	public static String getLang(final @NonNull OS_Module mod) {
 		final LibraryStatementPart lsp = mod.getLsp();
 
 
@@ -46,9 +46,9 @@ public record GN_GenerateNodesIntoSinkEnv(List<ProcessedNode> lgc,
 		return lang;
 	}
 
-	@NotNull
+	@NonNull
 	static GenerateFiles getGenerateFiles(final OutputFileFactoryParams params,
-										  final @NotNull OS_Module mod,
+										  final @NonNull OS_Module mod,
 										  final Supplier<GenerateResultEnv> fgs) {
 		// TODO creates more than one GenerateC, look into this
 		final String lang = getLang(mod);
@@ -62,7 +62,7 @@ public record GN_GenerateNodesIntoSinkEnv(List<ProcessedNode> lgc,
 	}
 
 	@Contract("_, _ -> new")
-	@NotNull OutputFileFactoryParams getParams(final OS_Module mod, final @NotNull GN_GenerateNodesIntoSink aGNGenerateNodesIntoSink) {
+	@NonNull OutputFileFactoryParams getParams(final OS_Module mod, final @NonNull GN_GenerateNodesIntoSink aGNGenerateNodesIntoSink) {
 		final CompilationEnclosure ce2 = aGNGenerateNodesIntoSink._env().ce();
 		assert ce == ce2;
 		return new OutputFileFactoryParams(mod, ce);

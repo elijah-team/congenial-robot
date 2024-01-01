@@ -18,7 +18,7 @@ public class SGTA_RegisterNamespaceInvocation implements setup_GenType_Action {
 	}
 
 	@Override
-	public void run(final @NotNull GenType gt, final @NotNull setup_GenType_Action_Arena arena) {
+	public void run(final @NonNull GenType gt, final @NonNull setup_GenType_Action_Arena arena) {
 		final NamespaceInvocation nsi = phase.registerNamespaceInvocation(namespaceStatement);
 		arena.put("nsi", nsi);
 	}

@@ -32,10 +32,10 @@ public class MatchConditionalContext extends ContextImpl {
 	}
 
 	@Override
-	public LookupResultList lookup(final @NotNull String name, final int level, final @NotNull LookupResultList Result, final @NotNull SearchList alreadySearched, final boolean one) {
+	public LookupResultList lookup(final @NonNull String name, final int level, final @NonNull LookupResultList Result, final @NonNull SearchList alreadySearched, final boolean one) {
 		alreadySearched.add(carrier.getContext());
 
-		if (carrier instanceof final MatchConditionalImpl.@NotNull MatchArm_TypeMatch carrier2) {
+		if (carrier instanceof final MatchConditionalImpl.@NonNull MatchArm_TypeMatch carrier2) {
 			if (name.equals(carrier2.getIdent().getText()))
 				Result.add(name, level, carrier2, this);
 		}

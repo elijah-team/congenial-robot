@@ -45,7 +45,7 @@ public class SlirImportNode implements SlirElement {
 	}
 
 	@Override
-	public @NotNull SlirPos partOfSpeech() {
+	public @NonNull SlirPos partOfSpeech() {
 		return SlirPos.IMPORT;
 	}
 }

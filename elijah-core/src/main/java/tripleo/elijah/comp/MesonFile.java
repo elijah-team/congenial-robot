@@ -30,12 +30,12 @@ class MesonFile implements EG_Statement {
 	}
 
 	@Override
-	public @NotNull EX_Explanation getExplanation() {
+	public @NonNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("MesonFile");
 	}
 
 	@Override
-	public @NotNull String getText() {
+	public @NonNull String getText() {
 		final Collection<String> files_ = lsp_outputs.get(compilerInstructions);
 		final Set<String> files = files_.stream()
 				.filter(x -> x.endsWith(".c"))
@@ -55,7 +55,7 @@ class MesonFile implements EG_Statement {
 		return s;
 	}
 
-	public @NotNull String getPathString() {
+	public @NonNull String getPathString() {
 		return path.getPath().toString();
 	}
 

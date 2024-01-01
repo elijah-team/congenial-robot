@@ -13,14 +13,14 @@ import java.util.function.Supplier;
 
 public class EntryPointList {
 
-	final @NotNull List<EntryPoint> eps;
+	final @NonNull List<EntryPoint> eps;
 
 	@Contract(pure = true)
 	public EntryPointList() {
 		eps = new ArrayList<>();
 	}
 
-	public @NotNull List<EntryPoint> _getMods() {
+	public @NonNull List<EntryPoint> _getMods() {
 		return eps;
 	}
 
@@ -28,11 +28,11 @@ public class EntryPointList {
 		eps.add(aEntryPoint);
 	}
 
-	public void generate(@NotNull final GenerateFunctions aGenerateFunctions, final DeducePhase aDeducePhase, @NotNull final Supplier<WorkManager> wm) {
+	public void generate(@NonNull final GenerateFunctions aGenerateFunctions, final DeducePhase aDeducePhase, @NonNull final Supplier<WorkManager> wm) {
 		generateFromEntryPoints(aDeducePhase, aGenerateFunctions, wm.get());
 	}
 
-	public void generate2(final GenerateFunctions aGenerateFunctions, final DeducePhase deducePhase, @NotNull final Supplier<WorkManager> wm0) {
+	public void generate2(final GenerateFunctions aGenerateFunctions, final DeducePhase deducePhase, @NonNull final Supplier<WorkManager> wm0) {
 		if (eps.size() == 0) return; // short circuit
 
 
@@ -51,7 +51,7 @@ public class EntryPointList {
 
 	private void generateFromEntryPoints(final DeducePhase deducePhase,
 										 final GenerateFunctions aGenerateFunctions,
-										 final @NotNull WorkManager wm) {
+										 final @NonNull WorkManager wm) {
 		if (eps.size() == 0) return; // short circuit
 
 

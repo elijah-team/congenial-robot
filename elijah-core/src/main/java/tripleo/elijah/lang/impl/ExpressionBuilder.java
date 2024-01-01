@@ -22,7 +22,7 @@ import tripleo.elijah.lang.i.OS_Type;
 
 public class ExpressionBuilder {
 
-	public static @NotNull IExpression build(final IExpression left, final ExpressionKind aType) {
+	public static @NonNull IExpression build(final IExpression left, final ExpressionKind aType) {
 		return new AbstractExpression(left, aType) {
 			OS_Type _type;
 
@@ -43,12 +43,12 @@ public class ExpressionBuilder {
 		};
 	}
 
-	public static @NotNull IBinaryExpression build(final IExpression left, final ExpressionKind aType,
+	public static @NonNull IBinaryExpression build(final IExpression left, final ExpressionKind aType,
 												   final IExpression aExpression) {
 		return new BasicBinaryExpressionImpl(left, aType, aExpression);
 	}
 
-	public static @NotNull IBinaryExpression buildPartial(final IExpression left, final ExpressionKind aType) {
+	public static @NonNull IBinaryExpression buildPartial(final IExpression left, final ExpressionKind aType) {
 		return new BasicBinaryExpressionImpl(left, aType, null);
 	}
 

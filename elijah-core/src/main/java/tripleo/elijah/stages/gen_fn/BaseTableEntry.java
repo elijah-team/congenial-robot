@@ -51,7 +51,7 @@ public abstract class BaseTableEntry {
 	protected     Status               status             = Status.UNCHECKED;
 	DeduceTypeResolve typeResolve;
 
-	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull BaseEvaFunction aEvaFunction) {
+	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NonNull BaseEvaFunction aEvaFunction) {
 		provide(aDeduceTypes2);
 		__gf  = aEvaFunction;
 
@@ -66,7 +66,7 @@ public abstract class BaseTableEntry {
 		return status;
 	}
 
-	public void setStatus(Status newStatus, /*@NotNull*/ IElementHolder eh) {
+	public void setStatus(Status newStatus, /*@NonNull*/ IElementHolder eh) {
 		status = newStatus;
 		if (newStatus == Status.KNOWN) {
 			if (eh == null || eh.getElement() == null) {

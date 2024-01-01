@@ -39,7 +39,7 @@ public class FunctionInvocation implements IInvocation {
 	private           NamespaceInvocation                         namespaceInvocation;
 	private           ClassInvocation                             classInvocation;
 
-	public FunctionInvocation(FunctionDef aFunctionDef, ProcTableEntry aProcTableEntry, @NotNull IInvocation invocation, GeneratePhase phase) {
+	public FunctionInvocation(FunctionDef aFunctionDef, ProcTableEntry aProcTableEntry, @NonNull IInvocation invocation, GeneratePhase phase) {
 		this.fd  = aFunctionDef;
 		this.pte = aProcTableEntry;
 		assert invocation != null;
@@ -61,7 +61,7 @@ public class FunctionInvocation implements IInvocation {
 	}
 */
 
-	public @NotNull DeferredObject<BaseEvaFunction, Void, Void> generateDeferred() {
+	public @NonNull DeferredObject<BaseEvaFunction, Void, Void> generateDeferred() {
 		return generateDeferred;
 	}
 
@@ -83,7 +83,7 @@ public class FunctionInvocation implements IInvocation {
 		return classInvocation;
 	}
 
-	public void setClassInvocation(@NotNull ClassInvocation aClassInvocation) {
+	public void setClassInvocation(@NonNull ClassInvocation aClassInvocation) {
 		classInvocation = aClassInvocation;
 	}
 
@@ -116,7 +116,7 @@ public class FunctionInvocation implements IInvocation {
 		throw new IllegalStateException("maybe this shouldn't be done?");
 	}
 
-	public Eventual<BaseEvaFunction> makeGenerated__Eventual(final @NotNull Deduce_CreationClosure cl, final EventualRegister register) {
+	public Eventual<BaseEvaFunction> makeGenerated__Eventual(final @NonNull Deduce_CreationClosure cl, final EventualRegister register) {
 		final DeduceTypes2          deduceTypes2  = cl.deduceTypes2();
 
 		final Eventual<BaseEvaFunction> eef = new Eventual<>();
@@ -151,36 +151,36 @@ public class FunctionInvocation implements IInvocation {
 		//}
 	}
 
-	@NotNull
+	@NonNull
 	private BaseEvaFunction xxx___forDefaultVirtualCtor(final Deduce_CreationClosure cl,
-														final DeduceTypes2.@NotNull DeduceTypes2Injector injector,
-														final @NotNull OS_Module module) {
-		@NotNull WlGenerateDefaultCtor wlgdc = injector.new_WlGenerateDefaultCtor(module, this, cl);
+														final DeduceTypes2.@NonNull DeduceTypes2Injector injector,
+														final @NonNull OS_Module module) {
+		@NonNull WlGenerateDefaultCtor wlgdc = injector.new_WlGenerateDefaultCtor(module, this, cl);
 		wlgdc.run(null);
 		BaseEvaFunction gf = wlgdc.getResult();
 		return gf;
 	}
 
-	@NotNull
+	@NonNull
 	private BaseEvaFunction xxxForConstructorDef(final Deduce_CreationClosure cl,
-												 final @NotNull ConstructorDef cd,
-												 final DeduceTypes2.@NotNull DeduceTypes2Injector injector,
-												 final @NotNull OS_Module module) {
-		@NotNull WlGenerateCtor wlgf = injector.new_WlGenerateCtor(module, cd.getNameNode(), this, cl);
+												 final @NonNull ConstructorDef cd,
+												 final DeduceTypes2.@NonNull DeduceTypes2Injector injector,
+												 final @NonNull OS_Module module) {
+		@NonNull WlGenerateCtor wlgf = injector.new_WlGenerateCtor(module, cd.getNameNode(), this, cl);
 		wlgf.run(null);
 		BaseEvaFunction gf = wlgf.getResult();
 		return gf;
 	}
 
-	@NotNull
-	private BaseEvaFunction xxx__forFunction(final @NotNull Deduce_CreationClosure cl,
-											 final DeduceTypes2.@NotNull DeduceTypes2Injector injector,
-											 final @NotNull OS_Module module) {
+	@NonNull
+	private BaseEvaFunction xxx__forFunction(final @NonNull Deduce_CreationClosure cl,
+											 final DeduceTypes2.@NonNull DeduceTypes2Injector injector,
+											 final @NonNull OS_Module module) {
 
 		final GeneratePhase generatePhase = cl.generatePhase();
 		final DeducePhase deducePhase = cl.deducePhase();
 
-		@NotNull WlGenerateFunction wlgf = injector.new_WlGenerateFunction(module, this, cl);
+		@NonNull WlGenerateFunction wlgf = injector.new_WlGenerateFunction(module, this, cl);
 
 		wlgf.run(null);
 
@@ -190,7 +190,7 @@ public class FunctionInvocation implements IInvocation {
 			if (namespaceInvocation != null) {
 				//namespaceInvocation = deducePhase.registerNamespaceInvocation(namespaceInvocation.getNamespace());
 
-				@NotNull WlGenerateNamespace wlgn = injector.new_WlGenerateNamespace(generatePhase.getGenerateFunctions(module),
+				@NonNull WlGenerateNamespace wlgn = injector.new_WlGenerateNamespace(generatePhase.getGenerateFunctions(module),
 																					 namespaceInvocation,
 																					 deducePhase.generatedClasses,
 																					 deducePhase.codeRegistrar);

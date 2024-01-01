@@ -71,7 +71,7 @@ public class GenericTypeNameImpl implements tripleo.elijah.lang.i.GenericTypeNam
 	// region Locatable
 
 	@Override
-	public @NotNull Type kindOfType() {
+	public @NonNull Type kindOfType() {
 		return Type.GENERIC;
 	}
 

@@ -43,16 +43,16 @@ import static tripleo.elijah.util.Helpers.String_join;
 /**
  * Created 9/13/21 11:58 PM
  */
-public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Supplier<Old_GenerateResult>> {
+public class WriteMesonPipeline implements PipelineMember, @NonNull Consumer<Supplier<Old_GenerateResult>> {
 	final                  Pattern         pullPat               = Pattern.compile("/[^/]+/(.+)");
-	private final @NotNull Compilation     c;
-	private final @NotNull IPipelineAccess pa;
+	private final @NonNull Compilation     c;
+	private final @NonNull IPipelineAccess pa;
 	private final          WritePipeline                                       writePipeline;
-	@NotNull               DoubleLatch<Multimap<CompilerInstructions, String>> write_makefiles_latch = new DoubleLatch<>(this::write_makefiles_action);
+	@NonNull               DoubleLatch<Multimap<CompilerInstructions, String>> write_makefiles_latch = new DoubleLatch<>(this::write_makefiles_action);
 	private                Consumer<Multimap<CompilerInstructions, String>>    _wmc;
 	private                Supplier<Old_GenerateResult>                        grs;
 
-	public WriteMesonPipeline(final @NotNull IPipelineAccess pa0) {
+	public WriteMesonPipeline(final @NonNull IPipelineAccess pa0) {
 		final AccessBus     ab             = pa0.getAccessBus();
 		final Compilation   compilation    = ab.getCompilation();
 		final WritePipeline writePipeline1 = ab.getPipelineAccess().getWitePipeline();
@@ -63,14 +63,14 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 	}
 
 	@Override
-	public void accept(final @NotNull Supplier<Old_GenerateResult> aGenerateResultSupplier) {
+	public void accept(final @NonNull Supplier<Old_GenerateResult> aGenerateResultSupplier) {
 		final GenerateResult gr = aGenerateResultSupplier.get();
 		//08/13 System.err.println("WMP66 "+gr);
 		grs = aGenerateResultSupplier;
 		int y = 2;
 	}
 
-	public @NotNull Consumer<Supplier<Old_GenerateResult>> consumer() {
+	public @NonNull Consumer<Supplier<Old_GenerateResult>> consumer() {
 		return new Consumer<Supplier<Old_GenerateResult>>() {
 			@Override
 			public void accept(final Supplier<Old_GenerateResult> aGenerateResultSupplier) {
@@ -86,7 +86,7 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 		};
 	}
 
-	@Nullable String pullFileName(@NotNull String aFilename) {
+	@Nullable String pullFileName(@NonNull String aFilename) {
 		//return aFilename.substring(aFilename.lastIndexOf('/')+1);
 		Matcher x = pullPat.matcher(aFilename);
 		try {
@@ -97,7 +97,7 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 		return null;
 	}
 
-	private void write_makefiles_action(final @NotNull Multimap<CompilerInstructions, String> lsp_outputs) {
+	private void write_makefiles_action(final @NonNull Multimap<CompilerInstructions, String> lsp_outputs) {
 		List<String> dep_dirs = new LinkedList<String>();
 
 		try {
@@ -124,7 +124,7 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 		}
 	}
 
-	private void write_root(@NotNull Multimap<CompilerInstructions, String> lsp_outputs, @NotNull List<String> aDep_dirs) throws IOException {
+	private void write_root(@NonNull Multimap<CompilerInstructions, String> lsp_outputs, @NonNull List<String> aDep_dirs) throws IOException {
 		final CP_Path path2_ = getPath2("meson.build");
 
 		path2_.getPathPromise().then(path2 -> {
@@ -191,7 +191,7 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 		return child;
 	}
 
-	public @NotNull Consumer<Multimap<CompilerInstructions, String>> write_makefiles_consumer() {
+	public @NonNull Consumer<Multimap<CompilerInstructions, String>> write_makefiles_consumer() {
 		if (_wmc != null)
 			return _wmc;
 
@@ -200,13 +200,13 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 		return _wmc;
 	}
 
-	private void write_lsp(@NotNull Multimap<CompilerInstructions, String> lsp_outputs, CompilerInstructions compilerInstructions, String aSub_dir) throws IOException {
+	private void write_lsp(@NonNull Multimap<CompilerInstructions, String> lsp_outputs, CompilerInstructions compilerInstructions, String aSub_dir) throws IOException {
 		if (true || false) {
 			CP_Path path = getPath2(aSub_dir, "meson.build");
 			path.getPathPromise().then(pp -> {
 				final MesonFile mesonFile = new MesonFile(this, aSub_dir, lsp_outputs, compilerInstructions, path);
 
-				@NotNull final EG_Statement stmt = mesonFile;
+				@NonNull final EG_Statement stmt = mesonFile;
 
 				mesonFile.getPath().getPathPromise().then(ppp -> {
 
@@ -246,7 +246,7 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 			sb.append(String.format("%s_dep = declare_dependency( link_with: %s )", "Prelude", "Prelude")); // include_directories
 			sb.append("\n");
 
-			@NotNull final EG_Statement stmt = EG_Statement.of(sb.toString(), EX_Explanation.withMessage("WriteMesonPipeline"));
+			@NonNull final EG_Statement stmt = EG_Statement.of(sb.toString(), EX_Explanation.withMessage("WriteMesonPipeline"));
 			final String                s    = ppath.toString();
 			final EOT_OutputFile        off  = new EOT_OutputFile(List_of(), s, EOT_OutputType.BUILD, stmt);
 			c.getOutputTree().add(off);

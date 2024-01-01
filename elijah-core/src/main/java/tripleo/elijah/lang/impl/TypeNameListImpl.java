@@ -21,7 +21,7 @@ import java.util.List;
 
 public class TypeNameListImpl implements tripleo.elijah.lang.i.TypeNameList {
 
-	@NotNull List<TypeName> p = new ArrayList<TypeName>();
+	@NonNull List<TypeName> p = new ArrayList<TypeName>();
 
 	@Override
 	public void add(final TypeName tn) {
@@ -44,7 +44,7 @@ public class TypeNameListImpl implements tripleo.elijah.lang.i.TypeNameList {
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return Helpers.String_join(", ", Collections2.transform(p, new Function<TypeName, String>() {
 			@Nullable
 			@Override

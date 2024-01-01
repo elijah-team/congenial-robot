@@ -10,7 +10,7 @@ import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 import tripleo.elijah.stages.instructions.IdentIA;
 
 public class IdentIA_Ops {
-	public static @NotNull IdentIA_Ops get(final IdentIA aIdentIA) {
+	public static @NonNull IdentIA_Ops get(final IdentIA aIdentIA) {
 		return new IdentIA_Ops(aIdentIA);
 	}
 
@@ -20,7 +20,7 @@ public class IdentIA_Ops {
 		identIA = aIdentIA;
 	}
 
-	public @NotNull ConstructorPathOp getConstructorPath() {
+	public @NonNull ConstructorPathOp getConstructorPath() {
 		final IdentTableEntry idte             = identIA.getEntry();
 		final OS_Element      resolved_element = idte.getResolvedElement();
 

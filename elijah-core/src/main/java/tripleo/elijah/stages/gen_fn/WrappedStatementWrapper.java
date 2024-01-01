@@ -22,7 +22,7 @@ import tripleo.elijah.lang2.ElElementVisitor;
  */
 public class WrappedStatementWrapper extends StatementWrapperImpl implements OS_Element {
 	private final          VariableStatementImpl vs;
-	private final @NotNull Wrapped               wrapped;
+	private final @NonNull Wrapped               wrapped;
 
 	public VariableStatementImpl getVariableStatement() {
 		return vs;

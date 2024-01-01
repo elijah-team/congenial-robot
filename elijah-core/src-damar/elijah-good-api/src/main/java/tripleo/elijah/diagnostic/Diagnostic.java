@@ -19,7 +19,7 @@ import java.util.List;
  * Created 12/26/20 5:31 AM
  */
 public interface Diagnostic {
-	static @NotNull Diagnostic withMessage(@NotNull String code, String string, @NotNull Severity severity) {
+	static @NonNull Diagnostic withMessage(@NonNull String code, String string, @NonNull Severity severity) {
 		return new Diagnostic() {
 
 			@Override
@@ -28,19 +28,19 @@ public interface Diagnostic {
 			}
 
 			@Override
-			public @NotNull Locatable primary() {
+			public @NonNull Locatable primary() {
 				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
-			public void report(@NotNull PrintStream stream) {
+			public void report(@NonNull PrintStream stream) {
 				// TODO Auto-generated method stub
 				stream.printf("%s %s %n", code(), string);
 			}
 
 			@Override
-			public @NotNull List<Locatable> secondary() {
+			public @NonNull List<Locatable> secondary() {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -54,12 +54,12 @@ public interface Diagnostic {
 
 	@Nullable String code();
 
-	@NotNull
+	@NonNull
 	Locatable primary();
 
 	void report(PrintStream stream);
 
-	@NotNull
+	@NonNull
 	List<Locatable> secondary();
 
 	@Nullable Severity severity();

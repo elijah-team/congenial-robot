@@ -23,13 +23,13 @@ import java.util.List;
 public abstract class _CommonNC {
 	protected final  List<ClassItem>        items       = new ArrayList<ClassItem>();
 	private final    List<String>           mDocs       = new ArrayList<String>();
-	public @NotNull  Attached               _a          = new AttachedImpl();
+	public @NonNull  Attached               _a          = new AttachedImpl();
 	protected        OS_Package             _packageName;
 	protected        IdentExpression        nameToken;
 	@Nullable        List<AnnotationClause> annotations = null;
 	// region ClassItem
 	private          AccessNotation         access_note;
-	private @NotNull List<AccessNotation>   accesses    = new ArrayList<AccessNotation>();
+	private @NonNull List<AccessNotation>   accesses    = new ArrayList<AccessNotation>();
 	private          El_Category            category;
 
 	public void addAccess(final AccessNotation acs) {
@@ -50,7 +50,7 @@ public abstract class _CommonNC {
 		annotations.add(a);
 	}
 
-	public void addDocString(final @NotNull Token aText) {
+	public void addDocString(final @NonNull Token aText) {
 		mDocs.add(aText.getText());
 	}
 
@@ -71,7 +71,7 @@ public abstract class _CommonNC {
 	}
 
 	// OS_Container
-	public @NotNull List<OS_NamedElement> items() {
+	public @NonNull List<OS_NamedElement> items() {
 		final ArrayList<OS_NamedElement> a = new ArrayList<>();
 
 		getItems().stream()
@@ -87,7 +87,7 @@ public abstract class _CommonNC {
 		return nameToken.getText();
 	}
 
-	public @NotNull List<ClassItem> getItems() {
+	public @NonNull List<ClassItem> getItems() {
 		return items;
 	}
 
@@ -114,7 +114,7 @@ public abstract class _CommonNC {
 		return items.contains(element);
 	}
 
-	public void walkAnnotations(@NotNull AnnotationWalker annotationWalker) {
+	public void walkAnnotations(@NonNull AnnotationWalker annotationWalker) {
 		if (annotations == null)
 			return;
 		for (AnnotationClause annotationClause : annotations) {

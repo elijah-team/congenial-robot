@@ -17,17 +17,17 @@ class Diagnostic_8887 implements GCFM_Diagnostic {
 	}
 
 	@Override
-	public @NotNull String code() {
+	public @NonNull String code() {
 		return "" + _code;
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NonNull Locatable primary() {
 		return null;
 	}
 
 	@Override
-	public void report(final @NotNull PrintStream stream) {
+	public void report(final @NonNull PrintStream stream) {
 		stream.println(_message());
 	}
 
@@ -37,12 +37,12 @@ class Diagnostic_8887 implements GCFM_Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NonNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NotNull Severity severity() {
+	public @NonNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

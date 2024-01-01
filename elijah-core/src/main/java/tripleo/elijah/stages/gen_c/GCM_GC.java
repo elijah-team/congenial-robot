@@ -28,13 +28,13 @@ class GCM_GC implements GCM_D {
 
 		@Nullable final InstructionArgument result_index = gf.vte_lookup("self");
 		if (result_index instanceof IntegerIA integerIA) {
-			@NotNull final VariableTableEntry vte = integerIA.getEntry();
+			@NonNull final VariableTableEntry vte = integerIA.getEntry();
 			assert vte.getVtt() == VariableTableType.SELF;
 
 			// Get it from resolved
 			tte = gf.getTypeTableEntry(integerIA.getIndex());
 			final EvaNode res = tte.resolved();
-			if (res instanceof final @NotNull EvaContainerNC nc) {
+			if (res instanceof final @NonNull EvaContainerNC nc) {
 				final int code = nc.getCode();
 				return String.format("Z%d*", code);
 			}

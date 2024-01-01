@@ -34,13 +34,13 @@ public class NumericExpressionImpl implements tripleo.elijah.lang.i.NumericExpre
 		carrier = aCarrier;
 	}
 
-	public NumericExpressionImpl(final @NotNull Token n) {
+	public NumericExpressionImpl(final @NonNull Token n) {
 		this.n  = n;
 		carrier = Integer.parseInt(n.getText());
 	}
 
 
-	public @NotNull List<FormalArgListItem> getArgs() {
+	public @NonNull List<FormalArgListItem> getArgs() {
 		return null;
 	}
 
@@ -72,7 +72,7 @@ public class NumericExpressionImpl implements tripleo.elijah.lang.i.NumericExpre
 	}
 
 	@Override // IExpression
-	public @NotNull ExpressionKind getKind() {
+	public @NonNull ExpressionKind getKind() {
 		return ExpressionKind.NUMERIC; // TODO
 	}
 
@@ -81,7 +81,7 @@ public class NumericExpressionImpl implements tripleo.elijah.lang.i.NumericExpre
 	// region representation
 
 	@Override
-	public @NotNull IExpression getLeft() {
+	public @NonNull IExpression getLeft() {
 		return this;
 	}
 
@@ -128,7 +128,7 @@ public class NumericExpressionImpl implements tripleo.elijah.lang.i.NumericExpre
 	// region Locatable
 
 	@Override // IExpression
-	public void setKind(final @NotNull ExpressionKind aType) {
+	public void setKind(final @NonNull ExpressionKind aType) {
 		// log and ignore
 		SimplePrintLoggerToRemoveSoon
 				.println_err_2("Trying to set ExpressionType of NumericExpression to " + aType.toString());

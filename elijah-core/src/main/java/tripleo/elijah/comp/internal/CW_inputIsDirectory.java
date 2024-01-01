@@ -21,10 +21,10 @@ import java.util.function.Consumer;
 import static tripleo.elijah.util.Helpers.List_of;
 
 public class CW_inputIsDirectory {
-	public void apply(final @NotNull CompilerInput 				input,
-					  final @NotNull Compilation 				c,
-					  final @NotNull File 						f,
-					  final @NotNull Consumer<CompilerInput> 	x) {
+	public void apply(final @NonNull CompilerInput 				input,
+					  final @NonNull Compilation 				c,
+					  final @NonNull File 						f,
+					  final @NonNull Consumer<CompilerInput> 	x) {
 		CompilerInstructions ez_file;
 		input.setDirectory(f);
 
@@ -59,7 +59,7 @@ public class CW_inputIsDirectory {
 		c.reports().addInput(input, Finally.Out2.EZ);
 	}
 
-	private List<CompilerInstructions> searchEzFiles(final @NotNull File directory, final @NotNull CompilationClosure ccl) {
+	private List<CompilerInstructions> searchEzFiles(final @NonNull File directory, final @NonNull CompilationClosure ccl) {
 		final QuerySearchEzFiles                     q    = new QuerySearchEzFiles(ccl);
 		final Operation2<List<CompilerInstructions>> olci = q.process(directory);
 

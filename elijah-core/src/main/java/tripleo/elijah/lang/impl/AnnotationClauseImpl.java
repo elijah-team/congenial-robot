@@ -19,7 +19,7 @@ import java.util.List;
  * Created 8/15/20 6:31 PM
  */
 public class AnnotationClauseImpl implements tripleo.elijah.lang.i.AnnotationClause {
-	private @NotNull List<AnnotationPart> aps = new ArrayList<AnnotationPart>();
+	private @NonNull List<AnnotationPart> aps = new ArrayList<AnnotationPart>();
 
 	@Override
 	public void add(final AnnotationPart ap) {

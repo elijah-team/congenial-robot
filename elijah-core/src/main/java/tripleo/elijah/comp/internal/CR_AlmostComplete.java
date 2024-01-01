@@ -9,18 +9,18 @@ public class CR_AlmostComplete implements CR_Action {
 	private CompilationRunner compilationRunner;
 
 	@Override
-	public void attach(final @NotNull CompilationRunner cr) {
+	public void attach(final @NonNull CompilationRunner cr) {
 		compilationRunner = cr;
 	}
 
 	@Override
-	public @NotNull Operation<Ok> execute(final CR_State st, final CB_Output aO) {
+	public @NonNull Operation<Ok> execute(final CR_State st, final CB_Output aO) {
 		compilationRunner.cis.almostComplete();
 		return Operation.success(Ok.instance());
 	}
 
 	@Override
-	public @NotNull String name() {
+	public @NonNull String name() {
 		return "cis almostComplete";
 	}
 }

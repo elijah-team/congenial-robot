@@ -37,7 +37,7 @@ public class IdentIA implements InstructionArgument, Constructable {
 		return getEntry().constructablePromise();
 	}
 
-	public @NotNull IdentTableEntry getEntry() {
+	public @NonNull IdentTableEntry getEntry() {
 		return gf.getIdentTableEntry(getIndex());
 	}
 
@@ -65,7 +65,7 @@ public class IdentIA implements InstructionArgument, Constructable {
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "IdentIA{" +
 				"id=" + id +
 //				", prev=" + prev +

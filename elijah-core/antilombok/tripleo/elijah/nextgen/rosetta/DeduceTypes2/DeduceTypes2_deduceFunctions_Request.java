@@ -6,15 +6,15 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.u.ElIntrinsics;
 
 public final class DeduceTypes2_deduceFunctions_Request {
-   @NotNull
+   @NonNull
    private final DeducePhase_deduceModule_Request request;
-   @NotNull
+   @NonNull
    private final Iterable listOfEvaFunctions;
    private final boolean b;
-   @NotNull
+   @NonNull
    private final DeducePhase deducePhase;
 
-   public DeduceTypes2_deduceFunctions_Request(@NotNull DeducePhase_deduceModule_Request request, @NotNull Iterable listOfEvaFunctions, boolean b, @NotNull DeducePhase deducePhase) {
+   public DeduceTypes2_deduceFunctions_Request(@NonNull DeducePhase_deduceModule_Request request, @NonNull Iterable listOfEvaFunctions, boolean b, @NonNull DeducePhase deducePhase) {
       ElIntrinsics.checkNotNullParameter(request, "request");
       ElIntrinsics.checkNotNullParameter(listOfEvaFunctions, "listOfEvaFunctions");
       ElIntrinsics.checkNotNullParameter(deducePhase, "deducePhase");
@@ -25,12 +25,12 @@ public final class DeduceTypes2_deduceFunctions_Request {
       this.deducePhase = deducePhase;
    }
 
-   @NotNull
+   @NonNull
    public final DeducePhase_deduceModule_Request getRequest() {
       return this.request;
    }
 
-   @NotNull
+   @NonNull
    public final Iterable getListOfEvaFunctions() {
       return this.listOfEvaFunctions;
    }
@@ -39,7 +39,7 @@ public final class DeduceTypes2_deduceFunctions_Request {
       return this.b;
    }
 
-   @NotNull
+   @NonNull
    public final DeducePhase getDeducePhase() {
       return this.deducePhase;
    }

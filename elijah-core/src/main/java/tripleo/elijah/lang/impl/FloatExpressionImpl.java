@@ -28,24 +28,24 @@ public class FloatExpressionImpl implements tripleo.elijah.lang.i.FloatExpressio
 	float   carrier;
 	private final Token n;
 
-	public FloatExpressionImpl(final @NotNull Token n) {
+	public FloatExpressionImpl(final @NonNull Token n) {
 		this.n  = n;
 		carrier = Float.parseFloat(n.getText());
 	}
 
 
-	public @NotNull List<FormalArgListItem> getArgs() {
+	public @NonNull List<FormalArgListItem> getArgs() {
 		return null;
 	}
 
 
 	@Override
-	public @NotNull ExpressionKind getKind() {
+	public @NonNull ExpressionKind getKind() {
 		return ExpressionKind.FLOAT; // TODO
 	}
 
 	@Override
-	public @NotNull IExpression getLeft() {
+	public @NonNull IExpression getLeft() {
 		return this;
 	}
 
@@ -65,7 +65,7 @@ public class FloatExpressionImpl implements tripleo.elijah.lang.i.FloatExpressio
 	}
 
 	@Override
-	public void setKind(final @NotNull ExpressionKind aType) {
+	public void setKind(final @NonNull ExpressionKind aType) {
 		// log and ignore
 		SimplePrintLoggerToRemoveSoon
 				.println_err_2("Trying to set ExpressionType of FloatExpression to " + aType.toString());

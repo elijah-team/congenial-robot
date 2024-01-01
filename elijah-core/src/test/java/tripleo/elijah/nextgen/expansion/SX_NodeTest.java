@@ -28,13 +28,13 @@ public class SX_NodeTest extends TestCase {
 			}
 
 			@Override
-			public @NotNull SM_ClassInheritance inheritance() {
+			public @NonNull SM_ClassInheritance inheritance() {
 				return new SM_ClassInheritance() {
 					@Override
-					public @NotNull List<SM_Name> names() {
+					public @NonNull List<SM_Name> names() {
 						return List_of(new SM_Name() {
 							@Override
-							public @NotNull String getText() {
+							public @NonNull String getText() {
 								return "Arguments";
 							}
 						});
@@ -43,17 +43,17 @@ public class SX_NodeTest extends TestCase {
 			}
 
 			@Override
-			public @NotNull SM_Name name() {
+			public @NonNull SM_Name name() {
 				return new SM_Name() {
 					@Override
-					public @NotNull String getText() {
+					public @NonNull String getText() {
 						return "Main";
 					}
 				};
 			}
 
 			@Override
-			public @NotNull SM_ClassSubtype subType() {
+			public @NonNull SM_ClassSubtype subType() {
 				return SM_ClassSubtype.NORMAL;
 			}
 		};

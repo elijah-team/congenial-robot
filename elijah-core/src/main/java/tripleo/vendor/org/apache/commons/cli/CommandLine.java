@@ -97,7 +97,7 @@ public class CommandLine implements Serializable {
 	 *
 	 * @return remaining items passed in but not parsed as an array.
 	 */
-	public String @NotNull [] getArgs() {
+	public String @NonNull [] getArgs() {
 //        return args.toArray(Util.EMPTY_STRING_ARRAY);
 		List<String> l = ci_args.stream()
 				.filter(inp -> inp.isNull())
@@ -237,7 +237,7 @@ public class CommandLine implements Serializable {
 	 * @return The Properties mapped by the option, never {@code null} even if the option doesn't exists.
 	 * @since 1.5.0
 	 */
-	public @NotNull Properties getOptionProperties(final Option option) {
+	public @NonNull Properties getOptionProperties(final Option option) {
 		final Properties props = new Properties();
 
 		for (final Option processedOption : options) {
@@ -266,7 +266,7 @@ public class CommandLine implements Serializable {
 	 * @return The Properties mapped by the option, never {@code null} even if the option doesn't exists.
 	 * @since 1.2
 	 */
-	public @NotNull Properties getOptionProperties(final @NotNull String opt) {
+	public @NonNull Properties getOptionProperties(final @NonNull String opt) {
 		final Properties props = new Properties();
 
 		for (final Option option : options) {
@@ -290,7 +290,7 @@ public class CommandLine implements Serializable {
 	 *
 	 * @return an array of the processed {@link Option}s.
 	 */
-	public Option @NotNull [] getOptions() {
+	public Option @NonNull [] getOptions() {
 		return options.toArray(Option.EMPTY_ARRAY);
 	}
 
@@ -436,7 +436,7 @@ public class CommandLine implements Serializable {
 	 *
 	 * @return an {@code Iterator} over the processed {@link Option} members of this {@link CommandLine}.
 	 */
-	public @NotNull Iterator<Option> iterator() {
+	public @NonNull Iterator<Option> iterator() {
 		return options.iterator();
 	}
 
@@ -457,7 +457,7 @@ public class CommandLine implements Serializable {
 		 * @param arg the unrecognized option/argument.
 		 * @return this Builder instance for method chaining.
 		 */
-		public @NotNull Builder addArg(final String arg) {
+		public @NonNull Builder addArg(final String arg) {
 			commandLine.addArg(arg);
 			return this;
 		}
@@ -468,12 +468,12 @@ public class CommandLine implements Serializable {
 		 * @param opt the processed option.
 		 * @return this Builder instance for method chaining.
 		 */
-		public @NotNull Builder addOption(final Option opt) {
+		public @NonNull Builder addOption(final Option opt) {
 			commandLine.addOption(opt);
 			return this;
 		}
 
-		public @NotNull CommandLine build() {
+		public @NonNull CommandLine build() {
 			return commandLine;
 		}
 	}

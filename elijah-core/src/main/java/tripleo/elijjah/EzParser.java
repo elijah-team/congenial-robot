@@ -117,7 +117,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 		return data;
 	}
 
-	public @NotNull CompilerInstructions ci  = new CompilerInstructionsImpl();
+	public @NonNull CompilerInstructions ci  = new CompilerInstructionsImpl();
 	@Nullable       Context              cur = null;
 
 	private static final long[] mk_tokenSet_2() {
@@ -715,7 +715,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 		return ee;
 	}
 
-	public final @NotNull ExpressionList expressionList2() throws RecognitionException, TokenStreamException {
+	public final @NonNull ExpressionList expressionList2() throws RecognitionException, TokenStreamException {
 		ExpressionList el;
 
 		el = new ExpressionListImpl();
@@ -920,7 +920,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 		return ee;
 	}
 
-	public final @NotNull GenerateStatement generate_statement() throws RecognitionException, TokenStreamException {
+	public final @NonNull GenerateStatement generate_statement() throws RecognitionException, TokenStreamException {
 		GenerateStatement gen;
 
 		Token i1 = null;
@@ -957,7 +957,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 	}
 
 	public final void identList(
-			@NotNull IdentList ail
+			@NonNull IdentList ail
 							   ) throws RecognitionException, TokenStreamException {
 
 		IdentExpression s = null;
@@ -1016,7 +1016,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 	}
 
 	public final void indexingStatement(
-			@NotNull CiIndexingStatement idx
+			@NonNull CiIndexingStatement idx
 									   ) throws RecognitionException, TokenStreamException {
 
 		Token          i1 = null;
@@ -1098,7 +1098,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 		}
 	}
 
-	public final @NotNull LibraryStatementPart library_statement_part() throws RecognitionException, TokenStreamException {
+	public final @NonNull LibraryStatementPart library_statement_part() throws RecognitionException, TokenStreamException {
 		LibraryStatementPart lsp;
 
 		Token i1      = null;
@@ -1597,7 +1597,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 	}
 
 	public final void qualidentList(
-			@NotNull QualidentList qal
+			@NonNull QualidentList qal
 								   ) throws RecognitionException, TokenStreamException {
 
 		Qualident qid;
@@ -1632,7 +1632,7 @@ public class EzParser extends antlr.LLkParser implements EzTokenTypes {
 		}
 	}
 
-	public final @NotNull Qualident qualident() throws RecognitionException, TokenStreamException {
+	public final @NonNull Qualident qualident() throws RecognitionException, TokenStreamException {
 		Qualident q;
 
 		Token d1 = null;

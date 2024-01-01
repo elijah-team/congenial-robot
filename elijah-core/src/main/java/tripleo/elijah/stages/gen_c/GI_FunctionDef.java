@@ -18,7 +18,7 @@ class GI_FunctionDef implements GenerateC_Item {
 		_repo = aGIRepo;
 	}
 
-	EvaNode _re_is_FunctionDef(final @Nullable ProcTableEntry pte, final EvaClass a_cheat, final @NotNull IdentTableEntry ite) {
+	EvaNode _re_is_FunctionDef(final @Nullable ProcTableEntry pte, final EvaClass a_cheat, final @NonNull IdentTableEntry ite) {
 		EvaNode resolved = null;
 		if (pte != null) {
 			final FunctionInvocation fi = pte.getFunctionInvocation();

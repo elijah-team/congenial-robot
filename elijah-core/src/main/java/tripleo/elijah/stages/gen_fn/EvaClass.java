@@ -51,7 +51,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 	private final   ClassStatement                      klass;
 	private final   OS_Module                           module;
 	public          ClassInvocation                     ci;
-	public @NotNull Map<ConstructorDef, EvaConstructor> constructors                      = new HashMap<ConstructorDef, EvaConstructor>();
+	public @NonNull Map<ConstructorDef, EvaConstructor> constructors                      = new HashMap<ConstructorDef, EvaConstructor>();
 	private         boolean                             resolve_var_table_entries_already = false;
 
 	public EvaClass(ClassStatement aClassStatement, OS_Module aModule) {
@@ -63,7 +63,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		throw new NotImplementedException();
 	}
 
-	public void addConstructor(ConstructorDef aConstructorDef, @NotNull EvaConstructor aGeneratedFunction) {
+	public void addConstructor(ConstructorDef aConstructorDef, @NonNull EvaConstructor aGeneratedFunction) {
 		constructors.put(aConstructorDef, aGeneratedFunction);
 	}
 
@@ -88,7 +88,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		}
 	}
 
-	public void fixupUserClasses(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext) {
+	public void fixupUserClasses(final @NonNull DeduceTypes2 aDeduceTypes2, final Context aContext) {
 		for (VarTableEntry varTableEntry : varTable) {
 			varTableEntry.updatePotentialTypesCB = new VarTableEntry_UpdatePotentialTypesCB(aDeduceTypes2,
 					varTableEntry, aContext, this);
@@ -113,7 +113,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 	}
 
 	@Override
-	public void generateCode(GenerateResultEnv aFileGen, @NotNull CodeGenerator aCodeGenerator) {
+	public void generateCode(GenerateResultEnv aFileGen, @NonNull CodeGenerator aCodeGenerator) {
 		aCodeGenerator.generate_class(aFileGen, this);
 	}
 
@@ -126,7 +126,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return this.klass;
 	}
 
-	@NotNull
+	@NonNull
 	public String getName() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(klass.getName());
@@ -146,8 +146,8 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return sb.toString();
 	}
 
-	@NotNull
-	private static String getNameHelper(@NotNull Map<TypeName, OS_Type> aGenericPart) {
+	@NonNull
+	private static String getNameHelper(@NonNull Map<TypeName, OS_Type> aGenericPart) {
 		final List<String> ls = new ArrayList<String>();
 		for (Map.Entry<TypeName, OS_Type> entry : aGenericPart.entrySet()) { // TODO Is this guaranteed to be in order?
 			final OS_Type value = entry.getValue(); // This can be another ClassInvocation using GenType
@@ -163,7 +163,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return Helpers.String_join(", ", ls);
 	}
 
-	@NotNull
+	@NonNull
 	public String getNumberedName() {
 		return getKlass().getName() + "_" + getCode();
 	}
@@ -173,12 +173,12 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 	}
 
 	@Override
-	public @NotNull Role getRole() {
+	public @NonNull Role getRole() {
 		return Role.CLASS;
 	}
 
 	@Override
-	public void register(final @NotNull ICodeRegistrar aCr) {
+	public void register(final @NonNull ICodeRegistrar aCr) {
 		aCr.registerClass1(this);
 	}
 
@@ -196,7 +196,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return klass.getGenericPart().size() > 0;
 	}
 
-	public boolean resolve_var_table_entries(@NotNull DeducePhase aDeducePhase) {
+	public boolean resolve_var_table_entries(@NonNull DeducePhase aDeducePhase) {
 		boolean Result = false;
 
 		if (resolve_var_table_entries_already) return true;
@@ -210,7 +210,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "EvaClass{" +
 				"klass=" + klass +
 				", code=" + getCode() +

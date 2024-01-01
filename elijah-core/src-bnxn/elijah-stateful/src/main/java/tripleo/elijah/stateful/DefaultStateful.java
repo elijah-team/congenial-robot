@@ -7,7 +7,7 @@ public abstract class DefaultStateful implements Stateful {
 	private State _state;
 
 	@Override
-	public void mvState(final @Nullable State aO, @NotNull final State aState) {
+	public void mvState(final @Nullable State aO, @NonNull final State aState) {
 		assert aO == null;
 
 		if (!aState.checkState(this)) {

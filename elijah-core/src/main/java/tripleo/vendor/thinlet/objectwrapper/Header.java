@@ -41,15 +41,15 @@ public class Header extends OWObject {
 		super(thinlet, Thinlet.create(ThinletConstants.HEADER));
 	}
 
-	public void addColumn(@NotNull Column child) {
+	public void addColumn(@NonNull Column child) {
 		fthinlet.add(unwrap(), child.unwrap());
 	}
 
-	public void addColumn(@NotNull Column child, int index) {
+	public void addColumn(@NonNull Column child, int index) {
 		fthinlet.add(unwrap(), child.unwrap(), index);
 	}
 
-	public void removeColumn(@NotNull Column child) {
+	public void removeColumn(@NonNull Column child) {
 		fthinlet.remove(child.unwrap());
 	}
 
@@ -65,7 +65,7 @@ public class Header extends OWObject {
 		return (Column) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Column @NotNull [] getColumns() {
+	public Column @NonNull [] getColumns() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Column[] ret = new Column[o.length];
 		for (int i = 0; i < ret.length; i++)

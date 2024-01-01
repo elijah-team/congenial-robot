@@ -52,7 +52,7 @@ public class FormalArgListItemImpl implements FormalArgListItem {
 	}
 
 	@Override
-	public @NotNull EN_Name getEnName() {
+	public @NonNull EN_Name getEnName() {
 		if (__n == null) {
 			__n = EN_Name_.create(name());
 		}
@@ -96,14 +96,14 @@ public class FormalArgListItemImpl implements FormalArgListItem {
 	}
 
 	@Override // OS_Element
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.visitFormalArgListItem(this);
 	}
 
 	private EN_Name __n;
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		String t;
 
 		if (tn != null) {

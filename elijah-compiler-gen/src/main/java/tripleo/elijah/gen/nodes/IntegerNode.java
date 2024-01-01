@@ -56,17 +56,17 @@ public class IntegerNode implements IExpressionNode {
 	}
 
 	@Override
-	public @NotNull String genText(final CompilerContext cctx) {
+	public @NonNull String genText(final CompilerContext cctx) {
 		return Integer.toString(((NumericExpression) _expr).getValue());
 	}
 
 	@Override
-	public @NotNull String genType() {
+	public @NonNull String genType() {
 		return "u64"; // TODO hardcoded
 	}
 
 	@Override
-	public @NotNull String genText() {
+	public @NonNull String genText() {
 		return Integer.toString(((NumericExpression) _expr).getValue());
 	}
 

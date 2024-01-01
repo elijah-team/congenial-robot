@@ -45,7 +45,7 @@ public class Table extends OWWidget {
 		return EnumSelection.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.SELECTION));
 	}
 
-	public void setSelection(@NotNull EnumSelection value) {
+	public void setSelection(@NonNull EnumSelection value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.SELECTION, value.toString());
 	}
 
@@ -77,15 +77,15 @@ public class Table extends OWWidget {
 		return (Row) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public void addRow(@NotNull Row row) {
+	public void addRow(@NonNull Row row) {
 		fthinlet.add(unwrap(), row.unwrap());
 	}
 
-	public void addRow(@NotNull Row row, int index) {
+	public void addRow(@NonNull Row row, int index) {
 		fthinlet.add(unwrap(), row.unwrap(), index);
 	}
 
-	public void removeRow(@NotNull Row row) {
+	public void removeRow(@NonNull Row row) {
 		fthinlet.remove(row.unwrap());
 	}
 

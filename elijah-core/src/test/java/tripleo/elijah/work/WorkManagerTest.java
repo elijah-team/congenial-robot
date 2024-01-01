@@ -21,7 +21,7 @@ public class WorkManagerTest {
 
 		private final          int          level;
 		private final          List<String> sink;
-		private final @NotNull String       state;
+		private final @NonNull String       state;
 		private                boolean      _done;
 
 		public AppendChar(String s, int level, List<String> aSink) {
@@ -31,7 +31,7 @@ public class WorkManagerTest {
 		}
 
 		@Override
-		public void run(@NotNull WorkManager aWorkManager) {
+		public void run(@NonNull WorkManager aWorkManager) {
 			if (level < 4) {
 				WorkList wl = new WorkList();
 				wl.addJob(new AppendChar(state, level + 1, sink));

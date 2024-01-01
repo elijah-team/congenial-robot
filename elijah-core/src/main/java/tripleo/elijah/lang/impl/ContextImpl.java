@@ -41,19 +41,19 @@ public abstract class ContextImpl implements Context {
 	}
 
 	@Override
-	public @NotNull Compilation compilation() {
+	public @NonNull Compilation compilation() {
 		OS_Module module = module();
 		return module.getCompilation();
 	}
 
 	@Override
-	public LookupResultList lookup(@NotNull final String name) {
+	public LookupResultList lookup(@NonNull final String name) {
 		final LookupResultList Result = new LookupResultListImpl();
 		return lookup(name, 0, Result, new SearchList(), false);
 	}
 
 	@Override
-	public @NotNull OS_Module module() {
+	public @NonNull OS_Module module() {
 		Context ctx = this;// getParent();
 		while (!(ctx instanceof ModuleContext)) {
 			ctx = ctx.getParent();

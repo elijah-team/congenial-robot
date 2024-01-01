@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ClassInheritanceImpl implements tripleo.elijah.lang.i.ClassInheritance {
-	public @NotNull List<TypeName> tns = new LinkedList<>();
+	public @NonNull List<TypeName> tns = new LinkedList<>();
 
 	/**
 	 * Do nothing and wait for addAll or add.
@@ -37,7 +37,7 @@ public class ClassInheritanceImpl implements tripleo.elijah.lang.i.ClassInherita
 	}
 
 	@Override
-	public void addAll(final @NotNull Collection<TypeName> tns) {
+	public void addAll(final @NonNull Collection<TypeName> tns) {
 		this.tns.addAll(tns);
 	}
 

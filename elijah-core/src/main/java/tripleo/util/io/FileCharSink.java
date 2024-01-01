@@ -40,7 +40,7 @@ public class FileCharSink implements DisposableCharSink {
 	 * @see tripleo.util.io.CharSink#accept(java.lang.String)
 	 */
 	@Override
-	public void accept(final @NotNull String string1) {
+	public void accept(final @NonNull String string1) {
 		try {
 			fos.write(string1.getBytes());
 		} catch (final IOException e) {

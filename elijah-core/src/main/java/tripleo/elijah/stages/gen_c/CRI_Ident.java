@@ -21,7 +21,7 @@ class CRI_Ident {
 	private final BaseEvaFunction generatedFunction;
 
 	@Contract(value = "_, _ -> new", pure = true)
-	public static @NotNull CRI_Ident of(final IdentTableEntry aIdte, final BaseEvaFunction aGf) {
+	public static @NonNull CRI_Ident of(final IdentTableEntry aIdte, final BaseEvaFunction aGf) {
 		return new CRI_Ident(aIdte, aGf);
 	}
 
@@ -45,14 +45,14 @@ class CRI_Ident {
 
 	public @Nullable String getIdentIAPath(int i,
 										   final int sSize,
-										   final Generate_Code_For_Method.@NotNull AOG aog,
-										   final @NotNull List<String> sl,
+										   final Generate_Code_For_Method.@NonNull AOG aog,
+										   final @NonNull List<String> sl,
 										   final String aValue,
-										   final @NotNull Consumer<CReference.Reference> addRef,
-										   final @NotNull List<InstructionArgument> s,
+										   final @NonNull Consumer<CReference.Reference> addRef,
+										   final @NonNull List<InstructionArgument> s,
 										   final IdentIA ia2,
-										   final @NotNull CReference aCReference,
-										   final @NotNull CR_ReferenceItem item) {
+										   final @NonNull CReference aCReference,
+										   final @NonNull CR_ReferenceItem item) {
 		final boolean[]  skip             = {false};
 		final OS_Element resolved_element = ite.getResolvedElement();
 		final String[]   text             = {null};
@@ -194,13 +194,13 @@ class CRI_Ident {
 		return text[0];
 	}
 
-	private @Nullable EvaNode _re_is_PropertyStatement(final @NotNull Consumer<CReference.Reference> addRef,
-													   final Generate_Code_For_Method.@NotNull AOG aog,
+	private @Nullable EvaNode _re_is_PropertyStatement(final @NonNull Consumer<CReference.Reference> addRef,
+													   final Generate_Code_For_Method.@NonNull AOG aog,
 													   final int sSize,
 													   final int i,
 													   final String aValue,
-													   final @NotNull Consumer<Void> skip,
-													   final @NotNull Consumer<String> text) {
+													   final @NonNull Consumer<Void> skip,
+													   final @NonNull Consumer<String> text) {
 		NotImplementedException.raise();
 		final EvaNode resolved1 = ite.type.resolved();
 		final int     code;

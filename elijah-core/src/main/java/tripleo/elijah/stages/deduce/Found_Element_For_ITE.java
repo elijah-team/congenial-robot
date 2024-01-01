@@ -33,7 +33,7 @@ class Found_Element_For_ITE {
 	private final ElLog                      LOG;
 	private final DeduceTypes2               deduceTypes2;
 
-	public Found_Element_For_ITE(BaseEvaFunction aGeneratedFunction, Context aCtx, final @NotNull DT_Env aEnv, DeduceTypes2.DeduceClient1 aDeduceClient1) {
+	public Found_Element_For_ITE(BaseEvaFunction aGeneratedFunction, Context aCtx, final @NonNull DT_Env aEnv, DeduceTypes2.DeduceClient1 aDeduceClient1) {
 		generatedFunction = aGeneratedFunction;
 		ctx               = aCtx;
 		dc                = aDeduceClient1;
@@ -45,13 +45,13 @@ class Found_Element_For_ITE {
 		deduceTypes2 = dc._deduceTypes2();
 	}
 
-	public void action(@NotNull IdentTableEntry ite) {
+	public void action(@NonNull IdentTableEntry ite) {
 		action2(ite);
 
 		generatedFunction.getIdent(ite).resolve();
 	}
 
-	private void action2(final @NotNull IdentTableEntry ite) {
+	private void action2(final @NonNull IdentTableEntry ite) {
 		final OS_Element y = ite.getResolvedElement();
 
 		if (y instanceof VariableStatementImpl) {
@@ -76,7 +76,7 @@ class Found_Element_For_ITE {
 			ite.resolveExpectation.satisfy(normal_path);
 	}
 
-	public void action_AliasStatement(@NotNull IdentTableEntry ite, @NotNull AliasStatementImpl y) {
+	public void action_AliasStatement(@NonNull IdentTableEntry ite, @NonNull AliasStatementImpl y) {
 		LOG.err("396 AliasStatementImpl");
 		@Nullable OS_Element x = dc._resolveAlias(y);
 		if (x == null) {
@@ -91,23 +91,23 @@ class Found_Element_For_ITE {
 		}
 	}
 
-	public void action_ClassStatement(@NotNull IdentTableEntry ite, @NotNull ClassStatement classStatement) {
-		@NotNull OS_Type attached = classStatement.getOS_Type();
+	public void action_ClassStatement(@NonNull IdentTableEntry ite, @NonNull ClassStatement classStatement) {
+		@NonNull OS_Type attached = classStatement.getOS_Type();
 		if (ite.type == null) {
 			ite.makeType(generatedFunction, TypeTableEntry.Type.TRANSIENT, attached);
 		} else
 			ite.type.setAttached(attached);
 	}
 
-	public void action_FunctionDef(@NotNull IdentTableEntry ite, @NotNull FunctionDef functionDef) {
-		@NotNull OS_Type attached = functionDef.getOS_Type();
+	public void action_FunctionDef(@NonNull IdentTableEntry ite, @NonNull FunctionDef functionDef) {
+		@NonNull OS_Type attached = functionDef.getOS_Type();
 		if (ite.type == null) {
 			ite.makeType(generatedFunction, TypeTableEntry.Type.TRANSIENT, attached);
 		} else
 			ite.type.setAttached(attached);
 	}
 
-	public void action_PropertyStatement(@NotNull IdentTableEntry ite, @NotNull PropertyStatement ps) {
+	public void action_PropertyStatement(@NonNull IdentTableEntry ite, @NonNull PropertyStatement ps) {
 		OS_Type attached;
 		switch (ps.getTypeName().kindOfType()) {
 		case GENERIC:
@@ -137,8 +137,8 @@ class Found_Element_For_ITE {
 		return deduceTypes2._inj();
 	}
 
-	public void action_VariableStatement(@NotNull IdentTableEntry ite, @NotNull VariableStatementImpl vs) {
-		@NotNull TypeName typeName = vs.typeName();
+	public void action_VariableStatement(@NonNull IdentTableEntry ite, @NonNull VariableStatementImpl vs) {
+		@NonNull TypeName typeName = vs.typeName();
 		if (ite.type == null || ite.type.getAttached() == null) {
 			if (!(typeName.isNull())) {
 				if (ite.type == null)
@@ -148,7 +148,7 @@ class Found_Element_For_ITE {
 				final OS_Element parent = vs.getParent().getParent();
 				if (parent instanceof NamespaceStatement || parent instanceof ClassStatement) {
 					boolean state;
-					if (generatedFunction instanceof final @NotNull EvaFunction generatedFunction1) {
+					if (generatedFunction instanceof final @NonNull EvaFunction generatedFunction1) {
 						state = (parent != generatedFunction1.getFD().getParent());
 					} else {
 						state = (parent != generatedFunction.getFD().getParent());
@@ -156,7 +156,7 @@ class Found_Element_For_ITE {
 					if (state) {
 						final IInvocation             invocation = dc.getInvocationFromBacklink(ite.getBacklink());
 						var                           dew_parent = new DeduceElementWrapper(parent);
-						final @NotNull DeferredMember dm         = dc.deferred_member(dew_parent, invocation, vs, ite);
+						final @NonNull DeferredMember dm         = dc.deferred_member(dew_parent, invocation, vs, ite);
 						dm.typePromise().
 								done((GenType result) -> {
 									if (ite.type == null)
@@ -176,7 +176,7 @@ class Found_Element_For_ITE {
 					} else {
 						IInvocation invocation;
 						if (ite.getBacklink() == null) {
-							if (parent instanceof final @NotNull ClassStatement classStatement) {
+							if (parent instanceof final @NonNull ClassStatement classStatement) {
 								final @Nullable ClassInvocation ci = dc.registerClassInvocation(classStatement, null);
 								assert ci != null;
 								invocation = ci;
@@ -187,10 +187,10 @@ class Found_Element_For_ITE {
 							invocation = dc.getInvocationFromBacklink(ite.getBacklink());
 						}
 						var                           dew_parent = new DeduceElementWrapper(parent);
-						final @NotNull DeferredMember dm         = dc.deferred_member(dew_parent, invocation, vs, ite);
+						final @NonNull DeferredMember dm         = dc.deferred_member(dew_parent, invocation, vs, ite);
 						dm.typePromise().then(new DoneCallback<GenType>() {
 							@Override
-							public void onDone(final @NotNull GenType result) {
+							public void onDone(final @NonNull GenType result) {
 								if (ite.type == null)
 									ite.makeType(generatedFunction, TypeTableEntry.Type.TRANSIENT, vs.initialValue());
 								assert result.getResolved() != null;
@@ -221,19 +221,19 @@ class Found_Element_For_ITE {
 	 *
 	 * @param aGenType the GenType to modify.
 	 */
-	public void genCIForGenType(final @NotNull GenType aGenType) {
+	public void genCIForGenType(final @NonNull GenType aGenType) {
 		//assert aGenType.nonGenericTypeName != null ;//&& ((NormalTypeName) aGenType.nonGenericTypeName).getGenericPart().size() > 0;
 
 		dc.genCI(aGenType, aGenType.getNonGenericTypeName());
 		final IInvocation invocation = aGenType.getCi();
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+		if (invocation instanceof final @NonNull NamespaceInvocation namespaceInvocation) {
 			namespaceInvocation.resolveDeferred().then(new DoneCallback<EvaNamespace>() {
 				@Override
 				public void onDone(final EvaNamespace result) {
 					aGenType.setNode(result);
 				}
 			});
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+		} else if (invocation instanceof final @NonNull ClassInvocation classInvocation) {
 			classInvocation.resolvePromise().then(new DoneCallback<EvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {

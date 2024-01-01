@@ -49,15 +49,15 @@ public class Row extends OWObject {
 		fthinlet.setBoolean(unwrap(), ThinletConstants.SELECTED, value);
 	}
 
-	public void addCell(@NotNull Cell child) {
+	public void addCell(@NonNull Cell child) {
 		fthinlet.add(unwrap(), child.unwrap());
 	}
 
-	public void addCell(@NotNull Cell child, int index) {
+	public void addCell(@NonNull Cell child, int index) {
 		fthinlet.add(unwrap(), child.unwrap(), index);
 	}
 
-	public void removeCell(@NotNull Cell child) {
+	public void removeCell(@NonNull Cell child) {
 		fthinlet.remove(child.unwrap());
 	}
 
@@ -73,7 +73,7 @@ public class Row extends OWObject {
 		return (Cell) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Cell @NotNull [] getCells() {
+	public Cell @NonNull [] getCells() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Cell[]   ret = new Cell[o.length];
 		for (int i = 0; i < ret.length; i++)

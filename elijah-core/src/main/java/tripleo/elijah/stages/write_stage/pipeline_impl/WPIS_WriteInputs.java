@@ -26,7 +26,7 @@ public class WPIS_WriteInputs implements WP_Indiviual_Step {
 	private final Map<String, Operation<String>> ops = new HashMap<>();
 
 	@Override
-	public void act(final @NotNull WritePipelineSharedState st, final WP_State_Control sc) {
+	public void act(final @NonNull WritePipelineSharedState st, final WP_State_Control sc) {
 		var root = st.c.paths().outputRoot();
 		var fn1  = root.child("inputs.txt");
 
@@ -48,7 +48,7 @@ public class WPIS_WriteInputs implements WP_Indiviual_Step {
 
 		String s = buf.getText();
 
-		final @NotNull EOT_OutputTree ot = st.c.getOutputTree();
+		final @NonNull EOT_OutputTree ot = st.c.getOutputTree();
 
 		final List<EIT_Input_HashSourceFile_Triple> yys = new ArrayList<>();
 
@@ -79,8 +79,8 @@ public class WPIS_WriteInputs implements WP_Indiviual_Step {
 		});
 	}
 
-	public @NotNull Operation<String> append_hash(@NotNull TextBuffer outputBuffer, @NotNull String aFilename) {
-		final @NotNull Operation<String> hh2 = Helpers.getHashForFilename(aFilename);
+	public @NonNull Operation<String> append_hash(@NonNull TextBuffer outputBuffer, @NonNull String aFilename) {
+		final @NonNull Operation<String> hh2 = Helpers.getHashForFilename(aFilename);
 
 		if (hh2.mode() == Mode.SUCCESS) {
 			final String hh = hh2.success();

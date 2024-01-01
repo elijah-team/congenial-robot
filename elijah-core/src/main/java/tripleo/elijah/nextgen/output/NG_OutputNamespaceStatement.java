@@ -10,16 +10,16 @@ import tripleo.util.buffer.Buffer;
 public class NG_OutputNamespaceStatement implements NG_OutputStatement {
 	private final          Buffer    buf;
 	private final          TY        ty;
-	private final @NotNull NG_OutDep moduleDependency;
+	private final @NonNull NG_OutDep moduleDependency;
 
-	public NG_OutputNamespaceStatement(final Buffer aBuf, final TY aTY, final @NotNull OS_Module aM) {
+	public NG_OutputNamespaceStatement(final Buffer aBuf, final TY aTY, final @NonNull OS_Module aM) {
 		buf              = aBuf;
 		ty               = aTY;
 		moduleDependency = new NG_OutDep(aM);
 	}
 
 	@Override
-	public @NotNull EX_Explanation getExplanation() {
+	public @NonNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("NG_OutputNamespaceStatement");
 	}
 
@@ -34,7 +34,7 @@ public class NG_OutputNamespaceStatement implements NG_OutputStatement {
 	}
 
 	@Override
-	@NotNull
+	@NonNull
 	public EIT_ModuleInput getModuleInput() {
 		var m = moduleDependency().getModule();
 
@@ -42,7 +42,7 @@ public class NG_OutputNamespaceStatement implements NG_OutputStatement {
 		return moduleInput;
 	}
 
-	public @NotNull NG_OutDep moduleDependency() {
+	public @NonNull NG_OutDep moduleDependency() {
 		return moduleDependency;
 	}
 }

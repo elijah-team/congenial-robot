@@ -13,7 +13,7 @@ public record GM_GenerateModuleResult(GenerateResult generateResult,
 									  GN_GenerateNodesIntoSink generateNodesIntoSink,
 									  GM_GenerateModuleRequest generateModuleRequest,
 									  java.util.function.Supplier<GenerateResultEnv> figs) {
-	void doResult(final @NotNull WorkManager wm) {
+	void doResult(final @NonNull WorkManager wm) {
 		// TODO find GenerateResultEnv and centralise them
 		final WorkList           wl             = new WorkList();
 		final GenerateFiles      generateFiles1 = generateModuleRequest.getGenerateFiles(figs);

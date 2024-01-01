@@ -17,14 +17,14 @@ import tripleo.elijah.util.Operation2;
 import java.util.function.Supplier;
 
 public interface GenType {
-	static @Nullable GenType makeFromOSType(@NotNull OS_Type aVt, ClassInvocation.@NotNull CI_GenericPart aGenericPart, @NotNull DeduceTypes2 dt2, DeducePhase phase, @NotNull ElLog aLOG, @NotNull ErrSink errSink) {
+	static @Nullable GenType makeFromOSType(@NonNull OS_Type aVt, ClassInvocation.@NonNull CI_GenericPart aGenericPart, @NonNull DeduceTypes2 dt2, DeducePhase phase, @NonNull ElLog aLOG, @NonNull ErrSink errSink) {
 		return makeGenTypeFromOSType(aVt, aGenericPart, aLOG, errSink, dt2, phase);
 	}
 
-	static @Nullable GenType makeGenTypeFromOSType(@NotNull OS_Type aType,
-												   ClassInvocation.@NotNull CI_GenericPart aGenericPart,
-												   @NotNull ElLog aLOG,
-												   @NotNull ErrSink errSink, @NotNull DeduceTypes2 dt2, DeducePhase phase) {
+	static @Nullable GenType makeGenTypeFromOSType(@NonNull OS_Type aType,
+												   ClassInvocation.@NonNull CI_GenericPart aGenericPart,
+												   @NonNull ElLog aLOG,
+												   @NonNull ErrSink errSink, @NonNull DeduceTypes2 dt2, DeducePhase phase) {
 		GenType gt = new GenTypeImpl();
 		gt.setTypeName(aType);
 		if (aType.getType() == OS_Type.Type.USER) {
@@ -37,7 +37,7 @@ public interface GenType {
 			final @Nullable OS_Element el  = lrl.chooseBest(null);
 
 			DeduceTypes2.ProcessElement.processElement(el, new DeduceTypes2.IElementProcessor() {
-				private void __hasElement__typeNameElement(final ClassContext.@NotNull OS_TypeNameElement typeNameElement) {
+				private void __hasElement__typeNameElement(final ClassContext.@NonNull OS_TypeNameElement typeNameElement) {
 					assert aGenericPart != null;
 
 					final OS_Type x = aGenericPart.get(typeNameElement.getTypeName());
@@ -57,7 +57,7 @@ public interface GenType {
 						final @Nullable OS_Element el2 = lrl2.chooseBest(null);
 
 						// TODO test next 4 lines are copies of above
-						if (el2 instanceof final @NotNull ClassStatement classStatement2) {
+						if (el2 instanceof final @NonNull ClassStatement classStatement2) {
 							gt.setResolved(classStatement2.getOS_Type());
 						} else
 							throw new NotImplementedException();
@@ -70,7 +70,7 @@ public interface GenType {
 					NotImplementedException.raise();
 				}
 
-				private void gotResolved(final @NotNull GenType gt) {
+				private void gotResolved(final @NonNull GenType gt) {
 					if (gt.getResolved().getClassOf().getGenericPart().size() != 0) {
 						//throw new AssertionError();
 						aLOG.info("149 non-generic type " + tn1);
@@ -112,7 +112,7 @@ public interface GenType {
 					}
 				}
 
-				private @NotNull Operation2<@NotNull OS_Element> preprocess(final OS_Element el) {
+				private @NonNull Operation2<@NonNull OS_Element> preprocess(final OS_Element el) {
 					@Nullable OS_Element best = el;
 					try {
 						while (best instanceof AliasStatement) {
@@ -141,19 +141,19 @@ public interface GenType {
 	 *
 	 * @param aGenType the GenType to modify.
 	 */
-	static void genNodeForGenType2(@NotNull GenType aGenType) {
+	static void genNodeForGenType2(@NonNull GenType aGenType) {
 //		assert aGenType.nonGenericTypeName != null;
 
 		final IInvocation invocation = aGenType.getCi();
 
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+		if (invocation instanceof final @NonNull NamespaceInvocation namespaceInvocation) {
 			namespaceInvocation.resolveDeferred().then(new DoneCallback<EvaNamespace>() {
 				@Override
 				public void onDone(final EvaNamespace result) {
 					aGenType.setNode(result);
 				}
 			});
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+		} else if (invocation instanceof final @NonNull ClassInvocation classInvocation) {
 			classInvocation.resolvePromise().then(new DoneCallback<EvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {
@@ -170,7 +170,7 @@ public interface GenType {
 
 	//@ensures Result.ci != null
 	//@ensures ResultgetResolved() != null
-	static @NotNull GenType of(NamespaceStatement aNamespaceStatement, @NotNull Supplier<NamespaceInvocation> aNamespaceInvocationSupplier) {
+	static @NonNull GenType of(NamespaceStatement aNamespaceStatement, @NonNull Supplier<NamespaceInvocation> aNamespaceInvocationSupplier) {
 		final GenType genType = new GenTypeImpl(aNamespaceStatement);
 
 		final NamespaceInvocation nsi = aNamespaceInvocationSupplier.get();
@@ -204,7 +204,7 @@ public interface GenType {
 
 	boolean isNull();
 
-	void set(@NotNull OS_Type aType);
+	void set(@NonNull OS_Type aType);
 
 	EvaNode getNode();
 
@@ -218,7 +218,7 @@ public interface GenType {
 
 	FunctionInvocation getFunctionInvocation();
 
-	void setNonGenericTypeName(@NotNull TypeName typeName);
+	void setNonGenericTypeName(@NonNull TypeName typeName);
 
 	void setResolvedn(NamespaceStatement parent);
 

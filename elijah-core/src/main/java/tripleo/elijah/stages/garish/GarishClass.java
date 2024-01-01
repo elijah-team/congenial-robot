@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class GarishClass {
 
-	public void garish(final GenerateC aGenerateC, final GenerateResult gr, final @NotNull GenerateResultSink aResultSink) {
+	public void garish(final GenerateC aGenerateC, final GenerateResult gr, final @NonNull GenerateResultSink aResultSink) {
 		final LivingClass dlc = _lc;
 		final EvaClass    x   = dlc.evaNode();
 
@@ -40,7 +40,7 @@ public class GarishClass {
 		x.generatedAlready = true;
 	}
 
-	public @NotNull BufferTabbedOutputStream getClassBuffer(final @NotNull GenerateC aGenerateC) {
+	public @NonNull BufferTabbedOutputStream getClassBuffer(final @NonNull GenerateC aGenerateC) {
 		final EvaClass evaClass = getLiving().evaNode();
 
 		final CClassDecl decl = new CClassDecl(evaClass);
@@ -60,8 +60,8 @@ public class GarishClass {
 		//_lc.setGarish(this);
 	}
 
-	public @NotNull BufferTabbedOutputStream getClassBuffer(final @NotNull EvaClass x,
-															final @NotNull CClassDecl decl,
+	public @NonNull BufferTabbedOutputStream getClassBuffer(final @NonNull EvaClass x,
+															final @NonNull CClassDecl decl,
 															final String class_name,
 															final int class_code) {
 		final BufferTabbedOutputStream tos = new BufferTabbedOutputStream();
@@ -97,7 +97,7 @@ public class GarishClass {
 		return tos;
 	}
 
-	public @NotNull BufferTabbedOutputStream getHeaderBuffer(final @NotNull GenerateC aGenerateC) {
+	public @NonNull BufferTabbedOutputStream getHeaderBuffer(final @NonNull GenerateC aGenerateC) {
 		final EvaClass evaClass = getLiving().evaNode();
 
 		final CClassDecl decl = new CClassDecl(evaClass);
@@ -109,9 +109,9 @@ public class GarishClass {
 		return getHeaderBuffer(aGenerateC, evaClass, decl, class_name);
 	}
 
-	public @NotNull BufferTabbedOutputStream getHeaderBuffer(final @NotNull GenerateC aGenerateC,
-															 final @NotNull EvaClass x,
-															 final @NotNull CClassDecl decl,
+	public @NonNull BufferTabbedOutputStream getHeaderBuffer(final @NonNull GenerateC aGenerateC,
+															 final @NonNull EvaClass x,
+															 final @NonNull CClassDecl decl,
 															 final String class_name) {
 		final BufferTabbedOutputStream tosHdr = new BufferTabbedOutputStream();
 
@@ -144,7 +144,7 @@ public class GarishClass {
 		return tosHdr;
 	}
 
-	public @NotNull String finalizedGenericPrintable(final @NotNull EvaClass evaClass) {
+	public @NonNull String finalizedGenericPrintable(final @NonNull EvaClass evaClass) {
 		final ClassStatement                 klass = evaClass.getKlass();
 		final ClassInvocation.CI_GenericPart x     = evaClass.ci.genericPart();
 

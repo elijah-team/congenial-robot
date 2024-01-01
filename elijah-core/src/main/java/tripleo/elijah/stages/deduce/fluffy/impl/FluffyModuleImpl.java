@@ -25,7 +25,7 @@ public class FluffyModuleImpl implements FluffyModule {
 	 * @param classStatement
 	 * @param ccs
 	 */
-	private static void faep_002(final @NotNull ClassStatement classStatement, final Consumer<ClassStatement> ccs) {
+	private static void faep_002(final @NonNull ClassStatement classStatement, final Consumer<ClassStatement> ccs) {
 		final Collection<ClassItem> x     = classStatement.findFunction("main");
 		final Stream<FunctionDef>   found = x.stream().filter(FluffyCompImpl::isMainClassEntryPoint).map(x7 -> (FunctionDef) x7);
 
@@ -70,7 +70,7 @@ public class FluffyModuleImpl implements FluffyModule {
 	}
 
 	@Override
-	public void find_multiple_items(final @NotNull FluffyComp aFc) {
+	public void find_multiple_items(final @NonNull FluffyComp aFc) {
 		aFc.find_multiple_items(module);
 	}
 

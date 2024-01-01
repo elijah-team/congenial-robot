@@ -25,7 +25,7 @@ public interface GenerateResult {
 	/* (non-Javadoc)
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addFunction(tripleo.elijah.stages.gen_fn.BaseEvaFunction, tripleo.util.buffer.Buffer, tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.ci.LibraryStatementPart)
 	 */
-	void addFunction(IPP_Function aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp);
+	void addFunction(IPP_Function aGeneratedFunction, @NonNull Buffer aBuffer, @NonNull TY aTY, LibraryStatementPart aLsp);
 
 	void additional(GenerateResult aGenerateResult);
 

@@ -166,7 +166,7 @@ public class HelpFormatter {
 	 * @param option   the Option to append
 	 * @param required whether the Option is required or not
 	 */
-	private void appendOption(final @NotNull StringBuffer buff, final @NotNull Option option, final boolean required) {
+	private void appendOption(final @NonNull StringBuffer buff, final @NonNull Option option, final boolean required) {
 		if (!required) {
 			buff.append("[");
 		}
@@ -197,7 +197,7 @@ public class HelpFormatter {
 	 * @param group the group to append
 	 * @see #appendOption(StringBuffer, Option, boolean)
 	 */
-	private void appendOptionGroup(final @NotNull StringBuffer buff, final @NotNull OptionGroup group) {
+	private void appendOptionGroup(final @NonNull StringBuffer buff, final @NonNull OptionGroup group) {
 		if (!group.isRequired()) {
 			buff.append("[");
 		}
@@ -227,7 +227,7 @@ public class HelpFormatter {
 	 * @param len The length of the String of padding to create.
 	 * @return The String of padding
 	 */
-	protected @NotNull String createPadding(final int len) {
+	protected @NonNull String createPadding(final int len) {
 		final char[] padding = new char[len];
 		Arrays.fill(padding, ' ');
 
@@ -244,7 +244,7 @@ public class HelpFormatter {
 	 * @param startPos position from which to start the lookup whitespace character
 	 * @return position on which the text must be wrapped or -1 if the wrap position is at the end of the text
 	 */
-	protected int findWrapPos(final @NotNull String text, final int width, final int startPos) {
+	protected int findWrapPos(final @NonNull String text, final int width, final int startPos) {
 		// the line ends before the max wrap pos or a new line char found
 		int pos = text.indexOf('\n', startPos);
 		if (pos != -1 && pos <= width) {
@@ -476,7 +476,7 @@ public class HelpFormatter {
 	 * @param options       the Options instance
 	 * @param footer        the banner to display at the end of the help
 	 */
-	public void printHelp(final int width, final @NotNull String cmdLineSyntax, final String header, final @NotNull Options options, final String footer) {
+	public void printHelp(final int width, final @NonNull String cmdLineSyntax, final String header, final @NonNull Options options, final String footer) {
 		printHelp(width, cmdLineSyntax, header, options, footer, false);
 	}
 
@@ -491,7 +491,7 @@ public class HelpFormatter {
 	 * @param footer        the banner to display at the end of the help
 	 * @param autoUsage     whether to print an automatically generated usage statement
 	 */
-	public void printHelp(final int width, final @NotNull String cmdLineSyntax, final String header, final @NotNull Options options, final String footer,
+	public void printHelp(final int width, final @NonNull String cmdLineSyntax, final String header, final @NonNull Options options, final String footer,
 						  final boolean autoUsage) {
 		final PrintWriter pw = new PrintWriter(System.out);
 
@@ -512,7 +512,7 @@ public class HelpFormatter {
 	 * @param footer        the banner to display at the end of the help
 	 * @throws IllegalStateException if there is no room to print a line
 	 */
-	public void printHelp(final @NotNull PrintWriter pw, final int width, final @NotNull String cmdLineSyntax, final String header, final @NotNull Options options, final int leftPad,
+	public void printHelp(final @NonNull PrintWriter pw, final int width, final @NonNull String cmdLineSyntax, final String header, final @NonNull Options options, final int leftPad,
 						  final int descPad, final String footer) {
 		printHelp(pw, width, cmdLineSyntax, header, options, leftPad, descPad, footer, false);
 	}
@@ -531,7 +531,7 @@ public class HelpFormatter {
 	 * @param autoUsage     whether to print an automatically generated usage statement
 	 * @throws IllegalStateException if there is no room to print a line
 	 */
-	public void printHelp(final @NotNull PrintWriter pw, final int width, final @NotNull String cmdLineSyntax, final @Nullable String header, final @NotNull Options options, final int leftPad,
+	public void printHelp(final @NonNull PrintWriter pw, final int width, final @NonNull String cmdLineSyntax, final @Nullable String header, final @NonNull Options options, final int leftPad,
 						  final int descPad, final @Nullable String footer, final boolean autoUsage) {
 		if (cmdLineSyntax == null || cmdLineSyntax.isEmpty()) {
 			throw new IllegalArgumentException("cmdLineSyntax not provided");
@@ -561,7 +561,7 @@ public class HelpFormatter {
 	 * @param cmdLineSyntax the syntax for this application
 	 * @param options       the Options instance
 	 */
-	public void printHelp(final @NotNull String cmdLineSyntax, final @NotNull Options options) {
+	public void printHelp(final @NonNull String cmdLineSyntax, final @NonNull Options options) {
 		printHelp(getWidth(), cmdLineSyntax, null, options, null, false);
 	}
 
@@ -573,7 +573,7 @@ public class HelpFormatter {
 	 * @param options       the Options instance
 	 * @param autoUsage     whether to print an automatically generated usage statement
 	 */
-	public void printHelp(final @NotNull String cmdLineSyntax, final @NotNull Options options, final boolean autoUsage) {
+	public void printHelp(final @NonNull String cmdLineSyntax, final @NonNull Options options, final boolean autoUsage) {
 		printHelp(getWidth(), cmdLineSyntax, null, options, null, autoUsage);
 	}
 
@@ -586,7 +586,7 @@ public class HelpFormatter {
 	 * @param options       the Options instance
 	 * @param footer        the banner to display at the end of the help
 	 */
-	public void printHelp(final @NotNull String cmdLineSyntax, final String header, final @NotNull Options options, final String footer) {
+	public void printHelp(final @NonNull String cmdLineSyntax, final String header, final @NonNull Options options, final String footer) {
 		printHelp(cmdLineSyntax, header, options, footer, false);
 	}
 
@@ -600,7 +600,7 @@ public class HelpFormatter {
 	 * @param footer        the banner to display at the end of the help
 	 * @param autoUsage     whether to print an automatically generated usage statement
 	 */
-	public void printHelp(final @NotNull String cmdLineSyntax, final String header, final @NotNull Options options, final String footer, final boolean autoUsage) {
+	public void printHelp(final @NonNull String cmdLineSyntax, final String header, final @NonNull Options options, final String footer, final boolean autoUsage) {
 		printHelp(getWidth(), cmdLineSyntax, header, options, footer, autoUsage);
 	}
 
@@ -614,7 +614,7 @@ public class HelpFormatter {
 	 * @param leftPad the number of characters of padding to be prefixed to each line
 	 * @param descPad the number of characters of padding to be prefixed to each description line
 	 */
-	public void printOptions(final @NotNull PrintWriter pw, final int width, final @NotNull Options options, final int leftPad, final int descPad) {
+	public void printOptions(final @NonNull PrintWriter pw, final int width, final @NonNull Options options, final int leftPad, final int descPad) {
 		final StringBuffer sb = new StringBuffer();
 
 		renderOptions(sb, width, options, leftPad, descPad);
@@ -628,7 +628,7 @@ public class HelpFormatter {
 	 * @param width         The number of characters per line for the usage statement.
 	 * @param cmdLineSyntax The usage statement.
 	 */
-	public void printUsage(final @NotNull PrintWriter pw, final int width, final @NotNull String cmdLineSyntax) {
+	public void printUsage(final @NonNull PrintWriter pw, final int width, final @NonNull String cmdLineSyntax) {
 		final int argPos = cmdLineSyntax.indexOf(' ') + 1;
 
 		printWrapped(pw, width, getSyntaxPrefix().length() + argPos, getSyntaxPrefix() + cmdLineSyntax);
@@ -642,7 +642,7 @@ public class HelpFormatter {
 	 * @param app     The application name
 	 * @param options The command line Options
 	 */
-	public void printUsage(final @NotNull PrintWriter pw, final int width, final String app, final @NotNull Options options) {
+	public void printUsage(final @NonNull PrintWriter pw, final int width, final String app, final @NonNull Options options) {
 		// initialize the string buffer
 		final StringBuffer buff = new StringBuffer(getSyntaxPrefix()).append(app).append(" ");
 
@@ -698,7 +698,7 @@ public class HelpFormatter {
 	 * @param nextLineTabStop The position on the next line for the first tab.
 	 * @param text            The text to be written to the PrintWriter
 	 */
-	public void printWrapped(final @NotNull PrintWriter pw, final int width, final int nextLineTabStop, final @NotNull String text) {
+	public void printWrapped(final @NonNull PrintWriter pw, final int width, final int nextLineTabStop, final @NonNull String text) {
 		final StringBuffer sb = new StringBuffer(text.length());
 
 		renderWrappedTextBlock(sb, width, nextLineTabStop, text);
@@ -712,7 +712,7 @@ public class HelpFormatter {
 	 * @param width The number of characters to display per line
 	 * @param text  The text to be written to the PrintWriter
 	 */
-	public void printWrapped(final @NotNull PrintWriter pw, final int width, final @NotNull String text) {
+	public void printWrapped(final @NonNull PrintWriter pw, final int width, final @NonNull String text) {
 		printWrapped(pw, width, 0, text);
 	}
 
@@ -726,7 +726,7 @@ public class HelpFormatter {
 	 * @param descPad the number of characters of padding to be prefixed to each description line
 	 * @return the StringBuffer with the rendered Options contents.
 	 */
-	protected StringBuffer renderOptions(final @NotNull StringBuffer sb, final int width, final @NotNull Options options, final int leftPad, final int descPad) {
+	protected StringBuffer renderOptions(final @NonNull StringBuffer sb, final int width, final @NonNull Options options, final int leftPad, final int descPad) {
 		final String lpad = createPadding(leftPad);
 		final String dpad = createPadding(descPad);
 
@@ -808,7 +808,7 @@ public class HelpFormatter {
 	 * @param text            The text to be rendered.
 	 * @return the StringBuffer with the rendered Options contents.
 	 */
-	protected @NotNull StringBuffer renderWrappedText(final @NotNull StringBuffer sb, final int width, int nextLineTabStop, @NotNull String text) {
+	protected @NonNull StringBuffer renderWrappedText(final @NonNull StringBuffer sb, final int width, int nextLineTabStop, @NonNull String text) {
 		int pos = findWrapPos(text, width, 0);
 
 		if (pos == -1) {
@@ -853,7 +853,7 @@ public class HelpFormatter {
 	 * @param nextLineTabStop The position on the next line for the first tab.
 	 * @param text            The text to be rendered.
 	 */
-	private Appendable renderWrappedTextBlock(final @NotNull StringBuffer sb, final int width, final int nextLineTabStop, final @NotNull String text) {
+	private Appendable renderWrappedTextBlock(final @NonNull StringBuffer sb, final int width, final int nextLineTabStop, final @NonNull String text) {
 		try {
 			final BufferedReader in        = new BufferedReader(new StringReader(text));
 			String               line;
@@ -912,7 +912,7 @@ public class HelpFormatter {
 		 * the second.
 		 */
 		@Override
-		public int compare(final @NotNull Option opt1, final @NotNull Option opt2) {
+		public int compare(final @NonNull Option opt1, final @NonNull Option opt2) {
 			return opt1.getKey().compareToIgnoreCase(opt2.getKey());
 		}
 	}

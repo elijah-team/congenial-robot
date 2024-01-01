@@ -20,14 +20,14 @@ public class EK_ExpertSystem {
 	//public static int countBackwardchaining=0;
 	//public static int countForwardchaining=0;
 
-	void actualizeMerge(final EK_Production current_production, final @NotNull EK_Merge aEKMerge) {
+	void actualizeMerge(final EK_Production current_production, final @NonNull EK_Merge aEKMerge) {
 		Listfacts.add(aEKMerge.result());
 		System.out.println("add fact:" + aEKMerge.result());
 		Listrule.remove(current_production);
 		System.out.println("remove rule: " + current_production);
 	}
 
-	public void actualizePush(final @NotNull EK_Push aPush, final EK_Production current_production) {
+	public void actualizePush(final @NonNull EK_Push aPush, final EK_Production current_production) {
 		Listfacts.add(aPush.resultant());
 		System.out.println("add fact: " + aPush.resultant());
 		Listrule.remove(current_production);
@@ -42,13 +42,13 @@ public class EK_ExpertSystem {
 
 	}
 
-	boolean canAcceptMerge(final @NotNull EK_Merge aMerge2) {
+	boolean canAcceptMerge(final @NonNull EK_Merge aMerge2) {
 		return Listfacts.contains(aMerge2.first())
 				&& Listfacts.contains(aMerge2.second())
 				&& !Listfacts.contains(aMerge2.result());
 	}
 
-	boolean canAcceptPush(final @NotNull EK_Push aPush) {
+	boolean canAcceptPush(final @NonNull EK_Push aPush) {
 		return Listfacts.contains(aPush.predicating()) && !Listfacts.contains(aPush.resultant());
 	}
 
@@ -140,7 +140,7 @@ public class EK_ExpertSystem {
 		}
 	}
 
-	public @NotNull Operation<EK_Reader> openfile_2() {
+	public @NonNull Operation<EK_Reader> openfile_2() {
 		try {
 			final InputStream stream = getClass().getResourceAsStream("KB3.txt");
 			return Operation.success(new EK_Reader1(this, stream));
@@ -160,7 +160,7 @@ public class EK_ExpertSystem {
 	}
 
 	//Interpretation of input
-	public void proof(@NotNull String st) {
+	public void proof(@NonNull String st) {
 		if (st.length() == 1) {
 			Listfacts.add(new EK_Fact(st.charAt(0)));
 		} else {
@@ -174,7 +174,7 @@ public class EK_ExpertSystem {
 		}
 	}
 
-	public void updateBackwardChaining(@NotNull final EK_Production prod) {
+	public void updateBackwardChaining(@NonNull final EK_Production prod) {
 		final EK_Merge m = prod.getMerge();
 
 		if (Listfacts.contains(m.first()) && Listfacts.contains(m.second())) {

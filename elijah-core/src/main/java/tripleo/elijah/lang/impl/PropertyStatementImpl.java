@@ -20,7 +20,7 @@ import tripleo.elijah.util.Helpers;
  */
 public class PropertyStatementImpl implements PropertyStatement {
 
-	private final @NotNull Context         context;
+	private final @NonNull Context         context;
 	private final          OS_Element      parent;
 	public                 FunctionDef     get_fn;
 	public                 FunctionDef     set_fn;
@@ -46,7 +46,7 @@ public class PropertyStatementImpl implements PropertyStatement {
 		_set_is_abstract = true;
 	}
 
-	@NotNull
+	@NonNull
 	FunctionDef createGetFunction() {
 		FunctionDef functionDef = new FunctionDefImpl(this, getContext());
 		functionDef.setName(Helpers.string_to_ident(String.format("<prop_get %s>", prop_name)));
@@ -55,7 +55,7 @@ public class PropertyStatementImpl implements PropertyStatement {
 		return functionDef;
 	}
 
-	@NotNull
+	@NonNull
 	FunctionDef createSetFunction() {
 		FunctionDef functionDef = new FunctionDefImpl(this, getContext());
 		functionDef.setName(Helpers.string_to_ident(String.format("<prop_set %s>", prop_name)));
@@ -156,7 +156,7 @@ public class PropertyStatementImpl implements PropertyStatement {
 	// endregion
 
 	@Override
-	public @NotNull EN_Name getEnName() {
+	public @NonNull EN_Name getEnName() {
 		if (__n == null) {
 			__n = EN_Name_.create(name());
 		}
@@ -174,7 +174,7 @@ public class PropertyStatementImpl implements PropertyStatement {
 	}
 
 	@Override // OS_Element
-	public void visitGen(@NotNull ElElementVisitor visit) {
+	public void visitGen(@NonNull ElElementVisitor visit) {
 		visit.visitPropertyStatement(this);
 	}
 

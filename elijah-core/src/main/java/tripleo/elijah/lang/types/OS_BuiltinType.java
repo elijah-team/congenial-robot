@@ -16,12 +16,12 @@ public class OS_BuiltinType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NotNull String asString() {
+	public @NonNull String asString() {
 		return MessageFormat.format("<OS_BuiltinType {0}>", _bit);
 	}
 
 	@Override
-	protected boolean _isEqual(final @NotNull OS_Type aType) {
+	protected boolean _isEqual(final @NonNull OS_Type aType) {
 		return aType.getType() == Type.BUILT_IN && _bit.equals(aType.getBType());
 	}
 
@@ -36,7 +36,7 @@ public class OS_BuiltinType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NotNull Type getType() {
+	public @NonNull Type getType() {
 		return Type.BUILT_IN;
 	}
 }

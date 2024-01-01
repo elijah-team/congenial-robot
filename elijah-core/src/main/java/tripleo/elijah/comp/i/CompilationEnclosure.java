@@ -118,7 +118,7 @@ public class CompilationEnclosure {
 	}
 
 	@Contract(pure = true)
-	public @NotNull Promise<IPipelineAccess, Void, Void> getPipelineAccessPromise() {
+	public @NonNull Promise<IPipelineAccess, Void, Void> getPipelineAccessPromise() {
 		return pipelineAccessPromise;
 	}
 
@@ -127,7 +127,7 @@ public class CompilationEnclosure {
 		return compilation;
 	}
 
-	public void addReactive(@NotNull Reactive r) {
+	public void addReactive(@NonNull Reactive r) {
 		dimensionSubject.subscribe(new Observer<ReactiveDimension>() {
 			@Override
 			public void onSubscribe(@NonNull final Disposable d) {
@@ -140,7 +140,7 @@ public class CompilationEnclosure {
 			}
 
 			@Override
-			public void onError(@NonNull final @NotNull Throwable e) {
+			public void onError(@NonNull final @NonNull Throwable e) {
 				e.printStackTrace();
 			}
 
@@ -161,12 +161,12 @@ public class CompilationEnclosure {
 			}
 
 			@Override
-			public void onNext(@NonNull final @NotNull Reactivable aReactivable) {
+			public void onNext(@NonNull final @NonNull Reactivable aReactivable) {
 				addReactive(aReactivable);
 			}
 
 			@Override
-			public void onError(@NonNull final @NotNull Throwable e) {
+			public void onError(@NonNull final @NonNull Throwable e) {
 				e.printStackTrace();
 			}
 
@@ -179,7 +179,7 @@ public class CompilationEnclosure {
 //		aReactiveDimension.setReactiveSink(addReactive);
 	}
 
-	public void addReactive(@NotNull Reactivable r) {
+	public void addReactive(@NonNull Reactivable r) {
 		int y = 2;
 		// reactivableObserver.onNext(r);
 		reactivableSubject.onNext(r);
@@ -198,7 +198,7 @@ public class CompilationEnclosure {
 			}
 
 			@Override
-			public void onError(@NonNull final @NotNull Throwable e) {
+			public void onError(@NonNull final @NonNull Throwable e) {
 				e.printStackTrace();
 			}
 
@@ -209,7 +209,7 @@ public class CompilationEnclosure {
 		});
 	}
 
-	public @NotNull Promise<AccessBus, Void, Void> getAccessBusPromise() {
+	public @NonNull Promise<AccessBus, Void, Void> getAccessBusPromise() {
 		return accessBusPromise;
 	}
 
@@ -219,11 +219,11 @@ public class CompilationEnclosure {
 	}
 
 	@Contract(pure = true)
-	public @NotNull ICompilationAccess getCompilationAccess() {
+	public @NonNull ICompilationAccess getCompilationAccess() {
 		return ca;
 	}
 
-	public void setCompilationAccess(@NotNull ICompilationAccess aca) {
+	public void setCompilationAccess(@NonNull ICompilationAccess aca) {
 		ca = aca;
 	}
 
@@ -299,13 +299,13 @@ public class CompilationEnclosure {
 		return addModuleThing(aMod);
 	}
 
-	public @NotNull ModuleThing addModuleThing(final OS_Module aMod) {
+	public @NonNull ModuleThing addModuleThing(final OS_Module aMod) {
 		var mt = new ModuleThing(aMod);
 		moduleThings.put(aMod, mt);
 		return mt;
 	}
 
-	public void noteAccept(final @NotNull WorldModule aWorldModule) {
+	public void noteAccept(final @NonNull WorldModule aWorldModule) {
 		var mod = aWorldModule.module();
 		var aMt = aWorldModule.rq().mt();
 		// System.err.println(mod);
@@ -330,7 +330,7 @@ public class CompilationEnclosure {
 		}
 	}
 
-	public void addEntryPoint(final @NotNull Mirror_EntryPoint aMirrorEntryPoint, final IClassGenerator dcg) {
+	public void addEntryPoint(final @NonNull Mirror_EntryPoint aMirrorEntryPoint, final IClassGenerator dcg) {
 		aMirrorEntryPoint.generate(dcg);
 	}
 

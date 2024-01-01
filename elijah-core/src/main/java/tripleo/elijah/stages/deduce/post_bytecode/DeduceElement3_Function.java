@@ -20,7 +20,7 @@ import java.util.Collection;
 
 public class DeduceElement3_Function implements IDeduceElement3 {
 	// TODO what about resolved?
-	public static final @NotNull GenType unitType = new GenTypeImpl();
+	public static final @NonNull GenType unitType = new GenTypeImpl();
 
 	static {
 		unitType.setTypeName(new OS_BuiltinType(BuiltInTypes.Unit));
@@ -30,7 +30,7 @@ public class DeduceElement3_Function implements IDeduceElement3 {
 	private final DeduceTypes2    deduceTypes2;
 	private final BaseEvaFunction generatedFunction;
 
-	public DeduceElement3_Function(final @NotNull DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public DeduceElement3_Function(final @NonNull DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
 		deduceTypes2      = aDeduceTypes2;
 		generatedFunction = aGeneratedFunction;
 
@@ -58,7 +58,7 @@ public class DeduceElement3_Function implements IDeduceElement3 {
 	}
 
 	@Override
-	public @NotNull GenType genType() {
+	public @NonNull GenType genType() {
 		return _gt;
 	}
 
@@ -69,7 +69,7 @@ public class DeduceElement3_Function implements IDeduceElement3 {
 	}
 
 	@Override
-	public @NotNull DeduceElement3_Kind kind() {
+	public @NonNull DeduceElement3_Kind kind() {
 		return DeduceElement3_Kind.FUNCTION;
 	}
 
@@ -84,18 +84,18 @@ public class DeduceElement3_Function implements IDeduceElement3 {
 	}
 
 	@Nullable
-	public GenType resolve_function_return_type_int(final @NotNull ErrSink errSink) {
+	public GenType resolve_function_return_type_int(final @NonNull ErrSink errSink) {
 		// MODERNIZATION Does this have any affinity with DeferredMember?
 		@Nullable final InstructionArgument vte_index = generatedFunction.vte_lookup("Result");
 		if (vte_index != null) {
-			final @NotNull VariableTableEntry vte = generatedFunction.getVarTableEntry(DeduceTypes2.to_int(vte_index));
+			final @NonNull VariableTableEntry vte = generatedFunction.getVarTableEntry(DeduceTypes2.to_int(vte_index));
 
 			if (vte.getType().getAttached() != null) {
 				vte.resolveType(vte.getType().genType); // TODO doesn't fit pattern of returning and then setting
 				return vte.getType().genType;
 			} else {
-				@NotNull Collection<TypeTableEntry> pot1 = vte.potentialTypes();
-				@NotNull ArrayList<TypeTableEntry>  pot  = new ArrayList<TypeTableEntry>(pot1);
+				@NonNull Collection<TypeTableEntry> pot1 = vte.potentialTypes();
+				@NonNull ArrayList<TypeTableEntry>  pot  = new ArrayList<TypeTableEntry>(pot1);
 
 				switch (pot.size()) {
 				case 1:

@@ -71,7 +71,7 @@ public abstract class Parser implements CommandLineParser {
 		return options;
 	}
 
-	protected void setOptions(final @NotNull Options options) {
+	protected void setOptions(final @NonNull Options options) {
 		this.options         = options;
 		this.requiredOptions = new ArrayList<>(options.getRequiredOptions());
 	}
@@ -89,7 +89,7 @@ public abstract class Parser implements CommandLineParser {
 	 * @throws ParseException if there are any problems encountered while parsing the command line tokens.
 	 */
 	@Override
-	public CommandLine parse(final @NotNull Options options, final String[] arguments) throws ParseException {
+	public CommandLine parse(final @NonNull Options options, final String[] arguments) throws ParseException {
 		return parse(options, arguments, null, false);
 	}
 
@@ -105,7 +105,7 @@ public abstract class Parser implements CommandLineParser {
 	 * @throws ParseException if an error occurs when parsing the arguments.
 	 */
 	@Override
-	public CommandLine parse(final @NotNull Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
+	public CommandLine parse(final @NonNull Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
 		return parse(options, arguments, null, stopAtNonOption);
 	}
 
@@ -119,7 +119,7 @@ public abstract class Parser implements CommandLineParser {
 	 * @throws ParseException if there are any problems encountered while parsing the command line tokens.
 	 * @since 1.1
 	 */
-	public CommandLine parse(final @NotNull Options options, final String[] arguments, final Properties properties) throws ParseException {
+	public CommandLine parse(final @NonNull Options options, final String[] arguments, final Properties properties) throws ParseException {
 		return parse(options, arguments, properties, false);
 	}
 
@@ -136,7 +136,7 @@ public abstract class Parser implements CommandLineParser {
 	 * @throws ParseException if there are any problems encountered while parsing the command line tokens.
 	 * @since 1.1
 	 */
-	public CommandLine parse(final @NotNull Options options, String @Nullable [] arguments, final Properties properties, final boolean stopAtNonOption) throws ParseException {
+	public CommandLine parse(final @NonNull Options options, String @Nullable [] arguments, final Properties properties, final boolean stopAtNonOption) throws ParseException {
 		// clear out the data in options in case it's been used before (CLI-71)
 		for (final Option opt : options.helpOptions()) {
 			opt.clearValues();
@@ -226,7 +226,7 @@ public abstract class Parser implements CommandLineParser {
 	 * @param iter The iterator over the flattened command line Options.
 	 * @throws ParseException if an argument value is required and it is has not been found.
 	 */
-	public void processArgs(final @NotNull Option opt, final @NotNull ListIterator<String> iter) throws ParseException {
+	public void processArgs(final @NonNull Option opt, final @NonNull ListIterator<String> iter) throws ParseException {
 		// loop until an option is found
 		while (iter.hasNext()) {
 			final String str = iter.next();
@@ -259,7 +259,7 @@ public abstract class Parser implements CommandLineParser {
 	 * @param iter The iterator over the flattened command line arguments.
 	 * @throws ParseException if {@code arg} does not represent an Option
 	 */
-	protected void processOption(final String arg, final @NotNull ListIterator<String> iter) throws ParseException {
+	protected void processOption(final String arg, final @NonNull ListIterator<String> iter) throws ParseException {
 		final boolean hasOption = getOptions().hasOption(arg);
 
 		// if there is no option throw an UnrecognizedOptionException
@@ -334,7 +334,7 @@ public abstract class Parser implements CommandLineParser {
 	 *
 	 * @param opt
 	 */
-	private void updateRequiredOptions(final @NotNull Option opt) throws ParseException {
+	private void updateRequiredOptions(final @NonNull Option opt) throws ParseException {
 		// if the option is a required option remove the option from
 		// the requiredOptions list
 		if (opt.isRequired()) {

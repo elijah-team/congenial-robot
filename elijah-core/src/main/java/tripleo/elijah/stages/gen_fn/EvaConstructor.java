@@ -31,7 +31,7 @@ public class EvaConstructor extends BaseEvaFunction {
 	}
 
 	@Override
-	public @NotNull FunctionDef getFD() {
+	public @NonNull FunctionDef getFD() {
 		if (cd == null) throw new IllegalStateException("No function");
 		return cd;
 	}
@@ -50,7 +50,7 @@ public class EvaConstructor extends BaseEvaFunction {
 	}
 
 	@Override
-	public @NotNull OS_Module module() {
+	public @NonNull OS_Module module() {
 		return cd.getContext().module();
 	}
 
@@ -60,7 +60,7 @@ public class EvaConstructor extends BaseEvaFunction {
 		return cd.name().asString();
 	}
 
-	public void setFunctionInvocation(@NotNull FunctionInvocation fi) {
+	public void setFunctionInvocation(@NonNull FunctionInvocation fi) {
 		GenType genType = new GenTypeImpl();
 
 		final ClassInvocation classInvocation1 = fi.getClassInvocation();

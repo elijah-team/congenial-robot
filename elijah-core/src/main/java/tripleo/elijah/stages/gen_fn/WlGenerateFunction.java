@@ -31,18 +31,18 @@ public class WlGenerateFunction implements WorkJob {
 	private final          ICodeRegistrar     cr;
 	private final          GenerateFunctions  generateFunctions;
 	private final          FunctionDef        functionDef;
-	private final @NotNull FunctionInvocation functionInvocation;
+	private final @NonNull FunctionInvocation functionInvocation;
 	private                boolean            _isDone = false;
 	private @Nullable      EvaFunction        result;
 
-	public WlGenerateFunction(GenerateFunctions aGenerateFunctions, @NotNull FunctionInvocation aFunctionInvocation, final ICodeRegistrar aCr) {
+	public WlGenerateFunction(GenerateFunctions aGenerateFunctions, @NonNull FunctionInvocation aFunctionInvocation, final ICodeRegistrar aCr) {
 		functionDef        = aFunctionInvocation.getFunction();
 		generateFunctions  = aGenerateFunctions;
 		functionInvocation = aFunctionInvocation;
 		cr                 = aCr;
 	}
 
-	public WlGenerateFunction(final OS_Module aModule, final FunctionInvocation aFunctionInvocation, final @NotNull Deduce_CreationClosure aCl) {
+	public WlGenerateFunction(final OS_Module aModule, final FunctionInvocation aFunctionInvocation, final @NonNull Deduce_CreationClosure aCl) {
 		this(aCl.generatePhase().getGenerateFunctions(aModule), aFunctionInvocation, aCl.deducePhase().getCodeRegistrar());
 	}
 
@@ -61,7 +61,7 @@ public class WlGenerateFunction implements WorkJob {
 
 		if (functionInvocation.getGenerated() == null) {
 			OS_Element           parent = functionDef.getParent();
-			@NotNull EvaFunction gf     = generateFunctions.generateFunction(functionDef, parent, functionInvocation);
+			@NonNull EvaFunction gf     = generateFunctions.generateFunction(functionDef, parent, functionInvocation);
 
 			{
 				int i = 0;
@@ -80,7 +80,7 @@ public class WlGenerateFunction implements WorkJob {
 				assert nsi != null;
 				nsi.resolveDeferred().done(new DoneCallback<EvaNamespace>() {
 					@Override
-					public void onDone(@NotNull EvaNamespace result) {
+					public void onDone(@NonNull EvaNamespace result) {
 						if (result.getFunction(functionDef) == null) {
 							cr.registerFunction1(gf);
 							//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());

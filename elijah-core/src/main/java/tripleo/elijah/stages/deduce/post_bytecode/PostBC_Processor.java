@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 
 public interface PostBC_Processor {
 	@Contract("_, _, _ -> new")
-	static @NotNull PostBC_Processor make_VTE(@NotNull final VariableTableEntry aVariableTableEntry, final Context aFd_ctx, final DeduceTypes2.DeduceClient1 aDeduceTypes2) {
+	static @NonNull PostBC_Processor make_VTE(@NonNull final VariableTableEntry aVariableTableEntry, final Context aFd_ctx, final DeduceTypes2.DeduceClient1 aDeduceTypes2) {
 		final OS_Type vte_type_attached = aVariableTableEntry.getType().getAttached();
 
 		switch (aVariableTableEntry.getVtt()) {
@@ -51,7 +51,7 @@ public interface PostBC_Processor {
 	Promise<DeduceType3, Diagnostic, Void> getType(final ErrSink aErrSink1);
 
 	abstract class __PostBC_Processor__VTE implements PostBC_Processor {
-		private static @NotNull DeduceType3 doNoTypeAttached__single_potential(final VariableTableEntry vte, final DeduceTypes2.@NotNull DeduceClient1 deduceTypes2) {
+		private static @NonNull DeduceType3 doNoTypeAttached__single_potential(final VariableTableEntry vte, final DeduceTypes2.@NonNull DeduceClient1 deduceTypes2) {
 			final OS_Type     attached = deduceTypes2.getPotentialTypesVte(vte).get(0).getAttached();
 			final DeduceType3 r        = new DeduceType3(attached, null);
 
@@ -63,8 +63,8 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public @Nullable DeduceType3 doNoTypeAttached(final @NotNull ErrSink errSink1) {
-			@NotNull final DeduceType3       r;
+		public @Nullable DeduceType3 doNoTypeAttached(final @NonNull ErrSink errSink1) {
+			@NonNull final DeduceType3       r;
 			final DeduceTypes2.DeduceClient1 deduceTypes2   = deduceTypes2();
 			final VariableTableEntry         vte            = vte();
 			final Supplier<CantDecideType>   cdt            = () -> deduceTypes2._inj().new_CantDecideType(vte, vte.potentialTypes());
@@ -86,7 +86,7 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public void doSetType(final @NotNull DeduceType3 aDeduceType3, final @NotNull ErrSink errSink1) {
+		public void doSetType(final @NonNull DeduceType3 aDeduceType3, final @NonNull ErrSink errSink1) {
 			final VariableTableEntry vte = vte();
 
 			if (aDeduceType3.isException()) {
@@ -99,7 +99,7 @@ public interface PostBC_Processor {
 
 		protected abstract DeduceTypes2.DeduceClient1 deduceTypes2();
 
-		private static @NotNull DeduceType3 doNoTypeAttached__zero_potential(final @NotNull VariableTableEntry vte, final @NotNull Supplier<CantDecideType> cdt) {
+		private static @NonNull DeduceType3 doNoTypeAttached__zero_potential(final @NonNull VariableTableEntry vte, final @NonNull Supplier<CantDecideType> cdt) {
 			// invariant: potential_size == 0
 
 			final DeduceType3 r;
@@ -121,9 +121,9 @@ public interface PostBC_Processor {
 			return r;
 		}
 
-		private @NotNull DeduceType3 doNoTypeAttached__numerous_potential(final @NotNull IDeduceElement3 de3,
-																		  final @NotNull Supplier<CantDecideType> cdt,
-																		  final @NotNull ErrSink errSink1) {
+		private @NonNull DeduceType3 doNoTypeAttached__numerous_potential(final @NonNull IDeduceElement3 de3,
+																		  final @NonNull Supplier<CantDecideType> cdt,
+																		  final @NonNull ErrSink errSink1) {
 			// TODO Check type compatibility (--> what does this mean?)
 			// TODO can inline more things here when ready/bored
 
@@ -156,7 +156,7 @@ public interface PostBC_Processor {
 
 		protected abstract Context ctx();
 
-		private Promise<DeduceType3, Diagnostic, Void> postBC_getTypeFor_VTE(final @NotNull VariableTableEntry vte, final Context fd_ctx, final ErrSink errSink) {
+		private Promise<DeduceType3, Diagnostic, Void> postBC_getTypeFor_VTE(final @NonNull VariableTableEntry vte, final Context fd_ctx, final ErrSink errSink) {
 			final DeduceType3                r;
 			final DeduceTypes2.DeduceClient1 deduceClient1     = deduceTypes2();
 			final OS_Type                    vte_type_attached = vte.getType().getAttached();
@@ -208,7 +208,7 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public @NotNull Maybe<OS_Type> doHasTypeAttached() {
+		public @NonNull Maybe<OS_Type> doHasTypeAttached() {
 			final Maybe<OS_Type> r;
 
 			r = new Maybe<>(vte_type_attached, null);
@@ -256,7 +256,7 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public @NotNull Maybe<OS_Type> doHasTypeAttached() {
+		public @NonNull Maybe<OS_Type> doHasTypeAttached() {
 			Maybe<OS_Type> r;
 
 			final OS_Type attached = vte_type_attached;
@@ -316,7 +316,7 @@ public interface PostBC_Processor {
 
 	/*
 			@Override
-			public DeduceType3 getType(final @NotNull _post_ByteCode aPost_byteCode, final ErrSink aErrSink1) {
+			public DeduceType3 getType(final @NonNull _post_ByteCode aPost_byteCode, final ErrSink aErrSink1) {
 				DED dt3 = _inj().new_DED() {
 					public DED elementDiscriminator() {
 						return null;
@@ -350,7 +350,7 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public @NotNull Maybe<OS_Type> doHasTypeAttached() {
+		public @NonNull Maybe<OS_Type> doHasTypeAttached() {
 			final Maybe<OS_Type> r;
 
 			r = new Maybe<>(vte_type_attached, null);
@@ -389,7 +389,7 @@ public interface PostBC_Processor {
 
 	/*
 			@Override
-			public DeduceType3 getType(final @NotNull _post_ByteCode aPost_byteCode, final ErrSink aErrSink1) {
+			public DeduceType3 getType(final @NonNull _post_ByteCode aPost_byteCode, final ErrSink aErrSink1) {
 				return null;
 			}
 	*/
@@ -414,7 +414,7 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public @NotNull Maybe<OS_Type> doHasTypeAttached() {
+		public @NonNull Maybe<OS_Type> doHasTypeAttached() {
 			final Maybe<OS_Type> r;
 
 			r = new Maybe<>(vte_type_attached, null);

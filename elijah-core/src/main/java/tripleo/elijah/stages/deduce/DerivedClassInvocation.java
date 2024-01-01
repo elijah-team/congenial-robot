@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 class DerivedClassInvocation extends ClassInvocation {
 	private final ClassInvocation derivation;
 
-	public DerivedClassInvocation(final @NotNull ClassStatement aClassStatement, final ClassInvocation aClassInvocation, final Supplier<DeduceTypes2> aDeduceTypes2) {
+	public DerivedClassInvocation(final @NonNull ClassStatement aClassStatement, final ClassInvocation aClassInvocation, final Supplier<DeduceTypes2> aDeduceTypes2) {
 		super(aClassStatement, null, aDeduceTypes2);
 		derivation = aClassInvocation;
 	}
@@ -30,7 +30,7 @@ class DerivedClassInvocation extends ClassInvocation {
 	}
 
 	@Override
-	public void setForFunctionInvocation(final @NotNull FunctionInvocation aFunctionInvocation) {
+	public void setForFunctionInvocation(final @NonNull FunctionInvocation aFunctionInvocation) {
 		aFunctionInvocation.setClassInvocation(this);
 	}
 }

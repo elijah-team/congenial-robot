@@ -51,7 +51,7 @@ public class SlirSourceFile {
 		}
 
 		@Override
-		public @NotNull SourceFileType getType() {
+		public @NonNull SourceFileType getType() {
 			return SourceFileType.CONFIG;
 		}
 
@@ -66,7 +66,7 @@ public class SlirSourceFile {
 		}
 
 		@Override
-		public @NotNull SourceFileType getType() {
+		public @NonNull SourceFileType getType() {
 			return SourceFileType.EZ;
 		}
 	}
@@ -83,7 +83,7 @@ public class SlirSourceFile {
 		}
 
 		@Override
-		public @NotNull SourceFileType getType() {
+		public @NonNull SourceFileType getType() {
 			return SourceFileType.ELIJAH;
 		}
 	}

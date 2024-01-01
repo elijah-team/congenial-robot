@@ -37,7 +37,7 @@ public class GetItemExpressionImpl extends AbstractExpression implements tripleo
 	 * @see tripleo.elijah.lang.impl.IExpression#getKind()
 	 */
 	@Override
-	public @NotNull ExpressionKind getKind() {
+	public @NonNull ExpressionKind getKind() {
 		return ExpressionKind.GET_ITEM;
 	}
 

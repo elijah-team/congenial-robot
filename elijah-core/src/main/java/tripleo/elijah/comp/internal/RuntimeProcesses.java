@@ -8,12 +8,12 @@ import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah.comp.i.RuntimeProcess;
 
 public class RuntimeProcesses {
-	private final @NotNull ICompilationAccess ca;
-	private final @NotNull ProcessRecord      pr;
+	private final @NonNull ICompilationAccess ca;
+	private final @NonNull ProcessRecord      pr;
 	private                RuntimeProcess     process;
 
 	@Contract(pure = true)
-	public RuntimeProcesses(final @NotNull ICompilationAccess aca, final @NotNull ProcessRecord aPr) {
+	public RuntimeProcesses(final @NonNull ICompilationAccess aca, final @NonNull ProcessRecord aPr) {
 		ca = aca;
 		pr = aPr;
 	}

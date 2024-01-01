@@ -52,7 +52,7 @@ public class ProcedureCallExpressionImpl implements tripleo.elijah.lang.i.Proced
 	// region kind
 
 //	@Override
-//	public @NotNull List<FormalArgListItem> getArgs() {
+//	public @NonNull List<FormalArgListItem> getArgs() {
 //		return args;
 //	}
 
@@ -66,7 +66,7 @@ public class ProcedureCallExpressionImpl implements tripleo.elijah.lang.i.Proced
 	// region left-side
 
 	@Override
-	public @NotNull ExpressionKind getKind() {
+	public @NonNull ExpressionKind getKind() {
 		return ExpressionKind.PROCEDURE_CALL;
 	}
 
@@ -123,7 +123,7 @@ public class ProcedureCallExpressionImpl implements tripleo.elijah.lang.i.Proced
 		args = ael;
 	}
 
-	public @NotNull String getReturnTypeString() {
+	public @NonNull String getReturnTypeString() {
 		return "int"; // TODO hardcoded
 	}
 

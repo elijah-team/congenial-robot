@@ -6,15 +6,15 @@ import tripleo.elijah.stages.gen_fn.*;
 
 public interface DED {
 
-	static @NotNull DED dispatch(final ConstantTableEntry aCte) {
+	static @NonNull DED dispatch(final ConstantTableEntry aCte) {
 		return new DED_CTE(aCte);
 	}
 
-	static @NotNull DED dispatch(final IdentTableEntry aIte) {
+	static @NonNull DED dispatch(final IdentTableEntry aIte) {
 		return new DED_ITE(aIte);
 	}
 
-	static @NotNull DED dispatch(final ProcTableEntry aPte) {
+	static @NonNull DED dispatch(final ProcTableEntry aPte) {
 		return new DED_PTE(aPte);
 	}
 
@@ -22,11 +22,11 @@ public interface DED {
 		throw new IllegalStateException("Error");
 	}
 
-	static @NotNull DED dispatch(final TypeTableEntry aCte) {
+	static @NonNull DED dispatch(final TypeTableEntry aCte) {
 		return new DED_TTE(aCte);
 	}
 
-	static @NotNull DED dispatch(final VariableTableEntry aVte) {
+	static @NonNull DED dispatch(final VariableTableEntry aVte) {
 		return new DED_VTE(aVte);
 	}
 
@@ -44,7 +44,7 @@ public interface DED {
 		}
 
 		@Override
-		public DED.@NotNull Kind kind() {
+		public DED.@NonNull Kind kind() {
 			return DED.Kind.DED_Kind_ConstantTableEntry;
 		}
 	}
@@ -62,7 +62,7 @@ public interface DED {
 		}
 
 		@Override
-		public @NotNull Kind kind() {
+		public @NonNull Kind kind() {
 			return Kind.DED_Kind_IdentTableEntry;
 		}
 
@@ -81,7 +81,7 @@ public interface DED {
 		}
 
 		@Override
-		public @NotNull Kind kind() {
+		public @NonNull Kind kind() {
 			return Kind.DED_Kind_VariableTableEntry;
 		}
 
@@ -114,7 +114,7 @@ public interface DED {
 		}
 
 		@Override
-		public @NotNull Kind kind() {
+		public @NonNull Kind kind() {
 			return Kind.DED_Kind_ProcTableEntry;
 		}
 
@@ -129,7 +129,7 @@ public interface DED {
 		}
 
 		@Override
-		public @NotNull Kind kind() {
+		public @NonNull Kind kind() {
 			return Kind.DED_Kind_TypeTableEntry;
 		}
 
@@ -144,7 +144,7 @@ public interface DED {
 		}
 
 		@Override
-		public @NotNull Kind kind() {
+		public @NonNull Kind kind() {
 			return Kind.DED_Kind_VarTableEntry;
 		}
 

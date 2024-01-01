@@ -32,7 +32,7 @@ public class FuncExprContext extends FunctionContext {
 	}
 
 	@Override
-	public LookupResultList lookup(final String name, final int level, final @NotNull LookupResultList Result, final @NotNull SearchList alreadySearched, final boolean one) {
+	public LookupResultList lookup(final String name, final int level, final @NonNull LookupResultList Result, final @NonNull SearchList alreadySearched, final boolean one) {
 		alreadySearched.add(carrier.getContext());
 		for (final FunctionItem item : carrier.getItems()) {
 			if (!(item instanceof ClassStatement) &&

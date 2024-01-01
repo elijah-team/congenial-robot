@@ -24,21 +24,21 @@ import java.util.stream.Collectors;
  * Created 4/13/21 5:46 AM
  */
 public class CantDecideType implements Diagnostic {
-	private final @NotNull Collection<TypeTableEntry> types;
+	private final @NonNull Collection<TypeTableEntry> types;
 	private final          VariableTableEntry         vte;
 
-	public CantDecideType(VariableTableEntry aVte, @NotNull Collection<TypeTableEntry> aTypes) {
+	public CantDecideType(VariableTableEntry aVte, @NonNull Collection<TypeTableEntry> aTypes) {
 		vte   = aVte;
 		types = aTypes;
 	}
 
 	@Override
-	public @NotNull String code() {
+	public @NonNull String code() {
 		return "E1001";
 	}
 
 	@Override
-	public void report(@NotNull PrintStream stream) {
+	public void report(@NonNull PrintStream stream) {
 		stream.printf("---[%s]---: %s%n", code(), message());
 		// linecache.print(primary);
 		for (Locatable sec : secondary()) {
@@ -48,17 +48,17 @@ public class CantDecideType implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
-		@NotNull VariableStatementImpl vs = (VariableStatementImpl) vte.getResolvedElement();
+	public @NonNull Locatable primary() {
+		@NonNull VariableStatementImpl vs = (VariableStatementImpl) vte.getResolvedElement();
 		return vs;
 	}
 
-	private @NotNull String message() {
+	private @NonNull String message() {
 		return "Can't decide type";
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NonNull List<Locatable> secondary() {
 		final List<Locatable> c = types.stream()
 				.map((TypeTableEntry input) -> {
 						 //return input.attached.getElement(); // TODO All elements should be Locatable
@@ -72,7 +72,7 @@ public class CantDecideType implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Severity severity() {
+	public @NonNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

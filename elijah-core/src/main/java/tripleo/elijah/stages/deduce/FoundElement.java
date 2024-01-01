@@ -18,7 +18,7 @@ public abstract class FoundElement {
 	private boolean _called;
 	private boolean _didntFind;
 
-	public FoundElement(@NotNull DeducePhase aPhase) {
+	public FoundElement(@NonNull DeducePhase aPhase) {
 		aPhase.registerFound(this);
 	}
 

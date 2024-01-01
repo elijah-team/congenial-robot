@@ -38,9 +38,9 @@ import java.util.stream.Collectors;
 public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.lang.i.OS_Module {
 
 	private final   Stack<Qualident>     packageNames_q = new Stack<Qualident>();
-	public @NotNull Attached             _a             = new AttachedImpl();
-	public @NotNull List<EntryPoint>     entryPoints    = new ArrayList<EntryPoint>();
-	public @NotNull List<ModuleItem>     items          = new ArrayList<ModuleItem>();
+	public @NonNull Attached             _a             = new AttachedImpl();
+	public @NonNull List<EntryPoint>     entryPoints    = new ArrayList<EntryPoint>();
+	public @NonNull List<ModuleItem>     items          = new ArrayList<ModuleItem>();
 	public          OS_Module            prelude;
 	private         String               _fileName;
 	private         LibraryStatementPart lsp;
@@ -63,7 +63,7 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	}
 
 	@Override // OS_Container
-	public @NotNull List<OS_NamedElement> items() {
+	public @NonNull List<OS_NamedElement> items() {
 		final var c = getItems().stream().filter(input -> input instanceof OS_NamedElement);
 
 		return c.collect(Collectors.toList());
@@ -75,7 +75,7 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	}
 
 	@Override
-	public @NotNull List<EntryPoint> entryPoints() {
+	public @NonNull List<EntryPoint> entryPoints() {
 		return entryPoints;
 	}
 
@@ -105,7 +105,7 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	}
 
 	@Override
-	public @NotNull Collection<ModuleItem> getItems() {
+	public @NonNull Collection<ModuleItem> getItems() {
 		return items;
 	}
 
@@ -192,7 +192,7 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	 * @return a new OS_Package instance or default_package
 	 */
 	@Override
-	@NotNull
+	@NonNull
 	public OS_Package pullPackageName() {
 		if (packageNames_q.empty())
 			return OS_Package.default_package;
@@ -207,12 +207,12 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	}
 
 	@Override
-	public void serializeTo(final @NotNull SmallWriter sw) {
+	public void serializeTo(final @NonNull SmallWriter sw) {
 		// TODO Auto-generated method stub
 
-		//public @NotNull Attached             _a             = new AttachedImpl();
+		//public @NonNull Attached             _a             = new AttachedImpl();
 		//private final   Stack<Qualident>     packageNames_q = new Stack<Qualident>();
-		//public @NotNull List<EntryPoint>     entryPoints    = new ArrayList<EntryPoint>();
+		//public @NonNull List<EntryPoint>     entryPoints    = new ArrayList<EntryPoint>();
 		//private         IndexingStatement    indexingStatement;
 		//private LibraryStatementPart lsp;
 
@@ -267,17 +267,17 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 	}
 
 	@Override
-	public void setParent(@NotNull final Compilation parent) {
+	public void setParent(@NonNull final Compilation parent) {
 		this.parent = parent;
 	}
 
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.addModule(this); // visitModule
 	}
 
 	@Override
-	public @NotNull Compilation getCompilation() {
+	public @NonNull Compilation getCompilation() {
 		return parent;
 	}
 

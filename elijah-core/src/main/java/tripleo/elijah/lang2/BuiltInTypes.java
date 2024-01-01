@@ -22,7 +22,7 @@ public enum BuiltInTypes {
 	SystemInteger(80),
 	Unit(0);
 
-	public static boolean isBooleanText(@NotNull String name) {
+	public static boolean isBooleanText(@NonNull String name) {
 		return name.equals("true") || name.equals("false")
 				|| name.equals("True") || name.equals("False");
 	}

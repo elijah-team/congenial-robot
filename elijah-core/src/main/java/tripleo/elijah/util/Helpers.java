@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 public enum Helpers {
 	;
 
-	public static @NotNull String getHash(byte[] aBytes) throws NoSuchAlgorithmException {
+	public static @NonNull String getHash(byte[] aBytes) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 
 //		String input;
@@ -56,7 +56,7 @@ public enum Helpers {
 		return sb.toString();
 	}
 
-	public static @NotNull Operation<String> getHashForFilename(final @NotNull String aFilename) {
+	public static @NonNull Operation<String> getHashForFilename(final @NonNull String aFilename) {
 		try {
 			final String hdigest = new DigestUtils(MessageDigestAlgorithms.SHA_256).digestAsHex(new File(aFilename));
 
@@ -72,7 +72,7 @@ public enum Helpers {
 
 	// TODO this method is just ugly
 	@Nullable
-	public static String getHashForFilenameJava(@NotNull String aFilename, @NotNull ErrSink aErrSink) throws IOException {
+	public static String getHashForFilenameJava(@NonNull String aFilename, @NonNull ErrSink aErrSink) throws IOException {
 		final MessageDigest md;
 		try {
 			md = MessageDigest.getInstance("SHA-256");
@@ -112,20 +112,20 @@ public enum Helpers {
 		}
 	}
 
-	@NotNull
-	public static <E> List<E> List_of(@NotNull final E... e1) {
+	@NonNull
+	public static <E> List<E> List_of(@NonNull final E... e1) {
 		final List<E> r = new ArrayList<E>();
 		Collections.addAll(r, e1);
 		return r;
 	}
 
-	public static @NotNull Token makeToken(final String aText) {
+	public static @NonNull Token makeToken(final String aText) {
 		final CommonToken t = new CommonToken();
 		t.setText(aText);
 		return t;
 	}
 
-	public static void printXML(final Object obj, @NotNull final TabbedOutputStream tos) {
+	public static void printXML(final Object obj, @NonNull final TabbedOutputStream tos) {
 		System.err.println("** XStream support has been disabled");
 /*
 		final XStream x = new XStream();
@@ -134,11 +134,11 @@ public enum Helpers {
 */
 	}
 
-	public static @Nullable IExpression qualidentToDotExpression2(@NotNull final List<IdentExpression> ts) {
+	public static @Nullable IExpression qualidentToDotExpression2(@NonNull final List<IdentExpression> ts) {
 		return qualidentToDotExpression2(ts, 1);
 	}
 
-	public static @Nullable IExpression qualidentToDotExpression2(@NotNull final List<IdentExpression> ts, int i) {
+	public static @Nullable IExpression qualidentToDotExpression2(@NonNull final List<IdentExpression> ts, int i) {
 		if (ts.size() == 1) return ts.get(0);
 		if (ts.size() == 0) return null;
 		IExpression r = ts.get(0);
@@ -153,16 +153,16 @@ public enum Helpers {
 		return r;
 	}
 
-	public static @Nullable IExpression qualidentToDotExpression2(@NotNull final Qualident q) {
+	public static @Nullable IExpression qualidentToDotExpression2(@NonNull final Qualident q) {
 		return qualidentToDotExpression2(q.parts(), 1);
 	}
 
-	@NotNull
-	public static String remove_single_quotes_from_string(final @NotNull String s) {
+	@NonNull
+	public static String remove_single_quotes_from_string(final @NonNull String s) {
 		return s.substring(1, s.length() - 1);
 	}
 
-	public static @NotNull String String_join(@NotNull String separator, @NotNull Iterable<String> stringIterable) {
+	public static @NonNull String String_join(@NonNull String separator, @NonNull Iterable<String> stringIterable) {
 		if (false) {
 			final StringBuilder sb = new StringBuilder();
 
@@ -178,7 +178,7 @@ public enum Helpers {
 		return String.join(separator, stringIterable);
 	}
 
-	public static @NotNull Qualident string_to_qualident(@NotNull String x) {
+	public static @NonNull Qualident string_to_qualident(@NonNull String x) {
 		Qualident q = new QualidentImpl();
 		for (String xx : x.split("\\.")) {
 			q.append(string_to_ident(xx));
@@ -186,7 +186,7 @@ public enum Helpers {
 		return q;
 	}
 
-	@NotNull
+	@NonNull
 	public static IdentExpression string_to_ident(final String txt) {
 		final CommonToken t = new CommonToken(ElijjahTokenTypes.IDENT, txt);
 		return new IdentExpressionImpl(t, "<inline-absent>");

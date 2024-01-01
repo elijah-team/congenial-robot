@@ -11,27 +11,27 @@ public class TooManyEz_ActuallyNone implements Diagnostic {
 	final String message = "No .ez files found.";
 
 	@Override
-	public @NotNull String code() {
+	public @NonNull String code() {
 		return "9999";
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NonNull Locatable primary() {
 		return null;
 	}
 
 	@Override
-	public void report(@NotNull PrintStream stream) {
+	public void report(@NonNull PrintStream stream) {
 		stream.println(String.format("%s %s", code(), message));
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NonNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NotNull Severity severity() {
+	public @NonNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

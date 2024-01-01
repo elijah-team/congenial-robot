@@ -16,7 +16,7 @@ public class FluffyCompImpl implements FluffyComp {
 
 	private final CompilationImpl _comp;
 
-	public static boolean isMainClassEntryPoint(@NotNull final ClassItem input) {
+	public static boolean isMainClassEntryPoint(@NonNull final ClassItem input) {
 		// TODO 08/27 Use understanding/~ processor for this
 		final FunctionDef fd = (FunctionDef) input;
 		return MainClassEntryPoint.is_main_function_with_no_args(fd);
@@ -29,7 +29,7 @@ public class FluffyCompImpl implements FluffyComp {
 	}
 
 	@Override
-	public void find_multiple_items(final @NotNull OS_Module aModule) {
+	public void find_multiple_items(final @NonNull OS_Module aModule) {
 		final Multimap<String, ModuleItem> items_map = ArrayListMultimap.create(aModule.getItems().size(), 1);
 
 		aModule.getItems().stream()

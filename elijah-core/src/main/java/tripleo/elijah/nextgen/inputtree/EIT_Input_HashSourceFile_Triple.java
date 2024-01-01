@@ -8,10 +8,10 @@ import tripleo.elijah.util.Operation;
 public record EIT_Input_HashSourceFile_Triple(String hash,
 											  EIT_SourceOrigin source,
 											  String filename) implements EIT_Input {
-	public static @NotNull EIT_Input_HashSourceFile_Triple decode(final @NotNull String fn) {
+	public static @NonNull EIT_Input_HashSourceFile_Triple decode(final @NonNull String fn) {
 		// move to Builder...Operation...
 		// also CP_Filename hashPromise products
-		final @NotNull Operation<String> op2 = Helpers.getHashForFilename(fn);
+		final @NonNull Operation<String> op2 = Helpers.getHashForFilename(fn);
 
 		if (op2.mode() == Mode.SUCCESS) {
 			final String hh = op2.success();
@@ -39,7 +39,7 @@ public record EIT_Input_HashSourceFile_Triple(String hash,
 	}
 
 	@Override
-	public @NotNull EIT_InputType getType() {
+	public @NonNull EIT_InputType getType() {
 		// builder?? memtc st pat
 		if (filename.endsWith(".elijah")) {
 			return EIT_InputType.ELIJAH_SOURCE;

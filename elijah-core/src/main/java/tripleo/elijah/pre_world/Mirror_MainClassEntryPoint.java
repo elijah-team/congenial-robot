@@ -21,7 +21,7 @@ public class Mirror_MainClassEntryPoint implements Mirror_EntryPoint {
 	private final ModuleThing         mt;
 	private final GenerateFunctions   gf;
 
-	public Mirror_MainClassEntryPoint(final MainClassEntryPoint aMcep, final @NotNull ModuleThing aMt, final GenerateFunctions aGenerateFunctions) {
+	public Mirror_MainClassEntryPoint(final MainClassEntryPoint aMcep, final @NonNull ModuleThing aMt, final GenerateFunctions aGenerateFunctions) {
 		mcep = aMcep;
 		mt   = aMt;
 		gf   = aGenerateFunctions;
@@ -29,12 +29,12 @@ public class Mirror_MainClassEntryPoint implements Mirror_EntryPoint {
 
 	@Override
 	public void generate(final IClassGenerator dcg) {
-		@NotNull final ClassStatement   cs = mcep.getKlass();
+		@NonNull final ClassStatement   cs = mcep.getKlass();
 		final FunctionDef               f  = mcep.getMainFunction();
 		@Nullable final ClassInvocation ci = dcg.registerClassInvocation(cs, null);
 		dcg.submitGenerateClass(Objects.requireNonNull(ci), gf);
 
-		final @NotNull FunctionInvocation fi = dcg.newFunctionInvocation(f, null, ci);
+		final @NonNull FunctionInvocation fi = dcg.newFunctionInvocation(f, null, ci);
 //				fi.setPhase(phase);
 		dcg.submitGenerateFunction(fi, gf);
 

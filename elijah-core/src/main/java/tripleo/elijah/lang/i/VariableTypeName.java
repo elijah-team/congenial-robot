@@ -15,7 +15,7 @@ public interface VariableTypeName extends TypeName {
 
 	TypeNameList getGenericPart();
 
-	@NotNull
+	@NonNull
 	Collection<TypeModifiers> getModifiers();
 
 	Qualident getRealName();

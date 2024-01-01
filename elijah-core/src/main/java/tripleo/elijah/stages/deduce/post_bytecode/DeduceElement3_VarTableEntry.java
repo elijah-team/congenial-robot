@@ -21,8 +21,8 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 	public        RegisterClassInvocation_env __passthru;
 
 	@Contract(pure = true)
-	public DeduceElement3_VarTableEntry(final @NotNull EvaContainer.VarTableEntry aVarTableEntry,
-										final @NotNull DeduceTypes2 aDeduceTypes2) {
+	public DeduceElement3_VarTableEntry(final @NonNull EvaContainer.VarTableEntry aVarTableEntry,
+										final @NonNull DeduceTypes2 aDeduceTypes2) {
 		_principal    = aVarTableEntry;
 		_deduceTypes2 = aDeduceTypes2;
 	}
@@ -33,11 +33,11 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 		_deduceTypes2 = null;
 	}
 
-	private void __one_potential(final @NotNull DeducePhase aDeducePhase,
-								 final EvaContainer.@NotNull VarTableEntry varTableEntry,
-								 final @NotNull List<TypeTableEntry> potentialTypes,
+	private void __one_potential(final @NonNull DeducePhase aDeducePhase,
+								 final EvaContainer.@NonNull VarTableEntry varTableEntry,
+								 final @NonNull List<TypeTableEntry> potentialTypes,
 								 final TypeName typeName,
-								 final @NotNull ClassInvocation ci) throws STOP {
+								 final @NonNull ClassInvocation ci) throws STOP {
 		boolean sc = false;
 
 		TypeTableEntry potentialType = potentialTypes.get(0);
@@ -82,7 +82,7 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 				}
 
 				xci = aDeducePhase.registerClassInvocation(xci);
-				@NotNull GenerateFunctions gf  = aDeducePhase.generatePhase.getGenerateFunctions(xci.getKlass().getContext().module());
+				@NonNull GenerateFunctions gf  = aDeducePhase.generatePhase.getGenerateFunctions(xci.getKlass().getContext().module());
 				WlGenerateClass            wgc = dt2._inj().new_WlGenerateClass(gf, xci, aDeducePhase.generatedClasses, aDeducePhase.codeRegistrar);
 				wgc.run(null); // !
 				potentialType.genType.setCi(xci); // just for completeness
@@ -105,12 +105,12 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 	}
 
 	@Contract("_, null -> fail")
-	private void __zero_potential(final EvaContainer.@NotNull VarTableEntry varTableEntry, final TypeName tn) {
+	private void __zero_potential(final EvaContainer.@NonNull VarTableEntry varTableEntry, final TypeName tn) {
 		Preconditions.checkNotNull(tn);
 		assert tn instanceof NormalTypeName;
 
 		if (tn != null) {
-			if (tn instanceof final @NotNull NormalTypeName tn2) {
+			if (tn instanceof final @NonNull NormalTypeName tn2) {
 
 				if (tn2.isNull()) return;
 
@@ -123,8 +123,8 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 		}
 	}
 
-	private void __zero_potential__1(final @NotNull EvaContainer.VarTableEntry varTableEntry,
-									 final @NotNull NormalTypeName aNormalTypeName) {
+	private void __zero_potential__1(final @NonNull EvaContainer.VarTableEntry varTableEntry,
+									 final @NonNull NormalTypeName aNormalTypeName) {
 		// 0. preflight
 		if (aNormalTypeName.isNull())
 			throw new NotImplementedException();
@@ -167,7 +167,7 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public @NotNull DED elementDiscriminator() {
+	public @NonNull DED elementDiscriminator() {
 		return DED.dispatch(_principal);
 	}
 
@@ -189,7 +189,7 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public @NotNull DeduceElement3_Kind kind() {
+	public @NonNull DeduceElement3_Kind kind() {
 		return DeduceElement3_Kind.GEN_FN__GC_VTE;
 	}
 
@@ -203,7 +203,7 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 		throw new NotImplementedException();
 	}
 
-	public void resolve_var_table_entries(final @NotNull DeducePhase aDeducePhase, final @NotNull ClassInvocation ci) {
+	public void resolve_var_table_entries(final @NonNull DeducePhase aDeducePhase, final @NonNull ClassInvocation ci) {
 		final EvaContainer.VarTableEntry varTableEntry = _principal;
 
 		final List<TypeTableEntry> potentialTypes = varTableEntry.potentialTypes;

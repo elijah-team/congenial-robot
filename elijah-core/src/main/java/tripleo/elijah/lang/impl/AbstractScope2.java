@@ -28,7 +28,7 @@ public abstract class AbstractScope2 implements Scope {
 	}
 
 	@Override
-	public void addDocString(@NotNull Token s1) {
+	public void addDocString(@NonNull Token s1) {
 		if (docstrings == null)
 			docstrings = new ArrayList<String>();
 		docstrings.add(s1.getText());
@@ -39,7 +39,7 @@ public abstract class AbstractScope2 implements Scope {
 //	}
 
 	@Override
-	public @NotNull BlockStatement blockStatement() {
+	public @NonNull BlockStatement blockStatement() {
 		return new BlockStatementImpl(this);
 	}
 
@@ -54,7 +54,7 @@ public abstract class AbstractScope2 implements Scope {
 	}
 
 	@Override
-	public @NotNull InvariantStatement invariantStatement() {
+	public @NonNull InvariantStatement invariantStatement() {
 		return new InvariantStatement();
 	}
 
@@ -65,7 +65,7 @@ public abstract class AbstractScope2 implements Scope {
 	}
 
 	@Override
-	public @NotNull TypeAliasStatement typeAlias() {
+	public @NonNull TypeAliasStatement typeAlias() {
 		return new TypeAliasStatementImpl(getParent());
 	}
 }

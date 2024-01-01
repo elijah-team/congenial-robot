@@ -65,7 +65,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 	}
 
 	@Override
-	public @NotNull List<MatchConditional.MC1> getParts() {
+	public @NonNull List<MatchConditional.MC1> getParts() {
 		return parts;
 	}
 
@@ -75,7 +75,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 	 * @category OS_Element
 	 */
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.visitMatchConditional(this);
 	}
 
@@ -95,7 +95,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		__ctx = ctx;
 	}
 
-	public @NotNull MatchConditionalPart2 normal() {
+	public @NonNull MatchConditionalPart2 normal() {
 		final MatchConditionalPart2 p = new MatchConditionalPart2();
 		parts.add(p);
 		return p;
@@ -104,13 +104,13 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 	//
 	//
 	//
-	public @NotNull MatchArm_TypeMatch typeMatch() {
+	public @NonNull MatchArm_TypeMatch typeMatch() {
 		final MatchArm_TypeMatch p = new MatchArm_TypeMatch();
 		parts.add(p);
 		return p;
 	}
 
-	public @NotNull MatchConditionalPart3 valNormal() {
+	public @NonNull MatchConditionalPart3 valNormal() {
 		final MatchConditionalPart3 p = new MatchConditionalPart3();
 		parts.add(p);
 		return p;
@@ -141,7 +141,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull Context getContext() {
+		public @NonNull Context getContext() {
 			return ___ctx;
 		}
 
@@ -150,7 +150,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull List<FunctionItem> getItems() {
+		public @NonNull List<FunctionItem> getItems() {
 			List<FunctionItem> collection = new ArrayList<FunctionItem>();
 			for (OS_Element element : scope3.items()) {
 				if (element instanceof FunctionItem)
@@ -161,7 +161,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull OS_Element getParent() {
+		public @NonNull OS_Element getParent() {
 			return MatchConditionalImpl.this;
 		}
 
@@ -215,12 +215,12 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull Context getContext() {
+		public @NonNull Context getContext() {
 			return ___ctx;
 		}
 
 		@Override
-		public @NotNull List<FunctionItem> getItems() {
+		public @NonNull List<FunctionItem> getItems() {
 			List<FunctionItem> collection = new ArrayList<FunctionItem>();
 			for (OS_Element element : scope3.items()) {
 				if (element instanceof FunctionItem)
@@ -235,7 +235,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull OS_Element getParent() {
+		public @NonNull OS_Element getParent() {
 			return MatchConditionalImpl.this;
 		}
 
@@ -277,12 +277,12 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull Context getContext() {
+		public @NonNull Context getContext() {
 			return ___ctx;
 		}
 
 		@Override
-		public @NotNull List<FunctionItem> getItems() {
+		public @NonNull List<FunctionItem> getItems() {
 			List<FunctionItem> collection = new ArrayList<FunctionItem>();
 			for (OS_Element element : scope3.items()) {
 				if (element instanceof FunctionItem)
@@ -293,7 +293,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@Override
-		public @NotNull OS_Element getParent() {
+		public @NonNull OS_Element getParent() {
 			return MatchConditionalImpl.this;
 		}
 

@@ -16,7 +16,7 @@ public class CP_SubFileTest {
 
 	@Before
 	public void setUp() throws Exception {
-		final @NotNull CompilationImpl cc = CompilationFactory.mkCompilation(new StdErrSink(), new IO());
+		final @NonNull CompilationImpl cc = CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		op = new CP_OutputPath(cc);
 	}
 

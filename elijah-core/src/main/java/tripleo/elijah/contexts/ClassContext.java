@@ -33,7 +33,7 @@ public class ClassContext extends ContextImpl implements Context {
 
 	private         boolean                       _didInheritance;
 	private final   ClassStatement                carrier;
-	public @NotNull Map<TypeName, ClassStatement> _inheritance = new HashMap<>();
+	public @NonNull Map<TypeName, ClassStatement> _inheritance = new HashMap<>();
 
 	public ClassStatement getCarrier() {
 		return carrier;
@@ -71,7 +71,7 @@ public class ClassContext extends ContextImpl implements Context {
 	}
 
 	@Override
-	public LookupResultList lookup(final @NotNull String name, final int level, final @NotNull LookupResultList Result, final @NotNull SearchList alreadySearched, final boolean one) {
+	public LookupResultList lookup(final @NonNull String name, final int level, final @NonNull LookupResultList Result, final @NonNull SearchList alreadySearched, final boolean one) {
 		alreadySearched.add(carrier.getContext());
 		for (final ClassItem item : carrier.getItems()) {
 			if (!(item instanceof ClassStatement) &&
@@ -105,7 +105,7 @@ public class ClassContext extends ContextImpl implements Context {
 		}
 
 		for (TypeName tn1 : carrier.getGenericPart()) {
-			if (tn1 instanceof final @NotNull NormalTypeName tn) {
+			if (tn1 instanceof final @NonNull NormalTypeName tn) {
 				final String name1 = tn.getName(); // TODO this may return a string with DOTs in it.
 				if (name1.equals(name)) {
 //					LookupResultList lrl = tn.getContext().lookup(name);
@@ -140,7 +140,7 @@ public class ClassContext extends ContextImpl implements Context {
 		}
 
 		@Override
-		public @NotNull Context getContext() {
+		public @NonNull Context getContext() {
 			return ClassContext.this;
 		}
 
@@ -150,7 +150,7 @@ public class ClassContext extends ContextImpl implements Context {
 		}
 
 		@Override
-		public void visitGen(@NotNull ElElementVisitor visit) {
+		public void visitGen(@NonNull ElElementVisitor visit) {
 			visit.visitTypeNameElement(this);
 		}
 

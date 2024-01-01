@@ -43,7 +43,7 @@ public class Sub_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#add(tripleo.util.buffer.Buffer, tripleo.elijah.stages.gen_fn.EvaNode, tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.ci.LibraryStatementPart, tripleo.elijah.stages.gen_generic.Dependency)
 	 */
 	@Override
-	public void add(@NotNull Buffer b, @NotNull EvaNode n, @NotNull TY ty, @Nullable LibraryStatementPart aLsp, @NotNull Dependency d) {
+	public void add(@NonNull Buffer b, @NonNull EvaNode n, @NonNull TY ty, @Nullable LibraryStatementPart aLsp, @NonNull Dependency d) {
 		if (aLsp == null) {
 			SimplePrintLoggerToRemoveSoon.println_err_2("*************************** buffer --> " + b.getText());
 			return;
@@ -62,7 +62,7 @@ public class Sub_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addClass(tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.stages.gen_fn.EvaClass, tripleo.util.buffer.Buffer, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addClass(@NotNull TY ty, @NotNull EvaClass aClass, @NotNull Buffer aBuf, LibraryStatementPart aLsp) {
+	public void addClass(@NonNull TY ty, @NonNull EvaClass aClass, @NonNull Buffer aBuf, LibraryStatementPart aLsp) {
 		add(aBuf, aClass, ty, aLsp, aClass.getDependency());
 	}
 
@@ -70,7 +70,7 @@ public class Sub_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addFunction(tripleo.elijah.stages.gen_fn.BaseEvaFunction, tripleo.util.buffer.Buffer, tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addFunction(IPP_Function aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
+	public void addFunction(IPP_Function aGeneratedFunction, @NonNull Buffer aBuffer, @NonNull TY aTY, LibraryStatementPart aLsp) {
 		final DeducedBaseEvaFunction carrier            = aGeneratedFunction.get2Carrier();
 
 		final EvaNode                evaNodeEscapeHatch = carrier.getEvaNodeEscapeHatch();
@@ -83,7 +83,7 @@ public class Sub_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#additional(tripleo.elijah.stages.gen_generic.GenerateResult)
 	 */
 	@Override
-	public void additional(final @NotNull GenerateResult aGenerateResult) {
+	public void additional(final @NonNull GenerateResult aGenerateResult) {
 		// TODO find something better
 		//results()
 		_res.addAll(aGenerateResult.results());
@@ -98,7 +98,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addNamespace(tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.stages.gen_fn.EvaNamespace, tripleo.util.buffer.Buffer, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addNamespace(@NotNull TY ty, @NotNull EvaNamespace aNamespace, @NotNull Buffer aBuf, LibraryStatementPart aLsp) {
+	public void addNamespace(@NonNull TY ty, @NonNull EvaNamespace aNamespace, @NonNull Buffer aBuf, LibraryStatementPart aLsp) {
 		add(aBuf, aNamespace, ty, aLsp, aNamespace.getDependency());
 	}
 
@@ -122,7 +122,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#observe(io.reactivex.rxjava3.core.Observer)
 	 */
 	@Override
-	public void observe(final @NotNull Observer<GenerateResultItem> obs) {
+	public void observe(final @NonNull Observer<GenerateResultItem> obs) {
 		for (Old_GenerateResultItem item : results()) {
 			obs.onNext(item);
 		}
@@ -148,7 +148,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#outputFiles(java.util.function.Consumer)
 	 */
 	@Override
-	public void outputFiles(final @NotNull Consumer<Map<String, OutputFileC>> cmso) {
+	public void outputFiles(final @NonNull Consumer<Map<String, OutputFileC>> cmso) {
 		cmso.accept(outputFiles);
 	}
 
@@ -156,7 +156,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#results()
 	 */
 	@Override
-	public @NotNull List<Old_GenerateResultItem> results() {
+	public @NonNull List<Old_GenerateResultItem> results() {
 		return _res;
 	}
 
@@ -174,7 +174,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#subscribeCompletedItems(io.reactivex.rxjava3.core.Observer)
 	 */
 	@Override
-	public void subscribeCompletedItems(@NotNull Observer<GenerateResultItem> aGenerateResultItemObserver) {
+	public void subscribeCompletedItems(@NonNull Observer<GenerateResultItem> aGenerateResultItemObserver) {
 		completedItems.subscribe(aGenerateResultItemObserver);
 	}
 

@@ -14,16 +14,16 @@ public class CR_RunBetterAction implements CR_Action {
 	public enum StageToRuntime {
 		;
 
-		public static @NotNull RuntimeProcesses get(final @NotNull IPipelineAccess aPa) {
+		public static @NonNull RuntimeProcesses get(final @NonNull IPipelineAccess aPa) {
 			final ICompilationAccess ca = aPa.getCompilationEnclosure().getCompilationAccess();
 			return get(ca.getStage(), ca, aPa);
 		}
 
 		@Contract("_, _, _, _ -> new")
-		@NotNull
-		public static RuntimeProcesses get(final @NotNull Stages stage,
-										   final @NotNull ICompilationAccess ca,
-										   final @NotNull IPipelineAccess aPa) {
+		@NonNull
+		public static RuntimeProcesses get(final @NonNull Stages stage,
+										   final @NonNull ICompilationAccess ca,
+										   final @NonNull IPipelineAccess aPa) {
 			final ProcessRecord    processRecord = aPa.getProcessRecord();
 			final RuntimeProcesses r             = new RuntimeProcesses(ca, processRecord);
 
@@ -34,12 +34,12 @@ public class CR_RunBetterAction implements CR_Action {
 	}
 
 	@Override
-	public void attach(final @NotNull CompilationRunner cr) {
+	public void attach(final @NonNull CompilationRunner cr) {
 
 	}
 
 	@Override
-	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final CB_Output aO) {
+	public @NonNull Operation<Ok> execute(final @NonNull CR_State st, final CB_Output aO) {
 		try {
 			final ICompilationAccess ca = st.ca();
 
@@ -54,7 +54,7 @@ public class CR_RunBetterAction implements CR_Action {
 	}
 
 	@Override
-	public @NotNull String name() {
+	public @NonNull String name() {
 		return "run better";
 	}
 }

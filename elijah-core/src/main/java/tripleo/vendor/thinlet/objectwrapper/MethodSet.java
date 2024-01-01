@@ -32,7 +32,7 @@ import tripleo.vendor.thinlet.Thinlet;
 public class MethodSet implements Method {
 	protected final Method[] fmethods;
 
-	public MethodSet(Method @NotNull [] methods) {
+	public MethodSet(Method @NonNull [] methods) {
 		fmethods = (Method[]) methods.clone();
 	}
 

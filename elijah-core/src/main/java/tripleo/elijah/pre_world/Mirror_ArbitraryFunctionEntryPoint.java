@@ -21,21 +21,21 @@ public class Mirror_ArbitraryFunctionEntryPoint implements Mirror_EntryPoint {
 	private final ModuleThing                 mt;
 	private final GenerateFunctions           gf;
 
-	public Mirror_ArbitraryFunctionEntryPoint(final ArbitraryFunctionEntryPoint aAfep, final @NotNull ModuleThing aMt, final GenerateFunctions aGenerateFunctions) {
+	public Mirror_ArbitraryFunctionEntryPoint(final ArbitraryFunctionEntryPoint aAfep, final @NonNull ModuleThing aMt, final GenerateFunctions aGenerateFunctions) {
 		carrier = aAfep;
 		mt      = aMt;
 		gf   = aGenerateFunctions;
 	}
 
 	@Override
-	public void generate(final @NotNull IClassGenerator dcg) {
+	public void generate(final @NonNull IClassGenerator dcg) {
 		final ClassStatement            cs = (ClassStatement) carrier.getParent();
 		final FunctionDef               f  = carrier.getFunction();
 		@Nullable final ClassInvocation ci = dcg.registerClassInvocation(cs, null);
 
 		dcg.submitGenerateClass(Objects.requireNonNull(ci), gf);
 
-		final @NotNull FunctionInvocation fi = dcg.newFunctionInvocation(f, null, ci);
+		final @NonNull FunctionInvocation fi = dcg.newFunctionInvocation(f, null, ci);
 		//fi.setPhase(phase);
 		dcg.submitGenerateFunction(fi, gf);
 

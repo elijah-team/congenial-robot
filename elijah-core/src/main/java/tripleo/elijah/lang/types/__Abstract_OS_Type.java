@@ -25,7 +25,7 @@ abstract class __Abstract_OS_Type implements OS_Type {
 	}
 
 	@Override
-	public boolean isEqual(final @NotNull OS_Type aType) {
+	public boolean isEqual(final @NonNull OS_Type aType) {
 		if (aType.getType() != getType()) return false;
 
 		return _isEqual(aType);
@@ -39,7 +39,7 @@ abstract class __Abstract_OS_Type implements OS_Type {
 	}
 
 	@Override
-	public @Nullable OS_Type resolve(final @NotNull Context ctx) {
+	public @Nullable OS_Type resolve(final @NonNull Context ctx) {
 		assert ctx != null;
 		switch (getType()) {
 		case BUILT_IN: {
@@ -53,7 +53,7 @@ abstract class __Abstract_OS_Type implements OS_Type {
 
 				r    = ctx.lookup("SystemInteger");
 				best = r.chooseBest(null);
-				while (best instanceof final @NotNull AliasStatementImpl aliasStatement) {
+				while (best instanceof final @NonNull AliasStatementImpl aliasStatement) {
 					final LookupResultList lrl = aliasStatement.getContext().lookup(aliasStatement.getExpression().toString());
 					best = lrl.chooseBest(null);
 				}

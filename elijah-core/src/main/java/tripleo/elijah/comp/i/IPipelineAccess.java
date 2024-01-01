@@ -46,7 +46,7 @@ public interface IPipelineAccess {
 
 	//List<NG_OutputItem> getOutputs();
 
-	@NotNull Eventual<PipelineLogic> getPipelineLogicPromise();
+	@NonNull Eventual<PipelineLogic> getPipelineLogicPromise();
 
 	ProcessRecord getProcessRecord();
 
@@ -58,7 +58,7 @@ public interface IPipelineAccess {
 
 	void registerNodeList(DoneCallback<List<EvaNode>> done);
 
-	void setEvaPipeline(@NotNull EvaPipeline agp);
+	void setEvaPipeline(@NonNull EvaPipeline agp);
 
 	void setGenerateResultSink(GenerateResultSink aGenerateResultSink);
 

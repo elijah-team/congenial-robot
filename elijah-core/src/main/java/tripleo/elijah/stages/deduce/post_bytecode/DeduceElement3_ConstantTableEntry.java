@@ -38,7 +38,7 @@ public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public @NotNull DED elementDiscriminator() {
+	public @NonNull DED elementDiscriminator() {
 		return new DED_CTE(principal);
 	}
 
@@ -62,7 +62,7 @@ public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public @NotNull DeduceElement3_Kind kind() {
+	public @NonNull DeduceElement3_Kind kind() {
 		return DeduceElement3_Kind.GEN_FN__CTE;
 	}
 
@@ -75,7 +75,7 @@ public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public void resolve(final @NotNull IdentIA aIdentIA, final @NotNull Context aContext, final @NotNull FoundElement aFoundElement) {
+	public void resolve(final @NonNull IdentIA aIdentIA, final @NonNull Context aContext, final @NonNull FoundElement aFoundElement) {
 		// FoundElement is the "disease"
 		deduceTypes2.resolveIdentIA_(aContext, aIdentIA, generatedFunction, aFoundElement);
 	}

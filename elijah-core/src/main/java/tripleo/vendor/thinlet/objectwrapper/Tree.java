@@ -49,7 +49,7 @@ public class Tree extends OWWidget {
 		return EnumSelection.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.SELECTION));
 	}
 
-	public void setSelection(@NotNull EnumSelection value) {
+	public void setSelection(@NonNull EnumSelection value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.SELECTION, value.toString());
 	}
 
@@ -85,22 +85,22 @@ public class Tree extends OWWidget {
 		fthinlet.defineMethod(fcomponent, ThinletConstants.COLLAPSE, method);
 	}
 
-	public @NotNull Tree addNode(@NotNull Node item) {
+	public @NonNull Tree addNode(@NonNull Node item) {
 		fthinlet.add(unwrap(), item.unwrap());
 		return this;
 	}
 
-	public @NotNull Tree addNode(@NotNull Node item, int index) {
+	public @NonNull Tree addNode(@NonNull Node item, int index) {
 		fthinlet.add(unwrap(), item.unwrap(), index);
 		return this;
 	}
 
-	public @NotNull Tree removeNode(@NotNull Node item) {
+	public @NonNull Tree removeNode(@NonNull Node item) {
 		fthinlet.remove(item.unwrap());
 		return this;
 	}
 
-	public @NotNull Tree removeAllNode() {
+	public @NonNull Tree removeAllNode() {
 		fthinlet.removeAll(unwrap());
 		return this;
 	}
@@ -113,7 +113,7 @@ public class Tree extends OWWidget {
 		return (Node) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Node @NotNull [] getNodes() {
+	public Node @NonNull [] getNodes() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Node[]   ret = new Node[o.length];
 		for (int i = 0; i < ret.length; i++)

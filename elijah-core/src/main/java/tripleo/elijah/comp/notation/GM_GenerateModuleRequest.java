@@ -10,17 +10,17 @@ import tripleo.elijah.stages.gen_generic.OutputFileFactoryParams;
 
 import java.util.function.Supplier;
 
-public record GM_GenerateModuleRequest(@NotNull GN_GenerateNodesIntoSink generateNodesIntoSink,
-									   @NotNull OS_Module mod,
-									   @NotNull GN_GenerateNodesIntoSinkEnv env) {
+public record GM_GenerateModuleRequest(@NonNull GN_GenerateNodesIntoSink generateNodesIntoSink,
+									   @NonNull OS_Module mod,
+									   @NonNull GN_GenerateNodesIntoSinkEnv env) {
 	@SuppressWarnings("static-access")
 	@Contract("_ -> new")
-	public @NotNull GenerateFiles getGenerateFiles(final Supplier<GenerateResultEnv> fgs) {
+	public @NonNull GenerateFiles getGenerateFiles(final Supplier<GenerateResultEnv> fgs) {
 		var params = params();
 		return env.getGenerateFiles(params, params.getMod(), fgs);
 	}
 
-	public @NotNull OutputFileFactoryParams params() {
+	public @NonNull OutputFileFactoryParams params() {
 		return env.getParams(mod, generateNodesIntoSink);
 	}
 }

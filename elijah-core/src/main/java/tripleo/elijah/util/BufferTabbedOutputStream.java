@@ -24,8 +24,8 @@ import static tripleo.elijah.util.Helpers.List_of;
 public class BufferTabbedOutputStream {
 
 	int tabwidth = 0;
-	@NotNull TextBuffer   b       = new DefaultBuffer("");
-	@NotNull List<AttStr> las     = new ArrayList<>();
+	@NonNull TextBuffer   b       = new DefaultBuffer("");
+	@NonNull List<AttStr> las     = new ArrayList<>();
 	private  boolean      _closed = false;
 
 	public void close() {
@@ -116,7 +116,7 @@ public class BufferTabbedOutputStream {
 		return tabwidth;
 	}
 
-	@NotNull String doIndent() {
+	@NonNull String doIndent() {
 		var sb = new StringBuilder();
 
 		for (int i = 0; i < tabwidth; i++)

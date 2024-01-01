@@ -85,7 +85,7 @@ public class VariableTypeNameImpl extends AbstractTypeName
 	}
 
 	@Override
-	@NotNull
+	@NonNull
 	public Collection<TypeModifiers> getModifiers() {
 		return (tm != null ? List_of(tm) : new ArrayList<TypeModifiers>());
 	}
@@ -123,7 +123,7 @@ public class VariableTypeNameImpl extends AbstractTypeName
 	}
 
 	@Override
-	public @NotNull Type kindOfType() {
+	public @NonNull Type kindOfType() {
 		return Type.NORMAL;
 	}
 

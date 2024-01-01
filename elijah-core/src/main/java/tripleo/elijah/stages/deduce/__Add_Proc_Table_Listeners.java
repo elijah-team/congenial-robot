@@ -12,30 +12,30 @@ import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 public class __Add_Proc_Table_Listeners {
-	void add_proc_table_listeners(final @NotNull BaseEvaFunction generatedFunction, final @NotNull ProcTableEntry pte, final DeduceTypes2 aDeduceTypes2) {
+	void add_proc_table_listeners(final @NonNull BaseEvaFunction generatedFunction, final @NonNull ProcTableEntry pte, final DeduceTypes2 aDeduceTypes2) {
 		pte.addStatusListener(aDeduceTypes2._inj().new_ProcTableListener(pte, generatedFunction, aDeduceTypes2._inj().new_DeduceClient2(aDeduceTypes2)));
 
 		InstructionArgument en = pte.expression_num;
 		if (en != null) {
-			if (en instanceof final @NotNull IdentIA identIA) {
-				@NotNull IdentTableEntry idte = identIA.getEntry();
+			if (en instanceof final @NonNull IdentIA identIA) {
+				@NonNull IdentTableEntry idte = identIA.getEntry();
 				idte.addStatusListener(new SL(generatedFunction, idte, pte, identIA, aDeduceTypes2));
 			} else if (en instanceof IntegerIA) {
 				// TODO this code does nothing so commented out
 /*
-				final @NotNull IntegerIA integerIA = (IntegerIA) en;
-				@NotNull VariableTableEntry vte = integerIA.getEntry();
+				final @NonNull IntegerIA integerIA = (IntegerIA) en;
+				@NonNull VariableTableEntry vte = integerIA.getEntry();
 				vte.addStatusListener(_inj().new_BaseTableEntry.StatusListener() {
 					@Override
 					public void onChange(IElementHolder eh, BaseTableEntry.Status newStatus) {
 						if (newStatus != BaseTableEntry.Status.KNOWN)
 							return;
 
-						@NotNull VariableTableEntry vte2 = vte;
+						@NonNull VariableTableEntry vte2 = vte;
 
 						final OS_Element el = eh.getElement();
 
-						@NotNull ElObjectType type = DecideElObjectType.getElObjectType(el);
+						@NonNull ElObjectType type = DecideElObjectType.getElObjectType(el);
 
 						switch (type) {
 						case VAR:
@@ -78,11 +78,11 @@ public class __Add_Proc_Table_Listeners {
 
 			final OS_Element el = eh.getElement();
 
-			@NotNull ElObjectType type = DecideElObjectType.getElObjectType(el);
+			@NonNull ElObjectType type = DecideElObjectType.getElObjectType(el);
 
 			switch (type) {
 			case NAMESPACE:
-				@NotNull GenType genType = deduceTypes2._inj().new_GenTypeImpl((NamespaceStatement) el);
+				@NonNull GenType genType = deduceTypes2._inj().new_GenTypeImpl((NamespaceStatement) el);
 				generatedFunction.addDependentType(genType);
 				break;
 			case CLASS:
@@ -90,7 +90,7 @@ public class __Add_Proc_Table_Listeners {
 					assert idte.type.genType.getResolved() != null;
 					generatedFunction.addDependentType(idte.type.genType);
 				} else {
-					@NotNull GenType genType2 = deduceTypes2._inj().new_GenTypeImpl((ClassStatement) el);
+					@NonNull GenType genType2 = deduceTypes2._inj().new_GenTypeImpl((ClassStatement) el);
 					generatedFunction.addDependentType(genType2);
 				}
 				break;
@@ -99,7 +99,7 @@ public class __Add_Proc_Table_Listeners {
 				if (pte.expression_num instanceof IdentIA)
 					identIA2 = (IdentIA) pte.expression_num;
 				if (identIA2 != null) {
-					@NotNull IdentTableEntry idte2          = identIA.getEntry();
+					@NonNull IdentTableEntry idte2          = identIA.getEntry();
 					@Nullable ProcTableEntry procTableEntry = idte2.getCallablePTE();
 					if (procTableEntry == pte) SimplePrintLoggerToRemoveSoon.println_err_2("940 procTableEntry == pte");
 					if (procTableEntry != null) {
@@ -107,12 +107,12 @@ public class __Add_Proc_Table_Listeners {
 						procTableEntry.onFunctionInvocation(new DoneCallback<FunctionInvocation>() {
 
 							@Override
-							public void onDone(@NotNull FunctionInvocation functionInvocation) {
+							public void onDone(@NonNull FunctionInvocation functionInvocation) {
 								ClassInvocation     ci  = functionInvocation.getClassInvocation();
 								NamespaceInvocation nsi = functionInvocation.getNamespaceInvocation();
 								// do we register?? probably not
 								assert ci != null || nsi != null;
-								@NotNull FunctionInvocation fi = deduceTypes2.newFunctionInvocation((FunctionDef) el, pte, ci != null ? ci : nsi, deduceTypes2.phase);
+								@NonNull FunctionInvocation fi = deduceTypes2.newFunctionInvocation((FunctionDef) el, pte, ci != null ? ci : nsi, deduceTypes2.phase);
 
 								{
 									if (functionInvocation.getClassInvocation() == fi.getClassInvocation() &&

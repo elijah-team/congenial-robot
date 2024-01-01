@@ -61,7 +61,7 @@ public class QualifiedImportStatement extends _BaseImportStatement {
 	}
 
 	@Override
-	public @NotNull List<Qualident> parts() {
+	public @NonNull List<Qualident> parts() {
 		final List<Qualident> r = new ArrayList<Qualident>();
 		for (final Part part : _parts) {
 			r.add(part.base);

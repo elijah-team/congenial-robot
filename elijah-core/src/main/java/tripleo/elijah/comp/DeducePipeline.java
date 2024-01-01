@@ -36,7 +36,7 @@ public class DeducePipeline implements PipelineMember {
 	//  3. We loop modules
 
 	@Override
-	public void run(final @NotNull CR_State aSt, final CB_Output aOutput) {
+	public void run(final @NonNull CR_State aSt, final CB_Output aOutput) {
 		logProgress("***** Hit DeducePipeline #run");
 
 		final CompilationEnclosure                   ce                   = aSt.ca().getCompilation().getCompilationEnclosure();

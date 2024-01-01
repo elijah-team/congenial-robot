@@ -119,7 +119,7 @@ public final class OptionBuilder {
 	 * @return the Option instance
 	 * @throws IllegalArgumentException if {@code opt} is not a valid character. See Option.
 	 */
-	public static @NotNull Option create(final String opt) throws IllegalArgumentException {
+	public static @NonNull Option create(final String opt) throws IllegalArgumentException {
 		Option option;
 		try {
 			// create the option

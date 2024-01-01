@@ -70,7 +70,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	private static final   String          PHASE = "GenerateFunctions";
 	final                  OS_Module       module;
 	final          GeneratePhase   phase;
-	final @NotNull ElLog           LOG;
+	final @NonNull ElLog           LOG;
 	private       GenFnC          bc;
 
 	/**
@@ -82,9 +82,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	 * @param gf
 	 * @return the cte table index
 	 */
-	int addConstantTableEntry(final String name, final IExpression initialValue, final OS_Type type, final @NotNull BaseEvaFunction gf) {
-		final @NotNull TypeTableEntry     tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, type, initialValue);
-		final @NotNull ConstantTableEntry cte = new ConstantTableEntry(gf.cte_list.size(), name, initialValue, tte);
+	int addConstantTableEntry(final String name, final IExpression initialValue, final OS_Type type, final @NonNull BaseEvaFunction gf) {
+		final @NonNull TypeTableEntry     tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, type, initialValue);
+		final @NonNull ConstantTableEntry cte = new ConstantTableEntry(gf.cte_list.size(), name, initialValue, tte);
 		gf.cte_list.add(cte);
 		return cte.index;
 	}
@@ -98,9 +98,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	 * @param gf
 	 * @return the cte table index
 	 */
-	private int addConstantTableEntry2(final String name, final IExpression initialValue, final OS_Type type, final @NotNull BaseEvaFunction gf) {
-		final @NotNull TypeTableEntry     tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, type, initialValue);
-		final @NotNull ConstantTableEntry cte = new ConstantTableEntry(gf.cte_list.size(), name, initialValue, tte);
+	private int addConstantTableEntry2(final String name, final IExpression initialValue, final OS_Type type, final @NonNull BaseEvaFunction gf) {
+		final @NonNull TypeTableEntry     tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, type, initialValue);
+		final @NonNull ConstantTableEntry cte = new ConstantTableEntry(gf.cte_list.size(), name, initialValue, tte);
 
 /*
 		gf.b(new BuildaBear() {
@@ -117,17 +117,17 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return cte.index;
 	}
 
-	int addTempTableEntry(final OS_Type type, final @NotNull BaseEvaFunction gf) {
+	int addTempTableEntry(final OS_Type type, final @NonNull BaseEvaFunction gf) {
 		return addTempTableEntry(type, null, gf, null);
 	}
 
 	int addTempTableEntry(final OS_Type type,
 						  @Nullable final IdentExpression name,
-						  @NotNull final BaseEvaFunction gf,
+						  @NonNull final BaseEvaFunction gf,
 						  @Nullable OS_Element el) {
 		final @org.jetbrains.annotations.Nullable String theName;
 		final int                                        num;
-		final @NotNull TypeTableEntry                    tte;
+		final @NonNull TypeTableEntry                    tte;
 
 		if (name != null) {
 			tte     = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, type, name);
@@ -140,13 +140,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			num     = gf.nextTemp();
 		}
 		final int                         vte_index = gf.addVariableTableEntry(theName, VariableTableType.TEMP, tte, el);
-		final @NotNull VariableTableEntry vte       = gf.getVarTableEntry(vte_index);
+		final @NonNull VariableTableEntry vte       = gf.getVarTableEntry(vte_index);
 		vte.setTempNum(num);
 		gf.vte_list.add(vte);
 		return vte.getIndex();
 	}
 
-	int addVariableTableEntry(final String name, final TypeTableEntry type, final @NotNull BaseEvaFunction gf, OS_Element el) {
+	int addVariableTableEntry(final String name, final TypeTableEntry type, final @NonNull BaseEvaFunction gf, OS_Element el) {
 		return gf.addVariableTableEntry(name, VariableTableType.VAR, type, el);
 	}
 
@@ -161,7 +161,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		bc.addLog(LOG);
 	}
 
-	//public GenerateFunctions(final OS_Module aModule, @NotNull PipelineLogic aPipelineLogic, final IPipelineAccess pa0) {
+	//public GenerateFunctions(final OS_Module aModule, @NonNull PipelineLogic aPipelineLogic, final IPipelineAccess pa0) {
 	//	// TODO remove me
 	//	bc = new GenFnC();
 	//
@@ -174,21 +174,21 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	//	bc.addLog(LOG);
 	//}
 
-	int add_i(@NotNull final BaseEvaFunction gf, final InstructionName x, final List<InstructionArgument> list_of, final Context ctx) {
+	int add_i(@NonNull final BaseEvaFunction gf, final InstructionName x, final List<InstructionArgument> list_of, final Context ctx) {
 		final int i = gf.add(x, list_of, ctx);
 		return i;
 	}
 
-	void assign_variable(final @NotNull BaseEvaFunction gf, final int vte, @NotNull final IExpression value, final @NotNull Context cctx) {
+	void assign_variable(final @NonNull BaseEvaFunction gf, final int vte, @NonNull final IExpression value, final @NonNull Context cctx) {
 		if (value == IExpression.UNASSIGNED) return; // default_expression
 		switch (value.getKind()) {
 		case PROCEDURE_CALL:
-			final @NotNull ProcedureCallExpression pce = (ProcedureCallExpression) value;
-			final @NotNull FnCallArgs fnCallArgs = new FnCallArgs(expression_to_call(pce, gf, cctx), gf);
+			final @NonNull ProcedureCallExpression pce = (ProcedureCallExpression) value;
+			final @NonNull FnCallArgs fnCallArgs = new FnCallArgs(expression_to_call(pce, gf, cctx), gf);
 			final int ii2 = add_i(gf, InstructionName.AGN, List_of(new IntegerIA(vte, gf), fnCallArgs), cctx);
-			final @NotNull VariableTableEntry vte_proccall = gf.getVarTableEntry(vte);
+			final @NonNull VariableTableEntry vte_proccall = gf.getVarTableEntry(vte);
 			InstructionArgument gg = fnCallArgs.expression_to_call.getArg(0);
-			@NotNull TableEntryIV g;
+			@NonNull TableEntryIV g;
 			if (gg instanceof IntegerIA) {
 				g = gf.getVarTableEntry(((IntegerIA) gg).getIndex());
 			} else if (gg instanceof IdentIA) {
@@ -197,29 +197,29 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				g = gf.getProcTableEntry(((ProcIA) gg).index());
 			} else
 				throw new NotImplementedException();
-			final @NotNull TypeTableEntry tte_proccall = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, value, g);
+			final @NonNull TypeTableEntry tte_proccall = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, value, g);
 			fnCallArgs.setType(tte_proccall);
 			vte_proccall.addPotentialType(ii2, tte_proccall);
 			break;
 		case NUMERIC:
 			final int ci = addConstantTableEntry(null, value, value.getType(), gf);
 			final int ii = add_i(gf, InstructionName.AGNK, List_of(new IntegerIA(vte, gf), new ConstTableIA(ci, gf)), cctx);
-			final @NotNull VariableTableEntry vte_numeric = gf.getVarTableEntry(vte);
+			final @NonNull VariableTableEntry vte_numeric = gf.getVarTableEntry(vte);
 			vte_numeric.addPotentialType(ii, gf.getConstTableEntry(ci).type);
 			break;
 		case IDENT:
 			InstructionArgument ia1 = simplify_expression(value, gf, cctx);
 			final int ii3 = add_i(gf, InstructionName.AGN, List_of(new IntegerIA(vte, gf), ia1), cctx);
-			final @NotNull VariableTableEntry vte3_ident = gf.getVarTableEntry(vte);
-			final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, value);
+			final @NonNull VariableTableEntry vte3_ident = gf.getVarTableEntry(vte);
+			final @NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, value);
 			vte3_ident.addPotentialType(ii3, tte);
 			break;
 		case FUNC_EXPR:
-			@NotNull FuncExpr fe = (FuncExpr) value;
+			@NonNull FuncExpr fe = (FuncExpr) value;
 			int pte_index = addProcTableEntry(fe, null, get_args_types(fe.getArgs(), gf), gf);
 			final int ii4 = add_i(gf, InstructionName.AGNF, List_of(new IntegerIA(vte, gf), new IntegerIA(pte_index, gf)), cctx);
-			final @NotNull VariableTableEntry vte3_func = gf.getVarTableEntry(vte);
-			final @NotNull TypeTableEntry tte_func = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, new OS_FuncExprType(fe), value);
+			final @NonNull VariableTableEntry vte3_func = gf.getVarTableEntry(vte);
+			final @NonNull TypeTableEntry tte_func = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, new OS_FuncExprType(fe), value);
 			vte3_func.addPotentialType(ii4, tte_func);
 			break;
 		default:
@@ -227,9 +227,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 	}
 
-	private @NotNull Instruction expression_to_call(@NotNull final ProcedureCallExpression pce,
-													@NotNull final BaseEvaFunction gf,
-													@NotNull final Context cctx) {
+	private @NonNull Instruction expression_to_call(@NonNull final ProcedureCallExpression pce,
+													@NonNull final BaseEvaFunction gf,
+													@NonNull final Context cctx) {
 		final IExpression left = pce.getLeft();
 		switch (left.getKind()) {
 		case IDENT:
@@ -242,12 +242,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //			simplify_qident((Qualident) pce.getLeft(), gf); // TODO ??
 			return expression_to_call_add_entry(gf, pce, xx, cctx);
 		case DOT_EXP:
-			@NotNull InstructionArgument x = simplify_dot_expression((DotExpression) left, gf, cctx); // TODO ??
+			@NonNull InstructionArgument x = simplify_dot_expression((DotExpression) left, gf, cctx); // TODO ??
 			return expression_to_call_add_entry(gf, pce, left, x, cctx);
 		case PROCEDURE_CALL:
 			ProcedureCallExpression pce1 = (ProcedureCallExpression) left;
 			if (true) {
-				@NotNull InstructionArgument x1 = simplify_expression(left, gf, cctx);
+				@NonNull InstructionArgument x1 = simplify_expression(left, gf, cctx);
 				return expression_to_call_add_entry(gf, pce1, left, x1, cctx);
 			} else {
 				int y = 2;
@@ -259,30 +259,30 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 	}
 
-	@NotNull
-	private Instruction expression_to_call_add_entry(final @NotNull BaseEvaFunction gf,
-													 @NotNull final ProcedureCallExpression pce,
-													 final @NotNull IExpression left,
-													 final @NotNull Context cctx) {
-		final @NotNull Instruction i = new Instruction();
+	@NonNull
+	private Instruction expression_to_call_add_entry(final @NonNull BaseEvaFunction gf,
+													 @NonNull final ProcedureCallExpression pce,
+													 final @NonNull IExpression left,
+													 final @NonNull Context cctx) {
+		final @NonNull Instruction i = new Instruction();
 		i.setName(InstructionName.CALL); // TODO see line 686
-		final @NotNull List<InstructionArgument> li              = new ArrayList<InstructionArgument>();
-		final @NotNull InstructionArgument       assignment_path = gf.get_assignment_path(left, this, cctx);
-		final @NotNull List<TypeTableEntry>      args_types      = get_args_types(pce.getArgs(), gf, cctx);
+		final @NonNull List<InstructionArgument> li              = new ArrayList<InstructionArgument>();
+		final @NonNull InstructionArgument       assignment_path = gf.get_assignment_path(left, this, cctx);
+		final @NonNull List<TypeTableEntry>      args_types      = get_args_types(pce.getArgs(), gf, cctx);
 		final int                                pte_num         = addProcTableEntry(left, assignment_path, args_types, gf);
 		li.add(new ProcIA(pte_num, gf));
-		final @NotNull List<InstructionArgument> args_ = simplify_args(pce.getArgs(), gf, cctx);
+		final @NonNull List<InstructionArgument> args_ = simplify_args(pce.getArgs(), gf, cctx);
 		li.addAll(args_);
 		i.setArgs(li);
 		return i;
 	}
 
-	@NotNull
-	private Instruction expression_to_call_add_entry(final @NotNull BaseEvaFunction gf,
-													 @NotNull final ProcedureCallExpression pce,
+	@NonNull
+	private Instruction expression_to_call_add_entry(final @NonNull BaseEvaFunction gf,
+													 @NonNull final ProcedureCallExpression pce,
 													 final IExpression left,
 													 final InstructionArgument left1,
-													 final @NotNull Context cctx) {
+													 final @NonNull Context cctx) {
 		/*
 		pte_num = addProcTableEntry(left...)
 		return Instruction {
@@ -294,21 +294,21 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		final ExpressionList                     args      = pce.getArgs();
 		final List<TypeTableEntry>               argsTypes = get_args_types(args, gf, cctx);
 		final int                                pte_num   = addProcTableEntry(left, left1, argsTypes, gf);
-		final @NotNull List<InstructionArgument> args_     = simplify_args(args, gf, cctx);
+		final @NonNull List<InstructionArgument> args_     = simplify_args(args, gf, cctx);
 
-		final @NotNull List<InstructionArgument> li = new ArrayList<InstructionArgument>();
+		final @NonNull List<InstructionArgument> li = new ArrayList<InstructionArgument>();
 		li.add(new ProcIA(pte_num, gf));
 		li.addAll(args_);
 
-		final @NotNull Instruction i = new Instruction(InstructionName.CALL, li);
+		final @NonNull Instruction i = new Instruction(InstructionName.CALL, li);
 		return i;
 	}
 
-	void generate_item_assignment(final StatementWrapper aStatementWrapper, @NotNull final IExpression x, @NotNull final BaseEvaFunction gf, final @NotNull Context cctx) {
+	void generate_item_assignment(final StatementWrapper aStatementWrapper, @NonNull final IExpression x, @NonNull final BaseEvaFunction gf, final @NonNull Context cctx) {
 //		LOG.err(String.format("801 %s %s", x.getLeft(), ((BasicBinaryExpressionImpl) x).getRight()));
-		final @NotNull BasicBinaryExpression    bbe    = (BasicBinaryExpression) x;
+		final @NonNull BasicBinaryExpression    bbe    = (BasicBinaryExpression) x;
 		final IExpression                       right1 = bbe.getRight();
-		final @NotNull Generate_item_assignment gia    = new Generate_item_assignment();
+		final @NonNull Generate_item_assignment gia    = new Generate_item_assignment();
 		switch (right1.getKind()) {
 		case PROCEDURE_CALL:
 			gia.procedure_call(aStatementWrapper, gf, bbe, (ProcedureCallExpression) right1, cctx);
@@ -343,13 +343,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 	void generate_item_dot_expression(@org.jetbrains.annotations.Nullable final InstructionArgument backlink,
 									  final IExpression left,
-									  @NotNull final IExpression right,
-									  final @NotNull BaseEvaFunction gf,
+									  @NonNull final IExpression right,
+									  final @NonNull BaseEvaFunction gf,
 									  final Context cctx) {
 		final int y = 2;
 		final int x = gf.addIdentTableEntry((IdentExpression) left, cctx);
 
-		final @NotNull IdentIA identIA = new IdentIA(x, gf);
+		final @NonNull IdentIA identIA = new IdentIA(x, gf);
 
 		var entry = identIA.getEntry();
 
@@ -371,13 +371,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			generate_item_dot_expression(new IdentIA(x, gf), right.getLeft(), ((BasicBinaryExpression) right).getRight(), gf, cctx);
 	}
 
-	public void generateAllTopLevelClasses(@NotNull List<EvaNode> lgc) {
+	public void generateAllTopLevelClasses(@NonNull List<EvaNode> lgc) {
 		for (final ModuleItem item : module.getItems()) {
-			if (item instanceof final @NotNull NamespaceStatement namespaceStatement) {
-				@NotNull EvaNamespace ns = generateNamespace(namespaceStatement);
+			if (item instanceof final @NonNull NamespaceStatement namespaceStatement) {
+				@NonNull EvaNamespace ns = generateNamespace(namespaceStatement);
 				lgc.add(ns);
-			} else if (item instanceof final @NotNull ClassStatement classStatement) {
-				@NotNull EvaClass kl = generateClass(classStatement);
+			} else if (item instanceof final @NonNull ClassStatement classStatement) {
+				@NonNull EvaClass kl = generateClass(classStatement);
 				lgc.add(kl);
 			}
 			// TODO enums, datatypes, (type)aliases
@@ -391,21 +391,21 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	 * @param aClassInvocation
 	 * @return
 	 */
-	public @NotNull EvaClass generateClass(@NotNull ClassStatement aClassStatement, ClassInvocation aClassInvocation) {
-		@NotNull EvaClass Result = generateClass(aClassStatement);
+	public @NonNull EvaClass generateClass(@NonNull ClassStatement aClassStatement, ClassInvocation aClassInvocation) {
+		@NonNull EvaClass Result = generateClass(aClassStatement);
 		Result.ci = aClassInvocation;
 		return Result;
 	}
 
-	public @NotNull EvaConstructor generateConstructor(@NotNull ConstructorDef aConstructorDef,
+	public @NonNull EvaConstructor generateConstructor(@NonNull ConstructorDef aConstructorDef,
 													   ClassStatement parent, // TODO Namespace constructors
-													   @NotNull FunctionInvocation aFunctionInvocation) {
-		final @NotNull EvaConstructor gf = new EvaConstructor(aConstructorDef);
+													   @NonNull FunctionInvocation aFunctionInvocation) {
+		final @NonNull EvaConstructor gf = new EvaConstructor(aConstructorDef);
 		gf.setFunctionInvocation(aFunctionInvocation);
 		if (parent instanceof ClassStatement) {
 			final OS_Type                  parentType = parent.getOS_Type();
-			final @NotNull IdentExpression selfIdent  = IdentExpression.forString("self");
-			final @NotNull TypeTableEntry  tte        = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, parentType, selfIdent);
+			final @NonNull IdentExpression selfIdent  = IdentExpression.forString("self");
+			final @NonNull TypeTableEntry  tte        = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, parentType, selfIdent);
 			gf.addVariableTableEntry("self", VariableTableType.SELF, tte, null);
 		}
 
@@ -420,7 +420,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				final @org.jetbrains.annotations.Nullable OS_Type attached = tte1.getAttached();
 
 				// TODO for reference now...
-				final @NotNull GenType genType  = new GenTypeImpl();
+				final @NonNull GenType genType  = new GenTypeImpl();
 				final TypeName         typeName = fali.typeName();
 				if (typeName != null)
 					genType.setTypeName(new OS_UserType(typeName));
@@ -432,7 +432,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				else
 					attached1 = attached;
 
-				final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
+				final @NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
 //				assert attached != null; // TODO this fails
 
 				gf.addVariableTableEntry(fali.name().asString(), VariableTableType.ARG, tte, fali);
@@ -456,19 +456,19 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gf;
 	}
 
-	void generate_item(final OS_Element item, @NotNull final BaseEvaFunction gf, final @NotNull Context cctx) {
-		@NotNull Generate_Item gi = new Generate_Item(this);
+	void generate_item(final OS_Element item, @NonNull final BaseEvaFunction gf, final @NonNull Context cctx) {
+		@NonNull Generate_Item gi = new Generate_Item(this);
 		if (item instanceof AliasStatement) {
 			gi.generate_alias_statement((AliasStatement) item);
 		} else if (item instanceof CaseConditional) {
 			gi.generate_case_conditional((CaseConditional) item);
 		} else if (item instanceof ClassStatement) {
 			// TODO this still has no ClassInvocation
-			@NotNull EvaClass        gc        = generateClass((ClassStatement) item);
+			@NonNull EvaClass        gc        = generateClass((ClassStatement) item);
 			int                      ite_index = gf.addIdentTableEntry(((ClassStatement) item).getNameNode(), cctx);
-			@NotNull IdentTableEntry ite       = gf.getIdentTableEntry(ite_index);
+			@NonNull IdentTableEntry ite       = gf.getIdentTableEntry(ite_index);
 			ite.resolveTypeToClass(gc);
-		} else if (item instanceof final @NotNull StatementWrapper sw) {
+		} else if (item instanceof final @NonNull StatementWrapper sw) {
 			final IExpression    x              = sw.getExpr();
 			final ExpressionKind expressionKind = x.getKind();
 			gi.generate_statement_wrapper(sw, x, expressionKind, gf, cctx);
@@ -488,19 +488,19 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			throw new NotImplementedException();
 		} else if (item instanceof SyntacticBlock) {
 			throw new NotImplementedException();
-		} else if (item instanceof final @NotNull ConstructStatement constructStatement) {
+		} else if (item instanceof final @NonNull ConstructStatement constructStatement) {
 			gi.generate_construct_statement(constructStatement, gf, cctx);
 		} else {
 			throw new IllegalStateException("cant be here");
 		}
 	}
 
-	private @NotNull List<TypeTableEntry> get_args_types(final @NotNull List<FormalArgListItem> args,
-														 final @NotNull BaseEvaFunction gf) {
-		final @NotNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
+	private @NonNull List<TypeTableEntry> get_args_types(final @NonNull List<FormalArgListItem> args,
+														 final @NonNull BaseEvaFunction gf) {
+		final @NonNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
 		//
-		for (final @NotNull FormalArgListItem arg : args) {
-			final @NotNull TypeTableEntry               tte;
+		for (final @NonNull FormalArgListItem arg : args) {
+			final @NonNull TypeTableEntry               tte;
 			@org.jetbrains.annotations.Nullable OS_Type ty;
 			if (arg.typeName() == null || arg.typeName().isNull())
 				ty = null;
@@ -515,13 +515,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return R;
 	}
 
-	private @NotNull InstructionArgument simplify_dot_expression(final @NotNull DotExpression dotExpression, final @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
-		@NotNull InstructionArgument x = gf.get_assignment_path(dotExpression, this, cctx);
+	private @NonNull InstructionArgument simplify_dot_expression(final @NonNull DotExpression dotExpression, final @NonNull BaseEvaFunction gf, @NonNull Context cctx) {
+		@NonNull InstructionArgument x = gf.get_assignment_path(dotExpression, this, cctx);
 		LOG.info("1117 " + x);
 		return x;
 	}
 
-	void simplify_procedure_call(@NotNull final ProcedureCallExpression pce, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+	void simplify_procedure_call(@NonNull final ProcedureCallExpression pce, final @NonNull BaseEvaFunction gf, final @NonNull Context cctx) {
 		final IExpression                                        left = pce.getLeft();
 		final @org.jetbrains.annotations.Nullable ExpressionList args = pce.getArgs();
 		//
@@ -530,20 +530,20 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			expression_num = gf.get_assignment_path(left, this, cctx);
 		}
 		final int                                i = addProcTableEntry(left, expression_num, get_args_types(args, gf, cctx), gf);
-		final @NotNull List<InstructionArgument> l = new ArrayList<InstructionArgument>();
+		final @NonNull List<InstructionArgument> l = new ArrayList<InstructionArgument>();
 		l.add(new ProcIA(i, gf));
 		l.addAll(simplify_args(args, gf, cctx));
 		final int instructionIndex = add_i(gf, InstructionName.CALL, l, cctx);
 		{
-			@NotNull ProcTableEntry pte = gf.getProcTableEntry(i);
+			@NonNull ProcTableEntry pte = gf.getProcTableEntry(i);
 			if (expression_num instanceof IdentIA) {
-				@NotNull IdentTableEntry idte = ((IdentIA) expression_num).getEntry();
+				@NonNull IdentTableEntry idte = ((IdentIA) expression_num).getEntry();
 				idte.setCallablePTE(pte);
 				pte.typePromise_setRegister(this);
 				pte.typePromise().then(new DoneCallback<GenType>() { // TODO should this be done here?
 					@Override
-					public void onDone(@NotNull GenType result) {
-						@NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, result.getResolved());
+					public void onDone(@NonNull GenType result) {
+						@NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, result.getResolved());
 						tte.genType.copy(result);
 						idte.addPotentialType(instructionIndex, tte);
 					}
@@ -552,7 +552,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 	}
 
-	public @NotNull EvaClass generateClass(@NotNull ClassStatement klass) {
+	public @NonNull EvaClass generateClass(@NonNull ClassStatement klass) {
 		final EvaClass        gc   = new EvaClass(klass, module);
 		final __GenerateClass gcgc = new __GenerateClass(LOG);
 
@@ -563,33 +563,33 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gc;
 	}
 
-	public int addProcTableEntry(final IExpression expression, final InstructionArgument expression_num, final List<TypeTableEntry> args, final @NotNull BaseEvaFunction gf) {
-		final @NotNull ProcTableEntry pte = new ProcTableEntry(gf.prte_list.size(), expression, expression_num, args);
+	public int addProcTableEntry(final IExpression expression, final InstructionArgument expression_num, final List<TypeTableEntry> args, final @NonNull BaseEvaFunction gf) {
+		final @NonNull ProcTableEntry pte = new ProcTableEntry(gf.prte_list.size(), expression, expression_num, args);
 		gf.prte_list.add(pte);
-		if (expression_num instanceof final @NotNull IdentIA identIA) {
+		if (expression_num instanceof final @NonNull IdentIA identIA) {
 			if (identIA.getEntry().getCallablePTE() == null)
 				identIA.getEntry().setCallablePTE(pte);
 		}
 		return pte.index;
 	}
 
-	@NotNull List<TypeTableEntry> get_args_types(@org.jetbrains.annotations.Nullable final ExpressionList args,
-												 final @NotNull BaseEvaFunction gf,
-												 @NotNull final Context aContext) {
-		final @NotNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
+	@NonNull List<TypeTableEntry> get_args_types(@org.jetbrains.annotations.Nullable final ExpressionList args,
+												 final @NonNull BaseEvaFunction gf,
+												 @NonNull final Context aContext) {
+		final @NonNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
 		if (args == null) return R;
 		//
-		for (final @NotNull IExpression arg : args) {
+		for (final @NonNull IExpression arg : args) {
 			final OS_Type type = arg.getType();
 //			LOG.err(String.format("108 %s %s", arg, type));
 			if (arg instanceof IdentExpression) {
 				final @org.jetbrains.annotations.Nullable InstructionArgument x = gf.vte_lookup(((IdentExpression) arg).getText());
 				final TypeTableEntry                                          tte;
 				if (x instanceof ConstTableIA) {
-					final @NotNull ConstantTableEntry cte = gf.getConstTableEntry(((ConstTableIA) x).getIndex());
+					final @NonNull ConstantTableEntry cte = gf.getConstTableEntry(((ConstTableIA) x).getIndex());
 					tte = cte.getTypeTableEntry();
 				} else if (x instanceof IntegerIA) {
-					final @NotNull VariableTableEntry vte = gf.getVarTableEntry(((IntegerIA) x).getIndex());
+					final @NonNull VariableTableEntry vte = gf.getVarTableEntry(((IntegerIA) x).getIndex());
 					tte = vte.getType();
 				} else {
 					//
@@ -611,11 +611,11 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		throw new NotImplementedException();
 	}
 
-	@NotNull EvaFunction generateFunction(@NotNull final FunctionDef fd,
+	@NonNull EvaFunction generateFunction(@NonNull final FunctionDef fd,
 										  final OS_Element parent,
-										  @NotNull FunctionInvocation aFunctionInvocation) {
+										  @NonNull FunctionInvocation aFunctionInvocation) {
 //		LOG.err("601.1 fn "+fd.name() + " " + parent);
-		final @NotNull EvaFunction gf = new EvaFunction(fd);
+		final @NonNull EvaFunction gf = new EvaFunction(fd);
 
 		__generatefunction_addSelfVar(parent, gf);
 		__generateFunction__addResultVar(fd, gf);
@@ -650,7 +650,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		// TODO 11/10 implement me
 	}
 
-	private static void __generateFunction__addArgumentVars(final @NotNull FunctionDef fd, final @NotNull FunctionInvocation aFunctionInvocation, final @NotNull EvaFunction gf) {
+	private static void __generateFunction__addArgumentVars(final @NonNull FunctionDef fd, final @NonNull FunctionInvocation aFunctionInvocation, final @NonNull EvaFunction gf) {
 		final List<FormalArgListItem> fali_args = fd.fal().falis();
 		final List<TypeTableEntry>    fi_args   = aFunctionInvocation.getArgs();
 
@@ -661,7 +661,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final @org.jetbrains.annotations.Nullable OS_Type attached = tte1.getAttached();
 
 			// TODO for reference now...
-			final @NotNull GenType genType  = new GenTypeImpl();
+			final @NonNull GenType genType  = new GenTypeImpl();
 			final TypeName         typeName = fali.typeName();
 			if (typeName != null)
 				genType.setTypeName(new OS_UserType(typeName));
@@ -673,15 +673,15 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			else
 				attached1 = attached;
 
-			final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
+			final @NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, attached1, fali.getNameToken());
 //				assert attached != null; // TODO this fails
 
 			gf.addVariableTableEntry(fali.name().asString(), VariableTableType.ARG, tte, fali);
 		}
 	}
 
-	private static void __generateFunction__addResultVar(final @NotNull FunctionDef fd, final @NotNull EvaFunction gf) {
-		final @NotNull OS_Type                             returnType;
+	private static void __generateFunction__addResultVar(final @NonNull FunctionDef fd, final @NonNull EvaFunction gf) {
+		final @NonNull OS_Type                             returnType;
 		final @org.jetbrains.annotations.Nullable TypeName returnType1 = fd.returnType();
 
 		if (returnType1 == null) {
@@ -696,7 +696,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 								 null); // TODO what about Unit returns?
 	}
 
-	private static void __generatefunction_addSelfVar(final OS_Element parent, final @NotNull EvaFunction gf) {
+	private static void __generatefunction_addSelfVar(final OS_Element parent, final @NonNull EvaFunction gf) {
 		if (parent instanceof ClassStatement) {
 			gf.addVariableTableEntry("self",
 									 VariableTableType.SELF,
@@ -705,9 +705,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 	}
 
-	@NotNull
-	public EvaNamespace generateNamespace(@NotNull NamespaceStatement namespace1) {
-		@NotNull EvaNamespace                              gn = new EvaNamespace(namespace1, module);
+	@NonNull
+	public EvaNamespace generateNamespace(@NonNull NamespaceStatement namespace1) {
+		@NonNull EvaNamespace                              gn = new EvaNamespace(namespace1, module);
 		@org.jetbrains.annotations.Nullable AccessNotation an = null;
 
 		for (ClassItem item : namespace1.getItems()) {
@@ -722,13 +722,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				throw new NotImplementedException();
 			} else if (item instanceof FunctionDef) {
 				//throw new NotImplementedException();
-//				@NotNull EvaFunction f = generateFunction((FunctionDef) item, namespace1);
+//				@NonNull EvaFunction f = generateFunction((FunctionDef) item, namespace1);
 //				gn.addFunction((FunctionDef) item, f);
 			} else if (item instanceof DefFunctionDef) {
 				throw new NotImplementedException();
 			} else if (item instanceof NamespaceStatement) {
 				throw new NotImplementedException();
-			} else if (item instanceof @NotNull final VariableSequence vsq) {
+			} else if (item instanceof @NonNull final VariableSequence vsq) {
 				for (VariableStatement vs : vsq.items()) {
 //					LOG.info("6999 "+vs);
 					gn.addVarTableEntry(an, vs, null/*, passthruEnv*/);
@@ -749,11 +749,11 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gn;
 	}
 
-	@NotNull List<InstructionArgument> simplify_args(@org.jetbrains.annotations.Nullable final ExpressionList args, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
-		final @NotNull List<InstructionArgument> R = new ArrayList<InstructionArgument>();
+	@NonNull List<InstructionArgument> simplify_args(@org.jetbrains.annotations.Nullable final ExpressionList args, final @NonNull BaseEvaFunction gf, final @NonNull Context cctx) {
+		final @NonNull List<InstructionArgument> R = new ArrayList<InstructionArgument>();
 		if (args == null) return R;
 		//
-		for (final @NotNull IExpression expression : args) {
+		for (final @NonNull IExpression expression : args) {
 			final InstructionArgument ia = simplify_expression(expression, gf, cctx);
 			if (ia != null) {
 //				LOG.err("109 "+expression);
@@ -765,15 +765,15 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return R;
 	}
 
-	private @NotNull Collection<InstructionArgument> simplify_args2(@org.jetbrains.annotations.Nullable final ExpressionList args, @NotNull final EvaFunction gf, final @NotNull Context cctx) {
-		@NotNull Collection<InstructionArgument> R = new ArrayList<InstructionArgument>();
+	private @NonNull Collection<InstructionArgument> simplify_args2(@org.jetbrains.annotations.Nullable final ExpressionList args, @NonNull final EvaFunction gf, final @NonNull Context cctx) {
+		@NonNull Collection<InstructionArgument> R = new ArrayList<InstructionArgument>();
 		if (args == null) return R;
 		//
 		R = Collections2.transform(args.expressions(), new Function<IExpression, InstructionArgument>() {
 			@Override
 			public @Nullable @org.jetbrains.annotations.Nullable InstructionArgument apply(@Nullable final IExpression input) {
 				assert input != null;
-				@NotNull final IExpression expression = input;
+				@NonNull final IExpression expression = input;
 				final InstructionArgument  ia         = simplify_expression(expression, gf, cctx);
 				if (ia != null) {
 					LOG.err("109-1 " + expression);
@@ -786,12 +786,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return R;
 	}
 
-	private @NotNull TypeTableEntry getType(@NotNull final IExpression arg, final @NotNull BaseEvaFunction gf) {
-		final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, arg.getType(), arg);
+	private @NonNull TypeTableEntry getType(@NonNull final IExpression arg, final @NonNull BaseEvaFunction gf) {
+		final @NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, arg.getType(), arg);
 		return tte;
 	}
 
-	InstructionArgument simplify_expression(@NotNull final IExpression expression, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+	InstructionArgument simplify_expression(@NonNull final IExpression expression, final @NonNull BaseEvaFunction gf, final @NonNull Context cctx) {
 		// TODO 11/10 this double resolves, ie cache the result??
 		gf._informGF(this);
 
@@ -800,23 +800,23 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		case PROCEDURE_CALL:
 			return simplify_expression_procedure_call(expression, gf, cctx);
 		case CAST_TO: {
-			@NotNull TypeCastExpression tce       = (TypeCastExpression) expression;
+			@NonNull TypeCastExpression tce       = (TypeCastExpression) expression;
 			InstructionArgument         simp      = simplify_expression(tce.getLeft(), gf, cctx);
-			@NotNull TypeTableEntry     tte_index = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, new OS_UserType(tce.getTypeName()));
+			@NonNull TypeTableEntry     tte_index = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, new OS_UserType(tce.getTypeName()));
 			final int                   x         = add_i(gf, InstructionName.CAST_TO, List_of(simp, new IntegerIA(tte_index.getIndex(), gf)), cctx);
 		}
 		case AS_CAST: {
-			@NotNull TypeCastExpression tce       = (TypeCastExpression) expression;
+			@NonNull TypeCastExpression tce       = (TypeCastExpression) expression;
 			InstructionArgument         simp      = simplify_expression(tce.getLeft(), gf, cctx);
-			@NotNull TypeTableEntry     tte_index = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, new OS_UserType(tce.getTypeName()));
+			@NonNull TypeTableEntry     tte_index = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, new OS_UserType(tce.getTypeName()));
 			final int                   x         = add_i(gf, InstructionName.AS_CAST, List_of(simp, new IntegerIA(tte_index.getIndex(), gf)), cctx);
 		}
 		case DOT_EXP: {
-			final @NotNull DotExpression de = (DotExpression) expression;
+			final @NonNull DotExpression de = (DotExpression) expression;
 			return gf.get_assignment_path(de, this, cctx);
 		}
 		case QIDENT: {
-			final @NotNull Qualident q  = (Qualident) expression;
+			final @NonNull Qualident q  = (Qualident) expression;
 			IExpression              de = Helpers.qualidentToDotExpression2(q);
 			return gf.get_assignment_path(de, this, cctx);
 		}
@@ -834,22 +834,22 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 			return i;
 		case NUMERIC: {
-			final @NotNull NumericExpression ne = (NumericExpression) expression;
+			final @NonNull NumericExpression ne = (NumericExpression) expression;
 			final int                        ii = addConstantTableEntry2(null, ne, ne.getType(), gf);
 			return new ConstTableIA(ii, gf);
 		}
 		case STRING_LITERAL: {
-			final @NotNull StringExpression se = (StringExpression) expression;
+			final @NonNull StringExpression se = (StringExpression) expression;
 			final int                       ii = addConstantTableEntry2(null, se, se.getType(), gf);
 			return new ConstTableIA(ii, gf);
 		}
 		case CHAR_LITERAL: {
-			final @NotNull CharLitExpression cle = (CharLitExpression) expression;
+			final @NonNull CharLitExpression cle = (CharLitExpression) expression;
 			final int                        ii  = addConstantTableEntry2(null, cle, cle.getType(), gf);
 			return new ConstTableIA(ii, gf);
 		}
 		case GET_ITEM: {
-			final @NotNull GetItemExpression gie   = (GetItemExpression) expression;
+			final @NonNull GetItemExpression gie   = (GetItemExpression) expression;
 			final IExpression                left  = gie.getLeft();
 			final IExpression                right = gie.index();
 			final InstructionArgument        left_instruction;
@@ -882,23 +882,23 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 			{
 				// create a call
-				final @NotNull IdentExpression expr_kind_name = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
+				final @NonNull IdentExpression expr_kind_name = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
 				//					TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, expr_kind_name);
-				final @NotNull TypeTableEntry tte_left  = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, left);
-				final @NotNull TypeTableEntry tte_right = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, right);
+				final @NonNull TypeTableEntry tte_left  = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, left);
+				final @NonNull TypeTableEntry tte_right = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, right);
 				final int                     pte       = addProcTableEntry(expr_kind_name, null, List_of(tte_left, tte_right), gf);
 				final int                     tmp       = addTempTableEntry(new OS_BuiltinType(BuiltInTypes.Boolean), gf); // README should be Boolean
 				add_i(gf, InstructionName.DECL, List_of(new SymbolIA("tmp"), new IntegerIA(tmp, gf)), cctx);
-				final @NotNull Instruction inst = new Instruction();
+				final @NonNull Instruction inst = new Instruction();
 				inst.setName(InstructionName.CALLS);
 				inst.setArgs(List_of(new ProcIA(pte, gf), left_instruction, right_instruction));
-				final @NotNull FnCallArgs fca = new FnCallArgs(inst, gf);
+				final @NonNull FnCallArgs fca = new FnCallArgs(inst, gf);
 				final int                 x   = add_i(gf, InstructionName.AGN, List_of(new IntegerIA(tmp, gf), fca), cctx);
 				return new IntegerIA(tmp, gf);
 			}
 		}
 		case SUBEXPRESSION: {
-			final @NotNull SubExpression subexpression = (SubExpression) expression;
+			final @NonNull SubExpression subexpression = (SubExpression) expression;
 			final IExpression            exp           = subexpression.getExpression();
 
 			final InstructionArgument ia = simplify_expression(exp, gf, cctx);
@@ -914,7 +914,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		case NOT_EQUAL:
 		case EQUAL:
 		case MODULO: {
-			final @NotNull BasicBinaryExpression bbe   = (BasicBinaryExpression) expression;
+			final @NonNull BasicBinaryExpression bbe   = (BasicBinaryExpression) expression;
 			final IExpression                    left  = bbe.getLeft();
 			final IExpression                    right = bbe.getRight();
 			final InstructionArgument            left_instruction;
@@ -953,17 +953,17 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 			{
 				// create a call
-				final @NotNull IdentExpression expr_kind_name = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
+				final @NonNull IdentExpression expr_kind_name = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
 //					TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, expr_kind_name);
-				final @NotNull TypeTableEntry tte_left  = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, left);
-				final @NotNull TypeTableEntry tte_right = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, right);
+				final @NonNull TypeTableEntry tte_left  = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, left);
+				final @NonNull TypeTableEntry tte_right = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, right);
 				final int                     pte       = addProcTableEntry(expr_kind_name, null, List_of(tte_left, tte_right), gf);
 				final int                     tmp       = addTempTableEntry(new OS_BuiltinType(BuiltInTypes.Boolean), gf);
 				add_i(gf, InstructionName.DECL, List_of(new SymbolIA("tmp"), new IntegerIA(tmp, gf)), cctx);
-				final @NotNull Instruction inst = new Instruction();
+				final @NonNull Instruction inst = new Instruction();
 				inst.setName(InstructionName.CALLS);
 				inst.setArgs(List_of(new ProcIA(pte, gf), left_instruction, right_instruction));
-				final @NotNull FnCallArgs fca = new FnCallArgs(inst, gf);
+				final @NonNull FnCallArgs fca = new FnCallArgs(inst, gf);
 				// TODO should be AGNC
 				final int x = add_i(gf, InstructionName.AGN, List_of(new IntegerIA(tmp, gf), fca), cctx);
 				return new IntegerIA(tmp, gf); // TODO  is this right?? we want to return the variable, not proc calls, right?
@@ -971,7 +971,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //				throw new NotImplementedException();
 		}
 		case NEG: {
-			final @NotNull UnaryExpression bbe  = (UnaryExpression) expression;
+			final @NonNull UnaryExpression bbe  = (UnaryExpression) expression;
 			final IExpression              left = bbe.getLeft();
 			final InstructionArgument      left_instruction;
 			if (left.is_simple()) {
@@ -988,16 +988,16 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 			{
 				// create a call
-				final @NotNull IdentExpression expr_kind_name = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
+				final @NonNull IdentExpression expr_kind_name = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
 //					TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, expr_kind_name);
-				final @NotNull TypeTableEntry tte_left = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, left);
+				final @NonNull TypeTableEntry tte_left = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, left);
 				final int                     pte      = addProcTableEntry(expr_kind_name, null, List_of(tte_left), gf);
 				final int                     tmp      = addTempTableEntry(new OS_BuiltinType(BuiltInTypes.Boolean), gf);
 				add_i(gf, InstructionName.DECL, List_of(new SymbolIA("tmp"), new IntegerIA(tmp, gf)), cctx);
-				final @NotNull Instruction inst = new Instruction();
+				final @NonNull Instruction inst = new Instruction();
 				inst.setName(InstructionName.CALLS);
 				inst.setArgs(List_of(new ProcIA(pte, gf), left_instruction));
-				final @NotNull FnCallArgs fca = new FnCallArgs(inst, gf);
+				final @NonNull FnCallArgs fca = new FnCallArgs(inst, gf);
 				// TODO should be AGNC
 				final int x = add_i(gf, InstructionName.AGN, List_of(new IntegerIA(tmp, gf), fca), cctx);
 				return new IntegerIA(tmp, gf);
@@ -1016,13 +1016,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //		return null;
 	}
 
-	@NotNull
-	private InstructionArgument simplify_expression_procedure_call(@NotNull IExpression expression, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
-		final @NotNull ProcedureCallExpression   pce  = (ProcedureCallExpression) expression;
+	@NonNull
+	private InstructionArgument simplify_expression_procedure_call(@NonNull IExpression expression, @NonNull BaseEvaFunction gf, @NonNull Context cctx) {
+		final @NonNull ProcedureCallExpression   pce  = (ProcedureCallExpression) expression;
 		final IExpression                        left = pce.getLeft();
 		final ExpressionList                     args = pce.getArgs();
 		final InstructionArgument                left_ia;
-		final @NotNull List<InstructionArgument> right_ia;
+		final @NonNull List<InstructionArgument> right_ia;
 		//
 		final int initialCapacity = args != null ? args.size() + 1 : 1;
 		right_ia = new ArrayList<InstructionArgument>(initialCapacity);
@@ -1033,7 +1033,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				final int x = gf.addIdentTableEntry((IdentExpression) left, cctx);
 				// TODO attach to var/const or lookup later in deduce
 				left_ia = new IdentIA(x, gf);
-			} else if (left instanceof final @NotNull SubExpression se) {
+			} else if (left instanceof final @NonNull SubExpression se) {
 				// for (1).toString() etc
 				final InstructionArgument ia = simplify_expression(se.getExpression(), gf, cctx);
 				//return ia;  // TODO is this correct?
@@ -1049,9 +1049,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final InstructionArgument x = simplify_expression(left, gf, cctx);
 			left_ia = x;
 		}
-		final @NotNull List<TypeTableEntry> args1 = new ArrayList<TypeTableEntry>();
+		final @NonNull List<TypeTableEntry> args1 = new ArrayList<TypeTableEntry>();
 		if (args != null) {
-			for (final @NotNull IExpression arg : args) {
+			for (final @NonNull IExpression arg : args) {
 				final InstructionArgument ia;
 				final TypeTableEntry      iat;
 				if (arg.is_simple()) {
@@ -1061,7 +1061,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 						// TODO attach to var/const or lookup later in deduce
 						ia  = new IdentIA(x, gf);
 						iat = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, arg);
-					} else if (arg instanceof final @NotNull SubExpression se) {
+					} else if (arg instanceof final @NonNull SubExpression se) {
 						ia  = simplify_expression(se.getExpression(), gf, cctx);
 						iat = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, arg);
 					} else {
@@ -1083,7 +1083,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		{
 			final int tmp_var = addTempTableEntry(null, gf); // line 686 is here
 			add_i(gf, InstructionName.DECL, List_of(new SymbolIA("tmp"), new IntegerIA(tmp_var, gf)), cctx);
-			final @NotNull Instruction i = new Instruction();
+			final @NonNull Instruction i = new Instruction();
 			i.setName(InstructionName.CALL);
 			i.setArgs(right_ia);
 			// TODO should be AGNC
@@ -1092,10 +1092,10 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 	}
 
-	public void generateFromEntryPoints(final @NotNull GN_PL_Run2.GenerateFunctionsRequest rq) {
-		final @NotNull List<EntryPoint> epl = rq.mod().entryPoints();
-		final @NotNull IClassGenerator  dcg = rq.classGenerator();
-		final @NotNull ModuleThing      mt  = rq.mt();
+	public void generateFromEntryPoints(final @NonNull GN_PL_Run2.GenerateFunctionsRequest rq) {
+		final @NonNull List<EntryPoint> epl = rq.mod().entryPoints();
+		final @NonNull IClassGenerator  dcg = rq.classGenerator();
+		final @NonNull ModuleThing      mt  = rq.mt();
 
 		if (epl.isEmpty()) return;
 
@@ -1190,21 +1190,21 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 	static class GIA__procedure_call__one {
 
-		final @NotNull         Instruction               expression_to_call;
+		final @NonNull         Instruction               expression_to_call;
 		final                  IExpression               left;
-		final @NotNull         List<InstructionArgument> list_of_fn_call;
+		final @NonNull         List<InstructionArgument> list_of_fn_call;
 		final                  InstructionArgument       lookup;
-		final @NotNull         TypeTableEntry            tte;
+		final @NonNull         TypeTableEntry            tte;
 		private final          Context                   cctx;
-		private final @NotNull Generate_item_assignment  generate_item_assign;
+		private final @NonNull Generate_item_assignment  generate_item_assign;
 		private final          BaseEvaFunction           gf;
 		private final          GenerateFunctions         gfs;
 
-		public GIA__procedure_call__one(final @NotNull BasicBinaryExpression bbe,
-										final @NotNull BaseEvaFunction gf,
-										final @NotNull Context cctx,
-										final @NotNull Generate_item_assignment generate_item_assignment,
-										final @NotNull ProcedureCallExpression pce,
+		public GIA__procedure_call__one(final @NonNull BasicBinaryExpression bbe,
+										final @NonNull BaseEvaFunction gf,
+										final @NonNull Context cctx,
+										final @NonNull Generate_item_assignment generate_item_assignment,
+										final @NonNull ProcedureCallExpression pce,
 										final GenerateFunctions gfs1) {
 			this.gf                   = gf;
 			this.cctx                 = cctx;
@@ -1221,7 +1221,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 
 		public void action(final StatementWrapper aStatementWrapper) {
-			if (lookup instanceof final @NotNull IntegerIA integerIA) {
+			if (lookup instanceof final @NonNull IntegerIA integerIA) {
 				final int index = integerIA.getIndex();
 				action__IntegerIA(list_of_fn_call, index);
 			} else {
@@ -1237,7 +1237,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			// TODO should be AGNC
 			final int                         instruction_number = add_i(gf, InstructionName.AGN, list_of_fn_call, cctx);
 			final Instruction                 instruction        = gf.getInstruction(instruction_number);
-			final @NotNull VariableTableEntry vte                = gf.getVarTableEntry(lookup);
+			final @NonNull VariableTableEntry vte                = gf.getVarTableEntry(lookup);
 			vte.addPotentialType(instruction.getIndex(), tte);
 		}
 
@@ -1255,7 +1255,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final List<InstructionArgument>   list_of_fn_call2   = List_of(new IntegerIA(vte_num, gf), new FnCallArgs(expression_to_call, gf));
 			final int                         instruction_number = add_i(gf, InstructionName.AGN, list_of_fn_call2, cctx);
 			final Instruction                 instruction        = gf.getInstruction(instruction_number);
-			final @NotNull VariableTableEntry vte                = gf.getVarTableEntry(vte_num);
+			final @NonNull VariableTableEntry vte                = gf.getVarTableEntry(vte_num);
 			vte.addPotentialType(instruction.getIndex(), tte);
 		}
 
@@ -1265,17 +1265,17 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			// TODO should be AGNC
 			final int                instruction_number = add_i(gf, InstructionName.AGN, list_of_fn_call, cctx);
 			final Instruction        instruction        = gf.getInstruction(instruction_number);
-			@NotNull IdentTableEntry ite                = ((IdentIA) lookup).getEntry();
+			@NonNull IdentTableEntry ite                = ((IdentIA) lookup).getEntry();
 			ite.addPotentialType(instruction.getIndex(), tte);
 		}
 
 		//
 
-		int add_i(final @NotNull BaseEvaFunction aGf, final InstructionName aAgn, final List<InstructionArgument> aList_of_fn_call, final Context aCctx) {
+		int add_i(final @NonNull BaseEvaFunction aGf, final InstructionName aAgn, final List<InstructionArgument> aList_of_fn_call, final Context aCctx) {
 			return gfs.add_i(aGf, aAgn, aList_of_fn_call, aCctx);
 		}
 
-		int addVariableTableEntry(final String aText, final @NotNull TypeTableEntry aTte, final @NotNull BaseEvaFunction aGf, final IdentExpression aIdentExpression) {
+		int addVariableTableEntry(final String aText, final @NonNull TypeTableEntry aTte, final @NonNull BaseEvaFunction aGf, final IdentExpression aIdentExpression) {
 			return gfs.addVariableTableEntry(aText, aTte, aGf, aIdentExpression);
 		}
 
@@ -1283,7 +1283,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 	class Generate_item_assignment {
 
-		public void dot(@NotNull BaseEvaFunction gf, @NotNull DotExpression left, @NotNull IExpression right, @NotNull Context cctx) {
+		public void dot(@NonNull BaseEvaFunction gf, @NonNull DotExpression left, @NonNull IExpression right, @NonNull Context cctx) {
 			final InstructionArgument simple_left  = simplify_expression(left, gf, cctx);
 			final InstructionArgument simple_right = simplify_expression(right, gf, cctx);
 
@@ -1321,7 +1321,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			int y = 2;
 		}
 
-		public void ident(@NotNull BaseEvaFunction gf, @NotNull IdentExpression left, @NotNull IdentExpression right, Context cctx) {
+		public void ident(@NonNull BaseEvaFunction gf, @NonNull IdentExpression left, @NonNull IdentExpression right, Context cctx) {
 			final @org.jetbrains.annotations.Nullable InstructionArgument vte_left = gf.vte_lookup(left.getText());
 			final int                                                     ident_left;
 			int                                                           ident_right;
@@ -1340,7 +1340,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				inst = add_i(gf, InstructionName.AGN, List_of(some_left, vte_right), cctx);
 
 				if (vte_left != null) {
-					final @NotNull VariableTableEntry vte = gf.getVarTableEntry(to_int(vte_left));
+					final @NonNull VariableTableEntry vte = gf.getVarTableEntry(to_int(vte_left));
 					// ^^
 					vte.addPotentialType(inst, gf.getVarTableEntry(to_int(vte_right)).getType());
 				} else if (some_left instanceof IdentIA) {
@@ -1349,9 +1349,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 		}
 
-		public void mathematical(@NotNull BaseEvaFunction gf, @NotNull IExpression left, ExpressionKind kind, @NotNull IExpression right1, @NotNull Context cctx) {
+		public void mathematical(@NonNull BaseEvaFunction gf, @NonNull IExpression left, ExpressionKind kind, @NonNull IExpression right1, @NonNull Context cctx) {
 			// TODO doesn't use kind
-			final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, right1.getType(), right1);
+			final @NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, right1.getType(), right1);
 
 			InstructionArgument left_ia  = simplify_expression(left, gf, cctx);
 			InstructionArgument right_ia = simplify_expression(right1, gf, cctx);
@@ -1360,19 +1360,19 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final Instruction instruction        = gf.getInstruction(instruction_number);
 			if (left_ia instanceof IntegerIA) {
 				// Assuming this points to a variable and not ie a function
-				final @NotNull VariableTableEntry vte = gf.getVarTableEntry(to_int(left_ia));
+				final @NonNull VariableTableEntry vte = gf.getVarTableEntry(to_int(left_ia));
 //				vte.type = tte;
 				vte.addPotentialType(instruction.getIndex(), tte);
 			} else if (left_ia instanceof IdentIA) {
-				final @NotNull IdentTableEntry idte = gf.getIdentTableEntry(to_int(left_ia));
+				final @NonNull IdentTableEntry idte = gf.getIdentTableEntry(to_int(left_ia));
 //				idte.type = tte;
 				idte.addPotentialType(instruction.getIndex(), tte);
 			}
 		}
 
-		public void neg(@NotNull BaseEvaFunction gf, @NotNull IExpression left, ExpressionKind aKind, @NotNull IExpression right1, @NotNull Context cctx) {
+		public void neg(@NonNull BaseEvaFunction gf, @NonNull IExpression left, ExpressionKind aKind, @NonNull IExpression right1, @NonNull Context cctx) {
 			// TODO doesn't use kind
-			final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, right1.getType(), right1);
+			final @NonNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, right1.getType(), right1);
 
 			InstructionArgument left_ia  = simplify_expression(left, gf, cctx);
 			InstructionArgument right_ia = simplify_expression(right1, gf, cctx);
@@ -1381,30 +1381,30 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final Instruction instruction        = gf.getInstruction(instruction_number);
 			if (left_ia instanceof IntegerIA) {
 				// Assuming this points to a variable and not ie a function
-				final @NotNull VariableTableEntry vte = gf.getVarTableEntry(to_int(left_ia));
+				final @NonNull VariableTableEntry vte = gf.getVarTableEntry(to_int(left_ia));
 //				vte.type = tte;
 				vte.addPotentialType(instruction.getIndex(), tte);
 			} else if (left_ia instanceof IdentIA) {
-				final @NotNull IdentTableEntry idte = gf.getIdentTableEntry(to_int(left_ia));
+				final @NonNull IdentTableEntry idte = gf.getIdentTableEntry(to_int(left_ia));
 //				idte.type = tte;
 				idte.addPotentialType(instruction.getIndex(), tte);
 			}
 		}
 
-		public void numeric(@NotNull BaseEvaFunction gf, @NotNull IExpression left, @NotNull NumericExpression ne, @NotNull Context cctx) {
-			@NotNull final InstructionArgument agn_path = gf.get_assignment_path(left, GenerateFunctions.this, cctx);
+		public void numeric(@NonNull BaseEvaFunction gf, @NonNull IExpression left, @NonNull NumericExpression ne, @NonNull Context cctx) {
+			@NonNull final InstructionArgument agn_path = gf.get_assignment_path(left, GenerateFunctions.this, cctx);
 			final int                          cte      = addConstantTableEntry("", ne, ne.getType(), gf);
 
 			final int agn_inst = add_i(gf, InstructionName.AGN, List_of(agn_path, new ConstTableIA(cte, gf)), cctx);
 			// TODO what now??
 		}
 
-		public void procedure_call(final StatementWrapper aStatementWrapper, @NotNull BaseEvaFunction gf, @NotNull BasicBinaryExpression bbe, @NotNull ProcedureCallExpression pce, @NotNull Context cctx) {
+		public void procedure_call(final StatementWrapper aStatementWrapper, @NonNull BaseEvaFunction gf, @NonNull BasicBinaryExpression bbe, @NonNull ProcedureCallExpression pce, @NonNull Context cctx) {
 /*
 			final IExpression left = bbe.getLeft();
 
 			final InstructionArgument     lookup = simplify_expression(left, gf, cctx);
-			final @NotNull TypeTableEntry tte    = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, bbe.getType(), left);
+			final @NonNull TypeTableEntry tte    = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, bbe.getType(), left);
 
 			final Instruction               expression_to_call = expression_to_call(pce, gf, cctx);
 			final List<InstructionArgument> list_of_fn_call    = List_of(lookup, new FnCallArgs(expression_to_call, gf));
@@ -1419,7 +1419,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				// TODO should be AGNC
 				final int instruction_number = add_i(gf, InstructionName.AGN, list_of_fn_call, cctx);
 				final Instruction                 instruction = gf.getInstruction(instruction_number);
-				final @NotNull VariableTableEntry vte         = gf.getVarTableEntry(((IntegerIA) lookup).getIndex());
+				final @NonNull VariableTableEntry vte         = gf.getVarTableEntry(((IntegerIA) lookup).getIndex());
 				vte.addPotentialType(instruction.getIndex(), tte);
 			} else {
 				if (left instanceof IdentExpression) {
@@ -1436,7 +1436,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 					final List<InstructionArgument>   list_of_fn_call2   = List_of(new IntegerIA(vte_num, gf), new FnCallArgs(expression_to_call, gf));
 					final int                         instruction_number = add_i(gf, InstructionName.AGN, list_of_fn_call2, cctx);
 					final Instruction                 instruction        = gf.getInstruction(instruction_number);
-					final @NotNull VariableTableEntry vte                = gf.getVarTableEntry(vte_num);
+					final @NonNull VariableTableEntry vte                = gf.getVarTableEntry(vte_num);
 					vte.addPotentialType(instruction.getIndex(), tte);
 				} else {
 					assert lookup instanceof IdentIA;
@@ -1444,15 +1444,15 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 					// TODO should be AGNC
 					final int instruction_number = add_i(gf, InstructionName.AGN, list_of_fn_call, cctx);
 					final Instruction        instruction = gf.getInstruction(instruction_number);
-					@NotNull IdentTableEntry ite         = ((IdentIA) lookup).getEntry();
+					@NonNull IdentTableEntry ite         = ((IdentIA) lookup).getEntry();
 					ite.addPotentialType(instruction.getIndex(), tte);
 				}
 			}
 */
 		}
 
-		public void string_literal(@NotNull BaseEvaFunction gf, @NotNull IExpression left, StringExpression right, @NotNull Context aContext) {
-			@NotNull final InstructionArgument agn_path = gf.get_assignment_path(left, GenerateFunctions.this, aContext);
+		public void string_literal(@NonNull BaseEvaFunction gf, @NonNull IExpression left, StringExpression right, @NonNull Context aContext) {
+			@NonNull final InstructionArgument agn_path = gf.get_assignment_path(left, GenerateFunctions.this, aContext);
 			final int                          cte      = addConstantTableEntry("", right, new OS_BuiltinType(BuiltInTypes.String_)/*right.getType()*/, gf);
 
 			final int agn_inst = add_i(gf, InstructionName.AGN, List_of(agn_path, new ConstTableIA(cte, gf)), aContext);
@@ -1471,7 +1471,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //			throw new NotImplementedException();
 		}
 
-		public void generate_construct_statement(@NotNull ConstructStatement aConstructStatement, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+		public void generate_construct_statement(@NonNull ConstructStatement aConstructStatement, @NonNull BaseEvaFunction gf, @NonNull Context cctx) {
 			final IExpression    left = aConstructStatement.getExpr(); // TODO need type of this expr, not expr!!
 			final ExpressionList args = aConstructStatement.getArgs();
 			//
@@ -1480,19 +1480,19 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				expression_num = gf.get_assignment_path(left, GenerateFunctions.this, cctx);
 			}
 			final int                                i      = addProcTableEntry(left, expression_num, get_args_types(args, gf, cctx), gf);
-			final @NotNull List<InstructionArgument> l      = new ArrayList<InstructionArgument>();
-			final @NotNull ProcIA                    procIA = new ProcIA(i, gf);
+			final @NonNull List<InstructionArgument> l      = new ArrayList<InstructionArgument>();
+			final @NonNull ProcIA                    procIA = new ProcIA(i, gf);
 			l.add(procIA);
-			final @NotNull List<InstructionArgument> args1 = simplify_args(args, gf, cctx);
+			final @NonNull List<InstructionArgument> args1 = simplify_args(args, gf, cctx);
 			l.addAll(args1);
 			final int instruction_number = add_i(gf, InstructionName.CONSTRUCT, l, cctx);
 		}
 
-		private void generate_if(@NotNull final IfConditional ifc, final @NotNull EvaFunction gf) {
+		private void generate_if(@NonNull final IfConditional ifc, final @NonNull EvaFunction gf) {
 			final Context                  cctx         = ifc.getContext();
-			final @NotNull IdentExpression Boolean_true = Helpers.string_to_ident("true");
-			final @NotNull Label           label_next   = gf.addLabel();
-			final @NotNull Label           label_end    = gf.addLabel();
+			final @NonNull IdentExpression Boolean_true = Helpers.string_to_ident("true");
+			final @NonNull Label           label_next   = gf.addLabel();
+			final @NonNull Label           label_end    = gf.addLabel();
 			{
 				final int                 begin0 = add_i(gf, InstructionName.ES, null, cctx);
 				final IExpression         expr   = ifc.getExpr();
@@ -1513,7 +1513,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				} else {
 					add_i(gf, InstructionName.JMP, List_of(label_end), cctx);
 					final List<IfConditional> parts = ifc.getParts();
-					for (final @NotNull IfConditional part : parts) {
+					for (final @NonNull IfConditional part : parts) {
 						gf.place(label_next);
 //						label_next = gf.addLabel();
 						if (part.getExpr() != null) {
@@ -1535,7 +1535,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 		}
 
-		private void generate_loop(@NotNull final Loop loop, final @NotNull EvaFunction gf) {
+		private void generate_loop(@NonNull final Loop loop, final @NonNull EvaFunction gf) {
 			final Context cctx = loop.getContext();
 			final int     e2   = add_i(gf, InstructionName.ES, null, cctx);
 //			LOG.info("702 "+loop.getType());
@@ -1556,11 +1556,11 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				break;
 			}
 			final int            x2 = add_i(gf, InstructionName.XS, List_of(new IntegerIA(e2, gf)), cctx);
-			final @NotNull Range r  = new Range(e2, x2);
+			final @NonNull Range r  = new Range(e2, x2);
 			gf.addContext(loop.getContext(), r);
 		}
 
-		private void generate_loop_FROM_TO_TYPE(@NotNull Loop loop, @NotNull EvaFunction gf, @NotNull Context cctx) {
+		private void generate_loop_FROM_TO_TYPE(@NonNull Loop loop, @NonNull EvaFunction gf, @NonNull Context cctx) {
 			final IdentExpression iterNameToken = loop.getIterNameToken();
 			final String          iterName      = iterNameToken.getText();
 			final int             iter_temp     = addTempTableEntry(null, iterNameToken, gf, iterNameToken); // TODO deduce later
@@ -1570,49 +1570,49 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				add_i(gf, InstructionName.AGNK, List_of(new IntegerIA(iter_temp, gf), ia1), cctx);
 			else
 				add_i(gf, InstructionName.AGN, List_of(new IntegerIA(iter_temp, gf), ia1), cctx);
-			final @NotNull Label label_top = gf.addLabel("top", true);
+			final @NonNull Label label_top = gf.addLabel("top", true);
 			gf.place(label_top);
-			final @NotNull Label label_bottom = gf.addLabel("bottom" + label_top.getIndex(), false);
+			final @NonNull Label label_bottom = gf.addLabel("bottom" + label_top.getIndex(), false);
 			add_i(gf, InstructionName.JE, List_of(new IntegerIA(iter_temp, gf), simplify_expression(loop.getToPart(), gf, cctx), label_bottom), cctx);
 			for (final StatementItem statementItem : loop.getItems()) {
 				LOG.info("705 " + statementItem);
 				generate_item((OS_Element) statementItem, gf, cctx);
 			}
-			final @NotNull IdentExpression pre_inc_name = Helpers.string_to_ident("__preinc__");
-			final @NotNull TypeTableEntry  tte          = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, pre_inc_name);
+			final @NonNull IdentExpression pre_inc_name = Helpers.string_to_ident("__preinc__");
+			final @NonNull TypeTableEntry  tte          = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, pre_inc_name);
 			final int                      pre_inc      = addProcTableEntry(pre_inc_name, null, List_of(tte/*getType(left), getType(right)*/), gf);
 			add_i(gf, InstructionName.CALLS, List_of(new ProcIA(pre_inc, gf), new IntegerIA(iter_temp, gf)), cctx);
 			add_i(gf, InstructionName.JMP, List_of(label_top), cctx);
 			gf.place(label_bottom);
 		}
 
-		private void generate_loop_EXPR_TYPE(@NotNull Loop loop, @NotNull EvaFunction gf, @NotNull Context cctx) {
+		private void generate_loop_EXPR_TYPE(@NonNull Loop loop, @NonNull EvaFunction gf, @NonNull Context cctx) {
 			final int loop_iterator = addTempTableEntry(null, gf); // TODO deduce later
 			add_i(gf, InstructionName.DECL, List_of(new SymbolIA("tmp"), new IntegerIA(loop_iterator, gf)), cctx);
 			final int                          i2  = addConstantTableEntry("", new NumericExpressionImpl(0), new OS_BuiltinType(BuiltInTypes.SystemInteger), gf);
-			final @NotNull InstructionArgument ia1 = new ConstTableIA(i2, gf);
+			final @NonNull InstructionArgument ia1 = new ConstTableIA(i2, gf);
 //			if (ia1 instanceof ConstTableIA)
 			add_i(gf, InstructionName.AGNK, List_of(new IntegerIA(loop_iterator, gf), ia1), cctx);
 //			else
 //				add_i(gf, InstructionName.AGN, List_of(new IntegerIA(loop_iterator), ia1), cctx);
-			final @NotNull Label label_top = gf.addLabel("top", true);
+			final @NonNull Label label_top = gf.addLabel("top", true);
 			gf.place(label_top);
-			final @NotNull Label label_bottom = gf.addLabel("bottom" + label_top.getIndex(), false);
+			final @NonNull Label label_bottom = gf.addLabel("bottom" + label_top.getIndex(), false);
 			add_i(gf, InstructionName.JE, List_of(new IntegerIA(loop_iterator, gf), simplify_expression(loop.getToPart(), gf, cctx), label_bottom), cctx);
 			for (final StatementItem statementItem : loop.getItems()) {
 				LOG.info("707 " + statementItem);
 				generate_item((OS_Element) statementItem, gf, cctx);
 			}
-			final @NotNull String          txt          = SpecialFunctions.of(ExpressionKind.INCREMENT);
-			final @NotNull IdentExpression pre_inc_name = Helpers.string_to_ident(txt);
-			final @NotNull TypeTableEntry  tte          = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, pre_inc_name);
+			final @NonNull String          txt          = SpecialFunctions.of(ExpressionKind.INCREMENT);
+			final @NonNull IdentExpression pre_inc_name = Helpers.string_to_ident(txt);
+			final @NonNull TypeTableEntry  tte          = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null, pre_inc_name);
 			final int                      pre_inc      = addProcTableEntry(pre_inc_name, null, List_of(tte), gf);
 			add_i(gf, InstructionName.CALLS, List_of(new ProcIA(pre_inc, gf), new IntegerIA(loop_iterator, gf)), cctx);
 			add_i(gf, InstructionName.JMP, List_of(label_top), cctx);
 			gf.place(label_bottom);
 		}
 
-		private void generate_match_conditional(@NotNull final MatchConditional mc, final @NotNull EvaFunction gf) {
+		private void generate_match_conditional(@NonNull final MatchConditional mc, final @NonNull EvaFunction gf) {
 			final int     y    = 2;
 			final Context cctx = mc.getParent().getContext(); // TODO MatchConditional.getContext returns NULL!!!
 			{
@@ -1620,19 +1620,19 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				final InstructionArgument i    = simplify_expression(expr, gf, cctx);
 //				LOG.info("710 " + i);
 
-				@NotNull Label       label_next = gf.addLabel();
-				final @NotNull Label label_end  = gf.addLabel();
+				@NonNull Label       label_next = gf.addLabel();
+				final @NonNull Label label_end  = gf.addLabel();
 
 				{
 					for (final MatchConditional.MC1 part : mc.getParts()) {
-						if (part instanceof final @NotNull MatchArm_TypeMatch mc1) {
+						if (part instanceof final @NonNull MatchArm_TypeMatch mc1) {
 							final TypeName        tn = mc1.getTypeName();
 							final IdentExpression id = mc1.getIdent();
 
 							final int begin0 = add_i(gf, InstructionName.ES, null, cctx);
 
 							final int                   tmp     = addTempTableEntry(new OS_UserType(tn), id, gf, id); // TODO no context!
-							@NotNull VariableTableEntry vte_tmp = gf.getVarTableEntry(tmp);
+							@NonNull VariableTableEntry vte_tmp = gf.getVarTableEntry(tmp);
 							final TypeTableEntry        t       = vte_tmp.getType();
 							add_i(gf, InstructionName.IS_A, List_of(i, new IntegerIA(t.getIndex(), gf), /*TODO not*/new LabelIA(label_next)), cctx);
 							final Context context = mc1.getContext();
@@ -1649,7 +1649,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 							add_i(gf, InstructionName.XS, List_of(new IntegerIA(begin0, gf)), cctx);
 							gf.place(label_next);
 							label_next = gf.addLabel();
-						} else if (part instanceof final @NotNull MatchConditionalPart2 mc2) {
+						} else if (part instanceof final @NonNull MatchConditionalPart2 mc2) {
 							final IExpression id = mc2.getMatchingExpression();
 
 							final int begin0 = add_i(gf, InstructionName.ES, null, cctx);
@@ -1679,10 +1679,10 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 
 		private void generate_statement_wrapper(final StatementWrapper aStatementWrapper,
-												@NotNull IExpression x,
-												@NotNull ExpressionKind expressionKind,
-												@NotNull BaseEvaFunction gf,
-												@NotNull Context cctx) {
+												@NonNull IExpression x,
+												@NonNull ExpressionKind expressionKind,
+												@NonNull BaseEvaFunction gf,
+												@NonNull Context cctx) {
 //			LOG.err("106-1 "+x.getKind()+" "+x);
 			if (x.is_simple()) {
 //				int i = addTempTableEntry(x.getType(), gf);
@@ -1697,15 +1697,15 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //						final IExpression right1 = bbe.getRight();
 					final InstructionArgument           left           = simplify_expression(x.getLeft(), gf, cctx);
 					final InstructionArgument           right          = simplify_expression(((BasicBinaryExpression) x).getRight(), gf, cctx);
-					final @NotNull IdentExpression      fn_aug_name    = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
-					final @NotNull List<TypeTableEntry> argument_types = List_of(gf.getVarTableEntry(to_int(left)).getType(), gf.getVarTableEntry(to_int(right)).getType());
+					final @NonNull IdentExpression      fn_aug_name    = Helpers.string_to_ident(SpecialFunctions.of(expressionKind));
+					final @NonNull List<TypeTableEntry> argument_types = List_of(gf.getVarTableEntry(to_int(left)).getType(), gf.getVarTableEntry(to_int(right)).getType());
 //						LOG.info("801.2 "+argument_types);
 					final int fn_aug = addProcTableEntry(fn_aug_name, null, argument_types, gf);
 					final int i      = add_i(gf, InstructionName.CALLS, List_of(new ProcIA(fn_aug, gf), left, right), cctx);
 					//
 					// SEE IF CALL SHOULD BE DEFERRED
 					//
-					for (final @NotNull TypeTableEntry argument_type : argument_types) {
+					for (final @NonNull TypeTableEntry argument_type : argument_types) {
 						if (argument_type.getAttached() == null) {
 							// still dont know the argument types at this point, which creates a problem
 							// for resolving functions, so wait until later when more information is available
@@ -1728,11 +1728,11 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //				case IS_A:
 //					break;
 				case PROCEDURE_CALL:
-					final @NotNull ProcedureCallExpression pce = (ProcedureCallExpression) x;
+					final @NonNull ProcedureCallExpression pce = (ProcedureCallExpression) x;
 					simplify_procedure_call(pce, gf, cctx);
 					break;
 				case DOT_EXP:
-					final @NotNull DotExpression de = (DotExpression) x;
+					final @NonNull DotExpression de = (DotExpression) x;
 					generate_item_dot_expression(null, de.getLeft(), de.getRight(), gf, cctx);
 					break;
 				default:
@@ -1741,12 +1741,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 		}
 
-		private void generate_variable_sequence(@NotNull VariableSequence item, @NotNull EvaFunction gf, @NotNull Context cctx) {
-			for (final @NotNull VariableStatement vs : item.items()) {
+		private void generate_variable_sequence(@NonNull VariableSequence item, @NonNull EvaFunction gf, @NonNull Context cctx) {
+			for (final @NonNull VariableStatement vs : item.items()) {
 				int state = 0;
 //				LOG.info("8004 " + vs);
 				final String               variable_name = vs.getName();
-				final @NotNull IExpression initialValue  = vs.initialValue();
+				final @NonNull IExpression initialValue  = vs.initialValue();
 				//
 				if (vs.getTypeModifiers() == TypeModifiers.CONST) {
 					if (initialValue.is_simple()) {
@@ -1769,7 +1769,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				case 1: {
 					final int                  ci      = addConstantTableEntry(variable_name, initialValue, initialValue.getType(), gf);
 					final int                  vte_num = addVariableTableEntry(variable_name, gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, (initialValue.getType()), vs.getNameToken()), gf, vs.getNameToken());
-					final @NotNull IExpression iv      = initialValue;
+					final @NonNull IExpression iv      = initialValue;
 					add_i(gf, InstructionName.DECL, List_of(new SymbolIA("const"), new IntegerIA(vte_num, gf)), cctx);
 					add_i(gf, InstructionName.AGNK, List_of(new IntegerIA(vte_num, gf), new ConstTableIA(ci, gf)), cctx);
 					break;
@@ -1777,12 +1777,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				case 2: {
 					final int vte_num = addVariableTableEntry(variable_name, gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, (initialValue.getType()), vs.getNameToken()), gf, vs.getNameToken());
 					add_i(gf, InstructionName.DECL, List_of(new SymbolIA("val"), new IntegerIA(vte_num, gf)), cctx);
-					final @NotNull IExpression iv = initialValue;
+					final @NonNull IExpression iv = initialValue;
 					assign_variable(gf, vte_num, iv, cctx);
 					break;
 				}
 				case 3: {
-					final @NotNull TypeTableEntry tte;
+					final @NonNull TypeTableEntry tte;
 					if (initialValue == IExpression.UNASSIGNED && vs.typeName() != null) {
 						tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, new OS_UserType(vs.typeName()), vs.getNameToken());
 					} else {
@@ -1790,7 +1790,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 					}
 					final int vte_num = addVariableTableEntry(variable_name, tte, gf, vs); // TODO why not vs.initialValue ??
 					add_i(gf, InstructionName.DECL, List_of(new SymbolIA("var"), new IntegerIA(vte_num, gf)), cctx);
-					final @NotNull IExpression iv = initialValue;
+					final @NonNull IExpression iv = initialValue;
 					assign_variable(
 							gf, vte_num, iv, cctx);
 					break;

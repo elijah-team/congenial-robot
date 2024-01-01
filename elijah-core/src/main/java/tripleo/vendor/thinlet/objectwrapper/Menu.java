@@ -48,15 +48,15 @@ public class Menu extends OWItem {
 	}
 
 
-	public void addItem(@NotNull OWObject child) {
+	public void addItem(@NonNull OWObject child) {
 		fthinlet.add(unwrap(), child.unwrap());
 	}
 
-	public void addItem(@NotNull OWObject child, int index) {
+	public void addItem(@NonNull OWObject child, int index) {
 		fthinlet.add(unwrap(), child.unwrap(), index);
 	}
 
-	public void removeItem(@NotNull OWObject child) {
+	public void removeItem(@NonNull OWObject child) {
 		fthinlet.remove(child.unwrap());
 	}
 
@@ -72,7 +72,7 @@ public class Menu extends OWItem {
 		return fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public OWObject @NotNull [] getItems() {
+	public OWObject @NonNull [] getItems() {
 		Object[]   o   = fthinlet.getItems(unwrap());
 		OWObject[] ret = new OWObject[o.length];
 		for (int i = 0; i < ret.length; i++)

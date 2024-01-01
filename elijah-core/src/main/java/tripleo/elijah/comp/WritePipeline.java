@@ -43,18 +43,18 @@ import static tripleo.elijah.util.Helpers.List_of;
 public class WritePipeline implements PipelineMember, Consumer<Supplier<GenerateResult>>, AB_GenerateResultListener {
 	public final DeferredObject<GenerateResult, Void, Void> generateResultPromise = new DeferredObject<>();
 
-	public final @NotNull  WritePipelineSharedState                                                 st;
-	private final @NotNull CompletedItemsHandler                                                    cih;
-	private final @NotNull DoubleLatch<GenerateResult>                                              latch;
+	public final @NonNull  WritePipelineSharedState                                                 st;
+	private final @NonNull CompletedItemsHandler                                                    cih;
+	private final @NonNull DoubleLatch<GenerateResult>                                              latch;
 	private                HashMap<WP_Indiviual_Step, Pair<WP_Flow.FlowStatus, Operation<Boolean>>> ops;
 
 	@Override
-	public void accept(final @NotNull Supplier<GenerateResult> aGenerateResultSupplier) {
+	public void accept(final @NonNull Supplier<GenerateResult> aGenerateResultSupplier) {
 		final GenerateResult gr = aGenerateResultSupplier.get();
 		int                  y  = 2;
 	}
 
-	public WritePipeline(final @NotNull IPipelineAccess pa) {
+	public WritePipeline(final @NonNull IPipelineAccess pa) {
 		st = new WritePipelineSharedState(pa);
 
 		// computed
@@ -91,14 +91,14 @@ public class WritePipeline implements PipelineMember, Consumer<Supplier<Generate
 		//st.outputs = pa.getOutputs();
 	}
 
-	@NotNull OutputStrategy createOutputStratgy() {
+	@NonNull OutputStrategy createOutputStratgy() {
 		final OutputStrategy os = new OutputStrategy();
 		os.per(OutputStrategy.Per.PER_CLASS); // TODO this needs to be configured per lsp
 
 		return os;
 	}
 
-	public @NotNull Consumer<Supplier<GenerateResult>> consumer() {
+	public @NonNull Consumer<Supplier<GenerateResult>> consumer() {
 		if (false) {
 			return new Consumer<Supplier<GenerateResult>>() {
 				@Override
@@ -113,7 +113,7 @@ public class WritePipeline implements PipelineMember, Consumer<Supplier<Generate
 	}
 
 	@Override
-	public void gr_slot(final @NotNull GenerateResult gr1) {
+	public void gr_slot(final @NonNull GenerateResult gr1) {
 		Objects.requireNonNull(gr1);
 		latch.notifyData(gr1);
 		gr1.subscribeCompletedItems(cih.observer());
@@ -128,7 +128,7 @@ public class WritePipeline implements PipelineMember, Consumer<Supplier<Generate
 		// README debugging purposes
 		private final          List<GenerateResultItem>                 abs  = new ArrayList<>();
 		private final          Multimap<Dependency, GenerateResultItem> gris = ArrayListMultimap.create();
-		private final @NotNull ElLog                                    LOG;
+		private final @NonNull ElLog                                    LOG;
 		private final          WritePipelineSharedState                 sharedState;
 		private                Observer<GenerateResultItem>             observer;
 
@@ -143,7 +143,7 @@ public class WritePipeline implements PipelineMember, Consumer<Supplier<Generate
 		}
 
 		@Contract(mutates = "this")
-		public @NotNull Observer<GenerateResultItem> observer() {
+		public @NonNull Observer<GenerateResultItem> observer() {
 			if (observer == null) {
 				observer = new Observer<GenerateResultItem>() {
 					@Override
@@ -151,7 +151,7 @@ public class WritePipeline implements PipelineMember, Consumer<Supplier<Generate
 					}
 
 					@Override
-					public void onNext(@NonNull @NotNull GenerateResultItem ab) {
+					public void onNext(@NonNull @NonNull GenerateResultItem ab) {
 						addItem(ab);
 					}
 
@@ -170,14 +170,14 @@ public class WritePipeline implements PipelineMember, Consumer<Supplier<Generate
 		}
 
 		public void completeSequence() {
-			final @NotNull GenerateResult generateResult = sharedState.getGr();
+			final @NonNull GenerateResult generateResult = sharedState.getGr();
 
-			generateResult.outputFiles((final @NotNull Map<String, OutputFileC> outputFiles) -> {
+			generateResult.outputFiles((final @NonNull Map<String, OutputFileC> outputFiles) -> {
 				//08/13 System.err.println("252252"); // 06/16
 			});
 		}
 
-		public void addItem(final @NotNull GenerateResultItem ab) {
+		public void addItem(final @NonNull GenerateResultItem ab) {
 			NotImplementedException.raise();
 
 			// README debugging purposes

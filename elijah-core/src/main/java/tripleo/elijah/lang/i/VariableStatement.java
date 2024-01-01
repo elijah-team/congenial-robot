@@ -4,7 +4,7 @@ import org.jspecify.annotations.NonNull;
 import tripleo.elijah.diagnostic.Locatable;
 import tripleo.elijah.lang2.ElElementVisitor;
 
-public interface VariableStatement extends @NotNull Locatable, OS_Element {
+public interface VariableStatement extends @NonNull Locatable, OS_Element {
 	@Override
 	Context getContext();
 
@@ -16,16 +16,16 @@ public interface VariableStatement extends @NotNull Locatable, OS_Element {
 
 	void initial(IExpression aExpr);
 
-	@NotNull
+	@NonNull
 	IExpression initialValue();
 
 	void set(TypeModifiers y);
 
 	void setName(IdentExpression s);
 
-	void setTypeName(@NotNull TypeName tn);
+	void setTypeName(@NonNull TypeName tn);
 
-	@NotNull
+	@NonNull
 	TypeName typeName();
 
 	@Override

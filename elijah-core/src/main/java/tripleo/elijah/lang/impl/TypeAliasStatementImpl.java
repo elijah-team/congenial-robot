@@ -56,7 +56,7 @@ public class TypeAliasStatementImpl implements OS_Element, tripleo.elijah.lang.i
 	}
 
 	@Override
-	public void visitGen(@NotNull ElElementVisitor visit) {
+	public void visitGen(@NonNull ElElementVisitor visit) {
 		visit.visitTypeAlias(this);
 	}
 

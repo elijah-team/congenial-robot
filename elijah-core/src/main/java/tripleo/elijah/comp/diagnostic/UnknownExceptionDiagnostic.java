@@ -17,27 +17,27 @@ public class UnknownExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull String code() {
+	public @NonNull String code() {
 		return "9002";
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NonNull Locatable primary() {
 		return null/*m*/;
 	}
 
 	@Override
-	public void report(final @NotNull PrintStream stream) {
+	public void report(final @NonNull PrintStream stream) {
 		stream.printf("%s Some error %s%n", code(), m.failure());
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NonNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NotNull Severity severity() {
+	public @NonNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

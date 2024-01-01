@@ -14,10 +14,10 @@ import java.nio.file.Path;
 // TODO 09/04 Duplication madness
 public enum ER_Node_ { ;
 	@Contract(value = "_, _ -> new", pure = true)
-	public static @NotNull ER_Node of(@NotNull CP_Path p, @NotNull EG_Statement seq) {
+	public static @NonNull ER_Node of(@NonNull CP_Path p, @NonNull EG_Statement seq) {
 		return new ER_Node() {
 			@Override
-			public @NotNull String toString() {
+			public @NonNull String toString() {
 				return "17 ER_Node " + p.toFile();
 			}
 

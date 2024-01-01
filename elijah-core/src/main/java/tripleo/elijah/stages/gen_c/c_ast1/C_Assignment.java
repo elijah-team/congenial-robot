@@ -8,7 +8,7 @@ public class C_Assignment {
 	private String          left;
 	private C_ProcedureCall right_pc;
 
-	public @NotNull String getString() {
+	public @NonNull String getString() {
 		final String str = MessageFormat.format("{0} = {1}", left, right_pc.getString());
 		return str;
 	}

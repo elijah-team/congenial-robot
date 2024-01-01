@@ -21,7 +21,7 @@ public class ClassHeaderImpl implements tripleo.elijah.lang.i.ClassHeader {
 	List<AnnotationClause> annos = new ArrayList<>();
 	boolean                extends_;
 	TypeNameList           genericPart;
-	@NotNull ClassInheritance inh = new ClassInheritanceImpl();
+	@NonNull ClassInheritance inh = new ClassInheritanceImpl();
 	private  boolean          isConst;
 	IdentExpression nameToken;
 	ClassTypes      type;

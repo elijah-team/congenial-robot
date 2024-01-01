@@ -5,9 +5,9 @@ import tripleo.elijah.lang.nextgen.names.i.EN_Understanding;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 
 public class ENU_TypeTransitiveOver implements EN_Understanding {
-	private final @NotNull ProcTableEntry pte;
+	private final @NonNull ProcTableEntry pte;
 
-	public ENU_TypeTransitiveOver(final @NotNull ProcTableEntry aPte) {
+	public ENU_TypeTransitiveOver(final @NonNull ProcTableEntry aPte) {
 
 		pte = aPte;
 	}

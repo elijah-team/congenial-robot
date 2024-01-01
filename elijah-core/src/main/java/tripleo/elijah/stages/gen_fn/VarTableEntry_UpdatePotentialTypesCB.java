@@ -33,13 +33,13 @@ import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
 final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.UpdatePotentialTypesCB {
-	private final @NotNull DeduceTypes2 deduceTypes2;
+	private final @NonNull DeduceTypes2 deduceTypes2;
 	private final VarTableEntry varTableEntry;
 	private final Context       ctx;
 
 	private final EvaClass evaClass;
 
-	VarTableEntry_UpdatePotentialTypesCB(@NotNull DeduceTypes2 aDeduceTypes2,
+	VarTableEntry_UpdatePotentialTypesCB(@NonNull DeduceTypes2 aDeduceTypes2,
 										 VarTableEntry varTableEntry,
 										 Context aContext,
 										 EvaClass evaClass) {
@@ -50,7 +50,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.Update
 	}
 
 	@Override
-	public @NotNull Operation<Ok> call(final @NotNull EvaContainer aEvaContainer) {
+	public @NonNull Operation<Ok> call(final @NonNull EvaContainer aEvaContainer) {
 		Operation<List<GenType>> potentialTypes00 = getPotentialTypes();
 
 		assert potentialTypes00.mode() == Mode.SUCCESS;
@@ -68,7 +68,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.Update
 				OS_BuiltinType resolved = (OS_BuiltinType) potentialTypes.get(1).getResolved();
 
 				try {
-					@NotNull final GenType rt = ResolveType.resolve_type(resolvedClass1.getContext().module(), resolved, resolvedClass1.getContext(), deduceTypes2._LOG(), deduceTypes2);
+					@NonNull final GenType rt = ResolveType.resolve_type(resolvedClass1.getContext().module(), resolved, resolvedClass1.getContext(), deduceTypes2._LOG(), deduceTypes2);
 					int                    y  = 2;
 
 					potentialTypes = Helpers.List_of(rt);
@@ -79,7 +79,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.Update
 				OS_BuiltinType resolved = (OS_BuiltinType) potentialTypes.get(0).getResolved();
 
 				try {
-					@NotNull final GenType rt = deduceTypes2.resolve_type(resolved, resolvedClass2.getContext());
+					@NonNull final GenType rt = deduceTypes2.resolve_type(resolved, resolvedClass2.getContext());
 					int                    y  = 2;
 
 					potentialTypes = Helpers.List_of(rt);
@@ -111,7 +111,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.Update
 					final OS_Type t = varTableEntry.varType;
 					if (t.getType() == OS_Type.Type.USER) {
 						try {
-							final @NotNull GenType genType = deduceTypes2.resolve_type(t, t.getTypeName().getContext());
+							final @NonNull GenType genType = deduceTypes2.resolve_type(t, t.getTypeName().getContext());
 							if (genType.getResolved() instanceof OS_GenericTypeNameType) {
 								final ClassInvocation xxci = ((EvaClass) aEvaContainer).ci;
 
@@ -135,12 +135,12 @@ final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.Update
 		return Operation.success(Ok.instance());
 	}
 
-	@NotNull
+	@NonNull
 	public Operation<List<GenType>> getPotentialTypes() {
 		List<GenType> potentialTypes = new ArrayList<>();
 		for (TypeTableEntry potentialType : varTableEntry.potentialTypes) {
 			int                    y = 2;
-			final @NotNull GenType genType;
+			final @NonNull GenType genType;
 			try {
 				if (potentialType.genType.getTypeName() == null) {
 					final OS_Type attached = potentialType.getAttached();

@@ -19,9 +19,9 @@ import tripleo.elijah.stages.instructions.IntegerIA;
  */
 public class GenericElementHolderWithIntegerIA implements IElementHolder {
 	private final @Nullable OS_Element element;
-	private final @NotNull  IntegerIA  integerIA;
+	private final @NonNull  IntegerIA  integerIA;
 
-	public GenericElementHolderWithIntegerIA(final @Nullable OS_Element aElement, final @NotNull IntegerIA aIntegerIA) {
+	public GenericElementHolderWithIntegerIA(final @Nullable OS_Element aElement, final @NonNull IntegerIA aIntegerIA) {
 		element   = aElement;
 		integerIA = aIntegerIA;
 	}
@@ -31,7 +31,7 @@ public class GenericElementHolderWithIntegerIA implements IElementHolder {
 		return element;
 	}
 
-	public @NotNull IntegerIA getIntegerIA() {
+	public @NonNull IntegerIA getIntegerIA() {
 		return integerIA;
 	}
 }

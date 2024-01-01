@@ -32,7 +32,7 @@ public class GenerateFunctions2 {
 			gcgc.processItem(aClassStatement, item, gc);
 		}
 
-		@NotNull EvaClass Result = gc;
+		@NonNull EvaClass Result = gc;
 		Result.ci = aClassInvocation;
 		return Result;
 	}

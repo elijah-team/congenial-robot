@@ -11,19 +11,19 @@ import tripleo.elijah.comp.i.ProgressSinkComponent;
 import tripleo.elijah.util.Maybe;
 
 public class DefaultCCI implements CCI {
-	//private final @NotNull Compilation compilation;
+	//private final @NonNull Compilation compilation;
 	private final CIS           _cis;
 	private final IProgressSink _ps;
 
 	@Contract(pure = true)
-	public DefaultCCI(final @NotNull Compilation aCompilation, final CIS aCis, final IProgressSink aProgressSink) {
+	public DefaultCCI(final @NonNull Compilation aCompilation, final CIS aCis, final IProgressSink aProgressSink) {
 		//compilation = aCompilation;
 		_cis = aCis;
 		_ps  = aProgressSink;
 	}
 
 	@Override
-	public void accept(final @NotNull Maybe<ILazyCompilerInstructions> mcci, final @NotNull IProgressSink aPs) {
+	public void accept(final @NonNull Maybe<ILazyCompilerInstructions> mcci, final @NonNull IProgressSink aPs) {
 		if (mcci.isException()) return;
 
 		final ILazyCompilerInstructions cci = mcci.o;
