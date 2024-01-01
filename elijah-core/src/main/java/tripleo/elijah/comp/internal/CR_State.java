@@ -20,7 +20,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;

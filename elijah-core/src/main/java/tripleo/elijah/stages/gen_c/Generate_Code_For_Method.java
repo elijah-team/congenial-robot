@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.gen_c;
 
 import com.google.common.base.Supplier;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.DebugFlags;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.lang.i.NormalTypeName;

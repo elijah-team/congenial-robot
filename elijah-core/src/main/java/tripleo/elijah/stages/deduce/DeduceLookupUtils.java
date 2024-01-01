@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.deduce;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.contexts.FunctionContext;
 import tripleo.elijah.lang.i.*;

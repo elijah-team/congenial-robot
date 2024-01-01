@@ -10,8 +10,8 @@ package tripleo.elijah.comp.internal;
 
 import io.reactivex.rxjava3.core.Observer;
 import io.smallrye.mutiny.Multi;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.*;

@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_fn.*;
 
 public interface DED {

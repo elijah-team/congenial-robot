@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Ignore;
 import org.junit.Test;
 import tripleo.elijah.ReadySupplier_1;

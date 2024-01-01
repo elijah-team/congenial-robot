@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_c;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.gen_c.c_ast1.C_Assignment;
 import tripleo.elijah.stages.gen_c.c_ast1.C_ProcedureCall;

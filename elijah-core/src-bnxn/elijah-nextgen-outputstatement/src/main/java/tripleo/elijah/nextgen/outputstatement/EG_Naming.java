@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.outputstatement;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class EG_Naming {
 	final           String s;

@@ -8,8 +8,8 @@
  */
 package tripleo.elijah.comp;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.util.io.CharSource;
 import tripleo.util.io.DisposableCharSink;
 import tripleo.util.io.FileCharSink;

@@ -1,7 +1,7 @@
 package tripleo.elijah.comp;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah.comp.i.RuntimeProcess;

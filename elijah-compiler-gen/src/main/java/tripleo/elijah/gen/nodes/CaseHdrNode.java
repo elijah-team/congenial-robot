@@ -14,7 +14,7 @@
  */
 package tripleo.elijah.gen.nodes;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.gen.Node;
 
 public class CaseHdrNode implements Node {

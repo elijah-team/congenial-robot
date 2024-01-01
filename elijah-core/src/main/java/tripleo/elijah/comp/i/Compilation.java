@@ -2,7 +2,7 @@ package tripleo.elijah.comp.i;
 
 import io.reactivex.rxjava3.core.Observer;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CIS;

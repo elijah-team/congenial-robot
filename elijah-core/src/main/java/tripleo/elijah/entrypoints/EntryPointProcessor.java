@@ -1,6 +1,6 @@
 package tripleo.elijah.entrypoints;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;

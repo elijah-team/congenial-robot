@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_c;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_generic.Dependency;
 import tripleo.elijah.stages.gen_generic.DependencyRef;
 import tripleo.elijah.stages.gen_generic.IOutputFile;

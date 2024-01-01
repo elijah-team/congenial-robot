@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_c;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.DebugFlags;
 import tripleo.elijah.UnintendedUseException;

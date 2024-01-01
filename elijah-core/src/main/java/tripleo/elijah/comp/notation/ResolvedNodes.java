@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.notation;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.PipelineLogic;

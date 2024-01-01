@@ -10,7 +10,7 @@ package tripleo.elijah.lang.impl;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.contexts.ClassContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.nextgen.names.i.EN_Name;

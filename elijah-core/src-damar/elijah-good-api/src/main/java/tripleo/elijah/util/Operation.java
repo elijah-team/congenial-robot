@@ -1,6 +1,6 @@
 package tripleo.elijah.util;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import static tripleo.elijah.util.Mode.FAILURE;
 import static tripleo.elijah.util.Mode.SUCCESS;

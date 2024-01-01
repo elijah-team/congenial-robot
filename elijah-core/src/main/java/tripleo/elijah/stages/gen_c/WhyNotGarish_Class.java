@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gen_c;
 
 import org.jdeferred2.impl.DeferredObject;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.util.NotImplementedException;

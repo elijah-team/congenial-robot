@@ -8,8 +8,8 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.ConstructorDef;

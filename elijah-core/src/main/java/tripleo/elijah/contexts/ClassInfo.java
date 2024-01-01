@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.contexts;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.NormalTypeName;
 

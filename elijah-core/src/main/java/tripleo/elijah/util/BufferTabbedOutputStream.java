@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.util;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.util.buffer.Buffer;
 import tripleo.util.buffer.DefaultBuffer;
 import tripleo.util.buffer.TextBuffer;

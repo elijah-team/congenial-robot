@@ -9,7 +9,7 @@
 package tripleo.elijah.comp;
 
 import com.google.common.base.Preconditions;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.internal.CB_Output;

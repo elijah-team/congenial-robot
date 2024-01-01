@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.write_stage.pipeline_impl;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.nextgen.inputtree.EIT_Input;
 import tripleo.elijah.nextgen.inputtree.EIT_InputType;

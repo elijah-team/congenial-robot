@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.IntegerIA;

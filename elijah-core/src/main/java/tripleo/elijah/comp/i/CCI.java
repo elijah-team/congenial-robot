@@ -7,7 +7,7 @@
  */
 package tripleo.elijah.comp.i;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.util.Maybe;
 
 @FunctionalInterface

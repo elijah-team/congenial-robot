@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 
 /**

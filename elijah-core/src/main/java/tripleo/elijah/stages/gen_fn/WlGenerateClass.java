@@ -10,7 +10,7 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.nextgen.rosetta.Rosetta;

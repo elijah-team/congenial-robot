@@ -1,6 +1,6 @@
 package tripleo.elijah.comp;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.lang.i.Qualident;

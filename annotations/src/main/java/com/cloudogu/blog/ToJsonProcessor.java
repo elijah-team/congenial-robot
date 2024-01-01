@@ -28,7 +28,7 @@ package com.cloudogu.blog;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;

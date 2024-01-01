@@ -1,7 +1,7 @@
 package tripleo.elijah.lang.nextgen.names.impl;
 
 import com.google.common.collect.ImmutableList;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.LookupResultList;
 import tripleo.elijah.lang.nextgen.names.i.EN_Understanding;

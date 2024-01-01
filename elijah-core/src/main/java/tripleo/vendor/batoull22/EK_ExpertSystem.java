@@ -1,6 +1,6 @@
 package tripleo.vendor.batoull22;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.util.Operation;
 
 import java.io.InputStream;

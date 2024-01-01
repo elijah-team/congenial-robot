@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.write_stage.pipeline_impl;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class SPrintStream implements XPrintStream {
 	private final StringBuilder sb = new StringBuilder();

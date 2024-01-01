@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.deduce.tastic;
 
 import org.jdeferred2.Promise;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.InstructionArgument;

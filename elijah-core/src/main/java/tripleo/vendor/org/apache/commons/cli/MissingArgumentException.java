@@ -17,7 +17,7 @@
 
 package tripleo.vendor.org.apache.commons.cli;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Thrown when an option requiring an argument is not provided with an argument.

@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gen_generic.pipeline_impl;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.nextgen.output.NG_OutputClass;

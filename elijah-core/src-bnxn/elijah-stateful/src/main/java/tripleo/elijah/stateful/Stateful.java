@@ -1,6 +1,6 @@
 package tripleo.elijah.stateful;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public interface Stateful {
 	void mvState(State aO, @NotNull State aState);

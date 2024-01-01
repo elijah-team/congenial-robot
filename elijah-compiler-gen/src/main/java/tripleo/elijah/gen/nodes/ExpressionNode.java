@@ -8,9 +8,9 @@
  */
 package tripleo.elijah.gen.nodes;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.gen.CompilerContext;
 import tripleo.elijah.gen.TypeRef;
 import tripleo.elijah.lang.i.*;

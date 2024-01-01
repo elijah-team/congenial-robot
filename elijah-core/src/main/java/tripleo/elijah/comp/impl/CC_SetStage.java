@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.impl;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.Stages;
 import tripleo.elijah.comp.i.CompilationChange;

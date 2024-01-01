@@ -2,7 +2,7 @@ package tripleo.elijah.lang.impl;
 
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.lang.i.OS_ElementName;

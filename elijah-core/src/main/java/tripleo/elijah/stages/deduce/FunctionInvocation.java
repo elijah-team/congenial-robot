@@ -10,8 +10,8 @@ package tripleo.elijah.stages.deduce;
 
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
 import tripleo.elijah.lang.LangGlobals;

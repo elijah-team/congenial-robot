@@ -1,7 +1,7 @@
 package tripleo.elijah.comp;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationFlow;
 import tripleo.elijah.comp.impl.DefaultCompilationFlow;

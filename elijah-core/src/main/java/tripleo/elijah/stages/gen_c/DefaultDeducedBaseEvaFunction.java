@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.gen_c;
 
 import io.reactivex.rxjava3.subjects.Subject;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.lang.i.*;

@@ -10,7 +10,7 @@ package tripleo.elijah.stages.deduce;
 
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 

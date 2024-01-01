@@ -1,6 +1,6 @@
 package tripleo.elijah.world.i;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.OS_Module;

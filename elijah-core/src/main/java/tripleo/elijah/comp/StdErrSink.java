@@ -12,8 +12,8 @@
 package tripleo.elijah.comp;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.diagnostic.Diagnostic;
 

@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.i;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

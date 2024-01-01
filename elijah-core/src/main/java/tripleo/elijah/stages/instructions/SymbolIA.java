@@ -9,7 +9,7 @@
 package tripleo.elijah.stages.instructions;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created 10/18/20 10:35 PM

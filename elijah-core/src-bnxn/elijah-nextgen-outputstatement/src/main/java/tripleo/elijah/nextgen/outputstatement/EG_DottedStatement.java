@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.outputstatement;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

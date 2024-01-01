@@ -1,7 +1,7 @@
 package tripleo.elijah.nextgen.rosetta.DeducePhase;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.rosetta.Rosetta;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;

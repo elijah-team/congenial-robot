@@ -26,7 +26,7 @@
 package com.cloudogu.blog;
 
 import com.github.mustachejava.util.DecoratedCollection;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

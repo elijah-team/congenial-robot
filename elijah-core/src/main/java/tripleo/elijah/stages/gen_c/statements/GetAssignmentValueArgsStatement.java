@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_c.statements;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.nextgen.outputstatement.*;
 import tripleo.elijah.stages.instructions.Instruction;

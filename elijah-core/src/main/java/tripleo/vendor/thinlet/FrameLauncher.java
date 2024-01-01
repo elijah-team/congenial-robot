@@ -2,8 +2,8 @@
  * Copyright (C) 2002-2003 Robert Bajzat (robert.bajzat@thinlet.com) */
 package tripleo.vendor.thinlet;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;

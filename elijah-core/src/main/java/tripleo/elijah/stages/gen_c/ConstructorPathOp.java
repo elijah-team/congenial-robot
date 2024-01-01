@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_c;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 
 interface ConstructorPathOp {

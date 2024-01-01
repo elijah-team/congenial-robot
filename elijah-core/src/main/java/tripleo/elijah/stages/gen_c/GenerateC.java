@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;

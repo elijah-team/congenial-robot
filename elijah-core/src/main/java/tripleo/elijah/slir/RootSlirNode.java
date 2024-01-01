@@ -9,7 +9,7 @@
  */
 package tripleo.elijah.slir;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 
 import java.util.ArrayList;

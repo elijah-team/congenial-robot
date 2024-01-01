@@ -1,7 +1,7 @@
 package tripleo.elijah.nextgen.outputstatement;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.util.buffer.Buffer;
 
 import java.util.Collection;

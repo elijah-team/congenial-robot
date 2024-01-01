@@ -1,6 +1,6 @@
 package tripleo.elijah.util;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.diagnostic.Diagnostic;
 
 /**

@@ -3,7 +3,7 @@
  */
 package tripleo.util.io;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.util.NotImplementedException;
 
 import java.io.IOException;

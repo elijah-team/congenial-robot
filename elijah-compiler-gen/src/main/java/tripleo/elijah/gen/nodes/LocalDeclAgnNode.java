@@ -3,7 +3,7 @@
  */
 package tripleo.elijah.gen.nodes;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.gen.TypeRef;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;

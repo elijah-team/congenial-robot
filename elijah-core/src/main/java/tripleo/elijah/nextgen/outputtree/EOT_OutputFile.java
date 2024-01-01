@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.outputtree;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.inputtree.EIT_Input;
 import tripleo.elijah.nextgen.inputtree.EIT_Input_HashSourceFile_Triple;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;

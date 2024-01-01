@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.write_stage.pipeline_impl;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.WritePipeline;
 import tripleo.elijah.util.Operation;
 

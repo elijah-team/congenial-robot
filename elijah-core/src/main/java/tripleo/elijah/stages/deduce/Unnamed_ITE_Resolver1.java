@@ -2,8 +2,8 @@ package tripleo.elijah.stages.deduce;
 
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.VariableStatementImpl;

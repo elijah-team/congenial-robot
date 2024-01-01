@@ -17,7 +17,7 @@
 
 package tripleo.vendor.org.apache.commons.cli;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Iterator;

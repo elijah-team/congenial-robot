@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.nextgen;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import tripleo.elijah.comp.IO;

@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.stages.deduce.declarations.DeferredMember;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;

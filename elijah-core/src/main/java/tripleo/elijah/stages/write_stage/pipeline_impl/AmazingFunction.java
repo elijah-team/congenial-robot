@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.write_stage.pipeline_impl;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
