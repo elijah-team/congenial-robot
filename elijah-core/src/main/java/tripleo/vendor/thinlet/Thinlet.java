@@ -294,9 +294,9 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	private transient           boolean        allI18n    = false; // for I18N
 	// enter the starting characters of a list item text within a short time to
 	// select the first matching item
-	private transient @NonNull  String         findprefix = "";
+	private transient @NotNull  String         findprefix = "";
 	private transient           long   findtime;
-	private final @NonNull      Object content = createImpl("desktop");
+	private final @NotNull      Object content = createImpl("desktop");
 	private transient @Nullable Object mouseinside;
 
 	//private transient int pressedkey;
@@ -346,7 +346,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param multiline
 	 * @return
 	 */
-	private static @NonNull String filter(@NonNull String text, boolean multiline) {
+	private static @NotNull String filter(@NotNull String text, boolean multiline) {
 		StringBuffer filtered = new StringBuffer(text.length());
 		for (int i = 0; i < text.length(); i++) {
 			char ckey = text.charAt(i);
@@ -364,7 +364,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return a new component, every component is simply an <i>Object </i>
 	 * @throws java.lang.IllegalArgumentException for unknown widget type
 	 */
-	public static @NonNull Object create(String classname) { //#
+	public static @NotNull Object create(String classname) { //#
 		for (int i = 0; i < dtd.length; i += 3) {
 			if (dtd[i].equals(classname)) {
 				return createImpl((String) dtd[i]);
@@ -376,7 +376,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	protected static @NonNull Object createImpl(String classname) {
+	protected static @NotNull Object createImpl(String classname) {
 		return new Object[]{":class", classname, null};
 	}
 
@@ -405,7 +405,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param key  a string to identify the value pair
 	 * @return the value, or null
 	 */
-	protected static @Nullable String getDOMAttribute(Object node, @NonNull String key) {
+	protected static @Nullable String getDOMAttribute(Object node, @NotNull String key) {
 		return (String) get(node, key.intern());
 	}
 
@@ -441,7 +441,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param key  the searched tagname
 	 * @return the number of tags
 	 */
-	protected static int getDOMCount(Object node, @NonNull String key) {
+	protected static int getDOMCount(Object node, @NotNull String key) {
 		return getItemCountImpl(node, key.intern());
 	}
 
@@ -606,7 +606,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param index the index of the requested subtag
 	 * @return the found tag, or null
 	 */
-	protected static @Nullable Object getDOMNode(Object node, @NonNull String key, int index) {
+	protected static @Nullable Object getDOMNode(Object node, @NotNull String key, int index) {
 		return getItemImpl(node, key.intern(), index);
 	}
 
@@ -627,7 +627,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 * @throws java.lang.IllegalArgumentException
 	 */
-	protected static Object @NonNull [] getDefinition(@Nullable Object classname, String key, @Nullable String type) {
+	protected static Object @NotNull [] getDefinition(@Nullable Object classname, String key, @Nullable String type) {
 		Object currentname = classname;
 		while (classname != null) {
 			for (int i = 0; i < dtd.length; i += 3) {
@@ -1084,7 +1084,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * Paints the components inside the graphics clip area
 	 */
 	@Override
-	public void paint(@NonNull Graphics g) {
+	public void paint(@NotNull Graphics g) {
 		g.setFont(font);
 		if (hgradient == null) {
 			int[][] pix = new int[2][block * block];
@@ -1123,7 +1123,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * Invokes the paint method
 	 */
 	@Override
-	public void update(@NonNull Graphics g) {
+	public void update(@NotNull Graphics g) {
 		paint(g);
 	}
 
@@ -1132,7 +1132,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * <i>Thinlet </i> component internally
 	 */
 	@Override
-	protected void processEvent(@NonNull AWTEvent e) {
+	protected void processEvent(@NotNull AWTEvent e) {
 		// evm (touchscreen) events: entered/moved/pressed -> dragged ->
 		// dragged/released/exited
 		int id = e.getID();
@@ -1328,7 +1328,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private char[] getChars(Object component, @NonNull String text, boolean wrap, int width, int height) {
+	private char[] getChars(Object component, @NotNull String text, boolean wrap, int width, int height) {
 		char[] chars = (char[]) get(component, ":text");
 		if ((chars == null) || (chars.length != text.length())) {
 			chars = text.toCharArray();
@@ -2026,7 +2026,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param combobox
 	 * @return the created combolist
 	 */
-	private @NonNull Object popupCombo(Object combobox) {
+	private @NotNull Object popupCombo(Object combobox) {
 		// combobox bounds relative to the root desktop
 		int combox = 0, comboy = 0, combowidth = 0, comboheight = 0;
 		for (Object comp = combobox; comp != content; comp = getParent(comp)) {
@@ -2175,7 +2175,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private @NonNull Dimension getFieldSize(Object component) {
+	private @NotNull Dimension getFieldSize(Object component) {
 		int         columns     = getInteger(component, "columns", 0);
 		Font        currentfont = (Font) get(component, "font");
 		FontMetrics fm          = getFontMetrics((currentfont != null) ? currentfont : font);
@@ -2190,7 +2190,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return size of the text and the image (plus a gap) including the given
 	 * offsets
 	 */
-	private @NonNull Dimension getSize(Object component, int dx, int dy) {
+	private @NotNull Dimension getSize(Object component, int dx, int dy) {
 		String text = getString(component, "text", null);
 		int    tw   = 0;
 		int    th   = 0;
@@ -2221,7 +2221,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param clipheight
 	 * @throws java.lang.IllegalArgumentException
 	 */
-	private void paint(@NonNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight, Object component,
+	private void paint(@NotNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight, Object component,
 					   boolean enabled) {
 		if (!getBoolean(component, "visible", true)) {
 			return;
@@ -2599,7 +2599,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private void paintReverse(@NonNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight, @Nullable Object component,
+	private void paintReverse(@NotNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight, @Nullable Object component,
 							  boolean enabled) {
 		if (component != null) {
 			Rectangle bounds = getRectangle(component, "bounds");
@@ -2614,7 +2614,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private void paintField(@NonNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight, Object component,
+	private void paintField(@NotNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight, Object component,
 							int width, int height, boolean focus, boolean enabled, boolean hidden, int left) {
 		boolean editable = getBoolean(component, "editable", true);
 		paintRect(g, 0, 0, width, height, enabled ? c_border : c_disable, editable ? c_textbg : c_bg, true, true, true,
@@ -2701,7 +2701,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param clipheight height of the cliping area
 	 */
 	private void paintScroll(Object component, String classname, boolean pressed, boolean inside, boolean focus,
-							 boolean enabled, @NonNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight) {
+							 boolean enabled, @NotNull Graphics g, int clipx, int clipy, int clipwidth, int clipheight) {
 		Rectangle port       = getRectangle(component, ":port");
 		Rectangle horizontal = getRectangle(component, ":horizontal");
 		Rectangle vertical   = getRectangle(component, ":vertical");
@@ -2832,7 +2832,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 *
 	 * @param component a panel
 	 */
-	private void paint(Object component, String classname, boolean focus, boolean enabled, @NonNull Graphics g, int clipx,
+	private void paint(Object component, String classname, boolean focus, boolean enabled, @NotNull Graphics g, int clipx,
 					   int clipy, int clipwidth, int clipheight, int portwidth, int viewwidth) {
 		if ("textarea" == classname) {
 			char[] chars      = (char[]) get(component, ":text");
@@ -3007,7 +3007,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private void paintRect(@NonNull Graphics g, int x, int y, int width, int height, Color border, Color bg, boolean top,
+	private void paintRect(@NotNull Graphics g, int x, int y, int width, int height, Color border, Color bg, boolean top,
 						   boolean left, boolean bottom, boolean right, boolean horizontal) {
 		if ((width <= 0) || (height <= 0)) return;
 		g.setColor(border);
@@ -3045,7 +3045,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 * Fill the given rectangle with gradient
 	 */
-	private void fill(@NonNull Graphics g, int x, int y, int width, int height, boolean horizontal) {
+	private void fill(@NotNull Graphics g, int x, int y, int width, int height, boolean horizontal) {
 		if (horizontal) {
 			if (height > block) {
 				g.setColor(c_bg);
@@ -3073,7 +3073,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private void paintArrow(@NonNull Graphics g, int x, int y, int width, int height, char dir, boolean enabled, boolean inside,
+	private void paintArrow(@NotNull Graphics g, int x, int y, int width, int height, char dir, boolean enabled, boolean inside,
 							boolean pressed, String part, boolean top, boolean left, boolean bottom, boolean right, boolean horizontal) {
 		inside  = inside && (insidepart == part);
 		pressed = pressed && (pressedpart == part);
@@ -3497,7 +3497,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	private void paintArrow(@NonNull Graphics g, int x, int y, int width, int height, char dir) {
+	private void paintArrow(@NotNull Graphics g, int x, int y, int width, int height, char dir) {
 		int cx = x + width / 2 - 2;
 		int cy = y + height / 2 - 2;
 		for (int i = 0; i < 4; i++) {
@@ -3631,7 +3631,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 * Paint component's borders and background
 	 */
-	private void paint(Object component, int x, int y, int width, int height, @NonNull Graphics g, boolean top, boolean left,
+	private void paint(Object component, int x, int y, int width, int height, @NotNull Graphics g, boolean top, boolean left,
 					   boolean bottom, boolean right, char mode) {
 		if ((width <= 0) || (height <= 0)) {
 			return;
@@ -3768,7 +3768,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 * Paints the dialog close, maximize and iconify buttons
 	 */
-	private void paint(Object component, @NonNull Graphics g, int x, int y, int width, int height, char type, char mode) {
+	private void paint(Object component, @NotNull Graphics g, int x, int y, int width, int height, char type, char mode) {
 		paint(component, x, y, width, height, g, true, true, true, true, mode);
 		g.setColor(c_text);
 		switch (type) {
@@ -3795,7 +3795,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 *
 	 * @param mnemonic find mnemonic index and underline text
 	 */
-	private void paint(Object component, int x, int y, int width, int height, @NonNull Graphics g, int clipx, int clipy,
+	private void paint(Object component, int x, int y, int width, int height, @NotNull Graphics g, int clipx, int clipy,
 					   int clipwidth, int clipheight, boolean top, boolean left, boolean bottom, boolean right, int toppadding,
 					   int leftpadding, int bottompadding, int rightpadding, boolean focus, char mode, String alignment,
 					   boolean mnemonic, boolean underline) {
@@ -4016,7 +4016,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param end       current caret position
 	 * @return true if selection, caret location, or text content changed
 	 */
-	private boolean changeField(Object component, @NonNull String text, @Nullable String insert, int movestart, int moveend, int start,
+	private boolean changeField(Object component, @NotNull String text, @Nullable String insert, int movestart, int moveend, int start,
 								int end) {
 		movestart = Math.max(0, Math.min(movestart, text.length()));
 		moveend   = Math.max(0, Math.min(moveend, text.length()));
@@ -5535,7 +5535,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 *
 	 * @param throwable the thrown exception by the bussiness logic
 	 */
-	protected void handleException(@NonNull Throwable throwable) {
+	protected void handleException(@NotNull Throwable throwable) {
 		throwable.printStackTrace();
 	}
 
@@ -5689,7 +5689,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param component a widget
 	 * @return the array of selected items, or a 0 length array
 	 */
-	public Object @NonNull [] getSelectedItems(Object component) {
+	public Object @NotNull [] getSelectedItems(Object component) {
 		String   classname = getClass(component);
 		Object[] selecteds = new Object[0];
 		for (Object item = findNextItem(component, classname, null); item != null; item = findNextItem(component,
@@ -5735,7 +5735,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param component a specified container
 	 * @return an array of all the components in this container
 	 */
-	public Object @NonNull [] getItems(Object component) {
+	public Object @NotNull [] getItems(Object component) {
 		Object[] items = new Object[getItemCountImpl(component, ":comp")];
 		Object   comp  = get(component, ":comp");
 		for (int i = 0; i < items.length; i++) {
@@ -5862,7 +5862,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param name parameter value identifies the widget
 	 * @return the first suitable component, or null
 	 */
-	public Object find(@NonNull String name) {
+	public Object find(@NotNull String name) {
 		return find(content, name);
 	}
 
@@ -5873,7 +5873,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param name      parameter value identifies the widget
 	 * @return the first suitable component, or null
 	 */
-	public @Nullable Object find(Object component, @NonNull String name) {
+	public @Nullable Object find(Object component, @NotNull String name) {
 		if (name.equals(get(component, "name"))) {
 			return component;
 		}
@@ -6037,7 +6037,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return the root component of the parsed resource
 	 * @throws java.io.IOException
 	 */
-	public Object parse(@NonNull String path) throws IOException {
+	public Object parse(@NotNull String path) throws IOException {
 		return parse(path, this);
 	}
 
@@ -6051,7 +6051,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return the parsed components' root
 	 * @throws java.io.IOException
 	 */
-	public Object parse(@NonNull String path, @NonNull Object handler) throws IOException {
+	public Object parse(@NotNull String path, @NotNull Object handler) throws IOException {
 		InputStream inputstream = null;
 		try {
 			inputstream = getClass().getResourceAsStream(path);
@@ -6077,7 +6077,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return the root component of the parsed stream
 	 * @throws java.io.IOException
 	 */
-	public Object parse(@NonNull InputStream inputstream) throws IOException {
+	public Object parse(@NotNull InputStream inputstream) throws IOException {
 		return parse(inputstream, this);
 	}
 
@@ -6089,7 +6089,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return the parsed components' root
 	 * @throws java.io.IOException
 	 */
-	public Object parse(@NonNull InputStream inputstream, @NonNull Object handler) throws IOException {
+	public Object parse(@NotNull InputStream inputstream, @NotNull Object handler) throws IOException {
 		return parse(inputstream, true, false, handler);
 	}
 
@@ -6102,7 +6102,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 *                    URL("http://myserver/myservlet").openStream() </i>
 	 * @throws java.io.IOException
 	 */
-	protected void parseXML(@NonNull InputStream inputstream) throws IOException {
+	protected void parseXML(@NotNull InputStream inputstream) throws IOException {
 		parse(inputstream, false, false, null);
 	}
 
@@ -6142,7 +6142,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return the root tag
 	 * @throws java.io.IOException
 	 */
-	protected Object parseDOM(@NonNull InputStream inputstream) throws IOException {
+	protected Object parseDOM(@NotNull InputStream inputstream) throws IOException {
 		return parse(inputstream, false, true, null);
 	}
 
@@ -6167,7 +6167,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @return @throws java.io.IOException
 	 * @throws java.lang.IllegalArgumentException
 	 */
-	protected @Nullable Object parse(@NonNull InputStream inputstream, boolean validate, boolean dom, @NonNull Object handler) throws IOException {
+	protected @Nullable Object parse(@NotNull InputStream inputstream, boolean validate, boolean dom, @NotNull Object handler) throws IOException {
 		Reader reader = new BufferedReader(new InputStreamReader(inputstream));
 		try {
 			Object[]     parentlist    = null;
@@ -6373,7 +6373,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	protected void finishParse(@Nullable Vector<Object> methods, Object root, @NonNull Object handler) {
+	protected void finishParse(@Nullable Vector<Object> methods, Object root, @NotNull Object handler) {
 		if (methods != null) {
 			for (int i = 0; i < methods.size(); i += 3) {
 				Object   component  = methods.elementAt(i);
@@ -6448,7 +6448,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 *
 	 */
-	protected @NonNull Object addElement(Object parent, String name) {
+	protected @NotNull Object addElement(Object parent, String name) {
 		Object component = create(name);
 		addImpl(parent, component, -1);
 		return component;
@@ -6457,7 +6457,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 * @throws java.lang.IllegalArgumentException
 	 */
-	protected void addAttribute(Object component, String key, @NonNull String value, @NonNull Vector<Object> lasts) {
+	protected void addAttribute(Object component, String key, @NotNull String value, @NotNull Vector<Object> lasts) {
 		// replace value found in the bundle
 		if ((resourcebundle != null) && value.startsWith("i18n.")) {
 			value = resourcebundle.getString(value.substring(5));
@@ -6562,7 +6562,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	/**
 	 * @throws java.lang.IllegalArgumentException
 	 */
-	private boolean setChoice(Object component, String key, @Nullable String value, String @NonNull [] values, String defaultvalue) {
+	private boolean setChoice(Object component, String key, @Nullable String value, String @NotNull [] values, String defaultvalue) {
 		if (value == null) {
 			return set(component, key, defaultvalue);
 		}
@@ -6735,7 +6735,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * @param handler   the target event handler object including the method
 	 * @throws java.lang.IllegalArgumentException
 	 */
-	public void setMethod(Object component, String key, @NonNull String value, Object root, @NonNull Object handler) {
+	public void setMethod(Object component, String key, @NotNull String value, Object root, @NotNull Object handler) {
 		key = (String) getDefinition(getClass(component), key, "method")[1];
 		Object[] method = getMethod(component, value, root, handler);
 		set(component, key, method);
@@ -6844,7 +6844,7 @@ public class Thinlet extends Container implements Runnable, Serializable {
 	 * parameter name, default value) for the item's given property e.g.
 	 * list item's text.
 	 */
-	protected Object @NonNull [] getMethod(Object component, @NonNull String value, Object root, @NonNull Object handler) {
+	protected Object @NotNull [] getMethod(Object component, @NotNull String value, Object root, @NotNull Object handler) {
 		StringTokenizer st             = new StringTokenizer(value, "(, \r\n\t)");
 		String          methodname     = st.nextToken();
 		int             n              = st.countTokens();

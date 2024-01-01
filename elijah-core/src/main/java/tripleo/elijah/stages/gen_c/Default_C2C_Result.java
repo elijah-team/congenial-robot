@@ -21,7 +21,7 @@ class Default_C2C_Result implements C2C_Result {
 	public Default_C2C_Result(final Buffer aBuffer,
 							  final GenerateResult.TY aTY,
 							  final String aExplanationMessage,
-							  final @NonNull WhyNotGarish_BaseFunction aWhyNotGarishFunction) {
+							  final @NotNull WhyNotGarish_BaseFunction aWhyNotGarishFunction) {
 		buffer               = aBuffer;
 		_ty                  = aTY;
 		explanation_message  = aExplanationMessage;
@@ -35,7 +35,7 @@ class Default_C2C_Result implements C2C_Result {
 	}
 
 	@Override
-	public @NonNull EG_Statement getStatement() {
+	public @NotNull EG_Statement getStatement() {
 		if (!_calculated) {
 			_my_statement = EG_Statement.of(buffer.getText(), EX_Explanation.withMessage(explanation_message));
 			_calculated   = true;

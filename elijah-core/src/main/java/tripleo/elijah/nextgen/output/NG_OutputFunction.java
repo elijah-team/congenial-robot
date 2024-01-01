@@ -22,7 +22,7 @@ public class NG_OutputFunction implements NG_OutputItem {
 	private IPP_Function     ppf;
 
 	@Override
-	public @NonNull List<NG_OutputStatement> getOutputs() {
+	public @NotNull List<NG_OutputStatement> getOutputs() {
 		final List<NG_OutputStatement> r = new ArrayList<>();
 
 		if (collect != null) {
@@ -38,7 +38,7 @@ public class NG_OutputFunction implements NG_OutputItem {
 	}
 
 	@Override
-	public EOT_OutputFile.FileNameProvider outName(final @NonNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NonNull TY ty) {
+	public EOT_OutputFile.FileNameProvider outName(final @NotNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NotNull TY ty) {
 		if (getGf() instanceof EvaFunction)
 			return aOutputStrategyC.nameForFunction1((EvaFunction) getGf(), ty);
 		else

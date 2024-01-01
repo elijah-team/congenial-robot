@@ -19,8 +19,8 @@ public enum DecideElObjectType {
 	;
 
 	@Contract(pure = true)
-	@NonNull
-	public static ElObjectType getElObjectType(@NonNull OS_Element input) {
+	@NotNull
+	public static ElObjectType getElObjectType(@NotNull OS_Element input) {
 		// Chain of instanceof checks indicates abstraction failure
 
 		if (input instanceof ClassStatement)

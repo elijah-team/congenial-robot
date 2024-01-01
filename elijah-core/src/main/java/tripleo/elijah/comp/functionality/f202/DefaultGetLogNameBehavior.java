@@ -18,7 +18,7 @@ import tripleo.elijah.stages.logging.ElLog;
 public class DefaultGetLogNameBehavior implements GetLogNameBehavior {
 	@Contract(pure = true)
 	@Override
-	public @NonNull String getLogName(@NonNull ElLog deduceLog) {
+	public @NotNull String getLogName(@NotNull ElLog deduceLog) {
 		final String s1 = deduceLog.getFileName();
 		final String s2 = s1.replace(System.getProperty("file.separator"), "~~");
 

@@ -47,7 +47,7 @@ public class DT_Function {
 	public void log() {
 		final var             fd         = generatedFunction.getFD();
 		final ProcTableEntry  pte        = generatedFunction.fi.pte;
-		final @NonNull String pte_string = d.getPTEString(pte);
+		final @NotNull String pte_string = d.getPTEString(pte);
 		d.LOG.info("** deduce_generated_function " + fd.name() + " " + pte_string);//+" "+((OS_Container)((FunctionDef)fd).getParent()).name());
 	}
 
@@ -58,7 +58,7 @@ public class DT_Function {
 		final var     fd     = generatedFunction.getFD();
 		final Context fd_ctx = fd.getContext();
 
-		for (final @NonNull Instruction instruction : generatedFunction.instructions()) {
+		for (final @NotNull Instruction instruction : generatedFunction.instructions()) {
 			final Context context = generatedFunction.getContextFromPC(instruction.getIndex());
 //			LOG.info("8006 " + instruction);
 			switch (instruction.getName()) {
@@ -106,8 +106,8 @@ public class DT_Function {
 		}
 	}
 
-	private void implement_construct(final @NonNull Instruction instruction, final Context context) {
-		final @NonNull Implement_construct ic = d.newImplement_construct(generatedFunction, instruction);
+	private void implement_construct(final @NotNull Instruction instruction, final Context context) {
+		final @NotNull Implement_construct ic = d.newImplement_construct(generatedFunction, instruction);
 		try {
 			ic.action(context);
 		} catch (FCA_Stop e) {
@@ -117,14 +117,14 @@ public class DT_Function {
 	}
 
 	public void __post_vte_list_001() {
-		for (final @NonNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
 			var de3_vte = vte.getDeduceElement3();
 			de3_vte.__post_vte_list_001();
 		}
 	}
 
 	public void __post_vte_list_002(final Context aFdCtx) {
-		for (final @NonNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
 			if (vte.getType().getAttached() == null) {
 				int potential_size = vte.potentialTypes().size();
 				if (potential_size == 1)
@@ -175,7 +175,7 @@ public class DT_Function {
 
 			final int                     i1  = DeduceTypes2.to_int(instruction.getArg(0));
 			final InstructionArgument     i2  = (instruction.getArg(1));
-			final @NonNull ProcTableEntry fn1 = generatedFunction.getProcTableEntry(i1);
+			final @NotNull ProcTableEntry fn1 = generatedFunction.getProcTableEntry(i1);
 
 			//generatedFunction.deferred_calls.remove(deferred_call);
 
@@ -188,11 +188,11 @@ public class DT_Function {
 		return deducedAlready;
 	}
 
-	public void __post_constructor(final @NonNull DeducePhase aDeducePhase) {
-		final @NonNull EvaConstructor aEvaConstructor  = (EvaConstructor) generatedFunction;
+	public void __post_constructor(final @NotNull DeducePhase aDeducePhase) {
+		final @NotNull EvaConstructor aEvaConstructor  = (EvaConstructor) generatedFunction;
 
-		for (@NonNull IdentTableEntry identTableEntry : aEvaConstructor.idte_list) {
-			if (identTableEntry.getResolvedElement() instanceof final @NonNull VariableStatementImpl vs) {
+		for (@NotNull IdentTableEntry identTableEntry : aEvaConstructor.idte_list) {
+			if (identTableEntry.getResolvedElement() instanceof final @NotNull VariableStatementImpl vs) {
 				OS_Element el  = vs.getParent().getParent();
 				OS_Element el2 = aEvaConstructor.getFD().getParent();
 				if (el != el2) {
@@ -210,7 +210,7 @@ public class DT_Function {
 			result_index = aEvaConstructor.vte_lookup("Value");
 			// but Value might be passed in. If it is, discard value
 			if (result_index != null) {
-				@NonNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
+				@NotNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
 				if (vte.getVtt() != VariableTableType.RESULT) {
 					result_index = null;
 				}
@@ -218,7 +218,7 @@ public class DT_Function {
 		}
 
 		if (result_index != null) {
-			@NonNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
+			@NotNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
 			if (vte.isResolvedYet()) {
 				GenType b = vte.getGenType();
 				OS_Type     a = vte.getType().getAttached();
@@ -234,7 +234,7 @@ public class DT_Function {
 					case USER:
 						b.setTypeName(a);
 						try {
-							@NonNull GenType rt = d.resolve_type(a, a.getTypeName().getContext());
+							@NotNull GenType rt = d.resolve_type(a, a.getTypeName().getContext());
 							if (rt.getResolved() != null && rt.getResolved().getType() == OS_Type.Type.USER_CLASS) {
 								if (rt.getResolved().getClassOf().getGenericPart().size() > 0)
 									b.setNonGenericTypeName(a.getTypeName()); // TODO might be wrong

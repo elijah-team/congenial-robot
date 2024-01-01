@@ -27,7 +27,7 @@ public class NormalImportStatement extends _BaseImportStatement {
 			throw new NotImplementedException();
 	}
 
-	public void addNormalPart(final @NonNull Qualident aQualident) {
+	public void addNormalPart(final @NotNull Qualident aQualident) {
 		importList.add(aQualident);
 
 		// README a lot of code on the first shot.
@@ -90,7 +90,7 @@ public class NormalImportStatement extends _BaseImportStatement {
 
 	}
 
-	public @NonNull Context myContext() {
+	public @NotNull Context myContext() {
 		assert _ctx != null;
 		return _ctx;
 	}

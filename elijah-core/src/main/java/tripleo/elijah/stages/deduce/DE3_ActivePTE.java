@@ -39,14 +39,14 @@ import static tripleo.elijah.util.Helpers.List_of;
 
 class DE3_ActivePTE implements DE3_Active {
 	private final          DeduceTypes2                      deduceTypes2;
-	private final @NonNull ProcTableEntry                    pte;
+	private final @NotNull ProcTableEntry                    pte;
 	private final          ClassInvocation                   ci;
-	private final @NonNull List<Reactivable>                 ables;
+	private final @NotNull List<Reactivable>                 ables;
 	private final          DeduceTypes2.DeduceTypes2Injector __inj;
 	private                boolean                           __do_001_called;
 
-	public DE3_ActivePTE(final @NonNull DeduceTypes2 aDeduceTypes2,
-						 final @NonNull ProcTableEntry pte,
+	public DE3_ActivePTE(final @NotNull DeduceTypes2 aDeduceTypes2,
+						 final @NotNull ProcTableEntry pte,
 						 final ClassInvocation classInvocation) {
 		this.deduceTypes2 = aDeduceTypes2;
 		this.pte          = pte;
@@ -111,8 +111,8 @@ class DE3_ActivePTE implements DE3_Active {
 		}
 	}
 
-	@NonNull
-	private GenerateResultEnv getResultEnv(final @NonNull GenerateC generateC, final GenerateResultSink resultSink) {
+	@NotNull
+	private GenerateResultEnv getResultEnv(final @NotNull GenerateC generateC, final GenerateResultSink resultSink) {
 		final GenerateResultEnv[] fg0        = {generateC.getFileGen()};
 
 		assert fg0[0] != null;
@@ -138,7 +138,7 @@ class DE3_ActivePTE implements DE3_Active {
 	}
 
 	//@SuppressWarnings("unused")
-	private void __do_001(final @NonNull GenerateFiles generateC,
+	private void __do_001(final @NotNull GenerateFiles generateC,
 						  final EvaClass node,
 						  final DeducePhase deducePhase,
 						  final GenerateResultSink resultSink,

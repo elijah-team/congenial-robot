@@ -41,19 +41,19 @@ import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 public interface EvaContainer extends EvaNode {
 	OS_Element getElement();
 
-	@NonNull Maybe<VarTableEntry> getVariable(String aVarName);
+	@NotNull Maybe<VarTableEntry> getVariable(String aVarName);
 
 	class VarTableEntry {
 		public final           IExpression                                        initialValue;
-		public final @NonNull  IdentExpression                                    nameToken;
+		public final @NotNull  IdentExpression                                    nameToken;
 		public final           VariableStatement                                  vs;
 		private final          DeferredObject<OS_Type, Void, Void>                _p_resolve_varType               = new DeferredObject<>();
-		private final @NonNull OS_Element                                         parent;
+		private final @NotNull OS_Element                                         parent;
 		private final          RegisterClassInvocation_env                        passthruEnv;
-		public @NonNull        List<ConnectionPair>                               connectionPairs                  = new ArrayList<>();
-		public @NonNull        List<TypeTableEntry>                               potentialTypes                   = new ArrayList<TypeTableEntry>();
+		public @NotNull        List<ConnectionPair>                               connectionPairs                  = new ArrayList<>();
+		public @NotNull        List<TypeTableEntry>                               potentialTypes                   = new ArrayList<TypeTableEntry>();
 		public                 TypeName                                           typeName;
-		public @NonNull        DeferredObject<UpdatePotentialTypesCB, Void, Void> _p_updatePotentialTypesCBPromise = new DeferredObject<>();
+		public @NotNull        DeferredObject<UpdatePotentialTypesCB, Void, Void> _p_updatePotentialTypesCBPromise = new DeferredObject<>();
 		public                 OS_Type                                            varType;
 		UpdatePotentialTypesCB updatePotentialTypesCB;
 		private EvaNode _resolvedType;
@@ -91,15 +91,15 @@ public interface EvaContainer extends EvaNode {
 			connectionPairs.add(new ConnectionPair(aVte, aConstructor));
 		}
 
-		public @NonNull DeduceElement3_VarTableEntry getDeduceElement3() {
+		public @NotNull DeduceElement3_VarTableEntry getDeduceElement3() {
 			return _de3;
 		}
 
 		public VarTableEntry(final VariableStatement aVs,
-							 final @NonNull IdentExpression aNameToken,
+							 final @NotNull IdentExpression aNameToken,
 							 final IExpression aInitialValue,
-							 final @NonNull TypeName aTypeName,
-							 final @NonNull OS_Element aElement) {
+							 final @NotNull TypeName aTypeName,
+							 final @NotNull OS_Element aElement) {
 			vs           = aVs;
 			nameToken    = aNameToken;
 			initialValue = aInitialValue;
@@ -111,11 +111,11 @@ public interface EvaContainer extends EvaNode {
 			_de3 = new DeduceElement3_VarTableEntry(this);
 		}
 
-		public void addPotentialTypes(@NonNull Collection<TypeTableEntry> aPotentialTypes) {
+		public void addPotentialTypes(@NotNull Collection<TypeTableEntry> aPotentialTypes) {
 			potentialTypes.addAll(aPotentialTypes);
 		}
 
-		public @NonNull OS_Element getParent() {
+		public @NotNull OS_Element getParent() {
 			return parent;
 		}
 
@@ -128,10 +128,10 @@ public interface EvaContainer extends EvaNode {
 		}
 
 		public interface UpdatePotentialTypesCB {
-			@NonNull Operation<Ok> call(final @NonNull EvaContainer aEvaContainer);
+			@NotNull Operation<Ok> call(final @NotNull EvaContainer aEvaContainer);
 		}
 
-		public void resolve(@NonNull EvaNode aResolvedType) {
+		public void resolve(@NotNull EvaNode aResolvedType) {
 			SimplePrintLoggerToRemoveSoon.println_out_2(String.format("** [GeneratedContainer 56] resolving VarTableEntry %s to %s", nameToken, aResolvedType.identityString()));
 			_resolvedType = aResolvedType;
 		}
@@ -156,11 +156,11 @@ public interface EvaContainer extends EvaNode {
 			}
 		}
 
-		public void updatePotentialTypes(final @NonNull EvaContainer aEvaContainer) {
+		public void updatePotentialTypes(final @NotNull EvaContainer aEvaContainer) {
 //			assert aGeneratedContainer == GeneratedContainer.this;
 			_p_updatePotentialTypesCBPromise.then(new DoneCallback<UpdatePotentialTypesCB>() {
 				@Override
-				public void onDone(final @NonNull UpdatePotentialTypesCB result) {
+				public void onDone(final @NotNull UpdatePotentialTypesCB result) {
 					Operation<Ok> s;
 
 					s = result.call(aEvaContainer);

@@ -74,7 +74,7 @@ public class CReference {
 		args = sl3;
 	}
 
-	@NonNull
+	@NotNull
 	public String build() {
 		final BuildState st = new BuildState();
 
@@ -115,17 +115,17 @@ public class CReference {
 
 	List<Reference> refs;
 
-	public void debugPath(final @NonNull IdentIA identIA, final @NonNull String aPath) {
-		@NonNull final List<InstructionArgument> pl = _getIdentIAPathList(identIA);
+	public void debugPath(final @NotNull IdentIA identIA, final @NotNull String aPath) {
+		@NotNull final List<InstructionArgument> pl = _getIdentIAPathList(identIA);
 
 		if (false) {
 			System.out.println("\\ 172-172-172-172-172 ---------------------------------------------");
 			for (InstructionArgument instructionArgument : pl) {
-				if (instructionArgument instanceof final @NonNull ProcIA procIA) {
+				if (instructionArgument instanceof final @NotNull ProcIA procIA) {
 					System.out.println(procIA.getEntry().__debug_expression);
-				} else if (instructionArgument instanceof final @NonNull IdentIA argument) {
+				} else if (instructionArgument instanceof final @NotNull IdentIA argument) {
 					System.out.println(argument.getEntry().getIdent().getText());
-				} else if (instructionArgument instanceof final @NonNull IntegerIA integerIA) {
+				} else if (instructionArgument instanceof final @NotNull IntegerIA integerIA) {
 					System.out.println(integerIA.getEntry().getName());
 				}
 			}
@@ -139,8 +139,8 @@ public class CReference {
 		_repo = aRepo;
 	}
 
-	@NonNull
-	static List<InstructionArgument> _getIdentIAPathList(@NonNull InstructionArgument oo) {
+	@NotNull
+	static List<InstructionArgument> _getIdentIAPathList(@NotNull InstructionArgument oo) {
 		final List<InstructionArgument> s = new LinkedList<InstructionArgument>();
 		while (oo != null) {
 			if (oo instanceof IntegerIA) {
@@ -160,7 +160,7 @@ public class CReference {
 		return s;
 	}
 
-	public @NonNull String getIdentIAPath2(final @NonNull IdentIA ia2, final Generate_Code_For_Method.AOG aog, final String aValue) {
+	public @NotNull String getIdentIAPath2(final @NotNull IdentIA ia2, final Generate_Code_For_Method.AOG aog, final String aValue) {
 		final BaseEvaFunction           generatedFunction = ia2.gf;
 		final List<InstructionArgument> s                 = _getIdentIAPathList(ia2);
 
@@ -170,15 +170,15 @@ public class CReference {
 		for (InstructionArgument instructionArgument : s) {
 			if (instructionArgument instanceof IntegerIA) {
 				IntegerIA                         integerIA = (IntegerIA) instructionArgument;
-				@NonNull final VariableTableEntry entry     = integerIA.getEntry();
+				@NotNull final VariableTableEntry entry     = integerIA.getEntry();
 				texts.add("vv" + entry.getName());
 			} else if (instructionArgument instanceof IdentIA) {
 				IdentIA                        identIA = (IdentIA) instructionArgument;
-				@NonNull final IdentTableEntry entry   = identIA.getEntry();
+				@NotNull final IdentTableEntry entry   = identIA.getEntry();
 				texts.add("vm" + entry.getIdent().getText());
 			} else if (instructionArgument instanceof ProcIA) {
 				ProcIA                        procIA = (ProcIA) instructionArgument;
-				@NonNull final ProcTableEntry entry  = procIA.getEntry();
+				@NotNull final ProcTableEntry entry  = procIA.getEntry();
 				texts.add("" + entry.getResolvedElement());
 			}
 		}
@@ -186,7 +186,7 @@ public class CReference {
 		return String_join("->", texts);
 	}
 
-	public void getIdentIAPath(final @NonNull IdentIA aIa, final BaseEvaFunction aGf, final Generate_Code_For_Method.@NonNull AOG aGet, final String aO) {
+	public void getIdentIAPath(final @NotNull IdentIA aIa, final BaseEvaFunction aGf, final Generate_Code_For_Method.@NotNull AOG aGet, final String aO) {
 		getIdentIAPath(aIa, aGet, aO);
 	}
 
@@ -195,7 +195,7 @@ public class CReference {
 		POINTER, UNKNOWN
 	}
 
-	public @NonNull String getIdentIAPath(final @NonNull IdentIA ia2, final Generate_Code_For_Method.@NonNull AOG aog, final String aValue) {
+	public @NotNull String getIdentIAPath(final @NotNull IdentIA ia2, final Generate_Code_For_Method.@NotNull AOG aog, final String aValue) {
 		final BaseEvaFunction           generatedFunction = ia2.gf;
 		final List<InstructionArgument> s                 = _getIdentIAPathList(ia2);
 		refs = new ArrayList<Reference>(s.size());
@@ -239,7 +239,7 @@ public class CReference {
 
 			if (ia instanceof IntegerIA) {
 				text = getIdentIAPath__IntegerIA(generatedFunction, i, item, ia);
-			} else if (ia instanceof final @NonNull IdentIA identIA) {
+			} else if (ia instanceof final @NotNull IdentIA identIA) {
 				text = getIdentIAPath__IdentIA(ia2, aog, aValue, s, sl, i, sSize, item, identIA);
 			} else if (ia instanceof ProcIA) {
 				text = getIdentIAPath__ProcIA(item, (ProcIA) ia);
@@ -280,8 +280,8 @@ public class CReference {
 		return rtext;
 	}
 
-	@NonNull
-	private String getIdentIAPath__IntegerIA(final @NonNull BaseEvaFunction generatedFunction, final int i, final @NonNull CR_ReferenceItem1 item, final @NonNull InstructionArgument ia) {
+	@NotNull
+	private String getIdentIAPath__IntegerIA(final @NotNull BaseEvaFunction generatedFunction, final int i, final @NotNull CR_ReferenceItem1 item, final @NotNull InstructionArgument ia) {
 		String text;
 		item.setType(InstructionArgument.t.VARIABLE);
 
@@ -450,16 +450,16 @@ public class CReference {
 		}
 	}
 
-	@NonNull
-	private String getIdentIAPath__IdentIA(final @NonNull IdentIA ia2,
-										   final Generate_Code_For_Method.@NonNull AOG aog,
+	@NotNull
+	private String getIdentIAPath__IdentIA(final @NotNull IdentIA ia2,
+										   final Generate_Code_For_Method.@NotNull AOG aog,
 										   final String aValue,
-										   final @NonNull List<InstructionArgument> s,
-										   final @NonNull List<String> sl,
+										   final @NotNull List<InstructionArgument> s,
+										   final @NotNull List<String> sl,
 										   final int i,
 										   final int sSize,
-										   final @NonNull CR_ReferenceItem1 item,
-										   final @NonNull IdentIA identIA) {
+										   final @NotNull CR_ReferenceItem1 item,
+										   final @NotNull IdentIA identIA) {
 		String text;
 		item.setType(InstructionArgument.t.IDENT);
 
@@ -484,7 +484,7 @@ public class CReference {
 		return text;
 	}
 
-	private String getIdentIAPath__ProcIA(final @NonNull CR_ReferenceItem1 item, final ProcIA ia) {
+	private String getIdentIAPath__ProcIA(final @NotNull CR_ReferenceItem1 item, final ProcIA ia) {
 		String text;
 		item.setType(InstructionArgument.t.PROC);
 
@@ -506,9 +506,9 @@ public class CReference {
 
 		CONSTRUCTOR {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String          text;
-				final @NonNull String s = sb.toString();
+				final @NotNull String s = sb.toString();
 				text    = String.format("%s(%s", ref.text, s);
 				sb.open = false;
 				if (!s.equals("")) sb.needs_comma = true;
@@ -517,7 +517,7 @@ public class CReference {
 		},
 		DIRECT_MEMBER {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text;
 				text = Emit.emit("/*124*/") + "vsc->vm" + ref.text;
 
@@ -535,7 +535,7 @@ public class CReference {
 		},
 		FUNCTION {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text;
 				final String s = sb.toString();
 				text    = String.format("%s(%s", ref.text, s);
@@ -546,14 +546,14 @@ public class CReference {
 		},
 		INLINE_MEMBER {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text = Emit.emit("/*219*/") + ".vm" + ref.text;
 				sb.appendText(text, false);
 			}
 		},
 		LITERAL {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text = ref.text;
 				sb.appendText(text, false);
 			}
@@ -561,7 +561,7 @@ public class CReference {
 		// https://www.baeldung.com/a-guide-to-java-enums
 		LOCAL {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text = "vv" + ref.text;
 				sb.appendText(text, false);
 			}
@@ -594,10 +594,10 @@ public class CReference {
 				}
 
 				@Override
-				public @NonNull GCR_Rule rule() {
+				public @NotNull GCR_Rule rule() {
 					return new GCR_Rule() {
 						@Override
-						public @NonNull String text() {
+						public @NotNull String text() {
 							return "Ref MEMBER Text";
 						}
 					};
@@ -605,7 +605,7 @@ public class CReference {
 			}
 
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final Text t = new Text(ref.text, () -> ref.value != null, () -> ref.value);
 
 				sb.appendText(t.getText(), false);
@@ -613,7 +613,7 @@ public class CReference {
 		},
 		PROPERTY_GET {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text;
 				final String s = sb.toString();
 				text    = String.format("%s%s)", ref.text, s);
@@ -625,7 +625,7 @@ public class CReference {
 		},
 		PROPERTY_SET {
 			@Override
-			public void buildHelper(final @NonNull Reference ref, final @NonNull BuildState sb) {
+			public void buildHelper(final @NotNull Reference ref, final @NotNull BuildState sb) {
 				final String text;
 				final String s = sb.toString();
 				text    = String.format("%s%s, %s);", ref.text, s, ref.value);
@@ -641,7 +641,7 @@ public class CReference {
 
 	private final static class BuildState {
 		boolean open = false, needs_comma = false;
-		@NonNull StringBuilder sb = new StringBuilder();
+		@NotNull StringBuilder sb = new StringBuilder();
 
 		public void appendText(final String text, final boolean erase) {
 			if (erase)
@@ -651,7 +651,7 @@ public class CReference {
 		}
 
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return sb.toString();
 		}
 		//ABOVE 3a

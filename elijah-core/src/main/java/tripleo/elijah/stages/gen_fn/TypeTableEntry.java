@@ -22,9 +22,9 @@ import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
  */
 public class TypeTableEntry {
 	public final    IExpression     __debug_expression;
-	@NonNull
+	@NotNull
 	public final    Type            lifetime;
-	public @NonNull GenType         genType = new GenTypeImpl();
+	public @NotNull GenType         genType = new GenTypeImpl();
 	@Nullable
 	public final    TableEntryIV    tableEntry;
 	final           int             index;
@@ -33,13 +33,13 @@ public class TypeTableEntry {
 	@Nullable
 	private         OS_Type         attached;
 
-	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NonNull BaseEvaFunction aEvaFunction) {
+	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull BaseEvaFunction aEvaFunction) {
 		_dt2 = aDeduceTypes2;
 		__gf = aEvaFunction;
 	}
 
 	public TypeTableEntry(final int index,
-						  @NonNull final Type lifetime,
+						  @NotNull final Type lifetime,
 						  @Nullable final OS_Type aAttached,
 						  final IExpression expression,
 						  @Nullable final TableEntryIV aTableEntryIV) {
@@ -67,7 +67,7 @@ public class TypeTableEntry {
 	}
 
 	public TypeTableEntry(final int index,
-						  @NonNull final Type lifetime,
+						  @NotNull final Type lifetime,
 						  @Nullable final GenType aGenType,
 						  final IExpression expression,
 						  @Nullable final TableEntryIV aTableEntryIV) {
@@ -86,7 +86,7 @@ public class TypeTableEntry {
 	}
 
 	@Deprecated
-	private void _settingAttached(@NonNull OS_Type aAttached) {
+	private void _settingAttached(@NotNull OS_Type aAttached) {
 		switch (aAttached.getType()) {
 		case USER:
 			if (genType.getTypeName() != null) {
@@ -144,7 +144,7 @@ public class TypeTableEntry {
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public String toString() {
 		return "TypeTableEntry{" + "index=" + index + ", lifetime=" + lifetime + ", attached=" + attached
 				+ ", expression=" + __debug_expression + '}';

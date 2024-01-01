@@ -12,7 +12,7 @@ import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 
 public interface DeducedBaseEvaFunction extends DeducedEvaFunctionBase {
 	@Override
-	void onGenClass(@NonNull OnGenClass aOnGenClass);
+	void onGenClass(@NotNull OnGenClass aOnGenClass);
 
 	@Override
 	BaseEvaFunction_Reactive reactive();

@@ -25,7 +25,7 @@ import java.util.List;
 public class DefFunctionDefImpl extends BaseFunctionDef implements tripleo.elijah.lang.i.DefFunctionDef {
 
 	private final     OS_Element         parent;
-	@NonNull          List<FunctionItem> _items      = new ArrayList<FunctionItem>();
+	@NotNull          List<FunctionItem> _items      = new ArrayList<FunctionItem>();
 	private           IExpression        _expr;
 	private @Nullable TypeName           _returnType = null;
 
@@ -54,7 +54,7 @@ public class DefFunctionDefImpl extends BaseFunctionDef implements tripleo.elija
 	}
 
 	@Override
-	public @NonNull List<FunctionItem> getItems() {
+	public @NotNull List<FunctionItem> getItems() {
 		return _items; // TODO what about scope?
 	}
 
@@ -122,7 +122,7 @@ public class DefFunctionDefImpl extends BaseFunctionDef implements tripleo.elija
 	}
 
 	@Override
-	public void setHeader(@NonNull FunctionHeader aFunctionHeader) {
+	public void setHeader(@NotNull FunctionHeader aFunctionHeader) {
 		setFal(aFunctionHeader.getFal());
 //		set(aFunctionHeader.getModifier()); // TODO
 		setName(aFunctionHeader.getName());
@@ -135,12 +135,12 @@ public class DefFunctionDefImpl extends BaseFunctionDef implements tripleo.elija
 	}
 
 	@Override
-	public void visitGen(@NonNull ElElementVisitor visit) {
+	public void visitGen(@NotNull ElElementVisitor visit) {
 		visit.visitDefFunction(this);
 	}
 
 	@Override
-	public void serializeTo(final @NonNull SmallWriter sw) {
+	public void serializeTo(final @NotNull SmallWriter sw) {
 		sw.fieldIdent("name", getNameNode());
 		//throw new NotImplementedException();
 	}

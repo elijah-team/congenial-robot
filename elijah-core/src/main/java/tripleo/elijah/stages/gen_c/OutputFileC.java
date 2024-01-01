@@ -34,7 +34,7 @@ public class OutputFileC implements IOutputFile {
 	}
 
 	@Override
-	public @NonNull String getOutput() {
+	public @NotNull String getOutput() {
 		final StringBuilder sb = new StringBuilder();
 
 		final Predicate<Dependency> dependencyPredicate = next -> {
@@ -98,11 +98,11 @@ public class OutputFileC implements IOutputFile {
 	}
 
 	@Override
-	public void putDependencies(@NonNull List<DependencyRef> aDependencies) {
+	public void putDependencies(@NotNull List<DependencyRef> aDependencies) {
 		dependencies.addAll(aDependencies);
 	}
 
-	public void putDependencies(@NonNull Set<Dependency> aNotedDeps) {
+	public void putDependencies(@NotNull Set<Dependency> aNotedDeps) {
 		notedDeps.addAll(aNotedDeps);
 	}
 }

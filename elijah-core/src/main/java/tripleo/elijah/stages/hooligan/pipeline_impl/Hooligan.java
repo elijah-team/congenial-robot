@@ -11,7 +11,7 @@ import java.util.*;
 class Hooligan {
 	private static final Set<SmallWriter.SW_Ref> insides = new HashSet<>();
 
-	@NonNull SmallWriter1 __modules2(final @NonNull List<OS_Module> aModuleList) {
+	@NotNull SmallWriter1 __modules2(final @NotNull List<OS_Module> aModuleList) {
 		var sw = new SmallWriter1();
 
 		for (OS_Module module : aModuleList) {
@@ -25,7 +25,7 @@ class Hooligan {
 		final         Map<OS_Element, SmallWriter.SW_Ref> objMap1 = new HashMap<>();
 		private final Map<OS_Element, SmallWriter>        writers = new LinkedHashMap<>();
 
-		public @NonNull SmallWriter newWriter(final OS_Module aModule) {
+		public @NotNull SmallWriter newWriter(final OS_Module aModule) {
 			var sw = new SmallWriter2(objMap1);
 
 			writers.put(aModule, sw);
@@ -33,7 +33,7 @@ class Hooligan {
 			return sw;
 		}
 
-		public @NonNull String getText() {
+		public @NotNull String getText() {
 			var sb3 = new StringBuilder();
 
 			for (Map.Entry<OS_Element, SmallWriter> entry : writers.entrySet()) {
@@ -68,7 +68,7 @@ class Hooligan {
 	class SmallWriter2 implements SmallWriter {
 		final         Map<OS_Element, SW_Ref> objMap;// = new HashMap<>();
 		private final StringBuilder           sb      = new StringBuilder();
-		@NonNull      Set<SW_Ref>             insides = new HashSet<>();
+		@NotNull      Set<SW_Ref>             insides = new HashSet<>();
 
 		SmallWriter2(final Map<OS_Element, SW_Ref> aObjMap) {
 			objMap = aObjMap;
@@ -80,12 +80,12 @@ class Hooligan {
 		}
 
 		@Override
-		public void fieldExpression(final String aFieldName, final @NonNull IExpression aFieldValue) {
+		public void fieldExpression(final String aFieldName, final @NotNull IExpression aFieldValue) {
 			sb.append("(field 'expression \"%s\" \"%s\")\n".formatted(aFieldName, aFieldValue.toString()));
 		}
 
 		@Override
-		public void fieldElement(final String aFieldName, final @NonNull OS_Element aFieldValue) {
+		public void fieldElement(final String aFieldName, final @NotNull OS_Element aFieldValue) {
 			var w5 = new SmallWriter2(objMap);
 			aFieldValue.serializeTo(w5);
 			sb.append("(field 'element \"%s\" %s)\n".formatted(aFieldName, w5.sb));
@@ -102,7 +102,7 @@ class Hooligan {
 		}
 
 		@Override
-		public <E> void fieldList(final String aFieldName, final @NonNull List<E> aFieldValue) {
+		public <E> void fieldList(final String aFieldName, final @NotNull List<E> aFieldValue) {
 			var sb2 = new StringBuilder();
 
 			int i = 1;
@@ -169,7 +169,7 @@ class Hooligan {
 		}
 
 		@Override
-		public void fieldIdent(final String aFieldName, final @NonNull IdentExpression aFieldValue) {
+		public void fieldIdent(final String aFieldName, final @NotNull IdentExpression aFieldValue) {
 			var w4 = new SmallWriter2(objMap);
 
 			aFieldValue.serializeTo(w4);
@@ -178,10 +178,10 @@ class Hooligan {
 		}
 
 		@Override
-		public @NonNull SW_TypenameList createTypeNameList() {
+		public @NotNull SW_TypenameList createTypeNameList() {
 			NotImplementedException.raise();
 			return new SW_TypenameList() {
-				private @NonNull List<TypeName> typenames = new LinkedList<>();
+				private @NotNull List<TypeName> typenames = new LinkedList<>();
 
 				@Override
 				public void add(final TypeName el) {
@@ -196,7 +196,7 @@ class Hooligan {
 		}
 
 		@Override
-		public void fieldTypenameList(final String aInheritance, final @NonNull SW_TypenameList aInh) {
+		public void fieldTypenameList(final String aInheritance, final @NotNull SW_TypenameList aInh) {
 			sb.append("(field 'typeNameList \"%s\" ".formatted(aInheritance));
 			for (TypeName item : aInh.items()) {
 				sb.append("(field 'typeName \"%s\")\n".formatted(item));
@@ -205,12 +205,12 @@ class Hooligan {
 		}
 
 		@Override
-		public void fieldRef(final String aParent, final @NonNull SW_Ref aRef) {
+		public void fieldRef(final String aParent, final @NotNull SW_Ref aRef) {
 			sb.append("(field 'ref \"%s\" \"%s\")\n".formatted(aParent, aRef.name()));
 		}
 
 		@Override
-		public @NonNull String getString() {
+		public @NotNull String getString() {
 			return sb.toString();
 		}
 	}

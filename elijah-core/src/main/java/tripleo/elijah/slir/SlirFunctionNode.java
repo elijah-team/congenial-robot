@@ -48,7 +48,7 @@ public class SlirFunctionNode implements SlirElement {
 	}
 
 	@Override
-	public @NonNull SlirPos partOfSpeech() {
+	public @NotNull SlirPos partOfSpeech() {
 		return SlirPos.FUNCTION;
 	}
 }

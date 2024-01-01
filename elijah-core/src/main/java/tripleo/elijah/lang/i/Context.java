@@ -15,23 +15,23 @@ public interface Context {
 
 	List<ContextImpl.Expectation> getExpectations();
 
-	@NonNull
+	@NotNull
 	Compilation compilation();
 
 	@Nullable Context getParent();
 
-	LookupResultList lookup(@NonNull String name);
+	LookupResultList lookup(@NotNull String name);
 
 	LookupResultList lookup(String name, int level, LookupResultList Result, SearchList alreadySearched,
 							boolean one);
 
-	@NonNull
+	@NotNull
 	OS_Module module();
 
 	void addName(EN_Name aName);
 
 	class SearchList {
-		@NonNull List<Context> alreadySearched = new ArrayList<>();
+		@NotNull List<Context> alreadySearched = new ArrayList<>();
 
 		public void add(Context c) {
 			alreadySearched.add(c);
@@ -41,7 +41,7 @@ public interface Context {
 			return alreadySearched.contains(context);
 		}
 
-		public @NonNull ImmutableList<Context> getList() {
+		public @NotNull ImmutableList<Context> getList() {
 			return ImmutableList.copyOf(alreadySearched);
 		}
 	}

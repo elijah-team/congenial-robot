@@ -29,18 +29,18 @@ import tripleo.elijah.work.WorkManager;
  * Created 5/16/21 12:41 AM
  */
 public class WlGenerateClass implements WorkJob {
-	private final @NonNull ClassStatement               classStatement;
-	private final @NonNull ClassInvocation              classInvocation;
+	private final @NotNull ClassStatement               classStatement;
+	private final @NotNull ClassInvocation              classInvocation;
 	private final          GenerateFunctions            generateFunctions;
 	private final          DeducePhase.GeneratedClasses coll;
-	private final @NonNull RegisterClassInvocation_env  __passthru_env;
+	private final @NotNull RegisterClassInvocation_env  __passthru_env;
 	private       boolean        _isDone = false;
 	private final ICodeRegistrar cr;
 	//private       EvaClass       Result;
 	private final Eventual<EvaClass> resultPromise = new Eventual<>();
 
 	public WlGenerateClass(GenerateFunctions aGenerateFunctions,
-						   @NonNull ClassInvocation aClassInvocation,
+						   @NotNull ClassInvocation aClassInvocation,
 						   DeducePhase.GeneratedClasses coll,
 						   final ICodeRegistrar aCodeRegistrar) {
 		classStatement    = aClassInvocation.getKlass();

@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 public class GN_WriteLogs implements GN_Notable {
-	private final @NonNull ICompilationAccess ca;
+	private final @NotNull ICompilationAccess ca;
 	//private final boolean            silent;
-	private final @NonNull List<ElLog>        logs;
+	private final @NotNull List<ElLog>        logs;
 
 	@Contract(pure = true)
-	public GN_WriteLogs(final @NonNull ICompilationAccess aCa,
-						final @NonNull List<ElLog> aLogs) {
+	public GN_WriteLogs(final @NotNull ICompilationAccess aCa,
+						final @NotNull List<ElLog> aLogs) {
 		ca = aCa;
 		//silent = aCa.testSilence() == ElLog.Verbosity.SILENT;
 		logs = aLogs;

@@ -34,7 +34,7 @@ public class CaseConditionalImpl implements tripleo.elijah.lang.i.CaseConditiona
 	private @Nullable SingleIdentContext                  _ctx               = null;
 	private @Nullable CaseConditional                     default_case_scope = null;
 	private           IExpression                         expr;
-	private @NonNull  HashMap<IExpression, CaseScopeImpl> scopes             = new LinkedHashMap<IExpression, CaseScopeImpl>();
+	private @NotNull  HashMap<IExpression, CaseScopeImpl> scopes             = new LinkedHashMap<IExpression, CaseScopeImpl>();
 
 	public CaseConditionalImpl(final OS_Element parent, final Context parentContext) {
 		this.parent = parent;
@@ -42,7 +42,7 @@ public class CaseConditionalImpl implements tripleo.elijah.lang.i.CaseConditiona
 	}
 
 	@Override
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitCaseConditional(this);
 	}
 
@@ -176,7 +176,7 @@ public class CaseConditionalImpl implements tripleo.elijah.lang.i.CaseConditiona
 		 * @see tripleo.elijah.lang.impl.CaseConditional#getParent()
 		 */
 		@Override
-		public @NonNull OS_Element getParent() {
+		public @NotNull OS_Element getParent() {
 			return CaseConditionalImpl.this;
 		}
 
@@ -229,7 +229,7 @@ public class CaseConditionalImpl implements tripleo.elijah.lang.i.CaseConditiona
 		}
 
 		@Override
-		public void visitGen(final @NonNull ElElementVisitor visit) {
+		public void visitGen(final @NotNull ElElementVisitor visit) {
 			visit.visitCaseScope(this);
 		}
 

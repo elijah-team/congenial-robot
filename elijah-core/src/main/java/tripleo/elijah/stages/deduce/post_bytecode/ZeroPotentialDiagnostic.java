@@ -17,7 +17,7 @@ public class ZeroPotentialDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NonNull Locatable primary() {
+	public @NotNull Locatable primary() {
 		NotImplementedException.raise();
 		return null;
 	}
@@ -29,7 +29,7 @@ public class ZeroPotentialDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NonNull List<Locatable> secondary() {
+	public @NotNull List<Locatable> secondary() {
 		NotImplementedException.raise();
 		return null;
 	}

@@ -34,7 +34,7 @@ public class Dependency {
 		referent = aReferent;
 	}
 
-	public @NonNull Set<Dependency> getNotedDeps() {
+	public @NotNull Set<Dependency> getNotedDeps() {
 		return deps;
 	}
 
@@ -42,7 +42,7 @@ public class Dependency {
 		return dref;
 	}
 
-	public @NonNull String jsonString() {
+	public @NotNull String jsonString() {
 		final String sb = "{\".class\": \"Dependency\", " + "referent: " + referent + ", " +
 				"dref: " + (dref != null ? dref.jsonString() + ", " : "null, ") +
 				"deps: " + deps + ", " +
@@ -52,8 +52,8 @@ public class Dependency {
 	}
 
 	public void noteDependencies(AbstractDependencyTracker aDependencyTracker,
-								 @NonNull List<FunctionInvocation> aDependentFunctions,
-								 @NonNull List<GenType> aDependentTypes) {
+								 @NotNull List<FunctionInvocation> aDependentFunctions,
+								 @NotNull List<GenType> aDependentTypes) {
 		for (FunctionInvocation dependentFunction : aDependentFunctions) {
 			final BaseEvaFunction generatedFunction = dependentFunction.getGenerated();
 			if (generatedFunction != null)

@@ -75,7 +75,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * wrapper object, ans register it.
 	 */
 	@Override
-	public @NonNull OWObject wrap(Object component) {
+	public @NotNull OWObject wrap(Object component) {
 		try {
 			return frepository.wrap(this, component, getClass(component));
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * register the given OWObject, as managed by the given thinlet
 	 */
 	@Override
-	public void register(@NonNull OWObject widget) {
+	public void register(@NotNull OWObject widget) {
 		frepository.add(widget);
 	}
 
@@ -95,7 +95,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * unregister the given OWObject, as not managed by the given thinlet
 	 */
 	@Override
-	public void unregister(@NonNull OWObject widget) {
+	public void unregister(@NotNull OWObject widget) {
 		frepository.remove(widget);
 	}
 
@@ -106,7 +106,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @param component a widget to be added
 	 */
 	@Override
-	public void add(@NonNull OWWidget component) {
+	public void add(@NotNull OWWidget component) {
 		add(component.unwrap());
 	}
 
@@ -118,7 +118,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @return the first suitable component, or null
 	 */
 	@Override
-	public OWObject findObject(@NonNull OWWidget component, @NonNull String name) {
+	public OWObject findObject(@NotNull OWWidget component, @NotNull String name) {
 		return wrap(find(component.unwrap(), name));
 	}
 
@@ -129,7 +129,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @return the first suitable component, or null
 	 */
 	@Override
-	public OWObject findObject(@NonNull String name) {
+	public OWObject findObject(@NotNull String name) {
 		return wrap(find(name));
 	}
 
@@ -143,7 +143,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @throws java.io.IOException
 	 */
 	@Override
-	public OWWidget parseAsObject(@NonNull String path) throws IOException {
+	public OWWidget parseAsObject(@NotNull String path) throws IOException {
 		return (OWWidget) wrap(parse(path));
 	}
 
@@ -157,7 +157,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @throws java.io.IOException
 	 */
 	@Override
-	public OWWidget parseAsObject(@NonNull String path, @NonNull Object handler) throws IOException {
+	public OWWidget parseAsObject(@NotNull String path, @NotNull Object handler) throws IOException {
 		return (OWWidget) wrap(parse(path, handler));
 	}
 
@@ -169,7 +169,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @throws java.io.IOException
 	 */
 	@Override
-	public OWWidget parseAsObject(@NonNull InputStream inputstream) throws IOException {
+	public OWWidget parseAsObject(@NotNull InputStream inputstream) throws IOException {
 		return (OWWidget) wrap(parse(inputstream));
 	}
 
@@ -182,7 +182,7 @@ public class DefaultOWThinlet extends Thinlet implements OWThinlet {
 	 * @throws java.io.IOException
 	 */
 	@Override
-	public OWWidget parseAsObject(@NonNull InputStream inputstream, @NonNull Object handler) throws IOException {
+	public OWWidget parseAsObject(@NotNull InputStream inputstream, @NotNull Object handler) throws IOException {
 		return (OWWidget) wrap(parse(inputstream, handler));
 	}
 

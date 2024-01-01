@@ -27,7 +27,7 @@ class GI_ClassStatement implements GenerateC_Item {
 		_evaNaode = a_evaNode;
 	}
 
-	public void setITE(final @NonNull IdentTableEntry ite) {
+	public void setITE(final @NotNull IdentTableEntry ite) {
 		EvaNode resolved = null;
 
 		if (ite.type != null)

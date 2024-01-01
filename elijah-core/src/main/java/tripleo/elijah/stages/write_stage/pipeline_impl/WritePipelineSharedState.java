@@ -24,7 +24,7 @@ public final class WritePipelineSharedState {
 	public  ElSystem                               sys;
 	private GenerateResult                         gr;
 
-	public WritePipelineSharedState(final @NonNull IPipelineAccess pa0) {
+	public WritePipelineSharedState(final @NotNull IPipelineAccess pa0) {
 		pa = pa0;
 		c  = pa0.getCompilation();
 	}
@@ -35,7 +35,7 @@ public final class WritePipelineSharedState {
 	}
 
 	@Contract(mutates = "this")
-	public void setGr(final @NonNull GenerateResult aGr) {
+	public void setGr(final @NotNull GenerateResult aGr) {
 		gr = aGr;
 	}
 }

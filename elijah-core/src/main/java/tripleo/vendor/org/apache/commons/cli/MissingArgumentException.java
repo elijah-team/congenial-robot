@@ -39,7 +39,7 @@ public class MissingArgumentException extends ParseException {
 	 * @param option the option requiring an argument
 	 * @since 1.2
 	 */
-	public MissingArgumentException(final @NonNull Option option) {
+	public MissingArgumentException(final @NotNull Option option) {
 		this("Missing argument for option: " + option.getKey());
 		this.option = option;
 	}

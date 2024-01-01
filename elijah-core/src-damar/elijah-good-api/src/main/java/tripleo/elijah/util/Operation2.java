@@ -14,12 +14,12 @@ public class Operation2<T> {
 
 	private final Diagnostic exc;
 
-	public static <T> @NonNull Operation2<T> failure(final Diagnostic aException) {
+	public static <T> @NotNull Operation2<T> failure(final Diagnostic aException) {
 		final Operation2<T> op = new Operation2<>(null, aException, Mode.FAILURE);
 		return op;
 	}
 
-	public static <T> @NonNull Operation2<T> success(final T aSuccess) {
+	public static <T> @NotNull Operation2<T> success(final T aSuccess) {
 		final Operation2<T> op = new Operation2<>(aSuccess, null, Mode.SUCCESS);
 		return op;
 	}

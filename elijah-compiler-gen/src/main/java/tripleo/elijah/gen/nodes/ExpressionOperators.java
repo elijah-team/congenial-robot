@@ -20,7 +20,7 @@ import org.jspecify.annotations.NonNull;
 public enum ExpressionOperators {
 	OP_MINUS, OP_MULT;
 
-	@NonNull
+	@NotNull
 	public String getSymbol() {
 		final String middle1;
 		switch (this) {

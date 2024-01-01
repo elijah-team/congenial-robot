@@ -41,12 +41,12 @@ public class ResolveError extends Exception implements Diagnostic {
 	}
 
 	@Override
-	public @NonNull String code() {
+	public @NotNull String code() {
 		return "S1000";
 	}
 
 	@Override
-	public void report(@NonNull PrintStream stream) {
+	public void report(@NotNull PrintStream stream) {
 		stream.printf("---[%s]---: %s%n", code(), message());
 		// linecache.print(primary);
 		for (Locatable sec : secondary()) {
@@ -56,34 +56,34 @@ public class ResolveError extends Exception implements Diagnostic {
 	}
 
 	@Override
-	public @NonNull Locatable primary() {
+	public @NotNull Locatable primary() {
 		if (typeName == null) {
 			return ident;
 		} else
 			return typeName;
 	}
 
-	private @NonNull String message() {
+	private @NotNull String message() {
 		if (resultsList().size() > 1)
 			return "Can't choose between alternatives";
 		else
 			return "Can't resolve";
 	}
 
-	@NonNull
+	@NotNull
 	public List<LookupResult> resultsList() {
 		return lrl.results();
 	}
 
 	@Override
-	public @NonNull List<Locatable> secondary() {
+	public @NotNull List<Locatable> secondary() {
 		return resultsList().stream()
 				.map(e -> (Locatable) e.getElement())
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public @NonNull Severity severity() {
+	public @NotNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

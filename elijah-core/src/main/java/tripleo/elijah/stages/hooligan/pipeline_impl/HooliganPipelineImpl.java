@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class HooliganPipelineImpl {
-	public void run(final @NonNull Compilation compilation) {
+	public void run(final @NotNull Compilation compilation) {
 		final Hooligan              hooligan = new Hooligan();
 		final List<OS_Module>       modules  = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class HooliganPipelineImpl {
 		cot.add(off);
 	}
 
-	private @NonNull List<EIT_Input> inputs_for_modules(final @NonNull List<OS_Module> aModules, final Compilation c) {
+	private @NotNull List<EIT_Input> inputs_for_modules(final @NotNull List<OS_Module> aModules, final Compilation c) {
 		return aModules.stream()
 				.map(mod -> new EIT_ModuleInput(mod, c))
 				.collect(Collectors.toList());

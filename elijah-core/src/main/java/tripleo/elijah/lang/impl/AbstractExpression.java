@@ -33,7 +33,7 @@ public abstract class AbstractExpression implements IExpression {
 		_kind = aType;
 	}
 
-	public @NonNull ExpressionList getArgs() {
+	public @NotNull ExpressionList getArgs() {
 		return args;
 	}
 

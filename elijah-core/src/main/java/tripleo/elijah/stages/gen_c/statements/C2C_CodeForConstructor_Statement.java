@@ -28,7 +28,7 @@ public class C2C_CodeForConstructor_Statement implements EG_Statement {
 	}
 
 	@Override
-	public @NonNull EX_Explanation getExplanation() {
+	public @NotNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("C2C_CodeForConstructor_Statement");
 	}
 
@@ -41,7 +41,7 @@ public class C2C_CodeForConstructor_Statement implements EG_Statement {
 		return tos.toString();
 	}
 
-	public void getTextInto(final @NonNull BufferTabbedOutputStream tos) {
+	public void getTextInto(final @NotNull BufferTabbedOutputStream tos) {
 		tos.put_string_ln(String.format("%s* ZC%d%s() {", class_name, class_code, constructorName));
 		tos.incr_tabs();
 		tos.put_string_ln(String.format("%s* R = GC_malloc(sizeof(%s));", class_name, class_name));

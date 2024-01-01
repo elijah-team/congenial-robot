@@ -32,7 +32,7 @@ public class CClassDecl {
 		ClassStatement xx = evaClass.getKlass();
 		xx.walkAnnotations(new AnnotationWalker() {
 			@Override
-			public void annotation(@NonNull AnnotationPart anno) {
+			public void annotation(@NotNull AnnotationPart anno) {
 				if (anno.annoClass().equals(Helpers.string_to_qualident("C.repr"))) {
 					if (anno.getExprs() != null) {
 						final ArrayList<IExpression> expressions = new ArrayList<IExpression>(anno.getExprs().expressions());

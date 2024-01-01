@@ -25,7 +25,7 @@ public class Zone {
 		return r;
 	}
 
-	public ZonePath getPath(final @NonNull IdentIA aIdentIA) {
+	public ZonePath getPath(final @NotNull IdentIA aIdentIA) {
 		if (members.containsKey(aIdentIA)) {
 			return (ZonePath) members.get(aIdentIA);
 		}

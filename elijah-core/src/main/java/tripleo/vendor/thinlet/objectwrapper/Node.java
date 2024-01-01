@@ -55,22 +55,22 @@ public class Node extends OWItem {
 		fthinlet.setBoolean(unwrap(), ThinletConstants.EXPANDED, value);
 	}
 
-	public @NonNull Node addNode(@NonNull Node item) {
+	public @NotNull Node addNode(@NotNull Node item) {
 		fthinlet.add(unwrap(), item.unwrap());
 		return this;
 	}
 
-	public @NonNull Node addNode(@NonNull Node item, int index) {
+	public @NotNull Node addNode(@NotNull Node item, int index) {
 		fthinlet.add(unwrap(), item.unwrap(), index);
 		return this;
 	}
 
-	public @NonNull Node removeNode(@NonNull Node item) {
+	public @NotNull Node removeNode(@NotNull Node item) {
 		fthinlet.remove(item.unwrap());
 		return this;
 	}
 
-	public @NonNull Node removeAllNode() {
+	public @NotNull Node removeAllNode() {
 		fthinlet.removeAll(unwrap());
 		return this;
 	}
@@ -83,7 +83,7 @@ public class Node extends OWItem {
 		return (Node) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Node @NonNull [] getNodes() {
+	public Node @NotNull [] getNodes() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Node[]   ret = new Node[o.length];
 		for (int i = 0; i < ret.length; i++)

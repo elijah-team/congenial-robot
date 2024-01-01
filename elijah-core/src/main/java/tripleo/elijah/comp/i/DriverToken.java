@@ -5,7 +5,7 @@ import org.jspecify.annotations.NonNull;
 
 public interface DriverToken {
 	@Contract(value = "_ -> new", pure = true)
-	static @NonNull DriverToken makeToken(@NonNull String s) {
+	static @NotNull DriverToken makeToken(@NotNull String s) {
 		return new DriverToken() {
 			@Override
 			public String asString() {

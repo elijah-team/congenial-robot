@@ -22,7 +22,7 @@ public class WhyNotGarish_Class implements WhyNotGarish_Item {
 		return GenerateC.GetTypeName.forGenClass(gc);
 	}
 
-	private void onFileGen(final @NonNull GenerateResultEnv aFileGen) {
+	private void onFileGen(final @NotNull GenerateResultEnv aFileGen) {
 		NotImplementedException.raise();
 	}
 

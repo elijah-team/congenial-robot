@@ -5,6 +5,6 @@ import org.jspecify.annotations.NonNull;
 public interface ParserClosure extends ProgramClosure {
 	OS_Package defaultPackageName(Qualident aPackageName);
 
-	@NonNull
+	@NotNull
 	OS_Module module();
 }

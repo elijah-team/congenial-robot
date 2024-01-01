@@ -49,13 +49,13 @@ public class TabbedOutputStream {
 	private boolean do_tabs    = false;
 	private boolean dont_close = false;
 
-	public TabbedOutputStream(final @NonNull OutputStream os) {
+	public TabbedOutputStream(final @NotNull OutputStream os) {
 		tabwidth = 0;
 		if (os == System.out) dont_close = true;
 		myStream = new BufferedWriter(new OutputStreamWriter(os));
 	}
 
-	public TabbedOutputStream(final @NonNull Writer w, boolean buffer_it) {
+	public TabbedOutputStream(final @NotNull Writer w, boolean buffer_it) {
 		tabwidth = 0;
 		//if (os == System.out) dont_close = true;
 		if (buffer_it)
@@ -98,7 +98,7 @@ public class TabbedOutputStream {
 		doIndent();
 	}
 
-	public void put_string_ln(final @NonNull String s) throws IOException {
+	public void put_string_ln(final @NotNull String s) throws IOException {
 		if (!is_connected())
 			throw new IllegalStateException("is_connected assertion failed");
 
@@ -110,7 +110,7 @@ public class TabbedOutputStream {
 		do_tabs = true;
 	}
 
-	public void put_string(final @NonNull String s) throws IOException {
+	public void put_string(final @NotNull String s) throws IOException {
 		if (!is_connected())
 			throw new IllegalStateException("is_connected assertion failed");
 
@@ -124,7 +124,7 @@ public class TabbedOutputStream {
 		return myStream != null;
 	}
 
-	public void put_string_ln_no_tabs(final @NonNull String s) throws IOException {
+	public void put_string_ln_no_tabs(final @NotNull String s) throws IOException {
 		if (!is_connected())
 			throw new IllegalStateException("is_connected assertion failed");
 
@@ -133,7 +133,7 @@ public class TabbedOutputStream {
 //		do_tabs = true;
 	}
 
-	public void quote_string(final @NonNull String s) throws IOException {
+	public void quote_string(final @NotNull String s) throws IOException {
 		if (!is_connected())
 			throw new IllegalStateException("is_connected assertion failed");
 

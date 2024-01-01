@@ -47,12 +47,12 @@ class CB_FindCIs implements CB_Action {
 
 	@Contract(pure = true)
 	@Override
-	public @NonNull String name() {
+	public @NotNull String name() {
 		return "FindCIs";
 	}
 
 	@Override
-	public @NonNull List<CB_OutputString> outputStrings() {
+	public @NotNull List<CB_OutputString> outputStrings() {
 		return o.get();
 	}
 }

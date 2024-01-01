@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class printer {
 
-	public static @NonNull String join(final @NonNull Map<String, MalVal> value,
+	public static @NotNull String join(final @NotNull Map<String, MalVal> value,
 									   final String delim, final Boolean print_readably) {
 		final ArrayList<String> strs = new ArrayList<String>();
 		for (final Map.Entry<String, MalVal> entry : value.entrySet()) {
@@ -29,18 +29,18 @@ public class printer {
 		return Joiner.on(" ").join(strs);
 	}
 
-	public static String _pr_str(final @NonNull MalVal mv,
+	public static String _pr_str(final @NotNull MalVal mv,
 								 final Boolean print_readably) {
 		return mv.toString(print_readably);
 	}
 
-	public static @NonNull String _pr_str_args(final @NonNull MalList args,
-											   final @NonNull String sep, final Boolean print_readably) {
+	public static @NotNull String _pr_str_args(final @NotNull MalList args,
+											   final @NotNull String sep, final Boolean print_readably) {
 		return join(args.getList(), sep, print_readably);
 	}
 
-	public static @NonNull String join(final @NonNull List<MalVal> value,
-									   final @NonNull String delim, final Boolean print_readably) {
+	public static @NotNull String join(final @NotNull List<MalVal> value,
+									   final @NotNull String delim, final Boolean print_readably) {
 		final ArrayList<String> strs = new ArrayList<String>();
 		for (final MalVal mv : value) {
 			strs.add(mv.toString(print_readably));

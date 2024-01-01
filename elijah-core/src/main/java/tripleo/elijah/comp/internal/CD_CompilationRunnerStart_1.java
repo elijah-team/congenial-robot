@@ -19,12 +19,12 @@ import static tripleo.elijah.util.Helpers.List_of;
 public class CD_CompilationRunnerStart_1 implements CD_CompilationRunnerStart {
 
 	@Override
-	public void start(final @NonNull CompilerInstructions aCompilerInstructions,
-					  final @NonNull CR_State crState,
-					  final @NonNull CB_Output out) {
-		final @NonNull CompilationRunner             cr             = crState.runner();
+	public void start(final @NotNull CompilerInstructions aCompilerInstructions,
+					  final @NotNull CR_State crState,
+					  final @NotNull CB_Output out) {
+		final @NotNull CompilationRunner             cr             = crState.runner();
 		final Compilation                            compilation    = crState.ca().getCompilation();
-		final @NonNull Compilation.CompilationConfig cfg            = compilation.cfg();
+		final @NotNull Compilation.CompilationConfig cfg            = compilation.cfg();
 		final CompilationEnclosure                   ce             = compilation.getCompilationEnclosure();
 		final List<CompilerInput>                    compilerInputs = ce.getCompilerInput();
 
@@ -36,9 +36,9 @@ public class CD_CompilationRunnerStart_1 implements CD_CompilationRunnerStart {
 		___start(crState, beginning, out);
 	}
 
-	protected void ___start(final @NonNull CR_State crState,
-							final @NonNull CompilerBeginning beginning,
-							final @NonNull CB_Output out) {
+	protected void ___start(final @NotNull CR_State crState,
+							final @NotNull CompilerBeginning beginning,
+							final @NotNull CB_Output out) {
 		if (crState.started) {
 			boolean should_never_happen = true;
 			assert should_never_happen;
@@ -51,8 +51,8 @@ public class CD_CompilationRunnerStart_1 implements CD_CompilationRunnerStart {
 		final CR_AlmostComplete       f3 = new CR_AlmostComplete();
 		final CR_RunBetterAction      f4 = new CR_RunBetterAction();
 
-		final @NonNull List<CR_Action>     crActionList       = List_of(/*f1,*/ f2, /*f3,*/ f4);
-		final @NonNull List<Operation<Ok>> crActionResultList = new ArrayList<>(crActionList.size());
+		final @NotNull List<CR_Action>     crActionList       = List_of(/*f1,*/ f2, /*f3,*/ f4);
+		final @NotNull List<Operation<Ok>> crActionResultList = new ArrayList<>(crActionList.size());
 
 		for (final CR_Action each : crActionList) {
 			each.attach(crState.runner());

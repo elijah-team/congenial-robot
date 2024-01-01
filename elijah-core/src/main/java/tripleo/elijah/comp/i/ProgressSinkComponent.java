@@ -10,7 +10,7 @@ public enum ProgressSinkComponent {
 		}
 
 		@Override
-		public @NonNull String printErr(final IProgressSink.Codes aCode, final int aType, final Object[] aParams) {
+		public @NotNull String printErr(final IProgressSink.Codes aCode, final int aType, final Object[] aParams) {
 			return "*** CCI ->> " + aParams[0]; // ci.getName
 		}
 	},

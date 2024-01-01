@@ -18,11 +18,11 @@ public enum EN_Name_ {
     ;
 
     @Contract(value = "_ -> new", pure = true)
-    static @NonNull EN_Name create(@NonNull String name) {
+    static @NotNull EN_Name create(@NotNull String name) {
         return new EN_Name() {
-            private final @NonNull List<EN_Usage> usages = new LinkedList<>();
-            private final @NonNull List<EN_Understanding> understandings = new LinkedList<>();
-            private final @NonNull Eventual<EN_Type> typePromise = new Eventual<>();
+            private final @NotNull List<EN_Usage> usages = new LinkedList<>();
+            private final @NotNull List<EN_Understanding> understandings = new LinkedList<>();
+            private final @NotNull Eventual<EN_Type> typePromise = new Eventual<>();
 
             @Override
             public String getText() {
@@ -50,7 +50,7 @@ public enum EN_Name_ {
             }
 
             @Override
-            public boolean hasUnderstanding(@NonNull Class className) {
+            public boolean hasUnderstanding(@NotNull Class className) {
                 return understandings.stream()
                         .anyMatch(className::isInstance);
             }
@@ -62,19 +62,19 @@ public enum EN_Name_ {
         };
     }
 
-    public static void assertUnderstanding(@NonNull IdentExpression aIdentExpression, final EN_Understanding u) {
+    public static void assertUnderstanding(@NotNull IdentExpression aIdentExpression, final EN_Understanding u) {
         aIdentExpression.getName().addUnderstanding(u);
     }
 
-    public static void assertUnderstanding(@NonNull EN_Name aName, EN_Understanding u) {
+    public static void assertUnderstanding(@NotNull EN_Name aName, EN_Understanding u) {
         aName.addUnderstanding(u);
     }
 
     public static EN_Name create(OS_ElementName name) {
         return new EN_Name() {
-            private final @NonNull List<EN_Usage> usages = new LinkedList<>();
-            private final @NonNull List<EN_Understanding> understandings = new LinkedList<>();
-            private final @NonNull Eventual<EN_Type> typePromise = new Eventual<>();
+            private final @NotNull List<EN_Usage> usages = new LinkedList<>();
+            private final @NotNull List<EN_Understanding> understandings = new LinkedList<>();
+            private final @NotNull Eventual<EN_Type> typePromise = new Eventual<>();
 
             @Override
             public String getText() {
@@ -102,7 +102,7 @@ public enum EN_Name_ {
             }
 
             @Override
-            public boolean hasUnderstanding(@NonNull Class className) {
+            public boolean hasUnderstanding(@NotNull Class className) {
 //                for (EN_Understanding und : understandings) {
 //                    if (className.isInstance(und)) {
 //                        return true;

@@ -25,7 +25,7 @@ public class DR_Ident implements DR_Item {
 	private final           List<DT_ResolveObserver>                    resolveObserverList  = new LinkedList<>();
 	private final @Nullable IdentExpression                             ident;
 	private final @Nullable VariableTableEntry                          vteBl1;
-	private final @NonNull  List<DoneCallback<DR_PossibleType>>         typePossibles        = new ArrayList<>();
+	private final @NotNull  List<DoneCallback<DR_PossibleType>>         typePossibles        = new ArrayList<>();
 	private final @Nullable IdentTableEntry                             _identTableEntry;
 	private final           BaseEvaFunction                             baseEvaFunction;
 	private final           int                                         mode;
@@ -33,7 +33,7 @@ public class DR_Ident implements DR_Item {
 	private final           List<DR_PossibleType>                       typeProposals        = new ArrayList<>();
 	boolean _b;
 
-	public DR_Ident(final @NonNull IdentTableEntry aIdentTableEntry, final BaseEvaFunction aBaseEvaFunction) {
+	public DR_Ident(final @NotNull IdentTableEntry aIdentTableEntry, final BaseEvaFunction aBaseEvaFunction) {
 		ident            = aIdentTableEntry.getIdent();
 		vteBl1           = null;
 		_identTableEntry = aIdentTableEntry;
@@ -65,15 +65,15 @@ public class DR_Ident implements DR_Item {
 		ident            = null;
 	}
 
-	public static @NonNull DR_Ident create(final IdentExpression aIdent, final VariableTableEntry aVteBl1, final BaseEvaFunction aBaseEvaFunction) {
+	public static @NotNull DR_Ident create(final IdentExpression aIdent, final VariableTableEntry aVteBl1, final BaseEvaFunction aBaseEvaFunction) {
 		return new DR_Ident(aIdent, aVteBl1, aBaseEvaFunction);
 	}
 
-	public static @NonNull DR_Ident create(@NonNull IdentTableEntry aIdentTableEntry, BaseEvaFunction aGeneratedFunction) {
+	public static @NotNull DR_Ident create(@NotNull IdentTableEntry aIdentTableEntry, BaseEvaFunction aGeneratedFunction) {
 		return new DR_Ident(aIdentTableEntry, aGeneratedFunction);
 	}
 
-	public static @NonNull DR_Ident create(final VariableTableEntry aVariableTableEntry, final BaseEvaFunction aGeneratedFunction) {
+	public static @NotNull DR_Ident create(final VariableTableEntry aVariableTableEntry, final BaseEvaFunction aGeneratedFunction) {
 		return new DR_Ident(aVariableTableEntry, aGeneratedFunction);
 	}
 
@@ -146,7 +146,7 @@ public class DR_Ident implements DR_Item {
 				var mainLogic = procIA.getEntry();
 
 				if (mainLogic.expression_num instanceof IdentIA mlIdentIA) {
-					@NonNull final IdentTableEntry mlident = mlIdentIA.getEntry();
+					@NotNull final IdentTableEntry mlident = mlIdentIA.getEntry();
 
 					final DR_Ident ident1 = baseEvaFunction.getIdent(mlident);
 
@@ -161,7 +161,7 @@ public class DR_Ident implements DR_Item {
 		});
 	}
 
-	public void addUnderstanding(final @NonNull Understanding aUnderstanding) {
+	public void addUnderstanding(final @NotNull Understanding aUnderstanding) {
 		final Compilation compilation = this.baseEvaFunction.module().getCompilation();
 		if (compilation.reports().outputOn(Finally.Outs.Out_153)) {
 			System.err.println("*** 162 Understanding DR_Ident >> " + this.simplified() + " " + aUnderstanding.asString());
@@ -219,7 +219,7 @@ public class DR_Ident implements DR_Item {
 		addUnderstanding(new ClassUnderstanding(aDcs));
 	}
 
-	public void resolve(final @NonNull IElementHolder aEh, final ProcTableEntry aPte) {
+	public void resolve(final @NotNull IElementHolder aEh, final ProcTableEntry aPte) {
 		addUnderstanding(new ElementUnderstanding(aEh.getElement()));
 		addUnderstanding(new PTEUnderstanding(aPte));
 	}
@@ -233,7 +233,7 @@ public class DR_Ident implements DR_Item {
 	}
 
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return "DR_Ident{" +
 				"ident=" + ident +
 				", vteBl1=" + vteBl1 +
@@ -246,7 +246,7 @@ public class DR_Ident implements DR_Item {
 				'}';
 	}
 
-	public void try_resolve_normal(final @NonNull Context aContext) {
+	public void try_resolve_normal(final @NotNull Context aContext) {
 		LookupResultList     lrl1 = aContext.lookup(this._identTableEntry.getIdent().getText());
 		@Nullable OS_Element best = lrl1.chooseBest(null);
 
@@ -286,7 +286,7 @@ public class DR_Ident implements DR_Item {
 		}
 
 		@Override
-		public @NonNull String asString() {
+		public @NotNull String asString() {
 			String xx = x.toString();
 
 			if (x instanceof VariableStatement vs) {
@@ -333,7 +333,7 @@ public class DR_Ident implements DR_Item {
 		}
 
 		@Override
-		public @NonNull String asString() {
+		public @NotNull String asString() {
 			return "ClassUnderstanding " + dcs.classInvocation();
 		}
 

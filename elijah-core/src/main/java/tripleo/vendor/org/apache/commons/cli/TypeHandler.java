@@ -39,7 +39,7 @@ public class TypeHandler {
 	 * @return The instance of {@code obj} initialized with the value of {@code str}.
 	 * @throws ParseException if the value creation for the given object type failed
 	 */
-	public static Object createValue(final @NonNull String str, final Object obj) throws ParseException {
+	public static Object createValue(final @NotNull String str, final Object obj) throws ParseException {
 		return createValue(str, (Class<?>) obj);
 	}
 
@@ -53,7 +53,7 @@ public class TypeHandler {
 	 * @throws ParseException if the value creation for the given class failed
 	 */
 	@SuppressWarnings("unchecked") // returned value will have type T because it is fixed by clazz
-	public static <T> T createValue(final @NonNull String str, final Class<T> clazz) throws ParseException {
+	public static <T> T createValue(final @NotNull String str, final Class<T> clazz) throws ParseException {
 		if (PatternOptionBuilder.STRING_VALUE == clazz) {
 			return (T) str;
 		}
@@ -91,7 +91,7 @@ public class TypeHandler {
 	 * @return the initialized object
 	 * @throws ParseException if the class could not be found or the object could not be created
 	 */
-	public static @NonNull Object createObject(final String classname) throws ParseException {
+	public static @NotNull Object createObject(final String classname) throws ParseException {
 		final Class<?> cl;
 
 		try {
@@ -114,7 +114,7 @@ public class TypeHandler {
 	 * @return the number represented by {@code str}
 	 * @throws ParseException if {@code str} is not a number
 	 */
-	public static @NonNull Number createNumber(final @NonNull String str) throws ParseException {
+	public static @NotNull Number createNumber(final @NotNull String str) throws ParseException {
 		try {
 			if (str.indexOf('.') != -1) {
 				return Double.valueOf(str);
@@ -145,7 +145,7 @@ public class TypeHandler {
 	 * @return The class if it is found
 	 * @throws ParseException if the class could not be found
 	 */
-	public static @NonNull Class<?> createClass(final String classname) throws ParseException {
+	public static @NotNull Class<?> createClass(final String classname) throws ParseException {
 		try {
 			return Class.forName(classname);
 		} catch (final ClassNotFoundException e) {
@@ -159,7 +159,7 @@ public class TypeHandler {
 	 * @param str the File location
 	 * @return The file represented by {@code str}.
 	 */
-	public static @NonNull File createFile(final @NonNull String str) {
+	public static @NotNull File createFile(final @NotNull String str) {
 		return new File(str);
 	}
 
@@ -170,7 +170,7 @@ public class TypeHandler {
 	 * @return The file input stream represented by {@code str}.
 	 * @throws ParseException if the file is not exist or not readable
 	 */
-	public static @NonNull FileInputStream openFile(final @NonNull String str) throws ParseException {
+	public static @NotNull FileInputStream openFile(final @NotNull String str) throws ParseException {
 		try {
 			return new FileInputStream(str);
 		} catch (final FileNotFoundException e) {
@@ -200,7 +200,7 @@ public class TypeHandler {
 	 * @return The URL in {@code str} is well-formed
 	 * @throws ParseException if the URL in {@code str} is not well-formed
 	 */
-	public static @NonNull URL createURL(final @NonNull String str) throws ParseException {
+	public static @NotNull URL createURL(final @NotNull String str) throws ParseException {
 		try {
 			return new URL(str);
 		} catch (final MalformedURLException e) {

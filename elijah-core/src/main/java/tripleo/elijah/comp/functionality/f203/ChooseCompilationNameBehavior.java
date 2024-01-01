@@ -13,7 +13,7 @@ public class ChooseCompilationNameBehavior implements ChooseDirectoryNameBehavio
 	}
 
 	@Override
-	public @NonNull File chooseDirectory() {
+	public @NotNull File chooseDirectory() {
 		final String c_name = c.getCompilationNumberString();
 
 		final File fn00 = new File("COMP", c_name);

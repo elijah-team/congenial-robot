@@ -67,8 +67,8 @@ public class GetIdentIAPathTest_ForC {
 	@Ignore
 	@Test
 	public void testManualXDotFoo() {
-		@NonNull IdentExpression x_ident   = IdentExpression.forString("X");
-		@NonNull IdentExpression foo_ident = IdentExpression.forString("foo");
+		@NotNull IdentExpression x_ident   = IdentExpression.forString("X");
+		@NotNull IdentExpression foo_ident = IdentExpression.forString("foo");
 		//
 		VariableSequence vsq = new VariableSequenceImpl(null);
 		vsq.setParent(mock(ClassStatement.class));
@@ -90,8 +90,8 @@ public class GetIdentIAPathTest_ForC {
 	@Ignore
 	@Test
 	public void testManualXDotFoo2() {
-		@NonNull IdentExpression x_ident   = IdentExpression.forString("x");
-		@NonNull IdentExpression foo_ident = IdentExpression.forString("foo");
+		@NotNull IdentExpression x_ident   = IdentExpression.forString("x");
+		@NotNull IdentExpression foo_ident = IdentExpression.forString("foo");
 		//
 		final OS_Element mock_class = mock(ClassStatement.class);
 		when(gf.getFD().getParent()).thenReturn(mock_class);
@@ -127,9 +127,9 @@ public class GetIdentIAPathTest_ForC {
 		DotExpression       expr = new DotExpressionImpl(x_ident, foo_ident);
 		InstructionArgument xx   = gen.simplify_expression(expr, gf, ctx);
 		//
-		@NonNull IdentTableEntry x_ite = gf.getIdentTableEntry(0); // x
+		@NotNull IdentTableEntry x_ite = gf.getIdentTableEntry(0); // x
 		x_ite.setResolvedElement(x_vs, new GG_ResolveEvent() {String id="GetIdentIAPathTest_ForC::testManualXDotFoo2";});
-		@NonNull IdentTableEntry foo_ite = gf.getIdentTableEntry(1); // foo
+		@NotNull IdentTableEntry foo_ite = gf.getIdentTableEntry(1); // foo
 		foo_ite.setResolvedElement(foo_vs, new GG_ResolveEvent() {String id="GetIdentIAPathTest_ForC::testManualXDotFoo2";});
 		//
 		IdentIA ident_ia = (IdentIA) xx;
@@ -144,7 +144,7 @@ public class GetIdentIAPathTest_ForC {
 	@Test
 	public void testManualXDotFoo3() {
 		IdentExpression          x_ident   = Helpers.string_to_ident("x");
-		@NonNull IdentExpression foo_ident = Helpers.string_to_ident("foo");
+		@NotNull IdentExpression foo_ident = Helpers.string_to_ident("foo");
 		//
 		final Boilerplate boilerplate = new Boilerplate();
 		boilerplate.get();
@@ -173,7 +173,7 @@ public class GetIdentIAPathTest_ForC {
 		foo_vs.setName(foo_ident);
 
 		IdentIA                  ident_ia = (IdentIA) xx;
-		@NonNull IdentTableEntry ite      = ((IdentIA) xx).getEntry();
+		@NotNull IdentTableEntry ite      = ((IdentIA) xx).getEntry();
 		ite.setResolvedElement(foo_vs, new GG_ResolveEvent() {String id="GetIdentIAPathTest_ForC::testManualXDotFoo3";});
 
 		String x = getIdentIAPath(ident_ia, gf, generateC, compilation.getCompilationEnclosure());
@@ -181,7 +181,7 @@ public class GetIdentIAPathTest_ForC {
 		Assert.assertEquals("vvx->vmfoo", x);
 	}
 
-	String getIdentIAPath(final @NonNull IdentIA ia2, EvaFunction generatedFunction, @NonNull GenerateC gc, CompilationEnclosure ce) {
+	String getIdentIAPath(final @NotNull IdentIA ia2, EvaFunction generatedFunction, @NotNull GenerateC gc, CompilationEnclosure ce) {
 		final CReference reference = new CReference(gc.repo(), ce);
 		var              x         = reference.getIdentIAPath2(ia2, Generate_Code_For_Method.AOG.GET, null);
 		System.err.println("258 " + x);
@@ -191,8 +191,8 @@ public class GetIdentIAPathTest_ForC {
 	@Ignore
 	@Test
 	public void testManualXDotFooWithFooBeingFunction() {
-		@NonNull IdentExpression x_ident   = Helpers.string_to_ident("x");
-		@NonNull IdentExpression foo_ident = Helpers.string_to_ident("foo");
+		@NotNull IdentExpression x_ident   = Helpers.string_to_ident("x");
+		@NotNull IdentExpression foo_ident = Helpers.string_to_ident("foo");
 		//
 		Context ctx         = mock(Context.class);
 		Context mockContext = mock(Context.class);

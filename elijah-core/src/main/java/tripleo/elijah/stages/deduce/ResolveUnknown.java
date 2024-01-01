@@ -20,21 +20,21 @@ import java.util.List;
  */
 public class ResolveUnknown implements Diagnostic {
 	@Override
-	public @NonNull String code() {
+	public @NotNull String code() {
 		return "E1003";
 	}
 
-	private @NonNull String message() {
+	private @NotNull String message() {
 		return "Can't resolve variable";
 	}
 
 	@Override
-	public @NonNull Locatable primary() {
+	public @NotNull Locatable primary() {
 		return null;
 	}
 
 	@Override
-	public void report(@NonNull PrintStream stream) {
+	public void report(@NotNull PrintStream stream) {
 		stream.printf("---[%s]---: %s%n", code(), message());
 		// linecache.print(primary);
 		for (Locatable sec : secondary()) {
@@ -44,12 +44,12 @@ public class ResolveUnknown implements Diagnostic {
 	}
 
 	@Override
-	public @NonNull List<Locatable> secondary() {
+	public @NotNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NonNull Severity severity() {
+	public @NotNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

@@ -9,7 +9,7 @@ public class C_ProcedureCall {
 	private List<String> args;
 	private String       targetName;
 
-	public @NonNull String getString() {
+	public @NotNull String getString() {
 
 		final String str = targetName +
 				"(" +

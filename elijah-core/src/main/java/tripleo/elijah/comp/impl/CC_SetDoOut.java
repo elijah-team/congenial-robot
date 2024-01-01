@@ -12,7 +12,7 @@ public class CC_SetDoOut implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final @NonNull Compilation c) {
+	public void apply(final @NotNull Compilation c) {
 		c.cfg().do_out = flag;
 	}
 }

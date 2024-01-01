@@ -11,7 +11,7 @@ public interface ExpressionList extends Iterable<IExpression> {
 	Collection<IExpression> expressions();
 
 	@Override
-	@NonNull
+	@NotNull
 	Iterator<IExpression> iterator();
 
 	IExpression next(IExpression aExpr);

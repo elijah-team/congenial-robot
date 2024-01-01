@@ -6,11 +6,11 @@ import org.jspecify.annotations.Nullable;
 import java.util.*;
 
 public class types {
-	public static @NonNull MalConstant Nil   = new MalConstant("nil");
-	public static @NonNull MalConstant True  = new MalConstant("true");
-	public static @NonNull MalConstant False = new MalConstant("false");
+	public static @NotNull MalConstant Nil   = new MalConstant("nil");
+	public static @NotNull MalConstant True  = new MalConstant("true");
+	public static @NotNull MalConstant False = new MalConstant("false");
 
-	public static @NonNull Boolean _equal_Q(final @NonNull MalVal a, final @NonNull MalVal b) {
+	public static @NotNull Boolean _equal_Q(final @NotNull MalVal a, final @NotNull MalVal b) {
 		final Class ota = a.getClass();
 		final Class otb = b.getClass();
 		if (!((ota == otb) ||
@@ -37,7 +37,7 @@ public class types {
 					}
 				}
 				return true;
-			} else if (a instanceof final @NonNull MalHashMap mhm) {
+			} else if (a instanceof final @NotNull MalHashMap mhm) {
 				if (((MalHashMap) a).value.size() != ((MalHashMap) b).value.size()) {
 					return false;
 				}
@@ -123,7 +123,7 @@ public class types {
 			meta = m;
 		}
 
-		public @NonNull Boolean list_Q() {
+		public @NotNull Boolean list_Q() {
 			return false;
 		}
 	}
@@ -135,7 +135,7 @@ public class types {
 			value = name;
 		}
 
-		public @NonNull MalConstant copy() throws MalThrowable {
+		public @NotNull MalConstant copy() throws MalThrowable {
 			return this;
 		}
 
@@ -151,16 +151,16 @@ public class types {
 			value = v;
 		}
 
-		public @NonNull MalInteger copy() throws MalThrowable {
+		public @NotNull MalInteger copy() throws MalThrowable {
 			return this;
 		}
 
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return value.toString();
 		}
 
-		public @NonNull MalInteger add(final @NonNull MalInteger other) {
+		public @NotNull MalInteger add(final @NotNull MalInteger other) {
 			return new MalInteger(value + other.getValue());
 		}
 
@@ -168,31 +168,31 @@ public class types {
 			return value;
 		}
 
-		public @NonNull MalInteger subtract(final @NonNull MalInteger other) {
+		public @NotNull MalInteger subtract(final @NotNull MalInteger other) {
 			return new MalInteger(value - other.getValue());
 		}
 
-		public @NonNull MalInteger multiply(final @NonNull MalInteger other) {
+		public @NotNull MalInteger multiply(final @NotNull MalInteger other) {
 			return new MalInteger(value * other.getValue());
 		}
 
-		public @NonNull MalInteger divide(final @NonNull MalInteger other) {
+		public @NotNull MalInteger divide(final @NotNull MalInteger other) {
 			return new MalInteger(value / other.getValue());
 		}
 
-		public MalConstant lt(final @NonNull MalInteger other) {
+		public MalConstant lt(final @NotNull MalInteger other) {
 			return (value < other.getValue()) ? True : False;
 		}
 
-		public MalConstant lte(final @NonNull MalInteger other) {
+		public MalConstant lte(final @NotNull MalInteger other) {
 			return (value <= other.getValue()) ? True : False;
 		}
 
-		public MalConstant gt(final @NonNull MalInteger other) {
+		public MalConstant gt(final @NotNull MalInteger other) {
 			return (value > other.getValue()) ? True : False;
 		}
 
-		public MalConstant gte(final @NonNull MalInteger other) {
+		public MalConstant gte(final @NotNull MalInteger other) {
 			return (value >= other.getValue()) ? True : False;
 		}
 	}
@@ -204,11 +204,11 @@ public class types {
 			value = v;
 		}
 
-		public MalSymbol(final @NonNull MalString v) {
+		public MalSymbol(final @NotNull MalString v) {
 			value = v.getValue();
 		}
 
-		public @NonNull MalSymbol copy() throws MalThrowable {
+		public @NotNull MalSymbol copy() throws MalThrowable {
 			return this;
 		}
 
@@ -229,11 +229,11 @@ public class types {
 			value = v;
 		}
 
-		public @NonNull MalString copy() throws MalThrowable {
+		public @NotNull MalString copy() throws MalThrowable {
 			return this;
 		}
 
-		public @NonNull String toString(final Boolean print_readably) {
+		public @NotNull String toString(final Boolean print_readably) {
 			if (value.length() > 0 && value.charAt(0) == '\u029e') {
 				return ":" + value.substring(1);
 			} else if (print_readably) {
@@ -248,13 +248,13 @@ public class types {
 		}
 
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return "\"" + value + "\"";
 		}
 	}
 
 	public static class MalList extends MalVal {
-		@NonNull String start = "(", end = ")";
+		@NotNull String start = "(", end = ")";
 		List value;
 
 		public MalList(final List val) {
@@ -266,28 +266,28 @@ public class types {
 			conj_BANG(mvs);
 		}
 
-		public @NonNull MalList conj_BANG(final MalVal... mvs) {
+		public @NotNull MalList conj_BANG(final MalVal... mvs) {
 			Collections.addAll(value, mvs);
 			return this;
 		}
 
-		public @NonNull MalList copy() throws MalThrowable {
+		public @NotNull MalList copy() throws MalThrowable {
 			final MalList new_ml = new MalList();
 			new_ml.value.addAll(value);
 			meta = meta;
 			return new_ml;
 		}
 
-		public @NonNull String toString(final Boolean print_readably) {
+		public @NotNull String toString(final Boolean print_readably) {
 			return start + printer.join(value, " ", print_readably) + end;
 		}
 
-		public @NonNull Boolean list_Q() {
+		public @NotNull Boolean list_Q() {
 			return true;
 		}
 
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return start + printer.join(value, " ", true) + end;
 		}
 
@@ -299,7 +299,7 @@ public class types {
 			return (MalVal) value.get(idx);
 		}
 
-		public @NonNull MalList rest() {
+		public @NotNull MalList rest() {
 			if (size() > 0) {
 				return new MalList(value.subList(1, value.size()));
 			} else {
@@ -307,7 +307,7 @@ public class types {
 			}
 		}
 
-		public @NonNull Integer size() {
+		public @NotNull Integer size() {
 			return value.size();
 		}
 
@@ -315,7 +315,7 @@ public class types {
 			return slice(start, value.size());
 		}
 
-		public @NonNull MalList slice(final Integer start, final Integer end) {
+		public @NotNull MalList slice(final Integer start, final Integer end) {
 			return new MalList(value.subList(start, end));
 		}
 	}
@@ -334,18 +334,18 @@ public class types {
 			end   = "]";
 		}
 
-		public @NonNull MalVector copy() throws MalThrowable {
+		public @NotNull MalVector copy() throws MalThrowable {
 			final MalVector new_mv = new MalVector();
 			new_mv.value.addAll(value);
 			meta = meta;
 			return new_mv;
 		}
 
-		public @NonNull Boolean list_Q() {
+		public @NotNull Boolean list_Q() {
 			return false;
 		}
 
-		public @NonNull MalVector slice(final Integer start, final Integer end) {
+		public @NotNull MalVector slice(final Integer start, final Integer end) {
 			return new MalVector(value.subList(start, end));
 		}
 	}
@@ -357,12 +357,12 @@ public class types {
 			value = val;
 		}
 
-		public MalHashMap(final @NonNull MalList lst) {
+		public MalHashMap(final @NotNull MalList lst) {
 			value = new HashMap<String, MalVal>();
 			assoc_BANG(lst);
 		}
 
-		public @NonNull MalHashMap assoc_BANG(final @NonNull MalList lst) {
+		public @NotNull MalHashMap assoc_BANG(final @NotNull MalList lst) {
 			for (Integer i = 0; i < lst.value.size(); i += 2) {
 				value.put(((MalString) lst.nth(i)).getValue(),
 						  lst.nth(i + 1));
@@ -375,7 +375,7 @@ public class types {
 			assoc_BANG(mvs);
 		}
 
-		public @NonNull MalHashMap assoc_BANG(final MalVal @NonNull ... mvs) {
+		public @NotNull MalHashMap assoc_BANG(final MalVal @NotNull ... mvs) {
 			for (Integer i = 0; i < mvs.length; i += 2) {
 				value.put(((MalSymbol) mvs[i]).getName(),
 						  mvs[i + 1]);
@@ -383,7 +383,7 @@ public class types {
 			return this;
 		}
 
-		public @NonNull MalHashMap copy() throws MalThrowable {
+		public @NotNull MalHashMap copy() throws MalThrowable {
 			final Map<String, MalVal> shallowCopy = new HashMap<String, MalVal>();
 			shallowCopy.putAll(value);
 			final MalHashMap new_hm = new MalHashMap(shallowCopy);
@@ -391,27 +391,27 @@ public class types {
 			return new_hm;
 		}
 
-		public @NonNull String toString(final Boolean print_readably) {
+		public @NotNull String toString(final Boolean print_readably) {
 			return "{" + printer.join(value, " ", print_readably) + "}";
 		}
 
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return "{" + printer.join(value, " ", true) + "}";
 		}
 
-		public @NonNull Set _entries() {
+		public @NotNull Set _entries() {
 			return value.entrySet();
 		}
 
-		public @NonNull MalHashMap dissoc_BANG(final @NonNull MalList lst) {
+		public @NotNull MalHashMap dissoc_BANG(final @NotNull MalList lst) {
 			for (Integer i = 0; i < lst.value.size(); i++) {
 				value.remove(((MalString) lst.nth(i)).getValue());
 			}
 			return this;
 		}
 
-		public @NonNull Integer size() {
+		public @NotNull Integer size() {
 			return value.size();
 		}
 	}
@@ -423,16 +423,16 @@ public class types {
 			this.value = value;
 		}
 
-		public @NonNull MalAtom copy() throws MalThrowable {
+		public @NotNull MalAtom copy() throws MalThrowable {
 			return new MalAtom(value);
 		}
 
-		public @NonNull String toString(final Boolean print_readably) {
+		public @NotNull String toString(final Boolean print_readably) {
 			return "(atom " + printer._pr_str(value, print_readably) + ")";
 		}
 
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return "(atom " + printer._pr_str(value, true) + ")";
 		}
 	}
@@ -453,7 +453,7 @@ public class types {
 			this.params = params;
 		}
 
-		public @NonNull MalFunction copy() throws MalThrowable {
+		public @NotNull MalFunction copy() throws MalThrowable {
 			try {
 				// WARNING: clone() is broken:
 				//   http://www.artima.com/intv/bloch13.html
@@ -485,7 +485,7 @@ public class types {
 			return params;
 		}
 
-		public tripleo.vendor.mal.env.@NonNull Env genEnv(final @NonNull MalList args) {
+		public tripleo.vendor.mal.env.@NotNull Env genEnv(final @NotNull MalList args) {
 			return new env.Env(env, params, args);
 		}
 

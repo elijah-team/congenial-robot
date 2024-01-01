@@ -11,27 +11,27 @@ public class TooManyEz_BeSpecific implements Diagnostic {
 	final String message = "Too many .ez files, be specific.";
 
 	@Override
-	public @NonNull String code() {
+	public @NotNull String code() {
 		return "9997";
 	}
 
 	@Override
-	public @NonNull Locatable primary() {
+	public @NotNull Locatable primary() {
 		return null;
 	}
 
 	@Override
-	public void report(@NonNull PrintStream stream) {
+	public void report(@NotNull PrintStream stream) {
 		stream.println(String.format("%s %s", code(), message));
 	}
 
 	@Override
-	public @NonNull List<Locatable> secondary() {
+	public @NotNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NonNull Severity severity() {
+	public @NotNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

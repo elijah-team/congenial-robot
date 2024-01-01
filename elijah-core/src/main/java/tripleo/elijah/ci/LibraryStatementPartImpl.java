@@ -33,14 +33,14 @@ public class LibraryStatementPartImpl implements LibraryStatementPart {
 	}
 
 	@Override
-	public void addDirective(final @NonNull Token token, final IExpression iExpression) {
+	public void addDirective(final @NotNull Token token, final IExpression iExpression) {
 		if (dirs == null)
 			dirs = new ArrayList<Directive>();
 		dirs.add(new Directive(token, iExpression));
 	}
 
 	@Override
-	public void setDirName(final @NonNull Token dirName) {
+	public void setDirName(final @NotNull Token dirName) {
 		this.dirName = dirName.getText();
 	}
 
@@ -55,7 +55,7 @@ public class LibraryStatementPartImpl implements LibraryStatementPart {
 	}
 
 	@Override
-	public void setName(final @NonNull Token i1) {
+	public void setName(final @NotNull Token i1) {
 		name = i1.getText();
 	}
 
@@ -69,7 +69,7 @@ public class LibraryStatementPartImpl implements LibraryStatementPart {
 		private final IExpression expression;
 		private final String      name;
 
-		public Directive(final @NonNull Token token_, final IExpression expression_) {
+		public Directive(final @NotNull Token token_, final IExpression expression_) {
 			name       = token_.getText();
 			expression = expression_;
 		}

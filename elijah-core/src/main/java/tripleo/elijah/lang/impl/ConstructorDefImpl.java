@@ -87,7 +87,7 @@ public class ConstructorDefImpl extends BaseFunctionDef implements tripleo.elija
 	}
 
 	@Override
-	public void setHeader(@NonNull FunctionHeader aFunctionHeader) {
+	public void setHeader(@NotNull FunctionHeader aFunctionHeader) {
 		setFal(aFunctionHeader.getFal());
 //		set(aFunctionHeader.getModifier());
 		assert aFunctionHeader.getModifier() == null;
@@ -102,7 +102,7 @@ public class ConstructorDefImpl extends BaseFunctionDef implements tripleo.elija
 	}
 
 	@Override
-	public void visitGen(@NonNull ElElementVisitor visit) {
+	public void visitGen(@NotNull ElElementVisitor visit) {
 		visit.visitConstructorDef(this);
 	}
 
@@ -112,7 +112,7 @@ public class ConstructorDefImpl extends BaseFunctionDef implements tripleo.elija
 	}
 
 	@Override
-	public void serializeTo(@NonNull SmallWriter sw) {
+	public void serializeTo(@NotNull SmallWriter sw) {
 		// TODO Auto-generated method stub
 		sw.fieldIdent("name", this.getNameNode());
 		//throw new NotImplementedException();

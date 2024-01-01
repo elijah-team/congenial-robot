@@ -23,7 +23,7 @@ public class QuerySourceFileToModule {
 		compilation = aCompilation;
 	}
 
-	public @NonNull Operation<OS_Module> calculate() {
+	public @NotNull Operation<OS_Module> calculate() {
 		final String      f      = params.sourceFilename();
 		final InputStream s      = params.inputStream();
 		final boolean     do_out = params.do_out();

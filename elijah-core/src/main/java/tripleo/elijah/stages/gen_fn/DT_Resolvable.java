@@ -7,7 +7,7 @@ import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 
 public interface DT_Resolvable {
-	static @NonNull DT_Resolvable from(@NonNull InstructionArgument aInstructionArgument, /*@NonNull*/ OS_Element aElement, FunctionInvocation aFunctionInvocation) {
+	static @NotNull DT_Resolvable from(@NotNull InstructionArgument aInstructionArgument, /*@NotNull*/ OS_Element aElement, FunctionInvocation aFunctionInvocation) {
 		return new DT_Resolvable() {
 			@Override
 			public Object deduceItem() {
@@ -26,7 +26,7 @@ public interface DT_Resolvable {
 		};
 	}
 
-	static @NonNull DT_Resolvable from(@NonNull InstructionArgument ia) {
+	static @NotNull DT_Resolvable from(@NotNull InstructionArgument ia) {
 		return new DT_Resolvable() {
 			@Override
 			public @Nullable Object deduceItem() {

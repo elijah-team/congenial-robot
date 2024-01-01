@@ -36,7 +36,7 @@ public class DeferredObject2<D, F, P> extends AbstractPromise<D, F, P> implement
 	}
 
 	@Override
-	public @NonNull Deferred<D, F, P> reject(final F reject) {
+	public @NotNull Deferred<D, F, P> reject(final F reject) {
 		synchronized (this) {
 			if (!isPending())
 				throw new IllegalStateException("Deferred object already finished, cannot reject again");
@@ -53,7 +53,7 @@ public class DeferredObject2<D, F, P> extends AbstractPromise<D, F, P> implement
 	}
 
 	@Override
-	public @NonNull Deferred<D, F, P> notify(final P progress) {
+	public @NotNull Deferred<D, F, P> notify(final P progress) {
 		synchronized (this) {
 			if (!isPending())
 				throw new IllegalStateException("Deferred object already finished, cannot notify progress");
@@ -70,7 +70,7 @@ public class DeferredObject2<D, F, P> extends AbstractPromise<D, F, P> implement
 	}
 
 	@Override
-	public @NonNull Promise<D, F, P> promise() {
+	public @NotNull Promise<D, F, P> promise() {
 		return this;
 	}
 }

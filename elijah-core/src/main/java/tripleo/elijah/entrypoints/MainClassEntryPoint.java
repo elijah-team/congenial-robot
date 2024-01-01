@@ -19,7 +19,7 @@ import java.util.Collection;
 public class MainClassEntryPoint implements EntryPoint {
 	private FunctionDef main_function;
 
-	public static boolean is_main_function_with_no_args(@NonNull FunctionDef aFunctionDef) {
+	public static boolean is_main_function_with_no_args(@NotNull FunctionDef aFunctionDef) {
 		switch (aFunctionDef.getSpecies()) {
 		case REG_FUN:
 		case DEF_FUN:
@@ -33,16 +33,16 @@ public class MainClassEntryPoint implements EntryPoint {
 		return false;
 	}
 
-	private final @NonNull ClassStatement klass;
+	private final @NotNull ClassStatement klass;
 
-	public static boolean isMainClass(@NonNull ClassStatement classStatement) {
+	public static boolean isMainClass(@NotNull ClassStatement classStatement) {
 		// TODO what about Library (for windows dlls) etc?
 		boolean b = classStatement.getPackageName() == OS_Package.default_package;
 		boolean main = classStatement.name().sameName("Main");
 		return b && main;
 	}
 
-	public MainClassEntryPoint(@NonNull ClassStatement aKlass) {
+	public MainClassEntryPoint(@NotNull ClassStatement aKlass) {
 		final Collection<ClassItem> main = aKlass.findFunction("main");
 		for (ClassItem classItem : main) {
 			FunctionDef    fd       = (FunctionDef) classItem;

@@ -20,7 +20,7 @@ public class DefaultLivingClass implements LivingClass {
 		_garish  = null;
 	}
 
-	public DefaultLivingClass(final @NonNull EvaClass aClass) {
+	public DefaultLivingClass(final @NotNull EvaClass aClass) {
 		_element = aClass.getKlass();
 		_gc      = aClass;
 		_garish  = null;
@@ -47,7 +47,7 @@ public class DefaultLivingClass implements LivingClass {
 
 	@Override
 	@Contract(mutates = "this")
-	public @NonNull GarishClass getGarish() {
+	public @NotNull GarishClass getGarish() {
 		if (_garish == null) {
 			_garish = new GarishClass(this);
 		}

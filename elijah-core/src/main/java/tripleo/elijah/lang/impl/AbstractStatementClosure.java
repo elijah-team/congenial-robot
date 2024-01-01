@@ -36,7 +36,7 @@ public final class AbstractStatementClosure implements StatementClosure, Stateme
 	private VariableSequence         vsq;
 	private YieldExpression          yiex;
 
-	public AbstractStatementClosure(final @NonNull ClassStatement classStatement) {
+	public AbstractStatementClosure(final @NotNull ClassStatement classStatement) {
 		// TODO check final member
 		_parent      = classStatement;
 		parent_scope = new AbstractScope2(_parent) {
@@ -52,7 +52,7 @@ public final class AbstractStatementClosure implements StatementClosure, Stateme
 			}
 
 			@Override
-			public @NonNull StatementClosure statementClosure() {
+			public @NotNull StatementClosure statementClosure() {
 				return AbstractStatementClosure.this; // TODO is this right?
 			}
 
@@ -83,14 +83,14 @@ public final class AbstractStatementClosure implements StatementClosure, Stateme
 	}
 
 	@Override
-	public tripleo.elijah.lang.i.@NonNull CaseConditional caseConditional(final Context parentContext) {
+	public tripleo.elijah.lang.i.@NotNull CaseConditional caseConditional(final Context parentContext) {
 		final CaseConditional caseConditional = new CaseConditionalImpl(getParent(), parentContext);
 		add(caseConditional);
 		return caseConditional;
 	}
 
 	@Override
-	public void constructExpression(final @NonNull IExpression aExpr, final ExpressionList aO) {
+	public void constructExpression(final @NotNull IExpression aExpr, final ExpressionList aO) {
 		add(new ConstructStatementImpl(_parent, _parent.getContext(), aExpr, null, aO)); // TODO provide for name
 	}
 
@@ -113,7 +113,7 @@ public final class AbstractStatementClosure implements StatementClosure, Stateme
 	}
 
 	@Override
-	public @NonNull MatchConditional matchConditional(final Context parentContext) {
+	public @NotNull MatchConditional matchConditional(final Context parentContext) {
 		final MatchConditional matchConditional = new MatchConditionalImpl(getParent(), parentContext);
 		add(matchConditional);
 		return matchConditional;

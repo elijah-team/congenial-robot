@@ -26,7 +26,7 @@ public class WithStatementImpl implements OS_Element, OS_Container, StatementIte
 	private final List<FunctionItem> _items     = new ArrayList<FunctionItem>();
 	private final OS_Element         _parent;
 	private       WithContext        ctx;
-	@NonNull      VariableSequence   hidden_seq = new VariableSequenceImpl();
+	@NotNull      VariableSequence   hidden_seq = new VariableSequenceImpl();
 	// private final List<String> mDocs = new ArrayList<String>();
 	private       Scope3             scope3;
 
@@ -58,12 +58,12 @@ public class WithStatementImpl implements OS_Element, OS_Container, StatementIte
 	}
 
 	@Override
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitWithStatement(this);
 	}
 
 	@Override
-	public @NonNull List<FunctionItem> getItems() {
+	public @NotNull List<FunctionItem> getItems() {
 		return _items;
 	}
 

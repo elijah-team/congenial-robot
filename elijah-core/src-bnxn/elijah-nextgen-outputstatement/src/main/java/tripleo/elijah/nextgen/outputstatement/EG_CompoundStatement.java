@@ -9,18 +9,18 @@ import java.util.List;
  * @author Tripleo Nova
  */
 public class EG_CompoundStatement implements EG_Statement {
-	private final @NonNull EG_Statement   beginning;
-	private final @NonNull EG_Statement   ending;
-	private final @NonNull EX_Explanation explanation;
+	private final @NotNull EG_Statement   beginning;
+	private final @NotNull EG_Statement   ending;
+	private final @NotNull EX_Explanation explanation;
 	private final          boolean        indent;
-	private final @NonNull EG_Statement   middle;
+	private final @NotNull EG_Statement   middle;
 
 	@Contract(pure = true)
-	public EG_CompoundStatement(final @NonNull EG_Statement aBeginning,
-								final @NonNull EG_Statement aEnding,
-								final @NonNull EG_Statement aMiddle,
+	public EG_CompoundStatement(final @NotNull EG_Statement aBeginning,
+								final @NotNull EG_Statement aEnding,
+								final @NotNull EG_Statement aMiddle,
 								final boolean aIndent,
-								final @NonNull EX_Explanation aExplanation) {
+								final @NotNull EX_Explanation aExplanation) {
 		beginning   = aBeginning;
 		ending      = aEnding;
 		middle      = aMiddle;
@@ -28,11 +28,11 @@ public class EG_CompoundStatement implements EG_Statement {
 		explanation = aExplanation;
 	}
 
-	public EG_CompoundStatement(final @NonNull EG_Statement aBeginning,
-								final @NonNull EG_Statement aEnding,
+	public EG_CompoundStatement(final @NotNull EG_Statement aBeginning,
+								final @NotNull EG_Statement aEnding,
 								final List<EG_Statement> aStatementList,
 								final boolean aIndent,
-								final @NonNull EX_Explanation aExplanation) {
+								final @NotNull EX_Explanation aExplanation) {
 		beginning   = aBeginning;
 		ending      = aEnding;
 		middle      = new EG_SequenceStatement(new EG_Naming("<<compound>>"), aStatementList);
@@ -41,12 +41,12 @@ public class EG_CompoundStatement implements EG_Statement {
 	}
 
 	@Override
-	public @NonNull EX_Explanation getExplanation() {
+	public @NotNull EX_Explanation getExplanation() {
 		return explanation;
 	}
 
 	@Override
-	public @NonNull String getText() {
+	public @NotNull String getText() {
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append(beginning.getText());

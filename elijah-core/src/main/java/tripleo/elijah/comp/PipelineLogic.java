@@ -42,8 +42,8 @@ import java.util.function.Consumer;
  */
 public class PipelineLogic implements EventualRegister {
 	public final          List<ElLog>                                            elLogs                  = new LinkedList<>();
-	public final @NonNull DeducePhase                                            dp;
-	public final @NonNull GeneratePhase                                          generatePhase;
+	public final @NotNull DeducePhase                                            dp;
+	public final @NotNull GeneratePhase                                          generatePhase;
 	public final          ModuleCompletableProcess                               mcp                     = new ModuleCompletableProcess();
 	private final         Map<OS_Module, Eventual<DeducePhase.GeneratedClasses>> modMap                  = new HashMap<>();
 	private final         IPipelineAccess                                        pa;
@@ -51,7 +51,7 @@ public class PipelineLogic implements EventualRegister {
 	private final         ElLog.Verbosity                                        verbosity;
 	private final         DefaultEventualRegister                                defaultEventualRegister = new DefaultEventualRegister();
 
-	public PipelineLogic(final IPipelineAccess aPa, final @NonNull ICompilationAccess ca) {
+	public PipelineLogic(final IPipelineAccess aPa, final @NotNull ICompilationAccess ca) {
 		pa = aPa;
 
 		// TODO annotation time, or use clj
@@ -65,8 +65,8 @@ public class PipelineLogic implements EventualRegister {
 		pa.getCompilationEnclosure().addModuleListener(new _PipelineLogic__ModuleListener());
 	}
 
-	@NonNull
-	public GenerateFunctions getGenerateFunctions(@NonNull OS_Module mod) {
+	@NotNull
+	public GenerateFunctions getGenerateFunctions(@NotNull OS_Module mod) {
 		return generatePhase.getGenerateFunctions(mod);
 	}
 
@@ -78,7 +78,7 @@ public class PipelineLogic implements EventualRegister {
 		pa._ModuleList_add(m);
 	}
 
-	public @NonNull EIT_ModuleList mods() {
+	public @NotNull EIT_ModuleList mods() {
 		return pa.getModuleList();
 	}
 
@@ -90,7 +90,7 @@ public class PipelineLogic implements EventualRegister {
 		return mcp;
 	}
 
-	public Eventual<DeducePhase.GeneratedClasses> handle(final GN_PL_Run2.@NonNull GenerateFunctionsRequest rq) {
+	public Eventual<DeducePhase.GeneratedClasses> handle(final GN_PL_Run2.@NotNull GenerateFunctionsRequest rq) {
 		final OS_Module          mod         = rq.mod();
 		final DefaultWorldModule worldModule = rq.worldModule();
 
@@ -115,7 +115,7 @@ public class PipelineLogic implements EventualRegister {
 	public final class ModuleCompletableProcess implements CompletableProcess<WorldModule> {
 
 		@Override
-		public void add(final @NonNull WorldModule aWorldModule) {
+		public void add(final @NotNull WorldModule aWorldModule) {
 			//System.err.printf("7070 %s %d%n", mod.getFileName(), mod.entryPoints.size());
 
 			final CompilationEnclosure  ce            = pa.getCompilationEnclosure();
@@ -177,7 +177,7 @@ public class PipelineLogic implements EventualRegister {
 			if (modMapEventual != null && !modMapEventual.isResolved()) {
 				Preconditions.checkNotNull(modMapEventual);
 
-				final DeducePhase.@NonNull GeneratedClasses lgc = dp.generatedClasses;
+				final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses;
 				modMapEventual.resolve(lgc);
 			}
 		}

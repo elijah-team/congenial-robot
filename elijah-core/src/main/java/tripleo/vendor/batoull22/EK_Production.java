@@ -18,7 +18,7 @@ class EK_Production {
 		ch = getEkFactarray().ch();
 	}
 
-	@NonNull
+	@NotNull
 	private EK_Factarray getEkFactarray() {
 		var ep = this;
 
@@ -39,11 +39,11 @@ class EK_Production {
 		return result;
 	}
 
-	public @NonNull EK_Merge getMerge() {
+	public @NotNull EK_Merge getMerge() {
 		return new EK_Merge(ch[0], ch[2], ch[4]);
 	}
 
-	public @NonNull EK_Push getPush() {
+	public @NotNull EK_Push getPush() {
 		final EK_Fact predicating = ch[0];
 		final EK_Fact resultant   = ch[3];
 		return new EK_Push(predicating, resultant);

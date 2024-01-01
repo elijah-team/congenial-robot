@@ -26,9 +26,9 @@ public class MonitorRequest_IdentTableEntry {
 		eg.then(mie -> mie.trigger_resolve(aEctx, ss, aFoundElement, deduceTypes2, null));
 	}
 
-	public void backstage_trigger(final @NonNull BaseEvaFunction aGeneratedFunction) {
+	public void backstage_trigger(final @NotNull BaseEvaFunction aGeneratedFunction) {
 		aGeneratedFunction.onInformGF(gf -> {
-			final @NonNull IdentTableEntry entry = identIA.getEntry();
+			final @NotNull IdentTableEntry entry = identIA.getEntry();
 			final GDM_IdentExpression      mie   = gf.monitor(entry.getIdent());
 
 			eg.resolve(mie);

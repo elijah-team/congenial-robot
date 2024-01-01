@@ -39,11 +39,11 @@ public class ObservableCompletableProcess<T> implements Observer<T> {
 		//cpt.complete();
 	}
 
-	public void subscribe(final @NonNull Observer<T> aCio) {
+	public void subscribe(final @NotNull Observer<T> aCio) {
 		subject.subscribe(aCio);
 	}
 
-	public void subscribe(final @NonNull CompletableProcess<T> cp) {
+	public void subscribe(final @NotNull CompletableProcess<T> cp) {
 		subject.subscribe(new Observer<T>() {
 			@Override
 			public void onSubscribe(@NonNull final Disposable d) {

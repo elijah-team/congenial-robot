@@ -12,7 +12,7 @@ public class ProcedureCallUnderstanding implements DR_Ident.Understanding {
 	}
 
 	@Override
-	public @NonNull String asString() {
+	public @NotNull String asString() {
 		return "ProcedureCallUnderstanding: " + procTableEntry.__debug_expression;
 	}
 

@@ -6,7 +6,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 
 public interface Qualident extends IExpression {
-	static boolean equivalentTokens(@NonNull Token token1, @NonNull Token token2) {
+	static boolean equivalentTokens(@NotNull Token token1, @NotNull Token token2) {
 		return token2.getText().equals(token1.getText()) && token2.getLine() == token1.getLine()
 				&& token2.getColumn() == token1.getColumn() && token2.getType() == token1.getType();
 	}
@@ -15,7 +15,7 @@ public interface Qualident extends IExpression {
 
 	void appendDot(Token d1);
 
-	@NonNull
+	@NotNull
 	String asSimpleString();
 
 	@Override

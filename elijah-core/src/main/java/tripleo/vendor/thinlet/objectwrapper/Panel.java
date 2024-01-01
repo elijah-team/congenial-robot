@@ -122,15 +122,15 @@ public class Panel extends OWWidget {
 		fthinlet.setBoolean(unwrap(), ThinletConstants.SCROLLABLE, value);
 	}
 
-	public void addChild(@NonNull OWWidget child) {
+	public void addChild(@NotNull OWWidget child) {
 		fthinlet.add(unwrap(), child.unwrap());
 	}
 
-	public void addChild(@NonNull OWWidget child, int index) {
+	public void addChild(@NotNull OWWidget child, int index) {
 		fthinlet.add(unwrap(), child.unwrap(), index);
 	}
 
-	public void removeChild(@NonNull OWWidget child) {
+	public void removeChild(@NotNull OWWidget child) {
 		fthinlet.remove(child.unwrap());
 	}
 
@@ -146,7 +146,7 @@ public class Panel extends OWWidget {
 		return (OWWidget) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public OWWidget @NonNull [] getChildren() {
+	public OWWidget @NotNull [] getChildren() {
 		Object[]   o   = fthinlet.getItems(unwrap());
 		OWWidget[] ret = new OWWidget[o.length];
 		for (int i = 0; i < ret.length; i++)

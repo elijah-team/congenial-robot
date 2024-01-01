@@ -28,7 +28,7 @@ public class IfConditionalImpl implements tripleo.elijah.lang.i.IfConditional {
 	private @Nullable Context             _ctx;
 	private           Scope3              scope3;
 
-	public IfConditionalImpl(final @NonNull IfConditional ifExpression) {
+	public IfConditionalImpl(final @NotNull IfConditional ifExpression) {
 //		this.sibling = ifExpression;
 		//
 		this._ctx    = new IfConditionalContext(ifExpression.getCtx(), this, true);
@@ -52,14 +52,14 @@ public class IfConditionalImpl implements tripleo.elijah.lang.i.IfConditional {
 	}
 
 	@Override
-	public @NonNull IfConditional else_() {
+	public @NotNull IfConditional else_() {
 		final IfConditional elsepart = new IfConditionalImpl(this);
 		parts.add(elsepart);
 		return elsepart;
 	}
 
 	@Override
-	public @NonNull IfConditional elseif() {
+	public @NotNull IfConditional elseif() {
 		final IfConditional elseifpart = new IfConditionalImpl(this);
 		parts.add(elseifpart);
 		return elseifpart;
@@ -102,7 +102,7 @@ public class IfConditionalImpl implements tripleo.elijah.lang.i.IfConditional {
 	}
 
 	@Override
-	public @NonNull List<IfConditional> getParts() {
+	public @NotNull List<IfConditional> getParts() {
 		return parts;
 	}
 
@@ -112,7 +112,7 @@ public class IfConditionalImpl implements tripleo.elijah.lang.i.IfConditional {
 	}
 
 	@Override
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitIfConditional(this);
 	}
 

@@ -13,7 +13,7 @@ public interface FuncExpr extends IExpression, OS_Element {
 
 	List<FormalArgListItem> falis();
 
-	@NonNull List<FormalArgListItem> getArgs();
+	@NotNull List<FormalArgListItem> getArgs();
 
 	@Override
 	Context getContext();

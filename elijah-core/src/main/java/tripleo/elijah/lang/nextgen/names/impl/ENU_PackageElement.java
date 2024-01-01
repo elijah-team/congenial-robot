@@ -46,7 +46,7 @@ public class ENU_PackageElement implements EN_Understanding {
 		}
 	}
 
-	@NonNull DeferredObject<PER, Void, Void> resolved = new DeferredObject<>();
+	@NotNull DeferredObject<PER, Void, Void> resolved = new DeferredObject<>();
 
 	public Promise<PER, Void, Void> resolved() {
 		return resolved;

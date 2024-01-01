@@ -58,7 +58,7 @@
 //public class TestGenFunction {
 //
 //	@Contract(value = " -> new", pure = true)
-//	public static CompilationFlow.@NonNull CompilationFlowMember parseElijah() {
+//	public static CompilationFlow.@NotNull CompilationFlowMember parseElijah() {
 //		return new CompilationFlow.CompilationFlowMember() {
 //			@Override
 //			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -171,7 +171,7 @@
 //		final List<EvaNode> lgc = flow.generateAllTopLevelClasses(m);
 //		state.lgc = lgc;
 //
-//		@NonNull List<EvaNode> lgf = flow.extractFunctions(lgc);
+//		@NotNull List<EvaNode> lgf = flow.extractFunctions(lgc);
 //
 //		//here
 //		flow.printInstructions(lgf);
@@ -196,7 +196,7 @@
 //		private Compilation  comp;
 //		private GeneratePhase generatePhase;
 //
-//		private void generateResults(final @NonNull List<EvaNode> lgc, final @NonNull generateCode result) {
+//		private void generateResults(final @NotNull List<EvaNode> lgc, final @NotNull generateCode result) {
 //			GenerateResult gr = new Old_GenerateResult();
 //
 //			final DefaultGenerateResultSink grs = result.grs();
@@ -211,10 +211,10 @@
 //			}
 //		}
 //
-//		@NonNull
+//		@NotNull
 //		private generateCode getGenerateCode(final OS_Module m,
 //											 final WorkManager wm,
-//											 final @NonNull List<EvaNode> lgf,
+//											 final @NotNull List<EvaNode> lgf,
 //											 final EvaPipeline aGp) {
 //			final ErrSink                   errSink   = comp.getErrSink();
 //			final ElLog.Verbosity           verbosity = Compilation.gitlabCIVerbosity();
@@ -228,7 +228,7 @@
 //			return result;
 //		}
 //
-//		private void printFunctionTables(final @NonNull List<EvaNode> lgf) {
+//		private void printFunctionTables(final @NotNull List<EvaNode> lgf) {
 //			for (final EvaNode gn : lgf) {
 //				if (gn instanceof final EvaFunction gf) {
 //					tripleo.elijah.util.Stupidity.println_out_2("----------------------------------------------------------");
@@ -242,14 +242,14 @@
 //
 //		private void deduceModule(final OS_Module m,
 //								  final List<EvaNode> lgc,
-//								  final @NonNull List<EvaNode> lgf) {
+//								  final @NotNull List<EvaNode> lgf) {
 //			final DeducePhase  dp  = comp.getCompilationEnclosure().getPipelineLogic().dp;
 //			final DeduceTypes2 dt2 = dp.deduceModule(m, lgc, Compilation.gitlabCIVerbosity());
 //			dt2.deduceFunctions(lgf);
 //			dp.finish();
 //		}
 //
-//		private void printInstructions(final @NonNull List<EvaNode> lgf) {
+//		private void printInstructions(final @NotNull List<EvaNode> lgf) {
 //			for (final EvaNode gn : lgf) {
 //				if (gn instanceof final EvaFunction gf) {
 //					for (final Instruction instruction : gf.instructions()) {
@@ -259,7 +259,7 @@
 //			}
 //		}
 //
-//		private @NonNull List<EvaNode> extractFunctions(final @NonNull List<EvaNode> lgc) {
+//		private @NotNull List<EvaNode> extractFunctions(final @NotNull List<EvaNode> lgc) {
 //			final List<EvaNode> lgf = new ArrayList<>();
 //			for (EvaNode generatedNode : lgc) {
 //				if (generatedNode instanceof EvaClass)

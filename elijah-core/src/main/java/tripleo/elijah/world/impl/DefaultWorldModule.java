@@ -40,7 +40,7 @@ public class DefaultWorldModule implements WorldModule {
 		return rq;
 	}
 
-	public DefaultWorldModule(final OS_Module aMod, final @NonNull CompilationEnclosure ce) {
+	public DefaultWorldModule(final OS_Module aMod, final @NotNull CompilationEnclosure ce) {
 		mod = aMod;
 		final ModuleThing mt = ce.addModuleThing(mod);
 		setThing(mt);

@@ -21,22 +21,22 @@ import java.util.Collection;
 import java.util.List;
 
 public interface GenerateFiles extends CodeGenerator {
-	void generate_constructor(IPP_Constructor aGf, GenerateResult aGr, WorkList aWl, GenerateResultSink aResultSink, final WorkManager aWorkManager, final @NonNull GenerateResultEnv aFileGen);
+	void generate_constructor(IPP_Constructor aGf, GenerateResult aGr, WorkList aWl, GenerateResultSink aResultSink, final WorkManager aWorkManager, final @NotNull GenerateResultEnv aFileGen);
 
 	void generate_function(IPP_Function aEvaFunction, GenerateResult aGenerateResult, WorkList aWorkList, GenerateResultSink aResultSink);
 
-	GenerateResult generateCode(Collection<EvaNode> lgn, @NonNull GenerateResultEnv aFileGen);
+	GenerateResult generateCode(Collection<EvaNode> lgn, @NotNull GenerateResultEnv aFileGen);
 
 	<T> GenerateResultEnv getFileGen();
 
-	GenerateResult resultsFromNodes(@NonNull List<EvaNode> aNodes, WorkManager wm, GenerateResultSink grs, @NonNull GenerateResultEnv fg);
+	GenerateResult resultsFromNodes(@NotNull List<EvaNode> aNodes, WorkManager wm, GenerateResultSink grs, @NotNull GenerateResultEnv fg);
 
 	ElLog elLog();
 
 	void finishUp(final GenerateResult aGenerateResult, final WorkManager wm, final WorkList aWorkList);
 
-	@NonNull
-	static Collection<EvaNode> classes_to_list_of_generated_nodes(@NonNull Collection<EvaClass> aEvaClasses) {
+	@NotNull
+	static Collection<EvaNode> classes_to_list_of_generated_nodes(@NotNull Collection<EvaClass> aEvaClasses) {
 		return Collections2.transform(aEvaClasses, new Function<EvaClass, EvaNode>() {
 			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override
@@ -46,8 +46,8 @@ public interface GenerateFiles extends CodeGenerator {
 		});
 	}
 
-	@NonNull
-	static Collection<EvaNode> constructors_to_list_of_generated_nodes(@NonNull Collection<EvaConstructor> aEvaConstructors) {
+	@NotNull
+	static Collection<EvaNode> constructors_to_list_of_generated_nodes(@NotNull Collection<EvaConstructor> aEvaConstructors) {
 		return Collections2.transform(aEvaConstructors, new Function<EvaConstructor, EvaNode>() {
 			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override
@@ -57,8 +57,8 @@ public interface GenerateFiles extends CodeGenerator {
 		});
 	}
 
-	@NonNull
-	static Collection<EvaNode> functions_to_list_of_generated_nodes(@NonNull Collection<EvaFunction> generatedFunctions) {
+	@NotNull
+	static Collection<EvaNode> functions_to_list_of_generated_nodes(@NotNull Collection<EvaFunction> generatedFunctions) {
 		return Collections2.transform(generatedFunctions, new Function<EvaFunction, EvaNode>() {
 			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override

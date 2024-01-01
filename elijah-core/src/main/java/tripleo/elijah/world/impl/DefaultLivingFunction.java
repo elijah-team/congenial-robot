@@ -11,7 +11,7 @@ public class DefaultLivingFunction implements LivingFunction {
 	private final           FunctionDef     _element;
 	private final @Nullable BaseEvaFunction _gf;
 
-	public DefaultLivingFunction(final @NonNull BaseEvaFunction aFunction) {
+	public DefaultLivingFunction(final @NotNull BaseEvaFunction aFunction) {
 		_element = aFunction.getFD();
 		_gf      = aFunction;
 	}

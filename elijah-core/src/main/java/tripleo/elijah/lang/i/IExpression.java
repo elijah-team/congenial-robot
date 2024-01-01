@@ -22,7 +22,7 @@ public interface IExpression {
 
 	IExpression UNASSIGNED = new BasicBinaryExpressionImpl() {
 		@Override
-		public @NonNull String toString() {
+		public @NotNull String toString() {
 			return "<UNASSIGNED expression>";
 		}
 	};
@@ -32,7 +32,7 @@ public interface IExpression {
 				|| expression instanceof FloatExpression || expression instanceof NumericExpression;
 	}
 
-	//@NonNull List<FormalArgListItem> getArgs();
+	//@NotNull List<FormalArgListItem> getArgs();
 	//
 	//void setArgs(ExpressionList ael);
 

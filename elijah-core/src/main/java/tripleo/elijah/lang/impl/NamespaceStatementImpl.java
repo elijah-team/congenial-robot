@@ -53,7 +53,7 @@ public class NamespaceStatementImpl extends _CommonNC
 	}
 
 	@Override
-	public @NonNull FunctionDef funcDef() {
+	public @NotNull FunctionDef funcDef() {
 		return new FunctionDefImpl(this, getContext());
 	}
 
@@ -77,7 +77,7 @@ public class NamespaceStatementImpl extends _CommonNC
 	}
 
 	@Override
-	public @NonNull StatementClosure statementClosure() {
+	public @NotNull StatementClosure statementClosure() {
 		return new AbstractStatementClosure(new AbstractScope2(this) {
 			@Override
 			public void add(final StatementItem aItem) {
@@ -122,7 +122,7 @@ public class NamespaceStatementImpl extends _CommonNC
 	}
 
 	@Override
-	public @NonNull ProgramClosure XXX() {
+	public @NotNull ProgramClosure XXX() {
 		return new ProgramClosureImpl() {
 		};
 	}
@@ -138,7 +138,7 @@ public class NamespaceStatementImpl extends _CommonNC
 	}
 
 	@Override // OS_Element
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitNamespaceStatement(this);
 	}
 

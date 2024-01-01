@@ -29,7 +29,7 @@ import tripleo.elijah.util.Operation;
  * Created 11/30/21 11:56 PM
  */
 public class DeduceProcCall {
-	private final @NonNull ProcTableEntry                                 procTableEntry;
+	private final @NotNull ProcTableEntry                                 procTableEntry;
 	private final          DT_Resolvable11<DeduceElement>                 _pr_target  = new DT_Resolvable11<>();
 	private final          DeferredObject2<DeduceElement, FCA_Stop, Void> _p_targetP2 = new DeferredObject2<>();
 	private                Context                                        _g_context;
@@ -43,12 +43,12 @@ public class DeduceProcCall {
 	}
 
 	@Contract(pure = true)
-	public DeduceProcCall(final @NonNull ProcTableEntry aProcTableEntry) {
+	public DeduceProcCall(final @NotNull ProcTableEntry aProcTableEntry) {
 		procTableEntry = aProcTableEntry;
 
-		procTableEntry.onFunctionInvocation((final @NonNull FunctionInvocation functionInvocation) -> {
+		procTableEntry.onFunctionInvocation((final @NotNull FunctionInvocation functionInvocation) -> {
 			functionInvocation.generatePromise().then((BaseEvaFunction evaFunction) -> {
-				final @NonNull FunctionDef best = evaFunction.getFD();
+				final @NotNull FunctionDef best = evaFunction.getFD();
 
 				final DeclAnchor.AnchorType anchorType = DeclAnchor.AnchorType.MEMBER;
 				final OS_Element            declAnchor = best.getParent();
@@ -90,9 +90,9 @@ public class DeduceProcCall {
 	}
 
 	public class DeclTarget implements DeduceElement {
-		private @NonNull
+		private @NotNull
 		final DeclAnchor anchor;
-		private @NonNull
+		private @NotNull
 		final OS_Element element;
 
 		/**
@@ -101,9 +101,9 @@ public class DeduceProcCall {
 		 * <p>
 		 * {@link file:///./Screenshot-from-2023-08-13 12-25-11.png}
 		 */
-		public DeclTarget(final @NonNull OS_Element aBest,
-						  final @NonNull OS_Element aDeclAnchor,
-						  final @NonNull DeclAnchor.AnchorType aAnchorType) throws FCA_Stop {
+		public DeclTarget(final @NotNull OS_Element aBest,
+						  final @NotNull OS_Element aDeclAnchor,
+						  final @NotNull DeclAnchor.AnchorType aAnchorType) throws FCA_Stop {
 			element = aBest;
 			anchor  = _g_deduceTypes2._inj().new_DeclAnchor(aDeclAnchor, aAnchorType);
 			final IInvocation invocation;
@@ -145,13 +145,13 @@ public class DeduceProcCall {
 
 		@Contract(pure = true)
 		@Override
-		public @NonNull DeclAnchor declAnchor() {
+		public @NotNull DeclAnchor declAnchor() {
 			return anchor;
 		}
 
 		@Contract(pure = true)
 		@Override
-		public @NonNull OS_Element element() {
+		public @NotNull OS_Element element() {
 			return element;
 		}
 	}

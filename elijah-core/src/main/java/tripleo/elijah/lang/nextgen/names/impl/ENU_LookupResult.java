@@ -21,7 +21,7 @@ public class ENU_LookupResult implements EN_Understanding {
 		this.contexts = aContexts;
 	}
 
-	public ENU_LookupResult(@NonNull LookupResultList lrl2) {
+	public ENU_LookupResult(@NotNull LookupResultList lrl2) {
 		this.lrl   = lrl2;
 		this.level = -10000;
 

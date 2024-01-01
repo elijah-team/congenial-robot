@@ -6,14 +6,14 @@ import org.jspecify.annotations.NonNull;
 import java.util.function.Consumer;
 
 public class DoubleLatch<T> {
-	private final @NonNull Consumer<T> action;
+	private final @NotNull Consumer<T> action;
 	private                boolean     simple;
 	private                T           tt;
 
 	//private IincInsnNode action;
 
 	@Contract(pure = true)
-	public DoubleLatch(final @NonNull Consumer<T> aAction) {
+	public DoubleLatch(final @NotNull Consumer<T> aAction) {
 		action = aAction;
 	}
 

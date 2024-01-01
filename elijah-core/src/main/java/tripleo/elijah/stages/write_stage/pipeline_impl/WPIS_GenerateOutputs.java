@@ -33,7 +33,7 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 	private       List<Amazing>            amazings;
 
 	@Override
-	public void act(final @NonNull WritePipelineSharedState st, final WP_State_Control sc) {
+	public void act(final @NotNull WritePipelineSharedState st, final WP_State_Control sc) {
 		Preconditions.checkNotNull(st.getGr());
 		Preconditions.checkNotNull(st.sys);
 
@@ -53,11 +53,11 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 		act0(st, result, cs, ns, fs);
 	}
 
-	private void act0(final @NonNull WritePipelineSharedState st,
+	private void act0(final @NotNull WritePipelineSharedState st,
 					  final GenerateResult result,
-					  final @NonNull List<EvaClass> cs,
-					  final @NonNull List<EvaNamespace> ns,
-					  final @NonNull List<BaseEvaFunction> fs) {
+					  final @NotNull List<EvaClass> cs,
+					  final @NotNull List<EvaNamespace> ns,
+					  final @NotNull List<BaseEvaFunction> fs) {
 		final CP_Paths paths = st.c.paths();
 		paths.signalCalculateFinishParse(); // TODO maybe move this 06/22
 
@@ -71,10 +71,10 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 	}
 
 	private void act3(final GenerateResult result,
-					  final @NonNull List<EvaClass> cs,
-					  final @NonNull List<EvaNamespace> ns,
-					  final @NonNull List<BaseEvaFunction> fs,
-					  final @NonNull OutputItems itms) {
+					  final @NotNull List<EvaClass> cs,
+					  final @NotNull List<EvaNamespace> ns,
+					  final @NotNull List<BaseEvaFunction> fs,
+					  final @NotNull OutputItems itms) {
 		final int totalCount = cs.size() + ns.size() + fs.size();
 		itms.readyCount(totalCount); // looks like it should work, but also looks like it won't
 
@@ -120,12 +120,12 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 	static class MyWriteable implements Writeable {
 		private final          Collection<EG_Statement>        value;
 		private final          EOT_OutputFile.FileNameProvider filename;
-		private final @NonNull List<EG_Statement>              list;
-		private final @NonNull EG_SequenceStatement            statement;
+		private final @NotNull List<EG_Statement>              list;
+		private final @NotNull EG_SequenceStatement            statement;
 		@Getter
 		private final          NG_OutputRequest                outputRequest;
 
-		public MyWriteable(final @NonNull Pair<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
+		public MyWriteable(final @NotNull Pair<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
 			this.outputRequest = aEntry.getKey();
 			filename           = outputRequest.fileName();
 			value              = aEntry.getValue();
@@ -146,7 +146,7 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 		}
 
 		@Override
-		public @NonNull List<EIT_Input> inputs() {
+		public @NotNull List<EIT_Input> inputs() {
 			if (outputRequest == null) {
 				throw new IllegalStateException("shouldn't be here");
 			}

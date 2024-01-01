@@ -20,7 +20,7 @@ public class QueryEzFileToModule {
 		params = aParams;
 	}
 
-	public @NonNull Operation<CompilerInstructions> calculate() {
+	public @NotNull Operation<CompilerInstructions> calculate() {
 		final String      f = params.sourceFilename;
 		final InputStream s = params.inputStream;
 

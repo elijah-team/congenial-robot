@@ -34,7 +34,7 @@ public class YieldExpressionImpl extends BasicBinaryExpressionImpl
 	}
 
 	@Override
-	public void visitGen(@NonNull ElElementVisitor visit) {
+	public void visitGen(@NotNull ElElementVisitor visit) {
 		visit.visitYield(this);
 	}
 

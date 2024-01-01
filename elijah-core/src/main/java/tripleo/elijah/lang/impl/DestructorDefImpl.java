@@ -40,7 +40,7 @@ public class DestructorDefImpl extends BaseFunctionDef implements tripleo.elijah
 	}
 
 	@Override
-	public void setHeader(@NonNull FunctionHeader aFunctionHeader) {
+	public void setHeader(@NotNull FunctionHeader aFunctionHeader) {
 		setFal(aFunctionHeader.getFal());
 //		set(aFunctionHeader.getModifier());
 		assert aFunctionHeader.getModifier() == null;
@@ -89,7 +89,7 @@ public class DestructorDefImpl extends BaseFunctionDef implements tripleo.elijah
 	}
 
 	@Override
-	public void visitGen(@NonNull ElElementVisitor visit) {
+	public void visitGen(@NotNull ElElementVisitor visit) {
 		visit.visitDestructor(this);
 	}
 

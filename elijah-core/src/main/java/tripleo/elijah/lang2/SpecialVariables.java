@@ -16,7 +16,7 @@ import org.jspecify.annotations.NonNull;
 public enum SpecialVariables {
 	;
 
-	public static boolean contains(final @NonNull String name) {
+	public static boolean contains(final @NotNull String name) {
 		if (name.equals("self")) return true;
 		if (name.equals("this")) return true;
 		if (name.equals("Value")) return true; // TODO only special sometimes
@@ -24,7 +24,7 @@ public enum SpecialVariables {
 //		tripleo.elijah.util.Stupidity.println_err_2("SpecialVariables: test: "+name);
 	}
 
-	public static @NonNull String get(final @NonNull String name) {
+	public static @NotNull String get(final @NotNull String name) {
 		if (name.equals("self")) return "vsc"; // TODO this should be this in Java and C++
 		if (name.equals("this")) return "vsc"; // TODO this should be this in Java and C++
 		if (name.equals("Value")) return "vsv"; // TODO only special sometimes

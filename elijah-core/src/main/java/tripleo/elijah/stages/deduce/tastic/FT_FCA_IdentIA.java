@@ -44,7 +44,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		vte          = aVte;
 	}
 
-	public void loop1(final FT_FnCallArgs.@NonNull DoAssignCall dac, final @NonNull Resolve_VTE rvte) {
+	public void loop1(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) {
 		var generatedFunction = dac.generatedFunction;
 		var dc                = dac.dc;
 		var errSink           = dac.errSink;
@@ -80,7 +80,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 				__loop1__PROCEDURE_CALL(pte, (ProcedureCallExpression) e, fdctx);
 				break;
 			case DOT_EXP:
-				final @NonNull DotExpression de = (DotExpression) e;
+				final @NotNull DotExpression de = (DotExpression) e;
 				__loop1__DOT_EXP(de, fdctx);
 				break;
 			case ADDITION:
@@ -90,7 +90,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 				SimplePrintLoggerToRemoveSoon.println_err_2("2363");
 				break;
 			case GET_ITEM:
-				final @NonNull GetItemExpression gie = (GetItemExpression) e;
+				final @NotNull GetItemExpression gie = (GetItemExpression) e;
 				do_assign_call_GET_ITEM(gie, fdctx);
 				break;
 			default:
@@ -99,12 +99,12 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	void do_assign_call_args_ident(@NonNull VariableTableEntry vte,
+	void do_assign_call_args_ident(@NotNull VariableTableEntry vte,
 								   int aInstructionIndex,
-								   @NonNull ProcTableEntry aPte,
+								   @NotNull ProcTableEntry aPte,
 								   int aI,
-								   @NonNull IdentExpression aExpression,
-								   final @NonNull FT_FCA_Ctx fdctx) {
+								   @NotNull IdentExpression aExpression,
+								   final @NotNull FT_FCA_Ctx fdctx) {
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             aTte              = fdctx.tte();
@@ -117,20 +117,20 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		final @Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(e_text);
 //		LOG.info("10000 "+vte_ia);
 		if (vte_ia != null) {
-			final @NonNull VariableTableEntry  vte1 = generatedFunction.getVarTableEntry(to_int(vte_ia));
+			final @NotNull VariableTableEntry  vte1 = generatedFunction.getVarTableEntry(to_int(vte_ia));
 			final Promise<GenType, Void, Void> p    = VTE_TypePromises.do_assign_call_args_ident_vte_promise(aTte, vte1);
-			@NonNull Runnable runnable = new Runnable() {
+			@NotNull Runnable runnable = new Runnable() {
 				boolean isDone;
 
-				private void __doLogic0__FormalArgListItem(final @NonNull FormalArgListItem fali) {
+				private void __doLogic0__FormalArgListItem(final @NotNull FormalArgListItem fali) {
 					dt2._inj().new_FT_FCA_FormalArgListItem(fali, generatedFunction).doLogic0(vte, vte1, errSink);
 				}
 
-				private void __doLogic0__VariableStatement(final @NonNull VariableStatementImpl vs) {
+				private void __doLogic0__VariableStatement(final @NotNull VariableStatementImpl vs) {
 					dt2._inj().new_FT_FCA_VariableStatement(vs, generatedFunction).doLogic0(e_text, p, vte1, vte);
 				}
 
-				public void doLogic(@NonNull List<TypeTableEntry> potentialTypes) {
+				public void doLogic(@NotNull List<TypeTableEntry> potentialTypes) {
 					switch (potentialTypes.size()) {
 					case 1:
 						doLogic1(potentialTypes);
@@ -144,9 +144,9 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					}
 				}
 
-				private void doLogic_default(final @NonNull List<TypeTableEntry> potentialTypes) {
+				private void doLogic_default(final @NotNull List<TypeTableEntry> potentialTypes) {
 					// TODO hopefully this works
-					final @NonNull List<TypeTableEntry> potentialTypes1 = potentialTypes.stream()
+					final @NotNull List<TypeTableEntry> potentialTypes1 = potentialTypes.stream()
 							.filter(input -> input.getAttached() != null)
 							.collect(Collectors.toList());
 
@@ -165,9 +165,9 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					}
 					LookupResultList     lrl  = ctx.lookup(e_text);
 					@Nullable OS_Element best = lrl.chooseBest(null);
-					if (best instanceof @NonNull final FormalArgListItem fali) {
+					if (best instanceof @NotNull final FormalArgListItem fali) {
 						__doLogic0__FormalArgListItem(fali);
-					} else if (best instanceof final @NonNull VariableStatementImpl vs) {
+					} else if (best instanceof final @NotNull VariableStatementImpl vs) {
 						__doLogic0__VariableStatement(vs);
 					} else {
 						int y = 2;
@@ -176,7 +176,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					}
 				}
 
-				private void doLogic1(final @NonNull List<TypeTableEntry> potentialTypes) {
+				private void doLogic1(final @NotNull List<TypeTableEntry> potentialTypes) {
 //						tte.attached = ll.get(0).attached;
 //						vte.addPotentialType(instructionIndex, ll.get(0));
 					if (p.isResolved()) {
@@ -204,7 +204,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 				@Override
 				public void run() {
 					if (isDone) return;
-					final @NonNull List<TypeTableEntry> ll = dc.getPotentialTypesVte((EvaFunction) generatedFunction, vte_ia);
+					final @NotNull List<TypeTableEntry> ll = dc.getPotentialTypesVte((EvaFunction) generatedFunction, vte_ia);
 					doLogic(ll);
 					isDone = true;
 				}
@@ -212,7 +212,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			dc.onFinish(runnable);
 		} else {
 			int                      ia   = generatedFunction.addIdentTableEntry(aExpression, ctx);
-			@NonNull IdentTableEntry idte = generatedFunction.getIdentTableEntry(ia);
+			@NotNull IdentTableEntry idte = generatedFunction.getIdentTableEntry(ia);
 			idte.addPotentialType(aInstructionIndex, aTte); // TODO DotExpression??
 			final int ii = aI;
 			idte.onType(dc.getPhase(), new OnType() {
@@ -222,7 +222,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 				}
 
 				@Override
-				public void typeDeduced(@NonNull OS_Type aType) {
+				public void typeDeduced(@NotNull OS_Type aType) {
 					aPte.setArgType(ii, aType); // TODO does this belong here or in FunctionInvocation?
 					aTte.setAttached(aType); // since we know that tte.attached is always null here
 				}
@@ -230,7 +230,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	private void __loop1__PROCEDURE_CALL(final ProcTableEntry pte, final @NonNull ProcedureCallExpression pce, final @NonNull FT_FCA_Ctx fdctx) {
+	private void __loop1__PROCEDURE_CALL(final ProcTableEntry pte, final @NotNull ProcedureCallExpression pce, final @NotNull FT_FCA_Ctx fdctx) {
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             tte               = fdctx.tte();
@@ -251,9 +251,9 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 				if (best instanceof FunctionDef) {
 					final OS_Element      parent = best.getParent();
 					@Nullable IInvocation invocation;
-					if (parent instanceof final @NonNull NamespaceStatement nsp) {
+					if (parent instanceof final @NotNull NamespaceStatement nsp) {
 						invocation = dc.registerNamespaceInvocation(nsp);
-					} else if (parent instanceof final @NonNull ClassStatement csp) {
+					} else if (parent instanceof final @NotNull ClassStatement csp) {
 						invocation = dc.registerClassInvocation(csp, null);
 					} else
 						throw new NotImplementedException(); // TODO implement me
@@ -261,7 +261,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					// tte transitiveOver: {best/codePoint >> FunctionInvocation} resolvedReturnType
 					dc.forFunction(dc.newFunctionInvocation((FunctionDef) best, pte, invocation), new ForFunction() {
 						@Override
-						public void typeDecided(@NonNull GenType aType) {
+						public void typeDecided(@NotNull GenType aType) {
 							tte.setAttached(aType);
 //									vte.addPotentialType(instructionIndex, tte);
 						}
@@ -285,7 +285,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	private void __loop1__DOT_EXP(final @NonNull DotExpression de, final @NonNull FT_FCA_Ctx fdctx) {
+	private void __loop1__DOT_EXP(final @NotNull DotExpression de, final @NotNull FT_FCA_Ctx fdctx) {
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             tte               = fdctx.tte();
@@ -304,7 +304,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					//vte.addPotentialType(instructionIndex, tte);
 				} else if (best instanceof ClassStatement) {
 					tte.setAttached(((ClassStatement) best).getOS_Type());
-				} else if (best instanceof final @NonNull VariableStatementImpl vs) {
+				} else if (best instanceof final @NotNull VariableStatementImpl vs) {
 					@Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(vs.getName());
 					TypeTableEntry                tte1   = ((IntegerIA) Objects.requireNonNull(vte_ia)).getEntry().getType();
 					tte.setAttached(tte1.getAttached());
@@ -324,7 +324,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	void do_assign_call_GET_ITEM(@NonNull GetItemExpression gie, final @NonNull FT_FCA_Ctx fdctx) {
+	void do_assign_call_GET_ITEM(@NotNull GetItemExpression gie, final @NotNull FT_FCA_Ctx fdctx) {
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             tte               = fdctx.tte();
@@ -337,11 +337,11 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			final LookupResultList     lrl  = dc.lookupExpression(gie.getLeft(), ctx);
 			final @Nullable OS_Element best = lrl.chooseBest(null);
 			if (best != null) {
-				if (best instanceof @NonNull final VariableStatementImpl vs) { // TODO what about alias?
+				if (best instanceof @NotNull final VariableStatementImpl vs) { // TODO what about alias?
 					String                        s      = vs.getName();
 					@Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(s);
 					if (vte_ia != null) {
-						@NonNull VariableTableEntry vte1 = generatedFunction.getVarTableEntry(to_int(vte_ia));
+						@NotNull VariableTableEntry vte1 = generatedFunction.getVarTableEntry(to_int(vte_ia));
 						throw new NotImplementedException();
 					} else {
 						final IdentTableEntry idte = generatedFunction.getIdentTableEntryFor(vs.getNameToken());
@@ -360,9 +360,9 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 							}
 
 							@Override
-							public void typeDeduced(final @NonNull OS_Type ty) {
+							public void typeDeduced(final @NotNull OS_Type ty) {
 								assert ty != null;
-								@NonNull GenType rtype = null;
+								@NotNull GenType rtype = null;
 								try {
 									rtype = dc.resolve_type(ty, ctx);
 								} catch (ResolveError resolveError) {
@@ -374,12 +374,12 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 									LookupResultList     lrl2  = rtype.getResolved().getClassOf().getContext().lookup("__getitem__");
 									@Nullable OS_Element best2 = lrl2.chooseBest(null);
 									if (best2 != null) {
-										if (best2 instanceof @NonNull final FunctionDef fd) {
+										if (best2 instanceof @NotNull final FunctionDef fd) {
 											@Nullable ProcTableEntry pte        = null;
 											final IInvocation        invocation = dc.getInvocation((EvaFunction) generatedFunction);
 											dc.forFunction(dc.newFunctionInvocation(fd, pte, invocation), new ForFunction() {
 												@Override
-												public void typeDecided(final @NonNull GenType aType) {
+												public void typeDecided(final @NotNull GenType aType) {
 													assert fd == generatedFunction.getFD();
 													//
 													if (idte.type == null) {
@@ -398,7 +398,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 							}
 						});
 						if (ty == null) {
-							@NonNull TypeTableEntry tte3 = generatedFunction.newTypeTableEntry(
+							@NotNull TypeTableEntry tte3 = generatedFunction.newTypeTableEntry(
 									TypeTableEntry.Type.SPECIFIED, dt2._inj().new_OS_UserType(vs.typeName()), vs.getNameToken());
 							idte.type = tte3;
 //							ty = idte.type.getAttached();
@@ -411,7 +411,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					String                        s      = fali.name().asString();
 					@Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(s);
 					if (vte_ia != null) {
-						@NonNull VariableTableEntry vte2 = generatedFunction.getVarTableEntry(to_int(vte_ia));
+						@NotNull VariableTableEntry vte2 = generatedFunction.getVarTableEntry(to_int(vte_ia));
 
 //						final @Nullable OS_Type ty2 = vte2.type.attached;
 						VTE_TypePromises.getItemFali(generatedFunction, ctx, vte2, dc.get());
@@ -426,7 +426,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 //					});
 /*
 					if (ty2 == null) {
-						@NonNull TypeTableEntry tte3 = generatedFunction.newTypeTableEntry(
+						@NotNull TypeTableEntry tte3 = generatedFunction.newTypeTableEntry(
 								TypeTableEntry.Type.SPECIFIED, _inj().new_OS_UserType(fali.typeName()), fali.getNameToken());
 						vte2.type = tte3;
 //						ty2 = vte2.type.attached; // TODO this is final, but why assign anyway?
@@ -448,13 +448,13 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	void loop2(final FT_FnCallArgs.@NonNull DoAssignCall dac, final @NonNull Resolve_VTE rvte) {
+	void loop2(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) {
 		final Context                     ctx              = rvte.ctx();
 		final ProcTableEntry              pte              = rvte.pte();
-		final @NonNull Instruction        instruction      = rvte.instruction();
+		final @NotNull Instruction        instruction      = rvte.instruction();
 		final int                         instructionIndex = instruction.getIndex();
-		final @NonNull VariableTableEntry vte              = rvte.vte();
-		final @NonNull FnCallArgs         fca              = rvte.fca();
+		final @NotNull VariableTableEntry vte              = rvte.vte();
+		final @NotNull FnCallArgs         fca              = rvte.fca();
 
 		if (pte.expression_num == null) {
 			if (fca.expression_to_call.getName() != InstructionName.CALLS) {
@@ -490,7 +490,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					if (el instanceof FunctionDef) {
 						final FT_FCA_FunctionDef fcafd = deduceTypes2._inj().new_FT_FCA_FunctionDef((FunctionDef) el, deduceTypes2);
 						fcafd.loop2_i(dac, pte, vte, instructionIndex);
-					} else if (el instanceof @NonNull final ClassStatement kl) {
+					} else if (el instanceof @NotNull final ClassStatement kl) {
 						final FT_FCA_ClassStatement fcafd = deduceTypes2._inj().new_FT_FCA_ClassStatement((ClassStatement) el);
 						loop2_i(kl);
 					} else {
@@ -498,9 +498,9 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 					}
 				}
 
-				private void loop2_i(final @NonNull ClassStatement kl) {
-					@NonNull OS_Type        type = kl.getOS_Type();
-					@NonNull TypeTableEntry tte  = dac.generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, type, pte.__debug_expression, pte);
+				private void loop2_i(final @NotNull ClassStatement kl) {
+					@NotNull OS_Type        type = kl.getOS_Type();
+					@NotNull TypeTableEntry tte  = dac.generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, type, pte.__debug_expression, pte);
 					vte.addPotentialType(instructionIndex, tte);
 					vte.setConstructable(pte);
 
@@ -515,7 +515,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	public void make2(final FT_FnCallArgs.@NonNull DoAssignCall dac, final @NonNull Resolve_VTE rvte) throws FCA_Stop {
+	public void make2(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) throws FCA_Stop {
 		var generatedFunction = dac.generatedFunction;
 		var dc4               = dac.dc;
 		var errSink           = dac.errSink;
@@ -551,7 +551,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		}
 	}
 
-	public void resolve_vte(final FT_FnCallArgs.@NonNull DoAssignCall dac, final @NonNull Resolve_VTE rvte) {
+	public void resolve_vte(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) {
 		var aGeneratedFunction = dac.generatedFunction;
 		var dc                 = dac.dc;
 		var ctx                = rvte.ctx();
@@ -622,11 +622,11 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			dc4 = aDc4;
 		}
 
-		public @NonNull ClassInvocation registerClassInvocation(final ClassInvocation invocation2) {
+		public @NotNull ClassInvocation registerClassInvocation(final ClassInvocation invocation2) {
 			return dc4.getPhase().registerClassInvocation((ClassInvocation) invocation2);
 		}
 
-		public FunctionInvocation newFunctionInvocation(final FunctionDef aResolvedElement, final ProcTableEntry aPte, final @NonNull IInvocation aInvocation2) {
+		public FunctionInvocation newFunctionInvocation(final FunctionDef aResolvedElement, final ProcTableEntry aPte, final @NotNull IInvocation aInvocation2) {
 			return dc4.newFunctionInvocation(aResolvedElement, aPte, aInvocation2);
 		}
 

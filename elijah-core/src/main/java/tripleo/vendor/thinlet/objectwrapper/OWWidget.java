@@ -144,7 +144,7 @@ public abstract class OWWidget extends OWObject {
 		return EnumHAlign.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.HALIGN));
 	}
 
-	public void setHalign(@NonNull EnumHAlign value) {
+	public void setHalign(@NotNull EnumHAlign value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.HALIGN, value.toString());
 	}
 
@@ -152,7 +152,7 @@ public abstract class OWWidget extends OWObject {
 		return EnumVAlign.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.VALIGN));
 	}
 
-	public void setValign(@NonNull EnumVAlign value) {
+	public void setValign(@NotNull EnumVAlign value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.VALIGN, value.toString());
 	}
 
@@ -165,7 +165,7 @@ public abstract class OWWidget extends OWObject {
 		fthinlet.defineMethod(fcomponent, ThinletConstants.FOCUSGAINED, method);
 	}
 
-	public void setPopupMenu(@NonNull PopupMenu menu) {
+	public void setPopupMenu(@NotNull PopupMenu menu) {
 		fthinlet.add(unwrap(), menu.unwrap());
 	}
 }

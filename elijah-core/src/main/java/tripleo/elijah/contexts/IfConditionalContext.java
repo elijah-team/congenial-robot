@@ -30,7 +30,7 @@ public class IfConditionalContext extends ContextImpl implements Context {
 		_prev_ctx = null; // TOP if statement
 	}
 
-	public IfConditionalContext(final @NonNull Context ctx, final IfConditional ifConditional, final boolean _ignored) {
+	public IfConditionalContext(final @NotNull Context ctx, final IfConditional ifConditional, final boolean _ignored) {
 		_prev_ctx = ctx;
 		_parent   = ((IfConditionalContext) ctx)._parent;
 		carrier   = ifConditional;
@@ -42,7 +42,7 @@ public class IfConditionalContext extends ContextImpl implements Context {
 	}
 
 	@Override
-	public LookupResultList lookup(final String name, final int level, final @NonNull LookupResultList Result, final @NonNull SearchList alreadySearched, final boolean one) {
+	public LookupResultList lookup(final String name, final int level, final @NotNull LookupResultList Result, final @NotNull SearchList alreadySearched, final boolean one) {
 		alreadySearched.add(carrier.getContext());
 		for (final OS_Element/*StatementItem*/ item : carrier.getItems()) {
 			if (!(item instanceof ClassStatement) &&

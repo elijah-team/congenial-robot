@@ -17,7 +17,7 @@ import tripleo.elijah.stages.gen_fn.ProcTableEntry;
  */
 public record ProcIA(int index, BaseEvaFunction generatedFunction) implements InstructionArgument {
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return "ProcIA{" +
 				"index=" + index + ", " +
 				"func=" + getEntry() +
@@ -28,7 +28,7 @@ public record ProcIA(int index, BaseEvaFunction generatedFunction) implements In
 	//	return index;
 	//}
 
-	public @NonNull ProcTableEntry getEntry() {
+	public @NotNull ProcTableEntry getEntry() {
 		return generatedFunction.getProcTableEntry(index);
 	}
 }

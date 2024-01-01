@@ -23,19 +23,19 @@ class ResolvedNodes {
 		cc = aCc;
 	}
 
-	public void do_better(final DeducePhase.GeneratedClasses lgc, final @NonNull PipelineLogic pipelineLogic, final @NonNull WorldModule worldModule) {
+	public void do_better(final DeducePhase.GeneratedClasses lgc, final @NotNull PipelineLogic pipelineLogic, final @NotNull WorldModule worldModule) {
 		this.init(lgc);
 		this.part2();
 		this.part3(pipelineLogic, worldModule, lgc);
 	}
 
-	public void init(final DeducePhase.@NonNull GeneratedClasses c) {
+	public void init(final DeducePhase.@NotNull GeneratedClasses c) {
 		if (cc.reports().outputOn(Finally.Outs.Out_6262)) {
 			System.err.println("2222 " + c);
 		}
 
 		for (final EvaNode evaNode : c) {
-			if (!(evaNode instanceof final @NonNull GNCoded coded)) {
+			if (!(evaNode instanceof final @NotNull GNCoded coded)) {
 				throw new IllegalStateException("node must be coded");
 			}
 
@@ -104,7 +104,7 @@ class ResolvedNodes {
 				});
 	}
 
-	public void part3(final @NonNull PipelineLogic pipelineLogic, final @NonNull WorldModule mod, final DeducePhase.GeneratedClasses lgc) {
+	public void part3(final @NotNull PipelineLogic pipelineLogic, final @NotNull WorldModule mod, final DeducePhase.GeneratedClasses lgc) {
 		final DeducePhase deducePhase = pipelineLogic.dp;
 
 		final DeducePhase_deduceModule_Request rq = new DeducePhase_deduceModule_Request(mod.module(), lgc, pipelineLogic.getVerbosity(), deducePhase);

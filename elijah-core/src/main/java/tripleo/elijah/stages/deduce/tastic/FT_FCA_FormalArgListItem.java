@@ -19,10 +19,10 @@ public class FT_FCA_FormalArgListItem {
 		generatedFunction = aGeneratedFunction;
 	}
 
-	public void doLogic0(final @NonNull VariableTableEntry vte, final @NonNull VariableTableEntry vte1, final @NonNull ErrSink errSink) {
-		final @NonNull OS_Type osType = new OS_UserType(fali.typeName());
+	public void doLogic0(final @NotNull VariableTableEntry vte, final @NotNull VariableTableEntry vte1, final @NotNull ErrSink errSink) {
+		final @NotNull OS_Type osType = new OS_UserType(fali.typeName());
 		if (!osType.equals(vte.getType().getAttached())) {
-			@NonNull TypeTableEntry tte1 = generatedFunction.newTypeTableEntry(
+			@NotNull TypeTableEntry tte1 = generatedFunction.newTypeTableEntry(
 					TypeTableEntry.Type.SPECIFIED,
 					osType,
 					fali.getNameToken(),

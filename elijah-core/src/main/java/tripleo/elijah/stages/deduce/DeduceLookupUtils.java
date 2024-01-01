@@ -37,7 +37,7 @@ public enum DeduceLookupUtils {
 	;
 
 	@Nullable
-	public static OS_Element _resolveAlias(final @NonNull AliasStatement aliasStatement, @NonNull DeduceTypes2 deduceTypes2) {
+	public static OS_Element _resolveAlias(final @NotNull AliasStatement aliasStatement, @NotNull DeduceTypes2 deduceTypes2) {
 		try {
 			return _resolveAlias2(aliasStatement, deduceTypes2);
 		} catch (ResolveError aE) {
@@ -47,7 +47,7 @@ public enum DeduceLookupUtils {
 	}
 
 	@Nullable
-	public static OS_Element _resolveAlias2(final @NonNull AliasStatement best, @NonNull DeduceTypes2 deduceTypes2) throws ResolveError {
+	public static OS_Element _resolveAlias2(final @NotNull AliasStatement best, @NotNull DeduceTypes2 deduceTypes2) throws ResolveError {
 		LookupResultList lrl2;
 		if (best.getExpression() instanceof Qualident) {
 			final IExpression de = Helpers.qualidentToDotExpression2(((Qualident) best.getExpression()));
@@ -67,16 +67,16 @@ public enum DeduceLookupUtils {
 		return lrl2.chooseBest(null);
 	}
 
-	public static @Nullable GenType deduceExpression(@NonNull DeduceTypes2 aDeduceTypes2, @NonNull final IExpression n, final @NonNull Context context) throws ResolveError {
+	public static @Nullable GenType deduceExpression(@NotNull DeduceTypes2 aDeduceTypes2, @NotNull final IExpression n, final @NotNull Context context) throws ResolveError {
 		switch (n.getKind()) {
 		case IDENT:
 			return deduceIdentExpression(aDeduceTypes2, (IdentExpression) n, context);
 		case NUMERIC:
-			final @NonNull GenType genType = aDeduceTypes2._inj().new_GenTypeImpl();
+			final @NotNull GenType genType = aDeduceTypes2._inj().new_GenTypeImpl();
 			genType.setResolved(aDeduceTypes2._inj().new_OS_BuiltinType(BuiltInTypes.SystemInteger));
 			return genType;
 		case DOT_EXP:
-			final @NonNull DotExpression de = (DotExpression) n;
+			final @NotNull DotExpression de = (DotExpression) n;
 			final LookupResultList lrl = lookup_dot_expression(context, de, aDeduceTypes2);
 			final @Nullable GenType left_type = deduceExpression(aDeduceTypes2, de.getLeft(), context);
 			final @Nullable GenType right_type = deduceExpression(aDeduceTypes2, de.getRight(), left_type.getResolved().getClassOf().getContext());
@@ -96,7 +96,7 @@ public enum DeduceLookupUtils {
 	}
 
 	@Contract("_, _ -> param1")
-	public static @NonNull Eventual<DeduceElement3_IdentTableEntry> deduceExpression2(final @NonNull DeduceElement3_IdentTableEntry de3_ite, final FunctionContext aFc) {
+	public static @NotNull Eventual<DeduceElement3_IdentTableEntry> deduceExpression2(final @NotNull DeduceElement3_IdentTableEntry de3_ite, final FunctionContext aFc) {
 		final Eventual<DeduceElement3_IdentTableEntry> e = new Eventual<>();
 
 		//final IdentExpression identExpression = de3_ite.principal.getIdent();
@@ -106,10 +106,10 @@ public enum DeduceLookupUtils {
 			@Nullable GenType result = null;
 			@Nullable GenType R      = ((IDeduceElement3) de3_ite).genType();
 
-			final @NonNull DeduceTypes2 dt2 = ((IDeduceElement3) de3_ite).deduceTypes2();
+			final @NotNull DeduceTypes2 dt2 = ((IDeduceElement3) de3_ite).deduceTypes2();
 			//assert dt2 == aDeduceTypes2;
 
-			final @NonNull IdentExpression ident = ((DeduceElement3_IdentTableEntry) de3_ite).principal.getIdent();
+			final @NotNull IdentExpression ident = ((DeduceElement3_IdentTableEntry) de3_ite).principal.getIdent();
 			final Context                  ctx   = ident.getContext();
 
 			// is this right?
@@ -128,11 +128,11 @@ public enum DeduceLookupUtils {
 						yield __deduceIdentExpression2__VAR(vs, dt2, ctx, result, R);
 					}
 					case FUNCTION -> {
-						final @NonNull FunctionDef functionDef = (FunctionDef) best;
+						final @NotNull FunctionDef functionDef = (FunctionDef) best;
 						yield __deduceIdentExpression2__FUNCTION(R, functionDef);
 					}
 					case FORMAL_ARG_LIST_ITEM -> {
-						final @NonNull FormalArgListItem fali = (FormalArgListItem) best;
+						final @NotNull FormalArgListItem fali = (FormalArgListItem) best;
 						yield __deduceIdentExpression2__FALI(fali, dt2, ctx, result, R);
 					}
 					default ->
@@ -150,7 +150,7 @@ public enum DeduceLookupUtils {
 		return e;
 	}
 
-	private static @Nullable GenType deduceIdentExpression(@NonNull DeduceTypes2 aDeduceTypes2, final @NonNull IdentExpression ident, final @NonNull Context ctx) throws ResolveError {
+	private static @Nullable GenType deduceIdentExpression(@NotNull DeduceTypes2 aDeduceTypes2, final @NotNull IdentExpression ident, final @NotNull Context ctx) throws ResolveError {
 		@Nullable GenType result = null;
 		@Nullable GenType R      = aDeduceTypes2._inj().new_GenTypeImpl();
 
@@ -172,12 +172,12 @@ public enum DeduceLookupUtils {
 				result = __deduceIdentExpression2__VAR(vs, aDeduceTypes2, ctx, result, R);
 				break;
 			case FUNCTION:
-				final @NonNull FunctionDef functionDef = (FunctionDef) best;
+				final @NotNull FunctionDef functionDef = (FunctionDef) best;
 				R.setResolved(functionDef.getOS_Type());
 				result = R;
 				break;
 			case FORMAL_ARG_LIST_ITEM:
-				final @NonNull FormalArgListItem fali = (FormalArgListItem) best;
+				final @NotNull FormalArgListItem fali = (FormalArgListItem) best;
 				result = __deduceIdentExpression2__FALI(fali, aDeduceTypes2, ctx, result, R);
 				break;
 			default:
@@ -190,12 +190,12 @@ public enum DeduceLookupUtils {
 		return result;
 	}
 
-	@NonNull
-	private static GenType __deduceIdentExpression2__FALI(final @NonNull FormalArgListItem fali, final DeduceTypes2 dt2, final Context ctx, @Nullable GenType result, final @Nullable GenType R) {
+	@NotNull
+	private static GenType __deduceIdentExpression2__FALI(final @NotNull FormalArgListItem fali, final DeduceTypes2 dt2, final Context ctx, @Nullable GenType result, final @Nullable GenType R) {
 		if (!fali.typeName().isNull()) {
 			try {
 				@Nullable OS_Module lets_hope_we_dont_need_this = null;
-				@NonNull GenType    ty                          = dt2.resolve_type(lets_hope_we_dont_need_this, dt2._inj().new_OS_UserType(fali.typeName()), ctx);
+				@NotNull GenType    ty                          = dt2.resolve_type(lets_hope_we_dont_need_this, dt2._inj().new_OS_UserType(fali.typeName()), ctx);
 				result = ty;
 			} catch (ResolveError aResolveError) {
 				// TODO This is the cheap way to do it
@@ -214,8 +214,8 @@ public enum DeduceLookupUtils {
 		return result;
 	}
 
-	@NonNull
-	private static GenType __deduceIdentExpression2__FUNCTION(final @Nullable GenType R, final @NonNull FunctionDef functionDef) {
+	@NotNull
+	private static GenType __deduceIdentExpression2__FUNCTION(final @Nullable GenType R, final @NotNull FunctionDef functionDef) {
 
 		R.setResolved(functionDef.getOS_Type());
 		@Nullable GenType result = R;
@@ -223,11 +223,11 @@ public enum DeduceLookupUtils {
 	}
 
 	@Nullable
-	private static GenType __deduceIdentExpression2__VAR(final @NonNull VariableStatementImpl vs, final DeduceTypes2 dt2, final Context ctx, @Nullable GenType result, @Nullable GenType R) throws ResolveError {
+	private static GenType __deduceIdentExpression2__VAR(final @NotNull VariableStatementImpl vs, final DeduceTypes2 dt2, final Context ctx, @Nullable GenType result, @Nullable GenType R) throws ResolveError {
 		if (!vs.typeName().isNull()) {
 			try {
 				@Nullable OS_Module lets_hope_we_dont_need_this = null;
-				@NonNull GenType    ty                          = dt2.resolve_type(lets_hope_we_dont_need_this, dt2._inj().new_OS_UserType(vs.typeName()), ctx);
+				@NotNull GenType    ty                          = dt2.resolve_type(lets_hope_we_dont_need_this, dt2._inj().new_OS_UserType(vs.typeName()), ctx);
 				result = ty;
 			} catch (ResolveError aResolveError) {
 				// TODO This is the cheap way to do it
@@ -265,7 +265,7 @@ public enum DeduceLookupUtils {
 	 * @param deduceTypes2
 	 * @return the deduced type or {@code null}. Do not {@code pce.setType}
 	 */
-	private static @Nullable GenType deduceProcedureCall(final @NonNull ProcedureCallExpression pce, final @NonNull Context ctx, @NonNull DeduceTypes2 deduceTypes2) {
+	private static @Nullable GenType deduceProcedureCall(final @NotNull ProcedureCallExpression pce, final @NotNull Context ctx, @NotNull DeduceTypes2 deduceTypes2) {
 		@Nullable GenType result   = deduceTypes2._inj().new_GenTypeImpl();
 		boolean           finished = false;
 		SimplePrintLoggerToRemoveSoon.println_err_2("979 During deduceProcedureCall " + pce);
@@ -286,7 +286,7 @@ public enum DeduceLookupUtils {
 					} else {
 						result.setResolved(deduceTypes2._inj().new_OS_UnknownType(fd));// TODO still must register somewhere
 					}
-				} else if (best instanceof final @NonNull FuncExpr funcExpr) {
+				} else if (best instanceof final @NotNull FuncExpr funcExpr) {
 					if (funcExpr.returnType() != null && !funcExpr.returnType().isNull()) {
 						result.setResolved(deduceTypes2._inj().new_OS_UserType(funcExpr.returnType()));
 					} else {
@@ -306,9 +306,9 @@ public enum DeduceLookupUtils {
 	 * @return a "flat" {@link Stack<IExpression>} of expressions
 	 * @see {@link tripleo.elijah.stages.deduce.DotExpressionToStackTest}
 	 */
-	@NonNull
-	static Stack<IExpression> dot_expression_to_stack(final @NonNull DotExpression de) {
-		final @NonNull Stack<IExpression> right_stack = new Stack<IExpression>();
+	@NotNull
+	static Stack<IExpression> dot_expression_to_stack(final @NotNull DotExpression de) {
+		final @NotNull Stack<IExpression> right_stack = new Stack<IExpression>();
 		IExpression                       right       = de.getRight();
 		right_stack.push(de.getLeft());
 		while (right instanceof DotExpression) {
@@ -320,7 +320,7 @@ public enum DeduceLookupUtils {
 		return right_stack;
 	}
 
-	static @Nullable OS_Element lookup(@NonNull IExpression expression, @NonNull Context ctx, @NonNull DeduceTypes2 deduceTypes2) throws ResolveError {
+	static @Nullable OS_Element lookup(@NotNull IExpression expression, @NotNull Context ctx, @NotNull DeduceTypes2 deduceTypes2) throws ResolveError {
 		switch (expression.getKind()) {
 		case IDENT:
 			LookupResultList lrl = ctx.lookup(((IdentExpression) expression).getText());
@@ -342,8 +342,8 @@ public enum DeduceLookupUtils {
 		}
 	}
 
-	private static LookupResultList lookup_dot_expression(Context ctx, final @NonNull DotExpression de, @NonNull DeduceTypes2 deduceTypes2) throws ResolveError {
-		final @NonNull Stack<IExpression> s  = dot_expression_to_stack(de);
+	private static LookupResultList lookup_dot_expression(Context ctx, final @NotNull DotExpression de, @NotNull DeduceTypes2 deduceTypes2) throws ResolveError {
+		final @NotNull Stack<IExpression> s  = dot_expression_to_stack(de);
 		@Nullable GenType                 t  = null;
 		IExpression                       ss = s.peek();
 		while (/*!*/s.size() > 1/*isEmpty()*/) {
@@ -374,9 +374,9 @@ public enum DeduceLookupUtils {
 		}
 	}
 
-	public static LookupResultList lookupExpression(final @NonNull IExpression left,
-													final @NonNull Context ctx,
-													final @NonNull DeduceTypes2 deduceTypes2) throws ResolveError {
+	public static LookupResultList lookupExpression(final @NotNull IExpression left,
+													final @NotNull Context ctx,
+													final @NotNull DeduceTypes2 deduceTypes2) throws ResolveError {
 		switch (left.getKind()) {
 		case QIDENT:
 			final IExpression de = Helpers.qualidentToDotExpression2((Qualident) left);
@@ -384,7 +384,7 @@ public enum DeduceLookupUtils {
 		case DOT_EXP:
 			return lookup_dot_expression(ctx, (DotExpression) left, deduceTypes2);
 		case IDENT: {
-			final @NonNull IdentExpression ident = (IdentExpression) left;
+			final @NotNull IdentExpression ident = (IdentExpression) left;
 			final LookupResultList         lrl   = ctx.lookup(ident.getText());
 			if (lrl.results().size() == 0) {
 				throw new ResolveError(ident, lrl);

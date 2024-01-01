@@ -54,15 +54,15 @@ public class Generate_Code_For_Method {
 	private final GenerateC                gc;
 	boolean is_constructor = false, is_unit_type = false;
 
-	public Generate_Code_For_Method(@NonNull final GenerateC aGenerateC, final ElLog aLog) {
+	public Generate_Code_For_Method(@NotNull final GenerateC aGenerateC, final ElLog aLog) {
 		gc  = aGenerateC;
 		LOG = aLog; // use log from GenerateC
 	}
 
-	void action_invariant(final @NonNull WhyNotGarish_BaseFunction yf, final Generate_Method_Header aGmh) {
+	void action_invariant(final @NotNull WhyNotGarish_BaseFunction yf, final Generate_Method_Header aGmh) {
 		tos.incr_tabs();
 		//
-		@NonNull final List<Instruction> instructions = yf.instructions();
+		@NotNull final List<Instruction> instructions = yf.instructions();
 		for (int i = 0, instructionsSize = instructions.size(); i < instructionsSize; i++) {
 			final Instruction instruction = instructions.get(i);
 			//			LOG.err("8999 "+instruction);
@@ -142,7 +142,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln("}");
 	}
 
-	private void action_E(final @NonNull WhyNotGarish_BaseFunction gf, final @NonNull Generate_Method_Header aGmh) {
+	private void action_E(final @NotNull WhyNotGarish_BaseFunction gf, final @NotNull Generate_Method_Header aGmh) {
 		tos.put_string_ln("bool vsb;");
 		int state = 0;
 
@@ -194,7 +194,7 @@ public class Generate_Code_For_Method {
 		tos.incr_tabs();
 	}
 
-	private void action_X(final @NonNull Generate_Method_Header aGmh) {
+	private void action_X(final @NotNull Generate_Method_Header aGmh) {
 		// TODO functions are being marked as constructor when they are not
 
 		if (is_constructor) {
@@ -222,7 +222,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln("}");
 	}
 
-	private void action_AGN(final WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_AGN(final WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		GCFM_Inst_AGN inst = new GCFM_Inst_AGN(this, gc, gf, aInstruction);
 
 		final String s = inst.getText();
@@ -230,7 +230,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(s);
 	}
 
-	private void action_AGNK(final WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_AGNK(final WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		GCFM_Inst_AGNK inst = new GCFM_Inst_AGNK(this, gc, gf, aInstruction);
 
 		final String s = inst.getText();
@@ -238,7 +238,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(s);
 	}
 
-	private void action_JE(final WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_JE(final WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		GCFM_Inst_JE inst = new GCFM_Inst_JE(this, gc, gf, aInstruction);
 
 		final String s = inst.getText();
@@ -246,7 +246,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(s);
 	}
 
-	private void action_JNE(final @NonNull WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_JNE(final @NotNull WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		final InstructionArgument lhs    = aInstruction.getArg(0);
 		final InstructionArgument rhs    = aInstruction.getArg(1);
 		final InstructionArgument target = aInstruction.getArg(2);
@@ -273,7 +273,7 @@ public class Generate_Code_For_Method {
 		}
 	}
 
-	private void action_JL(final @NonNull WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_JL(final @NotNull WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		final InstructionArgument lhs    = aInstruction.getArg(0);
 		final InstructionArgument rhs    = aInstruction.getArg(1);
 		final InstructionArgument target = aInstruction.getArg(2);
@@ -316,7 +316,7 @@ public class Generate_Code_For_Method {
 		tos.put_string(bt.getText());
 	}
 
-	private void action_JMP(final @NonNull Instruction aInstruction) {
+	private void action_JMP(final @NotNull Instruction aInstruction) {
 		final InstructionArgument target = aInstruction.getArg(0);
 //		InstructionArgument value  = instruction.getArg(1);
 
@@ -331,7 +331,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(bt.getText());
 	}
 
-	private void action_CONSTRUCT(final WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_CONSTRUCT(final WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		final InstructionArgument _arg0 = aInstruction.getArg(0);
 		assert _arg0 instanceof ProcIA;
 
@@ -342,7 +342,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(gcx_construct.getText());
 	}
 
-	private void action_CALL(final WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_CALL(final WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		//LOG.err("9000 "+inst.getName());
 
 		final GCX_FunctionCall gcx_fc = new GCX_FunctionCall(gf, gc, aInstruction);
@@ -350,7 +350,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(gcx_fc.getText());
 	}
 
-	private void action_CALLS(final @NonNull WhyNotGarish_BaseFunction gf, final @NonNull Instruction aInstruction) {
+	private void action_CALLS(final @NotNull WhyNotGarish_BaseFunction gf, final @NotNull Instruction aInstruction) {
 		final InstructionArgument x = aInstruction.getArg(0);
 
 		assert x instanceof ProcIA;
@@ -362,7 +362,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(gcx_fc.getText());
 	}
 
-	private void action_IS_A(final @NonNull Instruction instruction, final @NonNull BufferTabbedOutputStream tos, final @NonNull WhyNotGarish_BaseFunction gf) {
+	private void action_IS_A(final @NotNull Instruction instruction, final @NotNull BufferTabbedOutputStream tos, final @NotNull WhyNotGarish_BaseFunction gf) {
 		final IntegerIA testing_var_  = (IntegerIA) instruction.getArg(0);
 		final IntegerIA testing_type_ = (IntegerIA) instruction.getArg(1);
 		final Label     target_label  = ((LabelIA) instruction.getArg(2)).label;
@@ -393,7 +393,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(bt.getText());
 	}
 
-	private void action_DECL(final @NonNull Instruction instruction, final @NonNull BufferTabbedOutputStream tos, final @NonNull WhyNotGarish_BaseFunction gf) {
+	private void action_DECL(final @NotNull Instruction instruction, final @NotNull BufferTabbedOutputStream tos, final @NotNull WhyNotGarish_BaseFunction gf) {
 		final Operation2<EG_Statement> op = _action_DECL(instruction, gf);
 
 		if (op.mode() == Mode.SUCCESS) {
@@ -404,7 +404,7 @@ public class Generate_Code_For_Method {
 		}
 	}
 
-	private void action_CAST(final @NonNull Instruction instruction, final @NonNull BufferTabbedOutputStream tos, final @NonNull WhyNotGarish_BaseFunction gf) {
+	private void action_CAST(final @NotNull Instruction instruction, final @NotNull BufferTabbedOutputStream tos, final @NotNull WhyNotGarish_BaseFunction gf) {
 		final IntegerIA      vte_num_     = (IntegerIA) instruction.getArg(0);
 		final IntegerIA      vte_type_    = (IntegerIA) instruction.getArg(1);
 		final IntegerIA      vte_targ_    = (IntegerIA) instruction.getArg(2);
@@ -417,7 +417,7 @@ public class Generate_Code_For_Method {
 		tos.put_string_ln(String.format("%s = (%s)%s;", target_name, target_type, source_target));
 	}
 
-	private @NonNull Operation2<EG_Statement> _action_DECL(final @NonNull Instruction instruction, final @NonNull WhyNotGarish_BaseFunction gf) {
+	private @NotNull Operation2<EG_Statement> _action_DECL(final @NotNull Instruction instruction, final @NotNull WhyNotGarish_BaseFunction gf) {
 		final SymbolIA  decl_type = (SymbolIA) instruction.getArg(0);
 		final IntegerIA vte_num   = (IntegerIA) instruction.getArg(1);
 
@@ -512,12 +512,12 @@ public class Generate_Code_For_Method {
 			case FUNC_EXPR:
 				return Operation2.success(new EG_Statement() {
 					@Override
-					public @NonNull EX_Explanation getExplanation() {
+					public @NotNull EX_Explanation getExplanation() {
 						return EX_Explanation.withMessage("gcfm:type:func_decl");
 					}
 
 					@Override
-					public @NonNull String getText() {
+					public @NotNull String getText() {
 						return "void (*fun)()";
 					}
 				});
@@ -528,7 +528,7 @@ public class Generate_Code_For_Method {
 		// VARIABLE WASN'T FULLY DEDUCED YET
 		// MTL A TEMP VARIABLE
 		//
-		@NonNull final Collection<TypeTableEntry> pt_ = vte.potentialTypes();
+		@NotNull final Collection<TypeTableEntry> pt_ = vte.potentialTypes();
 		final List<TypeTableEntry>                pt  = new ArrayList<TypeTableEntry>(pt_);
 		if (pt.size() == 1) {
 			final TypeTableEntry ty = pt.get(0);
@@ -560,10 +560,10 @@ public class Generate_Code_For_Method {
 		return Operation2.failure(new Diagnostic_8886());
 	}
 
-	void generateCodeForConstructor(final @NonNull DeducedEvaConstructor gf,
+	void generateCodeForConstructor(final @NotNull DeducedEvaConstructor gf,
 									final GenerateResult gr__,
 									final WorkList aWorkList__,
-									final @NonNull GenerateResultEnv fileGen
+									final @NotNull GenerateResultEnv fileGen
 								   ) {
 
 		var gr        = fileGen.gr();
@@ -587,7 +587,7 @@ public class Generate_Code_For_Method {
 		}
 	}
 
-	void generateCodeForMethod(final @NonNull DeducedEvaFunctionBase gf, final @NonNull GenerateResultEnv aFileGen) {
+	void generateCodeForMethod(final @NotNull DeducedEvaFunctionBase gf, final @NotNull GenerateResultEnv aFileGen) {
 		// TODO separate into method and method_header??
 		final C2C_CodeForMethod cfm = new C2C_CodeForMethod(this, (DeducedBaseEvaFunction) gf, aFileGen);
 
@@ -627,7 +627,7 @@ public class Generate_Code_For_Method {
 		}
 
 		@Override
-		public @NonNull EX_Explanation getExplanation() {
+		public @NotNull EX_Explanation getExplanation() {
 			return EX_Explanation.withMessage("GCR_VTE_Target");
 		}
 
@@ -636,13 +636,13 @@ public class Generate_Code_For_Method {
 			return null;
 		}
 
-		public void feed(final AOG aAOG, final @NonNull GenerateC gc) {
+		public void feed(final AOG aAOG, final @NotNull GenerateC gc) {
 			target_name = gc.getRealTargetName(gf, vteNum, aAOG);
 		}
 	}
 
 	class BT {
-		@NonNull BufferTabbedOutputStream btos = new BufferTabbedOutputStream();
+		@NotNull BufferTabbedOutputStream btos = new BufferTabbedOutputStream();
 
 		public String getText() {
 			return btos.getBuffer().getText();
@@ -656,7 +656,7 @@ public class Generate_Code_For_Method {
 			btos.put_string_ln(s);
 		}
 
-		public void text2(@NonNull Supplier<String> s) {
+		public void text2(@NotNull Supplier<String> s) {
 			btos.put_string_ln(s.get());
 		}
 	}

@@ -34,11 +34,11 @@ public class EG_SingleStatement implements EG_Statement {
 		return text;
 	}
 
-	public @NonNull EG_SingleStatement rule(final String aS, final int aI) {
+	public @NotNull EG_SingleStatement rule(final String aS, final int aI) {
 		return this;
 	}
 
-	public @NonNull EG_SingleStatement tag(final String aS, final int aI) {
+	public @NotNull EG_SingleStatement tag(final String aS, final int aI) {
 		return this;
 	}
 }

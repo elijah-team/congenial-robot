@@ -13,10 +13,10 @@ import static tripleo.elijah.util.Helpers.List_of;
 
 public class ResolvedVariables {
 	final          IdentTableEntry identTableEntry;
-	final @NonNull OS_Element      parent; // README tripleo.elijah.lang._CommonNC, but that's package-private
+	final @NotNull OS_Element      parent; // README tripleo.elijah.lang._CommonNC, but that's package-private
 	final          String          varName;
 
-	public ResolvedVariables(IdentTableEntry aIdentTableEntry, @NonNull OS_Element aParent, String aVarName) {
+	public ResolvedVariables(IdentTableEntry aIdentTableEntry, @NotNull OS_Element aParent, String aVarName) {
 		assert aParent instanceof ClassStatement || aParent instanceof NamespaceStatement;
 
 		identTableEntry = aIdentTableEntry;
@@ -25,14 +25,14 @@ public class ResolvedVariables {
 	}
 
 	public void handle(final EvaContainer evaContainer) {
-		final @NonNull Maybe<EvaContainer.VarTableEntry> variable_m = evaContainer.getVariable(varName);
+		final @NotNull Maybe<EvaContainer.VarTableEntry> variable_m = evaContainer.getVariable(varName);
 
 		if (!variable_m.isException()) {
 			// TODO 11/10 curiously this is required to remove squigglies
 			//  when if above (maybe irt idea, but should be always by dfa)
-			//  and @NonNull below specify it
+			//  and @NotNull below specify it
 			assert variable_m.o != null;
-			final @NonNull EvaContainer.VarTableEntry variable = variable_m.o;
+			final @NotNull EvaContainer.VarTableEntry variable = variable_m.o;
 
 			final TypeTableEntry type = identTableEntry.type;
 			if (type != null) {

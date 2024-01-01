@@ -15,7 +15,7 @@ public class OS_UserType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NonNull String asString() {
+	public @NotNull String asString() {
 		return MessageFormat.format("<OS_UserType {0}>", typeName);
 	}
 
@@ -25,12 +25,12 @@ public class OS_UserType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	protected boolean _isEqual(final @NonNull OS_Type aType) {
+	protected boolean _isEqual(final @NotNull OS_Type aType) {
 		return aType.getType() == Type.USER && typeName.equals(aType.getTypeName());
 	}
 
 	@Override
-	public @Nullable OS_Type resolve(final @NonNull Context ctx) {
+	public @Nullable OS_Type resolve(final @NotNull Context ctx) {
 		assert ctx != null;
 
 		final LookupResultList r    = ctx.lookup(getTypeName().toString()); // TODO
@@ -49,7 +49,7 @@ public class OS_UserType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NonNull Type getType() {
+	public @NotNull Type getType() {
 		return Type.USER;
 	}
 

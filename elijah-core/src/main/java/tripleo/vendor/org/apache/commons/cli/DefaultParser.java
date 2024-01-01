@@ -150,7 +150,7 @@ public class DefaultParser implements CommandLineParser {
 	 * @return a new {@link Builder} instance
 	 * @since 1.5.0
 	 */
-	public static @NonNull Builder builder() {
+	public static @NotNull Builder builder() {
 		return new Builder();
 	}
 
@@ -186,7 +186,7 @@ public class DefaultParser implements CommandLineParser {
 	 * @param token The current token to be <b>burst</b> at the first non-Option encountered.
 	 * @throws ParseException if there are any problems encountered while parsing the command line token.
 	 */
-	protected void handleConcatenatedOptions(final @NonNull String token) throws ParseException {
+	protected void handleConcatenatedOptions(final @NotNull String token) throws ParseException {
 		for (int i = 1; i < token.length(); i++) {
 			final String ch = String.valueOf(token.charAt(i));
 
@@ -230,7 +230,7 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param token the command line token to handle
 	 */
-	private void handleLongOption(final @NonNull String token) throws ParseException {
+	private void handleLongOption(final @NotNull String token) throws ParseException {
 		if (token.indexOf('=') == -1) {
 			handleLongOptionWithoutEqual(token);
 		} else {
@@ -245,7 +245,7 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param token the command line token to handle
 	 */
-	private void handleLongOptionWithEqual(final @NonNull String token) throws ParseException {
+	private void handleLongOptionWithEqual(final @NotNull String token) throws ParseException {
 		final int pos = token.indexOf('=');
 
 		final String value = token.substring(pos + 1);
@@ -338,7 +338,7 @@ public class DefaultParser implements CommandLineParser {
 	 * @param token a string
 	 * @return token with the quotes stripped (if set)
 	 */
-	private String stripLeadingAndTrailingQuotesDefaultOff(final @NonNull String token) {
+	private String stripLeadingAndTrailingQuotesDefaultOff(final @NotNull String token) {
 		if (stripLeadingAndTrailingQuotes != null && stripLeadingAndTrailingQuotes) {
 			return Util.stripLeadingAndTrailingQuotes(token);
 		}
@@ -350,7 +350,7 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param option
 	 */
-	private void updateRequiredOptions(final @NonNull Option option) throws AlreadySelectedException {
+	private void updateRequiredOptions(final @NotNull Option option) throws AlreadySelectedException {
 		if (option.isRequired()) {
 			expectedOpts.remove(option.getKey());
 		}
@@ -402,7 +402,7 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param token the command line token to handle
 	 */
-	private void handleShortAndLongOption(final @NonNull String token) throws ParseException {
+	private void handleShortAndLongOption(final @NotNull String token) throws ParseException {
 		final String t = Util.stripLeadingHyphens(token);
 
 		final int pos = t.indexOf('=');
@@ -473,7 +473,7 @@ public class DefaultParser implements CommandLineParser {
 	 * @param argument the command line token to handle
 	 * @throws ParseException
 	 */
-	private void handleToken(final @NonNull CompilerInput ci) throws ParseException {
+	private void handleToken(final @NotNull CompilerInput ci) throws ParseException {
 		final String argument = ci.getInp();
 
 		currentToken = argument;
@@ -505,7 +505,7 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param token the command line token to handle
 	 */
-	private void handleUnknownToken(final @NonNull String token) throws ParseException {
+	private void handleUnknownToken(final @NotNull String token) throws ParseException {
 		if (token.startsWith("-") && token.length() > 1 && !stopAtNonOption) {
 			throw new UnrecognizedOptionException("Unrecognized option: " + token, token);
 		}
@@ -516,7 +516,7 @@ public class DefaultParser implements CommandLineParser {
 		}
 	}
 
-	private void handleUnknownToken(final @NonNull CompilerInput ci) throws ParseException {
+	private void handleUnknownToken(final @NotNull CompilerInput ci) throws ParseException {
 		String token = ci.getInp();
 
 		if (token.startsWith("-") && token.length() > 1 && !stopAtNonOption) {
@@ -535,14 +535,14 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param token
 	 */
-	private boolean isArgument(final @NonNull String token) {
+	private boolean isArgument(final @NotNull String token) {
 		return !isOption(token) || isNegativeNumber(token);
 	}
 
 	/**
 	 * Tests if the specified token is a Java-like property (-Dkey=value).
 	 */
-	private boolean isJavaProperty(final @NonNull String token) {
+	private boolean isJavaProperty(final @NotNull String token) {
 		final String opt    = token.substring(0, 1);
 		final Option option = options.getOption(opt);
 
@@ -600,7 +600,7 @@ public class DefaultParser implements CommandLineParser {
 	 *
 	 * @param token
 	 */
-	private boolean isNegativeNumber(final @NonNull String token) {
+	private boolean isNegativeNumber(final @NotNull String token) {
 		try {
 			Double.parseDouble(token);
 			return true;
@@ -650,7 +650,7 @@ public class DefaultParser implements CommandLineParser {
 	}
 
 	@Override
-	public CommandLine parse(@NonNull Options options, @NonNull List<CompilerInput> aInputs) throws ParseException {
+	public CommandLine parse(@NotNull Options options, @NotNull List<CompilerInput> aInputs) throws ParseException {
 		this.options         = options;
 		this.stopAtNonOption = false;
 		skipParsing          = false;
@@ -748,7 +748,7 @@ public class DefaultParser implements CommandLineParser {
 	 * @param token a string
 	 * @return token with the quotes stripped (if set)
 	 */
-	private String stripLeadingAndTrailingQuotesDefaultOn(final @NonNull String token) {
+	private String stripLeadingAndTrailingQuotesDefaultOn(final @NotNull String token) {
 		if (stripLeadingAndTrailingQuotes == null || stripLeadingAndTrailingQuotes) {
 			return Util.stripLeadingAndTrailingQuotes(token);
 		}
@@ -796,7 +796,7 @@ public class DefaultParser implements CommandLineParser {
 		 * @return the new {@link DefaultParser}
 		 * @since 1.5.0
 		 */
-		public @NonNull DefaultParser build() {
+		public @NotNull DefaultParser build() {
 			return new DefaultParser(allowPartialMatching, stripLeadingAndTrailingQuotes);
 		}
 
@@ -822,7 +822,7 @@ public class DefaultParser implements CommandLineParser {
 		 * @return this builder, to allow method chaining
 		 * @since 1.5.0
 		 */
-		public @NonNull Builder setAllowPartialMatching(final boolean allowPartialMatching) {
+		public @NotNull Builder setAllowPartialMatching(final boolean allowPartialMatching) {
 			this.allowPartialMatching = allowPartialMatching;
 			return this;
 		}
@@ -842,7 +842,7 @@ public class DefaultParser implements CommandLineParser {
 		 * @return this builder, to allow method chaining
 		 * @since 1.5.0
 		 */
-		public @NonNull Builder setStripLeadingAndTrailingQuotes(final Boolean stripLeadingAndTrailingQuotes) {
+		public @NotNull Builder setStripLeadingAndTrailingQuotes(final Boolean stripLeadingAndTrailingQuotes) {
 			this.stripLeadingAndTrailingQuotes = stripLeadingAndTrailingQuotes;
 			return this;
 		}

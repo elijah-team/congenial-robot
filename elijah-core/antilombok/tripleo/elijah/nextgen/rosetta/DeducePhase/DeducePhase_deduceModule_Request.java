@@ -12,20 +12,20 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.u.ElIntrinsics;
 
 public final class DeducePhase_deduceModule_Request {
-   @NonNull
+   @NotNull
    public static final Companion Companion = new Companion();
-   @NonNull
+   @NotNull
    private final OS_Module module;
-   @NonNull
+   @NotNull
    private final Iterable listOfEvaFunctions;
-   @NonNull
+   @NotNull
    private final ElLog.Verbosity verbosity;
-   @NonNull
+   @NotNull
    private final DeducePhase deducePhase;
    @Nullable
    private DeduceTypes2 createdDeduceTypes2;
 
-   public DeducePhase_deduceModule_Request(@NonNull OS_Module module, @NonNull Iterable listOfEvaFunctions, @NonNull ElLog.Verbosity verbosity, @NonNull DeducePhase deducePhase) {
+   public DeducePhase_deduceModule_Request(@NotNull OS_Module module, @NotNull Iterable listOfEvaFunctions, @NotNull ElLog.Verbosity verbosity, @NotNull DeducePhase deducePhase) {
       ElIntrinsics.checkNotNullParameter(module, "module");
       ElIntrinsics.checkNotNullParameter(listOfEvaFunctions, "listOfEvaFunctions");
       ElIntrinsics.checkNotNullParameter(verbosity, "verbosity");
@@ -37,27 +37,27 @@ public final class DeducePhase_deduceModule_Request {
       this.deducePhase = deducePhase;
    }
 
-   @NonNull
+   @NotNull
    public final OS_Module getModule() {
       return this.module;
    }
 
-   @NonNull
+   @NotNull
    public final Iterable<EvaNode> getListOfEvaFunctions() {
       return this.listOfEvaFunctions;
    }
 
-   @NonNull
+   @NotNull
    public final ElLog.Verbosity getVerbosity() {
       return this.verbosity;
    }
 
-   @NonNull
+   @NotNull
    public final DeducePhase getDeducePhase() {
       return this.deducePhase;
    }
 
-   @NonNull
+   @NotNull
    public final DeduceTypes2 createDeduceTypes2() {
       DeduceTypes2Request deduceTypes2Request = new DeduceTypes2Request(this.module, this.deducePhase, this.verbosity);
       DeduceTypes2 var10000 = Rosetta.create(deduceTypes2Request);
@@ -65,28 +65,28 @@ public final class DeducePhase_deduceModule_Request {
       return var10000;
    }
 
-   @NonNull
+   @NotNull
    public final OS_Module component1() {
       return this.module;
    }
 
-   @NonNull
+   @NotNull
    public final Iterable component2() {
       return this.listOfEvaFunctions;
    }
 
-   @NonNull
+   @NotNull
    public final ElLog.Verbosity component3() {
       return this.verbosity;
    }
 
-   @NonNull
+   @NotNull
    public final DeducePhase component4() {
       return this.deducePhase;
    }
 
-   @NonNull
-   public final DeducePhase_deduceModule_Request copy(@NonNull OS_Module module, @NonNull Iterable listOfEvaFunctions, @NonNull ElLog.Verbosity verbosity, @NonNull DeducePhase deducePhase) {
+   @NotNull
+   public final DeducePhase_deduceModule_Request copy(@NotNull OS_Module module, @NotNull Iterable listOfEvaFunctions, @NotNull ElLog.Verbosity verbosity, @NotNull DeducePhase deducePhase) {
       ElIntrinsics.checkNotNullParameter(module, "module");
       ElIntrinsics.checkNotNullParameter(listOfEvaFunctions, "listOfEvaFunctions");
       ElIntrinsics.checkNotNullParameter(verbosity, "verbosity");
@@ -115,7 +115,7 @@ public final class DeducePhase_deduceModule_Request {
       return var0.copy(var1, var2, var3, var4);
    }
 
-   @NonNull
+   @NotNull
    public String toString() {
       return "DeducePhase_deduceModule_Request(module=" + this.module + ", listOfEvaFunctions=" + this.listOfEvaFunctions + ", verbosity=" + this.verbosity + ", deducePhase=" + this.deducePhase + ")";
    }
@@ -158,8 +158,8 @@ public final class DeducePhase_deduceModule_Request {
       private Companion() {
       }
 
-      @NonNull
-      public final DeduceTypes2 createDeduceTypes2Singleton(@NonNull DeducePhase_deduceModule_Request moduleRequest) {
+      @NotNull
+      public final DeduceTypes2 createDeduceTypes2Singleton(@NotNull DeducePhase_deduceModule_Request moduleRequest) {
          ElIntrinsics.checkNotNullParameter(moduleRequest, "moduleRequest");
          if (moduleRequest.createdDeduceTypes2 == null) {
             moduleRequest.createdDeduceTypes2 = moduleRequest.createDeduceTypes2();

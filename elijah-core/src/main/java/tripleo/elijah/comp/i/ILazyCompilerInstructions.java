@@ -12,7 +12,7 @@ import java.io.File;
 
 public interface ILazyCompilerInstructions {
 	@Contract(value = "_ -> new", pure = true)
-	static @NonNull ILazyCompilerInstructions of(final @NonNull CompilerInstructions aCompilerInstructions) {
+	static @NotNull ILazyCompilerInstructions of(final @NotNull CompilerInstructions aCompilerInstructions) {
 		return new ILazyCompilerInstructions() {
 			@Override
 			public CompilerInstructions get() {
@@ -22,7 +22,7 @@ public interface ILazyCompilerInstructions {
 	}
 
 	@Contract(value = "_, _ -> new", pure = true)
-	static @NonNull ILazyCompilerInstructions of(final @NonNull CompilerInput input, final @NonNull CompilationClosure cc) {
+	static @NotNull ILazyCompilerInstructions of(final @NotNull CompilerInput input, final @NotNull CompilationClosure cc) {
 		final String file_name = input.getInp();
 		final File   f         = new File(file_name);
 

@@ -33,7 +33,7 @@ public class DefaultCompilationAccess implements ICompilationAccess {
 	}
 
 	@Override
-	public @NonNull List<IFunctionMapHook> functionMapHooks() {
+	public @NotNull List<IFunctionMapHook> functionMapHooks() {
 		return compilation.getCompilationEnclosure().getPipelineLogic().dp.functionMapHooks;
 	}
 
@@ -43,7 +43,7 @@ public class DefaultCompilationAccess implements ICompilationAccess {
 	}
 
 	@Override
-	public @NonNull Stages getStage() {
+	public @NotNull Stages getStage() {
 		return Stages.O;
 	}
 
@@ -54,7 +54,7 @@ public class DefaultCompilationAccess implements ICompilationAccess {
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public ElLog.Verbosity testSilence() {
 		return compilation.cfg().silent ? ElLog.Verbosity.SILENT : ElLog.Verbosity.VERBOSE;
 	}
@@ -69,7 +69,7 @@ public class DefaultCompilationAccess implements ICompilationAccess {
 	}
 
 	@Override
-	public @NonNull Pipeline internal_pipelines() {
+	public @NotNull Pipeline internal_pipelines() {
 		return pipelines;
 	}
 }

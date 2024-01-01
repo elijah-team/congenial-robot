@@ -30,16 +30,16 @@ public class NamespaceInvocation implements IInvocation {
 		return namespaceStatement;
 	}
 
-	public @NonNull DeferredObject<EvaNamespace, Void, Void> resolveDeferred() {
+	public @NotNull DeferredObject<EvaNamespace, Void, Void> resolveDeferred() {
 		return resolveDeferred;
 	}
 
-	public @NonNull Promise<EvaNamespace, Void, Void> resolvePromise() {
+	public @NotNull Promise<EvaNamespace, Void, Void> resolvePromise() {
 		return resolveDeferred.promise();
 	}
 
 	@Override
-	public void setForFunctionInvocation(@NonNull FunctionInvocation aFunctionInvocation) {
+	public void setForFunctionInvocation(@NotNull FunctionInvocation aFunctionInvocation) {
 		aFunctionInvocation.setNamespaceInvocation(this);
 	}
 }

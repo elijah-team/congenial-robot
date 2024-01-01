@@ -17,15 +17,15 @@ public class CompilationRunner extends _RegistrationTarget {
 	private final          Compilation                     _compilation;
 	public final           ICompilationBus                 cb;
 	public final           CR_State                        crState;
-	public final @NonNull  IProgressSink                   progressSink;
-	private final @NonNull CCI                             cci;
+	public final @NotNull  IProgressSink                   progressSink;
+	private final @NotNull CCI                             cci;
 	private final          EzM                             ezm = new EzM();
 	final                  CIS                             cis;
 
 	private CB_StartCompilationRunnerAction startAction;
 	CR_FindCIs cr_find_cis;
 
-	public CompilationRunner(final @NonNull ICompilationAccess aca, final CR_State aCrState) {
+	public CompilationRunner(final @NotNull ICompilationAccess aca, final CR_State aCrState) {
 		_compilation = aca.getCompilation();
 
 		_compilation.getCompilationEnclosure().setCompilationAccess(aca);
@@ -43,7 +43,7 @@ public class CompilationRunner extends _RegistrationTarget {
 		CompilationRunner.ST.register(this);
 	}
 
-	public CompilationRunner(final @NonNull ICompilationAccess aca, final CR_State aCrState, final Supplier<CompilationBus> scb) {
+	public CompilationRunner(final @NotNull ICompilationAccess aca, final CR_State aCrState, final Supplier<CompilationBus> scb) {
 		_compilation = aca.getCompilation();
 
 		_compilation.getCompilationEnclosure().setCompilationAccess(aca);
@@ -73,7 +73,7 @@ public class CompilationRunner extends _RegistrationTarget {
 		SimplePrintLoggerToRemoveSoon.println_err_3("%d %s".formatted(number, text));
 	}
 
-	public @NonNull Operation<CompilerInstructions> parseEzFile(final @NonNull SourceFileParserParams p) {
+	public @NotNull Operation<CompilerInstructions> parseEzFile(final @NotNull SourceFileParserParams p) {
 		final Operation<CompilerInstructions> oci = ezm.parseEzFile1(p);
 		assert oci != null;
 
@@ -82,7 +82,7 @@ public class CompilationRunner extends _RegistrationTarget {
 		return oci;
 	}
 
-	public @NonNull Operation<CompilerInstructions> realParseEzFile(final @NonNull SourceFileParserParams p) {
+	public @NotNull Operation<CompilerInstructions> realParseEzFile(final @NotNull SourceFileParserParams p) {
 		final Operation<CompilerInstructions> oci = ezm.realParseEzFile(p);
 
 		_compilation.getInputTree().setNodeOperation(p.input(), oci);
@@ -109,7 +109,7 @@ public class CompilationRunner extends _RegistrationTarget {
 		public static State EXIT_RESOLVE;
 		public static State INITIAL;
 
-		public static void register(final @NonNull _RegistrationTarget art) {
+		public static void register(final @NotNull _RegistrationTarget art) {
 			//EXIT_RESOLVE            = registerState(new ST.ExitResolveState());
 			INITIAL = art.registerState(new ST.InitialState());
 		}
@@ -134,7 +134,7 @@ public class CompilationRunner extends _RegistrationTarget {
 		}
 	}
 
-	public void start(final CompilerInstructions ci, final @NonNull IPipelineAccess pa) {
+	public void start(final CompilerInstructions ci, final @NotNull IPipelineAccess pa) {
 		// FIXME only run once 06/16
 		if (startAction == null) {
 			startAction = new CB_StartCompilationRunnerAction(this, pa, ci);

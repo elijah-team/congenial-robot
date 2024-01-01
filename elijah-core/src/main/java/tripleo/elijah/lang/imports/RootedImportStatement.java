@@ -69,7 +69,7 @@ public class RootedImportStatement extends _BaseImportStatement {
 	}
 
 	@Override
-	public @NonNull List<Qualident> parts() {
+	public @NotNull List<Qualident> parts() {
 		final List<Qualident> r = new ArrayList<Qualident>();
 		for (final Qualident qualident : importList.parts()) {
 			final Qualident q = new QualidentImpl();

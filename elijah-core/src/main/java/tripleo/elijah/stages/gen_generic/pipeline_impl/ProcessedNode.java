@@ -12,13 +12,13 @@ public interface ProcessedNode {
 	boolean matchModule(OS_Module aMod);
 
 	void processClassMap(GenerateFiles ggc,
-						 final @NonNull GenerateResultEnv aFileGen);
+						 final @NotNull GenerateResultEnv aFileGen);
 
 	void processConstructors(GenerateFiles ggc,
-							 final @NonNull GenerateResultEnv aFileGen);
+							 final @NotNull GenerateResultEnv aFileGen);
 
 	void processFunctions(GenerateFiles ggc,
-						  final @NonNull GenerateResultEnv aFileGen);
+						  final @NotNull GenerateResultEnv aFileGen);
 
 	void processContainer(GenerateFiles aGgc, GenerateResultEnv aFileGen);
 }

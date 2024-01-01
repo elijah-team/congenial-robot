@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public interface Compilation {
-	static ElLog.@NonNull Verbosity gitlabCIVerbosity() {
+	static ElLog.@NotNull Verbosity gitlabCIVerbosity() {
 		final boolean gitlab_ci = isGitlab_ci();
 		return gitlab_ci ? ElLog.Verbosity.SILENT : ElLog.Verbosity.VERBOSE;
 	}
@@ -44,7 +44,7 @@ public interface Compilation {
 
 	//void setCompilationEnclosure(CompilationEnclosure aCompilationEnclosure);
 
-	void addModule__(@NonNull OS_Module module, @NonNull String fn);
+	void addModule__(@NotNull OS_Module module, @NotNull String fn);
 
 	//int compilationNumber();
 
@@ -54,11 +54,11 @@ public interface Compilation {
 
 	int errorCount();
 
-	void feedInputs(@NonNull List<CompilerInput> inputs, CompilerController controller);
+	void feedInputs(@NotNull List<CompilerInput> inputs, CompilerController controller);
 
 	//void fakeFlow(List<CompilerInput> aInputs, CompilationFlow aFlow);
 
-	void feedCmdLine(@NonNull List<String> args) throws Exception;
+	void feedCmdLine(@NotNull List<String> args) throws Exception;
 
 	CompilationClosure getCompilationClosure();
 
@@ -68,7 +68,7 @@ public interface Compilation {
 
 	IPipelineAccess get_pa();
 
-	@NonNull FluffyComp getFluffy();
+	@NotNull FluffyComp getFluffy();
 
 	@Contract(pure = true)
 	List<CompilerInput> getInputs();
@@ -81,13 +81,13 @@ public interface Compilation {
 
 	void setIO(IO io);
 
-	OS_Package getPackage(@NonNull Qualident pkg_name);
+	OS_Package getPackage(@NotNull Qualident pkg_name);
 
 	String getProjectName();
 
 	void hasInstructions(List<CompilerInstructions> cis);
 
-	boolean isPackage(@NonNull String pkg);
+	boolean isPackage(@NotNull String pkg);
 
 	OS_Package makePackage(Qualident pkg_name);
 
@@ -101,7 +101,7 @@ public interface Compilation {
 
 	void subscribeCI(Observer<CompilerInstructions> aCio);
 
-	void use(@NonNull CompilerInstructions compilerInstructions, boolean do_out);
+	void use(@NotNull CompilerInstructions compilerInstructions, boolean do_out);
 
 	LivingRepo world();
 
@@ -111,7 +111,7 @@ public interface Compilation {
 
 	EIT_InputTree getInputTree();
 
-	@NonNull EOT_OutputTree getOutputTree();
+	@NotNull EOT_OutputTree getOutputTree();
 
 	CompilationConfig cfg();
 
@@ -124,7 +124,7 @@ public interface Compilation {
 	enum CompilationAlways {
 		;
 
-		@NonNull
+		@NotNull
 		public static String defaultPrelude() {
 			return "c";
 		}
@@ -140,7 +140,7 @@ public interface Compilation {
 		public          boolean do_out;
 		public          boolean showTree = false;
 		public          boolean silent   = false;
-		public @NonNull Stages  stage    = Stages.O; // Output
+		public @NotNull Stages  stage    = Stages.O; // Output
 	}
 
 	Map<String, CompilerInstructions> fn2ci();

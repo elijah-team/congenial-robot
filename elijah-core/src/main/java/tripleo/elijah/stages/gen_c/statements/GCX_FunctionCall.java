@@ -29,13 +29,13 @@ import java.util.List;
 public class GCX_FunctionCall implements EG_Statement {
 	private final          GenerateC                 gc;
 	private final          WhyNotGarish_BaseFunction gf;
-	private final @NonNull Instruction               instruction;
+	private final @NotNull Instruction               instruction;
 	private final          ProcTableEntry            pte;
 
 	@Contract(pure = true)
 	public GCX_FunctionCall(final WhyNotGarish_BaseFunction aGf,
 							final GenerateC aGc,
-							final @NonNull Instruction aInstruction) {
+							final @NotNull Instruction aInstruction) {
 		gf          = aGf;
 		gc          = aGc;
 		instruction = aInstruction;
@@ -48,12 +48,12 @@ public class GCX_FunctionCall implements EG_Statement {
 	}
 
 	@Override
-	public @NonNull EX_Explanation getExplanation() {
+	public @NotNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("GCX_FunctionCall >> action_CALL");
 	}
 
 	@Override
-	public @NonNull String getText() {
+	public @NotNull String getText() {
 		final StringBuilder sb = new StringBuilder();
 
 		ExpressionConfession ec = pte.expressionConfession();

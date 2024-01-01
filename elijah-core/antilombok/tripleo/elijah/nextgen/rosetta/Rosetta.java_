@@ -12,11 +12,11 @@ public class Rosetta {
    }
 
    @Contract("_ -> new")
-   public static @NonNull DeduceTypes2 create(DeduceTypes2Request aDeduceTypes2Request) {
+   public static @NotNull DeduceTypes2 create(DeduceTypes2Request aDeduceTypes2Request) {
       return new DeduceTypes2(aDeduceTypes2Request);
    }
 
-   public static void create_call(@NonNull DeduceTypes2_deduceFunctions_Request rq) {
+   public static void create_call(@NotNull DeduceTypes2_deduceFunctions_Request rq) {
       if (rq == null) {
          $$$reportNull$$$0(0);
       }
@@ -27,6 +27,6 @@ public class Rosetta {
 
    // $FF: synthetic method
    private static void $$$reportNull$$$0(int var0) {
-      throw new IllegalArgumentException(String.format("Argument for @NonNull parameter '%s' of %s.%s must not be null", "rq", "tripleo/elijah/nextgen/rosetta/Rosetta", "create_call"));
+      throw new IllegalArgumentException(String.format("Argument for @NotNull parameter '%s' of %s.%s must not be null", "rq", "tripleo/elijah/nextgen/rosetta/Rosetta", "create_call"));
    }
 }

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class FormalArgListImpl implements tripleo.elijah.lang.i.FormalArgList {
 
-	public @NonNull List<FormalArgListItem> falis = new ArrayList<FormalArgListItem>();
+	public @NotNull List<FormalArgListItem> falis = new ArrayList<FormalArgListItem>();
 
 	@Override
 	public List<FormalArgListItem> falis() {
@@ -29,12 +29,12 @@ public class FormalArgListImpl implements tripleo.elijah.lang.i.FormalArgList {
 	}
 
 	@Override
-	public @NonNull List<FormalArgListItem> items() {
+	public @NotNull List<FormalArgListItem> items() {
 		return falis;
 	}
 
 	@Override
-	public @NonNull FormalArgListItem next() {
+	public @NotNull FormalArgListItem next() {
 		final FormalArgListItem fali = new FormalArgListItemImpl();
 		falis.add(fali);
 		return fali;
@@ -46,7 +46,7 @@ public class FormalArgListImpl implements tripleo.elijah.lang.i.FormalArgList {
 	}
 
 	@Override
-	public void serializeTo(final @NonNull SmallWriter sw) {
+	public void serializeTo(final @NotNull SmallWriter sw) {
 		var i = 1;
 		for (FormalArgListItem fali : falis) {
 			sw.fieldString("fali%d".formatted(i++), fali.name().asString());

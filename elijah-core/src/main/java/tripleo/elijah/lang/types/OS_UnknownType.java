@@ -23,12 +23,12 @@ public class OS_UnknownType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NonNull String asString() {
+	public @NotNull String asString() {
 		return ("<OS_UnknownType>");
 	}
 
 	@Override
-	protected boolean _isEqual(final @NonNull OS_Type aType) {
+	protected boolean _isEqual(final @NotNull OS_Type aType) {
 		return aType.getType() == Type.UNKNOWN;
 	}
 
@@ -38,7 +38,7 @@ public class OS_UnknownType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NonNull Type getType() {
+	public @NotNull Type getType() {
 		return Type.UNKNOWN;
 	}
 }

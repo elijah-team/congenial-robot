@@ -44,12 +44,12 @@ public class GenFnC {
 		addEntryPoint(getMirrorEntryPoint(aEntryPoint, aMt, gf), aDcg);
 	}
 
-	@NonNull
+	@NotNull
 	private Mirror_EntryPoint getMirrorEntryPoint(final EntryPoint entryPoint, final ModuleThing mt, final GenerateFunctions gf) {
 		final Mirror_EntryPoint m;
-		if (entryPoint instanceof final @NonNull MainClassEntryPoint mcep) {
+		if (entryPoint instanceof final @NotNull MainClassEntryPoint mcep) {
 			m = new Mirror_MainClassEntryPoint(mcep, mt, gf);
-		} else if (entryPoint instanceof final @NonNull ArbitraryFunctionEntryPoint afep) {
+		} else if (entryPoint instanceof final @NotNull ArbitraryFunctionEntryPoint afep) {
 			m = new Mirror_ArbitraryFunctionEntryPoint(afep, mt, gf);
 		} else {
 			throw new IllegalStateException("unhandled");

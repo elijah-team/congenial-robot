@@ -27,15 +27,15 @@ import java.util.stream.Collectors;
 class Generate_Method_Header {
 
 	final                  String       args_string;
-	final @NonNull         String       header_string;
-	private final @NonNull EG_Statement args_statement;
-	private final @NonNull GenerateC    gc;
+	final @NotNull         String       header_string;
+	private final @NotNull EG_Statement args_statement;
+	private final @NotNull GenerateC    gc;
 	private final          String       name;
-	private final @NonNull String       return_type;
+	private final @NotNull String       return_type;
 	@Nullable              OS_Type      type;
 	TypeTableEntry tte;
 
-	public Generate_Method_Header(final @NonNull BaseEvaFunction gf, @NonNull final GenerateC aGenerateC, final @NonNull ElLog LOG) {
+	public Generate_Method_Header(final @NotNull BaseEvaFunction gf, @NotNull final GenerateC aGenerateC, final @NotNull ElLog LOG) {
 		gc   = aGenerateC;
 		name = gf.getFD().name().asString();
 		//
@@ -45,12 +45,12 @@ class Generate_Method_Header {
 		header_string  = find_header_string(gf, LOG);
 	}
 
-	@NonNull String find_return_type(final BaseEvaFunction gf, final ElLog LOG) {
+	@NotNull String find_return_type(final BaseEvaFunction gf, final ElLog LOG) {
 		return discriminator(gf, LOG, gc)
 				.find_return_type(this);
 	}
 
-	@NonNull EG_Statement find_args_statement(final @NonNull BaseEvaFunction gf) {
+	@NotNull EG_Statement find_args_statement(final @NotNull BaseEvaFunction gf) {
 
 		final String rule = "gen_c:gcfm:Generate_Method_Header:find_args_statement";
 
@@ -67,7 +67,7 @@ class Generate_Method_Header {
 		return args;
 	}
 
-	@NonNull String find_header_string(final @NonNull BaseEvaFunction gf, final @NonNull ElLog LOG) {
+	@NotNull String find_header_string(final @NotNull BaseEvaFunction gf, final @NotNull ElLog LOG) {
 		// NOTE getGenClass is always a class or namespace, getParent can be a function
 		final EvaContainerNC parent = (EvaContainerNC) gf.getGenClass();
 
@@ -89,7 +89,7 @@ class Generate_Method_Header {
 		return s2;
 	}
 
-	static @NonNull GCM_D discriminator(final BaseEvaFunction bgf, final ElLog aLOG, final GenerateC aGc) {
+	static @NotNull GCM_D discriminator(final BaseEvaFunction bgf, final ElLog aLOG, final GenerateC aGc) {
 		if (bgf instanceof EvaConstructor) {
 			return new GCM_GC((EvaConstructor) bgf, aLOG, aGc);
 		} else if (bgf instanceof EvaFunction) {
@@ -99,7 +99,7 @@ class Generate_Method_Header {
 		throw new IllegalStateException();
 	}
 
-	String __find_header_string(final @NonNull BaseEvaFunction gf, final @NonNull ElLog LOG) {
+	String __find_header_string(final @NotNull BaseEvaFunction gf, final @NotNull ElLog LOG) {
 		final String result;
 		// TODO buffer for gf.parent.<element>.locatable
 
@@ -109,7 +109,7 @@ class Generate_Method_Header {
 		if (parent instanceof EvaClass) {
 			final EvaClass st = (EvaClass) parent;
 
-			@NonNull final C_HeaderString chs = C_HeaderString.forClass(st,
+			@NotNull final C_HeaderString chs = C_HeaderString.forClass(st,
 																		() -> GenerateC.GetTypeName.forGenClass(st),
 																		return_type,
 																		name,
@@ -120,7 +120,7 @@ class Generate_Method_Header {
 		} else if (parent instanceof EvaNamespace) {
 			final EvaNamespace st = (EvaNamespace) parent;
 
-			@NonNull final C_HeaderString chs = C_HeaderString.forNamespace(st,
+			@NotNull final C_HeaderString chs = C_HeaderString.forNamespace(st,
 																			() -> GenerateC.GetTypeName.forGenNamespace(st),
 																			return_type,
 																			name,
@@ -128,7 +128,7 @@ class Generate_Method_Header {
 																			LOG);
 			result = chs.getResult();
 		} else {
-			@NonNull final C_HeaderString chs = C_HeaderString.forOther(parent, return_type, name, args_string);
+			@NotNull final C_HeaderString chs = C_HeaderString.forOther(parent, return_type, name, args_string);
 			//result = String.format("%s %s(%s)", return_type, name, args_string);
 			result = chs.getResult();
 		}
@@ -136,13 +136,13 @@ class Generate_Method_Header {
 		return result;
 	}
 
-	@NonNull String __find_return_type(final @NonNull WhyNotGarish_BaseFunction gf, final @NonNull ElLog LOG) {
+	@NotNull String __find_return_type(final @NotNull WhyNotGarish_BaseFunction gf, final @NotNull ElLog LOG) {
 		String returnType = null;
 		if (gf.pointsToConstructor2()) {
 			// Get it from resolved
 			tte = gf.tte_for_self();
 			final EvaNode res = tte.resolved();
-			if (res instanceof final @NonNull EvaContainerNC nc) {
+			if (res instanceof final @NotNull EvaContainerNC nc) {
 				final int code = nc.getCode();
 				return String.format("Z%d*", code);
 			}
@@ -168,7 +168,7 @@ class Generate_Method_Header {
 			tte = p.getRight();
 
 			final EvaNode res = tte.resolved();
-			if (res instanceof final @NonNull EvaContainerNC nc) {
+			if (res instanceof final @NotNull EvaContainerNC nc) {
 				final int code = nc.getCode();
 
 				// HACK
@@ -196,7 +196,7 @@ class Generate_Method_Header {
 			} else if (type.isUnitType()) {
 				returnType = "void/*Unit-197*/";
 			} else if (type != null) {
-				if (type instanceof final @NonNull OS_GenericTypeNameType genericTypeNameType) {
+				if (type instanceof final @NotNull OS_GenericTypeNameType genericTypeNameType) {
 					final TypeName tn = genericTypeNameType.getRealTypeName();
 
 					final @Nullable Map<TypeName, OS_Type> gp = gf.classInvcationGenericPart();
@@ -223,7 +223,7 @@ class Generate_Method_Header {
 		return returnType;
 	}
 
-	@NonNull String find_args_string(final @NonNull BaseEvaFunction gf) {
+	@NotNull String find_args_string(final @NotNull BaseEvaFunction gf) {
 		final String args;
 		if (false) {
 			args = Helpers.String_join(", ", Collections2.transform(gf.getFD().fal().falis(), new Function<FormalArgListItem, String>() {

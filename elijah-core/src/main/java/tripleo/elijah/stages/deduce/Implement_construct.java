@@ -30,7 +30,7 @@ public class Implement_construct {
 
 	private void _implement_construct_type(final @Nullable Constructable co,
 										   final @Nullable String constructorName,
-										   final @NonNull NormalTypeName aTyn1,
+										   final @NotNull NormalTypeName aTyn1,
 										   final @Nullable GenType aGenType) {
 		final String          s      = aTyn1.getName();
 		final ICH             ich    = _inj().new_ICH(aGenType, this);
@@ -46,7 +46,7 @@ public class Implement_construct {
 			@Nullable ConstructorDef cc = null;
 			if (constructorName != null) {
 				Collection<ConstructorDef> cs = best.getConstructors();
-				for (@NonNull ConstructorDef c : cs) {
+				for (@NotNull ConstructorDef c : cs) {
 					if (c.name().sameName(constructorName)) {
 						cc = c;
 						break;
@@ -59,7 +59,7 @@ public class Implement_construct {
 				if (cc == null) {
 					//assert pte.getArgs().size() == 0;
 					for (ClassItem item : best.getItems()) {
-						if (item instanceof final @NonNull ConstructorDef constructorDef) {
+						if (item instanceof final @NotNull ConstructorDef constructorDef) {
 							if (constructorDef.getArgs().size() == pte.getArgs().size()) {
 								// TODO we now have to find a way to check arg matching of two different types
 								//  of arglists. This is complicated by the fact that constructorDef doesn't have
@@ -73,13 +73,13 @@ public class Implement_construct {
 					}
 				}
 				// TODO do we still want to do this if cc is null?
-				@NonNull FunctionInvocation fi = deduceTypes2.newFunctionInvocation(cc, pte, clsinv, deduceTypes2.phase);
+				@NotNull FunctionInvocation fi = deduceTypes2.newFunctionInvocation(cc, pte, clsinv, deduceTypes2.phase);
 				pte.setFunctionInvocation(fi);
 			}
 		}
 	}
 
-	private final @NonNull ProcTableEntry pte;
+	private final @NotNull ProcTableEntry pte;
 
 	public Implement_construct(final DeduceTypes2 aDeduceTypes2, BaseEvaFunction aGeneratedFunction, Instruction aInstruction) {
 		deduceTypes2      = aDeduceTypes2;
@@ -98,12 +98,12 @@ public class Implement_construct {
 		assert expression instanceof IntegerIA || expression instanceof IdentIA;
 	}
 
-	private void genTypeCI_and_ResolveTypeToClass(@NonNull final Constructable co, final @NonNull ClassInvocation aClsinv) {
+	private void genTypeCI_and_ResolveTypeToClass(@NotNull final Constructable co, final @NotNull ClassInvocation aClsinv) {
 		if (co instanceof final @Nullable IdentTableEntry idte3) {
 			idte3.type.genTypeCI(aClsinv);
 			aClsinv.resolvePromise().then(
 					idte3::resolveTypeToClass);
-		} else if (co instanceof final @NonNull VariableTableEntry vte) {
+		} else if (co instanceof final @NotNull VariableTableEntry vte) {
 			vte.getType().genTypeCI(aClsinv);
 			aClsinv.resolvePromise().then(
 					vte::resolveTypeToClass
@@ -124,7 +124,7 @@ public class Implement_construct {
 	}
 
 	public void action_IdentIA(final Context aContext) throws FCA_Stop {
-		@NonNull IdentTableEntry idte       = ((IdentIA) expression).getEntry();
+		@NotNull IdentTableEntry idte       = ((IdentIA) expression).getEntry();
 		DeducePath               deducePath = idte.buildDeducePath(generatedFunction);
 
 		if (pte.dpc == null) {
@@ -134,7 +134,7 @@ public class Implement_construct {
 
 		final DeduceProcCall dpc = pte.dpc;
 
-		dpc.targetP2().then((final @NonNull DeduceElement target) -> {
+		dpc.targetP2().then((final @NotNull DeduceElement target) -> {
 			DeclAnchor xxv = target.declAnchor();
 			System.out.println("144 " + xxv);
 
@@ -153,7 +153,7 @@ public class Implement_construct {
 		});
 	}
 
-	private void action_IdentIA___0001(final @NonNull IdentTableEntry idte, final @NonNull DeducePath deducePath, final @NonNull DeduceProcCall dpc, final @NonNull DeduceElement target) {
+	private void action_IdentIA___0001(final @NotNull IdentTableEntry idte, final @NotNull DeducePath deducePath, final @NotNull DeduceProcCall dpc, final @NotNull DeduceElement target) {
 		@Nullable OS_Element el3;
 		@Nullable Context    ectx = generatedFunction.getFD().getContext();
 		for (int i = 0; i < deducePath.size(); i++) {
@@ -164,14 +164,14 @@ public class Implement_construct {
 			boolean p = false;
 
 			if (ia2 instanceof IntegerIA) {
-				@NonNull VariableTableEntry vte = ((IntegerIA) ia2).getEntry();
+				@NotNull VariableTableEntry vte = ((IntegerIA) ia2).getEntry();
 				// TODO will fail if we try to construct a tmp var, but we never try to do that
 				assert vte.getVtt() != VariableTableType.TEMP;
 				assert el3 != null;
 				assert i == 0;
 				ectx = deducePath.getContext(i);
-			} else if (ia2 instanceof final @NonNull IdentIA identIA) {
-				@NonNull IdentTableEntry idte2 = identIA.getEntry();
+			} else if (ia2 instanceof final @NotNull IdentIA identIA) {
+				@NotNull IdentTableEntry idte2 = identIA.getEntry();
 				final String             s     = idte2.getIdent().toString();
 				LookupResultList         lrl   = ectx.lookup(s);
 
@@ -207,7 +207,7 @@ public class Implement_construct {
 		}
 	}
 
-	private boolean action_IdentIA___0001_5(final @NonNull DeducePath deducePath, final @NonNull DeducePath.MemberContext ectx, final int i, final @NonNull IdentTableEntry idte2, final String s) {
+	private boolean action_IdentIA___0001_5(final @NotNull DeducePath deducePath, final @NotNull DeducePath.MemberContext ectx, final int i, final @NotNull IdentTableEntry idte2, final String s) {
 		final DeduceElement3_IdentTableEntry de3_idte      = deduceTypes2._zero_getIdent(idte2, generatedFunction, deduceTypes2);
 		final DeduceElement3_Type            de3_idte_type = de3_idte.type();
 
@@ -226,7 +226,7 @@ public class Implement_construct {
 		return false;
 	}
 
-	private void action_IdentIA___0001_4(final @NonNull DeducePath deducePath, final int i, final @NonNull IdentTableEntry idte2, final String s, final @NonNull OS_Type ty, final @NonNull Operation2<GenType> resolved) {
+	private void action_IdentIA___0001_4(final @NotNull DeducePath deducePath, final int i, final @NotNull IdentTableEntry idte2, final String s, final @NotNull OS_Type ty, final @NotNull Operation2<GenType> resolved) {
 		GenType success = resolved.success();
 
 		idte2.setStatus(BaseTableEntry.Status.KNOWN, _inj().new_GenericElementHolder(success.getResolved().getElement()));
@@ -252,16 +252,16 @@ public class Implement_construct {
 		return;
 	}
 
-	private void action_IdentIA___0001_3(final @NonNull DeducePath deducePath, final @Nullable OS_Element el3, final int i, final @NonNull IdentTableEntry idte2, final String s) {
+	private void action_IdentIA___0001_3(final @NotNull DeducePath deducePath, final @Nullable OS_Element el3, final int i, final @NotNull IdentTableEntry idte2, final String s) {
 		assert el3 instanceof VariableStatementImpl;
 		@Nullable VariableStatementImpl vs = (VariableStatementImpl) el3;
-		@NonNull TypeName               tn = vs.typeName();
-		@NonNull OS_Type                ty = _inj().new_OS_UserType(tn);
+		@NotNull TypeName               tn = vs.typeName();
+		@NotNull OS_Type                ty = _inj().new_OS_UserType(tn);
 
 		GenType resolved = null;
 		if (idte2.type == null) {
 			// README Don't remember enough about the constructors to select a different one
-			@NonNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, ty);
+			@NotNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, ty);
 			try {
 				resolved = deduceTypes2.resolve_type(ty, tn.getContext());
 				deduceTypes2.LOG.err("892 resolved: " + resolved);
@@ -290,12 +290,12 @@ public class Implement_construct {
 		return;
 	}
 
-	private void action_IdentIA___0001_2(final @NonNull DeducePath deducePath, final int i, final @NonNull IdentTableEntry idte2, final String s) {
+	private void action_IdentIA___0001_2(final @NotNull DeducePath deducePath, final int i, final @NotNull IdentTableEntry idte2, final String s) {
 		@Nullable GenType type = deducePath.getType(i);
 		if (type.getNonGenericTypeName() == null) {
 			type.setNonGenericTypeName(Objects.requireNonNull(deducePath.getType(i - 1)).getNonGenericTypeName()); // HACK. not guararnteed to work!
 		}
-		@NonNull OS_Type ty = _inj().new_OS_UserType(type.getNonGenericTypeName());
+		@NotNull OS_Type ty = _inj().new_OS_UserType(type.getNonGenericTypeName());
 		implement_construct_type(idte2, ty, s, type);
 
 		final VariableTableEntry x = (VariableTableEntry) (deducePath.getEntry(i - 1));
@@ -305,7 +305,7 @@ public class Implement_construct {
 		x.resolveTypeToClass(type.getNode());
 	}
 
-	private void action_IdentIA___0001_1(final @NonNull IdentTableEntry idte, final @NonNull DeducePath deducePath, final @NonNull DeduceProcCall dpc, final @NonNull DeduceElement target, final int i, final @NonNull IdentTableEntry idte2, final String s) {
+	private void action_IdentIA___0001_1(final @NotNull IdentTableEntry idte, final @NotNull DeducePath deducePath, final @NotNull DeduceProcCall dpc, final @NotNull DeduceElement target, final int i, final @NotNull IdentTableEntry idte2, final String s) {
 		@Nullable GenType type = deducePath.getType(i);
 
 		// FIXME or idte2??
@@ -339,7 +339,7 @@ public class Implement_construct {
 	}
 
 	public void action_IntegerIA() {
-		@NonNull VariableTableEntry vte      = ((IntegerIA) expression).getEntry();
+		@NotNull VariableTableEntry vte      = ((IntegerIA) expression).getEntry();
 		final @Nullable OS_Type     attached = vte.getType().getAttached();
 //			assert attached != null; // TODO will fail when empty variable expression
 		if (attached != null && attached.getType() == OS_Type.Type.USER) {
@@ -352,14 +352,14 @@ public class Implement_construct {
 	}
 
 	private void implement_construct_type(final @Nullable Constructable co,
-										  final @NonNull OS_Type aTy,
+										  final @NotNull OS_Type aTy,
 										  final @Nullable String constructorName,
 										  final @Nullable GenType aGenType) {
 		if (aTy.getType() != OS_Type.Type.USER)
 			throw new IllegalStateException("must be USER type");
 
 		TypeName tyn = aTy.getTypeName();
-		if (tyn instanceof final @NonNull NormalTypeName tyn1) {
+		if (tyn instanceof final @NotNull NormalTypeName tyn1) {
 			_implement_construct_type(co, constructorName, tyn1, aGenType);
 		}
 
@@ -377,7 +377,7 @@ public class Implement_construct {
 				@Nullable ConstructorDef cc                = null;
 				{
 					Collection<ConstructorDef> cs = classStatement.getConstructors();
-					for (@NonNull ConstructorDef c : cs) {
+					for (@NotNull ConstructorDef c : cs) {
 						if (c.name().sameName(constructorName)) {
 							cc = c;
 							break;
@@ -411,11 +411,11 @@ public class Implement_construct {
 			genType = aGenType;
 		}
 
-		@NonNull
+		@NotNull
 		ClassInvocation getClassInvocation(final @Nullable String constructorName,
-										   final @NonNull NormalTypeName aTyn1,
+										   final @NotNull NormalTypeName aTyn1,
 										   final @Nullable GenType aGenType,
-										   final @NonNull ClassStatement aBest) {
+										   final @NotNull ClassStatement aBest) {
 			final ClassInvocation clsinv;
 			if (aGenType != null && aGenType.getCi() != null) {
 				assert aGenType.getCi() instanceof ClassInvocation;
@@ -430,7 +430,7 @@ public class Implement_construct {
 			return clsinv;
 		}
 
-		@NonNull ClassStatement lookupTypeName(final @NonNull NormalTypeName normalTypeName, final @NonNull String typeName) {
+		@NotNull ClassStatement lookupTypeName(final @NotNull NormalTypeName normalTypeName, final @NotNull String typeName) {
 			final OS_Element best;
 			if (genType != null && genType.getResolved() != null) {
 				best = genType.getResolved().getClassOf();

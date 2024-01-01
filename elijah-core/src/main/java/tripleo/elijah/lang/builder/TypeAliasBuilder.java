@@ -22,7 +22,7 @@ public class TypeAliasBuilder extends ElBuilder {
 	private Qualident       oldElement;
 
 	@Override
-	public @NonNull TypeAliasStatement build() {
+	public @NotNull TypeAliasStatement build() {
 		TypeAliasStatement typeAliasStatement = new TypeAliasStatementImpl(_parent);
 		typeAliasStatement.make(newAlias, oldElement);
 		return typeAliasStatement;

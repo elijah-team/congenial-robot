@@ -19,8 +19,8 @@ import java.util.List;
  * Created 4/26/21 4:22 AM
  */
 public class WorkManager {
-	@NonNull List<WorkList> doneWork = new ArrayList<WorkList>();
-	@NonNull List<WorkList> jobs     = new ArrayList<WorkList>();
+	@NotNull List<WorkList> doneWork = new ArrayList<WorkList>();
+	@NotNull List<WorkList> jobs     = new ArrayList<WorkList>();
 
 	public void addJobs(final WorkList aList) {
 		jobs.add(aList);

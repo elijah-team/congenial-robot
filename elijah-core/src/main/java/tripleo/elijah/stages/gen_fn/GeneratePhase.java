@@ -28,19 +28,19 @@ import java.util.Map;
  * Created 5/16/21 12:35 AM
  */
 public class GeneratePhase implements ReactiveDimension, CompilationEnclosure.ModuleListener {
-	private @NonNull
+	private @NotNull
 	final PipelineLogic   pipelineLogic;
-	private @NonNull
+	private @NotNull
 	final ElLog.Verbosity verbosity;
-	private @NonNull
+	private @NotNull
 	final IPipelineAccess pa;
 
-	private final @NonNull Map<OS_Module, GenerateFunctions> generateFunctions = new HashMap<OS_Module, GenerateFunctions>();
-	private final @NonNull WorkManager                       wm                = new WorkManager();
+	private final @NotNull Map<OS_Module, GenerateFunctions> generateFunctions = new HashMap<OS_Module, GenerateFunctions>();
+	private final @NotNull WorkManager                       wm                = new WorkManager();
 
 	private @Nullable ICodeRegistrar codeRegistrar;
 
-	public GeneratePhase(ElLog.Verbosity aVerbosity, final @NonNull IPipelineAccess aPa, PipelineLogic aPipelineLogic) {
+	public GeneratePhase(ElLog.Verbosity aVerbosity, final @NotNull IPipelineAccess aPa, PipelineLogic aPipelineLogic) {
 		verbosity     = aVerbosity;
 		pipelineLogic = aPipelineLogic;
 		pa = aPa;
@@ -50,8 +50,8 @@ public class GeneratePhase implements ReactiveDimension, CompilationEnclosure.Mo
 		pa.getCompilationEnclosure().addModuleListener(this);
 	}
 
-	@NonNull
-	public GenerateFunctions getGenerateFunctions(@NonNull OS_Module mod) {
+	@NotNull
+	public GenerateFunctions getGenerateFunctions(@NotNull OS_Module mod) {
 		final GenerateFunctions Result;
 		if (generateFunctions.containsKey(mod)) {
 			Result = generateFunctions.get(mod);
@@ -83,7 +83,7 @@ public class GeneratePhase implements ReactiveDimension, CompilationEnclosure.Mo
 	}
 
 	@Override
-	public void listen(final @NonNull WorldModule module) {
+	public void listen(final @NotNull WorldModule module) {
 		//final GenerateFunctions x = getGenerateFunctions(module.module());
 	}
 

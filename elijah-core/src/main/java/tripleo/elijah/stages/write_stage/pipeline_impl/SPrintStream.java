@@ -5,7 +5,7 @@ import org.jspecify.annotations.NonNull;
 public class SPrintStream implements XPrintStream {
 	private final StringBuilder sb = new StringBuilder();
 
-	public @NonNull String getString() {
+	public @NotNull String getString() {
 		return sb.toString();
 	}
 

@@ -99,7 +99,7 @@ public class DeduceTypesTest2 {
 //		Assert.assertEquals(new OS_UserType(tn).toString(), x.toString());
 	}
 
-	private boolean genTypeEquals(@NonNull GenType a, @NonNull GenType b) {
+	private boolean genTypeEquals(@NotNull GenType a, @NotNull GenType b) {
 		// TODO hack
 		return a.getTypeName().isEqual(b.getTypeName()) &&
 				a.getResolved().isEqual(b.getResolved());
@@ -110,7 +110,7 @@ public class DeduceTypesTest2 {
 		private @Nullable OS_Module _mod  = null;
 		private @Nullable String    _name = null;
 
-		public @NonNull ClassStatement build() {
+		public @NotNull ClassStatement build() {
 			assert _mod != null;
 			assert _name != null;
 
@@ -122,12 +122,12 @@ public class DeduceTypesTest2 {
 			return cs;
 		}
 
-		public @NonNull ClassBuilder withModule(final OS_Module aMod) {
+		public @NotNull ClassBuilder withModule(final OS_Module aMod) {
 			_mod = aMod;
 			return this;
 		}
 
-		public @NonNull ClassBuilder withName(final String aS) {
+		public @NotNull ClassBuilder withName(final String aS) {
 			_name = aS;
 			return this;
 		}

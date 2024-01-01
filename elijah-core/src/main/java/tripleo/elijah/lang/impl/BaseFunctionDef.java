@@ -26,7 +26,7 @@ import java.util.List;
  */
 public abstract class BaseFunctionDef implements FunctionDef, Documentable, ClassItem, OS_Container, OS_NamedElement {
 
-	public @NonNull Attached               _a          = new AttachedImpl();
+	public @NotNull Attached               _a          = new AttachedImpl();
 	protected       Species                _species;
 	protected       FormalArgList          mFal        = new FormalArgListImpl(); // remove final for FunctionDefBuilder
 	protected       Scope3                 scope3;
@@ -51,7 +51,7 @@ public abstract class BaseFunctionDef implements FunctionDef, Documentable, Clas
 	}
 
 	@Override
-	public @NonNull List<FunctionItem> getItems() {
+	public @NotNull List<FunctionItem> getItems() {
 		if (scope3 == null) return Collections.emptyList(); // README ie. interfaces (parent.hdr.type == INTERFACE)
 
 
@@ -72,7 +72,7 @@ public abstract class BaseFunctionDef implements FunctionDef, Documentable, Clas
 	// endregion
 
 	@Override // OS_Container
-	public @NonNull List<OS_NamedElement> items() {
+	public @NotNull List<OS_NamedElement> items() {
 		final ArrayList<OS_NamedElement> a = new ArrayList<OS_NamedElement>();
 		for (final OS_Element functionItem : scope3.items()) {
 			if (functionItem instanceof OS_NamedElement)
@@ -94,7 +94,7 @@ public abstract class BaseFunctionDef implements FunctionDef, Documentable, Clas
 	}
 
 	@Override
-	public @NonNull List<FormalArgListItem> getArgs() {
+	public @NotNull List<FormalArgListItem> getArgs() {
 		return mFal.items();
 	}
 
@@ -189,7 +189,7 @@ public abstract class BaseFunctionDef implements FunctionDef, Documentable, Clas
 
 	}
 
-	public @NonNull Iterable<AnnotationPart> annotationIterable() {
+	public @NotNull Iterable<AnnotationPart> annotationIterable() {
 		List<AnnotationPart> aps = new ArrayList<AnnotationPart>();
 		if (annotations == null)
 			return aps;
@@ -260,7 +260,7 @@ public abstract class BaseFunctionDef implements FunctionDef, Documentable, Clas
 		return OS_ElementName_.ofString(funName.getText());
 	}
 
-	public void walkAnnotations(@NonNull AnnotationWalker annotationWalker) {
+	public void walkAnnotations(@NotNull AnnotationWalker annotationWalker) {
 		if (annotations == null)
 			return;
 		for (AnnotationClause annotationClause : annotations) {

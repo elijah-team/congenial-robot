@@ -13,7 +13,7 @@ public class QuerySourceFileParser {
 		cr = aCr;
 	}
 
-	public Operation<CompilerInstructions> process(final @NonNull SourceFileParserParams p) {
+	public Operation<CompilerInstructions> process(final @NotNull SourceFileParserParams p) {
 		final Operation<CompilerInstructions> oci = cr.realParseEzFile(p);
 		return oci;
 	}

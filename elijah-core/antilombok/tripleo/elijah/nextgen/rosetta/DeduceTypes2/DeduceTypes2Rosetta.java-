@@ -29,7 +29,7 @@ public class DeduceTypes2Rosetta {
       return new ElLog(this.getModule().getFileName(), this.getVerbosity(), "DeduceTypes2");
    }
 
-   private ElLog.@NonNull Verbosity getVerbosity() {
+   private ElLog.@NotNull Verbosity getVerbosity() {
       ElLog.Verbosity var10000 = this.request.getVerbosity();
       if (var10000 == null) {
          $$$reportNull$$$0(0);
@@ -46,6 +46,6 @@ public class DeduceTypes2Rosetta {
 
    // $FF: synthetic method
    private static void $$$reportNull$$$0(int var0) {
-      throw new IllegalStateException(String.format("@NonNull method %s.%s must not return null", "tripleo/elijah/nextgen/rosetta/DeduceTypes2/DeduceTypes2Rosetta", "getVerbosity"));
+      throw new IllegalStateException(String.format("@NotNull method %s.%s must not return null", "tripleo/elijah/nextgen/rosetta/DeduceTypes2/DeduceTypes2Rosetta", "getVerbosity"));
    }
 }

@@ -33,7 +33,7 @@ public interface ClassStatement
 
 	Collection<ConstructorDef> getConstructors();
 
-	@NonNull
+	@NotNull
 	List<TypeName> getGenericPart();
 
 	@Override

@@ -107,7 +107,7 @@ public abstract class OWItem extends OWObject {
 		return EnumAlign.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.ALIGNMENT));
 	}
 
-	public void setAlignment(@NonNull EnumAlign value) {
+	public void setAlignment(@NotNull EnumAlign value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.ALIGNMENT, value.toString());
 	}
 }

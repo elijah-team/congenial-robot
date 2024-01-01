@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 
 public class GI_ProcIA implements GenerateC_Item {
 	private final          GenerateC      gc;
-	private final @NonNull ProcTableEntry pte;
+	private final @NotNull ProcTableEntry pte;
 	private                EvaNode        _evaNode;
 	private final          ProcIA         carrier;
 
@@ -38,7 +38,7 @@ public class GI_ProcIA implements GenerateC_Item {
 		this.pte = carrier.getEntry();
 	}
 
-	public @NonNull Operation2<EG_Statement> action_CONSTRUCT(@NonNull Instruction aInstruction, @NonNull GenerateC gc) {
+	public @NotNull Operation2<EG_Statement> action_CONSTRUCT(@NotNull Instruction aInstruction, @NotNull GenerateC gc) {
 		final ProcTableEntry       pte = carrier.getEntry();
 		final List<TypeTableEntry> x   = pte.getArgs();
 		final int                  y   = aInstruction.getArgsSize();
@@ -56,7 +56,7 @@ public class GI_ProcIA implements GenerateC_Item {
 
 			if (target instanceof IdentIA) {
 				// how to tell between named ctors and just a path?
-				@NonNull final IdentTableEntry target2 = ((IdentIA) target).getEntry();
+				@NotNull final IdentTableEntry target2 = ((IdentIA) target).getEntry();
 				final String                   str     = target2.getIdent().getText();
 
 				System.out.println("130  " + str);
@@ -70,7 +70,7 @@ public class GI_ProcIA implements GenerateC_Item {
 		return Operation2.failure(Diagnostic.withMessage("12900", "no construct possible for GI_Proc", Severity.INFO));
 	}
 
-	public String getAssignmentValue(final @NonNull Instruction aInstruction, final @NonNull GenerateC gc) {
+	public String getAssignmentValue(final @NotNull Instruction aInstruction, final @NotNull GenerateC gc) {
 		final BaseEvaFunction gf     = carrier.generatedFunction();
 		final ClassInvocation clsinv = carrier.getEntry().getClassInvocation();
 
@@ -82,11 +82,11 @@ public class GI_ProcIA implements GenerateC_Item {
 		}
 
 		InstructionArgument     _arg0 = aInstruction.getArg(0);
-		@NonNull ProcTableEntry pte   = carrier.getEntry();
+		@NotNull ProcTableEntry pte   = carrier.getEntry();
 
 		final CtorReference reference = new CtorReference();
 		reference.getConstructorPath(pte.expression_num, gf);
-		@NonNull List<String> x = gav.getAssignmentValueArgs(aInstruction, gf, gc.elLog()).stringList();
+		@NotNull List<String> x = gav.getAssignmentValueArgs(aInstruction, gf, gc.elLog()).stringList();
 		reference.args(x);
 		final String build = reference.build(clsinv);
 		return build;
@@ -97,11 +97,11 @@ public class GI_ProcIA implements GenerateC_Item {
 		return _evaNode;
 	}
 
-	public @Nullable String getIdentIAPath(final @NonNull Consumer<Pair<String, CReference.Ref>> addRef) {
+	public @Nullable String getIdentIAPath(final @NotNull Consumer<Pair<String, CReference.Ref>> addRef) {
 		return getIdentIAPath_Proc(carrier.getEntry(), addRef);
 	}
 
-	public @Nullable String getIdentIAPath_Proc(final @NonNull ProcTableEntry pte, final @NonNull Consumer<Pair<String, CReference.Ref>> addRef) {
+	public @Nullable String getIdentIAPath_Proc(final @NotNull ProcTableEntry pte, final @NotNull Consumer<Pair<String, CReference.Ref>> addRef) {
 		final String[]           text = new String[1];
 		final FunctionInvocation fi   = pte.getFunctionInvocation();
 

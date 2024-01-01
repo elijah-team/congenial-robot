@@ -38,32 +38,32 @@ import static tripleo.elijah.gen.TypeRef.is_integer_code;
  */
 public class ExpressionNodeBuilder {
 
-	@NonNull
+	@NotNull
 	@Contract("_, _, _, _ -> new")
-	public static IExpression binex(final TypeRef rt, final VariableReferenceImpl left, final @NonNull ExpressionOperators middle, final IExpression right) {
+	public static IExpression binex(final TypeRef rt, final VariableReferenceImpl left, final @NotNull ExpressionOperators middle, final IExpression right) {
 		// TODO Auto-generated method stub
 		final ExpressionKind middle1 = Helpers.ExpressionOperatorToExpressionType(middle);
 		return new BasicBinaryExpressionImpl(left, middle1, right);
 	}
 
-	@NonNull
+	@NotNull
 	@Contract("_, _, _, _ -> new")
-	public static IExpression binex(final TypeRef rt, final VariableReferenceImpl left, final @NonNull ExpressionOperators middle, final @NonNull TmpSSACtxNode right) { // todo wrong again
+	public static IExpression binex(final TypeRef rt, final VariableReferenceImpl left, final @NotNull ExpressionOperators middle, final @NotNull TmpSSACtxNode right) { // todo wrong again
 		// TODO Auto-generated method stub
 		final ExpressionKind middle1 = Helpers.ExpressionOperatorToExpressionType(middle);
 		return new BasicBinaryExpressionImpl(left, middle1, new StringExpressionImpl(tripleo.elijah.util.Helpers.makeToken(right.text()))); // TODO !!!
 	}
 
-	@NonNull
+	@NotNull
 	public static IExpressionNode binex(final TypeRef rt, final VariableReferenceNode3 n, final ExpressionOperators opMinus, final NumericExpression integer) {
 		final TypeRef typeRef = new TypeRef(null, null, "int", 80);  // TODO smells
 		//
 		return new MyIExpressionNode1(n, opMinus, new IntegerNode(integer, typeRef));
 	}
 
-	@NonNull
+	@NotNull
 	@Contract(value = "_, _, _, _ -> new", pure = true)
-	public static IExpressionNode binex(final @NonNull TypeRef rt, final VariableReferenceNode3 varref, final ExpressionOperators operators, final TmpSSACtxNode node) {
+	public static IExpressionNode binex(final @NotNull TypeRef rt, final VariableReferenceNode3 varref, final ExpressionOperators operators, final TmpSSACtxNode node) {
 		return new IExpressionNode() {
 			@Override
 			public @org.jetbrains.annotations.Nullable IExpression getExpr() {
@@ -112,8 +112,8 @@ public class ExpressionNodeBuilder {
 		};
 	}
 
-	@NonNull
-	public static IExpressionNode fncall(final @NonNull MethRef aMeth, final @NonNull List<LocalAgnTmpNode> of) { // TODO no so wrong anymore
+	@NotNull
+	public static IExpressionNode fncall(final @NotNull MethRef aMeth, final @NotNull List<LocalAgnTmpNode> of) { // TODO no so wrong anymore
 		final ProcedureCallExpression pce1 = new ProcedureCallExpressionImpl();
 		final Qualident               xyz  = new QualidentImpl();
 		final Token                   t    = new CommonToken();
@@ -127,7 +127,7 @@ public class ExpressionNodeBuilder {
 		//
 		return new IExpressionNode() {
 			@Override
-			public @NonNull IExpression getExpr() {
+			public @NotNull IExpression getExpr() {
 				return pce1;
 			}
 
@@ -152,7 +152,7 @@ public class ExpressionNodeBuilder {
 			}
 
 			@Override
-			public @NonNull String genText(final CompilerContext cctx) {
+			public @NotNull String genText(final CompilerContext cctx) {
 				final TypeRef       p    = aMeth.getParent();
 				final int           code = p.getCode();
 				final String        s    = String.format("z%d%s", code, pce1.getLeft().toString());
@@ -176,7 +176,7 @@ public class ExpressionNodeBuilder {
 					@Nullable
 					@Override
 					public String apply(@Nullable IExpression input) {
-						@NonNull final IExpression arg = input;
+						@NotNull final IExpression arg = input;
 						final String               s2;
 						if (arg instanceof VariableReferenceImpl) {
 							s2 = ((VariableReferenceImpl) arg).getName();
@@ -211,7 +211,7 @@ public class ExpressionNodeBuilder {
 		};
 	}
 
-	public static @NonNull IExpressionNode fncall(final String string, final @NonNull List<LocalAgnTmpNode> of) { // todo wrong
+	public static @NotNull IExpressionNode fncall(final String string, final @NotNull List<LocalAgnTmpNode> of) { // todo wrong
 		// TODO Auto-generated method stub
 		final ProcedureCallExpression pce1 = new ProcedureCallExpressionImpl();
 		final Qualident               xyz  = new QualidentImpl();
@@ -224,7 +224,7 @@ public class ExpressionNodeBuilder {
 		//
 		return new IExpressionNode() {
 			@Override
-			public @NonNull IExpression getExpr() {
+			public @NotNull IExpression getExpr() {
 				return pce1;
 			}
 
@@ -274,7 +274,7 @@ public class ExpressionNodeBuilder {
 		};
 	}
 
-//	public static IExpressionNode fncall(String string, List<@NonNull NumericExpression> list_of) {
+//	public static IExpressionNode fncall(String string, List<@NotNull NumericExpression> list_of) {
 //		final ExpressionList expl = Helpers.LocalAgnTmpNodeToListVarRef(of);
 //		return fncall(string, expl);
 //	}
@@ -285,7 +285,7 @@ public class ExpressionNodeBuilder {
 	 * @param string string in question
 	 * @return OS_Ident
 	 */
-	@NonNull
+	@NotNull
 	@Contract("_ -> new")
 	public static IdentExpression ident(final String string) {
 		// TODO Parser level elements should not be used here
@@ -299,14 +299,14 @@ public class ExpressionNodeBuilder {
 	 * @param i integer in question
 	 * @return OS_Integer
 	 */
-	@NonNull
+	@NotNull
 	@Contract("_ -> new")
 	public static NumericExpression integer(final int i) {
 		// TODO Parser level elements should not be used here
 		return new NumericExpressionImpl(i);
 	}
 
-	@NonNull
+	@NotNull
 	@Contract("_, _, _ -> new")
 	public static VariableReferenceNode3 varref(final String string, final Node container, final TypeRef typeRef) {
 		return new VariableReferenceNode3(string, container, typeRef);
@@ -323,7 +323,7 @@ public class ExpressionNodeBuilder {
 			_right  = right;
 		}
 
-		static @NonNull String printableExpression(@NonNull final IExpression expression) {
+		static @NotNull String printableExpression(@NotNull final IExpression expression) {
 //			if (expression instanceof OS_Integer) {
 //				return Integer.toString(((OS_Integer) expression).getValue());
 //			} else
