@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.subjects.Subject;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+//import org.jspecify.annotations.NonNull;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CompilationRunner;
@@ -140,7 +140,7 @@ public class CompilationEnclosure {
 			}
 
 			@Override
-			public void onError(@NonNull final @NonNull Throwable e) {
+			public void onError( final @NonNull Throwable e) {
 				e.printStackTrace();
 			}
 
@@ -161,12 +161,12 @@ public class CompilationEnclosure {
 			}
 
 			@Override
-			public void onNext(@NonNull final @NonNull Reactivable aReactivable) {
+			public void onNext( final @NonNull Reactivable aReactivable) {
 				addReactive(aReactivable);
 			}
 
 			@Override
-			public void onError(@NonNull final @NonNull Throwable e) {
+			public void onError( final @NonNull Throwable e) {
 				e.printStackTrace();
 			}
 
@@ -198,7 +198,7 @@ public class CompilationEnclosure {
 			}
 
 			@Override
-			public void onError(@NonNull final @NonNull Throwable e) {
+			public void onError( final @NonNull Throwable e) {
 				e.printStackTrace();
 			}
 
