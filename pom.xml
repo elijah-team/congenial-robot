@@ -139,19 +139,28 @@
 		</dependency>
 -->
 
-<!--
 		<dependency>
+			<groupId>com.gitlab.tripleo1</groupId>
+			<artifactId>buffers</artifactId>
+			<version>3038ff102c</version>
+<!--
 			<groupId>tripleo.buffers</groupId>
 			<artifactId>buffers-v1</artifactId>
 			<version>0.0.3</version>
+-->
 		</dependency>
 
 		<dependency>
+<!--
 			<groupId>tripleo.util.range</groupId>
 			<artifactId>range-v1</artifactId>
 			<version>${range.version}</version>
-		</dependency>
 -->
+			<groupId>com.gitlab.Tripleo</groupId>
+			<artifactId>range</artifactId>
+			<version>v0.0.3b</version>
+		</dependency>
+
 
 <!--
 		<dependency>
@@ -170,6 +179,10 @@
 	</dependencies>
 
 	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 <!--
 		<repository>
 			<id>gitlab-maven-buffers</id>
