@@ -40,6 +40,13 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src-bnxn/elijah-nextgen-outputstatement/src/main/java"/>
+	<classpathentry kind="src" path="src-bnxn/elijah-stateful/src/main/java"/>
+	<classpathentry kind="src" path="src-bnxn/tripleo-reactive/src/main/java"/>
+	<classpathentry kind="src" path="src-bnxn/tripleo-small/src/main/java"/>
+	<classpathentry kind="src" path="src-damar/elijah-good-api/src/main/java"/>
+	<classpathentry kind="src" path="src-damar/elijah-sourcemodel-api/src/main/java"/>
+	<classpathentry kind="src" path="src-damar/elijah-sourcemodel-impl/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -60,6 +67,15 @@
 		<attributes>
 			<attribute name="test" value="true"/>
 			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/buffers-v1-0.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/range-v1-0.0.3b.jar"/>
+	<classpathentry kind="lib" path="lib/kotlin-stdlib-1.9.22.jar"/>
+	<classpathentry kind="lib" path="lib/kotlin-stdlib-jdk8-1.9.22.jar"/>
+	<classpathentry kind="lib" path="lib/kotlin-test-1.9.22.jar">
+		<attributes>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
