@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.subjects.Subject;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
-//import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.ReadySupplier_1;
@@ -2308,7 +2308,7 @@ public class DeduceTypes2 {
 				}
 
 				@Override
-				public void onNext( final @NonNull FunctionInvocation aFunctionInvocation) {
+				public void onNext(@NonNull final @NonNull FunctionInvocation aFunctionInvocation) {
 					action_function(aFunctionInvocation);
 				}
 
