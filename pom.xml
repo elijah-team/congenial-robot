@@ -5,9 +5,10 @@
 	<groupId>tripleo.elijah</groupId>
 	<artifactId>congenial-robot</artifactId>
 	<packaging>pom</packaging>
-	<version>2023.congenial.11.something-after-rosetta</version>
+	<version>congenial.2023-12</version>
 
-	<name>eljc-almost</name>
+	<!-- TODO 12/31 naming here -->
+	<name>eljc-almost-congenial-robot</name>
 	<url>http://git.sr.ht/~tripleo/el-almost</url>
 
 	<properties>
@@ -37,26 +38,7 @@
 	</properties>
 
 	<modules>
-		<!--
-			<module>annotation-processing</module>
-			<module>annotation-user</module>
-			<module>elijah-compiler-gen</module>
-			<module>annotations</module>
-		-->
-
-		<module>tripleo-small</module>
-<!--
-		<module>elijah-nextgen-outputstatement</module>
--->
-		<module>elijah-stateful</module>
-		<module>tripleo-reactive</module>
-		<!--
-				<module>elijah-sourcemodel-api</module>
-				<module>elijah-sourcemodel-impl</module>
-				<module>elijah-good-api</module>
-		-->
 		<module>elijah-core</module>
-		<!--		<module>typeinf</module>-->
 	</modules>
 
 	<dependencies>
