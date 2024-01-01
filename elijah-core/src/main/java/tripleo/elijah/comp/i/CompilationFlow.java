@@ -13,7 +13,7 @@ public interface CompilationFlow {
 	//	return new CF_FindPrelude(aCopm);
 	//}
 
-	static @NonNull CompilationFlowMember deduceModuleWithClasses() {
+	static @NotNull CompilationFlowMember deduceModuleWithClasses() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -22,7 +22,7 @@ public interface CompilationFlow {
 		};
 	}
 
-	static @NonNull CompilationFlowMember findMainClass() {
+	static @NotNull CompilationFlowMember findMainClass() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -31,7 +31,7 @@ public interface CompilationFlow {
 		};
 	}
 
-	static @NonNull CompilationFlowMember finishModule() {
+	static @NotNull CompilationFlowMember finishModule() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -40,7 +40,7 @@ public interface CompilationFlow {
 		};
 	}
 
-	static @NonNull CompilationFlowMember genFromEntrypoints() {
+	static @NotNull CompilationFlowMember genFromEntrypoints() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -49,7 +49,7 @@ public interface CompilationFlow {
 		};
 	}
 
-	static @NonNull CompilationFlowMember getClasses() {
+	static @NotNull CompilationFlowMember getClasses() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -59,7 +59,7 @@ public interface CompilationFlow {
 		};
 	}
 
-	static @NonNull CompilationFlowMember parseElijah() {
+	static @NotNull CompilationFlowMember parseElijah() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -68,7 +68,7 @@ public interface CompilationFlow {
 		};
 	}
 
-	static @NonNull CompilationFlowMember runFunctionMapHooks() {
+	static @NotNull CompilationFlowMember runFunctionMapHooks() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -79,7 +79,7 @@ public interface CompilationFlow {
 
 	void add(CompilationFlowMember aFlowMember);
 
-	static @NonNull CompilationFlowMember returnErrorCount() {
+	static @NotNull CompilationFlowMember returnErrorCount() {
 		return new CompilationFlowMember() {
 			@Override
 			public void doIt(final Compilation cc, final CompilationFlow flow) {
@@ -102,7 +102,7 @@ public interface CompilationFlow {
 		}
 
 		@Override
-		public void doIt(final @NonNull Compilation cc, final CompilationFlow flow) {
+		public void doIt(final @NotNull Compilation cc, final CompilationFlow flow) {
 			final Operation2<WorldModule> prl = cc.findPrelude(Compilation.CompilationAlways.defaultPrelude());
 			assert (prl.mode() == Mode.SUCCESS);
 

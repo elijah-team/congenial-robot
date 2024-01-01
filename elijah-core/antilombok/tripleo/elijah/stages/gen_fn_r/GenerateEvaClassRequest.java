@@ -8,12 +8,12 @@ import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.u.ElIntrinsics;
 
 public final class GenerateEvaClassRequest {
-   private final @NonNull GenerateFunctions generateFunctions;
-   private final @NonNull ClassStatement classStatement;
-   private final @NonNull ClassInvocation classInvocation;
-   private final @NonNull RegisterClassInvocation_env passthruEnv;
+   private final @NotNull GenerateFunctions generateFunctions;
+   private final @NotNull ClassStatement classStatement;
+   private final @NotNull ClassInvocation classInvocation;
+   private final @NotNull RegisterClassInvocation_env passthruEnv;
 
-   public GenerateEvaClassRequest(@NonNull GenerateFunctions generateFunctions, @NonNull ClassStatement classStatement, @NonNull ClassInvocation classInvocation, @NonNull RegisterClassInvocation_env passthruEnv) {
+   public GenerateEvaClassRequest(@NotNull GenerateFunctions generateFunctions, @NotNull ClassStatement classStatement, @NotNull ClassInvocation classInvocation, @NotNull RegisterClassInvocation_env passthruEnv) {
       ElIntrinsics.checkNotNullParameter(generateFunctions, "generateFunctions");
       ElIntrinsics.checkNotNullParameter(classStatement, "classStatement");
       ElIntrinsics.checkNotNullParameter(classInvocation, "classInvocation");
@@ -24,39 +24,39 @@ public final class GenerateEvaClassRequest {
       this.passthruEnv = passthruEnv;
    }
 
-   public final @NonNull GenerateFunctions getGenerateFunctions() {
+   public final @NotNull GenerateFunctions getGenerateFunctions() {
       return this.generateFunctions;
    }
 
-   public final @NonNull ClassStatement getClassStatement() {
+   public final @NotNull ClassStatement getClassStatement() {
       return this.classStatement;
    }
 
-   public final @NonNull ClassInvocation getClassInvocation() {
+   public final @NotNull ClassInvocation getClassInvocation() {
       return this.classInvocation;
    }
 
-   public final @NonNull RegisterClassInvocation_env getPassthruEnv() {
+   public final @NotNull RegisterClassInvocation_env getPassthruEnv() {
       return this.passthruEnv;
    }
 
-   public final @NonNull GenerateFunctions component1() {
+   public final @NotNull GenerateFunctions component1() {
       return this.generateFunctions;
    }
 
-   public final @NonNull ClassStatement component2() {
+   public final @NotNull ClassStatement component2() {
       return this.classStatement;
    }
 
-   public final @NonNull ClassInvocation component3() {
+   public final @NotNull ClassInvocation component3() {
       return this.classInvocation;
    }
 
-   public final @NonNull RegisterClassInvocation_env component4() {
+   public final @NotNull RegisterClassInvocation_env component4() {
       return this.passthruEnv;
    }
 
-   public final @NonNull GenerateEvaClassRequest copy(@NonNull GenerateFunctions generateFunctions, @NonNull ClassStatement classStatement, @NonNull ClassInvocation classInvocation, @NonNull RegisterClassInvocation_env passthruEnv) {
+   public final @NotNull GenerateEvaClassRequest copy(@NotNull GenerateFunctions generateFunctions, @NotNull ClassStatement classStatement, @NotNull ClassInvocation classInvocation, @NotNull RegisterClassInvocation_env passthruEnv) {
       ElIntrinsics.checkNotNullParameter(generateFunctions, "generateFunctions");
       ElIntrinsics.checkNotNullParameter(classStatement, "classStatement");
       ElIntrinsics.checkNotNullParameter(classInvocation, "classInvocation");
@@ -84,7 +84,7 @@ public final class GenerateEvaClassRequest {
       return var0.copy(var1, var2, var3, var4);
    }
 
-   public @NonNull String toString() {
+   public @NotNull String toString() {
       String var10000 = String.valueOf(this.generateFunctions);
       return "GenerateEvaClassRequest(generateFunctions=" + var10000 + ", classStatement=" + String.valueOf(this.classStatement) + ", classInvocation=" + String.valueOf(this.classInvocation) + ", passthruEnv=" + String.valueOf(this.passthruEnv) + ")";
    }

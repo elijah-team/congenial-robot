@@ -16,7 +16,7 @@ class DeduceCentral {
 		return deduceTypes2;
 	}
 
-	public @NonNull DC_ClassNote note_Class(final ClassStatement aE, final Context aCtx) {
+	public @NotNull DC_ClassNote note_Class(final ClassStatement aE, final Context aCtx) {
 		DC_ClassNote cn = deduceTypes2._inj().new_DC_ClassNote(aE, aCtx, this);
 		return cn;
 	}

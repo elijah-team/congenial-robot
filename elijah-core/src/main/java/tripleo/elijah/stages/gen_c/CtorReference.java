@@ -33,7 +33,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
  */
 public class CtorReference {
 
-	@NonNull List<CReference.Reference> refs     = new ArrayList<CReference.Reference>();
+	@NotNull List<CReference.Reference> refs     = new ArrayList<CReference.Reference>();
 	private  EvaNode                    _resolved;
 	private  List<String>               args;
 	private  String                     ctorName = "";
@@ -51,7 +51,7 @@ public class CtorReference {
 		args = sl3;
 	}
 
-	public String build(@NonNull ClassInvocation aClsinv) {
+	public String build(@NotNull ClassInvocation aClsinv) {
 		StringBuilder sb   = new StringBuilder();
 		boolean       open = false, needs_comma = false;
 //		List<String> sl = new ArrayList<String>();
@@ -153,7 +153,7 @@ public class CtorReference {
 */
 	}
 
-	public void getConstructorPath(@NonNull InstructionArgument ia2, @NonNull BaseEvaFunction gf) {
+	public void getConstructorPath(@NotNull InstructionArgument ia2, @NotNull BaseEvaFunction gf) {
 		final List<InstructionArgument> s = CReference._getIdentIAPathList(ia2);
 
 		for (int i = 0, sSize = s.size(); i < sSize; i++) {

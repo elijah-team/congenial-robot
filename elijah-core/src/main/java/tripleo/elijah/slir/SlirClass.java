@@ -36,7 +36,7 @@ public class SlirClass implements SlirElement {
 		classStatement = aClassStatement;
 	}
 
-	public SlirClass(final @NonNull SlirNamespaceNode aParent, final String aName, final ClassStatement aClassStatement) {
+	public SlirClass(final @NotNull SlirNamespaceNode aParent, final String aName, final ClassStatement aClassStatement) {
 		parent         = aParent;
 		sourceFile     = aParent.sourceFile();
 		className      = aName;
@@ -50,7 +50,7 @@ public class SlirClass implements SlirElement {
 		classStatement = aClassStatement;
 	}
 
-	public @NonNull SlirFunctionNode addFunction(final String aFunctionName, final FunctionDef aFunctionDef) {
+	public @NotNull SlirFunctionNode addFunction(final String aFunctionName, final FunctionDef aFunctionDef) {
 		final SlirFunctionNode sfn = new SlirFunctionNode(this, aFunctionName, aFunctionDef);
 		nodes.add(sfn);
 		return sfn;
@@ -79,7 +79,7 @@ public class SlirClass implements SlirElement {
 	}
 
 	@Override
-	public @NonNull SlirPos partOfSpeech() {
+	public @NotNull SlirPos partOfSpeech() {
 		return SlirPos.CLASS;
 	}
 

@@ -63,15 +63,15 @@ public class DeduceElement3_Constructor implements IDeduceElement3 {
 
 	}
 
-	public void __post_deduce_generated_function_base(final @NonNull DeducePhase aDeducePhase) {
-		for (@NonNull IdentTableEntry identTableEntry : evaConstructor.idte_list) {
-			if (identTableEntry.getResolvedElement() instanceof final @NonNull VariableStatementImpl vs) {
-				final @NonNull DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3(deduceTypes2(), evaConstructor);
+	public void __post_deduce_generated_function_base(final @NotNull DeducePhase aDeducePhase) {
+		for (@NotNull IdentTableEntry identTableEntry : evaConstructor.idte_list) {
+			if (identTableEntry.getResolvedElement() instanceof final @NotNull VariableStatementImpl vs) {
+				final @NotNull DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3(deduceTypes2(), evaConstructor);
 				de3_ite.stipulate_ResolvedVariable(aDeducePhase, identTableEntry, vs, evaConstructor);
 			}
 		}
 		{
-			final @NonNull EvaConstructor gf = evaConstructor;
+			final @NotNull EvaConstructor gf = evaConstructor;
 
 			@Nullable InstructionArgument result_index = gf.vte_lookup("Result");
 			if (result_index == null) {
@@ -79,14 +79,14 @@ public class DeduceElement3_Constructor implements IDeduceElement3 {
 				result_index = gf.vte_lookup("Value");
 				// but Value might be passed in. If it is, discard value
 				if (result_index != null) {
-					@NonNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
+					@NotNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
 					if (vte.getVtt() != VariableTableType.RESULT) {
 						result_index = null;
 					}
 				}
 			}
 			if (result_index != null) {
-				@NonNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
+				@NotNull VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
 				if (vte.resolvedType() == null) {
 					GenType b = vte.getGenType();
 					OS_Type a = vte.getType().getAttached();
@@ -99,7 +99,7 @@ public class DeduceElement3_Constructor implements IDeduceElement3 {
 						case USER:
 							b.setTypeName(a);
 							try {
-								@NonNull GenType rt = deduceTypes2.resolve_type(a, a.getTypeName().getContext());
+								@NotNull GenType rt = deduceTypes2.resolve_type(a, a.getTypeName().getContext());
 								if (rt.getResolved() != null && rt.getResolved().getType() == OS_Type.Type.USER_CLASS) {
 									if (rt.getResolved().getClassOf().getGenericPart().size() > 0)
 										b.setNonGenericTypeName(a.getTypeName()); // TODO might be wrong
@@ -122,7 +122,7 @@ public class DeduceElement3_Constructor implements IDeduceElement3 {
 //		aDeducePhase.addFunction(aGeneratedConstructor, (FunctionDef) aGeneratedConstructor.getFD()); // TODO do we need this?
 	}
 
-	private void dof_uc(@NonNull VariableTableEntry aVte, @NonNull OS_Type aOSType) {
+	private void dof_uc(@NotNull VariableTableEntry aVte, @NotNull OS_Type aOSType) {
 		// we really want a ci from somewhere
 		assert aOSType.getClassOf().getGenericPart().size() == 0;
 

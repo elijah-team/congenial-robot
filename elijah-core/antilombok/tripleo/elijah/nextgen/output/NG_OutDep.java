@@ -7,39 +7,39 @@ import tripleo.elijah.nextgen.comp_model.CM_Module;
 import tripleo.elijah.u.ElIntrinsics;
 
 public final class NG_OutDep implements CM_Module {
-   @NonNull
+   @NotNull
    private final OS_Module module_;
 
-   public NG_OutDep(@NonNull OS_Module module_) {
+   public NG_OutDep(@NotNull OS_Module module_) {
       ElIntrinsics.checkNotNullParameter(module_, "module_");
 
       this.module_ = module_;
    }
 
-   @NonNull
+   @NotNull
    public final OS_Module getModule_() {
       return this.module_;
    }
 
-   @NonNull
+   @NotNull
    public String getFilename() {
       String var10000 = this.module_.getFileName();
       ElIntrinsics.checkNotNullExpressionValue(var10000, "getFileName(...)");
       return var10000;
    }
 
-   @NonNull
+   @NotNull
    public OS_Module getModule() {
       return this.module_;
    }
 
-   @NonNull
+   @NotNull
    public final OS_Module component1() {
       return this.module_;
    }
 
-   @NonNull
-   public final NG_OutDep copy(@NonNull OS_Module module_) {
+   @NotNull
+   public final NG_OutDep copy(@NotNull OS_Module module_) {
       ElIntrinsics.checkNotNullParameter(module_, "module_");
       return new NG_OutDep(module_);
    }
@@ -53,7 +53,7 @@ public final class NG_OutDep implements CM_Module {
       return var0.copy(var1);
    }
 
-   @NonNull
+   @NotNull
    public String toString() {
       return "NG_OutDep(module_=" + this.module_ + ")";
    }

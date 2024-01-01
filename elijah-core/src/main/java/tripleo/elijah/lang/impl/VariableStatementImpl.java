@@ -27,7 +27,7 @@ public class VariableStatementImpl implements OS_Element, tripleo.elijah.lang.i.
 	private          IExpression            initialValue = IExpression.UNASSIGNED;
 	private          IdentExpression        name;
 	private          TypeModifiers          typeModifiers;
-	private @NonNull TypeName               typeName     = new VariableTypeNameImpl();
+	private @NotNull TypeName               typeName     = new VariableTypeNameImpl();
 
 	public VariableStatementImpl(final VariableSequence aSequence) {
 		_parent = aSequence;
@@ -74,7 +74,7 @@ public class VariableStatementImpl implements OS_Element, tripleo.elijah.lang.i.
 	}
 
 	@Override
-	public @NonNull String getName() {
+	public @NotNull String getName() {
 		return name.getText();
 	}
 
@@ -101,7 +101,7 @@ public class VariableStatementImpl implements OS_Element, tripleo.elijah.lang.i.
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public IExpression initialValue() {
 		return initialValue;
 	}
@@ -121,18 +121,18 @@ public class VariableStatementImpl implements OS_Element, tripleo.elijah.lang.i.
 	}
 
 	@Override
-	public void setTypeName(@NonNull final TypeName tn) {
+	public void setTypeName(@NotNull final TypeName tn) {
 		typeName = tn;
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public TypeName typeName() {
 		return typeName;
 	}
 
 	@Override
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitVariableStatement(this);
 	}
 
@@ -141,7 +141,7 @@ public class VariableStatementImpl implements OS_Element, tripleo.elijah.lang.i.
 
 	}
 
-	public void walkAnnotations(@NonNull AnnotationWalker annotationWalker) {
+	public void walkAnnotations(@NotNull AnnotationWalker annotationWalker) {
 		if (_parent.annotations() != null) {
 			for (AnnotationClause annotationClause : _parent.annotations()) {
 				for (AnnotationPart annotationPart : annotationClause.aps()) {

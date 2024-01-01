@@ -8,18 +8,18 @@ import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.u.ElIntrinsics;
 
 public final class RegisterClassInvocation_env {
-   private final @NonNull ClassInvocation ci;
+   private final @NotNull ClassInvocation ci;
    private final @Nullable DeduceTypes2 deduceTypes2;
    private final @Nullable DeducePhase phase;
 
-   public RegisterClassInvocation_env(@NonNull ClassInvocation ci, @Nullable DeduceTypes2 deduceTypes2, @Nullable DeducePhase phase) {
+   public RegisterClassInvocation_env(@NotNull ClassInvocation ci, @Nullable DeduceTypes2 deduceTypes2, @Nullable DeducePhase phase) {
       ElIntrinsics.checkNotNullParameter(ci, "ci");
       this.ci = ci;
       this.deduceTypes2 = deduceTypes2;
       this.phase = phase;
    }
 
-   public final @NonNull ClassInvocation getCi() {
+   public final @NotNull ClassInvocation getCi() {
       return this.ci;
    }
 
@@ -31,23 +31,23 @@ public final class RegisterClassInvocation_env {
       return this.phase;
    }
 
-   public final @NonNull ClassInvocation ci() {
+   public final @NotNull ClassInvocation ci() {
       return this.ci;
    }
 
-   public final @NonNull DeduceTypes2 deduceTypes2() {
+   public final @NotNull DeduceTypes2 deduceTypes2() {
       DeduceTypes2 var10000 = this.deduceTypes2;
       ElIntrinsics.checkNotNull(var10000);
       return var10000;
    }
 
-   public final @NonNull DeducePhase phase() {
+   public final @NotNull DeducePhase phase() {
       DeducePhase var10000 = this.phase;
       ElIntrinsics.checkNotNull(var10000);
       return var10000;
    }
 
-   public final @NonNull ClassInvocation component1() {
+   public final @NotNull ClassInvocation component1() {
       return this.ci;
    }
 
@@ -59,7 +59,7 @@ public final class RegisterClassInvocation_env {
       return this.phase;
    }
 
-   public final @NonNull RegisterClassInvocation_env copy(@NonNull ClassInvocation ci, @Nullable DeduceTypes2 deduceTypes2, @Nullable DeducePhase phase) {
+   public final @NotNull RegisterClassInvocation_env copy(@NotNull ClassInvocation ci, @Nullable DeduceTypes2 deduceTypes2, @Nullable DeducePhase phase) {
       ElIntrinsics.checkNotNullParameter(ci, "ci");
       return new RegisterClassInvocation_env(ci, deduceTypes2, phase);
    }
@@ -80,7 +80,7 @@ public final class RegisterClassInvocation_env {
       return var0.copy(var1, var2, var3);
    }
 
-   public @NonNull String toString() {
+   public @NotNull String toString() {
       String var10000 = String.valueOf(this.ci);
       return "RegisterClassInvocation_env(ci=" + var10000 + ", deduceTypes2=" + String.valueOf(this.deduceTypes2) + ", phase=" + String.valueOf(this.phase) + ")";
    }

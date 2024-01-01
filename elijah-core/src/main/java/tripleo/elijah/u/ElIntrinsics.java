@@ -7,7 +7,7 @@ import tripleo.elijah.lang.i.OS_Module;
 
 public class ElIntrinsics {
 
-	public static <T> void checkNotNullParameter(@NonNull Object ce, T string) {
+	public static <T> void checkNotNullParameter(@NotNull Object ce, T string) {
 		assert string != null;		
 	}
 
@@ -23,7 +23,7 @@ public class ElIntrinsics {
 		assert var3 != null;		
 	}
 
-	public static <T> boolean areEqual(@NonNull T module, @NonNull T module2) {
+	public static <T> boolean areEqual(@NotNull T module, @NotNull T module2) {
 		if (module == module2) return true;
 		return false;
 	}

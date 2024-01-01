@@ -19,12 +19,12 @@ public class WP_Flow {
 		FAILED, NOT_TRIED, TRIED
 	}
 
-	public WP_Flow(final WritePipeline aWritePipeline, final @NonNull Collection<? extends WP_Indiviual_Step> s) {
+	public WP_Flow(final WritePipeline aWritePipeline, final @NotNull Collection<? extends WP_Indiviual_Step> s) {
 		writePipeline = aWritePipeline;
 		steps.addAll(s);
 	}
 
-	public @NonNull HashMap<WP_Indiviual_Step, Pair<FlowStatus, Operation<Boolean>>> act() {
+	public @NotNull HashMap<WP_Indiviual_Step, Pair<FlowStatus, Operation<Boolean>>> act() {
 		final WP_State_Control_1 sc = new WP_State_Control_1();
 
 		for (final WP_Indiviual_Step step : steps) {

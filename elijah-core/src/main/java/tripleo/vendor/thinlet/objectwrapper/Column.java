@@ -51,7 +51,7 @@ public class Column extends OWItem {
 		return EnumSort.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.SORT));
 	}
 
-	public void setSsort(@NonNull EnumSort value) {
+	public void setSsort(@NotNull EnumSort value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.SORT, value.toString());
 	}
 }

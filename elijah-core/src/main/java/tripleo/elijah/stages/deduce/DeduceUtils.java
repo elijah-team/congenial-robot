@@ -53,10 +53,10 @@ public class DeduceUtils {
 		}
 
 		@Override
-		public boolean test(final @NonNull OS_Element o) {
+		public boolean test(final @NotNull OS_Element o) {
 			final ExpressionList args = pce.getArgs();
 			// See if candidate matches args
-			if (((LookupResult) o).getElement() instanceof final @NonNull ClassStatement klass) {
+			if (((LookupResult) o).getElement() instanceof final @NotNull ClassStatement klass) {
 				//o filter isCtor each (each args isCompat)
 
 				var ctors  = (klass.getItems().stream().filter(_inj().new_IsConstructor()));
@@ -72,7 +72,7 @@ public class DeduceUtils {
 			return __inj;
 		}
 
-		public boolean apply(@NonNull OS_Element input) {
+		public boolean apply(@NotNull OS_Element input) {
 			return test(input);
 		}
 	}
@@ -96,7 +96,7 @@ public class DeduceUtils {
 			/*if (((LookupResult)o).getElement() instanceof FunctionDef)*/
 			{
 				//o filter isCtor each (each args isCompat)
-				final @NonNull FunctionDef fd = (FunctionDef) (/*(LookupResult)*/o)/*.getElement()*/;
+				final @NotNull FunctionDef fd = (FunctionDef) (/*(LookupResult)*/o)/*.getElement()*/;
 				final List<OS_NamedElement> matching_functions = fd.items()
 						.stream()
 						.filter(_inj().new_MatchArgs(pce.getArgs()))

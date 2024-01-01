@@ -35,7 +35,7 @@ public class TmpSSACtxNode {
 		this._ctx = cctx;
 	}
 
-	public @NonNull String text() {
+	public @NotNull String text() {
 		return ExpressionNode.getStringPCE((ProcedureCallExpression) getExprType());
 		//"--------------------"; // TODO hardcoded
 	}
@@ -52,7 +52,7 @@ public class TmpSSACtxNode {
 		this._node = node;
 	}
 
-	public @NonNull IExpressionNode getType() {
+	public @NotNull IExpressionNode getType() {
 		if (_node != null)
 			return _node;
 		return new ExpressionNode(getExprType());

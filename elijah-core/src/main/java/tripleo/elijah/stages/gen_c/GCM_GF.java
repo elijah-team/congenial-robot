@@ -47,7 +47,7 @@ class GCM_GF implements GCM_D {
 			result_index = gf.vte_lookup("Value");
 			// but Value might be passed in. If it is, discard value
 			assert result_index != null;
-			@NonNull final VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
+			@NotNull final VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
 			if (vte.getVtt() != VariableTableType.RESULT)
 				result_index = null;
 			if (result_index == null)
@@ -57,7 +57,7 @@ class GCM_GF implements GCM_D {
 		// Get it from resolved
 		tte = getAssociatedTypeTableEntryOfIndex((IntegerIA) result_index);
 		final EvaNode res = tte.resolved();
-		if (res instanceof final @NonNull EvaContainerNC nc) {
+		if (res instanceof final @NotNull EvaContainerNC nc) {
 			final int code = nc.getCode();
 			return String.format("Z%d*", code);
 		}
@@ -75,7 +75,7 @@ class GCM_GF implements GCM_D {
 			//returnType = "void/*Unit-74*/";
 			returnType = "void";
 		} else if (type != null) {
-			if (type instanceof final @NonNull OS_GenericTypeNameType genericTypeNameType) {
+			if (type instanceof final @NotNull OS_GenericTypeNameType genericTypeNameType) {
 				final TypeName           tn          = genericTypeNameType.getRealTypeName();
 				final GCM_CI_GenericPart genericPart = getAssociatedClassInvocation().genericPart();
 				final GCM_OS_Type        realType    = genericPart.valueForKey(tn);
@@ -98,12 +98,12 @@ class GCM_GF implements GCM_D {
 		return new GCM_ClassInvocation(gf.fi.getClassInvocation());
 	}
 
-	@NonNull
+	@NotNull
 	private TypeTableEntry getAssociatedTypeTableEntryOfIndex(final IntegerIA result_index) {
 		return gf.getTypeTableEntry(result_index.getIndex());
 	}
 
-	@NonNull
+	@NotNull
 	private FunctionDef getAssociatedFunctionDef() {
 		return gf.getFD();
 	}

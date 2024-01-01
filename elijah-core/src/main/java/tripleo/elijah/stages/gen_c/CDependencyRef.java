@@ -29,7 +29,7 @@ public class CDependencyRef implements DependencyRef {
 	}
 
 	@Override
-	public @NonNull String jsonString() {
+	public @NotNull String jsonString() {
 		return "{type: \"CDependencyRef\", headerFile: " + headerFile + "}";
 	}
 }

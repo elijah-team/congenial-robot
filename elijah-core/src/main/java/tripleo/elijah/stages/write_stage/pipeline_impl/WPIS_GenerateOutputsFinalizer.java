@@ -23,7 +23,7 @@ import java.util.*;
 public enum WPIS_GenerateOutputsFinalizer {
 	;
 
-	static void _finalizeItems(final @NonNull List<NG_OutputItem> aItms,
+	static void _finalizeItems(final @NotNull List<NG_OutputItem> aItms,
 							   final List<NG_OutputRequest> aOrs1,
 							   final OutputStrategyC aOutputStrategyC,
 							   final ICompilationAccess2 ca2) {
@@ -99,7 +99,7 @@ public enum WPIS_GenerateOutputsFinalizer {
 		}
 	}
 
-	private static @NonNull EG_Statement recombine(final @NonNull Collection<NG_OutputRequest> aValue) {
+	private static @NotNull EG_Statement recombine(final @NotNull Collection<NG_OutputRequest> aValue) {
 		final List<EG_Statement> list = aValue.stream()
 				.map(NG_OutputRequest::statement)
 				.toList();
@@ -107,7 +107,7 @@ public enum WPIS_GenerateOutputsFinalizer {
 		return new EG_SequenceStatement(new EG_Naming("recombined"), list);
 	}
 
-	private static @NonNull List<EG_Statement> relist3(final EG_Statement sequence) {
+	private static @NotNull List<EG_Statement> relist3(final EG_Statement sequence) {
 		final List<EG_Statement> result = new ArrayList<EG_Statement>();
 
 		if (sequence instanceof EG_SequenceStatement seqst) {

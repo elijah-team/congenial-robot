@@ -37,7 +37,7 @@ public class SlirPackageNode implements SlirElement {
 	}
 
 	@Override
-	public @NonNull SlirPos partOfSpeech() {
+	public @NotNull SlirPos partOfSpeech() {
 		return SlirPos.PACKAGE;
 	}
 }

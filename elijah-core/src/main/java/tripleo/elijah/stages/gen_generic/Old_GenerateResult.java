@@ -50,7 +50,7 @@ public class Old_GenerateResult implements GenerateResult {
 	}
 
 	@Override
-	public void add(@NonNull Buffer b, @NonNull EvaNode n, @NonNull TY ty, @Nullable LibraryStatementPart aLsp, @NonNull Dependency d) {
+	public void add(@NotNull Buffer b, @NotNull EvaNode n, @NotNull TY ty, @Nullable LibraryStatementPart aLsp, @NotNull Dependency d) {
 		if (_closed) throw new IllegalStateException("closed GenerateResult");
 
 		if (aLsp == null) {
@@ -66,7 +66,7 @@ public class Old_GenerateResult implements GenerateResult {
 	}
 
 	@Override
-	public void addClass(@NonNull TY ty, @NonNull EvaClass aClass, @NonNull Buffer aBuf, LibraryStatementPart aLsp) {
+	public void addClass(@NotNull TY ty, @NotNull EvaClass aClass, @NotNull Buffer aBuf, LibraryStatementPart aLsp) {
 		add(aBuf, aClass, ty, aLsp, aClass.getDependency());
 	}
 
@@ -74,7 +74,7 @@ public class Old_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addFunction(tripleo.elijah.stages.gen_fn.BaseEvaFunction, tripleo.util.buffer.Buffer, tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addFunction(IPP_Function aGeneratedFunction, @NonNull Buffer aBuffer, @NonNull TY aTY, LibraryStatementPart aLsp) {
+	public void addFunction(IPP_Function aGeneratedFunction, @NotNull Buffer aBuffer, @NotNull TY aTY, LibraryStatementPart aLsp) {
 		add(aBuffer, aGeneratedFunction.get2Carrier().getEvaNodeEscapeHatch(), aTY, aLsp, aGeneratedFunction.get2Carrier().getDependency());
 	}
 
@@ -82,7 +82,7 @@ public class Old_GenerateResult implements GenerateResult {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#additional(tripleo.elijah.stages.gen_generic.GenerateResult)
 	 */
 	@Override
-	public void additional(final @NonNull GenerateResult aGenerateResult) {
+	public void additional(final @NotNull GenerateResult aGenerateResult) {
 		// TODO find something better
 		//results()
 		_res.addAll(aGenerateResult.results());
@@ -97,7 +97,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#addNamespace(tripleo.elijah.stages.gen_generic.Old_GenerateResult.TY, tripleo.elijah.stages.gen_fn.EvaNamespace, tripleo.util.buffer.Buffer, tripleo.elijah.ci.LibraryStatementPart)
 	 */
 	@Override
-	public void addNamespace(@NonNull TY ty, @NonNull EvaNamespace aNamespace, @NonNull Buffer aBuf, LibraryStatementPart aLsp) {
+	public void addNamespace(@NotNull TY ty, @NotNull EvaNamespace aNamespace, @NotNull Buffer aBuf, LibraryStatementPart aLsp) {
 		add(aBuf, aNamespace, ty, aLsp, aNamespace.getDependency());
 	}
 
@@ -121,7 +121,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#observe(io.reactivex.rxjava3.core.Observer)
 	 */
 	@Override
-	public void observe(final @NonNull Observer<GenerateResultItem> obs) {
+	public void observe(final @NotNull Observer<GenerateResultItem> obs) {
 		for (Old_GenerateResultItem item : results()) {
 			obs.onNext(item);
 		}
@@ -145,7 +145,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#outputFiles(java.util.function.Consumer)
 	 */
 	@Override
-	public void outputFiles(final @NonNull Consumer<Map<String, OutputFileC>> cmso) {
+	public void outputFiles(final @NotNull Consumer<Map<String, OutputFileC>> cmso) {
 		cmso.accept(outputFiles);
 	}
 
@@ -153,7 +153,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#results()
 	 */
 	@Override
-	public @NonNull List<Old_GenerateResultItem> results() {
+	public @NotNull List<Old_GenerateResultItem> results() {
 		return _res;
 	}
 
@@ -173,7 +173,7 @@ throw new UnintendedUseException();
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResult#subscribeCompletedItems(io.reactivex.rxjava3.core.Observer)
 	 */
 	@Override
-	public void subscribeCompletedItems(@NonNull Observer<GenerateResultItem> aGenerateResultItemObserver) {
+	public void subscribeCompletedItems(@NotNull Observer<GenerateResultItem> aGenerateResultItemObserver) {
 		completedItems.subscribe(aGenerateResultItemObserver);
 	}
 

@@ -10,12 +10,12 @@ import tripleo.elijah.stages.logging.ElLog;
 import java.util.function.Supplier;
 
 public class C_HeaderString {
-	public static @NonNull C_HeaderString forClass(final EvaClass aEvaClass,
-												   final @NonNull Supplier<String> classNameSupplier,
+	public static @NotNull C_HeaderString forClass(final EvaClass aEvaClass,
+												   final @NotNull Supplier<String> classNameSupplier,
 												   final String return_type,
 												   final String name,
-												   final @NonNull String args_string,
-												   final @NonNull ElLog LOG) {
+												   final @NotNull String args_string,
+												   final @NotNull ElLog LOG) {
 		final String class_name0 = classNameSupplier.get();
 
 		if (false) {
@@ -35,12 +35,12 @@ public class C_HeaderString {
 	}
 
 	@Contract("_, _, _, _, _, _ -> new")
-	public static @NonNull C_HeaderString forNamespace(final @NonNull EvaNamespace st,
-													   final java.util.function.@NonNull Supplier<String> classNameSupplier,
+	public static @NotNull C_HeaderString forNamespace(final @NotNull EvaNamespace st,
+													   final java.util.function.@NotNull Supplier<String> classNameSupplier,
 													   final String return_type,
 													   final String name,
-													   final @NonNull String args_string,
-													   final @NonNull ElLog LOG) {
+													   final @NotNull String args_string,
+													   final @NotNull ElLog LOG) {
 		//final String       class_name = gc.getTypeName(st);
 		final String class_name = classNameSupplier.get();
 		LOG.info(String.format("240 (namespace) %s -> %s", st.getName(), class_name));
@@ -57,7 +57,7 @@ public class C_HeaderString {
 	}
 
 	@Contract("_, _, _, _ -> new")
-	public static @NonNull C_HeaderString forOther(final EvaContainerNC aParent,
+	public static @NotNull C_HeaderString forOther(final EvaContainerNC aParent,
 												   final String return_type,
 												   final String name,
 												   final String args_string) {

@@ -32,19 +32,19 @@ public class SlirSourceNode {
 		nodes.add(aNode);
 	}
 
-	public @NonNull SlirClass addClass(final String aClassName, final ClassStatement aClassStatement) {
+	public @NotNull SlirClass addClass(final String aClassName, final ClassStatement aClassStatement) {
 		final SlirClass slirClass = new SlirClass(sourceFile, aClassName, aClassStatement);
 		add(slirClass);
 		return slirClass;
 	}
 
-	public @NonNull SlirImportNode addImport(final ImportStatement aImportStatement) {
+	public @NotNull SlirImportNode addImport(final ImportStatement aImportStatement) {
 		final SlirImportNode slirImportNode = new SlirImportNode(this, aImportStatement);
 		add(slirImportNode);
 		return slirImportNode;
 	}
 
-	public @NonNull SlirPackageNode addPackage(final OS_Package aPackageStatement) {
+	public @NotNull SlirPackageNode addPackage(final OS_Package aPackageStatement) {
 		final SlirPackageNode slirPackageNode = new SlirPackageNode(this, aPackageStatement);
 		add(slirPackageNode);
 		return slirPackageNode;

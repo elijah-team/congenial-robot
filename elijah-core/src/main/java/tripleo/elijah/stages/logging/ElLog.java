@@ -23,7 +23,7 @@ public class ElLog {
 	private final String         fileName;
 	private final String         phase;
 
-	public @NonNull List<LogEntry> getEntries() {
+	public @NotNull List<LogEntry> getEntries() {
 		return entries;
 	}
 

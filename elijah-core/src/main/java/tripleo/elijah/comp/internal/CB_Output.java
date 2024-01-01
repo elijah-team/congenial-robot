@@ -10,7 +10,7 @@ import java.util.List;
 public class CB_Output {
 	private final List<CB_OutputString> x = new ArrayList<>();
 
-	public @NonNull List<CB_OutputString> get() {
+	public @NotNull List<CB_OutputString> get() {
 		return x;
 	}
 

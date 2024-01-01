@@ -23,7 +23,7 @@ public class GCX_Construct implements EG_Statement {
 	}
 
 	@Override
-	public @NonNull EX_Explanation getExplanation() {
+	public @NotNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("GCX_Construct");
 	}
 

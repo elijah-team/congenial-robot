@@ -33,7 +33,7 @@ public class DG_ClassStatement implements DG_Item {
 		_evaNode = aResult;
 	}
 
-	public @NonNull ClassInvocation classInvocation() {
+	public @NotNull ClassInvocation classInvocation() {
 		if (classInvocation == null) {
 			classInvocation = new ClassInvocation(classStatement, null, new NULL_DeduceTypes2()); // 08/28 !!
 			//classInvocation = _inj().new_ClassInvocation((classStatement), null);
@@ -41,7 +41,7 @@ public class DG_ClassStatement implements DG_Item {
 		return classInvocation;
 	}
 
-	public @NonNull IElementHolder ConstructableElementHolder(final OS_Element aE, final VariableTableEntry aVte) {
+	public @NotNull IElementHolder ConstructableElementHolder(final OS_Element aE, final VariableTableEntry aVte) {
 		//return _inj().new_ConstructableElementHolder(classStatement, aVte);
 		return new ConstructableElementHolder(classStatement, aVte);
 	}
@@ -54,7 +54,7 @@ public class DG_ClassStatement implements DG_Item {
 		return fi;
 	}
 
-	public @NonNull GenericElementHolder GenericElementHolder() {
+	public @NotNull GenericElementHolder GenericElementHolder() {
 		if (genericElementHolder == null) {
 			//genericElementHolder = _inj().new_GenericElementHolder(classStatement);
 			genericElementHolder = new GenericElementHolder(classStatement);

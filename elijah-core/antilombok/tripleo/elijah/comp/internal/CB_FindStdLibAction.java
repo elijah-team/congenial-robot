@@ -22,16 +22,16 @@ import tripleo.elijah.util.Mode;
 import tripleo.elijah.util.Operation;
 
 public final class CB_FindStdLibAction implements CB_Action {
-   @NonNull
+   @NotNull
    private final CompilationEnclosure ce;
-   @NonNull
+   @NotNull
    private final CR_State crState;
    @Nullable
    private CD_FindStdLib findStdLib;
-   @NonNull
+   @NotNull
    private final List o;
 
-   public CB_FindStdLibAction(@NonNull CompilationEnclosure ce, @NonNull CR_State crState) {
+   public CB_FindStdLibAction(@NotNull CompilationEnclosure ce, @NotNull CR_State crState) {
 	   ElIntrinsics.checkNotNullParameter(ce, "ce");
 	   ElIntrinsics.checkNotNullParameter(crState, "crState");
       this.ce = ce;
@@ -123,14 +123,14 @@ public void execute() {
 
    @Override
 	@Contract(pure = true)
-   @NonNull
+   @NotNull
    public String name() {
       return "find std lib";
    }
 
    @Override
 	@Contract(pure = true)
-   @NonNull
+   @NotNull
    public List outputStrings() {
       return this.o;
    }

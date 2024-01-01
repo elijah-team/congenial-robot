@@ -66,7 +66,7 @@ public class TestIdentNormal {
 
 		final GenerateFunctions                  generateFunctions = boilerplate.defaultGenerateFunctions();
 		final GFS_ProcedureCall                  gfs               = generateFunctions.scheme(pce, generatedFunction, ctx2);
-		final @NonNull List<InstructionArgument> l                 = gfs.getIdentIAPathList();
+		final @NotNull List<InstructionArgument> l                 = gfs.getIdentIAPathList();
 		SimplePrintLoggerToRemoveSoon.println_out_2("8999-66" + String.valueOf(l));
 //      tripleo.elijah.util.Stupidity.println_out_2(generatedFunction.getIdentIAPathNormal());
 
@@ -241,7 +241,7 @@ public class TestIdentNormal {
 		generatedFunction.getVarTableEntry(0).setConstructable(generatedFunction.getProcTableEntry(0));
 		identIA.getEntry().setCallablePTE(generatedFunction.getProcTableEntry(1));
 
-		@NonNull FoundElement foundElement = new FoundElement(phase) {
+		@NotNull FoundElement foundElement = new FoundElement(phase) {
 			@Override
 			public void foundElement(OS_Element e) {
 				assert e == fd2;
@@ -253,7 +253,7 @@ public class TestIdentNormal {
 			}
 		};
 
-		final @NonNull List<InstructionArgument> s = BaseEvaFunction._getIdentIAPathList(identIA);
+		final @NotNull List<InstructionArgument> s = BaseEvaFunction._getIdentIAPathList(identIA);
 
 		final GDM_IdentExpression mix = generateFunctions.monitor(x);
 		boilerplate.fixTables(mix, mod, generatedFunction);

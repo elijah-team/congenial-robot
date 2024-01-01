@@ -32,12 +32,12 @@ public class SX_NodeTest2 extends TestCase {
 		final String f = "test/basic2/while100/";
 
 
-		@NonNull final List<CompilerInput> inps = List_of(new CompilerInput(f));
+		@NotNull final List<CompilerInput> inps = List_of(new CompilerInput(f));
 		comp.feedInputs(inps, new DefaultCompilerController());
 
 		//comp.feedCmdLine(List_of(f));
 
-		final @NonNull EOT_OutputTree rt = comp.getOutputTree();
+		final @NotNull EOT_OutputTree rt = comp.getOutputTree();
 
 /*
 		final SM_ClassDeclaration node = new SM_ClassDeclaration() {
@@ -47,13 +47,13 @@ public class SX_NodeTest2 extends TestCase {
 			}
 
 			@Override
-			public @NonNull SM_ClassInheritance inheritance() {
+			public @NotNull SM_ClassInheritance inheritance() {
 				return new SM_ClassInheritance() {
 					@Override
-					public @NonNull List<SM_Name> names() {
+					public @NotNull List<SM_Name> names() {
 						return List_of(new SM_Name() {
 							@Override
-							public @NonNull String getText() {
+							public @NotNull String getText() {
 								return "Arguments";
 							}
 						});
@@ -62,17 +62,17 @@ public class SX_NodeTest2 extends TestCase {
 			}
 
 			@Override
-			public @NonNull SM_Name name() {
+			public @NotNull SM_Name name() {
 				return new SM_Name() {
 					@Override
-					public @NonNull String getText() {
+					public @NotNull String getText() {
 						return "Main";
 					}
 				};
 			}
 
 			@Override
-			public @NonNull SM_ClassSubtype subType() {
+			public @NotNull SM_ClassSubtype subType() {
 				return SM_ClassSubtype.NORMAL;
 			}
 		};
@@ -107,7 +107,7 @@ public class SX_NodeTest2 extends TestCase {
 				});
 	}
 
-	@NonNull
+	@NotNull
 	private static EG_SequenceStatement getTestStatement() {
 		// (syn include local "main.h" :rule c-interface-default)
 		final EG_SyntheticStatement emh = new EG_SyntheticStatement(new EG_Naming("include", "local"), "main.h", new EX_Rule("c-interface-default"));

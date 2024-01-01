@@ -33,7 +33,7 @@ public class WriteOutputTreePipeline implements PipelineMember {
 	}
 
 	@Override
-	public void run(final @NonNull CR_State st, final CB_Output aOutput) throws Exception {
+	public void run(final @NotNull CR_State st, final CB_Output aOutput) throws Exception {
 		final Compilation    compilation = st.ca().getCompilation();
 		final EOT_OutputTree ot          = compilation.getOutputTree();
 		final List<EOT_OutputFile> l           = ot.getList();
@@ -89,7 +89,7 @@ public class WriteOutputTreePipeline implements PipelineMember {
 		paths.addNode(CP_RootType.OUTPUT, ER_Node_.of(pp, seq));
 	}
 
-	private static void addLogs(final @NonNull List<EOT_OutputFile> l, final @NonNull IPipelineAccess aPa) {
+	private static void addLogs(final @NotNull List<EOT_OutputFile> l, final @NotNull IPipelineAccess aPa) {
 		final List<ElLog> logs = aPa.getCompilationEnclosure().getPipelineLogic().elLogs;
 		final String      s1   = logs.get(0).getFileName();
 

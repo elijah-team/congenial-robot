@@ -68,7 +68,7 @@ public class ProgressBar extends OWWidget {
 		return EnumOrientation.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.ORIENTATION));
 	}
 
-	public void setOrientation(@NonNull EnumOrientation value) {
+	public void setOrientation(@NotNull EnumOrientation value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.ORIENTATION, value.toString());
 	}
 }

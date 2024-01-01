@@ -18,7 +18,7 @@ record EK_Factarray(String st, EK_Fact[] ch) {
 	}
 
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return "EK_Factarray[" +
 				"st=" + st + ", " +
 				"ch=" + ch + ']';

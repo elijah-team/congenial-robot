@@ -40,7 +40,7 @@ import java.util.List;
  * Created 9/12/20 10:07 PM
  */
 public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
-	public final @NonNull List<TypeTableEntry> args;
+	public final @NotNull List<TypeTableEntry> args;
 	/**
 	 * Either a hint to the programmer-- The compiler should be able to work without this.
 	 * <br/>
@@ -49,16 +49,16 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 	public final          IExpression          __debug_expression;
 	public final          InstructionArgument  expression_num;
 
-	public final @NonNull EvaExpression<IExpression> expression;
+	public final @NotNull EvaExpression<IExpression> expression;
 
 
 	public final    int                                             index;
 	private final   DeferredObject<Ok, Void, Void>                  _p_completeDeferred      = new DeferredObject<Ok, Void, Void>();
 	private final   DeferredObject2<FunctionInvocation, Void, Void> _p_onFunctionInvocations = new DeferredObject2<FunctionInvocation, Void, Void>();
-	public @NonNull DeduceProcCall                                  dpc                      = new DeduceProcCall(this);
-	@NonNull        ExpressionConfession                            expressionConfession     = new ExpressionConfession() {
+	public @NotNull DeduceProcCall                                  dpc                      = new DeduceProcCall(this);
+	@NotNull        ExpressionConfession                            expressionConfession     = new ExpressionConfession() {
 		@Override
-		public @NonNull ECT getType() {
+		public @NotNull ECT getType() {
 			return ECT.exp;
 		}
 	};
@@ -134,7 +134,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		}
 	}
 
-	private @NonNull DeferredObject<Ok, Void, Void> completeDeferred() {
+	private @NotNull DeferredObject<Ok, Void, Void> completeDeferred() {
 		return _p_completeDeferred;
 	}
 
@@ -142,19 +142,19 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		return dpc;
 	}
 
-	public @NonNull ExpressionConfession expressionConfession() {
+	public @NotNull ExpressionConfession expressionConfession() {
 		if (expressionConfession == null) {
 			if (expression_num == null) {
 				expressionConfession = new ExpressionConfession() {
 					@Override
-					public @NonNull ECT getType() {
+					public @NotNull ECT getType() {
 						return ECT.exp;
 					}
 				};
 			} else {
 				expressionConfession = new ExpressionConfession() {
 					@Override
-					public @NonNull ECT getType() {
+					public @NotNull ECT getType() {
 						return ECT.exp_num;
 					}
 				};
@@ -180,8 +180,8 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		return getDeduceElement3(_deduceTypes2(), __gf);
 	}
 
-	public @NonNull IDeduceElement3 getDeduceElement3(final @NonNull DeduceTypes2 aDeduceTypes2,
-													  final @NonNull BaseEvaFunction aGeneratedFunction) {
+	public @NotNull IDeduceElement3 getDeduceElement3(final @NotNull DeduceTypes2 aDeduceTypes2,
+													  final @NotNull BaseEvaFunction aGeneratedFunction) {
 		if (_de3 == null) {
 			_de3 = new DeduceElement3_ProcTableEntry(this, aDeduceTypes2, aGeneratedFunction);
 		}
@@ -205,12 +205,12 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		}
 	}
 
-	@NonNull
+	@NotNull
 	public String getLoggingString(final @Nullable DeduceTypes2 aDeduceTypes2) {
 		final String          pte_string;
-		@NonNull List<String> l = new ArrayList<String>();
+		@NotNull List<String> l = new ArrayList<String>();
 
-		for (@NonNull TypeTableEntry typeTableEntry : getArgs()) {
+		for (@NotNull TypeTableEntry typeTableEntry : getArgs()) {
 			OS_Type attached = typeTableEntry.getAttached();
 
 			if (attached != null)
@@ -250,12 +250,12 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		args.get(aIndex).setAttached(aType);
 	}
 
-	public void setExpressionConfession(final @NonNull ExpressionConfession aExpressionConfession) {
+	public void setExpressionConfession(final @NotNull ExpressionConfession aExpressionConfession) {
 		expressionConfession = aExpressionConfession;
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public String toString() {
 		return "ProcTableEntry{" +
 				"index=" + index +
@@ -309,8 +309,8 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		var procTableEntry = this;
 
 		InstructionArgument xxx = procTableEntry.expression_num;
-		if (xxx instanceof final @NonNull IdentIA identIA2) {
-			final @NonNull IdentTableEntry ite        = identIA2.getEntry();
+		if (xxx instanceof final @NotNull IdentIA identIA2) {
+			final @NotNull IdentTableEntry ite        = identIA2.getEntry();
 			final DeducePath               deducePath = ite.buildDeducePath(aDSRider.generatedFunction());
 			final @Nullable OS_Element     el5        = deducePath.getElement(deducePath.size() - 1);
 
@@ -324,7 +324,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 
 	private class _StatusListener_PTE_67 implements StatusListener {
 		@Override
-		public void onChange(/*@NonNull*/ IElementHolder eh, Status newStatus) {
+		public void onChange(/*@NotNull*/ IElementHolder eh, Status newStatus) {
 			if (newStatus == Status.KNOWN) {
 				setResolvedElement(eh.getElement(), new GG_ResolveEvent() {
 					String id = "_StatusListener_PTE_67::onChange";

@@ -10,25 +10,25 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 
 public class FT_FCA_VariableStatement {
 
-	private final @NonNull BaseEvaFunction       generatedFunction;
+	private final @NotNull BaseEvaFunction       generatedFunction;
 	private final          VariableStatementImpl vs;
 
-	public FT_FCA_VariableStatement(final VariableStatementImpl aVs, final @NonNull BaseEvaFunction aGeneratedFunction) {
+	public FT_FCA_VariableStatement(final VariableStatementImpl aVs, final @NotNull BaseEvaFunction aGeneratedFunction) {
 		vs                = aVs;
 		generatedFunction = aGeneratedFunction;
 	}
 
-	public void doLogic0(final @NonNull String e_text,
-						 final @NonNull Promise<GenType, Void, Void> p,
-						 final @NonNull VariableTableEntry vte1,
-						 final @NonNull VariableTableEntry vte) {
+	public void doLogic0(final @NotNull String e_text,
+						 final @NotNull Promise<GenType, Void, Void> p,
+						 final @NotNull VariableTableEntry vte1,
+						 final @NotNull VariableTableEntry vte) {
 		assert vs.getName().equals(e_text);
 
 		@Nullable InstructionArgument vte2_ia = generatedFunction.vte_lookup(vs.getName());
 
 		assert vte2_ia != null;
 
-		@NonNull VariableTableEntry vte2 = ((IntegerIA) vte2_ia).getEntry();
+		@NotNull VariableTableEntry vte2 = ((IntegerIA) vte2_ia).getEntry();
 		if (p.isResolved())
 			System.out.printf("915 Already resolved type: vte2.type = %s, gf = %s %n", vte1.getType(), generatedFunction);
 		else {

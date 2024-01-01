@@ -10,9 +10,9 @@ import java.util.List;
 
 public class CP_Paths {
 	private final          Compilation   _c;
-	private final @NonNull CP_StdlibPath stdlibRoot;
+	private final @NotNull CP_StdlibPath stdlibRoot;
 	private                CP_OutputPath outputRoot;
-	private @NonNull       List<ER_Node> outputNodes = new ArrayList<>();
+	private @NotNull       List<ER_Node> outputNodes = new ArrayList<>();
 
 	public CP_Path outputRoot() {
 		return outputRoot;
@@ -41,7 +41,7 @@ public class CP_Paths {
 		}
 	}
 
-	public @NonNull CP_StdlibPath stdlibRoot() {
+	public @NotNull CP_StdlibPath stdlibRoot() {
 		return stdlibRoot;
 	}
 }

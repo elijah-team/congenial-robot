@@ -14,7 +14,7 @@ public class EIT_InputTree {
 		next_node().setCompilerInput(aInput);
 	}
 
-	private @NonNull _Node next_node() {
+	private @NotNull _Node next_node() {
 		var R = new _Node();
 		nodes.add(R);
 		return R;

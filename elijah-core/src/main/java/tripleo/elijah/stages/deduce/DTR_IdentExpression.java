@@ -20,9 +20,9 @@ public class DTR_IdentExpression {
 	public void run(final IElementHolder eh, final GenType genType1) {
 		this.genType = genType1;
 
-		if (eh instanceof final @NonNull GenericElementHolderWithIntegerIA eh1) {
+		if (eh instanceof final @NotNull GenericElementHolderWithIntegerIA eh1) {
 			final IntegerIA                   integerIA          = eh1.getIntegerIA();
-			final @NonNull VariableTableEntry variableTableEntry = integerIA.getEntry();
+			final @NotNull VariableTableEntry variableTableEntry = integerIA.getEntry();
 			assert variableTableEntry == bte;
 			variableTableEntry.typeResolvePromise().then(this::q);
 		} else {

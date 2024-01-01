@@ -16,13 +16,13 @@ import java.util.function.Consumer;
 
 public class CD_FindStdLibImpl implements CD_FindStdLib {
 	@Override
-	public @NonNull Operation<Ok> findStdLib(final @NonNull CR_State crState,
-											 final @NonNull String aPreludeName,
-											 final @NonNull Consumer<Operation<CompilerInstructions>> coci) {
+	public @NotNull Operation<Ok> findStdLib(final @NotNull CR_State crState,
+											 final @NotNull String aPreludeName,
+											 final @NotNull Consumer<Operation<CompilerInstructions>> coci) {
 		try {
 			final CompilationRunner compilationRunner = crState.runner();
 
-			@NonNull final Operation<CompilerInstructions> oci = _____findStdLib(aPreludeName, compilationRunner._accessCompilation().getCompilationClosure(), compilationRunner);
+			@NotNull final Operation<CompilerInstructions> oci = _____findStdLib(aPreludeName, compilationRunner._accessCompilation().getCompilationClosure(), compilationRunner);
 			coci.accept(oci);
 			return Operation.success(Ok.instance());
 		} catch (Exception aE) {
@@ -30,9 +30,9 @@ public class CD_FindStdLibImpl implements CD_FindStdLib {
 		}
 	}
 
-	public @NonNull Operation<CompilerInstructions> _____findStdLib(final @NonNull String prelude_name,
-																	final @NonNull CompilationClosure cc,
-																	final @NonNull CompilationRunner cr) {
+	public @NotNull Operation<CompilerInstructions> _____findStdLib(final @NotNull String prelude_name,
+																	final @NotNull CompilationClosure cc,
+																	final @NotNull CompilationRunner cr) {
 
 		var slr = cc.getCompilation().paths().stdlibRoot();
 		var pl  = slr.child("lib-" + prelude_name);

@@ -44,21 +44,21 @@ public class MenuBar extends OWWidget {
 		return EnumPlacement.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.PLACEMENT));
 	}
 
-	public void setPlacement(@NonNull EnumPlacement value) {
+	public void setPlacement(@NotNull EnumPlacement value) {
 		if (value != EnumPlacement.TOP && value != EnumPlacement.BOTTOM)
 			throw new IllegalArgumentException("Only TOP or BOTTOM is allowed on menubar: " + value.toString());
 		fthinlet.setChoice(unwrap(), ThinletConstants.PLACEMENT, value.toString());
 	}
 
-	public void addMenu(@NonNull Menu child) {
+	public void addMenu(@NotNull Menu child) {
 		fthinlet.add(unwrap(), child.unwrap());
 	}
 
-	public void addMenu(@NonNull Menu child, int index) {
+	public void addMenu(@NotNull Menu child, int index) {
 		fthinlet.add(unwrap(), child.unwrap(), index);
 	}
 
-	public void removeMenu(@NonNull Menu child) {
+	public void removeMenu(@NotNull Menu child) {
 		fthinlet.remove(child.unwrap());
 	}
 
@@ -74,7 +74,7 @@ public class MenuBar extends OWWidget {
 		return (Menu) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Menu @NonNull [] getMenus() {
+	public Menu @NotNull [] getMenus() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Menu[]   ret = new Menu[o.length];
 		for (int i = 0; i < ret.length; i++)

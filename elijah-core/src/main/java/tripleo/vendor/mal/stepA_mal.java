@@ -14,12 +14,12 @@ import java.util.Map;
 
 public class stepA_mal {
 	// read
-	public static MalVal READ(final @NonNull String str) throws MalThrowable {
+	public static MalVal READ(final @NotNull String str) throws MalThrowable {
 		return reader.read_str(str);
 	}
 
 	// eval
-	public static @NonNull Boolean starts_with(final MalVal ast, final String sym) {
+	public static @NotNull Boolean starts_with(final MalVal ast, final String sym) {
 		//  Liskov, forgive me
 		if (ast instanceof MalList && !(ast instanceof MalVector) && ((MalList) ast).size() == 2) {
 			final MalVal a0 = ((MalList) ast).nth(0);
@@ -52,7 +52,7 @@ public class stepA_mal {
 		return res;
 	}
 
-	public static @NonNull Boolean is_macro_call(final MalVal ast, final @NonNull Env env)
+	public static @NotNull Boolean is_macro_call(final MalVal ast, final @NotNull Env env)
 	throws MalThrowable {
 		if (ast instanceof MalList) {
 			final MalVal a0 = ((MalList) ast).nth(0);
@@ -66,7 +66,7 @@ public class stepA_mal {
 		return false;
 	}
 
-	public static MalVal macroexpand(@NonNull MalVal ast, final @NonNull Env env)
+	public static MalVal macroexpand(@NotNull MalVal ast, final @NotNull Env env)
 	throws MalThrowable {
 		while (is_macro_call(ast, env)) {
 			final MalSymbol   a0  = (MalSymbol) ((MalList) ast).nth(0);
@@ -77,10 +77,10 @@ public class stepA_mal {
 	}
 
 	@Contract("null, _ -> null")
-	public static MalVal eval_ast(final MalVal ast, final @NonNull Env env) throws MalThrowable {
+	public static MalVal eval_ast(final MalVal ast, final @NotNull Env env) throws MalThrowable {
 		if (ast instanceof MalSymbol) {
 			return env.get((MalSymbol) ast);
-		} else if (ast instanceof final @NonNull MalList old_lst) {
+		} else if (ast instanceof final @NotNull MalList old_lst) {
 			final MalList new_lst = ast.list_Q() ? new MalList()
 					: new MalVector();
 			for (final MalVal mv : (List<MalVal>) old_lst.value) {
@@ -100,7 +100,7 @@ public class stepA_mal {
 		}
 	}
 
-	public static @Nullable MalVal EVAL(@NonNull MalVal orig_ast, @NonNull Env env) throws MalThrowable {
+	public static @Nullable MalVal EVAL(@NotNull MalVal orig_ast, @NotNull Env env) throws MalThrowable {
 		MalVal  a0, a1, a2, a3, res;
 		MalList el;
 
@@ -213,7 +213,7 @@ public class stepA_mal {
 				final MalVal a2f = ast.nth(2);
 				final Env cur_env = env;
 				return new MalFunction(a2f, env, a1f) {
-					public MalVal apply(final @NonNull MalList args) throws MalThrowable {
+					public MalVal apply(final @NotNull MalList args) throws MalThrowable {
 						return EVAL(a2f, new Env(cur_env, a1f, args));
 					}
 				};
@@ -233,12 +233,12 @@ public class stepA_mal {
 	}
 
 	// print
-	public static String PRINT(final @NonNull MalVal exp) {
+	public static String PRINT(final @NotNull MalVal exp) {
 		return printer._pr_str(exp, true);
 	}
 
 	// repl
-	public static MalVal RE(final @NonNull Env env, final @NonNull String str) throws MalThrowable {
+	public static MalVal RE(final @NotNull Env env, final @NotNull String str) throws MalThrowable {
 		return EVAL(READ(str), env);
 	}
 
@@ -319,7 +319,7 @@ public class stepA_mal {
 				repl_env.set(new MalSymbol(key), core.ns.get(key));
 			}
 			repl_env.set(new MalSymbol("eval"), new MalFunction() {
-				public MalVal apply(final @NonNull MalList args) throws MalThrowable {
+				public MalVal apply(final @NotNull MalList args) throws MalThrowable {
 					return EVAL(args.nth(0), repl_env);
 				}
 			});
@@ -334,7 +334,7 @@ public class stepA_mal {
 			}
 		}
 
-		public void init(final String @NonNull [] args) throws MalThrowable {
+		public void init(final String @NotNull [] args) throws MalThrowable {
 			final MalList _argv = new MalList();
 			for (Integer i = 1; i < args.length; i++) {
 				_argv.conj_BANG(new MalString(args[i]));
@@ -358,11 +358,11 @@ public class stepA_mal {
 			}
 		}
 
-		public void re(final @NonNull String str) throws MalThrowable {
+		public void re(final @NotNull String str) throws MalThrowable {
 			RE(repl_env, str);
 		}
 
-		public void set(final @NonNull MalSymbol aSymbol, final MalFunction aFunction) {
+		public void set(final @NotNull MalSymbol aSymbol, final MalFunction aFunction) {
 			repl_env.set(aSymbol, aFunction);
 		}
 	}

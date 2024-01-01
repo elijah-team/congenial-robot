@@ -14,7 +14,7 @@ public interface Loop extends StatementItem, FunctionItem, OS_Element {
 	@Override
 	Context getContext();
 
-	@NonNull
+	@NotNull
 	IExpression getFromPart();
 
 	List<StatementItem> getItems();
@@ -26,7 +26,7 @@ public interface Loop extends StatementItem, FunctionItem, OS_Element {
 	@Override
 	OS_Element getParent();
 
-	@NonNull
+	@NotNull
 	IExpression getToPart();
 
 	LoopTypes getType();

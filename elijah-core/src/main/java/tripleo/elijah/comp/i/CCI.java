@@ -12,5 +12,5 @@ import tripleo.elijah.util.Maybe;
 
 @FunctionalInterface
 public interface CCI {
-	void accept(@NonNull Maybe<ILazyCompilerInstructions> mcci, IProgressSink aPs);
+	void accept(@NotNull Maybe<ILazyCompilerInstructions> mcci, IProgressSink aPs);
 }

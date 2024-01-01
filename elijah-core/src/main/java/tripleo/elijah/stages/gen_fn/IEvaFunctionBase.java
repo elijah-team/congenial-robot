@@ -22,9 +22,9 @@ public interface IEvaFunctionBase {
 
 	int addIdentTableEntry(IdentExpression ident, Context context);
 
-	@NonNull Label addLabel();
+	@NotNull Label addLabel();
 
-	@NonNull Label addLabel(String base_name, boolean append_int);
+	@NotNull Label addLabel(String base_name, boolean append_int);
 
 	int addVariableTableEntry(String name, VariableTableType vtt, TypeTableEntry type, OS_Element el);
 
@@ -32,19 +32,19 @@ public interface IEvaFunctionBase {
 
 	@Nullable Label findLabel(int index);
 
-	@NonNull InstructionArgument get_assignment_path(@NonNull IExpression expression,
-													 @NonNull GenerateFunctions generateFunctions,
+	@NotNull InstructionArgument get_assignment_path(@NotNull IExpression expression,
+													 @NotNull GenerateFunctions generateFunctions,
 													 Context context);
 
 	int getCode();
 
-	@NonNull ConstantTableEntry getConstTableEntry(int index);
+	@NotNull ConstantTableEntry getConstTableEntry(int index);
 
 	Context getContextFromPC(int pc);
 
 	Dependency getDependency();
 
-	@NonNull FunctionDef getFD();
+	@NotNull FunctionDef getFD();
 
 	String getFunctionName();
 
@@ -52,7 +52,7 @@ public interface IEvaFunctionBase {
 
 	String getIdentIAPathNormal(IdentIA ia2);
 
-	@NonNull IdentTableEntry getIdentTableEntry(int index);
+	@NotNull IdentTableEntry getIdentTableEntry(int index);
 
 	@Nullable IdentTableEntry getIdentTableEntryFor(IExpression expression);
 
@@ -60,33 +60,33 @@ public interface IEvaFunctionBase {
 
 	EvaContainerNC getParent();
 
-	@NonNull ProcTableEntry getProcTableEntry(int index);
+	@NotNull ProcTableEntry getProcTableEntry(int index);
 
 	@Nullable VariableTableEntry getSelf();
 
-	@NonNull TypeTableEntry getTypeTableEntry(int index);
+	@NotNull TypeTableEntry getTypeTableEntry(int index);
 
-	@NonNull VariableTableEntry getVarTableEntry(int index);
+	@NotNull VariableTableEntry getVarTableEntry(int index);
 
-	@NonNull List<Instruction> instructions();
+	@NotNull List<Instruction> instructions();
 
-	@NonNull List<Label> labels();
+	@NotNull List<Label> labels();
 
-	@NonNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type);
+	@NotNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type);
 
-	@NonNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type, IExpression expression);
+	@NotNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type, IExpression expression);
 
-	@NonNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type, IExpression expression, TableEntryIV aTableEntryIV);
+	@NotNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type, IExpression expression, TableEntryIV aTableEntryIV);
 
-	@NonNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type, TableEntryIV aTableEntryIV);
+	@NotNull TypeTableEntry newTypeTableEntry(TypeTableEntry.Type type1, OS_Type type, TableEntryIV aTableEntryIV);
 
 	int nextTemp();
 
-	void place(@NonNull Label label);
+	void place(@NotNull Label label);
 
 	void resolveTypeDeferred(GenType aType);
 
-	void setClass(@NonNull EvaNode aNode);
+	void setClass(@NotNull EvaNode aNode);
 
 	void setCode(int aCode);
 

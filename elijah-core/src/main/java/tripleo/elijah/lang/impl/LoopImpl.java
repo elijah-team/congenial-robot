@@ -62,12 +62,12 @@ public class LoopImpl implements tripleo.elijah.lang.i.Loop {
 	}
 
 	@Override
-	public @NonNull IExpression getFromPart() {
+	public @NotNull IExpression getFromPart() {
 		return frompart;
 	}
 
 	@Override
-	public @NonNull List<StatementItem> getItems() {
+	public @NotNull List<StatementItem> getItems() {
 		List<StatementItem> collection = new ArrayList<StatementItem>();
 		for (OS_Element element : scope3.items()) {
 			if (element instanceof FunctionItem)
@@ -78,7 +78,7 @@ public class LoopImpl implements tripleo.elijah.lang.i.Loop {
 	}
 
 	@Override
-	public @NonNull String getIterName() {
+	public @NotNull String getIterName() {
 		return iterName.getText();
 	}
 
@@ -98,7 +98,7 @@ public class LoopImpl implements tripleo.elijah.lang.i.Loop {
 	}
 
 	@Override
-	public @NonNull IExpression getToPart() {
+	public @NotNull IExpression getToPart() {
 		return topart;
 	}
 
@@ -129,7 +129,7 @@ public class LoopImpl implements tripleo.elijah.lang.i.Loop {
 	}
 
 	@Override // OS_Element
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitLoop(this);
 	}
 
@@ -143,7 +143,7 @@ public class LoopImpl implements tripleo.elijah.lang.i.Loop {
 	}
 
 	//	@Override
-	public void visitGen1(@NonNull ElElementVisitor visit) {
+	public void visitGen1(@NotNull ElElementVisitor visit) {
 		visit.visitLoop(this);
 	}
 

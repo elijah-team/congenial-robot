@@ -8,7 +8,7 @@ import org.jspecify.annotations.NonNull;
  */
 public interface EG_Statement {
 	@Contract(value = "_, _ -> new", pure = true)
-	static @NonNull EG_Statement of(@NonNull String aText, @NonNull EX_Explanation aExplanation) {
+	static @NotNull EG_Statement of(@NotNull String aText, @NotNull EX_Explanation aExplanation) {
 		return new EG_SingleStatement(aText, aExplanation);
 	}
 

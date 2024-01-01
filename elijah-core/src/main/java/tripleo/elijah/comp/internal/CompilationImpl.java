@@ -41,7 +41,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class CompilationImpl implements Compilation {
-	private final @NonNull FluffyCompImpl                    _fluffyComp;
+	private final @NotNull FluffyCompImpl                    _fluffyComp;
 	private final          CIS                               _cis;
 	private final          CompilationConfig                 cfg;
 	private final          Map<String, CompilerInstructions> fn2ci;
@@ -87,7 +87,7 @@ public class CompilationImpl implements Compilation {
 		_f                      = new Finally();
 	}
 
-	public @NonNull ICompilationAccess _access() {
+	public @NotNull ICompilationAccess _access() {
 		return new DefaultCompilationAccess(this);
 	}
 
@@ -101,12 +101,12 @@ public class CompilationImpl implements Compilation {
 
 	private class DefaultCompFactory implements CompFactory {
 		@Override
-		public @NonNull EIT_ModuleInput createModuleInput(final OS_Module aModule) {
+		public @NotNull EIT_ModuleInput createModuleInput(final OS_Module aModule) {
 			return new EIT_ModuleInput(aModule, CompilationImpl.this);
 		}
 
 		@Override
-		public @NonNull Qualident createQualident(final @NonNull List<String> sl) {
+		public @NotNull Qualident createQualident(final @NotNull List<String> sl) {
 			Qualident R = new QualidentImpl();
 			for (String s : sl) {
 				R.append(Helpers.string_to_ident(s));
@@ -115,12 +115,12 @@ public class CompilationImpl implements Compilation {
 		}
 
 		@Override
-		public @NonNull InputRequest createInputRequest(final File aFile, final boolean aDo_out, final @Nullable LibraryStatementPart aLsp) {
+		public @NotNull InputRequest createInputRequest(final File aFile, final boolean aDo_out, final @Nullable LibraryStatementPart aLsp) {
 			return new InputRequest(aFile, aDo_out, aLsp);
 		}
 
 		@Override
-		public @NonNull WorldModule createWorldModule(final OS_Module m) {
+		public @NotNull WorldModule createWorldModule(final OS_Module m) {
 			CompilationEnclosure ce = getCompilationEnclosure();
 			final WorldModule    R  = new DefaultWorldModule(m, ce);
 
@@ -129,12 +129,12 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public @NonNull FluffyComp getFluffy() {
+	public @NotNull FluffyComp getFluffy() {
 		return _fluffyComp;
 	}
 
 	@Override
-	public @NonNull EOT_OutputTree getOutputTree() {
+	public @NotNull EOT_OutputTree getOutputTree() {
 		if (_output_tree == null) {
 			_output_tree = new EOT_OutputTree();
 		}
@@ -146,7 +146,7 @@ public class CompilationImpl implements Compilation {
 
 
 	@Override
-	public CompilerBeginning beginning(final @NonNull CompilationRunner compilationRunner) {
+	public CompilerBeginning beginning(final @NotNull CompilationRunner compilationRunner) {
 		return new CompilerBeginning(this, getRootCI(), getInputs(), compilationRunner.progressSink, cfg());
 	}
 
@@ -182,18 +182,18 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public void addModule__(final @NonNull OS_Module module, final @NonNull String fn) {
+	public void addModule__(final @NotNull OS_Module module, final @NotNull String fn) {
 		modules.add(module);
 		use.addModule(module, fn);
 	}
 
 	@Override
-	public @NonNull CompFactory con() {
+	public @NotNull CompFactory con() {
 		return _con;
 	}
 
 	@Override
-	public void eachModule(final @NonNull Consumer<OS_Module> object) {
+	public void eachModule(final @NotNull Consumer<OS_Module> object) {
 		for (OS_Module mod : modules) {
 			object.accept(mod);
 		}
@@ -205,7 +205,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public void feedInputs(final @NonNull List<CompilerInput> inputs, final @NonNull CompilerController controller) {
+	public void feedInputs(final @NotNull List<CompilerInput> inputs, final @NotNull CompilerController controller) {
 		if (inputs.size() == 0) {
 			controller.printUsage();
 			return;
@@ -249,7 +249,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public void feedCmdLine(final @NonNull List<String> args) throws Exception {
+	public void feedCmdLine(final @NotNull List<String> args) throws Exception {
 		final List<CompilerInput> inputs = args.stream()
 				.map(s -> {
 					final CompilerInput input = new CompilerInput(s);
@@ -266,7 +266,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public @NonNull CompilationClosure getCompilationClosure() {
+	public @NotNull CompilationClosure getCompilationClosure() {
 		return new CompilationClosure() {
 
 			@Override
@@ -275,7 +275,7 @@ public class CompilationImpl implements Compilation {
 			}
 
 			@Override
-			public @NonNull Compilation getCompilation() {
+			public @NotNull Compilation getCompilation() {
 				return CompilationImpl.this;
 			}
 
@@ -287,7 +287,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public @NonNull List<ClassStatement> findClass(final String aClassName) {
+	public @NotNull List<ClassStatement> findClass(final String aClassName) {
 		final List<ClassStatement> l = new ArrayList<ClassStatement>();
 		for (final OS_Module module : modules) {
 			if (module.hasClass(aClassName)) {
@@ -333,7 +333,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public OS_Package getPackage(final @NonNull Qualident pkg_name) {
+	public OS_Package getPackage(final @NotNull Qualident pkg_name) {
 		return _repo.getPackage(pkg_name.toString());
 	}
 
@@ -343,15 +343,15 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public void hasInstructions(final @NonNull List<CompilerInstructions> cis) {
+	public void hasInstructions(final @NotNull List<CompilerInstructions> cis) {
 		assert cis.size() == 1;
 		final CompilationEnclosure ce = getCompilationEnclosure();
 		assert !ce.getCompilerInput().isEmpty();
 		hasInstructions(cis.get(0), pa(), ce);
 	}
 
-	public void hasInstructions(final @NonNull CompilerInstructions aRootCI,
-								final @NonNull IPipelineAccess pa,
+	public void hasInstructions(final @NotNull CompilerInstructions aRootCI,
+								final @NotNull IPipelineAccess pa,
 								final CompilationEnclosure ce) {
 		//this.signals().hasInstructions()
 		//		.signal(this.con().createSignal_hasInstructions(pa, cis)); // this is wrong
@@ -362,7 +362,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public boolean isPackage(final @NonNull String pkg) {
+	public boolean isPackage(final @NotNull String pkg) {
 		return _repo.hasPackage(pkg);
 	}
 
@@ -372,7 +372,7 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public @NonNull ModuleBuilder moduleBuilder() {
+	public @NotNull ModuleBuilder moduleBuilder() {
 		return new ModuleBuilder(this);
 	}
 
@@ -396,12 +396,12 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public void subscribeCI(final @NonNull Observer<CompilerInstructions> aCio) {
+	public void subscribeCI(final @NotNull Observer<CompilerInstructions> aCio) {
 		_cis.subscribe(aCio);
 	}
 
 	@Override
-	public void use(final @NonNull CompilerInstructions compilerInstructions, final boolean do_out) {
+	public void use(final @NotNull CompilerInstructions compilerInstructions, final boolean do_out) {
 		use.use(compilerInstructions, do_out);    // NOTE Rust
 	}
 
@@ -421,12 +421,12 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
-	public @NonNull EIT_InputTree getInputTree() {
+	public @NotNull EIT_InputTree getInputTree() {
 		return _input_tree;
 	}
 
 	@Override
-	public @NonNull CompilationConfig cfg() {
+	public @NotNull CompilationConfig cfg() {
 		return cfg;
 	}
 

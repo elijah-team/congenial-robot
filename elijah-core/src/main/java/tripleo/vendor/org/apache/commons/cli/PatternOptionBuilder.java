@@ -130,7 +130,7 @@ public class PatternOptionBuilder {
 	 * @param pattern the pattern string
 	 * @return The {@link Options} instance
 	 */
-	public static @NonNull Options parsePattern(final @NonNull String pattern) {
+	public static @NotNull Options parsePattern(final @NotNull String pattern) {
 		char     opt      = ' ';
 		boolean  required = false;
 		Class<?> type     = null;

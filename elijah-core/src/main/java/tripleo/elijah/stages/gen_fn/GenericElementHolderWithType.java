@@ -19,10 +19,10 @@ import tripleo.elijah.stages.deduce.DeduceTypes2;
  */
 public class GenericElementHolderWithType implements IElementHolder {
 	private final          DeduceTypes2 dt2;
-	private final @NonNull OS_Element   element;
+	private final @NotNull OS_Element   element;
 	private final          OS_Type      type;
 
-	public GenericElementHolderWithType(final @NonNull OS_Element aElement,
+	public GenericElementHolderWithType(final @NotNull OS_Element aElement,
 										final OS_Type aType,
 										final DeduceTypes2 aDeduceTypes2) {
 		element = aElement;
@@ -35,7 +35,7 @@ public class GenericElementHolderWithType implements IElementHolder {
 	}
 
 	@Override
-	public @NonNull OS_Element getElement() {
+	public @NotNull OS_Element getElement() {
 		return element;
 	}
 

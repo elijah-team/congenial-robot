@@ -21,7 +21,7 @@ public class EG_DottedStatement implements EG_Statement {
 	}
 
 	@Override
-	public @NonNull String getText() {
+	public @NotNull String getText() {
 		return __.String_join(separator, stringList);
 	}
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class QualidentListImpl implements tripleo.elijah.lang.i.QualidentList {
 
-	public @NonNull List<Qualident> parts = new ArrayList<Qualident>();
+	public @NotNull List<Qualident> parts = new ArrayList<Qualident>();
 
 	@Override
 	public void add(final Qualident qid) {

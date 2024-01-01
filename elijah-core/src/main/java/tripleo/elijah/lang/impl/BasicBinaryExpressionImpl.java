@@ -32,7 +32,7 @@ public class BasicBinaryExpressionImpl implements BasicBinaryExpression {
 		right = aRight;
 	}
 
-	public @NonNull ExpressionList getArgs() {
+	public @NotNull ExpressionList getArgs() {
 		return this.args;
 	}
 
@@ -66,7 +66,7 @@ public class BasicBinaryExpressionImpl implements BasicBinaryExpression {
 	}
 
 	@Override
-	public void set(final @NonNull IBinaryExpression aEx) {
+	public void set(final @NotNull IBinaryExpression aEx) {
 		left  = aEx.getLeft();
 		_kind = aEx.getKind();
 		right = aEx.getRight();

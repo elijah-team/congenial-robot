@@ -12,15 +12,15 @@ import java.io.*;
 //import java.util.List;
 
 class readline {
-	static @NonNull  Mode    mode          = Mode.JAVA;// Mode.JNA;
+	static @NotNull  Mode    mode          = Mode.JAVA;// Mode.JNA;
 	static @Nullable String  HISTORY_FILE  = null;
-	static @NonNull  Boolean historyLoaded = false;
+	static @NotNull  Boolean historyLoaded = false;
 
 	static {
 		HISTORY_FILE = System.getProperty("user.home") + "/.mal-history";
 	}
 
-	public static @NonNull String readline(final String prompt)
+	public static @NotNull String readline(final String prompt)
 	throws EOFException, IOException {
 		// if (mode == Mode.JNA) {
 		// return jna_readline(prompt);
@@ -44,7 +44,7 @@ class readline {
 	//}
 
 	// Just java readline (no history, or line editing)
-	public static @NonNull String java_readline(final String prompt)
+	public static @NotNull String java_readline(final String prompt)
 	throws EOFException, IOException {
 		System.out.print(prompt);
 		final BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
@@ -70,7 +70,7 @@ class readline {
 	}
 */
 
-	public static void appendHistory(final @NonNull String filename, final String line) {
+	public static void appendHistory(final @NotNull String filename, final String line) {
 		try {
 			final BufferedWriter w;
 			w = new BufferedWriter(new FileWriter(filename, true));

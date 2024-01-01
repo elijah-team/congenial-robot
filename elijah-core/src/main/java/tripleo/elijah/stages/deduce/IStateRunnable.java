@@ -13,7 +13,7 @@ public interface IStateRunnable extends Stateful {
 		;
 		public static State EXIT_RUN;
 
-		public static void register(final @NonNull DeducePhase phase) {
+		public static void register(final @NotNull DeducePhase phase) {
 			EXIT_RUN = phase.registerState(new ExitRunState());
 		}
 
@@ -22,7 +22,7 @@ public interface IStateRunnable extends Stateful {
 			private StateRegistrationToken identity;
 
 			@Override
-			public void apply(final @NonNull DefaultStateful element) {
+			public void apply(final @NotNull DefaultStateful element) {
 //                              boolean b = ((StatefulBool) element).getValue();
 				if (!runAlready) {
 					runAlready = true;

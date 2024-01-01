@@ -6,14 +6,14 @@ import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action;
 import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action_Arena;
 
 public class SGTA_Set implements setup_GenType_Action {
-	private final @NonNull OS_Type type;
+	private final @NotNull OS_Type type;
 
-	public SGTA_Set(final @NonNull OS_Type aType) {
+	public SGTA_Set(final @NotNull OS_Type aType) {
 		type = aType;
 	}
 
 	@Override
-	public void run(final @NonNull GenType gt, final @NonNull setup_GenType_Action_Arena arena) {
+	public void run(final @NotNull GenType gt, final @NotNull setup_GenType_Action_Arena arena) {
 		gt.set(type);
 	}
 }

@@ -21,7 +21,7 @@ public record EK_Fact(char ch) {
 
 	@Contract(pure = true)
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return MessageFormat.format("<FACT {0}>", ch);
 	}
 }

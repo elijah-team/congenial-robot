@@ -26,7 +26,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 	private final String              value;
 	public        int                 code = -1;
 
-	boolean action(final CRI_Ident aCRI_ident, final @NonNull CReference aCReference) {
+	boolean action(final CRI_Ident aCRI_ident, final @NotNull CReference aCReference) {
 		boolean          b               = false;
 		final OS_Element resolvedElement = getResolved_element();
 
@@ -71,7 +71,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		value                  = aValue;
 	}
 
-	private boolean _act_ClassStatement(final @NonNull CReference aCReference, boolean b) {
+	private boolean _act_ClassStatement(final @NotNull CReference aCReference, boolean b) {
 		// Assuming constructor call
 		final int code;
 		if (getResolved() != null) {
@@ -111,7 +111,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		return b;
 	}
 
-	private void _act_ConstructorDef(final @NonNull CReference aCReference) {
+	private void _act_ConstructorDef(final @NotNull CReference aCReference) {
 		assert getI() == getsSize() - 1; // Make sure we are ending with a constructor call
 		final int code;
 		if (getResolved() != null) {
@@ -126,13 +126,13 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		aCReference.addRef(text2, CReference.Ref.CONSTRUCTOR);
 	}
 
-	private void _act_FunctionDef(final @NonNull CReference aCReference) {
+	private void _act_FunctionDef(final @NotNull CReference aCReference) {
 		final OS_Element parent        = getResolved_element().getParent();
 		int              our_code      = -1;
 		final EvaNode    resolved_node = getResolved();
 
 		if (resolved_node != null) {
-			if (resolved_node instanceof final @NonNull BaseEvaFunction resolvedFunction) {
+			if (resolved_node instanceof final @NotNull BaseEvaFunction resolvedFunction) {
 
 				resolvedFunction.onGenClass(gc -> {
 //						GeneratedNode gc = rf.getGenClass();
@@ -142,7 +142,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 						this.code = -2;
 				});
 
-				if (resolvedFunction.getGenClass() instanceof final @NonNull EvaNamespace generatedNamespace) {
+				if (resolvedFunction.getGenClass() instanceof final @NotNull EvaNamespace generatedNamespace) {
 					// FIXME sometimes genClass is not called so above wont work,
 					//  so check if a code was set and use it here
 					final int cc = generatedNamespace.getCode();
@@ -151,7 +151,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 					}
 				}
 
-			} else if (resolved_node instanceof final @NonNull EvaClass generatedClass) {
+			} else if (resolved_node instanceof final @NotNull EvaClass generatedClass) {
 				this.code = generatedClass.getCode();
 			}
 		}
@@ -168,7 +168,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		aCReference.addRef(text2, CReference.Ref.FUNCTION);
 	}
 
-	private void _act_DefFunctionDef(final @NonNull CReference aCReference) {
+	private void _act_DefFunctionDef(final @NotNull CReference aCReference) {
 		final OS_Element parent = getResolved_element().getParent();
 		final int        code;
 		if (getResolved() != null) {
@@ -200,14 +200,14 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		aCReference.addRef(text2, CReference.Ref.FUNCTION);
 	}
 
-	private void _act_VariableStatement(final @NonNull CReference aCReference) {
+	private void _act_VariableStatement(final @NotNull CReference aCReference) {
 		final VariableStatementImpl variableStatement = (VariableStatementImpl) getResolved_element();
 
 		GI_VariableStatement givs = (GI_VariableStatement) aCReference._repo().itemFor(variableStatement);
 		givs._createReferenceForVariableStatement(aCReference, getGeneratedFunction(), getValue());
 	}
 
-	private void _act_PropertyStatement(final @NonNull CReference aCReference) {
+	private void _act_PropertyStatement(final @NotNull CReference aCReference) {
 		getSl().clear();  // don't we want all the text including from sl?
 
 		final GCS_Property_Get propertyGet = new GCS_Property_Get((PropertyStatement) getResolved_element());
@@ -226,7 +226,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		//			return _getIdentIAPath_IdentIAHelper(text, sl, i, sSize, _res)
 	}
 
-	private void _act_FormalArgListItem(final @NonNull CReference aCReference, final @NonNull FormalArgListItem fali) {
+	private void _act_FormalArgListItem(final @NotNull CReference aCReference, final @NotNull FormalArgListItem fali) {
 		final int    y     = 2;
 		final String text2 = "va" + fali.getNameToken().getText();
 		aCReference.addRef(text2, CReference.Ref.LOCAL); // TODO
@@ -270,7 +270,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		}
 
 		@Override
-		public @NonNull EX_Explanation getExplanation() {
+		public @NotNull EX_Explanation getExplanation() {
 			return EX_Explanation.withMessage("GCS_Property_Get");
 		}
 

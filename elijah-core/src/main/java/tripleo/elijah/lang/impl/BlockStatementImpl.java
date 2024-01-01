@@ -21,7 +21,7 @@ public class BlockStatementImpl implements /* Statement, */ tripleo.elijah.lang.
 
 	private final          FormalArgList    fal = new FormalArgListImpl();
 	final private          Scope            parent;
-	private final @NonNull StatementClosure scope;
+	private final @NotNull StatementClosure scope;
 	private final          NormalTypeName   tn  = new RegularTypeNameImpl(); // FIXME
 
 	public BlockStatementImpl(final Scope aParent) {
@@ -30,17 +30,17 @@ public class BlockStatementImpl implements /* Statement, */ tripleo.elijah.lang.
 	}
 
 	@Override
-	public @NonNull FormalArgList opfal() {
+	public @NotNull FormalArgList opfal() {
 		return fal;
 	}
 
 	@Override
-	public @NonNull NormalTypeName returnType() {
+	public @NotNull NormalTypeName returnType() {
 		return tn;
 	}
 
 	@Override
-	public @NonNull StatementClosure scope() {
+	public @NotNull StatementClosure scope() {
 		return scope;
 	}
 }

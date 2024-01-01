@@ -61,7 +61,7 @@ public class SyntacticBlockImpl
 	}
 
 	@Override
-	public @NonNull List<FunctionItem> getItems() {
+	public @NotNull List<FunctionItem> getItems() {
 		List<FunctionItem> collection = new ArrayList<FunctionItem>();
 		for (OS_Element element : scope3.items()) {
 			if (element instanceof FunctionItem)
@@ -77,7 +77,7 @@ public class SyntacticBlockImpl
 	}
 
 	@Override
-	public @NonNull List<OS_NamedElement> items() {
+	public @NotNull List<OS_NamedElement> items() {
 		final Collection<OS_Element> items = Collections2.filter(scope3.items(), new Predicate<OS_Element>() {
 			@Override
 			public boolean apply(@Nullable OS_Element input) {
@@ -95,7 +95,7 @@ public class SyntacticBlockImpl
 	}
 
 	@Override
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitSyntacticBlock(this);
 	}
 

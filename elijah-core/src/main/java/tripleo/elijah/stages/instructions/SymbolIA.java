@@ -23,7 +23,7 @@ public class SymbolIA implements InstructionArgument {
 
 	@Override
 	@Contract(pure = true)
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return "SymbolIA{" +
 				"text='" + text + '\'' +
 				'}';

@@ -24,7 +24,7 @@ public class AssigningImportStatement extends _BaseImportStatement {
 	}
 
 	@Override
-	public @NonNull List<Qualident> parts() {
+	public @NotNull List<Qualident> parts() {
 		final List<Qualident> r = new ArrayList<Qualident>();
 		for (final Part part : _parts) {
 			r.add(identToQualident(part.name));
@@ -71,7 +71,7 @@ public class AssigningImportStatement extends _BaseImportStatement {
 		_ctx = ctx;
 	}
 
-	private static @NonNull Qualident identToQualident(final IdentExpression identExpression) {
+	private static @NotNull Qualident identToQualident(final IdentExpression identExpression) {
 		final Qualident r = new QualidentImpl();
 		r.append(identExpression);
 		return r;

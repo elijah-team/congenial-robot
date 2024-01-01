@@ -13,7 +13,7 @@ public class SGTA_CopyGenType implements setup_GenType_Action {
 	}
 
 	@Override
-	public void run(@NonNull GenType gt, @NonNull setup_GenType_Action_Arena arena) {
+	public void run(@NotNull GenType gt, @NotNull setup_GenType_Action_Arena arena) {
 		gt.copy(_gt);
 	}
 

@@ -20,7 +20,7 @@ public class Eventual<P> {
 		prom.then(cb);
 	}
 
-	public void register(final @NonNull EventualRegister ev) {
+	public void register(final @NotNull EventualRegister ev) {
 		ev.register(this);
 	}
 
@@ -55,7 +55,7 @@ public class Eventual<P> {
 		if (!prom.isResolved()) {
 			return Optional.empty();
 		}
-		final @NonNull P[] xx = (P[]) new Object[]{null};
+		final @NotNull P[] xx = (P[]) new Object[]{null};
 		prom.then(fg -> {
 			xx[0] = fg;
 		});
@@ -66,7 +66,7 @@ public class Eventual<P> {
 		if (!prom.isResolved()) {
 			return Optional.empty();
 		}
-		final @NonNull P[] xx = (P[]) new Object[]{null};
+		final @NotNull P[] xx = (P[]) new Object[]{null};
 		prom.then(fg -> {
 			xx[0] = s.get();
 		});

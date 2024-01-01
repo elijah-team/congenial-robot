@@ -40,7 +40,7 @@ public final class Scope {
 	private          ZonedDateTime date;
 	private          String        packageName;
 	private          String        sourceClassName;
-	private @NonNull List<Field>   fields = new ArrayList<>();
+	private @NotNull List<Field>   fields = new ArrayList<>();
 
 	Scope(String packageName, String sourceClassName) {
 		this.date            = ZonedDateTime.now();
@@ -48,11 +48,11 @@ public final class Scope {
 		this.sourceClassName = sourceClassName;
 	}
 
-	public @NonNull String getComment() {
+	public @NotNull String getComment() {
 		return COMMENT;
 	}
 
-	public @NonNull String getDate() {
+	public @NotNull String getDate() {
 		return date.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 	}
 
@@ -64,23 +64,23 @@ public final class Scope {
 		return sourceClassName;
 	}
 
-	public @NonNull String getSourceClassNameWithPackage() {
+	public @NotNull String getSourceClassNameWithPackage() {
 		return packageName + "." + sourceClassName;
 	}
 
-	public @NonNull String getTargetClassNameWithPackage() {
+	public @NotNull String getTargetClassNameWithPackage() {
 		return packageName + "." + getTargetClassName();
 	}
 
-	public @NonNull String getTargetClassName() {
+	public @NotNull String getTargetClassName() {
 		return sourceClassName + "JsonWriter";
 	}
 
-	public @NonNull DecoratedCollection<Field> getFields() {
+	public @NotNull DecoratedCollection<Field> getFields() {
 		return new DecoratedCollection(fields);
 	}
 
-	public void addGetter(@NonNull String getter) {
+	public void addGetter(@NotNull String getter) {
 		String fieldName = getter.substring(3);
 		char   firstChar = fieldName.charAt(0);
 		fieldName = Character.toLowerCase(firstChar) + fieldName.substring(1);

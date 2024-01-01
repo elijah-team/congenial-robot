@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 class NotableAction implements CB_Action {
-	private final @NonNull GN_Notable            notable;
-	@NonNull
+	private final @NotNull GN_Notable            notable;
+	@NotNull
 	final                  List<CB_OutputString> o;
 
-	public NotableAction(final @NonNull GN_Notable aNotable) {
+	public NotableAction(final @NotNull GN_Notable aNotable) {
 		notable = aNotable;
 		o       = new ArrayList<>();
 	}
@@ -28,7 +28,7 @@ class NotableAction implements CB_Action {
 	}
 
 	@Override
-	public @NonNull String name() {
+	public @NotNull String name() {
 		return "Notable wrapper";
 	}
 

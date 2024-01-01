@@ -7,7 +7,7 @@ import java.util.List;
 public interface FormalArgList {
 	List<FormalArgListItem> falis();
 
-	@NonNull List<FormalArgListItem> items();
+	@NotNull List<FormalArgListItem> items();
 
 	FormalArgListItem next();
 

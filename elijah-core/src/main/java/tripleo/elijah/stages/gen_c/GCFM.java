@@ -14,10 +14,10 @@ public class GCFM implements Reactivable {
 
 	private       Buffer          buf;
 	private       Buffer          bufHdr;
-	private final @NonNull DeducedBaseEvaFunction gf;
+	private final @NotNull DeducedBaseEvaFunction gf;
 	private final GenerateResult  gr;
 
-	public GCFM(final @NonNull List<C2C_Result> aRs, final @NonNull DeducedBaseEvaFunction aGf, final GenerateResult aGr) {
+	public GCFM(final @NotNull List<C2C_Result> aRs, final @NotNull DeducedBaseEvaFunction aGf, final GenerateResult aGr) {
 		gf = aGf;
 		gr = aGr;
 

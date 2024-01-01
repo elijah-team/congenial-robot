@@ -33,7 +33,7 @@ public class SubExpressionImpl extends AbstractExpression implements tripleo.eli
 	}
 
 	@Override
-	public @NonNull ExpressionKind getKind() {
+	public @NotNull ExpressionKind getKind() {
 		return ExpressionKind.SUBEXPRESSION;
 	}
 

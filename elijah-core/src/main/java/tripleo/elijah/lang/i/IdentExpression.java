@@ -9,7 +9,7 @@ import tripleo.elijah.util.Helpers;
 
 public interface IdentExpression extends IExpression, OS_Element, Resolvable, Locatable {
 	@Contract("_ -> new")
-	static @NonNull IdentExpression forString(String string) {
+	static @NotNull IdentExpression forString(String string) {
 		return new IdentExpressionImpl(Helpers.makeToken(string), "<inline-absent2>");
 	}
 
@@ -19,7 +19,7 @@ public interface IdentExpression extends IExpression, OS_Element, Resolvable, Lo
 	@Override
 	IExpression getLeft();
 
-	@NonNull
+	@NotNull
 	String getText();
 
 	@Override

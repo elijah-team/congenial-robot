@@ -21,8 +21,8 @@ public class HashBuffer extends DefaultBuffer {
 	final DoubleLatch<String> dl = new DoubleLatch<>(aFilename -> {
 		final HashBuffer outputBuffer = this;
 
-		final @NonNull String            hh;
-		final @NonNull Operation<String> hh2 = Helpers.getHashForFilename(aFilename);
+		final @NotNull String            hh;
+		final @NotNull Operation<String> hh2 = Helpers.getHashForFilename(aFilename);
 
 		if (hh2.mode() == Mode.SUCCESS) {
 			hh = hh2.success();

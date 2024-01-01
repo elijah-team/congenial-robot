@@ -45,7 +45,7 @@ public class Button extends Label {
 		return EnumType.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.TYPE));
 	}
 
-	public void setType(@NonNull EnumType value) {
+	public void setType(@NotNull EnumType value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.TYPE, value.toString());
 	}
 

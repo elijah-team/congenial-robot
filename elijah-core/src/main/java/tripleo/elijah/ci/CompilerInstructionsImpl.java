@@ -27,7 +27,7 @@ import java.util.List;
  * Created 9/6/20 11:20 AM
  */
 public class CompilerInstructionsImpl implements CompilerInstructions {
-	public @NonNull List<LibraryStatementPart> lsps = new ArrayList<LibraryStatementPart>();
+	public @NotNull List<LibraryStatementPart> lsps = new ArrayList<LibraryStatementPart>();
 	private         CiIndexingStatement        _idx;
 	private         String                     filename;
 	private         GenerateStatement          gen;
@@ -40,7 +40,7 @@ public class CompilerInstructionsImpl implements CompilerInstructions {
 	}
 
 	@Override
-	public void add(final @NonNull LibraryStatementPart libraryStatementPart) {
+	public void add(final @NotNull LibraryStatementPart libraryStatementPart) {
 		libraryStatementPart.setInstructions(this);
 		lsps.add(libraryStatementPart);
 	}
@@ -81,7 +81,7 @@ public class CompilerInstructionsImpl implements CompilerInstructions {
 	}
 
 	@Override
-	public @NonNull CiIndexingStatement indexingStatement() {
+	public @NotNull CiIndexingStatement indexingStatement() {
 		if (_idx == null)
 			_idx = new CiIndexingStatementImpl(this);
 
@@ -94,7 +94,7 @@ public class CompilerInstructionsImpl implements CompilerInstructions {
 	}
 
 	@Override
-	public void setName(@NonNull Token name) {
+	public void setName(@NotNull Token name) {
 		this.name = name.getText();
 	}
 

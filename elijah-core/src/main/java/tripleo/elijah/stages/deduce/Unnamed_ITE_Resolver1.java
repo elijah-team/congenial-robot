@@ -56,11 +56,11 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 		@Nullable InstructionArgument itex = _inj().new_IdentIA(ite.getIndex(), generatedFunction);
 		{
 			while (itex != null && itex instanceof IdentIA) {
-				@NonNull IdentTableEntry itee = ((IdentIA) itex).getEntry();
+				@NotNull IdentTableEntry itee = ((IdentIA) itex).getEntry();
 
 				@Nullable BaseTableEntry x = null;
 				if (itee.getBacklink() instanceof IntegerIA) {
-					@NonNull VariableTableEntry vte = ((IntegerIA) itee.getBacklink()).getEntry();
+					@NotNull VariableTableEntry vte = ((IntegerIA) itee.getBacklink()).getEntry();
 					x = vte;
 //					if (vte.constructable_pte != null)
 					itex = null;
@@ -147,21 +147,21 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 		}
 
 		@Override
-		public void onChange(@NonNull IElementHolder eh, BaseTableEntry.Status newStatus) {
+		public void onChange(@NotNull IElementHolder eh, BaseTableEntry.Status newStatus) {
 			if (newStatus == BaseTableEntry.Status.KNOWN) {
-				if (bte instanceof final @NonNull VariableTableEntry vte) {
+				if (bte instanceof final @NotNull VariableTableEntry vte) {
 					onChangeVTE(vte);
-				} else if (bte instanceof final @NonNull ProcTableEntry pte) {
+				} else if (bte instanceof final @NotNull ProcTableEntry pte) {
 					onChangePTE(pte);
-				} else if (bte instanceof final @NonNull IdentTableEntry ite) {
+				} else if (bte instanceof final @NotNull IdentTableEntry ite) {
 					onChangeITE(ite);
 				}
 				postOnChange(eh);
 			}
 		}
 
-		private void onChangeVTE(@NonNull VariableTableEntry vte) {
-			@NonNull List<TypeTableEntry> pot = dt2.getPotentialTypesVte(vte);
+		private void onChangeVTE(@NotNull VariableTableEntry vte) {
+			@NotNull List<TypeTableEntry> pot = dt2.getPotentialTypesVte(vte);
 			if (vte.getStatus() == BaseTableEntry.Status.KNOWN && vte.getType().getAttached() != null && vte.getResolvedElement() != null) {
 
 				final OS_Type ty = vte.getType().getAttached();
@@ -170,7 +170,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 
 				try {
 					if (ty.getType() == OS_Type.Type.USER) {
-						@NonNull GenType ty2 = dt2.resolve_type(ty, ty.getTypeName().getContext());
+						@NotNull GenType ty2 = dt2.resolve_type(ty, ty.getTypeName().getContext());
 						OS_Element       ele;
 						if (vte.getType().genType.getResolved() == null) {
 							if (ty2.getResolved().getType() == OS_Type.Type.USER_CLASS) {
@@ -186,7 +186,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 					if (ty instanceof OS_FuncType) {
 						vte.typePromise().then(new DoneCallback<GenType>() {
 							@Override
-							public void onDone(final @NonNull GenType result) {
+							public void onDone(final @NotNull GenType result) {
 								OS_Element                 ele3 = result.getResolved().getClassOf();
 								@Nullable LookupResultList lrl  = null;
 
@@ -232,7 +232,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 			}
 		}
 
-		private void onChangePTE(@NonNull ProcTableEntry aPte) {
+		private void onChangePTE(@NotNull ProcTableEntry aPte) {
 			if (aPte.getStatus() == BaseTableEntry.Status.KNOWN) { // TODO might be obvious
 				if (aPte.getFunctionInvocation() == null) {
 					throw new NotImplementedException();
@@ -262,9 +262,9 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 		}
 
 		private void __onChangePTE_helper(final EvaConstructor result) {
-			@NonNull EvaConstructor constructorDef = result;
+			@NotNull EvaConstructor constructorDef = result;
 
-			@NonNull FunctionDef ele = constructorDef.getFD();
+			@NotNull FunctionDef ele = constructorDef.getFD();
 
 			try {
 				LookupResultList     lrl  = DeduceLookupUtils.lookupExpression(ite.getIdent(), ele.getContext(), dt2);
@@ -277,7 +277,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 			}
 		}
 
-		private void onChangeITE(@NonNull IdentTableEntry identTableEntry) {
+		private void onChangeITE(@NotNull IdentTableEntry identTableEntry) {
 			final DT_Env         env      = _inj().new_DT_Env(dt2.LOG, dt2._errSink(), dt2.central());
 			final TypeTableEntry ite_type = identTableEntry.type;
 
@@ -288,7 +288,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 
 				try {
 					if (ty.getType() == OS_Type.Type.USER) {
-						@NonNull GenType ty2 = dt2.resolve_type(ty, ty.getTypeName().getContext());
+						@NotNull GenType ty2 = dt2.resolve_type(ty, ty.getTypeName().getContext());
 						OS_Element       ele;
 						if (ite_type.genType.getResolved() == null) {
 							if (ty2.getResolved().getType() == OS_Type.Type.USER_CLASS) {
@@ -320,7 +320,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 					identTableEntry.fefi = true;
 					identTableEntry.onFefiDone(new DoneCallback<GenType>() {
 						@Override
-						public void onDone(final @NonNull GenType result) {
+						public void onDone(final @NotNull GenType result) {
 							LookupResultList lrl = null;
 							OS_Element       ele2;
 							try {
@@ -333,8 +333,8 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 
 									if (ite.getCallablePTE() != null) {
 										final @Nullable ProcTableEntry    pte        = ite.getCallablePTE();
-										final @NonNull IInvocation        invocation = result.getCi();
-										final @NonNull FunctionInvocation fi         = dt2.newFunctionInvocation((BaseFunctionDef) ele2, pte, invocation, dt2.phase);
+										final @NotNull IInvocation        invocation = result.getCi();
+										final @NotNull FunctionInvocation fi         = dt2.newFunctionInvocation((BaseFunctionDef) ele2, pte, invocation, dt2.phase);
 
 										generatedFunction.addDependentFunction(fi);
 									}
@@ -350,17 +350,17 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 		}
 
 		/* @ensures ite.type != null; */
-		private void postOnChange(@NonNull IElementHolder eh) {
-			if (ite.type == null && eh.getElement() instanceof final @NonNull VariableStatementImpl variableStatement) {
-				@NonNull TypeName typ = variableStatement.typeName();
-				@NonNull OS_Type  ty  = dt2._inj().new_OS_UserType(typ);
+		private void postOnChange(@NotNull IElementHolder eh) {
+			if (ite.type == null && eh.getElement() instanceof final @NotNull VariableStatementImpl variableStatement) {
+				@NotNull TypeName typ = variableStatement.typeName();
+				@NotNull OS_Type  ty  = dt2._inj().new_OS_UserType(typ);
 
 				try {
 					@Nullable GenType ty2 = getTY2(variableStatement, typ, ty);
 
 					// no expression or TableEntryIV below
 					if (ty2 != null) {
-						final @NonNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null);
+						final @NotNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null);
 						// trying to keep genType up to date
 
 						if (!ty.getTypeName().isNull())
@@ -389,9 +389,9 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 			}
 		}
 
-		private void vte_pot_size_is_1_USER_TYPE(@NonNull VariableTableEntry vte, @Nullable OS_Type aTy) {
+		private void vte_pot_size_is_1_USER_TYPE(@NotNull VariableTableEntry vte, @Nullable OS_Type aTy) {
 			try {
-				@NonNull GenType ty2 = dt2.resolve_type(aTy, aTy.getTypeName().getContext());
+				@NotNull GenType ty2 = dt2.resolve_type(aTy, aTy.getTypeName().getContext());
 				// TODO ite.setAttached(ty2) ??
 				OS_Element           ele  = ty2.getResolved().getElement();
 				LookupResultList     lrl  = DeduceLookupUtils.lookupExpression(ite.getIdent(), ele.getContext(), dt2);
@@ -399,7 +399,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 				ite.setStatus(BaseTableEntry.Status.KNOWN, dt2._inj().new_GenericElementHolder(best));
 //									ite.setResolvedElement(best);
 
-				final @NonNull ClassStatement klass = (ClassStatement) ele;
+				final @NotNull ClassStatement klass = (ClassStatement) ele;
 
 				dt2.register_and_resolve(vte, klass);
 			} catch (ResolveError resolveError) {
@@ -407,7 +407,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 			}
 		}
 
-		private void vte_pot_size_is_1_USER_CLASS_TYPE(@NonNull VariableTableEntry vte, @Nullable OS_Type aTy) {
+		private void vte_pot_size_is_1_USER_CLASS_TYPE(@NotNull VariableTableEntry vte, @Nullable OS_Type aTy) {
 			ClassStatement             klass = aTy.getClassOf();
 			@Nullable LookupResultList lrl   = null;
 			try {
@@ -417,13 +417,13 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 				assert best != null;
 				ite.setResolvedElement(best, new GG_ResolveEvent() {String id="Unnamed_ITE_Resolver1::vte_pot_size_is_1_USER_CLASS_TYPE";});
 
-				final @NonNull GenType          genType  = dt2._inj().new_GenTypeImpl(klass);
+				final @NotNull GenType          genType  = dt2._inj().new_GenTypeImpl(klass);
 				final TypeName                  typeName = vte.getType().genType.getNonGenericTypeName();
 				final @Nullable ClassInvocation ci       = genType.genCI(typeName, dt2, dt2._errSink(), dt2.phase);
 //							resolve_vte_for_class(vte, klass);
 				ci.resolvePromise().done(new DoneCallback<EvaClass>() {
 					@Override
-					public void onDone(@NonNull EvaClass result) {
+					public void onDone(@NotNull EvaClass result) {
 						vte.resolveTypeToClass(result);
 					}
 				});
@@ -439,10 +439,10 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 			String ruleName();
 		}
 
-		private @Nullable GenType getTY2(final @NonNull VariableStatementImpl aVariableStatement, @NonNull TypeName aTypeName, @NonNull OS_Type aTy) throws ResolveError {
+		private @Nullable GenType getTY2(final @NotNull VariableStatementImpl aVariableStatement, @NotNull TypeName aTypeName, @NotNull OS_Type aTy) throws ResolveError {
 			if (aTy.getType() != OS_Type.Type.USER) {
 				assert false;
-				@NonNull GenType genType = _inj().new_GenTypeImpl();
+				@NotNull GenType genType = _inj().new_GenTypeImpl();
 				genType.set(aTy);
 				return genType;
 			}
@@ -492,8 +492,8 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 		class UIR1_Rule implements DT_Rule {
 			private final OS_Type aTy;
 
-			UIR1_Rule(final OS_Type aATy, final @NonNull VariableStatement vs) {
-				@NonNull TypeName typ = vs.typeName();
+			UIR1_Rule(final OS_Type aATy, final @NotNull VariableStatement vs) {
+				@NotNull TypeName typ = vs.typeName();
 
 				var aTypeName = vs.typeName();
 				assert (!aTypeName.isNull());
@@ -501,7 +501,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 				aTy = aATy;
 			}
 
-			public @NonNull Operation<GenType> product() {
+			public @NotNull Operation<GenType> product() {
 				GenType ty2;
 				assert aTy.getTypeName() != null;
 				try {
@@ -513,14 +513,14 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 			}
 
 			@Override
-			public @NonNull String ruleName() {
+			public @NotNull String ruleName() {
 				return "Unnamed_ITE_Resolver1::getTY2";
 			}
 		}
 
 		private void type_is_null_and_attached_is_null_vte() {
 			//LOG.err("2842 attached == null for "+((VariableTableEntry) bte).type);
-			@NonNull DeduceTypes2.PromiseExpectation<GenType> pe = dt2.promiseExpectation((VariableTableEntry) bte, "Null USER type attached resolved");
+			@NotNull DeduceTypes2.PromiseExpectation<GenType> pe = dt2.promiseExpectation((VariableTableEntry) bte, "Null USER type attached resolved");
 			VTE_TypePromises.found_parent(pe, generatedFunction, ((VariableTableEntry) bte), ite, dt2);
 		}
 
@@ -530,7 +530,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 //			ite.onType(phase, _inj().new_OnType() {
 //
 //				@Override
-//				public void typeDeduced(@NonNull OS_Type aType) {
+//				public void typeDeduced(@NotNull OS_Type aType) {
 //					// TODO Auto-generated method stub
 //					pe.satisfy(aType);
 //				}
@@ -555,7 +555,7 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 //							try {
 //								OS_Type ty3 = resolve_type(attached1, attached1.getTypeName().getContext());
 //								// no expression or TableEntryIV below
-//								@NonNull TypeTableEntry tte4 = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null);
+//								@NotNull TypeTableEntry tte4 = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, null);
 //								// README trying to keep genType up to date
 //								tte4.setAttached(attached1);
 //								tte4.setAttached(ty3);

@@ -28,15 +28,15 @@ public class GM_GenerateModule {
 		gmr = aGmr;
 	}
 
-	public GM_GenerateModuleResult getModuleResult(final @NonNull WorkManager wm,
-												   final @NonNull GenerateResultSink aResultSink) {
+	public GM_GenerateModuleResult getModuleResult(final @NotNull WorkManager wm,
+												   final @NotNull GenerateResultSink aResultSink) {
 		final OS_Module                         mod                   = gmr.params().getMod();
-		final @NonNull GN_GenerateNodesIntoSink generateNodesIntoSink = gmr.generateNodesIntoSink();
+		final @NotNull GN_GenerateNodesIntoSink generateNodesIntoSink = gmr.generateNodesIntoSink();
 
 		final GenerateResult              gr1 = new Sub_GenerateResult();
 		final Supplier<GenerateResultEnv> fgs = () ->new GenerateResultEnv(aResultSink, gr1, wm, new WorkList() /*tautology*/, this);
 
-		final @NonNull GenerateFiles            ggc                   = gmr.getGenerateFiles(fgs);
+		final @NotNull GenerateFiles            ggc                   = gmr.getGenerateFiles(fgs);
 		final List<ProcessedNode>               lgc                   = generateNodesIntoSink._env().lgc();
 
 		final GenerateResultEnv fileGen = ((GenerateC)ggc).getFileGen();

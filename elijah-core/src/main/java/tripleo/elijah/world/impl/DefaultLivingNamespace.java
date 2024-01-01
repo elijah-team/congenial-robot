@@ -42,7 +42,7 @@ public class DefaultLivingNamespace implements LivingNamespace {
 	}
 
 	@Override
-	public @NonNull GarishNamespace getGarish() {
+	public @NotNull GarishNamespace getGarish() {
 		if (_garish == null) {
 			_garish = new GarishNamespace(this);
 		}

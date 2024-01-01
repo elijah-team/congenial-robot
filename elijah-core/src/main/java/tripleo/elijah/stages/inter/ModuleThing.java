@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModuleThing {
-	public record GeneralDescription(ES_Symbol aSymbol, @NonNull List<Object> aObjects) {
+	public record GeneralDescription(ES_Symbol aSymbol, @NotNull List<Object> aObjects) {
 	}
 
-	private final @NonNull List<EntryPoint>  entryPoints;
-	private final @NonNull List<EvaFunction> evaFunctions = new ArrayList<>();
+	private final @NotNull List<EntryPoint>  entryPoints;
+	private final @NotNull List<EvaFunction> evaFunctions = new ArrayList<>();
 	private final          OS_Module         mod;
 
 	private GeneralDescription generalDescription;

@@ -51,18 +51,18 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	// region INSTRUCTIONS
 	//
 	private final   Eventual<GenType> _p_assignGenType  = new Eventual<>();
-	public @NonNull List<DR_Item>                       drs               = new ArrayList<>();
+	public @NotNull List<DR_Item>                       drs               = new ArrayList<>();
 	public          DefaultLivingFunction               _living;
-	public @NonNull List<ConstantTableEntry>            cte_list          = new ArrayList<ConstantTableEntry>();
+	public @NotNull List<ConstantTableEntry>            cte_list          = new ArrayList<ConstantTableEntry>();
 	public          boolean                             deducedAlready;
-	public @NonNull List<Integer>                       deferred_calls    = new ArrayList<Integer>();
+	public @NotNull List<Integer>                       deferred_calls    = new ArrayList<Integer>();
 	public          FunctionInvocation                  fi;
-	public @NonNull List<IdentTableEntry>               idte_list         = new ArrayList<IdentTableEntry>();
-	public @NonNull List<Instruction>                   instructionsList  = new ArrayList<Instruction>();
-	public @NonNull List<ProcTableEntry>                prte_list         = new ArrayList<ProcTableEntry>();
-	public @NonNull List<TypeTableEntry>                tte_list          = new ArrayList<TypeTableEntry>();
-	public @NonNull List<VariableTableEntry>            vte_list          = new ArrayList<VariableTableEntry>();
-	@NonNull        Map<OS_Element, DeduceElement>      elements          = new HashMap<OS_Element, DeduceElement>();
+	public @NotNull List<IdentTableEntry>               idte_list         = new ArrayList<IdentTableEntry>();
+	public @NotNull List<Instruction>                   instructionsList  = new ArrayList<Instruction>();
+	public @NotNull List<ProcTableEntry>                prte_list         = new ArrayList<ProcTableEntry>();
+	public @NotNull List<TypeTableEntry>                tte_list          = new ArrayList<TypeTableEntry>();
+	public @NotNull List<VariableTableEntry>            vte_list          = new ArrayList<VariableTableEntry>();
+	@NotNull        Map<OS_Element, DeduceElement>      elements          = new HashMap<OS_Element, DeduceElement>();
 	private         int                                 _nextTemp         = 0;
 	private         __Reactive                          _reactive;
 	private         int                                 code              = 0;
@@ -77,7 +77,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	private         Eventual<GenerateFunctions>         _p_informGF       = new Eventual<>();
 	private         _EvaCreationDimension               __evaCreationDimension;
 
-	static void printTables(@NonNull EvaFunction gf) {
+	static void printTables(@NotNull EvaFunction gf) {
 		SimplePrintLoggerToRemoveSoon.println_out_2("VariableTable ");
 		for (VariableTableEntry variableTableEntry : gf.vte_list) {
 			SimplePrintLoggerToRemoveSoon.println_out_2("\t" + variableTableEntry);
@@ -151,7 +151,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 					if (aDimension instanceof _EvaCreationDimension ecd) {
 						//ecd.responding(bef -> {
 						final BaseEvaFunction   bef     = BaseEvaFunction.this;
-						final @NonNull DR_Ident drIdent = bef.getIdent(idte);
+						final @NotNull DR_Ident drIdent = bef.getIdent(idte);
 						idte.set_ident(drIdent);
 						bef.idte_list.add(idte);
 						//});
@@ -181,7 +181,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	public @NonNull Label addLabel() {
+	public @NotNull Label addLabel() {
 		return addLabel("__label", true);
 	}
 
@@ -192,7 +192,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	//
 
 	@Override
-	public @NonNull Label addLabel(final String base_name, final boolean append_int) {
+	public @NotNull Label addLabel(final String base_name, final boolean append_int) {
 		final Label  label = new Label(this);
 		final String name;
 		if (append_int) {
@@ -225,9 +225,9 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	public @NonNull InstructionArgument get_assignment_path(@NonNull final IExpression expression,
-															@NonNull final GenerateFunctions generateFunctions,
-															@NonNull Context context) {
+	public @NotNull InstructionArgument get_assignment_path(@NotNull final IExpression expression,
+															@NotNull final GenerateFunctions generateFunctions,
+															@NotNull Context context) {
 		switch (expression.getKind()) {
 		case DOT_EXP: {
 			final DotExpression       de        = (DotExpression) expression;
@@ -239,10 +239,10 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 			throw new NotImplementedException();
 		case PROCEDURE_CALL: {
 			ProcedureCallExpression pce = (ProcedureCallExpression) expression;
-			if (pce.getLeft() instanceof final @NonNull IdentExpression identExpression) {
+			if (pce.getLeft() instanceof final @NotNull IdentExpression identExpression) {
 				int                        idte_index = addIdentTableEntry(identExpression, identExpression.getContext());
 				final IdentIA              identIA    = new IdentIA(idte_index, this);
-				final List<TypeTableEntry> args_types = generateFunctions.get_args_types(pce.getArgs(), (@NonNull EvaFunction) this, context);
+				final List<TypeTableEntry> args_types = generateFunctions.get_args_types(pce.getArgs(), (@NotNull EvaFunction) this, context);
 				int                        i          = generateFunctions.addProcTableEntry(pce, identIA, args_types, this);
 				return new ProcIA(i, this);
 			}
@@ -274,7 +274,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	// endregion
 
 	@Override
-	@NonNull
+	@NotNull
 	public ConstantTableEntry getConstTableEntry(final int index) {
 		return cte_list.get(index);
 	}
@@ -290,12 +290,12 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	public @NonNull Dependency getDependency() {
+	public @NotNull Dependency getDependency() {
 		return dependency;
 	}
 
 	@Override
-	public @NonNull String getFunctionName() {
+	public @NotNull String getFunctionName() {
 		// TODO change to abstract with override??
 		if (this instanceof EvaConstructor) {
 			int                   y               = 2;
@@ -330,7 +330,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	 * @return a string that represents the path encoded by ia2
 	 */
 	@Override
-	public @NonNull String getIdentIAPathNormal(final @NonNull IdentIA ia2) {
+	public @NotNull String getIdentIAPathNormal(final @NotNull IdentIA ia2) {
 		final List<InstructionArgument> s = _getIdentIAPathList(ia2);
 
 		//
@@ -358,7 +358,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 
 //	Map<Range, ContextImpl> contextToRangeMap = new HashMap<Range, ContextImpl>();
 
-	public static @NonNull List<InstructionArgument> _getIdentIAPathList(@NonNull InstructionArgument oo) {
+	public static @NotNull List<InstructionArgument> _getIdentIAPathList(@NotNull InstructionArgument oo) {
 		LinkedList<InstructionArgument> s = new LinkedList<InstructionArgument>();
 		while (oo != null) {
 			if (oo instanceof IntegerIA) {
@@ -378,7 +378,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public IdentTableEntry getIdentTableEntry(final int index) {
 		return idte_list.get(index);
 	}
@@ -391,7 +391,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	 * @return IdentTableEntry or null
 	 */
 	@Override
-	public @Nullable IdentTableEntry getIdentTableEntryFor(@NonNull IExpression expression) {
+	public @Nullable IdentTableEntry getIdentTableEntryFor(@NotNull IExpression expression) {
 		for (IdentTableEntry identTableEntry : idte_list) {
 			// TODO make this work for Qualidents and DotExpressions
 			if (identTableEntry.getIdent().getText().equals(((IdentExpression) expression).getText()) && identTableEntry.getBacklink() == null) {
@@ -412,45 +412,45 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public ProcTableEntry getProcTableEntry(final int index) {
 		return prte_list.get(index);
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public TypeTableEntry getTypeTableEntry(final int index) {
 		return tte_list.get(index);
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public VariableTableEntry getVarTableEntry(final int index) {
 		return vte_list.get(index);
 	}
 
 	@Override
-	public @NonNull List<Instruction> instructions() {
+	public @NotNull List<Instruction> instructions() {
 		return instructionsList;
 	}
 
 	@Override
-	public @NonNull List<Label> labels() {
+	public @NotNull List<Label> labels() {
 		return labelList;
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1, final OS_Type type) {
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1, final OS_Type type) {
 		return newTypeTableEntry(type1, type, null, null);
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1, final OS_Type type, final IExpression expression) {
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1, final OS_Type type, final IExpression expression) {
 		return newTypeTableEntry(type1, type, expression, null);
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1, final OS_Type type, final IExpression expression, TableEntryIV aTableEntryIV) {
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1, final OS_Type type, final IExpression expression, TableEntryIV aTableEntryIV) {
 		final TypeTableEntry typeTableEntry = new TypeTableEntry(tte_list.size(), type1, type, expression, aTableEntryIV);
 		typeTableEntry.setAttached(type); // README make sure tio call callback
 		tte_list.add(typeTableEntry);
@@ -458,7 +458,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1, final OS_Type type, TableEntryIV aTableEntryIV) {
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1, final OS_Type type, TableEntryIV aTableEntryIV) {
 		return newTypeTableEntry(type1, type, null, aTableEntryIV);
 	}
 
@@ -469,12 +469,12 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	public void place(@NonNull final Label label) {
+	public void place(@NotNull final Label label) {
 		label.setIndex(instruction_index);
 	}
 
 	@Override
-	public void resolveTypeDeferred(final @NonNull GenType aType) {
+	public void resolveTypeDeferred(final @NotNull GenType aType) {
 		if (_p_assignGenType.isPending())
 			_p_assignGenType.resolve(aType);
 		else {
@@ -490,7 +490,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	}
 
 	@Override
-	public void setClass(@NonNull EvaNode aNode) {
+	public void setClass(@NotNull EvaNode aNode) {
 		assert aNode instanceof EvaClass || aNode instanceof EvaNamespace;
 		genClass = aNode;
 
@@ -557,10 +557,10 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		return toString();
 	}
 
-	private @NonNull InstructionArgument get_assignment_path(@NonNull final InstructionArgument prev,
-															 @NonNull final IExpression expression,
-															 @NonNull final GenerateFunctions generateFunctions,
-															 @NonNull final Context context) {
+	private @NotNull InstructionArgument get_assignment_path(@NotNull final InstructionArgument prev,
+															 @NotNull final IExpression expression,
+															 @NotNull final GenerateFunctions generateFunctions,
+															 @NotNull final Context context) {
 		switch (expression.getKind()) {
 		case DOT_EXP: {
 			final DotExpression       de        = (DotExpression) expression;
@@ -591,21 +591,21 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		}
 	}
 
-	public @NonNull DT_Resolvabley _getIdentIAResolvable(final @NonNull IdentIA aIdentIA) {
+	public @NotNull DT_Resolvabley _getIdentIAResolvable(final @NotNull IdentIA aIdentIA) {
 		var x = _getIdentIAResolvableList(aIdentIA);
 
 		return new DT_Resolvabley(x);
 	}
 
-	public static @NonNull List<DT_Resolvable> _getIdentIAResolvableList(@NonNull InstructionArgument oo) {
+	public static @NotNull List<DT_Resolvable> _getIdentIAResolvableList(@NotNull InstructionArgument oo) {
 		LinkedList<DT_Resolvable> R = new LinkedList<>();
 		while (oo != null) {
 			if (oo instanceof IntegerIA integerIA) {
-				@NonNull final VariableTableEntry vte = integerIA.getEntry();
+				@NotNull final VariableTableEntry vte = integerIA.getEntry();
 
 				if (vte._vs == null) {
 					if (vte._p_elementPromise.isResolved()) {
-						final @NonNull InstructionArgument finalOo = oo;
+						final @NotNull InstructionArgument finalOo = oo;
 						vte._p_elementPromise.then(el1 -> R.addFirst(DT_Resolvable.from(finalOo, el1, null)));
 					} else {
 						R.addFirst(DT_Resolvable.from(oo, null, null));
@@ -662,47 +662,47 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 	/*
 	 * Hook in for GeneratedClass
 	 */
-	public void onGenClass(final @NonNull OnGenClass aOnGenClass) {
+	public void onGenClass(final @NotNull OnGenClass aOnGenClass) {
 		_p_assignEvaClass.then(aOnGenClass::accept);
 	}
 
-	public @NonNull __Reactive reactive() {
+	public @NotNull __Reactive reactive() {
 		if (_reactive == null)
 			_reactive = new __Reactive();
 		return _reactive;
 	}
 
-	public @NonNull DR_Ident getIdent(final IdentExpression aIdent, final VariableTableEntry aVteBl1) {
+	public @NotNull DR_Ident getIdent(final IdentExpression aIdent, final VariableTableEntry aVteBl1) {
 		final DR_Ident e = DR_Ident.create(aIdent, aVteBl1, this);
 		drs.add(e);
 		return e;
 	}
 
-	public @NonNull DR_Ident getIdent(final @NonNull IdentTableEntry aIdentTableEntry) {
+	public @NotNull DR_Ident getIdent(final @NotNull IdentTableEntry aIdentTableEntry) {
 		final DR_Ident e = DR_Ident.create(aIdentTableEntry, this);
 		drs.add(e);
 		return e;
 	}
 
-	public @NonNull DR_Ident getIdent(final VariableTableEntry aVteBl1) {
+	public @NotNull DR_Ident getIdent(final VariableTableEntry aVteBl1) {
 		final DR_Ident e = DR_Ident.create(aVteBl1, this);
 		drs.add(e);
 		return e;
 	}
 
-	public @NonNull DR_ProcCall getProcCall(final IExpression aZ, final ProcTableEntry aPte) {
+	public @NotNull DR_ProcCall getProcCall(final IExpression aZ, final ProcTableEntry aPte) {
 		DR_ProcCall e = new DR_ProcCall(aZ, aPte, this);
 		drs.add(e);
 		return e;
 	}
 
-	public @NonNull DR_Variable getVar(final VariableStatement aElement) {
+	public @NotNull DR_Variable getVar(final VariableStatement aElement) {
 		DR_Variable e = new DR_Variable(aElement, this);
 		drs.add(e);
 		return e;
 	}
 
-	public @NonNull DR_Type buildDrTypeFromNonGenericTypeName(final TypeName aNonGenericTypeName) {
+	public @NotNull DR_Type buildDrTypeFromNonGenericTypeName(final TypeName aNonGenericTypeName) {
 		var r = new DR_Type(this, aNonGenericTypeName);
 		r.build();
 		return r;
@@ -720,7 +720,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		_p_informGF.then(sgf);
 	}
 
-	public void monitorRequest_IdentTableEntry(final @NonNull MonitorRequest_IdentTableEntry aMr) {
+	public void monitorRequest_IdentTableEntry(final @NotNull MonitorRequest_IdentTableEntry aMr) {
 		aMr.backstage_trigger(this);
 	}
 

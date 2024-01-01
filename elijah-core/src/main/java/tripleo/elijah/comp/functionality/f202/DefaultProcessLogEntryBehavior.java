@@ -34,7 +34,7 @@ public class DefaultProcessLogEntryBehavior implements ProcessLogEntryBehavior {
 	}
 
 	@Override
-	public void initialize(@NonNull File aLogFile, String aElLogFileName, @NonNull ErrSink aErrSink) {
+	public void initialize(@NotNull File aLogFile, String aElLogFileName, @NotNull ErrSink aErrSink) {
 		try {
 			ps = new PrintStream(aLogFile);
 			s1 = aElLogFileName;
@@ -44,13 +44,13 @@ public class DefaultProcessLogEntryBehavior implements ProcessLogEntryBehavior {
 	}
 
 	@Override
-	public void processLogEntry(@NonNull LogEntry entry) {
+	public void processLogEntry(@NotNull LogEntry entry) {
 		final String logentry = String.format("[%s] [%tD %tT] %s %s", s1, entry.time, entry.time, entry.level, entry.message);
 		ps.println(logentry);
 	}
 
 	@Override
-	public void processPhase(@NonNull String aPhase) {
+	public void processPhase(@NotNull String aPhase) {
 		ps.println(aPhase);
 		StringBuilder sb = new StringBuilder(aPhase.length());
 		for (int i = 0; i < aPhase.length(); i++) {

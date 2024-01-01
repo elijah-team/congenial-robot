@@ -44,7 +44,7 @@ import java.util.Hashtable;
  */
 public final class OWRepository {
 
-	protected static Object[] @NonNull []     fcomponents = {
+	protected static Object[] @NotNull []     fcomponents = {
 			{ThinletConstants.BUTTON, Button.class},
 			{ThinletConstants.CELL, Cell.class},
 			{ThinletConstants.CHECKBOX, CheckBox.class},
@@ -111,7 +111,7 @@ public final class OWRepository {
 	/**
 	 * unregister the given OWObject, as not managed by the given thinlet
 	 */
-	public void remove(@NonNull OWObject widget) {
+	public void remove(@NotNull OWObject widget) {
 		try {
 			fobjectWrappersRemove.invoke(fobjectWrappers, widget.unwrap());
 		} catch (Exception e) {
@@ -123,7 +123,7 @@ public final class OWRepository {
 	 * return a previously registered object wrapper from the given thinlet component, or build a new
 	 * wrapper object, ans register it.
 	 */
-	public @NonNull OWObject wrap(OWThinlet thinlet, Object component, String componentClassname) throws NoSuchMethodException,
+	public @NotNull OWObject wrap(OWThinlet thinlet, Object component, String componentClassname) throws NoSuchMethodException,
 																										 IllegalAccessException, InvocationTargetException, InstantiationException {
 		OWObject ret = get(component);
 		if (ret == null) {
@@ -159,7 +159,7 @@ public final class OWRepository {
 	/**
 	 * register the given OWObject, as managed by the given thinlet
 	 */
-	public void add(@NonNull OWObject widget) {
+	public void add(@NotNull OWObject widget) {
 		try {
 			fobjectWrappersPut.invoke(fobjectWrappers, widget.unwrap(), widget);
 		} catch (Exception e) {

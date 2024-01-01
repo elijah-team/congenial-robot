@@ -38,7 +38,7 @@ public class GI_VariableStatement implements GenerateC_Item {
 	 * </p>
 	 */
 	@Contract("_, _ -> new")
-	private CReference.@NonNull Reference __createReferenceForVariableStatement(final @NonNull IEvaFunctionBase generatedFunction, final @Nullable String value) {
+	private CReference.@NotNull Reference __createReferenceForVariableStatement(final @NotNull IEvaFunctionBase generatedFunction, final @Nullable String value) {
 		final String text2 = variableStatement.getName();
 
 		// first getParent is VariableSequenceImpl
@@ -62,8 +62,8 @@ public class GI_VariableStatement implements GenerateC_Item {
 		return new CReference.Reference(text2, CReference.Ref.MEMBER, value);
 	}
 
-	public void _createReferenceForVariableStatement(final @NonNull CReference aCReference,
-													 final @NonNull IEvaFunctionBase generatedFunction,
+	public void _createReferenceForVariableStatement(final @NotNull CReference aCReference,
+													 final @NotNull IEvaFunctionBase generatedFunction,
 													 final @Nullable String value) {
 		final CReference.Reference r = __createReferenceForVariableStatement(generatedFunction, value);
 		aCReference.addRef(r);

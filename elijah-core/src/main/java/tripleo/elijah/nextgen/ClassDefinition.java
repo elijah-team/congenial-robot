@@ -28,7 +28,7 @@ public class ClassDefinition {
 	private       EvaClass            node;
 	private       IComposable         composable;
 
-	public ClassDefinition(final @NonNull ClassInvocation aClassInvocation) {
+	public ClassDefinition(final @NotNull ClassInvocation aClassInvocation) {
 		primary    = aClassInvocation.getKlass();
 		invocation = aClassInvocation;
 	}
@@ -41,7 +41,7 @@ public class ClassDefinition {
 		return composable;
 	}
 
-	public @NonNull Set<ClassStatement> getExtended() {
+	public @NotNull Set<ClassStatement> getExtended() {
 		return extended;
 	}
 

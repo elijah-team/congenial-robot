@@ -15,11 +15,11 @@ import tripleo.elijah.util.NotImplementedException;
 
 public class DG_AliasStatement implements DG_Item {
 	private final          AliasStatementImpl                          aliasStatement;
-	private @NonNull       DeferredObject<DG_Item, ResolveError, Void> _resolvePromise = new DeferredObject<>();
+	private @NotNull       DeferredObject<DG_Item, ResolveError, Void> _resolvePromise = new DeferredObject<>();
 	private                boolean                                     _resolveStarted;
-	private final @NonNull DeduceTypes2                                __dt2;
+	private final @NotNull DeduceTypes2                                __dt2;
 
-	public DG_AliasStatement(final AliasStatementImpl aAliasStatement, final @NonNull DeduceTypes2 aDt2) {
+	public DG_AliasStatement(final AliasStatementImpl aAliasStatement, final @NotNull DeduceTypes2 aDt2) {
 		aliasStatement = aAliasStatement;
 		__dt2          = aDt2;
 	}

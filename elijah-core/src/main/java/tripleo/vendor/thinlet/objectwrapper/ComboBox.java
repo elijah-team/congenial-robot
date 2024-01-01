@@ -61,15 +61,15 @@ public class ComboBox extends TextField {
 		return (Choice) fthinlet.wrap(fthinlet.getSelectedItem(unwrap()));
 	}
 
-	public void addItem(@NonNull Choice item) {
+	public void addItem(@NotNull Choice item) {
 		fthinlet.add(unwrap(), item.unwrap());
 	}
 
-	public void addItem(@NonNull Choice item, int index) {
+	public void addItem(@NotNull Choice item, int index) {
 		fthinlet.add(unwrap(), item.unwrap(), index);
 	}
 
-	public void removeItem(@NonNull Choice item) {
+	public void removeItem(@NotNull Choice item) {
 		fthinlet.remove(item.unwrap());
 	}
 
@@ -85,7 +85,7 @@ public class ComboBox extends TextField {
 		return (Choice) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Choice @NonNull [] getItems() {
+	public Choice @NotNull [] getItems() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Choice[] ret = new Choice[o.length];
 		for (int i = 0; i < ret.length; i++)

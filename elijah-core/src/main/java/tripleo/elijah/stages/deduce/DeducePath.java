@@ -35,16 +35,16 @@ import java.util.List;
  */
 public class DeducePath {
 	private final          IdentTableEntry           base;
-	private final          MemberContext @NonNull [] contexts;
-	private final          OS_Element @NonNull []    elements;  // arrays because they never need to be resized
-	private final @NonNull List<InstructionArgument> ias;
-	private final          GenType @NonNull []       types;
+	private final          MemberContext @NotNull [] contexts;
+	private final          OS_Element @NotNull []    elements;  // arrays because they never need to be resized
+	private final @NotNull List<InstructionArgument> ias;
+	private final          GenType @NotNull []       types;
 
 	public InstructionArgument getIA(int index) {
 		return ias.get(index);
 	}
 
-	public void setTarget(final @NonNull DeduceElement aTarget) {
+	public void setTarget(final @NotNull DeduceElement aTarget) {
 		//assert elements[0] == null;
 		elements[0] = aTarget.element();
 	}
@@ -54,7 +54,7 @@ public class DeducePath {
 	}
 
 	@Contract(pure = true)
-	public DeducePath(IdentTableEntry aIdentTableEntry, @NonNull List<InstructionArgument> aX) {
+	public DeducePath(IdentTableEntry aIdentTableEntry, @NotNull List<InstructionArgument> aX) {
 		final int size = aX.size();
 		assert size > 0;
 
@@ -97,9 +97,9 @@ public class DeducePath {
 	}
 
 	@Nullable
-	private OS_Element elementForIndex(final int aIndex, final @NonNull IntegerIA ia2) {
+	private OS_Element elementForIndex(final int aIndex, final @NotNull IntegerIA ia2) {
 		@Nullable OS_Element        el;
-		@NonNull VariableTableEntry vte = ia2.getEntry();
+		@NotNull VariableTableEntry vte = ia2.getEntry();
 		el = vte.getResolvedElement();
 		if (el == null) {
 			// never called bc above will NEVER be true due to construction of vte
@@ -117,10 +117,10 @@ public class DeducePath {
 	}
 
 	@Nullable
-	private OS_Element elementForIndex(final int aIndex, final @NonNull IdentIA ia2) {
+	private OS_Element elementForIndex(final int aIndex, final @NotNull IdentIA ia2) {
 		@Nullable OS_Element el;
 		el = null;
-		@NonNull IdentTableEntry identTableEntry = ia2.getEntry();
+		@NotNull IdentTableEntry identTableEntry = ia2.getEntry();
 		identTableEntry.onResolvedElement(re -> {
 			identTableEntry.setStatus(BaseTableEntry.Status.KNOWN, //_inj().new_
 									  new GenericElementHolder(re));
@@ -152,8 +152,8 @@ public class DeducePath {
 	}
 
 	@Nullable
-	private OS_Element elementForIndex(final @NonNull ProcIA ia2) {
-		final @NonNull ProcTableEntry procTableEntry = ia2.getEntry();
+	private OS_Element elementForIndex(final @NotNull ProcIA ia2) {
+		final @NotNull ProcTableEntry procTableEntry = ia2.getEntry();
 		@Nullable OS_Element          el             = procTableEntry.getResolvedElement(); // .expression?
 		// TODO no setStatus here?
 
@@ -193,13 +193,13 @@ public class DeducePath {
 	public BaseTableEntry getEntry(int aIndex) {
 		InstructionArgument ia2 = getIA(aIndex);
 		if (ia2 instanceof IntegerIA) {
-			@NonNull VariableTableEntry vte = ((IntegerIA) ia2).getEntry();
+			@NotNull VariableTableEntry vte = ((IntegerIA) ia2).getEntry();
 			return vte;
 		} else if (ia2 instanceof IdentIA) {
-			@NonNull IdentTableEntry identTableEntry = ((IdentIA) ia2).getEntry();
+			@NotNull IdentTableEntry identTableEntry = ((IdentIA) ia2).getEntry();
 			return identTableEntry;
 		} else if (ia2 instanceof ProcIA) {
-			final @NonNull ProcTableEntry procTableEntry = ((ProcIA) ia2).getEntry();
+			final @NotNull ProcTableEntry procTableEntry = ((ProcIA) ia2).getEntry();
 			return procTableEntry;
 		}
 		return null;
@@ -231,11 +231,11 @@ public class DeducePath {
 		InstructionArgument ia2 = getIA(aIndex);
 		@Nullable GenType   gt;
 		if (ia2 instanceof IntegerIA) {
-			@NonNull VariableTableEntry vte = ((IntegerIA) ia2).getEntry();
+			@NotNull VariableTableEntry vte = ((IntegerIA) ia2).getEntry();
 			gt = vte.getType().genType;
 			assert gt != null;
 		} else if (ia2 instanceof IdentIA) {
-			@NonNull IdentTableEntry identTableEntry = ((IdentIA) ia2).getEntry();
+			@NotNull IdentTableEntry identTableEntry = ((IdentIA) ia2).getEntry();
 			if (identTableEntry.type != null) {
 				gt = identTableEntry.type.genType;
 				assert gt != null;
@@ -243,7 +243,7 @@ public class DeducePath {
 				gt = null;
 			}
 		} else if (ia2 instanceof ProcIA) {
-			final @NonNull ProcTableEntry procTableEntry = ((ProcIA) ia2).getEntry();
+			final @NotNull ProcTableEntry procTableEntry = ((ProcIA) ia2).getEntry();
 			gt = null;//procTableEntry.getResolvedElement(); // .expression?
 //				assert gt != null;
 		} else

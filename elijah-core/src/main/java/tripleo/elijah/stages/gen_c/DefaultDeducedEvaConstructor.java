@@ -29,15 +29,15 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		carrier = aEvaFunction;
 	}
 
-	public void addDependentFunction(@NonNull final FunctionInvocation aFunction) {
+	public void addDependentFunction(@NotNull final FunctionInvocation aFunction) {
 		carrier.addDependentFunction(aFunction);
 	}
 
-	public void addDependentType(@NonNull final GenType aType) {
+	public void addDependentType(@NotNull final GenType aType) {
 		carrier.addDependentType(aType);
 	}
 
-	public @NonNull List<FunctionInvocation> dependentFunctions() {
+	public @NotNull List<FunctionInvocation> dependentFunctions() {
 		return carrier.dependentFunctions();
 	}
 
@@ -45,7 +45,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		return carrier.dependentFunctionSubject();
 	}
 
-	public @NonNull List<GenType> dependentTypes() {
+	public @NotNull List<GenType> dependentTypes() {
 		return carrier.dependentTypes();
 	}
 
@@ -53,11 +53,11 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		return carrier.dependentTypesSubject();
 	}
 
-	public void noteDependencies(final @NonNull Dependency d) {
+	public void noteDependencies(final @NotNull Dependency d) {
 		carrier.noteDependencies(d);
 	}
 
-	public @NonNull DT_Resolvabley _getIdentIAResolvable(final @NonNull IdentIA aIdentIA) {
+	public @NotNull DT_Resolvabley _getIdentIAResolvable(final @NotNull IdentIA aIdentIA) {
 		return carrier._getIdentIAResolvable(aIdentIA);
 	}
 
@@ -82,12 +82,12 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public @NonNull Label addLabel() {
+	public @NotNull Label addLabel() {
 		return carrier.addLabel();
 	}
 
 	@Override
-	public @NonNull Label addLabel(final String base_name, final boolean append_int) {
+	public @NotNull Label addLabel(final String base_name, final boolean append_int) {
 		return carrier.addLabel(base_name, append_int);
 	}
 
@@ -96,7 +96,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		return carrier.addVariableTableEntry(name, vtt, type, el);
 	}
 
-	public @NonNull DR_Type buildDrTypeFromNonGenericTypeName(final TypeName aNonGenericTypeName) {
+	public @NotNull DR_Type buildDrTypeFromNonGenericTypeName(final TypeName aNonGenericTypeName) {
 		return carrier.buildDrTypeFromNonGenericTypeName(aNonGenericTypeName);
 	}
 
@@ -115,7 +115,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public @NonNull InstructionArgument get_assignment_path(final @NonNull IExpression expression, final @NonNull GenerateFunctions generateFunctions, final @NonNull Context context) {
+	public @NotNull InstructionArgument get_assignment_path(final @NotNull IExpression expression, final @NotNull GenerateFunctions generateFunctions, final @NotNull Context context) {
 		return carrier.get_assignment_path(expression, generateFunctions, context);
 	}
 
@@ -125,7 +125,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public @NonNull ConstantTableEntry getConstTableEntry(final int index) {
+	public @NotNull ConstantTableEntry getConstTableEntry(final int index) {
 		return carrier.getConstTableEntry(index);
 	}
 
@@ -135,12 +135,12 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public @NonNull Dependency getDependency() {
+	public @NotNull Dependency getDependency() {
 		return carrier.getDependency();
 	}
 
 	@Override
-	public @NonNull String getFunctionName() {
+	public @NotNull String getFunctionName() {
 		return carrier.getFunctionName();
 	}
 
@@ -149,30 +149,30 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		return carrier.getGenClass();
 	}
 
-	public @NonNull DR_Ident getIdent(final IdentExpression aIdent, final VariableTableEntry aVteBl1) {
+	public @NotNull DR_Ident getIdent(final IdentExpression aIdent, final VariableTableEntry aVteBl1) {
 		return carrier.getIdent(aIdent, aVteBl1);
 	}
 
-	public @NonNull DR_Ident getIdent(final @NonNull IdentTableEntry aIdentTableEntry) {
+	public @NotNull DR_Ident getIdent(final @NotNull IdentTableEntry aIdentTableEntry) {
 		return carrier.getIdent(aIdentTableEntry);
 	}
 
-	public @NonNull DR_Ident getIdent(final VariableTableEntry aVteBl1) {
+	public @NotNull DR_Ident getIdent(final VariableTableEntry aVteBl1) {
 		return carrier.getIdent(aVteBl1);
 	}
 
 	@Override
-	public @NonNull String getIdentIAPathNormal(final @NonNull IdentIA ia2) {
+	public @NotNull String getIdentIAPathNormal(final @NotNull IdentIA ia2) {
 		return carrier.getIdentIAPathNormal(ia2);
 	}
 
 	@Override
-	public @NonNull IdentTableEntry getIdentTableEntry(final int index) {
+	public @NotNull IdentTableEntry getIdentTableEntry(final int index) {
 		return carrier.getIdentTableEntry(index);
 	}
 
 	@Override
-	public @Nullable IdentTableEntry getIdentTableEntryFor(final @NonNull IExpression expression) {
+	public @Nullable IdentTableEntry getIdentTableEntryFor(final @NotNull IExpression expression) {
 		return carrier.getIdentTableEntryFor(expression);
 	}
 
@@ -186,51 +186,51 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 		return carrier.getParent();
 	}
 
-	public @NonNull DR_ProcCall getProcCall(final IExpression aZ, final ProcTableEntry aPte) {
+	public @NotNull DR_ProcCall getProcCall(final IExpression aZ, final ProcTableEntry aPte) {
 		return carrier.getProcCall(aZ, aPte);
 	}
 
 	@Override
-	public @NonNull ProcTableEntry getProcTableEntry(final int index) {
+	public @NotNull ProcTableEntry getProcTableEntry(final int index) {
 		return carrier.getProcTableEntry(index);
 	}
 
 	@Override
-	public @NonNull TypeTableEntry getTypeTableEntry(final int index) {
+	public @NotNull TypeTableEntry getTypeTableEntry(final int index) {
 		return carrier.getTypeTableEntry(index);
 	}
 
-	public @NonNull DR_Variable getVar(final VariableStatement aElement) {
+	public @NotNull DR_Variable getVar(final VariableStatement aElement) {
 		return carrier.getVar(aElement);
 	}
 
 	@Override
-	public @NonNull VariableTableEntry getVarTableEntry(final int index) {
+	public @NotNull VariableTableEntry getVarTableEntry(final int index) {
 		return carrier.getVarTableEntry(index);
 	}
 
 	@Override
-	public @NonNull List<Instruction> instructions() {
+	public @NotNull List<Instruction> instructions() {
 		return carrier.instructions();
 	}
 
 	@Override
-	public @NonNull List<Label> labels() {
+	public @NotNull List<Label> labels() {
 		return carrier.labels();
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1, final OS_Type type) {
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1, final OS_Type type) {
 		return carrier.newTypeTableEntry(type1, type);
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1, final OS_Type type, final IExpression expression) {
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1, final OS_Type type, final IExpression expression) {
 		return carrier.newTypeTableEntry(type1, type, expression);
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1,
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1,
 													 final OS_Type type,
 													 final IExpression expression,
 													 final TableEntryIV aTableEntryIV) {
@@ -238,7 +238,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public @NonNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NonNull Type type1,
+	public @NotNull TypeTableEntry newTypeTableEntry(final TypeTableEntry.@NotNull Type type1,
 													 final OS_Type type,
 													 final TableEntryIV aTableEntryIV) {
 		return carrier.newTypeTableEntry(type1, type, aTableEntryIV);
@@ -250,18 +250,18 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public void onGenClass(final @NonNull OnGenClass aOnGenClass) {
+	public void onGenClass(final @NotNull OnGenClass aOnGenClass) {
 		carrier.onGenClass(aOnGenClass);
 	}
 
 	@Override
-	public void place(final @NonNull Label label) {
+	public void place(final @NotNull Label label) {
 		carrier.place(label);
 	}
 
 	//@Override
 	@Override
-	public BaseEvaFunction.@NonNull __Reactive reactive() {
+	public BaseEvaFunction.@NotNull __Reactive reactive() {
 		return carrier.reactive();
 	}
 
@@ -276,17 +276,17 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public WhyNotGarish_Constructor getWhyNotGarishFunction(final @NonNull GenerateC aGc) {
+	public WhyNotGarish_Constructor getWhyNotGarishFunction(final @NotNull GenerateC aGc) {
 		return aGc.a_lookup(carrier);
 	}
 
 	@Override
-	public void resolveTypeDeferred(final @NonNull GenType aType) {
+	public void resolveTypeDeferred(final @NotNull GenType aType) {
 		carrier.resolveTypeDeferred(aType);
 	}
 
 	@Override
-	public void setClass(@NonNull final EvaNode aNode) {
+	public void setClass(@NotNull final EvaNode aNode) {
 		carrier.setClass(aNode);
 	}
 
@@ -351,7 +351,7 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 	}
 
 	@Override
-	public @NonNull FunctionDef getFD() {
+	public @NotNull FunctionDef getFD() {
 		return carrier.getFD();
 	}
 

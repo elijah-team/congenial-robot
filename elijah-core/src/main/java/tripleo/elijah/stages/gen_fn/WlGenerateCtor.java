@@ -32,14 +32,14 @@ import java.util.List;
 public class WlGenerateCtor implements WorkJob {
 	private final @Nullable IdentExpression    constructorName;
 	private final           ICodeRegistrar     codeRegistrar;
-	private final @NonNull  GenerateFunctions  generateFunctions;
-	private final @NonNull  FunctionInvocation functionInvocation;
+	private final @NotNull  GenerateFunctions  generateFunctions;
+	private final @NotNull  FunctionInvocation functionInvocation;
 	private                 boolean            _isDone = false;
 	private                 EvaConstructor     result;
 
 	@Contract(pure = true)
-	public WlGenerateCtor(@NonNull GenerateFunctions aGenerateFunctions,
-						  @NonNull FunctionInvocation aFunctionInvocation,
+	public WlGenerateCtor(@NotNull GenerateFunctions aGenerateFunctions,
+						  @NotNull FunctionInvocation aFunctionInvocation,
 						  @Nullable IdentExpression aConstructorName,
 						  final ICodeRegistrar aCodeRegistrar) {
 		generateFunctions  = aGenerateFunctions;
@@ -48,7 +48,7 @@ public class WlGenerateCtor implements WorkJob {
 		codeRegistrar      = aCodeRegistrar;
 	}
 
-	public WlGenerateCtor(final OS_Module aModule, final IdentExpression aNameNode, final FunctionInvocation aFunctionInvocation, final @NonNull Deduce_CreationClosure aCl) {
+	public WlGenerateCtor(final OS_Module aModule, final IdentExpression aNameNode, final FunctionInvocation aFunctionInvocation, final @NotNull Deduce_CreationClosure aCl) {
 		this(aCl.generatePhase().getGenerateFunctions(aModule), aFunctionInvocation, aNameNode, aCl.generatePhase().getCodeRegistrar());
 	}
 
@@ -82,7 +82,7 @@ public class WlGenerateCtor implements WorkJob {
 			ConstructorDef ccc = null;
 			if (constructorName != null) {
 				Collection<ConstructorDef> cs = klass.getConstructors();
-				for (@NonNull ConstructorDef c : cs) {
+				for (@NotNull ConstructorDef c : cs) {
 					if (c.name().sameName(constructorName.getText())) {
 						ccc = c;
 						break;
@@ -163,13 +163,13 @@ public class WlGenerateCtor implements WorkJob {
 				}
 			}
 
-			@NonNull EvaConstructor gf = generateFunctions.generateConstructor(cd, (ClassStatement) classStatement_, functionInvocation);
+			@NotNull EvaConstructor gf = generateFunctions.generateConstructor(cd, (ClassStatement) classStatement_, functionInvocation);
 //		lgf.add(gf);
 
 			final ClassInvocation ci = functionInvocation.getClassInvocation();
 			ci.resolvePromise().done(new DoneCallback<EvaClass>() {
 				@Override
-				public void onDone(@NonNull EvaClass result) {
+				public void onDone(@NotNull EvaClass result) {
 
 					codeRegistrar.registerFunction1(gf);
 					//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());

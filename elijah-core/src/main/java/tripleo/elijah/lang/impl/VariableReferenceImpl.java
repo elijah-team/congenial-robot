@@ -66,7 +66,7 @@ public class VariableReferenceImpl extends AbstractExpression
 	}
 
 	@Override
-	public void setMain(final @NonNull Token t) {
+	public void setMain(final @NotNull Token t) {
 		final String s = t.getText();
 		main = s;
 		SimplePrintLoggerToRemoveSoon.println_out_2(repr_());

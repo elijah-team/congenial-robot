@@ -21,12 +21,12 @@ public class StringExpressionImpl extends AbstractExpression implements tripleo.
 	OS_Type _type;
 	private String repr_;
 
-	public StringExpressionImpl(final @NonNull Token g) { // TODO List<Token>
+	public StringExpressionImpl(final @NotNull Token g) { // TODO List<Token>
 		set(g.getText());
 	}
 
 	@Override
-	public @NonNull ExpressionKind getKind() {
+	public @NotNull ExpressionKind getKind() {
 		return ExpressionKind.STRING_LITERAL;
 	}
 
@@ -38,7 +38,7 @@ public class StringExpressionImpl extends AbstractExpression implements tripleo.
 	}
 
 	@Override
-	public @NonNull String getText() {
+	public @NotNull String getText() {
 		return Helpers.remove_single_quotes_from_string(repr_); // TODO wont work with triple quoted string
 	}
 

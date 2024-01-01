@@ -23,10 +23,10 @@ public class OStageProcess implements RuntimeProcess {
 		}
 
 		@Override
-		public types.MalVal apply(final types.@NonNull MalList args) throws types.MalThrowable {
+		public types.MalVal apply(final types.@NotNull MalList args) throws types.MalThrowable {
 			final types.MalVal a0 = args.nth(0);
 
-			if (a0 instanceof final types.@NonNull MalSymbol pipelineSymbol) {
+			if (a0 instanceof final types.@NotNull MalSymbol pipelineSymbol) {
 				// 0. accessors
 				final String pipelineName = pipelineSymbol.getName();
 
@@ -51,7 +51,7 @@ public class OStageProcess implements RuntimeProcess {
 
 	private stepA_mal.MalEnv2 env;
 
-	public OStageProcess(final ICompilationAccess aCa, final @NonNull ProcessRecord aPr) {
+	public OStageProcess(final ICompilationAccess aCa, final @NotNull ProcessRecord aPr) {
 		ca = aCa;
 
 		ca.getCompilation().getCompilationEnclosure().getAccessBusPromise()
@@ -93,7 +93,7 @@ public class OStageProcess implements RuntimeProcess {
 	}
 
 	@Override
-	public void run(final @NonNull Compilation aCompilation, final CR_State st, final CB_Output output) {
+	public void run(final @NotNull Compilation aCompilation, final CR_State st, final CB_Output output) {
 		final Pipeline ps = aCompilation.getCompilationEnclosure().getCompilationAccess().internal_pipelines();
 
 		try {

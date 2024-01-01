@@ -15,7 +15,7 @@ import tripleo.elijah.work.WorkList;
 import tripleo.elijah.world.i.LivingRepo;
 
 public interface EntryPointProcessor {
-	static @NonNull EntryPointProcessor dispatch(final EntryPoint ep, final DeducePhase aDeducePhase, final WorkList aWl, final GenerateFunctions aGenerateFunctions) {
+	static @NotNull EntryPointProcessor dispatch(final EntryPoint ep, final DeducePhase aDeducePhase, final WorkList aWl, final GenerateFunctions aGenerateFunctions) {
 		if (ep instanceof MainClassEntryPoint) {
 			return new EPP_MCEP((MainClassEntryPoint) ep, aDeducePhase, aWl, aGenerateFunctions);
 		} else if (ep instanceof ArbitraryFunctionEntryPoint) {
@@ -30,7 +30,7 @@ public interface EntryPointProcessor {
 	class EPP_AFEP implements EntryPointProcessor {
 
 		private final ArbitraryFunctionEntryPoint        afep;
-		private final EPP_MCEP.@NonNull EppCodeRegistrar codeRegistrar;
+		private final EPP_MCEP.@NotNull EppCodeRegistrar codeRegistrar;
 		private final DeducePhase                        deducePhase;
 		private final GenerateFunctions                  generateFunctions;
 		private final WorkList                           wl;
@@ -46,13 +46,13 @@ public interface EntryPointProcessor {
 
 		@Override
 		public void process() {
-			final @NonNull FunctionDef     f  = afep.getFunction();
-			@NonNull final ClassInvocation ci = deducePhase.registerClassInvocation((ClassStatement) afep.getParent());
+			final @NotNull FunctionDef     f  = afep.getFunction();
+			@NotNull final ClassInvocation ci = deducePhase.registerClassInvocation((ClassStatement) afep.getParent());
 
 			final WlGenerateClass job = new WlGenerateClass(generateFunctions, ci, deducePhase.generatedClasses,/*, deducePhase.codeRegistrar*/codeRegistrar);
 			wl.addJob(job);
 
-			final @NonNull FunctionInvocation fi = deducePhase.newFunctionInvocation((BaseFunctionDef) f, null, ci);
+			final @NotNull FunctionInvocation fi = deducePhase.newFunctionInvocation((BaseFunctionDef) f, null, ci);
 //				fi.setPhase(phase);
 			final WlGenerateFunction job1 = new WlGenerateFunction(generateFunctions, fi, codeRegistrar);
 			wl.addJob(job1);
@@ -60,7 +60,7 @@ public interface EntryPointProcessor {
 	}
 
 	class EPP_MCEP implements EntryPointProcessor {
-		final @NonNull ICodeRegistrar      codeRegistrar;
+		final @NotNull ICodeRegistrar      codeRegistrar;
 		private final  DeducePhase         deducePhase;
 		private final  GenerateFunctions   generateFunctions;
 		private final  MainClassEntryPoint mcep;
@@ -77,20 +77,20 @@ public interface EntryPointProcessor {
 
 		@Override
 		public void process() {
-			final @NonNull ClassStatement cs = mcep.getKlass();
-			final @NonNull FunctionDef    f  = mcep.getMainFunction();
+			final @NotNull ClassStatement cs = mcep.getKlass();
+			final @NotNull FunctionDef    f  = mcep.getMainFunction();
 			final ClassInvocation         ci = deducePhase.registerClassInvocation(cs, null, new NULL_DeduceTypes2());
 
 			assert ci != null;
 
 			deducePhase.generatePhase.setCodeRegistrar(codeRegistrar);
 
-			final @NonNull WlGenerateClass job = new WlGenerateClass(generateFunctions, ci, deducePhase.generatedClasses, codeRegistrar);
+			final @NotNull WlGenerateClass job = new WlGenerateClass(generateFunctions, ci, deducePhase.generatedClasses, codeRegistrar);
 			wl.addJob(job);
 
-			final @NonNull FunctionInvocation fi = deducePhase.newFunctionInvocation((BaseFunctionDef) f, null, ci);
+			final @NotNull FunctionInvocation fi = deducePhase.newFunctionInvocation((BaseFunctionDef) f, null, ci);
 //				fi.setPhase(phase);
-			final @NonNull WlGenerateFunction job1 = new WlGenerateFunction(generateFunctions, fi, codeRegistrar);
+			final @NotNull WlGenerateFunction job1 = new WlGenerateFunction(generateFunctions, fi, codeRegistrar);
 			wl.addJob(job1);
 		}
 	}

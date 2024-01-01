@@ -15,11 +15,11 @@ import static tripleo.elijah.util.Helpers.List_of;
 class CB_StartCompilationRunnerAction implements CB_Action, CB_Process {
 	private final          CompilationRunner    compilationRunner;
 	private final          CompilerInstructions ci;
-	private final @NonNull IPipelineAccess      pa;
+	private final @NotNull IPipelineAccess      pa;
 
 	@Contract(pure = true)
 	public CB_StartCompilationRunnerAction(final CompilationRunner aCompilationRunner,
-										   final @NonNull IPipelineAccess aPa,
+										   final @NotNull IPipelineAccess aPa,
 										   final CompilerInstructions aCi) {
 		compilationRunner = aCompilationRunner;
 		pa                = aPa;
@@ -29,13 +29,13 @@ class CB_StartCompilationRunnerAction implements CB_Action, CB_Process {
 	}
 
 	@Contract(value = " -> new", pure = true)
-	@NonNull
+	@NotNull
 	public CB_Process cb_Process() {
 		return this;
 	}
 
 	@Override
-	@NonNull
+	@NotNull
 	public List<CB_Action> steps() {
 		return List_of(
 				CB_StartCompilationRunnerAction.this
@@ -61,7 +61,7 @@ class CB_StartCompilationRunnerAction implements CB_Action, CB_Process {
 
 	@Contract(pure = true)
 	@Override
-	public @NonNull String name() {
+	public @NotNull String name() {
 		return "StartCompilationRunnerAction";
 	}
 

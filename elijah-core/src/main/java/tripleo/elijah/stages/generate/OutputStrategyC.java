@@ -36,7 +36,7 @@ public class OutputStrategyC {
 	}
 
 	@Contract(pure = true)
-	public @NonNull String Extension0(Old_GenerateResult.@NonNull TY aTy) {
+	public @NotNull String Extension0(Old_GenerateResult.@NotNull TY aTy) {
 		switch (aTy) {
 		case IMPL:
 			return (".c");
@@ -49,12 +49,12 @@ public class OutputStrategyC {
 		}
 	}
 
-	public @NonNull EOT_OutputFile.FileNameProvider nameForFunction1(final @NonNull EvaFunction aGf, final GenerateResult.@NonNull TY aTy) {
+	public @NotNull EOT_OutputFile.FileNameProvider nameForFunction1(final @NotNull EvaFunction aGf, final GenerateResult.@NotNull TY aTy) {
 		return new OSC_NFF(nameForFunction(aGf, aTy));
 	}
 
 	@Contract(pure = true)
-	public String nameForFunction(@NonNull EvaFunction generatedFunction, Old_GenerateResult.@NonNull TY aTy) {
+	public String nameForFunction(@NotNull EvaFunction generatedFunction, Old_GenerateResult.@NotNull TY aTy) {
 		EvaNode c = generatedFunction.getGenClass();
 		if (c == null) {
 			assert false;
@@ -68,11 +68,11 @@ public class OutputStrategyC {
 		return null;
 	}
 
-	public String nameForClass(final @NonNull EvaClass aX, final GenerateResult.@NonNull TY aTy) {
+	public String nameForClass(final @NotNull EvaClass aX, final GenerateResult.@NotNull TY aTy) {
 		return nameForClass1(aX, aTy).getFilename();
 	}
 
-	public String nameForNamespace(@NonNull EvaNamespace generatedNamespace, Old_GenerateResult.@NonNull TY aTy) {
+	public String nameForNamespace(@NotNull EvaNamespace generatedNamespace, Old_GenerateResult.@NotNull TY aTy) {
 		if (generatedNamespace.module().isPrelude()) {
 			// We are dealing with the Prelude
 			var          lsp0       = ("/Prelude/");
@@ -107,7 +107,7 @@ public class OutputStrategyC {
 		return new OFC_NFN(lsp0, name0, filename, extension0).getFilename();
 	}
 
-	public @NonNull EOT_OutputFile.FileNameProvider nameForClass1(@NonNull EvaClass aEvaClass, GenerateResult.@NonNull TY aTy) {
+	public @NotNull EOT_OutputFile.FileNameProvider nameForClass1(@NotNull EvaClass aEvaClass, GenerateResult.@NotNull TY aTy) {
 		if (aEvaClass.module().isPrelude()) {
 			// We are dealing with the Prelude
 /*
@@ -129,7 +129,7 @@ public class OutputStrategyC {
 							()-> Extension0(aTy));
 	}
 
-	@NonNull String strip_elijah_extension(@NonNull String aFilename) {
+	@NotNull String strip_elijah_extension(@NotNull String aFilename) {
 		if (aFilename.endsWith(".elijah")) {
 			aFilename = aFilename.substring(0, aFilename.length() - 7);
 		} else if (aFilename.endsWith(".elijjah")) {
@@ -189,7 +189,7 @@ public class OutputStrategyC {
 
 	}
 
-	private static String n_lsp(final @NonNull EvaNamespace generatedNamespace) {
+	private static String n_lsp(final @NotNull EvaNamespace generatedNamespace) {
 		final String               lsp0;
 		final LibraryStatementPart lsp = generatedNamespace.module().getLsp();
 		if (lsp == null) {
@@ -201,7 +201,7 @@ public class OutputStrategyC {
 		return lsp0;
 	}
 
-	private String n_pkg(final @NonNull EvaNamespace generatedNamespace, @Nullable OS_Package pkg) {
+	private String n_pkg(final @NotNull EvaNamespace generatedNamespace, @Nullable OS_Package pkg) {
 		final String name0;
 		if (pkg != OS_Package.default_package) {
 			if (pkg == null)
@@ -227,7 +227,7 @@ public class OutputStrategyC {
 	}
 
 	@Contract(pure = true)
-	private @NonNull String a_pkg(final @NonNull EvaClass aEvaClass) {
+	private @NotNull String a_pkg(final @NotNull EvaClass aEvaClass) {
 		final OS_Package pkg0 = aEvaClass.getKlass().getPackageName();
 		final OS_Package pkg;
 
@@ -247,7 +247,7 @@ public class OutputStrategyC {
 		return dir0;
 	}
 
-	private @NonNull String a_name(final @NonNull EvaClass aEvaClass, final @NonNull LibraryStatementPart lsp) {
+	private @NotNull String a_name(final @NotNull EvaClass aEvaClass, final @NotNull LibraryStatementPart lsp) {
 		String name0;
 
 		switch (outputStrategy.per()) {
@@ -291,7 +291,7 @@ public class OutputStrategyC {
 			if (e.getContext().getParent() == e.getContext())
 				e = null;
 			else {
-				@NonNull ElObjectType t = DecideElObjectType.getElObjectType(e);
+				@NotNull ElObjectType t = DecideElObjectType.getElObjectType(e);
 				switch (t) {
 				case NAMESPACE:
 					if (((NamespaceStatement) e).getPackageName() != null)
@@ -312,16 +312,16 @@ public class OutputStrategyC {
 		return null;
 	}
 
-	public EOT_OutputFile.FileNameProvider nameForNamespace1(final @NonNull EvaNamespace aX, final GenerateResult.@NonNull TY aTy) {
+	public EOT_OutputFile.FileNameProvider nameForNamespace1(final @NotNull EvaNamespace aX, final GenerateResult.@NotNull TY aTy) {
 		return new OFC_NFN_(aX, aTy);
 	}
 
-	public @NonNull OSC_NFCo nameForConstructor1(final @NonNull EvaConstructor aGf, final GenerateResult.@NonNull TY aTy) {
+	public @NotNull OSC_NFCo nameForConstructor1(final @NotNull EvaConstructor aGf, final GenerateResult.@NotNull TY aTy) {
 		return new OSC_NFCo(nameForConstructor(aGf, aTy));
 	}
 
 	@Contract(pure = true)
-	public @Nullable String nameForConstructor(@NonNull EvaConstructor aEvaConstructor, Old_GenerateResult.@NonNull TY aTy) {
+	public @Nullable String nameForConstructor(@NotNull EvaConstructor aEvaConstructor, Old_GenerateResult.@NotNull TY aTy) {
 		EvaNode c = aEvaConstructor.getGenClass();
 		if (c == null) c = aEvaConstructor.getParent(); // TODO fixme
 		if (c instanceof EvaClass)
@@ -355,7 +355,7 @@ public class OutputStrategyC {
 		}
 
 		@Override
-		public @NonNull String getFilename() {
+		public @NotNull String getFilename() {
 			if (s == null) {
 				final String sb = lsp0 +
 						"/" +
@@ -377,7 +377,7 @@ public class OutputStrategyC {
 		}
 
 		@Override
-		public @NonNull String getFilename() {
+		public @NotNull String getFilename() {
 			return s;
 		}
 	}
@@ -398,7 +398,7 @@ public class OutputStrategyC {
 		ReasonedStringListStatement z;
 
 		@Override
-		public @NonNull String getFilename() {
+		public @NotNull String getFilename() {
 			_calculate();
 
 			return z.getText();
@@ -449,7 +449,7 @@ public class OutputStrategyC {
 		}
 
 		@Override
-		public @NonNull String getFilename() {
+		public @NotNull String getFilename() {
 			_calculate();
 
 			return z.getText();

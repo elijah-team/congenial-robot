@@ -15,7 +15,7 @@ public class CC_SetStage implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final @NonNull Compilation c) {
+	public void apply(final @NotNull Compilation c) {
 		c.cfg().stage = Stages.valueOf(s);
 	}
 }

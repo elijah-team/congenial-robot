@@ -49,7 +49,7 @@ public class GCFM_Inst_AGN implements GenerateC_Statement {
 	}
 
 	@Override
-	public @NonNull GCR_Rule rule() {
+	public @NotNull GCR_Rule rule() {
 		return GCR_Rule.withMessage("GCFM_Inst_AGN");
 	}
 }

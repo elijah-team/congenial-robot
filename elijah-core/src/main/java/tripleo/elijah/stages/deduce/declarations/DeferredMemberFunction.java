@@ -29,11 +29,11 @@ import tripleo.elijah.stages.gen_fn.GenType;
  * Created 11/21/21 6:32 AM
  */
 public class DeferredMemberFunction {
-	private final @NonNull DeduceTypes2                                deduceTypes2;
+	private final @NotNull DeduceTypes2                                deduceTypes2;
 	private final          DeferredObject<BaseEvaFunction, Void, Void> externalRef;
-	private final @NonNull FunctionDef                                 functionDef;
-	private final @NonNull FunctionInvocation                          functionInvocation;
-	private final @NonNull OS_Element                                  parent;
+	private final @NotNull FunctionDef                                 functionDef;
+	private final @NotNull FunctionInvocation                          functionInvocation;
+	private final @NotNull OS_Element                                  parent;
 	private final          DeferredObject<GenType, Diagnostic, Void>   typePromise;
 	/**
 	 * A {@link tripleo.elijah.stages.deduce.ClassInvocation} or {@link tripleo.elijah.stages.deduce.NamespaceInvocation}.
@@ -43,11 +43,11 @@ public class DeferredMemberFunction {
 	 */
 	private @Nullable      IInvocation                                 invocation;
 
-	public DeferredMemberFunction(final @NonNull OS_Element aParent,
+	public DeferredMemberFunction(final @NotNull OS_Element aParent,
 								  final @Nullable IInvocation aInvocation,
-								  final @NonNull FunctionDef aBaseFunctionDef,
-								  final @NonNull DeduceTypes2 aDeduceTypes2,
-								  final @NonNull FunctionInvocation aFunctionInvocation) { // TODO can this be nullable?
+								  final @NotNull FunctionDef aBaseFunctionDef,
+								  final @NotNull DeduceTypes2 aDeduceTypes2,
+								  final @NotNull FunctionInvocation aFunctionInvocation) { // TODO can this be nullable?
 		parent             = aParent;
 		invocation         = aInvocation;
 		functionDef        = aBaseFunctionDef;
@@ -63,7 +63,7 @@ public class DeferredMemberFunction {
 				if (result instanceof EvaFunction) {
 					deduceTypes2.deduceOneFunction((EvaFunction) result, deduceTypes2._phase()); // !!
 				} else {
-					deduceTypes2.deduceOneConstructor((@NonNull EvaConstructor) result, deduceTypes2._phase());
+					deduceTypes2.deduceOneConstructor((@NotNull EvaConstructor) result, deduceTypes2._phase());
 				}
 				result.typePromise().then(new DoneCallback<GenType>() {
 					@Override
@@ -83,7 +83,7 @@ public class DeferredMemberFunction {
 		return externalRef.promise();
 	}
 
-	public @NonNull DeferredObject<BaseEvaFunction, Void, Void> externalRefDeferred() {
+	public @NotNull DeferredObject<BaseEvaFunction, Void, Void> externalRefDeferred() {
 		return externalRef;
 	}
 
@@ -97,7 +97,7 @@ public class DeferredMemberFunction {
 
 	public @Nullable IInvocation getInvocation() {
 		if (invocation == null) {
-			if (parent instanceof final DeduceTypes2.@NonNull OS_SpecialVariable specialVariable) {
+			if (parent instanceof final DeduceTypes2.@NotNull OS_SpecialVariable specialVariable) {
 				invocation = specialVariable.getInvocation(deduceTypes2);
 			}
 		}
@@ -109,19 +109,19 @@ public class DeferredMemberFunction {
 	}
 
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return "DeferredMemberFunction{" +
 				"parent=" + parent +
 				", functionName=" + functionDef.name() +
 				'}';
 	}
 
-	public @NonNull Promise<GenType, Diagnostic, Void> typePromise() {
+	public @NotNull Promise<GenType, Diagnostic, Void> typePromise() {
 		return typePromise;
 	}
 
 	// for DeducePhase
-	public @NonNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
+	public @NotNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
 		return typePromise;
 	}
 }

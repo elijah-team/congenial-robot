@@ -19,7 +19,7 @@ import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 public enum SpecialFunctions {
 	;
 
-	public static @NonNull String of(final @NonNull ExpressionKind kind) {
+	public static @NotNull String of(final @NotNull ExpressionKind kind) {
 		switch (kind) {
 		case LT_:
 			return "__lt__";
@@ -57,7 +57,7 @@ public enum SpecialFunctions {
 		}
 	}
 
-	public static @Nullable String reverse_name(final @NonNull String pn) {
+	public static @Nullable String reverse_name(final @NotNull String pn) {
 		if (pn.equals("__gt__")) // README  explicitly disallow
 			return null;
 //		if (pn.equals("__eq__"))

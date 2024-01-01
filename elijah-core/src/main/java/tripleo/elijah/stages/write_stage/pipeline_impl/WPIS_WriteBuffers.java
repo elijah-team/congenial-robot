@@ -45,8 +45,8 @@ public class WPIS_WriteBuffers implements WP_Indiviual_Step {
 		});
 	}
 
-	@NonNull
-	private static EOT_OutputFile createOutputFile(final LSPrintStream.LSResult ls, final @NonNull Compilation c, final @NonNull CP_Paths paths) {
+	@NotNull
+	private static EOT_OutputFile createOutputFile(final LSPrintStream.LSResult ls, final @NotNull Compilation c, final @NotNull CP_Paths paths) {
 		final CP_Path or    = paths.outputRoot();
 		final File    file1 = or.subFile("buffers.txt").toFile(); // TODO subFile vs child
 
@@ -71,7 +71,7 @@ public class WPIS_WriteBuffers implements WP_Indiviual_Step {
 	}
 
 	@Override
-	public void act(final @NonNull WritePipelineSharedState st, final @NonNull WP_State_Control sc) {
+	public void act(final @NotNull WritePipelineSharedState st, final @NotNull WP_State_Control sc) {
 		// 5. write buffers
 		try {
 			debug_buffers(st);
@@ -80,7 +80,7 @@ public class WPIS_WriteBuffers implements WP_Indiviual_Step {
 		}
 	}
 
-	private void debug_buffers(final @NonNull WritePipelineSharedState st) throws FileNotFoundException {
+	private void debug_buffers(final @NotNull WritePipelineSharedState st) throws FileNotFoundException {
 		// TODO can/should this fail??
 
 		compilationPromise.resolve(st.c);
@@ -97,7 +97,7 @@ public class WPIS_WriteBuffers implements WP_Indiviual_Step {
 			//Stupidity.println_err_3("8383 " + s1);
 
 			// TODO nested promises is a latch
-			writePipeline.generateResultPromise.then((final @NonNull GenerateResult result) -> {
+			writePipeline.generateResultPromise.then((final @NotNull GenerateResult result) -> {
 				final GenerateResult result1 = st.getGr();
 				final LSPrintStream  sps     = new LSPrintStream();
 
@@ -115,11 +115,11 @@ public class WPIS_WriteBuffers implements WP_Indiviual_Step {
 	static class Bus {
 		private Compilation c;
 
-		public void setCompilation(final @NonNull Compilation cc) {
+		public void setCompilation(final @NotNull Compilation cc) {
 			c = cc;
 		}
 
-		public void addOutputFile(final @NonNull EOT_OutputFile off) {
+		public void addOutputFile(final @NotNull EOT_OutputFile off) {
 			c.getOutputTree().add(off);
 		}
 	}

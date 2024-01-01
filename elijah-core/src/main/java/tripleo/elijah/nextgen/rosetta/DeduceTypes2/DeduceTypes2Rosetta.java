@@ -38,7 +38,7 @@ public class DeduceTypes2Rosetta {
 		return request.getModule();
 	}
 
-	private ElLog.@NonNull Verbosity getVerbosity() {
+	private ElLog.@NotNull Verbosity getVerbosity() {
 		return request.getVerbosity();
 	}
 }

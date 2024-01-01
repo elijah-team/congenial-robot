@@ -129,7 +129,7 @@ public class DeduceTypesTest {
 		Assert.assertTrue(genTypeTypenameEquals(new OS_UserType(tn), x/*.getTypeName()*/));
 	}
 
-	private boolean genTypeTypenameEquals(OS_Type aType, @NonNull GenType genType) {
+	private boolean genTypeTypenameEquals(OS_Type aType, @NotNull GenType genType) {
 		return genType.getTypeName().equals(aType);
 	}
 

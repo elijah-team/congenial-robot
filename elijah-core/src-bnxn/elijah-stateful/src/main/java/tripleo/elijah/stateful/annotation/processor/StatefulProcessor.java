@@ -26,7 +26,7 @@
 //public class StatefulProcessor extends AbstractProcessor {
 //
 //	@Override
-//	public boolean process(@NonNull Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+//	public boolean process(@NotNull Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 //		for (TypeElement annotation : annotations) {
 //
 //			Set<? extends Element> annotatedElements = roundEnv.getElementsAnnotatedWith(annotation);
@@ -57,7 +57,7 @@
 //		return true;
 //	}
 //
-//	private void writeBuilderFile(@NonNull String className, Map<String, String> setterMap) throws IOException {
+//	private void writeBuilderFile(@NotNull String className, Map<String, String> setterMap) throws IOException {
 //
 //		String packageName = null;
 //		int    lastDot     = className.lastIndexOf('.');

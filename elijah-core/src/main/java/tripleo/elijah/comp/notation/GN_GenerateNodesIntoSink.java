@@ -26,7 +26,7 @@ public class GN_GenerateNodesIntoSink implements GN_Notable, CompilationEnclosur
 
 	@Contract(value = "_ -> new", pure = true)
 	@SuppressWarnings("unused")
-	public static @NonNull GN_Notable getFactoryEnv(GN_Env aEnv) {
+	public static @NotNull GN_Notable getFactoryEnv(GN_Env aEnv) {
 		return new GN_GenerateNodesIntoSink((GN_GenerateNodesIntoSinkEnv) aEnv);
 	}
 
@@ -63,7 +63,7 @@ public class GN_GenerateNodesIntoSink implements GN_Notable, CompilationEnclosur
 	}
 
 	@Override
-	public void listen(final @NonNull WorldModule module) {
+	public void listen(final @NotNull WorldModule module) {
 		var wm = new WorkManager();
 		run_one_mod(module.module(), wm);
 	}

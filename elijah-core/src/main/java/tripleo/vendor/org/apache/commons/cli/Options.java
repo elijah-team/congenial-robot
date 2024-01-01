@@ -72,7 +72,7 @@ public class Options implements Serializable {
 	 * @param description Self-documenting description
 	 * @return the resulting Options instance
 	 */
-	public @NonNull Options addOption(final String opt, final boolean hasArg, final String description) {
+	public @NotNull Options addOption(final String opt, final boolean hasArg, final String description) {
 		addOption(opt, null, hasArg, description);
 		return this;
 	}
@@ -90,7 +90,7 @@ public class Options implements Serializable {
 	 * @param description Self-documenting description
 	 * @return the resulting Options instance
 	 */
-	public @NonNull Options addOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
+	public @NotNull Options addOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
 		addOption(new Option(opt, longOpt, hasArg, description));
 		return this;
 	}
@@ -101,7 +101,7 @@ public class Options implements Serializable {
 	 * @param opt the option that is to be added
 	 * @return the resulting Options instance
 	 */
-	public @NonNull Options addOption(final @NonNull Option opt) {
+	public @NotNull Options addOption(final @NotNull Option opt) {
 		final String key = opt.getKey();
 
 		// add it to the long option list
@@ -134,7 +134,7 @@ public class Options implements Serializable {
 	 * @return the resulting Options instance
 	 * @since 1.3
 	 */
-	public @NonNull Options addOption(final String opt, final String description) {
+	public @NotNull Options addOption(final String opt, final String description) {
 		addOption(opt, null, false, description);
 		return this;
 	}
@@ -145,7 +145,7 @@ public class Options implements Serializable {
 	 * @param group the OptionGroup that is to be added
 	 * @return the resulting Options instance
 	 */
-	public @NonNull Options addOptionGroup(final @NonNull OptionGroup group) {
+	public @NotNull Options addOptionGroup(final @NotNull OptionGroup group) {
 		if (group.isRequired()) {
 			requiredOpts.add(group);
 		}
@@ -185,7 +185,7 @@ public class Options implements Serializable {
 	 * @return the resulting Options instance
 	 * @since 1.4
 	 */
-	public @NonNull Options addRequiredOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
+	public @NotNull Options addRequiredOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
 		final Option option = new Option(opt, longOpt, hasArg, description);
 		option.setRequired(true);
 		addOption(option);
@@ -199,7 +199,7 @@ public class Options implements Serializable {
 	 * @return the options matching the partial name specified, or an empty list if none matches
 	 * @since 1.3
 	 */
-	public @NonNull List<String> getMatchingOptions(String opt) {
+	public @NotNull List<String> getMatchingOptions(String opt) {
 		opt = Util.stripLeadingHyphens(opt);
 
 		final List<String> matchingOpts = new ArrayList<>();
@@ -241,7 +241,7 @@ public class Options implements Serializable {
 	 * @param opt the option whose OptionGroup is being queried.
 	 * @return the OptionGroup if {@code opt} is part of an OptionGroup, otherwise return null
 	 */
-	public OptionGroup getOptionGroup(final @NonNull Option opt) {
+	public OptionGroup getOptionGroup(final @NotNull Option opt) {
 		return optionGroups.get(opt.getKey());
 	}
 
@@ -250,7 +250,7 @@ public class Options implements Serializable {
 	 *
 	 * @return a Collection of OptionGroup instances.
 	 */
-	@NonNull Collection<OptionGroup> getOptionGroups() {
+	@NotNull Collection<OptionGroup> getOptionGroups() {
 		return new HashSet<>(optionGroups.values());
 	}
 
@@ -259,7 +259,7 @@ public class Options implements Serializable {
 	 *
 	 * @return read-only Collection of {@link Option} objects in this descriptor
 	 */
-	public @NonNull Collection<Option> getOptions() {
+	public @NotNull Collection<Option> getOptions() {
 		return Collections.unmodifiableCollection(helpOptions());
 	}
 
@@ -268,7 +268,7 @@ public class Options implements Serializable {
 	 *
 	 * @return the List of Options
 	 */
-	@NonNull List<Option> helpOptions() {
+	@NotNull List<Option> helpOptions() {
 		return new ArrayList<>(shortOpts.values());
 	}
 
@@ -277,7 +277,7 @@ public class Options implements Serializable {
 	 *
 	 * @return read-only List of required options
 	 */
-	public @NonNull List getRequiredOptions() {
+	public @NotNull List getRequiredOptions() {
 		return Collections.unmodifiableList(requiredOpts);
 	}
 
@@ -325,7 +325,7 @@ public class Options implements Serializable {
 	 * @return Stringified form of this object
 	 */
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		final StringBuilder buf = new StringBuilder();
 
 		buf.append("[ Options: [ short ");

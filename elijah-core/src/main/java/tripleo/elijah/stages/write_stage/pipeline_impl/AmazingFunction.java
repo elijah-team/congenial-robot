@@ -42,10 +42,10 @@ class AmazingFunction implements Amazing {
 	private final GenerateResult                   result;
 	private final IPipelineAccess                  pa;
 
-	public AmazingFunction(final @NonNull BaseEvaFunction aBaseEvaFunction,
-						   final @NonNull WPIS_GenerateOutputs.OutputItems aOutputItems,
-						   final @NonNull GenerateResult aGenerateResult,
-						   final @NonNull IPipelineAccess aPa) {
+	public AmazingFunction(final @NotNull BaseEvaFunction aBaseEvaFunction,
+						   final @NotNull WPIS_GenerateOutputs.OutputItems aOutputItems,
+						   final @NotNull GenerateResult aGenerateResult,
+						   final @NotNull IPipelineAccess aPa) {
 		// given
 		f      = aBaseEvaFunction;
 		mod    = aBaseEvaFunction.module();

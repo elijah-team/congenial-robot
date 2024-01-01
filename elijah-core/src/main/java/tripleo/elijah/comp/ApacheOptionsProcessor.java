@@ -30,7 +30,7 @@ public class ApacheOptionsProcessor implements OptionsProcessor {
 	}
 
 	@Override
-	public String[] process(final @NonNull Compilation c, final @NonNull List<CompilerInput> aInputs, final CompilationBus aCb) throws Exception {
+	public String[] process(final @NotNull Compilation c, final @NotNull List<CompilerInput> aInputs, final CompilationBus aCb) throws Exception {
 
 		final List<String> args = aInputs.stream()
 				.map(inp -> inp.getInp())

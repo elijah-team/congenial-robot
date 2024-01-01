@@ -19,7 +19,7 @@ public class NG_OutputNamespace implements NG_OutputItem {
 	private GenerateC       generateC;
 
 	@Override
-	public @NonNull List<NG_OutputStatement> getOutputs() {
+	public @NotNull List<NG_OutputStatement> getOutputs() {
 		final EvaNamespace x = garishNamespace.getLiving().evaNode();
 		var                m = x.module();
 
@@ -45,7 +45,7 @@ public class NG_OutputNamespace implements NG_OutputItem {
 	}
 
 	@Override
-	public EOT_OutputFile.FileNameProvider outName(final @NonNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NonNull TY ty) {
+	public EOT_OutputFile.FileNameProvider outName(final @NotNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NotNull TY ty) {
 		final EvaNamespace x = garishNamespace.getLiving().evaNode();
 
 		return aOutputStrategyC.nameForNamespace1(x, ty);

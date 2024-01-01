@@ -34,18 +34,18 @@ public class EvaFunction extends BaseEvaFunction implements GNCoded {
 	//
 
 	@Override
-	public @NonNull FunctionDef getFD() {
+	public @NotNull FunctionDef getFD() {
 		if (fd != null) return fd;
 		throw new IllegalStateException("No function");
 	}
 
 	@Override
-	public @NonNull Role getRole() {
+	public @NotNull Role getRole() {
 		return Role.FUNCTION;
 	}
 
 	@Override
-	public void register(final @NonNull ICodeRegistrar aCr) {
+	public void register(final @NotNull ICodeRegistrar aCr) {
 		aCr.registerFunction1(this);
 	}
 
@@ -65,7 +65,7 @@ public class EvaFunction extends BaseEvaFunction implements GNCoded {
 	}
 
 	@Override
-	public @NonNull OS_Module module() {
+	public @NotNull OS_Module module() {
 		return getFD().getContext().module();
 	}
 

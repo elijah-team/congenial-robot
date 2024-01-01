@@ -22,7 +22,7 @@ public class AliasStatementImpl extends __Access implements AliasStatement {
 	private       IExpression     expr;
 	private       IdentExpression nameToken;
 
-	public AliasStatementImpl(final @NonNull OS_Element aParent) {
+	public AliasStatementImpl(final @NotNull OS_Element aParent) {
 		this.parent = aParent;
 		if (parent instanceof OS_Container) {
 			((OS_Container) parent).addToContainer(this);
@@ -61,7 +61,7 @@ public class AliasStatementImpl extends __Access implements AliasStatement {
 		return (Qualident) expr;
 	}
 
-	public void setExpression(final @NonNull IExpression expr) {
+	public void setExpression(final @NotNull IExpression expr) {
 		if (expr.getKind() != ExpressionKind.IDENT && expr.getKind() != ExpressionKind.QIDENT
 				&& expr.getKind() != ExpressionKind.DOT_EXP) // TODO need DOT_EXP to QIDENT
 		{
@@ -72,7 +72,7 @@ public class AliasStatementImpl extends __Access implements AliasStatement {
 	}
 
 	@Override // OS_Element
-	public void visitGen(final @NonNull ElElementVisitor visit) {
+	public void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitAliasStatement(this);
 	}
 
@@ -94,12 +94,12 @@ public class AliasStatementImpl extends __Access implements AliasStatement {
 	}
 
 	@Override
-	public void setName(@NonNull final IdentExpression i1) {
+	public void setName(@NotNull final IdentExpression i1) {
 		this.nameToken = i1;
 	}
 
 	@Override
-	public void serializeTo(@NonNull SmallWriter sw) {
+	public void serializeTo(@NotNull SmallWriter sw) {
 		// TODO Auto-generated method stub
 //		private       AccessNotation  access_note;
 //		private       El_Category     category;
@@ -109,7 +109,7 @@ public class AliasStatementImpl extends __Access implements AliasStatement {
 	}
 
 	@Override
-	public @NonNull EN_Name getEnName() {
+	public @NotNull EN_Name getEnName() {
 		if (__n == null) {
 			__n = EN_Name_.create(name());
 		}

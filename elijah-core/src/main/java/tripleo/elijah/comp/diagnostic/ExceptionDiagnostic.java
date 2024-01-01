@@ -15,27 +15,27 @@ public class ExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NonNull String code() {
+	public @NotNull String code() {
 		return "9003";
 	}
 
 	@Override
-	public @NonNull Locatable primary() {
+	public @NotNull Locatable primary() {
 		return null;
 	}
 
 	@Override
-	public void report(final @NonNull PrintStream stream) {
+	public void report(final @NotNull PrintStream stream) {
 		stream.println(code() + " Some exception " + e);
 	}
 
 	@Override
-	public @NonNull List<Locatable> secondary() {
+	public @NotNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NonNull Severity severity() {
+	public @NotNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

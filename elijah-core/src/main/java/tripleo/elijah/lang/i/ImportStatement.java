@@ -23,7 +23,7 @@ public interface ImportStatement extends ModuleItem, ClassItem, StatementItem {
 	void setContext(ImportContext ctx);
 
 	@Override
-	default void visitGen(final @NonNull ElElementVisitor visit) {
+	default void visitGen(final @NotNull ElElementVisitor visit) {
 		visit.visitImportStatment(this);
 	}
 

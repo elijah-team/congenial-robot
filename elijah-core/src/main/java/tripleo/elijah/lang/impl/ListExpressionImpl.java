@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ListExpressionImpl extends AbstractExpression implements tripleo.elijah.lang.i.ListExpression {
 
-	public @NonNull SyntaxImpl syntax = new SyntaxImpl();
+	public @NotNull SyntaxImpl syntax = new SyntaxImpl();
 
 	ExpressionList contents;
 
@@ -95,7 +95,7 @@ public class ListExpressionImpl extends AbstractExpression implements tripleo.el
 	}
 
 	public class SyntaxImpl {
-		@NonNull List<Token> commas = new ArrayList<Token>();
+		@NotNull List<Token> commas = new ArrayList<Token>();
 		Token endToken;
 		Token startToken;
 

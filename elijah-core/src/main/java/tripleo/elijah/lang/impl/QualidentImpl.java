@@ -34,7 +34,7 @@ public class QualidentImpl implements tripleo.elijah.lang.i.Qualident {
 	 * Look into creating a {@link DotExpression} from here
 	 */
 	@Override
-	public void append(final @NonNull IdentExpression r1) {
+	public void append(final @NotNull IdentExpression r1) {
 		if (r1.getText().contains("."))
 			throw new IllegalArgumentException("trying to create a Qualident with a dot from a user created Token");
 		parts.add(r1);
@@ -47,12 +47,12 @@ public class QualidentImpl implements tripleo.elijah.lang.i.Qualident {
 
 
 	@Override
-	@NonNull
+	@NotNull
 	public String asSimpleString() {
 		return Helpers.String_join(".", Collections2.transform(parts, new Function<IdentExpression, String>() {
 			@Nullable
 			@Override
-			public @NonNull String apply(@Nullable IdentExpression input) {
+			public @NotNull String apply(@Nullable IdentExpression input) {
 				assert input != null;
 				return input.getText();
 			}
@@ -89,7 +89,7 @@ public class QualidentImpl implements tripleo.elijah.lang.i.Qualident {
 		return true;// Objects.equals(_type, qualident._type);
 	}
 
-	public @NonNull List<FormalArgListItem> getArgs() {
+	public @NotNull List<FormalArgListItem> getArgs() {
 		return null;
 	}
 
@@ -98,17 +98,17 @@ public class QualidentImpl implements tripleo.elijah.lang.i.Qualident {
 	}
 
 	@Override
-	public @NonNull ExpressionKind getKind() {
+	public @NotNull ExpressionKind getKind() {
 		return ExpressionKind.QIDENT;
 	}
 
 	@Override
-	public @NonNull IExpression getLeft() {
+	public @NotNull IExpression getLeft() {
 		return this;
 	}
 
 	@Override
-	public @NonNull List<IdentExpression> parts() {
+	public @NotNull List<IdentExpression> parts() {
 		return parts;
 	}
 
@@ -151,7 +151,7 @@ public class QualidentImpl implements tripleo.elijah.lang.i.Qualident {
 	}
 
 	@Override
-	public @NonNull String toString() {
+	public @NotNull String toString() {
 		return asSimpleString();
 	}
 

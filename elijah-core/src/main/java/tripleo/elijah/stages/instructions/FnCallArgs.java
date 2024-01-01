@@ -24,9 +24,9 @@ import java.util.List;
 public class FnCallArgs implements InstructionArgument {
 	private                TypeTableEntry  _type; // the return type of the function call
 	public final           Instruction     expression_to_call;
-	private final @NonNull BaseEvaFunction gf;
+	private final @NotNull BaseEvaFunction gf;
 
-	public FnCallArgs(final Instruction expression_to_call, final @NonNull BaseEvaFunction generatedFunction) {
+	public FnCallArgs(final Instruction expression_to_call, final @NotNull BaseEvaFunction generatedFunction) {
 		this.expression_to_call = expression_to_call;
 		this.gf                 = generatedFunction;
 	}
@@ -39,7 +39,7 @@ public class FnCallArgs implements InstructionArgument {
 		return expression_to_call;
 	}
 
-	@NonNull
+	@NotNull
 	public List<InstructionArgument> getInstructionArguments() {
 		final List<InstructionArgument> args = this.getArgs();
 		return args.subList(1, args.size());
@@ -59,7 +59,7 @@ public class FnCallArgs implements InstructionArgument {
 		final List<InstructionArgument> instructionArguments = getInstructionArguments();
 
 		final Collection<String> collect2        = Helpers.mapCollectionElementsToString(instructionArguments);
-		final @NonNull String    commaed_strings = Helpers.String_join(" ", collect2);
+		final @NotNull String    commaed_strings = Helpers.String_join(" ", collect2);
 		
 		final ProcTableEntry procTableEntry = gf.prte_list.get(index);
 

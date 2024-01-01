@@ -125,7 +125,7 @@ public class DT_External_2 implements DT_External {
 	}
 
 	@Override
-	public void actualise(final @NonNull DeduceTypes2 aDt2) {
+	public void actualise(final @NotNull DeduceTypes2 aDt2) {
 		// README this is kinda by construction
 		//  12/24 so let's make it official
 		Preconditions.checkState(mod1 != module);
@@ -136,7 +136,7 @@ public class DT_External_2 implements DT_External {
 
 		//assert ite._p_resolvedElementPromise.isResolved();
 
-		ite1._p_resolvedElementPromise.then((final @NonNull OS_Element orig_e) -> {
+		ite1._p_resolvedElementPromise.then((final @NotNull OS_Element orig_e) -> {
 			OS_Element e = orig_e;
 
 			final Compilation compilation = aDt2.module.getCompilation();
@@ -185,12 +185,12 @@ public class DT_External_2 implements DT_External {
 				pte.setStatus(BaseTableEntry.Status.KNOWN, _inj().new_ConstructableElementHolder(e, identIA));
 			}
 
-			pte.onFunctionInvocation((@NonNull FunctionInvocation functionInvocation) -> {
-				functionInvocation.generateDeferred().done((@NonNull BaseEvaFunction bgf) -> {
-					@NonNull DeduceTypes2.PromiseExpectation<GenType> pe = dc.promiseExpectation(bgf, "Function Result type");
-					bgf.typePromise().then((@NonNull GenType result) -> {
+			pte.onFunctionInvocation((@NotNull FunctionInvocation functionInvocation) -> {
+				functionInvocation.generateDeferred().done((@NotNull BaseEvaFunction bgf) -> {
+					@NotNull DeduceTypes2.PromiseExpectation<GenType> pe = dc.promiseExpectation(bgf, "Function Result type");
+					bgf.typePromise().then((@NotNull GenType result) -> {
 						pe.satisfy(result);
-						@NonNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, result.getResolved()); // TODO there has to be a better way
+						@NotNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, result.getResolved()); // TODO there has to be a better way
 						tte.genType.copy(result);
 						vte.addPotentialType(instructionIndex, tte);
 					});
@@ -204,7 +204,7 @@ public class DT_External_2 implements DT_External {
 		});
 	}
 
-	private /*static*/ void __make2_1__hasFunctionInvocation(final @NonNull ProcTableEntry pte, final @NonNull FunctionInvocation fi) {
+	private /*static*/ void __make2_1__hasFunctionInvocation(final @NotNull ProcTableEntry pte, final @NotNull FunctionInvocation fi) {
 		fi.generateDeferred().then((BaseEvaFunction ef) -> {
 			var result = _inj().new_GenTypeImpl();
 			result.setFunctionInvocation(fi);
@@ -236,7 +236,7 @@ public class DT_External_2 implements DT_External {
 	}
 
 	@Override
-	public @NonNull Promise<OS_Module, Void, Void> onTargetModulePromise() {
+	public @NotNull Promise<OS_Module, Void, Void> onTargetModulePromise() {
 		return mod1Promise;
 	}
 
@@ -269,12 +269,12 @@ public class DT_External_2 implements DT_External {
 																final FunctionDef resolved_element,
 																final OS_Element parent,
 																final IInvocation invocation2) {
-		final @NonNull FunctionInvocation fi;
+		final @NotNull FunctionInvocation fi;
 		fi = dc.newFunctionInvocation(resolved_element, pte, invocation2);
 
 		final DeferredMemberFunction dmf = dc.deferred_member_function(parent, invocation2, resolved_element, fi);
 
-		dmf.typeResolved().then((final @NonNull GenType result) -> {
+		dmf.typeResolved().then((final @NotNull GenType result) -> {
 			LOG.info("2717 " + dmf.getFunctionDef() + " " + result);
 			if (pte.typeDeferred().isPending())
 				pte.typeDeferred().resolve(result);

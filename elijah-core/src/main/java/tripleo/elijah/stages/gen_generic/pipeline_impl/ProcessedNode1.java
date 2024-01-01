@@ -35,21 +35,21 @@ public class ProcessedNode1 implements ProcessedNode {
 	}
 
 	@Override
-	public void processClassMap(final @NonNull GenerateFiles ggc, final @NonNull GenerateResultEnv aFileGen) {
+	public void processClassMap(final @NotNull GenerateFiles ggc, final @NotNull GenerateResultEnv aFileGen) {
 		final EvaContainerNC nc = (EvaContainerNC) evaNode;
 
-		final @NonNull Collection<EvaNode> gn2 = GenerateFiles.classes_to_list_of_generated_nodes(nc.classMap.values());
+		final @NotNull Collection<EvaNode> gn2 = GenerateFiles.classes_to_list_of_generated_nodes(nc.classMap.values());
 		GenerateResult                     gr4 = ggc.generateCode(gn2, aFileGen);
 		aFileGen.gr().additional(gr4);
 		aFileGen.resultSink().additional(gr4);
 	}
 
 	@Override
-	public void processConstructors(final @NonNull GenerateFiles ggc, final @NonNull GenerateResultEnv aFileGen) {
+	public void processConstructors(final @NotNull GenerateFiles ggc, final @NotNull GenerateResultEnv aFileGen) {
 		final EvaContainerNC nc = (EvaContainerNC) evaNode;
 
-		if (nc instanceof final @NonNull EvaClass evaClass) {
-			final @NonNull Collection<EvaNode> gn2 = GenerateFiles.constructors_to_list_of_generated_nodes(evaClass.constructors.values());
+		if (nc instanceof final @NotNull EvaClass evaClass) {
+			final @NotNull Collection<EvaNode> gn2 = GenerateFiles.constructors_to_list_of_generated_nodes(evaClass.constructors.values());
 			GenerateResult                     gr3 = ggc.generateCode(gn2, aFileGen);
 
 			aFileGen.gr().additional(gr3);
@@ -57,7 +57,7 @@ public class ProcessedNode1 implements ProcessedNode {
 		}
 /*
 		if (nc instanceof final EvaNamespace evaNamespace) {
-			final @NonNull Collection<EvaNode> gn2 = GenerateFiles.constructors_to_list_of_generated_nodes(evaNamespace.constructors.values());
+			final @NotNull Collection<EvaNode> gn2 = GenerateFiles.constructors_to_list_of_generated_nodes(evaNamespace.constructors.values());
 			GenerateResult                     gr3 = ggc.generateCode(gn2, wm, aResultSink);
 			gr.additional(gr3);
 			aResultSink.additional(gr3);
@@ -66,10 +66,10 @@ public class ProcessedNode1 implements ProcessedNode {
 	}
 
 	@Override
-	public void processFunctions(final @NonNull GenerateFiles ggc, final @NonNull GenerateResultEnv aFileGen) {
+	public void processFunctions(final @NotNull GenerateFiles ggc, final @NotNull GenerateResultEnv aFileGen) {
 		final EvaContainerNC nc = (EvaContainerNC) evaNode;
 
-		final @NonNull Collection<EvaNode> gn1 = GenerateFiles.functions_to_list_of_generated_nodes(nc.functionMap.values());
+		final @NotNull Collection<EvaNode> gn1 = GenerateFiles.functions_to_list_of_generated_nodes(nc.functionMap.values());
 		GenerateResult                     gr2 = ggc.generateCode(gn1, aFileGen);
 		aFileGen.gr().additional(gr2);
 		aFileGen.resultSink().additional(gr2);
@@ -77,7 +77,7 @@ public class ProcessedNode1 implements ProcessedNode {
 
 	@Override
 	public void processContainer(final GenerateFiles ggc,
-								 final @NonNull GenerateResultEnv aFileGen) {
+								 final @NotNull GenerateResultEnv aFileGen) {
 		final EvaContainerNC nc = (EvaContainerNC) evaNode;
 
 		nc.generateCode(aFileGen, ggc);

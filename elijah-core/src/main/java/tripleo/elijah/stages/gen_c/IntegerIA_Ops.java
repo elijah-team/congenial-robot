@@ -9,7 +9,7 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 
 public class IntegerIA_Ops {
 	@Contract(value = "_, _ -> new", pure = true)
-	public static @NonNull IntegerIA_Ops get(final IntegerIA aIntegerIA, final int aSSize) {
+	public static @NotNull IntegerIA_Ops get(final IntegerIA aIntegerIA, final int aSSize) {
 		return new IntegerIA_Ops(aIntegerIA, aSSize);
 	}
 
@@ -22,7 +22,7 @@ public class IntegerIA_Ops {
 		sSize     = aSSize;
 	}
 
-	public @NonNull ConstructorPathOp getConstructorPath() {
+	public @NotNull ConstructorPathOp getConstructorPath() {
 		return new ConstructorPathOp1();
 	}
 

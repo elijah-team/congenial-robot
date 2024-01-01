@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 public class PP_Function implements IPP_Function {
 	private final DeducedBaseEvaFunction carrier;
 
-	public PP_Function(final @NonNull DeducedBaseEvaFunction aGf) {
+	public PP_Function(final @NotNull DeducedBaseEvaFunction aGf) {
 		carrier = aGf;
 	}
 

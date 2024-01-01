@@ -120,14 +120,14 @@ public class GenerateC
 
   private final CompilationEnclosure ce;
   private final ErrSink errSink;
-  private final @NonNull GenerateResultEnv _fileGen;
-  private @NonNull ElLog LOG;
+  private final @NotNull GenerateResultEnv _fileGen;
+  private @NotNull ElLog LOG;
   private GenerateResultSink resultSink;
 
   private __SPI_Save spi_save;
 
   public GenerateC(
-      final @NonNull OutputFileFactoryParams aParams, final @NonNull GenerateResultEnv aFileGen) {
+      final @NotNull OutputFileFactoryParams aParams, final @NotNull GenerateResultEnv aFileGen) {
     // provided
     _fileGen = aFileGen;
     errSink = aParams.getErrSink();
@@ -151,7 +151,7 @@ public class GenerateC
     ce.getPipelineAccess().resolveWaitGenC(mod, this);
   }
 
-  static boolean isValue(@NonNull BaseEvaFunction gf, @NonNull String name) {
+  static boolean isValue(@NotNull BaseEvaFunction gf, @NotNull String name) {
     if (!name.equals("Value")) return false;
     //
     FunctionDef fd = (FunctionDef) gf.getFD();
@@ -180,10 +180,10 @@ public class GenerateC
     cc.resolveFileGenPromise(aFileGen);
   }
 
-  @NonNull
+  @NotNull
   public String getRealTargetName(
-          final @NonNull BaseEvaFunction gf,
-          final @NonNull IdentIA target,
+          final @NotNull BaseEvaFunction gf,
+          final @NotNull IdentIA target,
           final Generate_Code_For_Method.AOG aog,
           final String value) {
     int state = 0, code = -1;
@@ -194,7 +194,7 @@ public class GenerateC
     InstructionArgument backlink = identTableEntry.getBacklink();
     final String text = identTableEntry.getIdent().getText();
     if (backlink == null) {
-      if (identTableEntry.getResolvedElement() instanceof final @NonNull VariableStatement vs) {
+      if (identTableEntry.getResolvedElement() instanceof final @NotNull VariableStatement vs) {
         OS_Element parent = vs.getParent().getParent();
         if (parent != gf.getFD()) {
           // we want identTableEntry.resolved which will be a EvaMember
@@ -202,7 +202,7 @@ public class GenerateC
           // statement (semantic block, loop, match, etc) or a EvaContainerNC
           int y = 2;
           EvaNode er = identTableEntry.externalRef;
-          if (er instanceof final @NonNull EvaContainerNC nc) {
+          if (er instanceof final @NotNull EvaContainerNC nc) {
             assert nc instanceof EvaNamespace;
             EvaNamespace ns = (EvaNamespace) nc;
             //						if (ns.isInstance()) {}
@@ -230,12 +230,12 @@ public class GenerateC
               + "vm"
               + text); // TODO blindly adding "vm" might not always work, also put in loop
     while (backlink != null) {
-      if (backlink instanceof final @NonNull IntegerIA integerIA) {
+      if (backlink instanceof final @NotNull IntegerIA integerIA) {
         String realTargetName =
             getRealTargetName(gf, integerIA, Generate_Code_For_Method.AOG.ASSIGN);
         ls.addFirst(Emit.emit("/*892*/") + realTargetName);
         backlink = null;
-      } else if (backlink instanceof final @NonNull IdentIA identIA) {
+      } else if (backlink instanceof final @NotNull IdentIA identIA) {
         int identIAIndex = identIA.getIndex();
         IdentTableEntry identTableEntry1 = gf.getIdentTableEntry(identIAIndex);
         String identTableEntryName = identTableEntry1.getIdent().getText();
@@ -259,8 +259,8 @@ public class GenerateC
   }
 
   String getRealTargetName(
-      final @NonNull BaseEvaFunction gf,
-      final @NonNull IntegerIA target,
+      final @NotNull BaseEvaFunction gf,
+      final @NotNull IntegerIA target,
       final Generate_Code_For_Method.AOG aog) {
     final VariableTableEntry varTableEntry = gf.getVarTableEntry(target.getIndex());
     return getRealTargetName(gf, varTableEntry);
@@ -287,10 +287,10 @@ public class GenerateC
     return generateResultProgressive;
   }
 
-  @NonNull
+  @NotNull
   List<String> getArgumentStrings(
-      final @NonNull Supplier<IFixedList<InstructionArgument>> instructionSupplier) {
-    final @NonNull List<String> sl3 = new ArrayList<String>();
+      final @NotNull Supplier<IFixedList<InstructionArgument>> instructionSupplier) {
+    final @NotNull List<String> sl3 = new ArrayList<String>();
     final int args_size = instructionSupplier.get().size();
     for (int i = 1; i < args_size; i++) {
       final InstructionArgument ia = instructionSupplier.get().get(i);
@@ -304,7 +304,7 @@ public class GenerateC
         reference.getIdentIAPath((IdentIA) ia, Generate_Code_For_Method.AOG.GET, null);
         final String text = reference.build();
         sl3.add(Emit.emit("/*673*/") + text);
-      } else if (ia instanceof final @NonNull ConstTableIA c) {
+      } else if (ia instanceof final @NotNull ConstTableIA c) {
         final ConstantTableEntry cte = c.getEntry();
         final String s = new GetAssignmentValue(this).const_to_string(cte.initialValue);
         sl3.add(s);
@@ -321,7 +321,7 @@ public class GenerateC
   }
 
   String getRealTargetName(
-      final @NonNull IntegerIA target, final Generate_Code_For_Method.AOG aog) {
+      final @NotNull IntegerIA target, final Generate_Code_For_Method.AOG aog) {
     final BaseEvaFunction gf = target.gf;
     final VariableTableEntry varTableEntry = gf.getVarTableEntry(target.getIndex());
 
@@ -330,31 +330,31 @@ public class GenerateC
     return zone_vte.getRealTargetName();
   }
 
-  @NonNull
-  String getTypeName(@NonNull TypeTableEntry tte) {
+  @NotNull
+  String getTypeName(@NotNull TypeTableEntry tte) {
     return GetTypeName.forTypeTableEntry(tte);
   }
 
   @Deprecated
   public String getRealTargetName(
-      final @NonNull WhyNotGarish_BaseFunction aGf,
-      final @NonNull IntegerIA aTarget,
+      final @NotNull WhyNotGarish_BaseFunction aGf,
+      final @NotNull IntegerIA aTarget,
       final Generate_Code_For_Method.AOG aAOG) {
     return getRealTargetName(aGf.cheat(), aTarget, aAOG);
   }
 
-  public @NonNull GI_Repo repo() {
+  public @NotNull GI_Repo repo() {
     return _repo;
   }
 
-  public @NonNull List<String> getArgumentStrings(
-      final @NonNull WhyNotGarish_BaseFunction aGf, final @NonNull Instruction aInstruction) {
+  public @NotNull List<String> getArgumentStrings(
+      final @NotNull WhyNotGarish_BaseFunction aGf, final @NotNull Instruction aInstruction) {
     return getArgumentStrings(aGf.cheat(), aInstruction);
   }
 
-  @NonNull
+  @NotNull
   List<String> getArgumentStrings(
-      final @NonNull BaseEvaFunction gf, final @NonNull Instruction instruction) {
+      final @NotNull BaseEvaFunction gf, final @NotNull Instruction instruction) {
     final WhyNotGarish_Function yf = a_lookup(gf);
     return yf.getArgumentStrings(instruction).getLeft();
   }
@@ -362,19 +362,19 @@ public class GenerateC
 
 
   private void generateCodeForConstructor(
-      @NonNull DeducedEvaConstructor aEvaConstructor,
+      @NotNull DeducedEvaConstructor aEvaConstructor,
       GenerateResult aGenerateResult,
       WorkList aWorkList,
-      final @NonNull GenerateResultEnv aFileGen) {
+      final @NotNull GenerateResultEnv aFileGen) {
     if (aEvaConstructor.getFD() == null) return;
     Generate_Code_For_Method gcfm = new Generate_Code_For_Method(this, LOG);
     gcfm.generateCodeForConstructor(aEvaConstructor, aGenerateResult, aWorkList, aFileGen);
   }
 
   private void postGenerateCodeForConstructor(
-      final @NonNull DeducedEvaConstructor aEvaConstructor,
-      final @NonNull WorkList wl,
-      final @NonNull GenerateResultEnv aFileGen) {
+      final @NotNull DeducedEvaConstructor aEvaConstructor,
+      final @NotNull WorkList wl,
+      final @NotNull GenerateResultEnv aFileGen) {
     for (IdentTableEntry identTableEntry :
         ((EvaConstructor) aEvaConstructor.getCarrier()).idte_list) {
       identTableEntry
@@ -403,12 +403,12 @@ public class GenerateC
     }
   }
 
-  private void generateIdent(@NonNull IdentTableEntry identTableEntry) {
+  private void generateIdent(@NotNull IdentTableEntry identTableEntry) {
     assert identTableEntry.isResolved();
 
-    final @NonNull var fileGen = _fileGen;
+    final @NotNull var fileGen = _fileGen;
 
-    final @NonNull EvaNode x = identTableEntry.resolvedType();
+    final @NotNull EvaNode x = identTableEntry.resolvedType();
 
     final GenerateResult gr = fileGen.gr();
     final GenerateResultSink resultSink1 = fileGen.resultSink();
@@ -431,7 +431,7 @@ public class GenerateC
       final WorkList wl,
       final GenerateResultSink aResultSink,
       final WorkManager aWorkManager,
-      final @NonNull GenerateResultEnv aFileGen) {
+      final @NotNull GenerateResultEnv aFileGen) {
     var aEvaConstructor = aGf.get2Carrier();
 
 	  generateCodeForConstructor(aEvaConstructor, gr, wl, aFileGen);
@@ -439,7 +439,7 @@ public class GenerateC
   }
 
   @Override
-  public void generate_class(@NonNull GenerateResultEnv aFileGen, EvaClass x) {
+  public void generate_class(@NotNull GenerateResultEnv aFileGen, EvaClass x) {
     var gr = aFileGen.gr();
     var aResultSink = aFileGen.resultSink();
 
@@ -453,7 +453,7 @@ public class GenerateC
   public void generate_function(
       IPP_Function ipf,
       GenerateResult gr,
-      @NonNull WorkList wl,
+      @NotNull WorkList wl,
       final GenerateResultSink aResultSink) {
     var aEvaFunction = ipf.get2Carrier().getCarrier();
 
@@ -463,15 +463,15 @@ public class GenerateC
 
   @Override
   public void generate_namespace(
-      final @NonNull EvaNamespace x,
+      final @NotNull EvaNamespace x,
       final GenerateResult gr,
-      final @NonNull GenerateResultSink aResultSink) {
+      final @NotNull GenerateResultSink aResultSink) {
     final LivingNamespace ln =
         aResultSink.getLivingNamespaceForEva(x); // TODO could also add _living property
     ln.garish(this, gr, aResultSink);
   }
 
-  @NonNull
+  @NotNull
   public String getTypeName(EvaNode aNode) {
     if (aNode instanceof EvaClass ec) {
       return a_lookup(ec).getTypeNameString();
@@ -484,32 +484,32 @@ public class GenerateC
 
 
 
-  public @NonNull String getAssignmentValue(
+  public @NotNull String getAssignmentValue(
       final VariableTableEntry aSelf,
       final InstructionArgument aRhs,
-      final @NonNull WhyNotGarish_BaseFunction aGf) {
+      final @NotNull WhyNotGarish_BaseFunction aGf) {
     return getAssignmentValue(aSelf, aRhs, aGf.cheat());
   }
 
-  @NonNull
+  @NotNull
   public String getAssignmentValue(
           VariableTableEntry value_of_this,
           final InstructionArgument value,
-          final @NonNull BaseEvaFunction gf) {
+          final @NotNull BaseEvaFunction gf) {
     GetAssignmentValue gav = new GetAssignmentValue(this);
-    if (value instanceof final @NonNull FnCallArgs fca) {
+    if (value instanceof final @NotNull FnCallArgs fca) {
       return gav.FnCallArgs(fca, gf, LOG).success().getText();
     }
 
-    if (value instanceof final @NonNull ConstTableIA constTableIA) {
+    if (value instanceof final @NotNull ConstTableIA constTableIA) {
       return gav.ConstTableIA(constTableIA, gf);
     }
 
-    if (value instanceof final @NonNull IntegerIA integerIA) {
+    if (value instanceof final @NotNull IntegerIA integerIA) {
       return gav.IntegerIA(integerIA, gf);
     }
 
-    if (value instanceof final @NonNull IdentIA identIA) {
+    if (value instanceof final @NotNull IdentIA identIA) {
       return gav.IdentIA(identIA, gf);
     }
 
@@ -518,18 +518,18 @@ public class GenerateC
   }
 
   @Deprecated
-  String getTypeName(final @NonNull TypeName typeName) {
+  String getTypeName(final @NotNull TypeName typeName) {
     return GetTypeName.forTypeName(typeName, errSink);
   }
 
-  String getTypeNameForGenClass(@NonNull EvaNode aGenClass) {
+  String getTypeNameForGenClass(@NotNull EvaNode aGenClass) {
     return GetTypeName.getTypeNameForEvaNode(aGenClass);
   }
 
   private void _post_generate_function(
-      final @NonNull EvaFunction aEvaFunction,
-      final @NonNull WorkList wl,
-      final @NonNull GenerateResultEnv fileGen) {
+      final @NotNull EvaFunction aEvaFunction,
+      final @NotNull WorkList wl,
+      final @NotNull GenerateResultEnv fileGen) {
     for (IdentTableEntry identTableEntry : aEvaFunction.idte_list) {
       if (identTableEntry.isResolved()) {
         EvaNode x = identTableEntry.resolvedType();
@@ -557,12 +557,12 @@ public class GenerateC
     }
   }
 
-  String getTypeNameForVariableEntry(@NonNull VariableTableEntry input) {
+  String getTypeNameForVariableEntry(@NotNull VariableTableEntry input) {
     return GetTypeName.forVTE(input);
   }
 
-  @NonNull
-  public String getTypeNameGNCForVarTableEntry(EvaContainer.@NonNull VarTableEntry o) {
+  @NotNull
+  public String getTypeNameGNCForVarTableEntry(EvaContainer.@NotNull VarTableEntry o) {
     final String typeName;
     if (o.resolvedType() != null) {
       EvaNode xx = o.resolvedType();
@@ -579,7 +579,7 @@ public class GenerateC
   }
 
   @Deprecated
-  public String getTypeName(final @NonNull OS_Type ty) {
+  public String getTypeName(final @NotNull OS_Type ty) {
     return GetTypeName.forOSType(ty, LOG);
   }
 
@@ -635,7 +635,7 @@ public class GenerateC
     ;
 
     @Deprecated
-    static String forOSType(final @NonNull OS_Type ty, @NonNull ElLog LOG) {
+    static String forOSType(final @NotNull OS_Type ty, @NotNull ElLog LOG) {
       if (ty == null) throw new IllegalArgumentException("ty is null");
       //
       String z;
@@ -678,7 +678,7 @@ public class GenerateC
     }
 
     @Deprecated
-    static String forTypeName(final @NonNull TypeName typeName, final @NonNull ErrSink errSink) {
+    static String forTypeName(final @NotNull TypeName typeName, final @NotNull ErrSink errSink) {
       if (typeName instanceof RegularTypeName) {
         final String name = ((RegularTypeName) typeName).getName(); // TODO convert to Z-name
 
@@ -689,15 +689,15 @@ public class GenerateC
       return String.valueOf(typeName); // TODO type is not fully deduced
     }
 
-    static @NonNull String forTypeTableEntry(@NonNull TypeTableEntry tte) {
+    static @NotNull String forTypeTableEntry(@NotNull TypeTableEntry tte) {
       EvaNode res = tte.resolved();
-      if (res instanceof final @NonNull EvaContainerNC nc) {
+      if (res instanceof final @NotNull EvaContainerNC nc) {
         int code = nc.getCode();
         return "Z" + code;
       } else return "Z<-1>";
     }
 
-    static String forVTE(@NonNull VariableTableEntry input) {
+    static String forVTE(@NotNull VariableTableEntry input) {
       OS_Type attached = input.getType().getAttached();
       if (attached == null) return Emit.emit("/*390*/") + "Z__Unresolved*"; // TODO remove this ASAP
       //
@@ -720,7 +720,7 @@ public class GenerateC
       } else throw new NotImplementedException();
     }
 
-    static String getTypeNameForEvaNode(@NonNull EvaNode aEvaNode) {
+    static String getTypeNameForEvaNode(@NotNull EvaNode aEvaNode) {
       String ty;
       if (aEvaNode instanceof EvaClass) ty = forGenClass((EvaClass) aEvaNode);
       else if (aEvaNode instanceof EvaNamespace) ty = forGenNamespace((EvaNamespace) aEvaNode);
@@ -728,13 +728,13 @@ public class GenerateC
       return ty;
     }
 
-    static String forGenClass(@NonNull EvaClass aEvaClass) {
+    static String forGenClass(@NotNull EvaClass aEvaClass) {
       String z;
       z = String.format("Z%d", aEvaClass.getCode());
       return z;
     }
 
-    static String forGenNamespace(@NonNull EvaNamespace aEvaNamespace) {
+    static String forGenNamespace(@NotNull EvaNamespace aEvaNamespace) {
       String z;
       z = String.format("Z%d", aEvaNamespace.getCode());
       return z;
@@ -748,11 +748,11 @@ public class GenerateC
     private final BaseEvaFunction gf;
     private final GenerateResult gr;
     private final WorkList wl;
-    private final @NonNull GenerateResultEnv fileGen;
+    private final @NotNull GenerateResultEnv fileGen;
     private boolean _isDone = false;
 
     public WlGenerateFunctionC(
-        @NonNull GenerateResultEnv fileGen, BaseEvaFunction aGf, final GenerateFiles aGenerateC) {
+        @NotNull GenerateResultEnv fileGen, BaseEvaFunction aGf, final GenerateFiles aGenerateC) {
       gf = aGf;
 
       gr = fileGen.gr();
@@ -803,7 +803,7 @@ public class GenerateC
       gc = aGc;
     }
 
-    public String ConstTableIA(@NonNull ConstTableIA constTableIA, @NonNull BaseEvaFunction gf) {
+    public String ConstTableIA(@NotNull ConstTableIA constTableIA, @NotNull BaseEvaFunction gf) {
       final ConstantTableEntry cte = gf.getConstTableEntry(constTableIA.getIndex());
       //			LOG.err(("9001-3 "+cte.initialValue));
       switch (cte.initialValue.getKind()) {
@@ -826,8 +826,8 @@ public class GenerateC
       return cs.getText();
     }
 
-    public @NonNull Operation<EG_Statement> FnCallArgs(
-        @NonNull FnCallArgs fca, @NonNull BaseEvaFunction gf, @NonNull ElLog LOG) {
+    public @NotNull Operation<EG_Statement> FnCallArgs(
+        @NotNull FnCallArgs fca, @NotNull BaseEvaFunction gf, @NotNull ElLog LOG) {
       final StringBuilder sb = new StringBuilder();
       final Instruction inst = fca.getExpression();
       //			LOG.err("9000 "+inst.getName());
@@ -903,7 +903,7 @@ public class GenerateC
     }
 
     public GetAssignmentValueArgsStatement getAssignmentValueArgs(
-            final @NonNull Instruction inst, final @NonNull BaseEvaFunction gf, @NonNull ElLog LOG) {
+            final @NotNull Instruction inst, final @NotNull BaseEvaFunction gf, @NotNull ElLog LOG) {
       var gavas = new GetAssignmentValueArgsStatement(inst);
 
       final int args_size = inst.getArgsSize();
@@ -957,28 +957,28 @@ public class GenerateC
 
     // TODO look at me
     public String forClassInvocation(
-        @NonNull Instruction aInstruction,
+        @NotNull Instruction aInstruction,
         ClassInvocation aClsinv,
-        @NonNull BaseEvaFunction gf,
-        @NonNull ElLog LOG) {
+        @NotNull BaseEvaFunction gf,
+        @NotNull ElLog LOG) {
       InstructionArgument _arg0 = aInstruction.getArg(0);
-      @NonNull ProcTableEntry pte = gf.getProcTableEntry(((ProcIA) _arg0).index());
+      @NotNull ProcTableEntry pte = gf.getProcTableEntry(((ProcIA) _arg0).index());
       final CtorReference reference = new CtorReference();
       assert pte.expression_num != null;
       reference.getConstructorPath(pte.expression_num, gf);
-      @NonNull List<String> x = getAssignmentValueArgs(aInstruction, gf, LOG).stringList();
+      @NotNull List<String> x = getAssignmentValueArgs(aInstruction, gf, LOG).stringList();
       reference.args(x);
       return reference.build(aClsinv);
     }
 
-    public @NonNull String IdentIA(@NonNull IdentIA identIA, BaseEvaFunction gf) {
+    public @NotNull String IdentIA(@NotNull IdentIA identIA, BaseEvaFunction gf) {
       assert gf == identIA.gf; // yup
       final CReference reference = new CReference(gc.get_repo(), gc._ce());
       reference.getIdentIAPath(identIA, Generate_Code_For_Method.AOG.GET, null);
       return reference.build();
     }
 
-    public String IntegerIA(@NonNull IntegerIA integerIA, @NonNull BaseEvaFunction gf) {
+    public String IntegerIA(@NotNull IntegerIA integerIA, @NotNull BaseEvaFunction gf) {
       VariableTableEntry vte = gf.getVarTableEntry(integerIA.getIndex());
       String x = gc.getRealTargetName(gf, vte);
       return x;
@@ -986,9 +986,9 @@ public class GenerateC
   }
 
   @Override
-  public @NonNull GenerateResult generateCode(
-      final @NonNull Collection<EvaNode> lgn,
-      final @NonNull GenerateResultEnv aFileGen) {
+  public @NotNull GenerateResult generateCode(
+      final @NotNull Collection<EvaNode> lgn,
+      final @NotNull GenerateResultEnv aFileGen) {
     GenerateResult gr = new Old_GenerateResult();
     WorkList wl = new WorkList();
 
@@ -996,12 +996,12 @@ public class GenerateC
     final GenerateResultSink aResultSink = aFileGen.resultSink();
 
     for (final EvaNode evaNode : lgn) {
-      if (evaNode instanceof final @NonNull EvaFunction generatedFunction) {
+      if (evaNode instanceof final @NotNull EvaFunction generatedFunction) {
         generate_function(new PP_Function(deduced(generatedFunction)), gr, wl, aResultSink);
         if (!wl.isEmpty()) wm.addJobs(wl);
-      } else if (evaNode instanceof final @NonNull EvaContainerNC containerNC) {
+      } else if (evaNode instanceof final @NotNull EvaContainerNC containerNC) {
         containerNC.generateCode(_fileGen, this);
-      } else if (evaNode instanceof final @NonNull EvaConstructor evaConstructor) {
+      } else if (evaNode instanceof final @NotNull EvaConstructor evaConstructor) {
         final DeducedEvaConstructor ddec = deduced(evaConstructor);
         final PP_Constructor cc = new PP_Constructor(ddec);
         generate_constructor(cc, gr, wl, aResultSink, wm, aFileGen);
@@ -1052,7 +1052,7 @@ public class GenerateC
     }
 
     public void addFunction(
-        final @NonNull DeducedBaseEvaFunction aGf,
+        final @NotNull DeducedBaseEvaFunction aGf,
         final Buffer aBufHdr,
         final GenerateResult.TY aTY) {
       final LibraryStatementPart lsp = aGf.getModule__().getLsp();
@@ -1073,7 +1073,7 @@ public class GenerateC
     }
 
     public void addConstructor(
-        final @NonNull DeducedEvaConstructor aGf, final Buffer aBuf, final GenerateResult.TY aTY) {
+        final @NotNull DeducedEvaConstructor aGf, final Buffer aBuf, final GenerateResult.TY aTY) {
       final LibraryStatementPart lsp = aGf.evaLayer_module_lsp();
 
       _gr.addConstructor(new PP_Constructor(aGf), aBuf, aTY, lsp);
@@ -1107,22 +1107,22 @@ public class GenerateC
 
   @Override
   public GenerateResult resultsFromNodes(
-      final @NonNull List<EvaNode> aNodes,
+      final @NotNull List<EvaNode> aNodes,
       final WorkManager wm,
-      final @NonNull GenerateResultSink grs,
-      @NonNull final GenerateResultEnv fg) {
+      final @NotNull GenerateResultSink grs,
+      @NotNull final GenerateResultEnv fg) {
     final GenerateResult gr2 = fg.gr();
 
     for (final EvaNode generatedNode : aNodes) {
-      if (generatedNode instanceof final @NonNull EvaContainerNC nc) {
+      if (generatedNode instanceof final @NotNull EvaContainerNC nc) {
 
         nc.generateCode(_fileGen, this);
 
-        final @NonNull Collection<EvaNode> gn1 = (nc.functionMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
+        final @NotNull Collection<EvaNode> gn1 = (nc.functionMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
         final GenerateResult gr3 = this.generateCode(gn1, fg);
         grs.additional(gr3);
 
-        final @NonNull Collection<EvaNode> gn2 = (nc.classMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
+        final @NotNull Collection<EvaNode> gn2 = (nc.classMap.values()).stream().map(x -> (EvaNode) x).collect(Collectors.toList());
         final GenerateResult gr4 = this.generateCode(gn2, fg);
         grs.additional(gr4);
 

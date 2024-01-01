@@ -27,13 +27,13 @@ public class WlGenerateNamespace implements WorkJob {
 	private final          DeducePhase.@Nullable GeneratedClasses coll;
 	private final          NamespaceStatement                     namespaceStatement;
 	private                boolean                                _isDone = false;
-	private final @NonNull GenerateFunctions                      generateFunctions;
-	private final @NonNull NamespaceInvocation                    namespaceInvocation;
+	private final @NotNull GenerateFunctions                      generateFunctions;
+	private final @NotNull NamespaceInvocation                    namespaceInvocation;
 	private                ICodeRegistrar                         cr;
 	private                EvaNamespace                           result;
 
-	public WlGenerateNamespace(@NonNull GenerateFunctions aGenerateFunctions,
-							   @NonNull NamespaceInvocation aNamespaceInvocation,
+	public WlGenerateNamespace(@NotNull GenerateFunctions aGenerateFunctions,
+							   @NotNull NamespaceInvocation aNamespaceInvocation,
 							   @Nullable DeducePhase.GeneratedClasses aColl,
 							   final ICodeRegistrar aCr) {
 		generateFunctions   = aGenerateFunctions;
@@ -58,7 +58,7 @@ public class WlGenerateNamespace implements WorkJob {
 		final DeferredObject<EvaNamespace, Void, Void> resolvePromise = namespaceInvocation.resolveDeferred();
 		switch (resolvePromise.state()) {
 		case PENDING:
-			@NonNull EvaNamespace ns = generateFunctions.generateNamespace(namespaceStatement);
+			@NotNull EvaNamespace ns = generateFunctions.generateNamespace(namespaceStatement);
 			//ns.setCode(generateFunctions.module.getCompilation().nextClassCode());
 
 

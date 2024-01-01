@@ -8,7 +8,7 @@ public interface RegularTypeName extends NormalTypeName {
 	/*
 	 * Null context. Possibly only for testing.
 	 */
-	static @NonNull RegularTypeName makeWithStringTypeName(@NonNull String aTypeName) {
+	static @NotNull RegularTypeName makeWithStringTypeName(@NotNull String aTypeName) {
 		final RegularTypeName R = new RegularTypeNameImpl(null);
 		R.setName(Helpers.string_to_qualident(aTypeName));
 		return R;

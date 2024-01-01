@@ -30,7 +30,7 @@ public class FrameLauncher extends Frame implements WindowListener {
 	 * @param width   the preferred width of the content
 	 * @param height  the preferred height of the content
 	 */
-	public FrameLauncher(String title, @NonNull Thinlet content, int width, int height) {
+	public FrameLauncher(String title, @NotNull Thinlet content, int width, int height) {
 		this(title, null, content, width, height, true);
 	}
 
@@ -48,7 +48,7 @@ public class FrameLauncher extends Frame implements WindowListener {
 	 * @param height  the preferred height of the content
 	 * @param visible whether to make the frame visible immediately
 	 */
-	public FrameLauncher(String title, @Nullable Image icon, @NonNull Thinlet content, int width, int height, boolean visible) {
+	public FrameLauncher(String title, @Nullable Image icon, @NotNull Thinlet content, int width, int height, boolean visible) {
 		super(title);
 		this.content = content;
 		add(content, BorderLayout.CENTER);
@@ -102,7 +102,7 @@ public class FrameLauncher extends Frame implements WindowListener {
 	 * background rectangle
 	 */
 	@Override
-	public void update(@NonNull Graphics g) {
+	public void update(@NotNull Graphics g) {
 		paint(g);
 	}
 
@@ -111,7 +111,7 @@ public class FrameLauncher extends Frame implements WindowListener {
 	 * the <i>thinlet</i> component paints the content
 	 */
 	@Override
-	public void paint(@NonNull Graphics g) {
+	public void paint(@NotNull Graphics g) {
 		if (doublebuffer == null) {
 			Dimension d = getSize();
 			doublebuffer = createImage(d.width, d.height);

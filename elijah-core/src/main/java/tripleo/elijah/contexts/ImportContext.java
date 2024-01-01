@@ -38,15 +38,15 @@ public class ImportContext extends ContextImpl implements Context {
 		return _parent;
 	}
 
-	@NonNull Map<List<IdentExpression>, NPC> npcs = new LinkedHashMap();
+	@NotNull Map<List<IdentExpression>, NPC> npcs = new LinkedHashMap();
 
 	@Override
-	public @NonNull Compilation compilation() {
+	public @NotNull Compilation compilation() {
 		return module().getCompilation();
 	}
 
 	@Override
-	public @NonNull OS_Module module() {
+	public @NotNull OS_Module module() {
 		return _parent.module();
 	}
 
@@ -61,7 +61,7 @@ public class ImportContext extends ContextImpl implements Context {
 	}
 
 	@Override
-	public LookupResultList lookup(final String name, final int level, final @NonNull LookupResultList Result, final @NonNull SearchList alreadySearched, final boolean one) {
+	public LookupResultList lookup(final String name, final int level, final @NotNull LookupResultList Result, final @NotNull SearchList alreadySearched, final boolean one) {
 		alreadySearched.add(this);
 //		tripleo.elijah.util.Stupidity.println_err_2("2002 "+importStatement.importList());
 		Compilation compilation = compilation();
@@ -77,7 +77,7 @@ public class ImportContext extends ContextImpl implements Context {
 						final NamespaceContext namespaceContext = (NamespaceContext) element.getContext();
 						alreadySearched.add(namespaceContext);
 						namespaceContext.lookup(name, level, Result, alreadySearched, true);
-					} else if (element instanceof final @NonNull OS_NamedElement element2) {
+					} else if (element instanceof final @NotNull OS_NamedElement element2) {
 						if (element2.name().sameName(name)) {
 							Result.add(name, level, element, this);
 							break; // shortcut: should only have one in scope
@@ -108,9 +108,9 @@ public class ImportContext extends ContextImpl implements Context {
 
 		private void checkLast(final String name,
 							   final int level,
-							   final @NonNull LookupResultList Result,
-							   final @NonNull SearchList alreadySearched,
-							   final @NonNull Compilation compilation) {
+							   final @NotNull LookupResultList Result,
+							   final @NotNull SearchList alreadySearched,
+							   final @NotNull Compilation compilation) {
 			final IdentExpression last = x.get(x.size() - 1);
 			if (last.getText().equals(name)) {
 				Qualident cl = new QualidentImpl();
@@ -134,10 +134,10 @@ public class ImportContext extends ContextImpl implements Context {
 
 		private void checkLastHelper(final String name,
 									 final int level,
-									 final @NonNull LookupResultList Result,
-									 final @NonNull SearchList alreadySearched,
-									 final @NonNull Compilation compilation,
-									 final @NonNull Qualident cl) {
+									 final @NotNull LookupResultList Result,
+									 final @NotNull SearchList alreadySearched,
+									 final @NotNull Compilation compilation,
+									 final @NotNull Qualident cl) {
 			final OS_Package aPackage = compilation.getPackage(cl);
 			//LogEvent.logEvent(4003 , ""+aPackage.getElements());
 			for (final OS_Element element : aPackage.getElements()) {

@@ -11,18 +11,18 @@ import tripleo.elijah.util.NotImplementedException;
 public enum Stages {
 	D("D") {
 		@Override
-		public @NonNull RuntimeProcess getProcess(final ICompilationAccess aCa, final ProcessRecord aPr) {
+		public @NotNull RuntimeProcess getProcess(final ICompilationAccess aCa, final ProcessRecord aPr) {
 			return new DStageProcess(aCa, aPr);
 		}
 
 		@Override
-		public void writeLogs(final @NonNull ICompilationAccess aCompilationAccess) {
+		public void writeLogs(final @NotNull ICompilationAccess aCompilationAccess) {
 			aCompilationAccess.writeLogs();
 		}
 	},
 	E("E") {
 		@Override
-		public @NonNull RuntimeProcess getProcess(final ICompilationAccess aCa, final ProcessRecord aPr) {
+		public @NotNull RuntimeProcess getProcess(final ICompilationAccess aCa, final ProcessRecord aPr) {
 			return new EmptyProcess(aCa, aPr);
 		}
 
@@ -33,12 +33,12 @@ public enum Stages {
 	},
 	O("O") {
 		@Override
-		public @NonNull RuntimeProcess getProcess(final ICompilationAccess aCa, final @NonNull ProcessRecord aPr) {
+		public @NotNull RuntimeProcess getProcess(final ICompilationAccess aCa, final @NotNull ProcessRecord aPr) {
 			return new OStageProcess(aCa, aPr);
 		}
 
 		@Override
-		public void writeLogs(final @NonNull ICompilationAccess aCompilationAccess) {
+		public void writeLogs(final @NotNull ICompilationAccess aCompilationAccess) {
 			aCompilationAccess.writeLogs();
 		}
 	},  // Output,  // ??
@@ -49,7 +49,7 @@ public enum Stages {
 		}
 
 		@Override
-		public void writeLogs(final @NonNull ICompilationAccess aCompilationAccess) {
+		public void writeLogs(final @NotNull ICompilationAccess aCompilationAccess) {
 			aCompilationAccess.writeLogs();
 		}
 	};

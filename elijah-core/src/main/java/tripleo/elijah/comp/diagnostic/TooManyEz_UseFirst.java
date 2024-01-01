@@ -11,27 +11,27 @@ class TooManyEz_UseFirst implements Diagnostic {
 	final String message = "Too many .ez files, using first.";
 
 	@Override
-	public @NonNull String code() {
+	public @NotNull String code() {
 		return "9998";
 	}
 
 	@Override
-	public @NonNull Locatable primary() {
+	public @NotNull Locatable primary() {
 		return null;
 	}
 
 	@Override
-	public void report(@NonNull PrintStream stream) {
+	public void report(@NotNull PrintStream stream) {
 		stream.println(String.format("%s %s", code(), message));
 	}
 
 	@Override
-	public @NonNull List<Locatable> secondary() {
+	public @NotNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NonNull Severity severity() {
+	public @NotNull Severity severity() {
 		return Severity.WARN;
 	}
 }

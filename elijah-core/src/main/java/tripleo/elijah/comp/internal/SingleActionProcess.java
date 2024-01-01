@@ -17,7 +17,7 @@ class SingleActionProcess implements CB_Process {
 	}
 
 	@Override
-	public @NonNull List<CB_Action> steps() {
+	public @NotNull List<CB_Action> steps() {
 		return List_of(a);
 	}
 }

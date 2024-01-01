@@ -3,7 +3,7 @@ package tripleo.elijah.lang.i;
 import org.jspecify.annotations.NonNull;
 
 public interface DotExpression extends IExpression {
-	@NonNull
+	@NotNull
 	IExpression getRight();
 
 	@Override

@@ -28,7 +28,7 @@ public class ContextMock extends ContextImpl implements Context {
 	private final @Nullable OS_Element carrier;
 	private final @Nullable Context    _parent;
 
-	public ContextMock(final @NonNull Context aParent, final @NonNull OS_Element fd) {
+	public ContextMock(final @NotNull Context aParent, final @NotNull OS_Element fd) {
 		_parent = aParent;
 		carrier = fd;
 	}

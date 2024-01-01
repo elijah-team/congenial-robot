@@ -30,20 +30,20 @@ class ExitGetType implements State {
 		assign_type_to_idte(ite, generatedFunction1, aFd_ctx, aContext, dt2, phase1);
 	}
 
-	public void assign_type_to_idte(@NonNull final IdentTableEntry ite,
-									@NonNull final BaseEvaFunction generatedFunction,
-									@NonNull final Context aFunctionContext,
-									@NonNull final Context aContext,
-									@NonNull final DeduceTypes2 dt2,
-									@NonNull final DeducePhase phase) {
+	public void assign_type_to_idte(@NotNull final IdentTableEntry ite,
+									@NotNull final BaseEvaFunction generatedFunction,
+									@NotNull final Context aFunctionContext,
+									@NotNull final Context aContext,
+									@NotNull final DeduceTypes2 dt2,
+									@NotNull final DeducePhase phase) {
 		if (!ite.hasResolvedElement()) {
-			@NonNull final IdentIA ident_a = new IdentIA(ite.getIndex(), generatedFunction);
+			@NotNull final IdentIA ident_a = new IdentIA(ite.getIndex(), generatedFunction);
 			dt2.resolveIdentIA_(aContext, ident_a, generatedFunction, new FoundElement(phase) {
 
 				final String path = generatedFunction.getIdentIAPathNormal(ident_a);
 
 				@Override
-				public void foundElement(final @NonNull OS_Element x) {
+				public void foundElement(final @NotNull OS_Element x) {
 					System.err.println("590-590 " + x);
 
 
@@ -59,7 +59,7 @@ class ExitGetType implements State {
 				final __foundElement_noIdteType__ITE_Resolver resolver000 = new __foundElement_noIdteType__ITE_Resolver();
 				final __foundElement_hasIdteType__ITE_Resolver resolver001 = new __foundElement_hasIdteType__ITE_Resolver();
 
-				private void __foundElement_noIdteType(final @NonNull OS_Element x) {
+				private void __foundElement_noIdteType(final @NotNull OS_Element x) {
 
 					ite.addResolver(resolver000);
 
@@ -74,7 +74,7 @@ class ExitGetType implements State {
 								if (ite.type != null && ite.type.getAttached() != null) {
 									if (ite.type.getAttached().getType() == OS_Type.Type.USER) {
 										try {
-											@NonNull final GenType xx = dt2.resolve_type(ite.type.getAttached(), aFunctionContext);
+											@NotNull final GenType xx = dt2.resolve_type(ite.type.getAttached(), aFunctionContext);
 											ite.type.setAttached(xx);
 										} catch (final ResolveError resolveError) { // TODO double catch
 											dt2._LOG().info("210 Can't attach type to " + ite.getIdent());
@@ -104,7 +104,7 @@ class ExitGetType implements State {
 					switch (ite.type.getAttached().getType()) {
 					case USER -> {
 						try {
-							final @NonNull GenType xx = dt2.resolve_type(ite.type.getAttached(), aFunctionContext);
+							final @NotNull GenType xx = dt2.resolve_type(ite.type.getAttached(), aFunctionContext);
 							ite.type.setAttached(xx);
 						} catch (final ResolveError resolveError) {
 							dt2._LOG().info("192 Can't attach type to " + path);
@@ -119,14 +119,14 @@ class ExitGetType implements State {
 						// TODO All this for nothing
 						//  the ite points to a function, not a function call,
 						//  so there is no point in resolving it
-						if (ite.type.tableEntry instanceof final @NonNull ProcTableEntry pte) {
+						if (ite.type.tableEntry instanceof final @NotNull ProcTableEntry pte) {
 
-						} else if (ite.type.tableEntry instanceof final @NonNull IdentTableEntry identTableEntry) {
+						} else if (ite.type.tableEntry instanceof final @NotNull IdentTableEntry identTableEntry) {
 							if (identTableEntry.getCallablePTE() != null) {
 								@Nullable final ProcTableEntry cpte = identTableEntry.getCallablePTE();
 								cpte.typePromise().then(new DoneCallback<GenType>() {
 									@Override
-									public void onDone(@NonNull final GenType result) {
+									public void onDone(@NotNull final GenType result) {
 										SimplePrintLoggerToRemoveSoon.println2("1483 " + result.getResolved() + " " + result.getNode());
 									}
 								});
@@ -143,7 +143,7 @@ class ExitGetType implements State {
 					dt2._errSink().reportError("165 Can't resolve " + path);
 				}
 
-				private void use_user_class(@NonNull final OS_Type aType, @NonNull final IdentTableEntry aEntry) {
+				private void use_user_class(@NotNull final OS_Type aType, @NotNull final IdentTableEntry aEntry) {
 					final ClassStatement cs = aType.getClassOf();
 					if (aEntry.constructable_pte != null) {
 						final int yyy = 3;

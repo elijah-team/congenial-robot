@@ -29,7 +29,7 @@ public class ChooseHashDirectoryNameBehaviorPaths implements ChooseDirectoryName
 	}
 
 	@Override
-	public @NonNull File chooseDirectory() {
+	public @NotNull File chooseDirectory() {
 		final File file = choose_dir_name();
 
 		//c.paths().outputRoot().set(p);
@@ -62,7 +62,7 @@ public class ChooseHashDirectoryNameBehaviorPaths implements ChooseDirectoryName
 		}
 	}
 
-	@NonNull
+	@NotNull
 	public File choose_dir_name() {
 		final List<File> recordedreads = c.getIO().recordedreads;
 
