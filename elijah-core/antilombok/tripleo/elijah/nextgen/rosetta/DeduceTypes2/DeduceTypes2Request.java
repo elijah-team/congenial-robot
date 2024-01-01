@@ -19,7 +19,7 @@ public final class DeduceTypes2Request {
       ElIntrinsics.checkNotNullParameter(module, "module");
       ElIntrinsics.checkNotNullParameter(deducePhase, "deducePhase");
       ElIntrinsics.checkNotNullParameter(verbosity, "verbosity");
-//      super();
+
       this.module = module;
       this.deducePhase = deducePhase;
       this.verbosity = verbosity;

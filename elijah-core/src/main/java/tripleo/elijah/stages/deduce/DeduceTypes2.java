@@ -77,9 +77,9 @@ import java.util.regex.Pattern;
  */
 public class DeduceTypes2 {
 
-	CHAIN __CHAIN__post_dof_idte_register_resolved = new _CHAIN___post_dof_idte_register_resolved();
+	private final CHAIN __CHAIN__post_dof_idte_register_resolved = new _CHAIN___post_dof_idte_register_resolved();
 
-	private final DeduceTypes2Injector __inj = new DeduceTypes2Injector();
+	private static final DeduceTypes2Injector __inj = new DeduceTypes2Injector(); // TODO 12/31 kt,etc singleton
 	private final DeduceTypes2Rosetta  rosetta;
 
 	public DeduceElement3_IdentTableEntry _zero_getIdent(final IdentTableEntry aIdentTableEntryBte, final BaseEvaFunction aGf, final DeduceTypes2 aDt2) {
@@ -100,7 +100,7 @@ public class DeduceTypes2 {
 	private final          DeduceCentral            _p_central              = _inj().new_DeduceCentral(this);
 	private final          Map<OS_Element, DG_Item> _map_dgs                = _inj().new_HashMap_DGS();
 	private final @NotNull List<Runnable>           onRunnables             = _inj().new_ArrayList__Runnable();
-	private final          List<FunctionInvocation> functionInvocations     = _inj().new_ArrayList__FunctionInvocation(); // TODO never used!
+//	private final          List<FunctionInvocation> functionInvocations     = _inj().new_ArrayList__FunctionInvocation(); // TODO never used!
 	private final          List<IDeduceResolvable>  _pendingResolves        = _inj().new_ArrayList__IDeduceResolvable();
 	private final          ErrSink                  errSink;
 	private final          PromiseExpectations      expectations            = _inj().new_PromiseExpectations(this);
@@ -111,10 +111,13 @@ public class DeduceTypes2 {
 		this.rosetta = new DeduceTypes2Rosetta(aRequest);
 
 		this.module  = rosetta.getModule();
+		
+		System.err.println("************* DT2::for "+module.getFileName());
+		
 		this.phase   = rosetta.getDeducePhase();
 		this.errSink = rosetta.getErrSink();
 
-		this.LOG     = rosetta.createAndAddLog_DeduceTypes2();
+		this.LOG     = rosetta.createAndAddLog_DeduceTypes2(); // 12/31 eeeeeeeeeeeeeeeeeeeeeeee
 
 		phase.waitOn(this);
 	}

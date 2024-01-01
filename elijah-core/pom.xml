@@ -120,6 +120,90 @@
 
 	<build>
 		<plugins>
+<!--
+				<plugin>
+					<groupId>org.jetbrains.kotlin</groupId>
+					<artifactId>kotlin-maven-plugin</artifactId>
+					<version>${kotlin.version}</version>
+					<extensions>true</extensions> &lt;!&ndash; You can set this option
+            to automatically take information about lifecycles &ndash;&gt;
+					<executions>
+						<execution>
+							<id>compile</id>
+							<goals>
+								<goal>compile</goal> &lt;!&ndash; You can skip the <goals> element
+                        if you enable extensions for the plugin &ndash;&gt;
+							</goals>
+							<configuration>
+								<sourceDirs>
+									<sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/src/main/java</sourceDir>
+
+									<sourceDir>./src-damar/elijah-sourcemodel-api/src/main/java</sourceDir>
+									<sourceDir>./src-damar/elijah-sourcemodel-impl/src/main/java</sourceDir>
+									<sourceDir>./src-damar/elijah-good-api/src/main/java</sourceDir>
+									<sourceDir>./src-bnxn/elijah-nextgen-outputstatement/src/main/java</sourceDir>
+									<sourceDir>./src-bnxn/elijah-stateful/src/main/java</sourceDir>
+									<sourceDir>./src-bnxn/tripleo-small/src/main/java</sourceDir>
+								</sourceDirs>
+							</configuration>
+						</execution>
+						<execution>
+							<id>test-compile</id>
+							<goals>
+								<goal>test-compile</goal> &lt;!&ndash; You can skip the <goals> element
+                    if you enable extensions for the plugin &ndash;&gt;
+							</goals>
+							<configuration>
+								<sourceDirs>
+									<sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/src/test/java</sourceDir>
+									<sourceDir>./src-damar/elijah-sourcemodel-api/src/main/java</sourceDir>
+									<sourceDir>./src-damar/elijah-sourcemodel-impl/src/main/java</sourceDir>
+									<sourceDir>./src-damar/elijah-good-api/src/main/java</sourceDir>
+									<sourceDir>./src-bnxn/elijah-nextgen-outputstatement/src/main/java</sourceDir>
+									<sourceDir>./src-bnxn/elijah-stateful/src/main/java</sourceDir>
+									<sourceDir>./src-bnxn/tripleo-small/src/main/java</sourceDir>
+								</sourceDirs>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+-->
+<!--
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<executions>
+						&lt;!&ndash; Replacing default-compile as it is treated specially by Maven &ndash;&gt;
+						<execution>
+							<id>default-compile</id>
+							<phase>none</phase>
+						</execution>
+						&lt;!&ndash; Replacing default-testCompile as it is treated specially by Maven &ndash;&gt;
+						<execution>
+							<id>default-testCompile</id>
+							<phase>none</phase>
+						</execution>
+						<execution>
+							<id>java-compile</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>java-test-compile</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>testCompile</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+-->
+
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>

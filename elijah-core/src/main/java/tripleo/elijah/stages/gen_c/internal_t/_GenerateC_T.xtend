@@ -15,11 +15,13 @@ import tripleo.elijah.stages.gen_fn.EvaConstructor
 import tripleo.elijah.stages.gen_fn.EvaNamespace
 import tripleo.elijah.stages.gen_fn.EvaNode
 import java.util.Collection
+import java.util.ArrayList
 
 abstract class _GenerateC_T {
 	protected final Map<EvaNode, WhyNotGarish_Item> a_directory = new HashMap();
 	
 	def Collection<WhyNotGarish_Item> __directoryValues() { a_directory.values() }
+	def Collection<WhyNotGarish_Item> __directoryValuesCopy() { new ArrayList(a_directory.values()) }
 	
 	def WhyNotGarish_Constructor a_lookup(/*final*/ EvaConstructor aGf) {
 	  if (a_directory.containsKey(aGf)) {
