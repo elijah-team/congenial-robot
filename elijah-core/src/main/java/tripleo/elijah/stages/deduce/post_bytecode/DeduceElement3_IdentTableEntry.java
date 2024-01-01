@@ -44,7 +44,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 
 		@Override
-		public @NotNull Operation2<GenType> resolved(final Context ectx) {
+		public @NonNull Operation2<GenType> resolved(final Context ectx) {
 			try {
 				if (_resolved == null) {
 					_resolved = deduceTypes2.resolve_type(genType().getTypeName(), ectx);
@@ -78,14 +78,14 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		context = aContext;
 	}
 
-	public void assign_type_to_idte(final @NotNull Context aFunctionContext, final @NotNull Context aContext) {
+	public void assign_type_to_idte(final @NonNull Context aFunctionContext, final @NonNull Context aContext) {
 		new ExitGetType().
 				assign_type_to_idte(principal, generatedFunction, aFunctionContext, aContext, deduceTypes2, deduceTypes2._phase());
 	}
 
-	public void backlinkPte(final @NotNull ClassStatement classStatement,
+	public void backlinkPte(final @NonNull ClassStatement classStatement,
 							final ProcTableEntry ignoredPte,
-							final @NotNull IElementHolder __eh) {
+							final @NonNull IElementHolder __eh) {
 		// README classStatement [T310-231]
 
 		// README setStause on callablePTE and principal
@@ -152,7 +152,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	@Override
-	public @NotNull DED elementDiscriminator() {
+	public @NonNull DED elementDiscriminator() {
 		return new DED_ITE(principal);
 	}
 
@@ -162,7 +162,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	@Override
-	public @NotNull GenType genType() {
+	public @NonNull GenType genType() {
 		if (genType == null) {
 			genType = new GenTypeImpl();//_inj().new_GenTypeImpl();
 		}
@@ -176,11 +176,11 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	@Override
-	public @NotNull DeduceElement3_Kind kind() {
+	public @NonNull DeduceElement3_Kind kind() {
 		return DeduceElement3_Kind.GEN_FN__ITE;
 	}
 
-	//	@NotNull final GenType xx = // TODO xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	//	@NonNull final GenType xx = // TODO xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	@Override
 	public void resolve(final Context aContext, final DeduceTypes2 aDeduceTypes2) {
 		//		deduceTypes2.resolveIdentIA_(aContext, aIdentIA, generatedFunction, aFoundElement);
@@ -190,7 +190,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	@Override
-	public void resolve(final @NotNull IdentIA aIdentIA, final @NotNull Context aContext, final @NotNull FoundElement aFoundElement) {
+	public void resolve(final @NonNull IdentIA aIdentIA, final @NonNull Context aContext, final @NonNull FoundElement aFoundElement) {
 		// FoundElement is the "disease"
 		deduceTypes2.resolveIdentIA_(aContext, aIdentIA, generatedFunction, aFoundElement);
 	}
@@ -242,7 +242,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		return R;
 	}
 
-	public @NotNull Operation2<GenType> resolve1(final @NotNull IdentTableEntry ite, final @NotNull Context aContext) {
+	public @NonNull Operation2<GenType> resolve1(final @NonNull IdentTableEntry ite, final @NonNull Context aContext) {
 		// FoundElement is the "disease"
 		try {
 			return Operation2.success(deduceTypes2.resolve_type(ite.type.getAttached(), aContext));
@@ -319,7 +319,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 
 		if (principal.getCallablePTE() != null) {
-			@NotNull final ProcTableEntry callable = principal.getCallablePTE();
+			@NonNull final ProcTableEntry callable = principal.getCallablePTE();
 
 			DeduceTypes2    dt2 = callable._deduceTypes2();
 			BaseEvaFunction gf  = callable.__gf;
@@ -357,12 +357,12 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 	}
 
-	private OS_Element sneak_el_null__bl1_not_null(final @NotNull IdentExpression ident, final OS_Element[] elx, OS_Element el, final InstructionArgument bl1) {
+	private OS_Element sneak_el_null__bl1_not_null(final @NonNull IdentExpression ident, final OS_Element[] elx, OS_Element el, final InstructionArgument bl1) {
 		var dt2 = principal._deduceTypes2();
 		assert dt2 != null;
 
 		if (bl1 instanceof final IntegerIA integerIA) {
-			@NotNull final VariableTableEntry vte_bl1 = integerIA.getEntry();
+			@NonNull final VariableTableEntry vte_bl1 = integerIA.getEntry();
 
 			// get DR
 			final DR_Ident x = generatedFunction.getIdent(ident, vte_bl1);
@@ -494,7 +494,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	@Nullable
-	private OS_Element sneak_el_null__bl1_null(final @NotNull IdentExpression ident, OS_Element el) {
+	private OS_Element sneak_el_null__bl1_null(final @NonNull IdentExpression ident, OS_Element el) {
 		var dt2 = principal._deduceTypes2();
 		assert dt2 != null;
 
@@ -515,7 +515,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			if (ctx2 instanceof ModuleContext) {
 				ctxs.add(ctx2);
 
-				final @NotNull Collection<ModuleItem> itms = ((ModuleContext) ctx2).getCarrier().getItems();
+				final @NonNull Collection<ModuleItem> itms = ((ModuleContext) ctx2).getCarrier().getItems();
 				for (ModuleItem moduleItem : itms) {
 					if (moduleItem instanceof final NormalImportStatement importStatement) {
 						ctx2 = importStatement.myContext();
@@ -539,17 +539,17 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		return el;
 	}
 
-	public @NotNull DeduceElement3_Type type() {
+	public @NonNull DeduceElement3_Type type() {
 		return _type;
 	}
 
-	public void dan(final @NotNull BaseEvaFunction generatedFunction,
-					final @NotNull Instruction instruction,
-					final @NotNull Context aContext,
-					final @NotNull VariableTableEntry vte,
-					final @NotNull IdentIA identIA,
-					final @NotNull IdentTableEntry idte,
-					final @NotNull DeduceTypes2 aDeduceTypes2) {
+	public void dan(final @NonNull BaseEvaFunction generatedFunction,
+					final @NonNull Instruction instruction,
+					final @NonNull Context aContext,
+					final @NonNull VariableTableEntry vte,
+					final @NonNull IdentIA identIA,
+					final @NonNull IdentTableEntry idte,
+					final @NonNull DeduceTypes2 aDeduceTypes2) {
 
 		assert idte == principal;
 
@@ -580,10 +580,10 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		return principal.get_ident();
 	}
 
-	public void stipulate_ResolvedVariable(final @NotNull DeducePhase aDeducePhase,
-										   final @NotNull IdentTableEntry identTableEntry,
-										   final @NotNull VariableStatement vs,
-										   final @NotNull IEvaFunctionBase evaFunction) {
+	public void stipulate_ResolvedVariable(final @NonNull DeducePhase aDeducePhase,
+										   final @NonNull IdentTableEntry identTableEntry,
+										   final @NonNull VariableStatement vs,
+										   final @NonNull IEvaFunctionBase evaFunction) {
 		assert identTableEntry == principal;
 
 		final OS_Element parent = vs.getParent();
@@ -612,7 +612,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		public static State EXIT_GET_TYPE;
 		public static State CHECK_EVA_CLASS_VAR_TABLE;
 
-		public static void register(final @NotNull _RegistrationTarget aRegistrationTarget) {
+		public static void register(final @NonNull _RegistrationTarget aRegistrationTarget) {
 			EXIT_GET_TYPE             = aRegistrationTarget.registerState(new ExitGetType());
 			CHECK_EVA_CLASS_VAR_TABLE = aRegistrationTarget.registerState(new CheckEvaClassVarTable());
 		}
@@ -631,7 +631,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			identTableEntry.backlinkSet().then((InstructionArgument backlink0) -> {
 				final Consumer<BaseTableEntry> setBacklinkCallback2 = (BaseTableEntry backlink) -> {
 					if (backlink instanceof final ProcTableEntry procTableEntry) {
-						procTableEntry.typeResolvePromise().then((final @NotNull GenType result) -> {
+						procTableEntry.typeResolvePromise().then((final @NonNull GenType result) -> {
 							final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
 
 
@@ -682,11 +682,11 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	public class DE3_EH_GroundedVariableStatement implements IElementHolder {
-		private final @NotNull VariableStatement              element;
+		private final @NonNull VariableStatement              element;
 		private final          DeduceElement3_IdentTableEntry ground;
-		private final @NotNull List<setup_GenType_Action>     actions = new ArrayList<>();
+		private final @NonNull List<setup_GenType_Action>     actions = new ArrayList<>();
 
-		public DE3_EH_GroundedVariableStatement(final @NotNull VariableStatement aVariableStatement, final DeduceElement3_IdentTableEntry aPrincipal) {
+		public DE3_EH_GroundedVariableStatement(final @NonNull VariableStatement aVariableStatement, final DeduceElement3_IdentTableEntry aPrincipal) {
 			element = aVariableStatement;
 			ground  = aPrincipal;
 		}
@@ -711,7 +711,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 
 		@Override
-		public @NotNull VariableStatement getElement() {
+		public @NonNull VariableStatement getElement() {
 			return element;
 		}
 
@@ -721,10 +721,10 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	public class DE3_ITE_Holder implements IElementHolder {
-		private final @NotNull List<setup_GenType_Action> actions = new ArrayList<>();
-		private final @NotNull OS_Element                 element;
+		private final @NonNull List<setup_GenType_Action> actions = new ArrayList<>();
+		private final @NonNull OS_Element                 element;
 
-		public DE3_ITE_Holder(final @NotNull OS_Element aElement) {
+		public DE3_ITE_Holder(final @NonNull OS_Element aElement) {
 			element = aElement;
 		}
 
@@ -748,7 +748,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 
 		@Override
-		public @NotNull OS_Element getElement() {
+		public @NonNull OS_Element getElement() {
 			return element;
 		}
 	}

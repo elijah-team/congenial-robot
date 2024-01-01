@@ -15,7 +15,7 @@ public class DefaultClassGenerator implements IClassGenerator {
 
 	private final          ICodeRegistrar cr;
 	private final          DeducePhase    deducePhase;
-	private final @NotNull WorkList       wl;
+	private final @NonNull WorkList       wl;
 
 	public DefaultClassGenerator(DeducePhase aDeducePhase) {
 		// given
@@ -34,36 +34,36 @@ public class DefaultClassGenerator implements IClassGenerator {
 	}
 
 	@Override
-	public DeducePhase.@NotNull GeneratedClasses getGeneratedClasses() {
+	public DeducePhase.@NonNull GeneratedClasses getGeneratedClasses() {
 		return deducePhase.generatedClasses;
 	}
 
 	@Override
 	public FunctionInvocation newFunctionInvocation(final FunctionDef fd,
 													final ProcTableEntry pte,
-													final @NotNull ClassInvocation ci) {
-		final @NotNull FunctionInvocation fi = deducePhase.newFunctionInvocation(fd, pte, ci);
+													final @NonNull ClassInvocation ci) {
+		final @NonNull FunctionInvocation fi = deducePhase.newFunctionInvocation(fd, pte, ci);
 		return fi;
 	}
 
 	@Override
-	public @Nullable ClassInvocation registerClassInvocation(final @NotNull ClassStatement cs, final String className) {
+	public @Nullable ClassInvocation registerClassInvocation(final @NonNull ClassStatement cs, final String className) {
 		final ClassInvocation ci = deducePhase.registerClassInvocation(cs, className, new NULL_DeduceTypes2());
 		return ci;
 	}
 
 	@Override
-	public void submitGenerateClass(final @NotNull ClassInvocation ci, final GenerateFunctions gf) {
+	public void submitGenerateClass(final @NonNull ClassInvocation ci, final GenerateFunctions gf) {
 		wl.addJob(new WlGenerateClass(gf, ci, deducePhase.generatedClasses, cr));
 	}
 
 	@Override
-	public void submitGenerateFunction(final @NotNull FunctionInvocation fi, final GenerateFunctions gf) {
+	public void submitGenerateFunction(final @NonNull FunctionInvocation fi, final GenerateFunctions gf) {
 		wl.addJob(new WlGenerateFunction(gf, fi, cr));
 	}
 
 	@Override
-	public @NotNull WorkList wl() {
+	public @NonNull WorkList wl() {
 		return wl;
 	}
 }

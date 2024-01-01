@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class DefaultReactive implements Reactive {
-	private final @NotNull List<Reactivable> ables = new ArrayList<>();
+	private final @NonNull List<Reactivable> ables = new ArrayList<>();
 
 	@Override
 	public void add(final Reactivable aReactivable) {

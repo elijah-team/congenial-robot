@@ -40,9 +40,9 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getGf().findLabel(aIndex);
 	}
 
-	@NotNull
+	@NonNull
 	public Pair<java.util.List<String>, java.util.List<ArgumentString>> getArgumentStrings(
-			final @NotNull Instruction instruction) {
+			final @NonNull Instruction instruction) {
 		Preconditions.checkState(getGenerateC().isPresent());
 		final GenerateC generateC = getGenerateC().get();
 		Preconditions.checkNotNull(generateC);
@@ -61,14 +61,14 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 				final ASS_ID st = new ASS_ID(this, (IdentIA) ia, Generate_Code_For_Method.AOG.GET);
 				sl4.add(new ArgumentString(ia, st, null));
 				sl3.add(st.getText());
-			} else if (ia instanceof final @NotNull ConstTableIA c) {
+			} else if (ia instanceof final @NonNull ConstTableIA c) {
 				final ASS_CONSTIA st = new ASS_CONSTIA(this, (ConstTableIA) ia, Generate_Code_For_Method.AOG.GET);
 				sl4.add(new ArgumentString(ia, st, null));
 				sl3.add(st.getText());
 			} else if (ia instanceof ProcIA) {
 				logProgress(740, "ProcIA");
 
-				// @NotNull final EG_Statement st = EG_Statement.of(realTargetName,
+				// @NonNull final EG_Statement st = EG_Statement.of(realTargetName,
 				// EX_Explanation.withMessage("ArgumentString::integerIA"));
 				sl4.add(new ArgumentString(ia, null, "ProcIA"));
 
@@ -76,7 +76,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 			} else {
 				logProgress(131, ia.getClass().getName());
 
-				// @NotNull final EG_Statement st = EG_Statement.of(realTargetName,
+				// @NonNull final EG_Statement st = EG_Statement.of(realTargetName,
 				// EX_Explanation.withMessage("ArgumentString::integerIA"));
 				sl4.add(new ArgumentString(ia, null, "Invalid InstructionArgument"));
 
@@ -86,11 +86,11 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return Pair.of(sl3, sl4);
 	}
 
-	public @NotNull ConstantTableEntry getConstTableEntry(final int aIndex) {
+	public @NonNull ConstantTableEntry getConstTableEntry(final int aIndex) {
 		return getGf().getConstTableEntry(aIndex);
 	}
 
-	public @NotNull FunctionDef getFD() {
+	public @NonNull FunctionDef getFD() {
 		return getGf().getFD();
 	}
 
@@ -102,7 +102,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 
 	public abstract BaseEvaFunction getGf();
 
-	public @NotNull ProcTableEntry getProcTableEntry(final int aIndex) {
+	public @NonNull ProcTableEntry getProcTableEntry(final int aIndex) {
 		return getGf().getProcTableEntry(aIndex);
 	}
 
@@ -110,11 +110,11 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getGf().getSelf();
 	}
 
-	public @NotNull TypeTableEntry getTypeTableEntry(final int aIndex) {
+	public @NonNull TypeTableEntry getTypeTableEntry(final int aIndex) {
 		return getGf().getTypeTableEntry(aIndex);
 	}
 
-	public @NotNull VariableTableEntry getVarTableEntry(final int aIndex) {
+	public @NonNull VariableTableEntry getVarTableEntry(final int aIndex) {
 		return getGf().getVarTableEntry(aIndex);
 	}
 
@@ -123,7 +123,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return fileGenPromise.isResolved();
 	}
 
-	public @NotNull List<Instruction> instructions() {
+	public @NonNull List<Instruction> instructions() {
 		return getGf().instructions();
 	}
 
@@ -153,7 +153,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return getFD().getNameNode();
 	}
 
-	public void pt_onGenClass(final @NotNull OnGenClass ogc) {
+	public void pt_onGenClass(final @NonNull OnGenClass ogc) {
 		getGf().onGenClass(ogc);
 	}
 
@@ -165,14 +165,14 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		fileGenPromise.resolve(aFileGen);
 	}
 
-	public @NotNull Pair<String, TypeTableEntry> tte_for_result() {
+	public @NonNull Pair<String, TypeTableEntry> tte_for_result() {
 		@Nullable
 		InstructionArgument result_index = getGf().vte_lookup("Result");
 		if (result_index == null) {
 			// if there is no Result, there should be Value
 			result_index = getGf().vte_lookup("Value");
 			// but Value might be passed in. If it is, discard value
-			@NotNull
+			@NonNull
 			final VariableTableEntry vte = ((IntegerIA) result_index).getEntry();
 			if (vte.getVtt() != VariableTableType.RESULT)
 				result_index = null;
@@ -185,11 +185,11 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 		return Pair.of(null, tte1);
 	}
 
-	public @NotNull TypeTableEntry tte_for_self() {
+	public @NonNull TypeTableEntry tte_for_self() {
 		@Nullable
 		final InstructionArgument result_index = getGf().vte_lookup("self");
 		final IntegerIA resultIA = (IntegerIA) result_index;
-		@NotNull
+		@NonNull
 		final VariableTableEntry vte = resultIA.getEntry();
 		assert vte.getVtt() == VariableTableType.SELF;
 
@@ -203,7 +203,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	}
 
 	public ZoneVTE zoneHelper(final IntegerIA ia) {
-		final @NotNull BaseEvaFunction gf = this.getGf();
+		final @NonNull BaseEvaFunction gf = this.getGf();
 		final VariableTableEntry varTableEntry = this.getVarTableEntry(ia.getIndex());
 		final ZoneVTE zone_vte = getGenerateC().get().get_zone().get(varTableEntry, gf);
 
@@ -211,7 +211,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	}
 
 	public ZoneVTE zoneHelper(final VariableTableEntry varTableEntry) {
-		final @NotNull BaseEvaFunction gf = this.getGf();
+		final @NonNull BaseEvaFunction gf = this.getGf();
 		final ZoneVTE zone_vte = getGenerateC().get().get_zone().get(varTableEntry, gf);
 		return zone_vte;
 	}

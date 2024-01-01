@@ -36,10 +36,10 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	private       OS_Type        __cached_osType;
 	private       ClassHeader    hdr;
 
-	public ClassStatementImpl(final @NotNull OS_Element parentElement, final Context parentContext) {
+	public ClassStatementImpl(final @NonNull OS_Element parentElement, final Context parentContext) {
 		parent = parentElement; // setParent
 
-		@NotNull final ElObjectType x = DecideElObjectType.getElObjectType(parentElement);
+		@NonNull final ElObjectType x = DecideElObjectType.getElObjectType(parentElement);
 		switch (x) {
 		case MODULE:
 			final OS_Module module = (OS_Module) parentElement;
@@ -66,7 +66,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull List<AnnotationPart> annotationIterable() {
+	public @NonNull List<AnnotationPart> annotationIterable() {
 		List<AnnotationClause> annotations = hdr.annos();
 
 		List<AnnotationPart> aps = new ArrayList<AnnotationPart>();
@@ -79,17 +79,17 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull ConstructorDef addCtor(final IdentExpression aConstructorName) {
+	public @NonNull ConstructorDef addCtor(final IdentExpression aConstructorName) {
 		return new ConstructorDefImpl(aConstructorName, this, getContext());
 	}
 
 	@Override
-	public @NotNull DestructorDef addDtor() {
+	public @NonNull DestructorDef addDtor() {
 		return new DestructorDefImpl(this, getContext());
 	}
 
 	@Override
-	public @NotNull DefFunctionDef defFuncDef() {
+	public @NonNull DefFunctionDef defFuncDef() {
 		return new DefFunctionDefImpl(this, getContext());
 	}
 
@@ -99,12 +99,12 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull FunctionDef funcDef() {
+	public @NonNull FunctionDef funcDef() {
 		return new FunctionDefImpl(this, getContext());
 	}
 
     @Override
-    public @NotNull Collection<ClassItem> findFunction(final String name) {
+    public @NonNull Collection<ClassItem> findFunction(final String name) {
         return items.stream()
                 .filter(item -> {
                     switch (DecideElObjectType.getElObjectType(item)) {
@@ -118,7 +118,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
     }
 
     @Override
-    public @NotNull Collection<ConstructorDef> getConstructors() {
+    public @NonNull Collection<ConstructorDef> getConstructors() {
         final Collection<ClassItem> x = Collections2.filter(items,
 				__GetConstructorsHelper.selectForConstructors);
         final Collection<ConstructorDef> y = Collections2.transform(x,
@@ -127,7 +127,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
     }
 
 	@Override
-	public @NotNull OS_Type getOS_Type() {
+	public @NonNull OS_Type getOS_Type() {
 		if (__cached_osType == null)
 			__cached_osType = new OS_UserClassType(this);
 		return __cached_osType;
@@ -139,7 +139,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull List<TypeName> getGenericPart() {
+	public @NonNull List<TypeName> getGenericPart() {
 		if (hdr.genericPart() == null)
 			return emptyTypeNameList;
 		else
@@ -177,7 +177,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull PropertyStatement prop() {
+	public @NonNull PropertyStatement prop() {
 		PropertyStatement propertyStatement = new PropertyStatementImpl(this, getContext());
 		addToContainer(propertyStatement);
 		return propertyStatement;
@@ -209,12 +209,12 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull StatementClosure statementClosure() {
+	public @NonNull StatementClosure statementClosure() {
 		return new AbstractStatementClosure(this);
 	}
 
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.addClass(this); // TODO visitClass
 	}
 
@@ -236,7 +236,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public void serializeTo(final @NotNull SmallWriter sw) {
+	public void serializeTo(final @NonNull SmallWriter sw) {
 		// name inheritance items
 		// packagename parent
 
@@ -265,7 +265,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 	}
 
 	@Override
-	public @NotNull String getName() {
+	public @NonNull String getName() {
 		if (hdr.nameToken() == null)
 			throw new IllegalStateException("null name");
 		return hdr.nameToken().getText();
@@ -301,7 +301,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 		return null;
 	}
 
-	public @NotNull ProgramClosure XXX() {
+	public @NonNull ProgramClosure XXX() {
 		return new ProgramClosureImpl() {
 		};
 	}

@@ -29,12 +29,12 @@ public class OS_GenericTypeNameType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NotNull String asString() {
+	public @NonNull String asString() {
 		return MessageFormat.format("<OS_GenericTypeNameType {0}>", genericTypename);
 	}
 
 	@Override
-	protected boolean _isEqual(final @NotNull OS_Type aType) {
+	protected boolean _isEqual(final @NonNull OS_Type aType) {
 		return aType.getType() == Type.GENERIC_TYPENAME && genericTypename.equals(((OS_GenericTypeNameType) aType).genericTypename);
 	}
 
@@ -48,7 +48,7 @@ public class OS_GenericTypeNameType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NotNull Type getType() {
+	public @NonNull Type getType() {
 		return Type.GENERIC_TYPENAME;
 	}
 }

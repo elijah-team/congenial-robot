@@ -25,10 +25,10 @@ import tripleo.util.buffer.Buffer;
 import java.util.List;
 
 public class DefaultGenerateResultSink implements GenerateResultSink {
-	private final @NotNull IPipelineAccess pa;
+	private final @NonNull IPipelineAccess pa;
 
 	@Contract(pure = true)
-	public DefaultGenerateResultSink(final @NotNull IPipelineAccess pa0) {
+	public DefaultGenerateResultSink(final @NonNull IPipelineAccess pa0) {
 		pa = pa0;
 	}
 
@@ -43,9 +43,9 @@ public class DefaultGenerateResultSink implements GenerateResultSink {
 	}
 
 	@Override
-	public void addClass_1(final @NotNull GarishClass aGarishClass,
-						   final @NotNull GenerateResult gr,
-						   final @NotNull GenerateC aGenerateC) {
+	public void addClass_1(final @NonNull GarishClass aGarishClass,
+						   final @NonNull GenerateResult gr,
+						   final @NonNull GenerateC aGenerateC) {
 		NG_OutputClass o = new NG_OutputClass();
 		o.setClass(aGarishClass, aGenerateC);
 		pa.addOutput(o);
@@ -59,19 +59,19 @@ public class DefaultGenerateResultSink implements GenerateResultSink {
 	}
 
 	@Override
-	public void additional(final @NotNull GenerateResult aGenerateResult) {
+	public void additional(final @NonNull GenerateResult aGenerateResult) {
 		//throw new IllegalStateException("Error");
 	}
 
 	@Override
-	public void addNamespace_0(final @NotNull GarishNamespace aGarishNamespace, final Buffer aImplBuffer, final Buffer aHeaderBuffer) {
+	public void addNamespace_0(final @NonNull GarishNamespace aGarishNamespace, final Buffer aImplBuffer, final Buffer aHeaderBuffer) {
 		throw new IllegalStateException("Error");
 	}
 
 	@Override
-	public void addNamespace_1(final @NotNull GarishNamespace aGarishNamespace,
-							   final @NotNull GenerateResult gr,
-							   final @NotNull GenerateC aGenerateC) {
+	public void addNamespace_1(final @NonNull GarishNamespace aGarishNamespace,
+							   final @NonNull GenerateResult gr,
+							   final @NonNull GenerateC aGenerateC) {
 		NG_OutputNamespace o = new NG_OutputNamespace();
 		o.setNamespace(aGarishNamespace, aGenerateC);
 		pa.addOutput(o);

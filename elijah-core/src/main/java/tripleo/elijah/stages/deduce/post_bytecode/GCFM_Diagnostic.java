@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 public interface GCFM_Diagnostic extends Diagnostic {
-	static @NotNull GCFM_Diagnostic forThis(final @NotNull String aMessage, final @NotNull String aCode, final @NotNull Severity aSeverity) {
+	static @NonNull GCFM_Diagnostic forThis(final @NonNull String aMessage, final @NonNull String aCode, final @NonNull Severity aSeverity) {
 		return new GCFM_Diagnostic() {
 			@Override
 			public String _message() {
@@ -21,17 +21,17 @@ public interface GCFM_Diagnostic extends Diagnostic {
 			}
 
 			@Override
-			public @NotNull Locatable primary() {
+			public @NonNull Locatable primary() {
 				return null;
 			}
 
 			@Override
-			public void report(final @NotNull PrintStream stream) {
+			public void report(final @NonNull PrintStream stream) {
 				stream.printf("%s %s%n", code(), _message());
 			}
 
 			@Override
-			public @NotNull List<Locatable> secondary() {
+			public @NonNull List<Locatable> secondary() {
 				return null;
 			}
 

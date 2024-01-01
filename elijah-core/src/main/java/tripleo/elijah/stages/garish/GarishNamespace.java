@@ -12,7 +12,7 @@ import tripleo.elijah.world.impl.DefaultLivingNamespace;
 import tripleo.util.buffer.Buffer;
 
 public class GarishNamespace {
-	public @NotNull BufferTabbedOutputStream getImplBuffer(final @NotNull EvaNamespace ignoredX,
+	public @NonNull BufferTabbedOutputStream getImplBuffer(final @NonNull EvaNamespace ignoredX,
 														   final String class_name,
 														   final int class_code) {
 		final BufferTabbedOutputStream tos = new BufferTabbedOutputStream();
@@ -43,7 +43,7 @@ public class GarishNamespace {
 		//_lc.setGarish(this);
 	}
 
-	public void garish(final GenerateC aGenerateC, final GenerateResult gr, final @NotNull GenerateResultSink aResultSink) {
+	public void garish(final GenerateC aGenerateC, final GenerateResult gr, final @NonNull GenerateResultSink aResultSink) {
 		final DefaultLivingNamespace dln = (DefaultLivingNamespace) _lc;
 		final EvaNamespace           x   = dln.evaNode();
 
@@ -60,8 +60,8 @@ public class GarishNamespace {
 		x.generatedAlready = true;
 	}
 
-	public @NotNull BufferTabbedOutputStream getHeaderBuffer(final @NotNull GenerateC aGenerateC,
-															 final @NotNull EvaNamespace x,
+	public @NonNull BufferTabbedOutputStream getHeaderBuffer(final @NonNull GenerateC aGenerateC,
+															 final @NonNull EvaNamespace x,
 															 final String class_name,
 															 final int class_code) {
 		final BufferTabbedOutputStream tosHdr = new BufferTabbedOutputStream();

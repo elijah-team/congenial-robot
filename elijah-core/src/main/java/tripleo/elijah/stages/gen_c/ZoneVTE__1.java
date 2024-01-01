@@ -15,7 +15,7 @@ class ZoneVTE__1 implements ZoneVTE {
 		_g_gf            = aGf;
 	}
 
-	@NotNull
+	@NonNull
 	private String calculate() {
 		final String vte_name = _g_varTableEntry.getName();
 		return switch (_g_varTableEntry.getVtt()) {
@@ -43,7 +43,7 @@ class ZoneVTE__1 implements ZoneVTE {
 	}
 
 	@Override
-	public @NotNull String getRealTargetName() {
+	public @NonNull String getRealTargetName() {
 		if (_realTargetName == null) {
 			_realTargetName = calculate();
 		}

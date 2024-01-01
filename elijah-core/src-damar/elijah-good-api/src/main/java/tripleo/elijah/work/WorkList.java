@@ -26,7 +26,7 @@ public class WorkList {
 		jobs.add(aJob);
 	}
 
-	public @NotNull ImmutableList<WorkJob> getJobs() {
+	public @NonNull ImmutableList<WorkJob> getJobs() {
 		return ImmutableList.copyOf(jobs);
 	}
 

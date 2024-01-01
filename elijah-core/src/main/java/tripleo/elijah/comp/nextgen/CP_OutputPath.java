@@ -35,7 +35,7 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 	}
 
 	@Override
-	public @NotNull CP_SubFile subFile(final String aFile) { // s ;)
+	public @NonNull CP_SubFile subFile(final String aFile) { // s ;)
 		return new CP_SubFile(this, aFile);
 	}
 
@@ -45,7 +45,7 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 	}
 
 	@Override
-	public @NotNull Path getPath() {
+	public @NonNull Path getPath() {
 		//assert (root != null);
 		if (root == null)
 			return Path.of("zero");
@@ -53,17 +53,17 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 	}
 
 	@Override
-	public @NotNull Promise<Path, Void, Void> getPathPromise() {
+	public @NonNull Promise<Path, Void, Void> getPathPromise() {
 		return _pathPromise;
 	}
 
 	@Override
-	public @NotNull File toFile() {
+	public @NonNull File toFile() {
 		return getPath().toFile();
 	}
 
 	@Override
-	public @NotNull File getRootFile() {
+	public @NonNull File getRootFile() {
 		return new File("COMP");
 	}
 
@@ -78,7 +78,7 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 	}
 
 	@Override
-	public @NotNull _CP_RootPath getRootPath() {
+	public @NonNull _CP_RootPath getRootPath() {
 		return this;
 	}
 
@@ -90,7 +90,7 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 
 	}
 
-	public void _renderNodes(final @NotNull List<ER_Node> nodes) {
+	public void _renderNodes(final @NonNull List<ER_Node> nodes) {
 		signalCalculateFinishParse();
 		nodes.stream()
 				.map(this::renderNode)
@@ -139,7 +139,7 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 		System.err.println(String.format("%d %s", code, message));
 	}
 
-	public @NotNull Operation<Boolean> renderNode(final @NotNull ER_Node node) {
+	public @NonNull Operation<Boolean> renderNode(final @NonNull ER_Node node) {
 		final Path         path = node.getPath();
 		final EG_Statement seq  = node.getStatement();
 
@@ -191,7 +191,7 @@ public class CP_OutputPath implements CP_Path, _CP_RootPath {
 		private String date;
 		private String c_name;
 
-		public CP_Path getP(final @NotNull CP_OutputPath aCPOutputPath) {
+		public CP_Path getP(final @NonNull CP_OutputPath aCPOutputPath) {
 			final CP_Path outputRoot = aCPOutputPath.c.paths().outputRoot();
 
 			return outputRoot

@@ -45,7 +45,7 @@ public class RegularTypeNameImpl extends AbstractTypeName2
 	}
 
 	@Override
-	public @NotNull Type kindOfType() {
+	public @NonNull Type kindOfType() {
 		return Type.NORMAL;
 	}
 
@@ -119,7 +119,7 @@ public class RegularTypeNameImpl extends AbstractTypeName2
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		final StringBuilder sb = new StringBuilder();
 		for (final TypeModifiers modifier : _ltm) {
 			switch (modifier) {

@@ -17,7 +17,7 @@ import tripleo.elijah.world.impl.DefaultWorldModule;
 import java.util.function.Consumer;
 
 public class GN_PL_Run2 implements GN_Notable {
-	private final @NotNull WorldModule mod;
+	private final @NonNull WorldModule mod;
 	private final          PipelineLogic         pipelineLogic;
 	private final          CompilationEnclosure  ce;
 	private final          DefaultClassGenerator dcg;
@@ -25,7 +25,7 @@ public class GN_PL_Run2 implements GN_Notable {
 
 	@Contract(pure = true)
 	public GN_PL_Run2(final PipelineLogic aPipelineLogic,
-					  final @NotNull WorldModule aMod,
+					  final @NonNull WorldModule aMod,
 					  final CompilationEnclosure aCe,
 					  final Consumer<WorldModule> aWorldConsumer) {
 		pipelineLogic = aPipelineLogic;
@@ -38,7 +38,7 @@ public class GN_PL_Run2 implements GN_Notable {
 
 	@Contract("_ -> new")
 	@SuppressWarnings("unused")
-	public static @NotNull GN_PL_Run2 getFactoryEnv(GN_Env env1) {
+	public static @NonNull GN_PL_Run2 getFactoryEnv(GN_Env env1) {
 		GN_PL_Run2_Env env = (GN_PL_Run2_Env) env1;
 		return new GN_PL_Run2(env.pipelineLogic(), env.mod(), env.ce(), env.worldConsumer());
 	}

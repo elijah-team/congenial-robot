@@ -33,7 +33,7 @@ public class CharLitExpressionImpl implements tripleo.elijah.lang.i.CharLitExpre
 		char_lit_raw = c;
 	}
 
-	public @NotNull ExpressionList getArgs() {
+	public @NonNull ExpressionList getArgs() {
 		return args;
 	}
 
@@ -43,7 +43,7 @@ public class CharLitExpressionImpl implements tripleo.elijah.lang.i.CharLitExpre
 	 * @see tripleo.elijah.lang.impl.IExpression#getType()
 	 */
 	@Override
-	public @NotNull ExpressionKind getKind() {
+	public @NonNull ExpressionKind getKind() {
 		return ExpressionKind.CHAR_LITERAL;
 	}
 
@@ -113,7 +113,7 @@ public class CharLitExpressionImpl implements tripleo.elijah.lang.i.CharLitExpre
 
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return Helpers.remove_single_quotes_from_string(char_lit_raw.getText());
 	}
 }

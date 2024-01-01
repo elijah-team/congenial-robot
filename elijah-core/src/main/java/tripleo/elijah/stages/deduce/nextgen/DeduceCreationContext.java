@@ -14,7 +14,7 @@ public interface DeduceCreationContext {
 
 	DeduceTypes2 getDeduceTypes2();
 
-	@NotNull DeducePhase getDeducePhase();
+	@NonNull DeducePhase getDeducePhase();
 
-	@NotNull GeneratePhase getGeneratePhase();
+	@NonNull GeneratePhase getGeneratePhase();
 }

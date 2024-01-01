@@ -79,7 +79,7 @@ public class Boilerplate {
 		}
 	}
 
-	public void getGenerateFiles(final @NotNull OS_Module mod) {
+	public void getGenerateFiles(final @NonNull OS_Module mod) {
 		// NOTE 11/08:
 		//  fileGen can be null for [GetRealTargetNameTest], but (may) fail under other circumstances
 		final GenerateResultEnv fileGen = new GenerateResultEnv(null, null, null, null, null);
@@ -113,7 +113,7 @@ public class Boilerplate {
 		return Rosetta.create(new DeduceTypes2Request(mod, phase, ElLog.Verbosity.VERBOSE));
 	}
 
-	@NotNull
+	@NonNull
 	public GenerateFunctions defaultGenerateFunctions() {
 		final GenFnC bc = new GenFnC();
 		bc.set(pipelineLogic());
@@ -121,7 +121,7 @@ public class Boilerplate {
 		return new GenerateFunctions(defaultMod(), bc);
 	}
 
-	//public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod, final @NotNull BaseEvaFunction aBaseEvaFunction) {
+	//public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod, final @NonNull BaseEvaFunction aBaseEvaFunction) {
 	//	gdm.onIdentTableEntry(ite -> {
 	//		fixTables(gdm, aMod, ite._generatedFunction());
 	//	});

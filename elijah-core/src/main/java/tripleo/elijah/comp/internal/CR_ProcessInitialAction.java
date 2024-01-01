@@ -8,29 +8,29 @@ import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
 public class CR_ProcessInitialAction implements CR_Action {
-	private final @NotNull CompilerInstructionsImpl ci;
+	private final @NonNull CompilerInstructionsImpl ci;
 	private                CompilationRunner        compilationRunner;
 	private final          boolean                  do_out;
 
 	@Contract(pure = true)
-	public CR_ProcessInitialAction(final @NotNull CompilerBeginning beginning) {
+	public CR_ProcessInitialAction(final @NonNull CompilerBeginning beginning) {
 		this((CompilerInstructionsImpl) beginning.compilerInstructions(), beginning.cfg().do_out);
 	}
 
 	@Contract(pure = true)
-	public CR_ProcessInitialAction(final @NotNull CompilerInstructionsImpl aCi,
+	public CR_ProcessInitialAction(final @NonNull CompilerInstructionsImpl aCi,
 								   final boolean aDo_out) {
 		ci     = aCi;
 		do_out = aDo_out;
 	}
 
 	@Override
-	public void attach(final @NotNull CompilationRunner cr) {
+	public void attach(final @NonNull CompilationRunner cr) {
 		compilationRunner = cr;
 	}
 
 	@Override
-	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final CB_Output aO) {
+	public @NonNull Operation<Ok> execute(final @NonNull CR_State st, final CB_Output aO) {
 		compilationRunner = st.runner();
 
 		try {
@@ -42,7 +42,7 @@ public class CR_ProcessInitialAction implements CR_Action {
 	}
 
 	@Override
-	public @NotNull String name() {
+	public @NonNull String name() {
 		return "process initial";
 	}
 }

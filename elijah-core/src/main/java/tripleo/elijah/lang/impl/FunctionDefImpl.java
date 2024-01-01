@@ -68,7 +68,7 @@ public class FunctionDefImpl extends BaseFunctionDef
 	}
 
 	@Override
-	public void setBody(@NotNull FunctionBody aFunctionBody) {
+	public void setBody(@NonNull FunctionBody aFunctionBody) {
 		scope(aFunctionBody.scope3());
 		setAbstract(aFunctionBody.getAbstract());
 	}
@@ -105,7 +105,7 @@ public class FunctionDefImpl extends BaseFunctionDef
 	}
 
 	@Override
-	public void setHeader(@NotNull FunctionHeader aFunctionHeader) {
+	public void setHeader(@NonNull FunctionHeader aFunctionHeader) {
 		setFal(aFunctionHeader.getFal());
 		set(aFunctionHeader.getModifier());
 		setName(aFunctionHeader.getName());
@@ -113,14 +113,14 @@ public class FunctionDefImpl extends BaseFunctionDef
 	}
 
 	@Override
-	public @NotNull OS_FuncType getOS_Type() {
+	public @NonNull OS_FuncType getOS_Type() {
 		if (osType == null)
 			osType = new OS_FuncType(this);
 		return osType;
 	}
 
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.visitFunctionDef(this);
 	}
 
@@ -146,7 +146,7 @@ public class FunctionDefImpl extends BaseFunctionDef
 	}
 
 	@Override
-	public void serializeTo(final @NotNull SmallWriter sw) {
+	public void serializeTo(final @NonNull SmallWriter sw) {
 		sw.fieldIdent("name", getNameNode());
 //		throw new NotImplementedException();
 	}

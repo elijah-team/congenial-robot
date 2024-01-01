@@ -21,7 +21,7 @@ public class OS_UserClassType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NotNull String asString() {
+	public @NonNull String asString() {
 		return MessageFormat.format("<OS_UserClassType {0}>", _classStatement);
 	}
 
@@ -31,7 +31,7 @@ public class OS_UserClassType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	protected boolean _isEqual(final @NotNull OS_Type aType) {
+	protected boolean _isEqual(final @NonNull OS_Type aType) {
 		return aType.getType() == Type.USER_CLASS && _classStatement.equals(((OS_UserClassType) aType)._classStatement);
 	}
 
@@ -41,16 +41,16 @@ public class OS_UserClassType extends __Abstract_OS_Type {
 	}
 
 	@Override
-	public @NotNull Type getType() {
+	public @NonNull Type getType() {
 		return Type.USER_CLASS;
 	}
 
-	@NotNull
-	public ClassInvocation resolvedUserClass(final @NotNull GenType genType, final TypeName aGenericTypeName, final @NotNull DeducePhase phase, final DeduceTypes2 deduceTypes2) {
+	@NonNull
+	public ClassInvocation resolvedUserClass(final @NonNull GenType genType, final TypeName aGenericTypeName, final @NonNull DeducePhase phase, final DeduceTypes2 deduceTypes2) {
 		final ClassStatement   best            = _classStatement;
 		@Nullable final String constructorName = null; // TODO what to do about this, nothing I guess
 
-		@NotNull final List<TypeName> gp = best.getGenericPart();
+		@NonNull final List<TypeName> gp = best.getGenericPart();
 		@Nullable ClassInvocation     clsinv;
 		if (genType.getCi() == null) {
 			final Operation<ClassInvocation> oi = DeduceTypes2.ClassInvocationMake.withGenericPart(best, constructorName, (NormalTypeName) aGenericTypeName, deduceTypes2);

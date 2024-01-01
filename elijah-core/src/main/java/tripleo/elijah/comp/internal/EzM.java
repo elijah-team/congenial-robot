@@ -20,8 +20,8 @@ import java.io.InputStream;
 import static tripleo.elijah.util.Mode.SUCCESS;
 
 class EzM {
-	@NotNull Operation<CompilerInstructions> parseEzFile1(final @NotNull SourceFileParserParams p) {
-		@NotNull final File f = p.f();
+	@NonNull Operation<CompilerInstructions> parseEzFile1(final @NonNull SourceFileParserParams p) {
+		@NonNull final File f = p.f();
 		//logProgress(27, "   " + f.getAbsolutePath());
 		if (!f.exists()) {
 
@@ -43,7 +43,7 @@ class EzM {
 		System.out.println(x);
 	}
 
-	@NotNull Operation<CompilerInstructions> realParseEzFile(final @NotNull SourceFileParserParams p) {
+	@NonNull Operation<CompilerInstructions> realParseEzFile(final @NonNull SourceFileParserParams p) {
 		final String f    = p.file_name();
 		final File   file = p.f();
 
@@ -74,7 +74,7 @@ class EzM {
 		}
 	}
 
-	@NotNull Operation<CompilerInstructions> realParseEzFile(final String f, final @Nullable InputStream s, final @NotNull File file, final @NotNull Compilation c) {
+	@NonNull Operation<CompilerInstructions> realParseEzFile(final String f, final @Nullable InputStream s, final @NonNull File file, final @NonNull Compilation c) {
 		final String absolutePath;
 		try {
 			absolutePath = file.getCanonicalFile().toString(); // TODO 04/10 hash this and "attach"

@@ -49,7 +49,7 @@ public class GenTypeImpl implements GenType {
 	public GenTypeImpl() {
 	}
 
-	public GenTypeImpl(@NotNull ClassStatement aClassStatement) {
+	public GenTypeImpl(@NonNull ClassStatement aClassStatement) {
 		resolved = aClassStatement.getOS_Type();
 	}
 
@@ -62,9 +62,9 @@ public class GenTypeImpl implements GenType {
 					   final OS_Type aOS_type,
 					   final boolean aB,
 					   final TypeName aTypeName,
-					   final @NotNull DeduceTypes2 deduceTypes2,
+					   final @NonNull DeduceTypes2 deduceTypes2,
 					   final ErrSink errSink,
-					   final @NotNull DeducePhase phase) {
+					   final @NonNull DeducePhase phase) {
 		typeName = aAttached;
 		resolved = aOS_type;
 		if (aB) {
@@ -74,9 +74,9 @@ public class GenTypeImpl implements GenType {
 
 	@Override
 	public ClassInvocation genCI(final TypeName aGenericTypeName,
-								 final @NotNull DeduceTypes2 deduceTypes2,
+								 final @NonNull DeduceTypes2 deduceTypes2,
 								 final ErrSink errSink,
-								 final @NotNull DeducePhase phase) {
+								 final @NonNull DeducePhase phase) {
 		SetGenCI              sgci = new SetGenCI();
 		final ClassInvocation ci   = sgci.call(this, aGenericTypeName, deduceTypes2, phase);
 		final ClassInvocation ci1  = ci;
@@ -85,7 +85,7 @@ public class GenTypeImpl implements GenType {
 	}
 
 	@Override
-	public @NotNull String asString() {
+	public @NonNull String asString() {
 		final String sb = "GenType{" + "resolvedn=" + resolvedn +
 				", typeName=" + typeName +
 				", nonGenericTypeName=" + nonGenericTypeName +
@@ -98,7 +98,7 @@ public class GenTypeImpl implements GenType {
 	}
 
 	@Override
-	public void copy(@NotNull GenType aGenType) {
+	public void copy(@NonNull GenType aGenType) {
 		if (resolvedn == null) resolvedn = aGenType.getResolvedn();
 		if (typeName == null) typeName = aGenType.getTypeName();
 		if (nonGenericTypeName == null) nonGenericTypeName = aGenType.getNonGenericTypeName();
@@ -108,20 +108,20 @@ public class GenTypeImpl implements GenType {
 	}
 
 	@Override
-	public void genCIForGenType2(final @NotNull DeduceTypes2 deduceTypes2) {
+	public void genCIForGenType2(final @NonNull DeduceTypes2 deduceTypes2) {
 		final List<setup_GenType_Action> list  = new ArrayList<>();
 		final setup_GenType_Action_Arena arena = new setup_GenType_Action_Arena();
 
 		genCI(nonGenericTypeName, deduceTypes2, deduceTypes2._errSink(), deduceTypes2.phase);
 		final IInvocation invocation = ci;
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+		if (invocation instanceof final @NonNull NamespaceInvocation namespaceInvocation) {
 			namespaceInvocation.resolveDeferred().then(new DoneCallback<EvaNamespace>() {
 				@Override
 				public void onDone(final EvaNamespace result) {
 					node = result;
 				}
 			});
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+		} else if (invocation instanceof final @NonNull ClassInvocation classInvocation) {
 			classInvocation.resolvePromise().then(new DoneCallback<EvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {
@@ -146,17 +146,17 @@ public class GenTypeImpl implements GenType {
 	 * @param aDeduceTypes2
 	 */
 	@Override
-	public void genCIForGenType2__(final @NotNull DeduceTypes2 aDeduceTypes2) {
+	public void genCIForGenType2__(final @NonNull DeduceTypes2 aDeduceTypes2) {
 		genCI(nonGenericTypeName, aDeduceTypes2, aDeduceTypes2._errSink(), aDeduceTypes2.phase);
 		final IInvocation invocation = ci;
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+		if (invocation instanceof final @NonNull NamespaceInvocation namespaceInvocation) {
 			namespaceInvocation.resolveDeferred().then(new DoneCallback<EvaNamespace>() {
 				@Override
 				public void onDone(final EvaNamespace result) {
 					node = result;
 				}
 			});
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+		} else if (invocation instanceof final @NonNull ClassInvocation classInvocation) {
 			classInvocation.resolvePromise().then(new DoneCallback<EvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {
@@ -164,15 +164,15 @@ public class GenTypeImpl implements GenType {
 				}
 			});
 		} else {
-			if (resolved instanceof final @NotNull OS_FuncExprType funcExprType) {
-				final @NotNull GenerateFunctions genf = aDeduceTypes2.getGenerateFunctions(funcExprType.getElement().getContext().module());
+			if (resolved instanceof final @NonNull OS_FuncExprType funcExprType) {
+				final @NonNull GenerateFunctions genf = aDeduceTypes2.getGenerateFunctions(funcExprType.getElement().getContext().module());
 				final FunctionInvocation fi = aDeduceTypes2._phase().newFunctionInvocation((BaseFunctionDef) funcExprType.getElement(),
 																						   null,
 																						   null);
 				WlGenerateFunction gen = new WlGenerateFunction(genf, fi, aDeduceTypes2._phase().codeRegistrar);
 				gen.run(null);
 				node = gen.getResult();
-			} else if (resolved instanceof final @NotNull OS_FuncType funcType) {
+			} else if (resolved instanceof final @NonNull OS_FuncType funcType) {
 				int y = 2;
 			} else if (resolved instanceof OS_BuiltinType) {
 				// passthrough
@@ -193,7 +193,7 @@ public class GenTypeImpl implements GenType {
 		return result;
 	}
 
-	public static @NotNull GenType genCIFrom(final ClassStatement best, final @NotNull DeduceTypes2 deduceTypes2) {
+	public static @NonNull GenType genCIFrom(final ClassStatement best, final @NonNull DeduceTypes2 deduceTypes2) {
 		var genType = new GenTypeImpl();
 		genType.setResolved(new OS_UserClassType(best));
 		// ci, typeName, node
@@ -231,7 +231,7 @@ public class GenTypeImpl implements GenType {
 	}
 
 	@Override
-	public void set(@NotNull OS_Type aType) {
+	public void set(@NonNull OS_Type aType) {
 		switch (aType.getType()) {
 		case USER:
 			typeName = aType;
@@ -324,7 +324,7 @@ public class GenTypeImpl implements GenType {
 
 	static class SetGenCI {
 
-		public @Nullable ClassInvocation call(@NotNull GenType genType, TypeName aGenericTypeName, final @NotNull DeduceTypes2 deduceTypes2, final @NotNull DeducePhase phase) {
+		public @Nullable ClassInvocation call(@NonNull GenType genType, TypeName aGenericTypeName, final @NonNull DeduceTypes2 deduceTypes2, final @NonNull DeducePhase phase) {
 			if (genType.getNonGenericTypeName() != null) {
 				return nonGenericTypeName(genType, deduceTypes2, phase);
 			}
@@ -348,8 +348,8 @@ public class GenTypeImpl implements GenType {
 			return null;
 		}
 
-		private @NotNull ClassInvocation nonGenericTypeName(final @NotNull GenType genType, final @NotNull DeduceTypes2 deduceTypes2, final @NotNull DeducePhase phase) {
-			@NotNull NormalTypeName aTyn1           = (NormalTypeName) genType.getNonGenericTypeName();
+		private @NonNull ClassInvocation nonGenericTypeName(final @NonNull GenType genType, final @NonNull DeduceTypes2 deduceTypes2, final @NonNull DeducePhase phase) {
+			@NonNull NormalTypeName aTyn1           = (NormalTypeName) genType.getNonGenericTypeName();
 			@Nullable String        constructorName = null; // FIXME this comes from nowhere
 
 			switch (genType.getResolved().getType()) {
@@ -372,11 +372,11 @@ public class GenTypeImpl implements GenType {
 			}
 		}
 
-		private @NotNull ClassInvocation resolvedUserClass(final @NotNull GenType genType, final TypeName aGenericTypeName, final @NotNull DeducePhase phase, final @NotNull DeduceTypes2 deduceTypes2) {
+		private @NonNull ClassInvocation resolvedUserClass(final @NonNull GenType genType, final TypeName aGenericTypeName, final @NonNull DeducePhase phase, final @NonNull DeduceTypes2 deduceTypes2) {
 			ClassStatement   best            = genType.getResolved().getClassOf();
 			@Nullable String constructorName = null; // TODO what to do about this, nothing I guess
 
-			@NotNull List<TypeName> gp = best.getGenericPart();
+			@NonNull List<TypeName> gp = best.getGenericPart();
 			assert gp.size() == 0 || gp.size() > 0;
 
 			@Nullable ClassInvocation clsinv;
@@ -392,13 +392,13 @@ public class GenTypeImpl implements GenType {
 			return clsinv;
 		}
 
-		private @NotNull ClassInvocation resolvedFunction(final @NotNull GenType genType, final TypeName aGenericTypeName, final @NotNull DeduceTypes2 deduceTypes2, final @NotNull DeducePhase phase) {
+		private @NonNull ClassInvocation resolvedFunction(final @NonNull GenType genType, final TypeName aGenericTypeName, final @NonNull DeduceTypes2 deduceTypes2, final @NonNull DeducePhase phase) {
 			// TODO what to do here?
 			OS_Element       ele             = genType.getResolved().getElement();
 			ClassStatement   best            = (ClassStatement) ele.getParent();//genType.resolved.getClassOf();
 			@Nullable String constructorName = null; // TODO what to do about this, nothing I guess
 
-			@NotNull List<TypeName>   gp = best.getGenericPart();
+			@NonNull List<TypeName>   gp = best.getGenericPart();
 			@Nullable ClassInvocation clsinv;
 			if (genType.getCi() == null) {
 				final Operation<ClassInvocation> oi = DeduceTypes2.ClassInvocationMake.withGenericPart(best, constructorName, (NormalTypeName) aGenericTypeName, deduceTypes2);

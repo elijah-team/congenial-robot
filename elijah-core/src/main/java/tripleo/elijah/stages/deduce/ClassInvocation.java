@@ -30,8 +30,8 @@ import java.util.function.Supplier;
  * Created 3/5/21 3:51 AM
  */
 public class ClassInvocation implements IInvocation {
-	private final @NotNull ClassStatement                       cls;
-	private final @NotNull Supplier<DeduceTypes2>               _dt2s;
+	private final @NonNull ClassStatement                       cls;
+	private final @NonNull Supplier<DeduceTypes2>               _dt2s;
 	private final          String                               constructorName;
 	private final          DeferredObject<EvaClass, Void, Void> resolvePromise = new DeferredObject<EvaClass, Void, Void>();
 	private                CI_GenericPart                       genericPart_;
@@ -48,7 +48,7 @@ public class ClassInvocation implements IInvocation {
 		return genericPart_;
 	}
 
-	public ClassInvocation(@NotNull ClassStatement aClassStatement, String aConstructorName, final @NotNull Supplier<DeduceTypes2> aDeduceTypes2) {
+	public ClassInvocation(@NonNull ClassStatement aClassStatement, String aConstructorName, final @NonNull Supplier<DeduceTypes2> aDeduceTypes2) {
 		this._dt2s = aDeduceTypes2;
 
 		cls = aClassStatement;
@@ -60,19 +60,19 @@ public class ClassInvocation implements IInvocation {
 		return constructorName;
 	}
 
-	public @NotNull ClassStatement getKlass() {
+	public @NonNull ClassStatement getKlass() {
 		return cls;
 	}
 
-	public @NotNull Promise<EvaClass, Void, Void> resolvePromise() {
+	public @NonNull Promise<EvaClass, Void, Void> resolvePromise() {
 		return resolvePromise.promise();
 	}
 
-	public @NotNull DeferredObject<EvaClass, Void, Void> resolveDeferred() {
+	public @NonNull DeferredObject<EvaClass, Void, Void> resolveDeferred() {
 		return resolvePromise;
 	}
 
-	public @NotNull String finalizedGenericPrintable() {
+	public @NonNull String finalizedGenericPrintable() {
 		final String        name = getKlass().getName();
 		final StringBuilder sb   = new StringBuilder();
 
@@ -104,10 +104,10 @@ public class ClassInvocation implements IInvocation {
 	}
 
 	public class CI_GenericPart {
-		private final @NotNull Map<TypeName, OS_Type> genericPart;
+		private final @NonNull Map<TypeName, OS_Type> genericPart;
 		private final          boolean                isEmpty;
 
-		public CI_GenericPart(final @NotNull Collection<TypeName> genericPart1) {
+		public CI_GenericPart(final @NonNull Collection<TypeName> genericPart1) {
 			if (!genericPart1.isEmpty()) {
 				genericPart = new HashMap<>(genericPart1.size());
 				for (TypeName typeName : genericPart1) {
@@ -137,7 +137,7 @@ public class ClassInvocation implements IInvocation {
 			genericPart.put(aTypeName, aType);
 		}
 
-		public void record(final TypeName aKey, final EvaContainer.@NotNull VarTableEntry aVarTableEntry) {
+		public void record(final TypeName aKey, final EvaContainer.@NonNull VarTableEntry aVarTableEntry) {
 			assert genericPart != null;
 			genericPart.put(aKey, aVarTableEntry.varType);
 		}
@@ -153,7 +153,7 @@ public class ClassInvocation implements IInvocation {
 			return realType;
 		}
 
-		public @NotNull Iterable<? extends Map.Entry<TypeName, OS_Type>> entrySet() {
+		public @NonNull Iterable<? extends Map.Entry<TypeName, OS_Type>> entrySet() {
 			//if (isEmpty) {
 			//	return new HashMap<TypeName, OS_Type>().entrySet();
 			//}
@@ -161,13 +161,13 @@ public class ClassInvocation implements IInvocation {
 		}
 	}
 
-	public void set(int aIndex, TypeName aTypeName, @NotNull OS_Type aType) {
+	public void set(int aIndex, TypeName aTypeName, @NonNull OS_Type aType) {
 		assert aType.getType() == OS_Type.Type.USER_CLASS;
 		genericPart().put(aTypeName, aType);
 	}
 
 	@Override
-	public void setForFunctionInvocation(@NotNull FunctionInvocation aFunctionInvocation) {
+	public void setForFunctionInvocation(@NonNull FunctionInvocation aFunctionInvocation) {
 		aFunctionInvocation.setClassInvocation(this);
 	}
 }

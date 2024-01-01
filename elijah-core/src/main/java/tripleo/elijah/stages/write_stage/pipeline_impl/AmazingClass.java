@@ -14,8 +14,8 @@ class AmazingClass implements Amazing {
 	private final WPIS_GenerateOutputs.OutputItems itms;
 	private final EvaClass                         c;
 
-	public AmazingClass(final @NotNull EvaClass c,
-						final @NotNull WPIS_GenerateOutputs.OutputItems aOutputItems,
+	public AmazingClass(final @NonNull EvaClass c,
+						final @NonNull WPIS_GenerateOutputs.OutputItems aOutputItems,
 						final IPipelineAccess aPa) {
 		this.c              = c;
 		mod                 = c.module();

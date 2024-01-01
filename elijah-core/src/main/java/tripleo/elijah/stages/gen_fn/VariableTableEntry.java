@@ -49,7 +49,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 	public            int                                        tempNum                  = -1;
 	private           TypeTableEntry                             type;
 	private @Nullable GenType                                    _resolveTypeCalled       = null;
-	private @NotNull  Map<Integer, TypeTableEntry>               potentialTypes           = new HashMap<Integer, TypeTableEntry>();
+	private @NonNull  Map<Integer, TypeTableEntry>               potentialTypes           = new HashMap<Integer, TypeTableEntry>();
 	private           DeduceLocalVariable                        dlv                      = new DeduceLocalVariable(this);
 	private           ProcTableEntry                             constructable_pte;
 	private           DeduceElement3_VariableTableEntry          _de3;
@@ -116,12 +116,12 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 
 	}
 
-	public @NotNull GenType getGenType() {
+	public @NonNull GenType getGenType() {
 		return genType;
 	}
 
 	@Override
-	public void setGenType(@NotNull GenType aGenType) {
+	public void setGenType(@NonNull GenType aGenType) {
 		genType.copy(aGenType);
 		resolveType(aGenType);
 	}
@@ -130,7 +130,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 //		return typeDeferred;
 //	}
 
-	public void addPotentialType(final int instructionIndex, final @NotNull TypeTableEntry tte) {
+	public void addPotentialType(final int instructionIndex, final @NonNull TypeTableEntry tte) {
 		if (!typeDeferred.isPending()) {
 			SimplePrintLoggerToRemoveSoon.println_err_2("62 addPotentialType while typeDeferred is already resolved " + this);//throw new AssertionError();
 			return;
@@ -169,11 +169,11 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		}
 	}
 
-	public @NotNull Map<Integer, TypeTableEntry> getPotentialTypes() {
+	public @NonNull Map<Integer, TypeTableEntry> getPotentialTypes() {
 		return potentialTypes;
 	}
 
-	public void setPotentialTypes(@NotNull Map<Integer, TypeTableEntry> potentialTypes) {
+	public void setPotentialTypes(@NonNull Map<Integer, TypeTableEntry> potentialTypes) {
 		this.potentialTypes = potentialTypes;
 	}
 
@@ -183,7 +183,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 	}
 
 	@Override
-	public void resolveTypeToClass(final @NotNull EvaNode aNode) {
+	public void resolveTypeToClass(final @NonNull EvaNode aNode) {
 		if (!_p_resolvedTypePromise.isResolved()) {
 			_p_resolvedTypePromise.resolve(aNode);
 		} else {
@@ -218,7 +218,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 	}
 
 	@Override
-	public @NotNull String expectationString() {
+	public @NonNull String expectationString() {
 		return "VariableTableEntry{" +
 				"index=" + index +
 				", name='" + name + '\'' +
@@ -227,7 +227,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 
 	// endregion constructable
 
-	public @NotNull Collection<TypeTableEntry> potentialTypes() {
+	public @NonNull Collection<TypeTableEntry> potentialTypes() {
 		return getPotentialTypes().values();
 	}
 
@@ -243,7 +243,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		return name;
 	}
 
-	public @NotNull DeduceElement3_VariableTableEntry getDeduceElement3() {
+	public @NonNull DeduceElement3_VariableTableEntry getDeduceElement3() {
 		if (_de3 == null) {
 			_de3 = new DeduceElement3_VariableTableEntry(this);
 			//_de3.generatedFunction = generatedFunction;
@@ -286,7 +286,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		((ForwardingGenType) bGenType).unsparkled();
 	}
 
-	public void resolveType(final @NotNull GenType aGenType) {
+	public void resolveType(final @NonNull GenType aGenType) {
 		try {
 			if (_resolveTypeCalled != null) { // TODO what a hack
 				if (_resolveTypeCalled.getResolved() != null) {
@@ -317,7 +317,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "VariableTableEntry{" +
 				"index=" + index +
 				", name='" + name + '\'' +
@@ -348,7 +348,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		return typeResolve;
 	}
 
-	public @NotNull PostBC_Processor getPostBC_Processor(Context aFd_ctx, DeduceTypes2.DeduceClient1 aDeduceClient1) {
+	public @NonNull PostBC_Processor getPostBC_Processor(Context aFd_ctx, DeduceTypes2.DeduceClient1 aDeduceClient1) {
 		return PostBC_Processor.make_VTE(this, aFd_ctx, aDeduceClient1);
 	}
 
@@ -356,7 +356,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		return type;
 	}
 
-	public void setType(@NotNull TypeTableEntry tte1) {
+	public void setType(@NonNull TypeTableEntry tte1) {
 		type = tte1;
 
 	}

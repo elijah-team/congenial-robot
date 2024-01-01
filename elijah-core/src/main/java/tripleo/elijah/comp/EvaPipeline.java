@@ -44,11 +44,11 @@ import static tripleo.elijah.util.Helpers.List_of;
  */
 public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 	private final          CompilationEnclosure       ce;
-	private final @NotNull IPipelineAccess            pa;
-	private final @NotNull DefaultGenerateResultSink  grs;
-	private final @NotNull DoubleLatch<List<EvaNode>> latch2;
+	private final @NonNull IPipelineAccess            pa;
+	private final @NonNull DefaultGenerateResultSink  grs;
+	private final @NonNull DoubleLatch<List<EvaNode>> latch2;
 	private                List<EvaNode>           _lgc;
-	private final @NotNull List<FunctionStatement> functionStatements = new ArrayList<>();
+	private final @NonNull List<FunctionStatement> functionStatements = new ArrayList<>();
 	private                PipelineLogic           pipelineLogic;
 	private                CB_Output                  _processOutput;
 	private                CR_State                   _processState;
@@ -58,7 +58,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 	}
 
 	@Contract(pure = true)
-	public EvaPipeline(@NotNull IPipelineAccess pa0) {
+	public EvaPipeline(@NonNull IPipelineAccess pa0) {
 		pa = pa0;
 
 		//
@@ -92,7 +92,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 	}
 
 	@Override
-	public void lgc_slot(final @NotNull List<EvaNode> aLgc1) {
+	public void lgc_slot(final @NonNull List<EvaNode> aLgc1) {
 		var aLgc = new ArrayList<>(aLgc1);
 
 
@@ -105,7 +105,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		EOT_OutputFile.FileNameProvider filename1;
 
 		// README 11/04 Really want a "Flow" i/o cot.add...
-		final @NotNull EOT_OutputTree cot = this.ce.getCompilation().getOutputTree();
+		final @NonNull EOT_OutputTree cot = this.ce.getCompilation().getOutputTree();
 
 		for (EvaNode evaNode : aLgc) {
 			String             filename = null;
@@ -232,12 +232,12 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		}
 
 		@Override
-		public @NotNull EX_Explanation getExplanation() {
+		public @NonNull EX_Explanation getExplanation() {
 			return EX_Explanation.withMessage("FunctionStatement");
 		}
 
 		@Override
-		public @NotNull String getText() {
+		public @NonNull String getText() {
 			final StringBuilder sb = new StringBuilder();
 
 			final String str = "FUNCTION %d %s %s\n".formatted(evaFunction.getCode(),
@@ -283,7 +283,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 			return sb.toString();
 		}
 
-		public @NotNull String getFilename(@NotNull IPipelineAccess pa) {
+		public @NonNull String getFilename(@NonNull IPipelineAccess pa) {
 			// HACK 07/07 register if not registered
 			EvaFunction v    = (EvaFunction) evaFunction;
 			int         code = v.getCode();
@@ -304,7 +304,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		}
 	}
 
-	private @NotNull List<ProcessedNode> processLgc(final @NotNull List<EvaNode> aLgc) {
+	private @NonNull List<ProcessedNode> processLgc(final @NonNull List<EvaNode> aLgc) {
 		final List<ProcessedNode> l = new ArrayList<>();
 
 		for (EvaNode evaNode : aLgc) {

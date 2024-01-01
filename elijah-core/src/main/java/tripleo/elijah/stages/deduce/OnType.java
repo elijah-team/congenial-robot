@@ -17,7 +17,7 @@ import tripleo.elijah.lang.i.OS_Type;
 public interface OnType {
 	void noTypeFound();
 
-	void typeDeduced(final @NotNull OS_Type aType);
+	void typeDeduced(final @NonNull OS_Type aType);
 }
 
 //

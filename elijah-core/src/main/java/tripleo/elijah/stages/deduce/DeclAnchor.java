@@ -17,7 +17,7 @@ import tripleo.elijah.lang.i.OS_Element;
  */
 public class DeclAnchor {
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "DeclAnchor [anchorType=" + anchorType + ", element=" + element + ", invocation=" + invocation + "]";
 	}
 

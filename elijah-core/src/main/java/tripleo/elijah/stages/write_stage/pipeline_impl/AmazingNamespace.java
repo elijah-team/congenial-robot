@@ -14,7 +14,7 @@ class AmazingNamespace implements Amazing {
 	private final WPIS_GenerateOutputs.OutputItems itms;
 	private final EvaNamespace                     n;
 
-	public AmazingNamespace(final @NotNull EvaNamespace n,
+	public AmazingNamespace(final @NonNull EvaNamespace n,
 							final WPIS_GenerateOutputs.OutputItems itms,
 							final IPipelineAccess aPa) {
 		this.n              = n;

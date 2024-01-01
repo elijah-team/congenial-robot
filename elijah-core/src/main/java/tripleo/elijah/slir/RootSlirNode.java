@@ -26,7 +26,7 @@ public class RootSlirNode {
 		compilation = aCompilation;
 	}
 
-	public @NotNull SlirSourceNode newSourceNode(final SlirSourceFile aSourceFile) {
+	public @NonNull SlirSourceNode newSourceNode(final SlirSourceFile aSourceFile) {
 		final SlirSourceNode sourceNode = new SlirSourceNode(aSourceFile);
 		sourceNodes.add(sourceNode);
 		return sourceNode;

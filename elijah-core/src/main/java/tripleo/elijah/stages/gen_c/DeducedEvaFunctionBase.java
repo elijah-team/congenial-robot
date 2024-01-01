@@ -13,7 +13,7 @@ import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 
 public interface DeducedEvaFunctionBase extends IEvaFunctionBase, IGC_Deduced {
-	void onGenClass(@NotNull OnGenClass aOnGenClass);
+	void onGenClass(@NonNull OnGenClass aOnGenClass);
 
 	IEvaFunctionBase getCarrier();
 

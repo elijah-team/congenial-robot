@@ -48,7 +48,7 @@ public class List extends OWWidget {
 		return EnumSelection.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.SELECTION));
 	}
 
-	public void setSelection(@NotNull EnumSelection value) {
+	public void setSelection(@NonNull EnumSelection value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.SELECTION, value.toString());
 	}
 
@@ -68,15 +68,15 @@ public class List extends OWWidget {
 		fthinlet.defineMethod(fcomponent, ThinletConstants.PERFORM, method);
 	}
 
-	public void addItem(@NotNull Item item) {
+	public void addItem(@NonNull Item item) {
 		fthinlet.add(unwrap(), item.unwrap());
 	}
 
-	public void addItem(@NotNull Item item, int index) {
+	public void addItem(@NonNull Item item, int index) {
 		fthinlet.add(unwrap(), item.unwrap(), index);
 	}
 
-	public void removeItem(@NotNull Item item) {
+	public void removeItem(@NonNull Item item) {
 		fthinlet.remove(item.unwrap());
 	}
 
@@ -92,7 +92,7 @@ public class List extends OWWidget {
 		return (Item) fthinlet.wrap(fthinlet.getItem(unwrap(), index));
 	}
 
-	public Item @NotNull [] getItems() {
+	public Item @NonNull [] getItems() {
 		Object[] o   = fthinlet.getItems(unwrap());
 		Item[]   ret = new Item[o.length];
 		for (int i = 0; i < ret.length; i++)

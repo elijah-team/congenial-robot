@@ -29,17 +29,17 @@ public class ExpressionListImpl implements tripleo.elijah.lang.i.ExpressionList 
 	}
 
 	@Override
-	public @NotNull Collection<IExpression> expressions() {
+	public @NonNull Collection<IExpression> expressions() {
 		return exprs;
 	}
 
 	@Override
-	public @NotNull Iterator<IExpression> iterator() {
+	public @NonNull Iterator<IExpression> iterator() {
 		return exprs.iterator();
 	}
 
 	@Override
-	public @NotNull IExpression next(final @NotNull IExpression aExpr) {
+	public @NonNull IExpression next(final @NonNull IExpression aExpr) {
 //		assert aExpr != null;
 		if (aExpr == null)
 			throw new IllegalArgumentException("expression cannot be null");

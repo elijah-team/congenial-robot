@@ -36,7 +36,7 @@ public class F202 {
 		pre     = new DefaultProgressBehavior();
 	}
 
-	public void processLogs(@NotNull Collection<ElLog> aElLogs) {
+	public void processLogs(@NonNull Collection<ElLog> aElLogs) {
 		//if (aElLogs.size() == 0) return; // TODO progress message? should be impossible anyway
 		Preconditions.checkArgument(aElLogs.size() > 0);
 

@@ -23,7 +23,7 @@ public class FuncTypeNameImpl implements tripleo.elijah.lang.i.FuncTypeName {
 	}
 
 	@Override
-	public void argList(final @NotNull FormalArgList op) {
+	public void argList(final @NonNull FormalArgList op) {
 		TypeNameList tnl = new TypeNameListImpl();
 		for (FormalArgListItem fali : op.falis()) {
 			final TypeName tn = fali.typeName();
@@ -72,7 +72,7 @@ public class FuncTypeNameImpl implements tripleo.elijah.lang.i.FuncTypeName {
 	}
 
 	@Override
-	public @NotNull Type kindOfType() {
+	public @NonNull Type kindOfType() {
 		return Type.FUNCTION;
 	}
 

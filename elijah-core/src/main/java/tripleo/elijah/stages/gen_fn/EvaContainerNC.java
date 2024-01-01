@@ -33,16 +33,16 @@ import java.util.Map;
  * Created 3/16/21 10:45 AM
  */
 public abstract class EvaContainerNC extends AbstractDependencyTracker implements EvaContainer, IDependencyReferent {
-	static @NotNull Diagnostic                                 _def_VarNotFound     = new VarNotFound();
+	static @NonNull Diagnostic                                 _def_VarNotFound     = new VarNotFound();
 	private final   Dependency                                 dependency           = new Dependency(this);
-	public @NotNull Map<ClassStatement, EvaClass>              classMap             = new HashMap<ClassStatement, EvaClass>();
-	public @NotNull Map<FunctionDef, EvaFunction>              functionMap          = new HashMap<FunctionDef, EvaFunction>();
+	public @NonNull Map<ClassStatement, EvaClass>              classMap             = new HashMap<ClassStatement, EvaClass>();
+	public @NonNull Map<FunctionDef, EvaFunction>              functionMap          = new HashMap<FunctionDef, EvaFunction>();
 	public          boolean                                    generatedAlready     = false;
-	public @NotNull List<VarTableEntry>                        varTable             = new ArrayList<VarTableEntry>();
-	@NotNull        Multimap<FunctionDef, FunctionMapDeferred> functionMapDeferreds = ArrayListMultimap.create();
+	public @NonNull List<VarTableEntry>                        varTable             = new ArrayList<VarTableEntry>();
+	@NonNull        Multimap<FunctionDef, FunctionMapDeferred> functionMapDeferreds = ArrayListMultimap.create();
 	private         int                                        code                 = 0;
 
-	public void addVarTableEntry(@Nullable AccessNotation an, @NotNull VariableStatement vs, final RegisterClassInvocation_env aPassthruEnv) {
+	public void addVarTableEntry(@Nullable AccessNotation an, @NonNull VariableStatement vs, final RegisterClassInvocation_env aPassthruEnv) {
 		// TODO dont ignore AccessNotationImpl
 		varTable.add(new VarTableEntry(vs, vs.getNameToken(), vs.initialValue(), vs.typeName(), vs.getParent().getParent(), aPassthruEnv));
 	}
@@ -70,12 +70,12 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		return code;
 	}
 
-	public @NotNull Dependency getDependency() {
+	public @NonNull Dependency getDependency() {
 		return dependency;
 	}
 
 	@Override
-	public @NotNull Maybe<VarTableEntry> getVariable(String aVarName) {
+	public @NonNull Maybe<VarTableEntry> getVariable(String aVarName) {
 		for (VarTableEntry varTableEntry : varTable) {
 			if (varTableEntry.nameToken.getText().equals(aVarName))
 				return new Maybe<>(varTableEntry, null);
@@ -100,7 +100,7 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		}
 
 		@Override
-		public @NotNull Locatable primary() {
+		public @NonNull Locatable primary() {
 			return null;
 		}
 
@@ -110,7 +110,7 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		}
 
 		@Override
-		public @NotNull List<Locatable> secondary() {
+		public @NonNull List<Locatable> secondary() {
 			return null;
 		}
 

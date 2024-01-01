@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompilationBus implements ICompilationBus {
-	public final @NotNull  CompilerDriver   cd;
-	private final @NotNull Compilation      c;
-	private final @NotNull List<CB_Process> _processes           = new ArrayList<>();
-	private final @NotNull IProgressSink    _defaultProgressSink = new DefaultProgressSink();
+	public final @NonNull  CompilerDriver   cd;
+	private final @NonNull Compilation      c;
+	private final @NonNull List<CB_Process> _processes           = new ArrayList<>();
+	private final @NonNull IProgressSink    _defaultProgressSink = new DefaultProgressSink();
 	public                 CB_FindCIs              cb_findCIs;
 
-	public CompilationBus(final @NotNull CompilationEnclosure ace) {
+	public CompilationBus(final @NonNull CompilationEnclosure ace) {
 		c  = ace.getCompilationAccess().getCompilation();
 		cd = new CompilerDriver(this);
 
@@ -23,7 +23,7 @@ public class CompilationBus implements ICompilationBus {
 	}
 
 	@Override
-	public void add(final @NotNull CB_Action action) {
+	public void add(final @NonNull CB_Action action) {
 		_processes.add(new SingleActionProcess(action));
 	}
 
@@ -38,17 +38,17 @@ public class CompilationBus implements ICompilationBus {
 	}
 
 	@Override
-	public void add(final @NotNull CB_Process aProcess) {
+	public void add(final @NonNull CB_Process aProcess) {
 		_processes.add(aProcess);
 	}
 
 	@Override
-	public void inst(final @NotNull ILazyCompilerInstructions aLazyCompilerInstructions) {
+	public void inst(final @NonNull ILazyCompilerInstructions aLazyCompilerInstructions) {
 		_defaultProgressSink.note(IProgressSink.Codes.LazyCompilerInstructions_inst, ProgressSinkComponent.CompilationBus_, -1, new Object[]{aLazyCompilerInstructions.get()});
 	}
 
 	@Override
-	public void option(final @NotNull CompilationChange aChange) {
+	public void option(final @NonNull CompilationChange aChange) {
 		aChange.apply(c);
 	}
 
@@ -75,7 +75,7 @@ public class CompilationBus implements ICompilationBus {
 
 	//private static class DefaultProgressSink implements IProgressSink {
 	//	@Override
-	//	public void note(final Codes aCode, final @NotNull ProgressSinkComponent aProgressSinkComponent, final int aType, final Object[] aParams) {
+	//	public void note(final Codes aCode, final @NonNull ProgressSinkComponent aProgressSinkComponent, final int aType, final Object[] aParams) {
 	//		SimplePrintLoggerToRemoveSoon.println_err_2(aProgressSinkComponent.printErr(aCode, aType, aParams));
 	//	}
 	//}

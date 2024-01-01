@@ -20,21 +20,21 @@ import java.util.stream.Collectors;
  * Created 4/27/21 1:12 AM
  */
 public class Old_GenerateResultItem implements GenerateResultItem {
-	public final @NotNull  Buffer                buffer;
+	public final @NonNull  Buffer                buffer;
 	public final           int                   counter;
-	public final @NotNull  LibraryStatementPart  lsp;
-	public final @NotNull  EvaNode               node;
-	public final @NotNull  Old_GenerateResult.TY ty;
-	private final @NotNull Dependency            dependency;
+	public final @NonNull  LibraryStatementPart  lsp;
+	public final @NonNull  EvaNode               node;
+	public final @NonNull  Old_GenerateResult.TY ty;
+	private final @NonNull Dependency            dependency;
 	public                 String                output;
 	public                 IOutputFile           outputFile;
 
 	@Contract(pure = true)
-	public Old_GenerateResultItem(final @NotNull Old_GenerateResult.TY aTy,
-								  final @NotNull Buffer aBuffer,
-								  final @NotNull EvaNode aNode,
-								  final @NotNull LibraryStatementPart aLsp,
-								  final @NotNull Dependency aDependency,
+	public Old_GenerateResultItem(final @NonNull Old_GenerateResult.TY aTy,
+								  final @NonNull Buffer aBuffer,
+								  final @NonNull EvaNode aNode,
+								  final @NonNull LibraryStatementPart aLsp,
+								  final @NonNull Dependency aDependency,
 								  final int aCounter) {
 		ty         = aTy;
 		buffer     = aBuffer;
@@ -45,7 +45,7 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	}
 
 	@Override
-	public @NotNull Buffer buffer() {
+	public @NonNull Buffer buffer() {
 		return this.buffer;
 	}
 
@@ -53,7 +53,7 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResultItem#dependencies()
 	 */
 	@Override
-	public @NotNull List<DependencyRef> dependencies() {
+	public @NonNull List<DependencyRef> dependencies() {
 		List<DependencyRef> x = dependency.getNotedDeps().stream()
 				.map(dep -> dep.dref)
 				.collect(Collectors.toList());
@@ -64,7 +64,7 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResultItem#getDependency()
 	 */
 	@Override
-	public @NotNull Dependency getDependency() {
+	public @NonNull Dependency getDependency() {
 		final List<DependencyRef> ds = dependencies();
 		return dependency;
 	}
@@ -73,7 +73,7 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResultItem#jsonString()
 	 */
 	@Override
-	public @NotNull String jsonString() {
+	public @NonNull String jsonString() {
 		final String sb = "{\".class\": \"GenerateResultItem\", " + "counter: " + counter + ", " +
 				"ty: " + ty + ", " +
 				"output: " + output + ", " +
@@ -88,12 +88,12 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	}
 
 	@Override
-	public @NotNull LibraryStatementPart lsp() {
+	public @NonNull LibraryStatementPart lsp() {
 		return this.lsp;
 	}
 
 	@Override
-	public @NotNull EvaNode node() {
+	public @NonNull EvaNode node() {
 		return this.node;
 	}
 
@@ -103,7 +103,7 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	}
 
 	@Override
-	public GenerateResult.@NotNull TY __ty() {
+	public GenerateResult.@NonNull TY __ty() {
 		return ty;
 	}
 
@@ -111,7 +111,7 @@ public class Old_GenerateResultItem implements GenerateResultItem {
 	 * @see tripleo.elijah.stages.gen_generic.GenerateResultItem#toString()
 	 */
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "GenerateResultItem{" +
 				"counter=" + counter +
 				", ty=" + ty +

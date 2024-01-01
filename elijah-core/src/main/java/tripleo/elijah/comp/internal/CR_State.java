@@ -78,24 +78,24 @@ public class CR_State {
 	}
 
 	public interface PipelinePlugin {
-		PipelineMember instance(final @NotNull AccessBus ab0);
+		PipelineMember instance(final @NonNull AccessBus ab0);
 
 		String name();
 	}
 
 	private static class ProcessRecordImpl implements ProcessRecord {
 		//private final DeducePipeline                             dpl;
-		private final @NotNull ICompilationAccess ca;
+		private final @NonNull ICompilationAccess ca;
 		private final          IPipelineAccess    pa;
-		private final @NotNull PipelineLogic      pipelineLogic;
+		private final @NonNull PipelineLogic      pipelineLogic;
 		private                AccessBus          ab;
 
-		public ProcessRecordImpl(final @NotNull ICompilationAccess ca0) {
+		public ProcessRecordImpl(final @NonNull ICompilationAccess ca0) {
 			ca = ca0;
 
 			//ca.getCompilation().getCompilationEnclosure().getAccessBusPromise()
 			//		.then(iab->ab=iab);
-			ca.getCompilation().getCompilationEnclosure().getAccessBusPromise().then((final @NotNull AccessBus iab) -> {
+			ca.getCompilation().getCompilationEnclosure().getAccessBusPromise().then((final @NonNull AccessBus iab) -> {
 				ab = iab;
 			});
 
@@ -135,14 +135,14 @@ public class CR_State {
 	}
 
 	class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRegister {
-		private final @NotNull List<EvaNode>                                         _l_classes       = new ArrayList<>();
-		private final @NotNull List<EvaClass>                                        activeClasses    = new ArrayList<>();
-		private final @NotNull List<BaseEvaFunction>                                 activeFunctions  = new ArrayList<>();
-		private final @NotNull List<EvaNamespace>                                    activeNamespaces = new ArrayList<>();
-		private final @NotNull Eventual<PipelineLogic>                               _p_pipelineLogic = new Eventual<>();
-		private final @NotNull Eventual<EvaPipeline>                                 _p_EvaPipeline   = new Eventual<>();
+		private final @NonNull List<EvaNode>                                         _l_classes       = new ArrayList<>();
+		private final @NonNull List<EvaClass>                                        activeClasses    = new ArrayList<>();
+		private final @NonNull List<BaseEvaFunction>                                 activeFunctions  = new ArrayList<>();
+		private final @NonNull List<EvaNamespace>                                    activeNamespaces = new ArrayList<>();
+		private final @NonNull Eventual<PipelineLogic>                               _p_pipelineLogic = new Eventual<>();
+		private final @NonNull Eventual<EvaPipeline>                                 _p_EvaPipeline   = new Eventual<>();
 		private final          Map<OS_Module, DeferredObject<GenerateC, Void, Void>> gc2m_map         = new HashMap<>();
-		private final @NotNull Map<Provenance, Pair<Class, Class>>                   installs         = new HashMap<>();
+		private final @NonNull Map<Provenance, Pair<Class, Class>>                   installs         = new HashMap<>();
 		private final          DeferredObject<List<EvaNode>, Void, Void>             nodeListPromise  = new DeferredObject<>();
 		private final          List<NG_OutputItem>                                   outputs          = new ArrayList<NG_OutputItem>();
 		private final          List<OS_Module>                                       __mods_BACKING   = new ArrayList<>();
@@ -200,12 +200,12 @@ public class CR_State {
 		}
 
 		@Override
-		public @NotNull Eventual<PipelineLogic> getPipelineLogicPromise() {
+		public @NonNull Eventual<PipelineLogic> getPipelineLogicPromise() {
 			return _p_pipelineLogic;
 		}
 
 		@Override
-		public @NotNull Eventual<EvaPipeline> getEvaPipelinePromise() {
+		public @NonNull Eventual<EvaPipeline> getEvaPipelinePromise() {
 			return _p_EvaPipeline;
 		}
 
@@ -220,7 +220,7 @@ public class CR_State {
 		}
 
 		@Override
-		public void notate(final Provenance provenance, final @NotNull GN_Notable aNotable) {
+		public void notate(final Provenance provenance, final @NonNull GN_Notable aNotable) {
 			var cb = getCompilationEnclosure().getCompilationBus();
 
 			// FIXME 07/01 this doesn't work, why??
@@ -244,12 +244,12 @@ public class CR_State {
 		}
 
 		//@Override
-		//public @NotNull List<NG_OutputItem> getOutputs() {
+		//public @NonNull List<NG_OutputItem> getOutputs() {
 		//	return outputs;
 		//}
 
 		@Override
-		public void setEvaPipeline(final @NotNull EvaPipeline agp) {
+		public void setEvaPipeline(final @NonNull EvaPipeline agp) {
 			_p_EvaPipeline.resolve(agp);
 		}
 
@@ -259,7 +259,7 @@ public class CR_State {
 		}
 
 		@Override
-		public void setNodeList(final @NotNull List<EvaNode> aEvaNodeList) {
+		public void setNodeList(final @NonNull List<EvaNode> aEvaNodeList) {
 			nodeListPromise.resolve(aEvaNodeList);
 		}
 
@@ -284,17 +284,17 @@ public class CR_State {
 		}
 
 		@Override
-		public @NotNull List<EvaNamespace> getActiveNamespaces() {
+		public @NonNull List<EvaNamespace> getActiveNamespaces() {
 			return activeNamespaces;
 		}
 
 		@Override
-		public @NotNull List<BaseEvaFunction> getActiveFunctions() {
+		public @NonNull List<BaseEvaFunction> getActiveFunctions() {
 			return activeFunctions;
 		}
 
 		@Override
-		public @NotNull List<EvaClass> getActiveClasses() {
+		public @NonNull List<EvaClass> getActiveClasses() {
 			return activeClasses;
 		}
 
@@ -335,7 +335,7 @@ public class CR_State {
 
 				var notable1 = inst.invoke(null, aGNEnv);
 
-				if (notable1 instanceof @NotNull GN_Notable notable) {
+				if (notable1 instanceof @NonNull GN_Notable notable) {
 					final NotableAction notableAction = new NotableAction(notable);
 
 					//cb.add(notableAction);

@@ -56,7 +56,7 @@ public class OptionGroup implements Serializable {
 	 * @param option the option to add to this group
 	 * @return this option group with the option added
 	 */
-	public @NotNull OptionGroup addOption(final @NotNull Option option) {
+	public @NonNull OptionGroup addOption(final @NonNull Option option) {
 		// key - option name
 		// value - the option
 		optionMap.put(option.getKey(), option);
@@ -67,7 +67,7 @@ public class OptionGroup implements Serializable {
 	/**
 	 * @return the names of the options in this group as a {@code Collection}
 	 */
-	public @NotNull Collection<String> getNames() {
+	public @NonNull Collection<String> getNames() {
 		// the key set is the collection of names
 		return optionMap.keySet();
 	}
@@ -123,7 +123,7 @@ public class OptionGroup implements Serializable {
 	 * @return the stringified representation of this group
 	 */
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		final StringBuilder buff = new StringBuilder();
 
 		final Iterator<Option> iter = getOptions().iterator();
@@ -159,7 +159,7 @@ public class OptionGroup implements Serializable {
 	/**
 	 * @return the options in this group as a {@code Collection}
 	 */
-	public @NotNull Collection<Option> getOptions() {
+	public @NonNull Collection<Option> getOptions() {
 		// the values are the collection of options
 		return optionMap.values();
 	}

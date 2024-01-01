@@ -113,15 +113,15 @@ public class DeduceTypeResolve {
 	}
 
 	class _StatusListener__BTE_86 implements BaseTableEntry.StatusListener {
-		@NotNull GenType genType = _inj().new_GenTypeImpl();
+		@NonNull GenType genType = _inj().new_GenTypeImpl();
 
 		@Override
-		public void onChange(final @NotNull IElementHolder eh, final BaseTableEntry.Status newStatus) {
+		public void onChange(final @NonNull IElementHolder eh, final BaseTableEntry.Status newStatus) {
 			if (newStatus != BaseTableEntry.Status.KNOWN) return;
 
 			eh.getElement().visitGen(new AbstractCodeGen() {
 				@Override
-				public void addClass(final @NotNull ClassStatement klass) {
+				public void addClass(final @NonNull ClassStatement klass) {
 					genType.setResolved(klass.getOS_Type());
 
 					if (eh instanceof DeduceElement3_IdentTableEntry.DE3_ITE_Holder) {
@@ -137,7 +137,7 @@ public class DeduceTypeResolve {
 				}
 
 				@Override
-				public void visitAliasStatement(final @NotNull AliasStatementImpl aAliasStatement) {
+				public void visitAliasStatement(final @NonNull AliasStatementImpl aAliasStatement) {
 					logProgress(127, String.format("** AliasStatementImpl %s points to %s", aAliasStatement.name(), aAliasStatement.getExpression()));
 				}
 
@@ -147,12 +147,12 @@ public class DeduceTypeResolve {
 				}
 
 				@Override
-				public void visitDefFunction(final @NotNull DefFunctionDef aDefFunctionDef) {
+				public void visitDefFunction(final @NonNull DefFunctionDef aDefFunctionDef) {
 					logProgress(138, String.format("** DefFunctionDef %s is %s", aDefFunctionDef.name(), ((StatementWrapper) aDefFunctionDef.getItems().iterator().next()).getExpr()));
 				}
 
 				@Override
-				public void visitFormalArgListItem(final @NotNull FormalArgListItem aFormalArgListItem) {
+				public void visitFormalArgListItem(final @NonNull FormalArgListItem aFormalArgListItem) {
 					final OS_Type attached;
 					if (bte instanceof VariableTableEntry)
 						attached = ((VariableTableEntry) bte).getType().getAttached();
@@ -176,7 +176,7 @@ public class DeduceTypeResolve {
 				}
 
 				@Override
-				public void visitFunctionDef(final @NotNull FunctionDef aFunctionDef) {
+				public void visitFunctionDef(final @NonNull FunctionDef aFunctionDef) {
 					genType.setResolved(aFunctionDef.getOS_Type());
 				}
 
@@ -187,13 +187,13 @@ public class DeduceTypeResolve {
 
 				@Override
 				public void visitMC1(final MatchConditional.MC1 aMC1) {
-					if (aMC1 instanceof final MatchConditionalImpl.@NotNull MatchArm_TypeMatch typeMatch) {
+					if (aMC1 instanceof final MatchConditionalImpl.@NonNull MatchArm_TypeMatch typeMatch) {
 						NotImplementedException.raise();
 					}
 				}
 
 				@Override
-				public void visitPropertyStatement(final @NotNull PropertyStatement aPropertyStatement) {
+				public void visitPropertyStatement(final @NonNull PropertyStatement aPropertyStatement) {
 					genType.setTypeName(_inj().new_OS_UserType(aPropertyStatement.getTypeName()));
 					// TODO resolve??
 				}
@@ -225,19 +225,19 @@ public class DeduceTypeResolve {
 
 	public class _StatusListener__BTE_203 implements BaseTableEntry.StatusListener {
 		@Override
-		public void onChange(final @NotNull IElementHolder eh, final BaseTableEntry.Status newStatus) {
+		public void onChange(final @NonNull IElementHolder eh, final BaseTableEntry.Status newStatus) {
 			if (newStatus != BaseTableEntry.Status.KNOWN) return;
 
-			if (backlink instanceof final @NotNull IdentTableEntry identTableEntry) {
+			if (backlink instanceof final @NonNull IdentTableEntry identTableEntry) {
 				identTableEntry.typeResolvePromise().then(result -> _203_backlink_isIDTE(result, identTableEntry));
-			} else if (backlink instanceof final @NotNull VariableTableEntry variableTableEntry) {
+			} else if (backlink instanceof final @NonNull VariableTableEntry variableTableEntry) {
 				variableTableEntry.typeResolvePromise().then(result -> _203_backlink_is_VTE(result, eh, variableTableEntry));
 			} else if (backlink instanceof final ProcTableEntry procTableEntry) {
 				procTableEntry.typeResolvePromise().then(result -> _203_backlink_is_PTE(result, procTableEntry, eh));
 			}
 		}
 
-		private void _203_backlink_isIDTE(final @NotNull GenType result, final @NotNull IdentTableEntry identTableEntry) {
+		private void _203_backlink_isIDTE(final @NonNull GenType result, final @NonNull IdentTableEntry identTableEntry) {
 			if (identTableEntry.type == null) {
 				identTableEntry.type = _inj().new_TypeTableEntry(999, TypeTableEntry.Type.TRANSIENT, result.getTypeName(), identTableEntry.getIdent(), null); // FIXME 999
 			}
@@ -245,21 +245,21 @@ public class DeduceTypeResolve {
 			identTableEntry.type.setAttached(result);
 		}
 
-		private void _203_backlink_is_VTE(final @NotNull GenType aGenType, final IElementHolder eh, final @NotNull VariableTableEntry variableTableEntry) {
-			if (eh instanceof final Resolve_Ident_IA.@NotNull GenericElementHolderWithDC eh1) {
+		private void _203_backlink_is_VTE(final @NonNull GenType aGenType, final IElementHolder eh, final @NonNull VariableTableEntry variableTableEntry) {
+			if (eh instanceof final Resolve_Ident_IA.@NonNull GenericElementHolderWithDC eh1) {
 				final DeduceTypes2.DeduceClient3 dc = eh1.getDC();
 				dc.genCIForGenType2(aGenType);
 			}
 			// maybe set something in ci to INHERITED, but that's what DeduceProcCall is for
 			if (eh.getElement() instanceof FunctionDef) {
-				if (aGenType.getNode() instanceof final @NotNull EvaClass evaClass) {
+				if (aGenType.getNode() instanceof final @NonNull EvaClass evaClass) {
 					evaClass.functionMapDeferred((FunctionDef) eh.getElement(), aGenType::setNode);
 				}
 			}
 			variableTableEntry.getType().setAttached(aGenType);
 		}
 
-		private void _203_backlink_is_PTE(final @NotNull GenType result, final ProcTableEntry procTableEntry, final @NotNull IElementHolder eh) {
+		private void _203_backlink_is_PTE(final @NonNull GenType result, final ProcTableEntry procTableEntry, final @NonNull IElementHolder eh) {
 			// README
 			//   1. Resolve type of pte (above) to a class
 			//   2. Convert bte to ite

@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class reader {
-	public static @NotNull ArrayList<String> tokenize(final @NotNull String str) {
+	public static @NonNull ArrayList<String> tokenize(final @NonNull String str) {
 		final ArrayList<String> tokens  = new ArrayList<String>();
 		final Pattern           pattern = Pattern.compile("[\\s ,]*(~@|[\\[\\]{}()'`~@]|\"(?:[\\\\].|[^\\\\\"])*\"?|;.*|[^\\s \\[\\]{}()'\"`~@,;]*)");
 		final Matcher           matcher = pattern.matcher(str);
@@ -25,7 +25,7 @@ public class reader {
 		return tokens;
 	}
 
-	public static MalVal read_atom(final @NotNull Reader rdr)
+	public static MalVal read_atom(final @NonNull Reader rdr)
 	throws ParseError {
 		final String  token   = rdr.next();
 		final Pattern pattern = Pattern.compile("(^-?[0-9]+$)|(^-?[0-9][0-9.]*$)|(^nil$)|(^true$)|(^false$)|^\"((?:[\\\\].|[^\\\\\"])*)\"$|^\"(.*)$|:(.*)|(^[^\"]*$)");
@@ -54,7 +54,7 @@ public class reader {
 		}
 	}
 
-	public static MalVal read_list(final @NotNull Reader rdr, final @NotNull MalList lst, final char start, final char end)
+	public static MalVal read_list(final @NonNull Reader rdr, final @NonNull MalList lst, final char start, final char end)
 	throws MalContinue, ParseError {
 		String token = rdr.next();
 		if (token.charAt(0) != start) {
@@ -73,13 +73,13 @@ public class reader {
 		return lst;
 	}
 
-	public static @NotNull MalVal read_hash_map(final @NotNull Reader rdr)
+	public static @NonNull MalVal read_hash_map(final @NonNull Reader rdr)
 	throws MalContinue, ParseError {
 		final MalList lst = (MalList) read_list(rdr, new MalList(), '{', '}');
 		return new MalHashMap(lst);
 	}
 
-	public static MalVal read_form(final @NotNull Reader rdr)
+	public static MalVal read_form(final @NonNull Reader rdr)
 	throws MalContinue, ParseError {
 		final String token = rdr.peek();
 		if (token == null) {
@@ -137,7 +137,7 @@ public class reader {
 		return form;
 	}
 
-	public static MalVal read_str(final @NotNull String str)
+	public static MalVal read_str(final @NonNull String str)
 	throws MalContinue, ParseError {
 		return read_form(new Reader(tokenize(str)));
 	}

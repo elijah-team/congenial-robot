@@ -55,18 +55,18 @@ public class USE {
 	}
 
 	public void addModule(final OS_Module aModule, final String aFn) {
-		final @NotNull CompilationEnclosure ce = c.getCompilationEnclosure();
+		final @NonNull CompilationEnclosure ce = c.getCompilationEnclosure();
 		final WorldModule                   module = new DefaultWorldModule(aModule, ce);
 		fn2m.put(aFn, module);
 	}
 
-	private Operation2<WorldModule> parseElijjahFile(final CompFactory.@NotNull InputRequest aInputRequest) {
+	private Operation2<WorldModule> parseElijjahFile(final CompFactory.@NonNull InputRequest aInputRequest) {
 		var owm = __parseElijjahFile(aInputRequest);
 		aInputRequest.setOp(owm);
 		return owm;
 	}
 
-	private Operation2<WorldModule> __parseElijjahFile(final CompFactory.@NotNull InputRequest aInputRequest) {
+	private Operation2<WorldModule> __parseElijjahFile(final CompFactory.@NonNull InputRequest aInputRequest) {
 		final File f = aInputRequest.file();
 		final LibraryStatementPart lsp = aInputRequest.lsp();
 
@@ -109,7 +109,7 @@ public class USE {
 		}
 	}
 
-	public Operation2<WorldModule> realParseElijjahFile2(final CompFactory.@NotNull InputRequest aInputRequest) {
+	public Operation2<WorldModule> realParseElijjahFile2(final CompFactory.@NonNull InputRequest aInputRequest) {
 		final Operation<WorldModule> om;
 
 		try {
@@ -131,7 +131,7 @@ public class USE {
 		}
 	}
 
-	public Operation<WorldModule> realParseElijjahFile(final CompFactory.@NotNull InputRequest aInputRequest) {
+	public Operation<WorldModule> realParseElijjahFile(final CompFactory.@NonNull InputRequest aInputRequest) {
 
 
 		var file   = aInputRequest.file();
@@ -162,7 +162,7 @@ public class USE {
 				return Operation.failure(e);
 			}
 
-			@NotNull final CompilationEnclosure ce = c.getCompilationEnclosure();
+			@NonNull final CompilationEnclosure ce = c.getCompilationEnclosure();
 			final WorldModule                   R = new DefaultWorldModule(om.success(), ce);
 			fn2m.put(absolutePath, R);
 			s.close();
@@ -194,7 +194,7 @@ public class USE {
 		return Operation2.success(om.success());
 	}
 
-	public void use(final @NotNull CompilerInstructions compilerInstructions, final boolean do_out) {
+	public void use(final @NonNull CompilerInstructions compilerInstructions, final boolean do_out) {
 		final File instruction_dir = new File(compilerInstructions.getFilename()).getParentFile();
 		for (final LibraryStatementPart lsp : compilerInstructions.lsps()) {
 			final String dir_name = Helpers.remove_single_quotes_from_string(lsp.getDirName());
@@ -212,7 +212,7 @@ public class USE {
 		use_internal(instruction_dir, do_out, lsp);
 	}
 
-	private void use_internal(final @NotNull File dir, final boolean do_out, @NotNull LibraryStatementPart lsp) {
+	private void use_internal(final @NonNull File dir, final boolean do_out, @NonNull LibraryStatementPart lsp) {
 		if (!dir.isDirectory()) {
 			errSink.reportError("9997 Not a directory " + dir);
 			return;

@@ -21,14 +21,14 @@ import tripleo.elijah.lang2.ElElementVisitor;
  */
 public class ConstructStatementImpl implements tripleo.elijah.lang.i.ConstructStatement {
 	private final @Nullable ExpressionList _args;
-	private final @NotNull  IExpression    _expr;
+	private final @NonNull  IExpression    _expr;
 	private final @Nullable String         constructorName;
 	//	private OS_Type _type;
-	private final @NotNull  Context        context;
-	private final @NotNull  OS_Element     parent;
+	private final @NonNull  Context        context;
+	private final @NonNull  OS_Element     parent;
 
-	public ConstructStatementImpl(@NotNull final OS_Element aParent, @NotNull final Context aContext,
-								  @NotNull final IExpression aExpr, @Nullable final String aConstructorName,
+	public ConstructStatementImpl(@NonNull final OS_Element aParent, @NonNull final Context aContext,
+								  @NonNull final IExpression aExpr, @Nullable final String aConstructorName,
 								  @Nullable final ExpressionList aExpressionList) {
 		parent          = aParent;
 		context         = aContext;
@@ -58,22 +58,22 @@ public class ConstructStatementImpl implements tripleo.elijah.lang.i.ConstructSt
 	}
 
 	@Override
-	public @NotNull Context getContext() {
+	public @NonNull Context getContext() {
 		return context;
 	}
 
 	@Override
-	public @NotNull IExpression getExpr() {
+	public @NonNull IExpression getExpr() {
 		return _expr;
 	}
 
 	@Override
-	public @NotNull OS_Element getParent() {
+	public @NonNull OS_Element getParent() {
 		return parent;
 	}
 
 	@Override
-	public void visitGen(@NotNull ElElementVisitor visit) {
+	public void visitGen(@NonNull ElElementVisitor visit) {
 		visit.visitConstructStatement(this);
 	}
 

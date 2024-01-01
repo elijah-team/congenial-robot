@@ -20,7 +20,7 @@ public class JavaDependencyRef implements DependencyRef {
 	private String packageName;
 
 	@Override
-	public @NotNull String jsonString() {
+	public @NonNull String jsonString() {
 		return "";
 	}
 }

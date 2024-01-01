@@ -24,7 +24,7 @@ import java.util.Date;
 
 public class Out {
 
-	private static @NotNull TabbedOutputStream getTOSLog() throws FileNotFoundException {
+	private static @NonNull TabbedOutputStream getTOSLog() throws FileNotFoundException {
 		final SimpleDateFormat sdf      = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 		final String           filename = String.format("eljc-%s.out", sdf.format(new Date()));
 		return new TabbedOutputStream(new FileOutputStream(filename));
@@ -37,14 +37,14 @@ public class Out {
 
 	private final boolean do_out;
 
-	private final @NotNull ParserClosure pc;
+	private final @NonNull ParserClosure pc;
 
-	public Out(final String fn, final @NotNull Compilation aCompilation, final boolean aDoOut) {
+	public Out(final String fn, final @NonNull Compilation aCompilation, final boolean aDoOut) {
 		pc     = new ParserClosureImpl(fn, aCompilation);
 		do_out = aDoOut;
 	}
 
-	public @NotNull ParserClosure closure() {
+	public @NonNull ParserClosure closure() {
 		return pc;
 	}
 
@@ -77,7 +77,7 @@ public class Out {
 */
 	}
 
-	public @NotNull OS_Module module() {
+	public @NonNull OS_Module module() {
 		return pc.module();
 	}
 }

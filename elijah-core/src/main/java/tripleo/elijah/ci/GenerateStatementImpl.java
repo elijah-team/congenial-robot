@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class GenerateStatementImpl implements GenerateStatement {
 	@Override
-	public void addDirective(final @NotNull Token token, final IExpression expression) {
+	public void addDirective(final @NonNull Token token, final IExpression expression) {
 		dirs.add(new Directive(token, expression));
 	}
 
@@ -31,7 +31,7 @@ public class GenerateStatementImpl implements GenerateStatement {
 		private final IExpression expression;
 		private final String      name;
 
-		public Directive(final @NotNull Token token_, final IExpression expression_) {
+		public Directive(final @NonNull Token token_, final IExpression expression_) {
 			name       = token_.getText();
 			expression = expression_;
 		}

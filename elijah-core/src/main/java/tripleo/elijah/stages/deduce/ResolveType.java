@@ -30,12 +30,12 @@ import java.util.function.Consumer;
 public enum ResolveType {
 	;
 
-	public static @NotNull GenType resolve_type(final @NotNull OS_Module module,
-												final @NotNull OS_Type type,
+	public static @NonNull GenType resolve_type(final @NonNull OS_Module module,
+												final @NonNull OS_Type type,
 												final Context ctx,
-												final @NotNull ElLog LOG,
-												final @NotNull DeduceTypes2 dt2) throws ResolveError {
-		@NotNull GenType R = new GenTypeImpl();
+												final @NonNull ElLog LOG,
+												final @NonNull DeduceTypes2 dt2) throws ResolveError {
+		@NonNull GenType R = new GenTypeImpl();
 		if (type.getType() != OS_Type.Type.USER_CLASS)
 			R.setTypeName(type);
 
@@ -66,10 +66,10 @@ public enum ResolveType {
 		return __inj;
 	}
 
-	private static void resolve_built_in(final @NotNull OS_Module module, final @NotNull OS_Type type, final @NotNull DeduceTypes2 dt2, final @NotNull GenType aR) throws ResolveError {
+	private static void resolve_built_in(final @NonNull OS_Module module, final @NonNull OS_Type type, final @NonNull DeduceTypes2 dt2, final @NonNull GenType aR) throws ResolveError {
 		switch (type.getBType()) {
 		case SystemInteger: {
-			@NotNull String typeName = type.getBType().name();
+			@NonNull String typeName = type.getBType().name();
 			assert typeName.equals("SystemInteger");
 			OS_Module prelude = module.prelude();
 			if (prelude == null) // README Assume `module' IS prelude
@@ -91,7 +91,7 @@ public enum ResolveType {
 			break;
 		}
 		case String_: {
-			@NotNull String typeName = type.getBType().name();
+			@NonNull String typeName = type.getBType().name();
 			assert typeName.equals("String_");
 			OS_Module prelude = module.prelude();
 			if (prelude == null) // README Assume `module' IS prelude
@@ -113,7 +113,7 @@ public enum ResolveType {
 			break;
 		}
 		case SystemCharacter: {
-			@NotNull String typeName = type.getBType().name();
+			@NonNull String typeName = type.getBType().name();
 			assert typeName.equals("SystemCharacter");
 			OS_Module prelude = module.prelude();
 			if (prelude == null) // README Assume `module' IS prelude
@@ -148,17 +148,17 @@ public enum ResolveType {
 		}
 	}
 
-	private static void resolve_user2(final @NotNull OS_Type type,
-									  final @NotNull ElLog LOG,
-									  final @NotNull DeduceTypes2 dt2,
-									  final @NotNull Consumer<GenType> cgt) throws ResolveError {
+	private static void resolve_user2(final @NonNull OS_Type type,
+									  final @NonNull ElLog LOG,
+									  final @NonNull DeduceTypes2 dt2,
+									  final @NonNull Consumer<GenType> cgt) throws ResolveError {
 		resolve_user(type, LOG, dt2, cgt);
 	}
 
-	private static void resolve_user(final @NotNull OS_Type type,
-									 final @NotNull ElLog LOG,
-									 final @NotNull DeduceTypes2 dt2,
-									 final @NotNull Consumer<GenType> cgt) throws ResolveError {
+	private static void resolve_user(final @NonNull OS_Type type,
+									 final @NonNull ElLog LOG,
+									 final @NonNull DeduceTypes2 dt2,
+									 final @NonNull Consumer<GenType> cgt) throws ResolveError {
 		final GenType ggg = new GenTypeImpl();
 
 		final TypeName tn1 = type.getTypeName();
@@ -214,15 +214,15 @@ public enum ResolveType {
 		cgt.accept(ggg);
 	}
 
-	private static void resolve_user(final @NotNull IDeduceElement3 aDeduceElement3,
-									 final @NotNull OS_Type type1,
-									 final @NotNull ElLog LOG,
-									 final @NotNull Consumer<GenType> cgt) throws ResolveError {
-		final @NotNull OS_Type type = aDeduceElement3.genType().getResolved();
+	private static void resolve_user(final @NonNull IDeduceElement3 aDeduceElement3,
+									 final @NonNull OS_Type type1,
+									 final @NonNull ElLog LOG,
+									 final @NonNull Consumer<GenType> cgt) throws ResolveError {
+		final @NonNull OS_Type type = aDeduceElement3.genType().getResolved();
 		assert type1 == type;
 
-		//final @NotNull ElLog LOG;
-		final @NotNull DeduceTypes2 dt2 = aDeduceElement3.deduceTypes2();
+		//final @NonNull ElLog LOG;
+		final @NonNull DeduceTypes2 dt2 = aDeduceElement3.deduceTypes2();
 
 		resolve_user(type, LOG, dt2, cgt);
 	}

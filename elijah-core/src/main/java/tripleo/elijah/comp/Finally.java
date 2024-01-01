@@ -38,7 +38,7 @@ public class Finally {
 		inputs.add(new Input(aInp, ty));
 	}
 
-	public boolean containsCodeOutput(@NotNull final String s) {
+	public boolean containsCodeOutput(@NonNull final String s) {
 		return outputs.stream().anyMatch(i -> i.name().equals(s));
 	}
 

@@ -31,7 +31,7 @@ public class CB_FindStdLibActionProcess implements CB_Action {
 	}
 
 	@Override
-	public @NotNull List<CB_OutputString> outputStrings() {
+	public @NonNull List<CB_OutputString> outputStrings() {
 		return o;
 	}
 }

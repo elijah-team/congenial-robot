@@ -50,7 +50,7 @@ public interface MatchConditional extends OS_Element, StatementItem, FunctionIte
 		Context getContext();
 
 		@Override
-		default void visitGen(@NotNull ElElementVisitor visit) {
+		default void visitGen(@NonNull ElElementVisitor visit) {
 			visit.visitMC1(this);
 		}
 

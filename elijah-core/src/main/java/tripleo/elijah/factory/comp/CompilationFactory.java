@@ -15,7 +15,7 @@ public enum CompilationFactory {
 	;
 
 	@Contract("_, _ -> new")
-	public static @NotNull CompilationImpl mkCompilation(final ErrSink aErrSink, final IO io) {
+	public static @NonNull CompilationImpl mkCompilation(final ErrSink aErrSink, final IO io) {
 		final CompilationImpl c = new CompilationImpl(aErrSink, io);
 		if (aErrSink instanceof StdErrSink stdErrSink) {
 			stdErrSink.setRep(c.reports());
@@ -23,11 +23,11 @@ public enum CompilationFactory {
 		return c;
 	}
 
-	public static @NotNull CompilationImpl mkCompilation2(final List<IFunctionMapHook> aMapHooks) {
+	public static @NonNull CompilationImpl mkCompilation2(final List<IFunctionMapHook> aMapHooks) {
 		final StdErrSink errSink = new StdErrSink();
 		final IO         io      = new IO();
 
-		final @NotNull CompilationImpl c = mkCompilation(errSink, io);
+		final @NonNull CompilationImpl c = mkCompilation(errSink, io);
 		errSink.setRep(c.reports());
 
 		c.testMapHooks(aMapHooks);
@@ -35,7 +35,7 @@ public enum CompilationFactory {
 		return c;
 	}
 
-	public static @NotNull Compilation mkCompilationSilent(final StdErrSink aStdErrSink, final IO aIO) {
+	public static @NonNull Compilation mkCompilationSilent(final StdErrSink aStdErrSink, final IO aIO) {
 		final Compilation c = mkCompilation(aStdErrSink, aIO);
 		aStdErrSink.setRep(c.reports());
 		c.reports().turnAllOutputOff();

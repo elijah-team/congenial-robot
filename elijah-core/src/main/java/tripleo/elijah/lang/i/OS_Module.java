@@ -14,13 +14,13 @@ import java.util.List;
 public interface OS_Module extends OS_Element {
 	void add(ModuleItem anElement);
 
-	@NotNull List<EntryPoint> entryPoints();
+	@NonNull List<EntryPoint> entryPoints();
 
 	@Nullable OS_Element findClass(String aClassName);
 
 	void finish();
 
-	@NotNull Compilation getCompilation();
+	@NonNull Compilation getCompilation();
 
 	@Override Context getContext();
 
@@ -30,7 +30,7 @@ public interface OS_Module extends OS_Element {
 
 	LibraryStatementPart getLsp();
 
-	@Override void visitGen(@NotNull ElElementVisitor visit);
+	@Override void visitGen(@NonNull ElElementVisitor visit);
 
 	boolean hasClass(String className); // OS_Container
 
@@ -50,13 +50,13 @@ public interface OS_Module extends OS_Element {
 
 	void setIndexingStatement(IndexingStatement idx);
 
-	void setLsp(@NotNull LibraryStatementPart lsp);
+	void setLsp(@NonNull LibraryStatementPart lsp);
 
-	void setParent(@NotNull Compilation parent);
+	void setParent(@NonNull Compilation parent);
 
 	void setPrelude(OS_Module success);
 
 	@Override void serializeTo(SmallWriter sw);
 
-	@NotNull Collection<ModuleItem> getItems();
+	@NonNull Collection<ModuleItem> getItems();
 }

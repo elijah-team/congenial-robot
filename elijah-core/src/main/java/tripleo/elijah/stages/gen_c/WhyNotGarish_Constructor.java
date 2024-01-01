@@ -31,7 +31,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		fileGenPromise.then(this::onFileGen);
 	}
 
-	void onFileGen(final @NotNull GenerateResultEnv aFileGen) {
+	void onFileGen(final @NonNull GenerateResultEnv aFileGen) {
 		final Generate_Code_For_Method gcfm = new Generate_Code_For_Method(generateC, generateC.elLog());
 
 
@@ -82,14 +82,14 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 	public Optional<GenerateC> getGenerateC() {
 		if (!hasFileGen())
 			return null;
-		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
+		final @NonNull GenerateFiles[] xx = new GenerateFiles[1];
 		fileGenPromise.then(fg -> {
 			xx[0] = fg.generateModule().gmr().getGenerateFiles(null);
 		});
 		return Optional.of((GenerateC) xx[0]);
 	}
 
-	@NotNull String getConstructorNameText() {
+	@NonNull String getConstructorNameText() {
 		final IdentExpression constructorName = gf.getFD().getNameNode();
 
 		final String constructorNameText;
@@ -129,10 +129,10 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		}
 	}
 
-	private void generateIdent(@NotNull IdentTableEntry identTableEntry, @NotNull GenerateResultEnv aFileGen) {
+	private void generateIdent(@NonNull IdentTableEntry identTableEntry, @NonNull GenerateResultEnv aFileGen) {
 		assert identTableEntry.isResolved();
 
-		final @NotNull EvaNode   x           = identTableEntry.resolvedType();
+		final @NonNull EvaNode   x           = identTableEntry.resolvedType();
 		final WorkList           wl          = aFileGen.wl();
 
 		if (x instanceof final EvaClass evaClass) {

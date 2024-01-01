@@ -24,7 +24,7 @@ public class GCX_FunctionCall_Special {
 	private final Instruction instruction;
 	private final ProcTableEntry  pte;
 
-	public GCX_FunctionCall_Special(final ProcTableEntry aPte, final @NotNull WhyNotGarish_BaseFunction aGf, final GenerateC aGc, final Instruction aInstruction) {
+	public GCX_FunctionCall_Special(final ProcTableEntry aPte, final @NonNull WhyNotGarish_BaseFunction aGf, final GenerateC aGc, final Instruction aInstruction) {
 		pte         = aPte;
 		//gf          = aGf.cheat();
 		gc          = aGc;
@@ -32,9 +32,9 @@ public class GCX_FunctionCall_Special {
 
 		yf = aGf;
 	}
-	private final @NotNull WhyNotGarish_BaseFunction yf;
+	private final @NonNull WhyNotGarish_BaseFunction yf;
 
-	public @NotNull String getText() {
+	public @NonNull String getText() {
 		final StringBuilder sb = new StringBuilder();
 
 		final Map<OS_Element, DeduceElement> e = yf.pt_elements();

@@ -37,7 +37,7 @@ public class CouldntGenerateClass implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull String code() {
+	public @NonNull String code() {
 		return "E2000";
 	}
 
@@ -54,7 +54,7 @@ public class CouldntGenerateClass implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NonNull Locatable primary() {
 		return null;
 	}
 
@@ -64,12 +64,12 @@ public class CouldntGenerateClass implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NonNull List<Locatable> secondary() {
 		return null;
 	}
 
 	@Override
-	public @NotNull Severity severity() {
+	public @NonNull Severity severity() {
 		return Severity.ERROR;
 	}
 }

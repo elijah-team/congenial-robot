@@ -45,24 +45,24 @@ public class DeferredMember {
 		return externalRef.promise();
 	}
 
-	public @NotNull DeferredObject<EvaNode, Void, Void> externalRefDeferred() {
+	public @NonNull DeferredObject<EvaNode, Void, Void> externalRefDeferred() {
 		return externalRef;
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "DeferredMember{" +
 				"parent=" + parent +
 				", variableName=" + variableStatement.getName() +
 				'}';
 	}
 
-	public @NotNull Promise<GenType, Diagnostic, Void> typePromise() {
+	public @NonNull Promise<GenType, Diagnostic, Void> typePromise() {
 		return typePromise;
 	}
 
 	// for DeducePhase
-	public @NotNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
+	public @NonNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
 		return typePromise;
 	}
 

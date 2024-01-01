@@ -18,7 +18,7 @@ public class NG_OutputClass implements NG_OutputItem {
 	private GenerateC   generateC;
 
 	@Override
-	public @NotNull List<NG_OutputStatement> getOutputs() {
+	public @NonNull List<NG_OutputStatement> getOutputs() {
 		final EvaClass x = garishClass.getLiving().evaNode();
 
 		final BufferTabbedOutputStream tos = garishClass.getClassBuffer(generateC);
@@ -33,7 +33,7 @@ public class NG_OutputClass implements NG_OutputItem {
 	}
 
 	@Override
-	public EOT_OutputFile.FileNameProvider outName(final @NotNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NotNull TY ty) {
+	public EOT_OutputFile.FileNameProvider outName(final @NonNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NonNull TY ty) {
 		final EvaClass x = garishClass.getLiving().evaNode();
 
 		return aOutputStrategyC.nameForClass1(x, ty);

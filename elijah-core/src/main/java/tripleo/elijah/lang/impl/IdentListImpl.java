@@ -18,7 +18,7 @@ import java.util.List;
 public class IdentListImpl implements tripleo.elijah.lang.i.IdentList {
 
 	// List<OS_Ident> idents=new ArrayList<OS_Ident>();
-	@NotNull List<IdentExpression> idents2 = new ArrayList<IdentExpression>();
+	@NonNull List<IdentExpression> idents2 = new ArrayList<IdentExpression>();
 
 //	public void push(String aa){
 //		idents.add(new OS_Ident(aa));

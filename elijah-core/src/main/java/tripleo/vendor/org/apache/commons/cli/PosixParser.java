@@ -85,7 +85,7 @@ public class PosixParser extends Parser {
 	 * @return The flattened {@code arguments} String array.
 	 */
 	@Override
-	protected String @NotNull [] flatten(final @NotNull Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
+	protected String @NonNull [] flatten(final @NonNull Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
 		init();
 		this.options = options;
 
@@ -215,7 +215,7 @@ public class PosixParser extends Parser {
 	 * @param token           The current token to be <b>burst</b>
 	 * @param stopAtNonOption Specifies whether to stop processing at the first non-Option encountered.
 	 */
-	protected void burstToken(final @NotNull String token, final boolean stopAtNonOption) {
+	protected void burstToken(final @NonNull String token, final boolean stopAtNonOption) {
 		for (int i = 1; i < token.length(); i++) {
 			final String ch = String.valueOf(token.charAt(i));
 
@@ -243,7 +243,7 @@ public class PosixParser extends Parser {
 	 *
 	 * @param iter An iterator over the remaining tokens
 	 */
-	private void gobble(final @NotNull Iterator<String> iter) {
+	private void gobble(final @NonNull Iterator<String> iter) {
 		if (eatTheRest) {
 			while (iter.hasNext()) {
 				tokens.add(iter.next());
@@ -252,7 +252,7 @@ public class PosixParser extends Parser {
 	}
 
 	@Override
-	public CommandLine parse(Options options, @NotNull List<CompilerInput> aInputs) {
+	public CommandLine parse(Options options, @NonNull List<CompilerInput> aInputs) {
 		throw new NotImplementedException();
 	}
 

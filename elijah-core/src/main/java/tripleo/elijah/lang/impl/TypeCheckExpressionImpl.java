@@ -30,7 +30,7 @@ public class TypeCheckExpressionImpl extends AbstractExpression implements tripl
 	}
 
 	@Override
-	public @NotNull OS_Type getType() {
+	public @NonNull OS_Type getType() {
 		return new OS_BuiltinType(BuiltInTypes.Boolean);
 	}
 

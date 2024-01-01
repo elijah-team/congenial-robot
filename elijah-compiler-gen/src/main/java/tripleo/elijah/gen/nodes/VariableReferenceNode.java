@@ -29,7 +29,7 @@ public class VariableReferenceNode {
 		return null;
 	}
 
-	public @NotNull String genText() {
+	public @NonNull String genText() {
 		NotImplementedException.raise();
 		return "vtn"; // TODO hardcoded
 	}

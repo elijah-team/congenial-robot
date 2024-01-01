@@ -55,7 +55,7 @@ public abstract class _BaseImportStatement implements ImportStatement {
 	// endregion
 
 	@Override
-	public @NotNull EN_Name getEnName() {
+	public @NonNull EN_Name getEnName() {
 		if (__n == null) {
 			__n = EN_Name_.create(name());
 		}

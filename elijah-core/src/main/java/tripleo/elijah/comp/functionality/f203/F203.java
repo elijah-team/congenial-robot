@@ -9,7 +9,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 
 public class F203 {
-	public final @NotNull ChooseDirectoryNameBehavior cdn;
+	public final @NonNull ChooseDirectoryNameBehavior cdn;
 	private final         ErrSink                     errSink;
 	final                 LocalDateTime               localDateTime = LocalDateTime.now();
 
@@ -27,7 +27,7 @@ public class F203 {
 	public File chooseDirectory() {
 		final File file = cdn.chooseDirectory();
 
-		if (cdn instanceof final @NotNull ChooseHashDirectoryNameBehaviorPaths paths) {
+		if (cdn instanceof final @NonNull ChooseHashDirectoryNameBehaviorPaths paths) {
 			var p = paths.getPath();
 
 			p.getPathPromise().then(pp -> {

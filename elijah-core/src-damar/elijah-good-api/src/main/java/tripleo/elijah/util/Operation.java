@@ -16,12 +16,12 @@ public class Operation<T> {
 
 	private final Exception exc;
 
-	public static <T> @NotNull Operation<T> failure(final Exception aException) {
+	public static <T> @NonNull Operation<T> failure(final Exception aException) {
 		final Operation<T> op = new Operation<>(null, aException, FAILURE);
 		return op;
 	}
 
-	public static <T> @NotNull Operation<T> success(final T aSuccess) {
+	public static <T> @NonNull Operation<T> success(final T aSuccess) {
 		final Operation<T> op = new Operation<>(aSuccess, null, SUCCESS);
 		return op;
 	}
@@ -34,7 +34,7 @@ public class Operation<T> {
 		assert succ != exc;
 	}
 
-	public static <T> @NotNull Operation<T> failure_simple(final String aS) {
+	public static <T> @NonNull Operation<T> failure_simple(final String aS) {
 		Operation<T> R = new Operation<T>(null, new Exception(aS), FAILURE);
 		return R;
 	}

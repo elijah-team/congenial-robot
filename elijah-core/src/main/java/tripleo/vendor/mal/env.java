@@ -9,13 +9,13 @@ import java.util.HashMap;
 public class env {
 	public static class Env {
 		@Nullable Env                     outer = null;
-		@NotNull  HashMap<String, MalVal> data  = new HashMap<String, MalVal>();
+		@NonNull  HashMap<String, MalVal> data  = new HashMap<String, MalVal>();
 
 		public Env(final Env outer) {
 			this.outer = outer;
 		}
 
-		public Env(final Env outer, final @NotNull MalList binds, final @NotNull MalList exprs) {
+		public Env(final Env outer, final @NonNull MalList binds, final @NonNull MalList exprs) {
 			this.outer = outer;
 			for (Integer i = 0; i < binds.size(); i++) {
 				final String sym = ((MalSymbol) binds.nth(i)).getName();
@@ -29,7 +29,7 @@ public class env {
 			}
 		}
 
-		public @Nullable Env find(final @NotNull MalSymbol key) {
+		public @Nullable Env find(final @NonNull MalSymbol key) {
 			if (data.containsKey(key.getName())) {
 				return this;
 			} else if (outer != null) {
@@ -39,7 +39,7 @@ public class env {
 			}
 		}
 
-		public MalVal get(final @NotNull MalSymbol key) throws MalThrowable {
+		public MalVal get(final @NonNull MalSymbol key) throws MalThrowable {
 			final Env e = find(key);
 			if (e == null) {
 				throw new MalException(
@@ -49,7 +49,7 @@ public class env {
 			}
 		}
 
-		public @NotNull Env set(final @NotNull MalSymbol key, final MalVal value) {
+		public @NonNull Env set(final @NonNull MalSymbol key, final MalVal value) {
 			data.put(key.getName(), value);
 			return this;
 		}

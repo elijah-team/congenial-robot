@@ -15,7 +15,7 @@ public class GCFC implements Reactivable {
 	private final DeducedEvaConstructor gf;
 	private final GenerateResult        gr;
 
-	public GCFC(final @NotNull List<C2C_Result> rs, final DeducedEvaConstructor aGf, final GenerateResult aGr) {
+	public GCFC(final @NonNull List<C2C_Result> rs, final DeducedEvaConstructor aGf, final GenerateResult aGr) {
 		gf = aGf;
 		gr = aGr;
 

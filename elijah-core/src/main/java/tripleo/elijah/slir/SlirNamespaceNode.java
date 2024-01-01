@@ -48,7 +48,7 @@ public class SlirNamespaceNode implements SlirElement {
 		namespaceStatement = aNamespaceStatement;
 	}
 
-	public SlirNamespaceNode(final @NotNull SlirSourceNode aSourceNode,
+	public SlirNamespaceNode(final @NonNull SlirSourceNode aSourceNode,
 							 final String aNamespaceName,
 							 final NamespaceStatement aNamespaceStatement) {
 		parent             = null;
@@ -73,7 +73,7 @@ public class SlirNamespaceNode implements SlirElement {
 	}
 
 	@Override
-	public @NotNull SlirPos partOfSpeech() {
+	public @NonNull SlirPos partOfSpeech() {
 		return SlirPos.NAMESPACE;
 	}
 

@@ -17,7 +17,7 @@ public class DebugPrint {
 		System.err.println("**** addDeferredMember " + aDm);
 	}
 
-	public static void addPotentialType(final @NotNull VariableTableEntry aVte, final ConstantTableEntry aCte) {
+	public static void addPotentialType(final @NonNull VariableTableEntry aVte, final ConstantTableEntry aCte) {
 		var c = aVte._deduceTypes2().module.getCompilation();
 		if (c.reports().outputOn(Finally.Outs.Out_2121)) {
 			System.err.println("**** addPotentialType " + aVte + " " + aCte);

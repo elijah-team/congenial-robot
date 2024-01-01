@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class GE_BuffersStatement implements EG_Statement {
 	@Override
-	public @NotNull EX_Explanation getExplanation() {
+	public @NonNull EX_Explanation getExplanation() {
 		return new GE_BuffersExplanation(this);
 	}
 
@@ -22,7 +22,7 @@ public class GE_BuffersStatement implements EG_Statement {
 	}
 
 	@Override
-	public @NotNull String getText() {
+	public @NonNull String getText() {
 		return __.String_join("\n\n", entry.getValue()
 				.stream()
 				//.filter(entry)
@@ -38,12 +38,12 @@ public class GE_BuffersStatement implements EG_Statement {
 			st = aGEBuffersStatement;
 		}
 
-		public @NotNull String getText() {
+		public @NonNull String getText() {
 			return message;
 		}
 
 		@Override
-		public @NotNull String message() {
+		public @NonNull String message() {
 			return "GE_BuffersExplanation";
 		}
 	}

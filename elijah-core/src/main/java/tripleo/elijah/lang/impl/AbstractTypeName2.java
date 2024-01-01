@@ -24,7 +24,7 @@ import java.util.LinkedHashSet;
  */
 public abstract class AbstractTypeName2 implements NormalTypeName {
 
-	protected @NotNull Collection<TypeModifiers> _ltm = new LinkedHashSet<TypeModifiers>();
+	protected @NonNull Collection<TypeModifiers> _ltm = new LinkedHashSet<TypeModifiers>();
 	protected          TypeModifiers             tm;
 	protected          Qualident                 typeName;
 

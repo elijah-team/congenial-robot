@@ -18,13 +18,13 @@ import java.util.Map;
 public class EOT_OutputTree {
 	private final List<EOT_OutputFile> list = new ArrayList<>();
 
-	public void add(final @NotNull EOT_OutputFile aOff) {
+	public void add(final @NonNull EOT_OutputFile aOff) {
 		//05/18 System.err.printf("[add] %s %s%n", aOff.getFilename(), aOff.getStatementSequence().getText());
 
 		list.add(aOff);
 	}
 
-	public void addAll(final @NotNull List<EOT_OutputFile> aLeof) {
+	public void addAll(final @NonNull List<EOT_OutputFile> aLeof) {
 		list.addAll(aLeof);
 	}
 
@@ -56,11 +56,11 @@ public class EOT_OutputTree {
 		}
 	}
 
-	public @NotNull List<EOT_OutputFile> getList() {
+	public @NonNull List<EOT_OutputFile> getList() {
 		return list;
 	}
 
-	public void set(final @NotNull List<EOT_OutputFile> aLeof) {
+	public void set(final @NonNull List<EOT_OutputFile> aLeof) {
 		list.addAll(aLeof);
 	}
 }

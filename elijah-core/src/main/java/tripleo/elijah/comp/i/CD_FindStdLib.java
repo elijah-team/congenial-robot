@@ -9,5 +9,5 @@ import tripleo.elijah.util.Operation;
 import java.util.function.Consumer;
 
 public interface CD_FindStdLib extends CompilerDriven {
-	@NotNull Operation<Ok> findStdLib(CR_State crState, String aPreludeName, Consumer<Operation<CompilerInstructions>> coci);
+	@NonNull Operation<Ok> findStdLib(CR_State crState, String aPreludeName, Consumer<Operation<CompilerInstructions>> coci);
 }

@@ -33,7 +33,7 @@ public class CaseHdrNode implements Node {
 		this.expr = expr;
 	}
 
-	public @NotNull String simpleGenText() {
+	public @NonNull String simpleGenText() {
 		if (expr instanceof VariableReferenceNode3) {
 			return expr.genText();
 		}

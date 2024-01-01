@@ -38,12 +38,12 @@ public class FnCallArgs_Statement2 implements EG_Statement {
 	}
 
 	@Override
-	public @NotNull EX_Explanation getExplanation() {
+	public @NonNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("FnCallArgs_Statement2");
 	}
 
 	@Override
-	public @NotNull String getText() {
+	public @NonNull String getText() {
 		final StringBuilder sb = new StringBuilder();
 
 		if (pte.expression_num instanceof IntegerIA) {

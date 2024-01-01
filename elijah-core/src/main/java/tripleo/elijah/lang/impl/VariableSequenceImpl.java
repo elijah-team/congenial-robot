@@ -75,7 +75,7 @@ public class VariableSequenceImpl implements tripleo.elijah.lang.i.VariableSeque
 	}
 
 	@Override
-	public @NotNull VariableStatement next() {
+	public @NonNull VariableStatement next() {
 		final VariableStatement st = new VariableStatementImpl(this);
 		st.set(def);
 		stmts.add(st);
@@ -90,7 +90,7 @@ public class VariableSequenceImpl implements tripleo.elijah.lang.i.VariableSeque
 	}
 
 	@Override
-	public void setTypeName(@NotNull TypeName aTypeName) {
+	public void setTypeName(@NonNull TypeName aTypeName) {
 		for (VariableStatement vs : stmts) {
 			vs.setTypeName(aTypeName);
 		}
@@ -107,12 +107,12 @@ public class VariableSequenceImpl implements tripleo.elijah.lang.i.VariableSeque
 	}
 
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.visitVariableSequence(this);
 	}
 
 	@Override
-	public void serializeTo(final @NotNull SmallWriter sw) {
+	public void serializeTo(final @NonNull SmallWriter sw) {
 		int i = 1;
 		for (final VariableStatement stmt : stmts) {
 			sw.fieldString("stmt%d".formatted(i++), stmt.getName());

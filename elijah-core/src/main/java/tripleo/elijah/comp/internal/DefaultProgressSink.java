@@ -8,7 +8,7 @@ import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 public class DefaultProgressSink implements IProgressSink {
 	@Override
 	public void note(final Codes code,
-					 final @NotNull ProgressSinkComponent component,
+					 final @NonNull ProgressSinkComponent component,
 					 final int type,
 					 final Object[] params) {
 		//component.note(code, type, params);

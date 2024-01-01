@@ -21,16 +21,16 @@ import java.util.*;
 
 public class DefaultLivingRepo implements LivingRepo {
 	private final          Map<String, OS_Package>                          _packages     = new HashMap<String, OS_Package>();
-	private final @NotNull ObservableCompletableProcess<WorldModule>        wmo           = new ObservableCompletableProcess<>();
-	private final @NotNull List<LivingNode>                                 repo          = new ArrayList<>();
-	private final @NotNull Multimap<BaseEvaFunction, DefaultLivingFunction> functionMap   = ArrayListMultimap.create();
+	private final @NonNull ObservableCompletableProcess<WorldModule>        wmo           = new ObservableCompletableProcess<>();
+	private final @NonNull List<LivingNode>                                 repo          = new ArrayList<>();
+	private final @NonNull Multimap<BaseEvaFunction, DefaultLivingFunction> functionMap   = ArrayListMultimap.create();
 	private final          Set<WorldModule>                                 _modules    = new HashSet<>();
 	private                int                                              _classCode    = 101;
 	private                int                                              _functionCode = 1001;
 	private                int      _packageCode  = 1;
 
 	@Override
-	public @NotNull DefaultLivingClass addClass(final @NotNull EvaClass aClass, final @NotNull Add addFlag) {
+	public @NonNull DefaultLivingClass addClass(final @NonNull EvaClass aClass, final @NonNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
 			if (aClass.getCode() == 0) {
@@ -67,7 +67,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull DefaultLivingFunction addFunction(final @NotNull BaseEvaFunction aFunction, final @NotNull Add addFlag) {
+	public @NonNull DefaultLivingFunction addFunction(final @NonNull BaseEvaFunction aFunction, final @NonNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
 			aFunction.setCode(nextFunctionCode());
@@ -95,7 +95,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public void addModule(final @NotNull OS_Module mod, final @NotNull String aFilename, final @NotNull Compilation aC) {
+	public void addModule(final @NonNull OS_Module mod, final @NonNull String aFilename, final @NonNull Compilation aC) {
 		aC.addModule__(mod, aFilename);
 	}
 
@@ -110,7 +110,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull DefaultLivingNamespace addNamespace(final @NotNull EvaNamespace aNamespace, final @NotNull Add addFlag) {
+	public @NonNull DefaultLivingNamespace addNamespace(final @NonNull EvaNamespace aNamespace, final @NonNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
 			aNamespace.setCode(nextClassCode());
@@ -132,9 +132,9 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull LivingNamespace getNamespace(final EvaNamespace aEvaNamespace) {
+	public @NonNull LivingNamespace getNamespace(final EvaNamespace aEvaNamespace) {
 		for (LivingNode livingNode : repo) {
-			if (livingNode instanceof final @NotNull LivingNamespace livingNamespace) {
+			if (livingNode instanceof final @NonNull LivingNamespace livingNamespace) {
 				if (livingNamespace.evaNode().equals(aEvaNamespace))
 					return livingNamespace;
 			}
@@ -149,9 +149,9 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull LivingClass getClass(final @NotNull EvaClass aEvaClass) {
+	public @NonNull LivingClass getClass(final @NonNull EvaClass aEvaClass) {
 		for (LivingNode livingNode : repo) {
-			if (livingNode instanceof final @NotNull LivingClass livingClass) {
+			if (livingNode instanceof final @NonNull LivingClass livingClass) {
 				if (livingClass.evaNode().equals(aEvaClass))
 					return livingClass;
 			}
@@ -171,7 +171,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public boolean hasPackage(final @NotNull String aPackageName) {
+	public boolean hasPackage(final @NonNull String aPackageName) {
 		if (aPackageName.equals("C")) {
 			int y = 2;
 		}
@@ -206,7 +206,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public OS_Package makePackage(final @NotNull Qualident pkg_name) {
+	public OS_Package makePackage(final @NonNull Qualident pkg_name) {
 		final String pkg_name_s = pkg_name.toString();
 		if (!isPackage(pkg_name_s)) {
 			final OS_Package newPackage = new OS_PackageImpl(pkg_name, nextPackageCode());
@@ -240,11 +240,11 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull List<LivingClass> getClassesForClassStatement(ClassStatement cls) {
+	public @NonNull List<LivingClass> getClassesForClassStatement(ClassStatement cls) {
 		List<LivingClass> lcs = new LinkedList<>();
 
 		for (LivingNode livingNode : repo) {
-			if (livingNode instanceof final @NotNull LivingClass livingClass) {
+			if (livingNode instanceof final @NonNull LivingClass livingClass) {
 				if (livingClass.getElement().equals(cls))
 					lcs.add(livingClass);
 			}
@@ -254,11 +254,11 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull List<LivingClass> getClassesForClassNamed(final String className) {
+	public @NonNull List<LivingClass> getClassesForClassNamed(final String className) {
 		List<LivingClass> lcs = new LinkedList<>();
 
 		for (LivingNode livingNode : repo) {
-			if (livingNode instanceof final @NotNull LivingClass livingClass) {
+			if (livingNode instanceof final @NonNull LivingClass livingClass) {
 				if (livingClass.getElement().name().sameName(className))
 					lcs.add(livingClass);
 			}

@@ -22,16 +22,16 @@ public class AccessBus {
 	public final  Old_GenerateResult gr                    = new Old_GenerateResult();
 	private final Compilation        _c;
 	private final IPipelineAccess    _pa;
-	private final stepA_mal.@NotNull MalEnv2                     env;
+	private final stepA_mal.@NonNull MalEnv2                     env;
 	private final DeferredObject<Old_GenerateResult, Void, Void> generateResultPromise = new DeferredObject<>();
 	private final DeferredObject<List<EvaNode>, Void, Void>      lgcPromise            = new DeferredObject<>();
 	private final Map<String, CR_State.PipelinePlugin>           pipelinePlugins       = new HashMap<>();
 
-	public stepA_mal.@NotNull MalEnv2 env() {
+	public stepA_mal.@NonNull MalEnv2 env() {
 		return env;
 	}
 
-	public @NotNull Compilation getCompilation() {
+	public @NonNull Compilation getCompilation() {
 		return _c;
 	}
 
@@ -42,12 +42,12 @@ public class AccessBus {
 		env = new stepA_mal.MalEnv2(null); // TODO what does null mean?
 	}
 
-	public void add(final @NotNull Function<AccessBus, PipelineMember> aCr) {
+	public void add(final @NonNull Function<AccessBus, PipelineMember> aCr) {
 		final PipelineMember x = aCr.apply(this);
 		_c.getCompilationEnclosure().getCompilationAccess().addPipeline(x);
 	}
 
-	public void addPipelinePlugin(final @NotNull PipelinePlugin aPlugin) {
+	public void addPipelinePlugin(final @NonNull PipelinePlugin aPlugin) {
 		pipelinePlugins.put(aPlugin.name(), aPlugin);
 	}
 
@@ -63,7 +63,7 @@ public class AccessBus {
 		_pa.getPipelineLogicPromise().resolve(aPipelineLogic);
 	}
 
-	public void subscribe_GenerateResult(@NotNull final AB_GenerateResultListener aGenerateResultListener) {
+	public void subscribe_GenerateResult(@NonNull final AB_GenerateResultListener aGenerateResultListener) {
 		generateResultPromise.then(aGenerateResultListener::gr_slot);
 	}
 
@@ -73,7 +73,7 @@ public class AccessBus {
 		return pipelinePlugins.get(aPipelineName);
 	}
 
-	public void subscribe_lgc(@NotNull final AB_LgcListener aLgcListener) {
+	public void subscribe_lgc(@NonNull final AB_LgcListener aLgcListener) {
 		lgcPromise.then(aLgcListener::lgc_slot);
 	}
 

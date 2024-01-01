@@ -22,7 +22,7 @@ public class WhyNotGarish_Namespace implements WhyNotGarish_Item {
 		return GenerateC.GetTypeName.forGenNamespace(en);
 	}
 
-	private void onFileGen(final @NotNull GenerateResultEnv aFileGen) {
+	private void onFileGen(final @NonNull GenerateResultEnv aFileGen) {
 		NotImplementedException.raise();
 	}
 

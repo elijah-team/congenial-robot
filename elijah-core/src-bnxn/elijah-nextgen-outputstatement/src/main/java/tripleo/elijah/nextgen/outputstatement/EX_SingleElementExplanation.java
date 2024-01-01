@@ -6,19 +6,19 @@
 //
 //public class EX_SingleElementExplanation implements EX_Explanation {
 //
-//	private final @NotNull OS_Element _element;
+//	private final @NonNull OS_Element _element;
 //
 //	@Contract(pure = true)
-//	public EX_SingleElementExplanation(final @NotNull OS_Element aElement) {
+//	public EX_SingleElementExplanation(final @NonNull OS_Element aElement) {
 //		_element = aElement;
 //	}
 //
-//	public @NotNull OS_Element getElement() {
+//	public @NonNull OS_Element getElement() {
 //		return _element;
 //	}
 //
 //	@Override
-//	public @NotNull String message() {
+//	public @NonNull String message() {
 //		return "EX_SingleElementExplanation";
 //	}
 //}

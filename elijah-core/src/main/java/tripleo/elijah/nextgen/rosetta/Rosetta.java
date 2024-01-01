@@ -22,7 +22,7 @@ public class Rosetta {
 	private Rosetta() { }
 
 	@Contract("_ -> new")
-	public static @NotNull DeduceTypes2 create(final DeduceTypes2Request aDeduceTypes2Request) {
+	public static @NonNull DeduceTypes2 create(final DeduceTypes2Request aDeduceTypes2Request) {
 		return new DeduceTypes2(aDeduceTypes2Request);
 	}
 
@@ -30,7 +30,7 @@ public class Rosetta {
 		return new DeduceTypes2_TWO(aDeduceTypes2Request);
 	}
 
-	public static void create_call(final @NotNull DeduceTypes2_deduceFunctions_Request rq) {
+	public static void create_call(final @NonNull DeduceTypes2_deduceFunctions_Request rq) {
 		final DeducePhase deducePhase = rq.getDeducePhase();
 
 		deducePhase.__DeduceTypes2_deduceFunctions_Request__run(rq.getB(), rq.getRequest());
@@ -52,7 +52,7 @@ public class Rosetta {
 
 		@Override
 		public void apply() {
-			final @NotNull ClassInvocation ci2 = env.phase().registerClassInvocation(env.ci());
+			final @NonNull ClassInvocation ci2 = env.phase().registerClassInvocation(env.ci());
 			resp.succeed(ci2);
 		}
 	}
@@ -69,13 +69,13 @@ public class Rosetta {
 
 		@Override
 		public void apply() {
-			@NotNull EvaClass kl = new GenerateFunctions2(rq.getGenerateFunctions()).generateClass(rq.getClassStatement(), rq.getClassInvocation(), rq.getPassthruEnv());
+			@NonNull EvaClass kl = new GenerateFunctions2(rq.getGenerateFunctions()).generateClass(rq.getClassStatement(), rq.getClassInvocation(), rq.getPassthruEnv());
 			rsp.getEvaClassPromise().resolve(kl);
 		}
 	}
 
 	@Contract(pure = true)
-	public static @NotNull GECR create(final GenerateEvaClassRequest aRq, final GenerateEvaClassResponse aRsp) {
+	public static @NonNull GECR create(final GenerateEvaClassRequest aRq, final GenerateEvaClassResponse aRsp) {
 		GECR gecr = new GECR(aRq, aRsp);
 		return gecr;
 	}

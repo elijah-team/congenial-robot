@@ -17,7 +17,7 @@ public class LSPrintStream implements XPrintStream {
 	private final StringBuilder sb = new StringBuilder();
 	private final List<String>  ff = new ArrayList<>();
 
-	public @NotNull String getString() {
+	public @NonNull String getString() {
 		return sb.toString();
 	}
 

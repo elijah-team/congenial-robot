@@ -62,12 +62,12 @@ public class AccessNotationImpl implements OS_Element, tripleo.elijah.lang.i.Acc
 	}
 
 	@Override
-	public void visitGen(@NotNull ElElementVisitor visit) {
+	public void visitGen(@NonNull ElElementVisitor visit) {
 		visit.visitAccessNotation(this);
 	}
 
 	@Override
-	public void serializeTo(@NotNull SmallWriter sw) {
+	public void serializeTo(@NonNull SmallWriter sw) {
 		sw.fieldToken("category", category);
 		sw.fieldToken("shorthand", shorthand);
 		var tnl1 = sw.createTypeNameList();

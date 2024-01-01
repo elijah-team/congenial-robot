@@ -53,12 +53,12 @@ public class StatementWrapperImpl implements StatementItem, FunctionItem, OS_Ele
 	 * ElElementVisitor)
 	 */
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.visitStatementWrapper(this);
 	}
 
 	@Override
-	public void serializeTo(final @NotNull SmallWriter sw) {
+	public void serializeTo(final @NonNull SmallWriter sw) {
 		sw.fieldExpression("expr", expr);
 		sw.fieldElement("parent", _parent);
 		sw.fieldString("context", _ctx.toString());

@@ -23,7 +23,7 @@ public class GCX_ConstantString implements EG_Statement {
 	}
 
 	@Override
-	public @NotNull EX_Explanation getExplanation() {
+	public @NonNull EX_Explanation getExplanation() {
 		return EX_Explanation.withMessage("GCX_ConstantString >> GetAssignmentValue.const_to_string");
 	}
 

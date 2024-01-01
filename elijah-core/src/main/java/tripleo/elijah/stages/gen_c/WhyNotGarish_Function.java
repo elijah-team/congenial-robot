@@ -32,7 +32,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 		fileGenPromise.then(this::onFileGen);
 	}
 
-	private void onFileGen(final @NotNull GenerateResultEnv aFileGen) {
+	private void onFileGen(final @NonNull GenerateResultEnv aFileGen) {
 //		if (gf.getFD() == null) assert false; //return; // FIXME why? when?
 		Generate_Code_For_Method gcfm = new Generate_Code_For_Method(generateC, generateC.elLog());
 
@@ -51,7 +51,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 	}
 
 	@Contract(pure = true)
-	private @Nullable BaseEvaFunction deduced(final @NotNull BaseEvaFunction aEvaFunction) {
+	private @Nullable BaseEvaFunction deduced(final @NonNull BaseEvaFunction aEvaFunction) {
 		final GM_GenerateModule  generateModule    = generateC.getFileGen().generateModule();
 		final DeducePhase        deducePhase       = generateModule.pa().getDeducePhase();
 		final ICompilationAccess compilationAccess = generateModule.pa().getCompilationEnclosure().getCompilationAccess();
@@ -91,7 +91,7 @@ public class WhyNotGarish_Function extends WhyNotGarish_BaseFunction implements 
 			return Optional.empty();
 		}
 
-		final @NotNull GenerateFiles[] xx = new GenerateFiles[1];
+		final @NonNull GenerateFiles[] xx = new GenerateFiles[1];
 		fileGenPromise.then(fg -> xx[0] = fg.getGenerateFiles());
 
 		return Optional.of((GenerateC) xx[0]);

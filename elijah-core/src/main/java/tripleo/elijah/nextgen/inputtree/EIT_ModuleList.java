@@ -37,7 +37,7 @@ public class EIT_ModuleList {
 		mods = aMods;
 	}
 
-	private void __process__PL__each(final @NotNull _ProcessParams plp) {
+	private void __process__PL__each(final @NonNull _ProcessParams plp) {
 		final List<EvaNode> resolved_nodes = new ArrayList<EvaNode>();
 
 		final OS_Module                    mod = plp.getMod();
@@ -86,9 +86,9 @@ public class EIT_ModuleList {
 		mods.add(m);
 	}
 
-	public void process__PL(final @NotNull Function<OS_Module, GenerateFunctions> ggf, final @NotNull PipelineLogic pipelineLogic) {
+	public void process__PL(final @NonNull Function<OS_Module, GenerateFunctions> ggf, final @NonNull PipelineLogic pipelineLogic) {
 		for (final OS_Module mod : mods) {
-			final @NotNull EntryPointList epl = null; //mod.entryPoints;
+			final @NonNull EntryPointList epl = null; //mod.entryPoints;
 
 
 			//
@@ -115,7 +115,7 @@ public class EIT_ModuleList {
 			final GenerateFunctions gfm = ggf.apply(mod);
 
 			final DeducePhase deducePhase = pipelineLogic.dp;
-			//final DeducePhase.@NotNull GeneratedClasses lgc            = deducePhase.generatedClasses;
+			//final DeducePhase.@NonNull GeneratedClasses lgc            = deducePhase.generatedClasses;
 
 			final _ProcessParams plp = new _ProcessParams(mod, pipelineLogic, gfm, epl, deducePhase);
 
@@ -128,19 +128,19 @@ public class EIT_ModuleList {
 	}
 
 	private static class _ProcessParams {
-		private final @NotNull DeducePhase       deducePhase;
-		@NotNull
+		private final @NonNull DeducePhase       deducePhase;
+		@NonNull
 		private final          EntryPointList    epl;
-		private final @NotNull GenerateFunctions gfm;
-		private final @NotNull OS_Module         mod;
-		private final @NotNull PipelineLogic     pipelineLogic;
+		private final @NonNull GenerateFunctions gfm;
+		private final @NonNull OS_Module         mod;
+		private final @NonNull PipelineLogic     pipelineLogic;
 
 		@Contract(pure = true)
-		private _ProcessParams(@NotNull final OS_Module aModule,
-							   @NotNull final PipelineLogic aPipelineLogic,
-							   @NotNull final GenerateFunctions aGenerateFunctions,
-							   @NotNull final EntryPointList aEntryPointList,
-							   @NotNull final DeducePhase aDeducePhase) {
+		private _ProcessParams(@NonNull final OS_Module aModule,
+							   @NonNull final PipelineLogic aPipelineLogic,
+							   @NonNull final GenerateFunctions aGenerateFunctions,
+							   @NonNull final EntryPointList aEntryPointList,
+							   @NonNull final DeducePhase aDeducePhase) {
 			mod           = aModule;
 			pipelineLogic = aPipelineLogic;
 			gfm           = aGenerateFunctions;
@@ -155,12 +155,12 @@ public class EIT_ModuleList {
 		}
 
 		@Contract(pure = true)
-		public DeducePhase.@NotNull GeneratedClasses getLgc() {
+		public DeducePhase.@NonNull GeneratedClasses getLgc() {
 			return deducePhase.generatedClasses;
 		}
 
 		@Contract(pure = true)
-		public ElLog.@NotNull Verbosity getVerbosity() {
+		public ElLog.@NonNull Verbosity getVerbosity() {
 			return pipelineLogic.getVerbosity();
 		}
 
@@ -169,12 +169,12 @@ public class EIT_ModuleList {
 		}
 
 		@Contract(pure = true)
-		public @NotNull Supplier<WorkManager> getWorkManagerSupplier() {
+		public @NonNull Supplier<WorkManager> getWorkManagerSupplier() {
 			return () -> pipelineLogic.generatePhase.getWm();
 		}
 
 		@Contract(pure = true)
-		public @NotNull OS_Module getMod() {
+		public @NonNull OS_Module getMod() {
 			return mod;
 		}
 

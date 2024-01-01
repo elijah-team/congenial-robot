@@ -24,7 +24,7 @@ public class ConstTableIA implements InstructionArgument {
 		this.gf    = generatedFunction;
 	}
 
-	public @NotNull ConstantTableEntry getEntry() {
+	public @NonNull ConstantTableEntry getEntry() {
 		return gf.getConstTableEntry(index);
 	}
 

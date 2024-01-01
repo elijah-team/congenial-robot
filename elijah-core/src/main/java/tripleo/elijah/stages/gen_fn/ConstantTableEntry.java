@@ -29,7 +29,7 @@ public class ConstantTableEntry {
 		this.type         = type;
 	}
 
-	public @NotNull DeduceElement3_ConstantTableEntry getDeduceElement3() {
+	public @NonNull DeduceElement3_ConstantTableEntry getDeduceElement3() {
 		if (_de3 == null) {
 			_de3 = new DeduceElement3_ConstantTableEntry(this);
 //			_de3.
@@ -50,7 +50,7 @@ public class ConstantTableEntry {
 //    }
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "ConstantTableEntry{" +
 				"index=" + index +
 				", name='" + name + '\'' +

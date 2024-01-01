@@ -12,7 +12,7 @@ public class CC_SetSilent implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final @NotNull Compilation c) {
+	public void apply(final @NonNull Compilation c) {
 		c.cfg().silent = flag;
 	}
 }

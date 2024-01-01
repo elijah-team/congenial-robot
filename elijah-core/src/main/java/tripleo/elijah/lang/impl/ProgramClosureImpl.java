@@ -13,7 +13,7 @@ import tripleo.elijah.lang.i.*;
 
 public abstract class ProgramClosureImpl implements tripleo.elijah.lang.i.ProgramClosure {
 	@Override
-	public @NotNull AliasStatement aliasStatement(final @NotNull OS_Element aParent) {
+	public @NonNull AliasStatement aliasStatement(final @NonNull OS_Element aParent) {
 		final AliasStatement aliasStatement = new AliasStatementImpl(aParent);
 		return aliasStatement;
 	}
@@ -24,13 +24,13 @@ public abstract class ProgramClosureImpl implements tripleo.elijah.lang.i.Progra
 //	}
 
 	@Override
-	public @NotNull ClassStatement classStatement(final @NotNull OS_Element aParent, Context ctx) {
+	public @NonNull ClassStatement classStatement(final @NonNull OS_Element aParent, Context ctx) {
 		final ClassStatement classStatement = new ClassStatementImpl(aParent, ctx);
 		return classStatement;
 	}
 
 	@Override
-	public @NotNull NamespaceStatement namespaceStatement(final OS_Element aParent, Context ctx) {
+	public @NonNull NamespaceStatement namespaceStatement(final OS_Element aParent, Context ctx) {
 		final NamespaceStatement namespaceStatement = new NamespaceStatementImpl(aParent, ctx);
 		return namespaceStatement;
 	}

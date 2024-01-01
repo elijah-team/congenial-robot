@@ -35,7 +35,7 @@ public class Scope3Impl implements Scope3, Documentable {
 	}
 
 	@Override
-	public @NotNull Iterable<? extends Token> docstrings() {
+	public @NonNull Iterable<? extends Token> docstrings() {
 		return _docstrings;
 	}
 
@@ -45,7 +45,7 @@ public class Scope3Impl implements Scope3, Documentable {
 	}
 
 	@Override
-	public @NotNull List<OS_Element> items() {
+	public @NonNull List<OS_Element> items() {
 		return _items;
 	}
 
@@ -55,12 +55,12 @@ public class Scope3Impl implements Scope3, Documentable {
 	}
 
 	@Override
-	public @NotNull StatementClosure statementClosure() {
+	public @NonNull StatementClosure statementClosure() {
 		return asc;
 	}
 
 	@Override
-	public @NotNull VariableSequence varSeq() {
+	public @NonNull VariableSequence varSeq() {
 		return asc.varSeq(asc.getParent().getContext());
 	}
 
@@ -71,21 +71,21 @@ public class Scope3Impl implements Scope3, Documentable {
 
 	private class Scope3StatementClosure implements StatementClosure {
 		@Override
-		public @NotNull BlockStatement blockClosure() {
+		public @NonNull BlockStatement blockClosure() {
 			BlockStatement bs = new BlockStatementImpl(null);
 //			add(bs);  // TODO make this an Element
 			return bs;
 		}
 
 		@Override
-		public @NotNull CaseConditional caseConditional(final Context parentContext) {
+		public @NonNull CaseConditional caseConditional(final Context parentContext) {
 			final CaseConditional caseConditional = new CaseConditionalImpl(getParent(), parentContext);
 			add(caseConditional);
 			return caseConditional;
 		}
 
 		@Override
-		public void constructExpression(final @NotNull IExpression aExpr, final ExpressionList aO) {
+		public void constructExpression(final @NonNull IExpression aExpr, final ExpressionList aO) {
 			final ConstructStatement constructExpression = new ConstructStatementImpl(parent, parent.getContext(),
 																					  aExpr, null, aO); // TODO provide for name
 			add(constructExpression);
@@ -96,7 +96,7 @@ public class Scope3Impl implements Scope3, Documentable {
 		}
 
 		@Override
-		public @NotNull IfConditional ifConditional(final OS_Element aParent, final Context cur) {
+		public @NonNull IfConditional ifConditional(final OS_Element aParent, final Context cur) {
 			IfConditional ifex = new IfConditionalImpl(aParent);
 			ifex.setContext(new IfConditionalContext(cur, ifex));
 			add(ifex);
@@ -104,21 +104,21 @@ public class Scope3Impl implements Scope3, Documentable {
 		}
 
 		@Override
-		public @NotNull Loop loop() {
+		public @NonNull Loop loop() {
 			Loop loop = new LoopImpl(parent, parent.getContext());
 			add(loop);
 			return loop;
 		}
 
 		@Override
-		public @NotNull MatchConditional matchConditional(final Context parentContext) {
+		public @NonNull MatchConditional matchConditional(final Context parentContext) {
 			final MatchConditional matchConditional = new MatchConditionalImpl(getParent(), parentContext);
 			add(matchConditional);
 			return matchConditional;
 		}
 
 		@Override
-		public @NotNull ProcedureCallExpression procedureCallExpression() {
+		public @NonNull ProcedureCallExpression procedureCallExpression() {
 			ProcedureCallExpression pce = new ProcedureCallExpressionImpl();
 			add(new StatementWrapperImpl(pce, getParent().getContext(), getParent()));
 			return pce;
@@ -131,7 +131,7 @@ public class Scope3Impl implements Scope3, Documentable {
 		}
 
 		@Override
-		public @NotNull VariableSequence varSeq(final Context ctx) {
+		public @NonNull VariableSequence varSeq(final Context ctx) {
 			VariableSequence vsq = new VariableSequenceImpl(ctx);
 			vsq.setParent(parent); // TODO look at this
 			assert ctx == parent.getContext();

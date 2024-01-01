@@ -30,13 +30,13 @@ public class FuncExprImpl extends BaseFunctionDef implements FuncExpr {
 	private TypeName        _returnType;
 	private OS_Type         _type;
 
-	public @NotNull List<FormalArgListItem> falis() {
+	public @NonNull List<FormalArgListItem> falis() {
 		return mFal.falis();
 	}
 
 	/****** FOR IEXPRESSION ******/
 	@Override
-	public @NotNull ExpressionKind getKind() {
+	public @NonNull ExpressionKind getKind() {
 		return ExpressionKind.FUNC_EXPR;
 	}
 
@@ -72,7 +72,7 @@ public class FuncExprImpl extends BaseFunctionDef implements FuncExpr {
 	}
 
 	@Override
-	public void visitGen(final @NotNull ElElementVisitor visit) {
+	public void visitGen(final @NonNull ElElementVisitor visit) {
 		visit.visitFuncExpr(this);
 	}
 

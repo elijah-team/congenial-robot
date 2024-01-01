@@ -24,7 +24,7 @@ import java.util.List;
 public abstract class AbstractDependencyTracker implements DependencyTracker {
 	private final List<FunctionInvocation>    dependentFunctions        = new ArrayList<FunctionInvocation>();
 	private final List<GenType>               dependentTypes            = new ArrayList<GenType>();
-	@NotNull      Subject<FunctionInvocation> dependentFunctionsSubject = ReplaySubject.create(2);/*new Publisher<FunctionInvocation>() {
+	@NonNull      Subject<FunctionInvocation> dependentFunctionsSubject = ReplaySubject.create(2);/*new Publisher<FunctionInvocation>() {
 		List<Subscriber<FunctionInvocation>> subscribers = new ArrayList<>(2);
 
 		@Override
@@ -32,7 +32,7 @@ public abstract class AbstractDependencyTracker implements DependencyTracker {
 			subscribers.add((Subscriber<FunctionInvocation>) aSubscriber);
 		}
 	};*/
-	@NotNull      Subject<GenType>            dependentTypesSubject     = ReplaySubject.create(2);/*new Publisher<GenType>() {
+	@NonNull      Subject<GenType>            dependentTypesSubject     = ReplaySubject.create(2);/*new Publisher<GenType>() {
 		List<Subscriber<GenType>> subscribers = new ArrayList<>(2);
 
 		@Override
@@ -41,18 +41,18 @@ public abstract class AbstractDependencyTracker implements DependencyTracker {
 		}
 	};*/
 
-	public void addDependentFunction(@NotNull FunctionInvocation aFunction) {
+	public void addDependentFunction(@NonNull FunctionInvocation aFunction) {
 //		dependentFunctions.add(aFunction);
 		dependentFunctionsSubject.onNext(aFunction);
 	}
 
-	public void addDependentType(@NotNull GenType aType) {
+	public void addDependentType(@NonNull GenType aType) {
 //		dependentTypes.add(aType);
 		dependentTypesSubject.onNext(aType);
 	}
 
 	//	@Override
-	public @NotNull List<FunctionInvocation> dependentFunctions() {
+	public @NonNull List<FunctionInvocation> dependentFunctions() {
 		return dependentFunctions;
 	}
 
@@ -61,7 +61,7 @@ public abstract class AbstractDependencyTracker implements DependencyTracker {
 	}
 
 	//	@Override
-	public @NotNull List<GenType> dependentTypes() {
+	public @NonNull List<GenType> dependentTypes() {
 		return dependentTypes;
 	}
 
@@ -69,7 +69,7 @@ public abstract class AbstractDependencyTracker implements DependencyTracker {
 		return dependentTypesSubject;
 	}
 
-	public void noteDependencies(final @NotNull Dependency d) {
+	public void noteDependencies(final @NonNull Dependency d) {
 		d.noteDependencies(this, dependentFunctions, dependentTypes);
 	}
 }

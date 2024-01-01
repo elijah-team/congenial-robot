@@ -8,9 +8,9 @@ import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
 public interface CR_Action {
-	void attach(@NotNull CompilationRunner cr);
+	void attach(@NonNull CompilationRunner cr);
 
-	@NotNull Operation<Ok> execute(@NotNull CR_State st, CB_Output aO);
+	@NonNull Operation<Ok> execute(@NonNull CR_State st, CB_Output aO);
 
 	String name();
 }

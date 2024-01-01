@@ -29,21 +29,21 @@ import tripleo.elijah.work.WorkManager;
  */
 public class WlGenerateDefaultCtor implements WorkJob {
 	private final          FunctionInvocation    functionInvocation;
-	private final @NotNull GenerateFunctions     generateFunctions;
+	private final @NonNull GenerateFunctions     generateFunctions;
 	private                boolean               _isDone = false;
 	private                BaseEvaFunction       Result;
 	private                DeduceCreationContext dcc;
 	private final          ICodeRegistrar        codeRegistrar;
 
 	@Contract(pure = true)
-	public WlGenerateDefaultCtor(@NotNull GenerateFunctions aGenerateFunctions, FunctionInvocation aFunctionInvocation, DeduceCreationContext aDcc, final ICodeRegistrar aCodeRegistrar) {
+	public WlGenerateDefaultCtor(@NonNull GenerateFunctions aGenerateFunctions, FunctionInvocation aFunctionInvocation, DeduceCreationContext aDcc, final ICodeRegistrar aCodeRegistrar) {
 		generateFunctions  = aGenerateFunctions;
 		functionInvocation = aFunctionInvocation;
 		dcc                = aDcc;
 		codeRegistrar      = aCodeRegistrar;
 	}
 
-	public WlGenerateDefaultCtor(final OS_Module module, final FunctionInvocation aFunctionInvocation, final @NotNull Deduce_CreationClosure crcl) {
+	public WlGenerateDefaultCtor(final OS_Module module, final FunctionInvocation aFunctionInvocation, final @NonNull Deduce_CreationClosure crcl) {
 		this(crcl.generatePhase().getGenerateFunctions(module), aFunctionInvocation, crcl.dcc(), crcl.deducePhase().getCodeRegistrar());
 	}
 
@@ -87,7 +87,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 		_isDone = true;
 	}
 
-	@NotNull
+	@NonNull
 	private EvaConstructor xx(final ClassStatement klass, final EvaClass genClass) {
 		ConstructorDef cd = new ConstructorDefImpl(null, (_CommonNC) klass, klass.getContext());
 		cd.setName(LangGlobals.emptyConstructorName);
@@ -109,13 +109,13 @@ public class WlGenerateDefaultCtor implements WorkJob {
 
 		OS_Element classStatement = cd.getParent();
 		assert classStatement instanceof ClassStatement;
-		@NotNull EvaConstructor gf = generateFunctions.generateConstructor(cd, (ClassStatement) classStatement, functionInvocation);
+		@NonNull EvaConstructor gf = generateFunctions.generateConstructor(cd, (ClassStatement) classStatement, functionInvocation);
 //		lgf.add(gf);
 
 		final ClassInvocation ci = functionInvocation.getClassInvocation();
 		ci.resolvePromise().done(new DoneCallback<EvaClass>() {
 			@Override
-			public void onDone(@NotNull EvaClass result) {
+			public void onDone(@NonNull EvaClass result) {
 				codeRegistrar.registerFunction1(gf);
 				//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
 

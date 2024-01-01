@@ -13,20 +13,20 @@ import tripleo.elijah.u.ElIntrinsics;
 import tripleo.elijah.util.BufferTabbedOutputStream;
 
 public final class NG_OutputClassStatement implements NG_OutputStatement {
-   @NotNull
+   @NonNull
    private final BufferTabbedOutputStream __tos;
-   @NotNull
+   @NonNull
    private final OS_Module aModuleDependency;
-   @NotNull
+   @NonNull
    private final GenerateResult.TY ty;
-   @NotNull
+   @NonNull
    private final String text;
-   @NotNull
+   @NonNull
    private final Lazy moduleInput_$delegate;
-   @NotNull
+   @NonNull
    private final Lazy moduleDependency$delegate;
 
-   public NG_OutputClassStatement(@NotNull BufferTabbedOutputStream __tos, @NotNull OS_Module aModuleDependency, @NotNull GenerateResult.TY ty) {
+   public NG_OutputClassStatement(@NonNull BufferTabbedOutputStream __tos, @NonNull OS_Module aModuleDependency, @NonNull GenerateResult.TY ty) {
       ElIntrinsics.checkNotNullParameter(__tos, "__tos");
       ElIntrinsics.checkNotNullParameter(aModuleDependency, "aModuleDependency");
       ElIntrinsics.checkNotNullParameter(ty, "ty");
@@ -38,38 +38,38 @@ public final class NG_OutputClassStatement implements NG_OutputStatement {
       ElIntrinsics.checkNotNullExpressionValue(var10001, "getText(...)");
       this.text = var10001;
       this.moduleInput_$delegate = LazyKt.lazy((Function0)(new Function0() {
-         @NotNull
+         @NonNull
          public final EIT_ModuleInput invoke() {
             OS_Module m = NG_OutputClassStatement.this.getModuleDependency().getModule();
             return new EIT_ModuleInput(m, m.getCompilation());
          }
       }));
       this.moduleDependency$delegate = LazyKt.lazy((Function0)(new Function0() {
-         @NotNull
+         @NonNull
          public final NG_OutDep invoke() {
             return new NG_OutDep(NG_OutputClassStatement.this.aModuleDependency);
          }
       }));
    }
 
-   @NotNull
+   @NonNull
    public EX_Explanation getExplanation() {
       EX_Explanation var10000 = EX_Explanation.withMessage("NG_OutputClassStatement");
       ElIntrinsics.checkNotNullExpressionValue(var10000, "withMessage(...)");
       return var10000;
    }
 
-   @NotNull
+   @NonNull
    public String getText() {
       return this.text;
    }
 
-   @NotNull
+   @NonNull
    public GenerateResult.TY getTy() {
       return this.ty;
    }
 
-   @NotNull
+   @NonNull
    public EIT_ModuleInput getModuleInput() {
       return this.getModuleInput_();
    }
@@ -96,8 +96,8 @@ public final class NG_OutputClassStatement implements NG_OutputStatement {
       return this.ty;
    }
 
-   @NotNull
-   public final NG_OutputClassStatement copy(@NotNull BufferTabbedOutputStream __tos, @NotNull OS_Module aModuleDependency, @NotNull GenerateResult.TY ty) {
+   @NonNull
+   public final NG_OutputClassStatement copy(@NonNull BufferTabbedOutputStream __tos, @NonNull OS_Module aModuleDependency, @NonNull GenerateResult.TY ty) {
       ElIntrinsics.checkNotNullParameter(__tos, "__tos");
       ElIntrinsics.checkNotNullParameter(aModuleDependency, "aModuleDependency");
       ElIntrinsics.checkNotNullParameter(ty, "ty");
@@ -121,7 +121,7 @@ public final class NG_OutputClassStatement implements NG_OutputStatement {
       return var0.copy(var1, var2, var3);
    }
 
-   @NotNull
+   @NonNull
    public String toString() {
       return "NG_OutputClassStatement(__tos=" + this.__tos + ", aModuleDependency=" + this.aModuleDependency + ", ty=" + this.ty + ")";
    }

@@ -70,7 +70,7 @@ public class Label extends OWWidget {
 		return EnumAlign.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.ALIGNMENT));
 	}
 
-	public void setAlignment(@NotNull EnumAlign value) {
+	public void setAlignment(@NonNull EnumAlign value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.ALIGNMENT, value.toString());
 	}
 

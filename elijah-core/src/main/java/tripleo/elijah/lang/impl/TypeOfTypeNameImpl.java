@@ -66,7 +66,7 @@ public class TypeOfTypeNameImpl implements TypeName, tripleo.elijah.lang.i.TypeO
 	// region Locatable
 
 	@Override
-	public @Nullable TypeName resolve(@NotNull Context ctx, @NotNull DeduceTypes2 deduceTypes2) throws ResolveError {
+	public @Nullable TypeName resolve(@NonNull Context ctx, @NonNull DeduceTypes2 deduceTypes2) throws ResolveError {
 //		tripleo.elijah.util.Stupidity.println_out_2(_typeOf.toString());
 		LookupResultList lrl  = DeduceLookupUtils.lookupExpression(_typeOf, ctx, deduceTypes2);
 		OS_Element       best = lrl.chooseBest(null);
@@ -91,7 +91,7 @@ public class TypeOfTypeNameImpl implements TypeName, tripleo.elijah.lang.i.TypeO
 	}
 
 	@Override
-	public @NotNull Type kindOfType() {
+	public @NonNull Type kindOfType() {
 		return Type.TYPE_OF;
 	}
 

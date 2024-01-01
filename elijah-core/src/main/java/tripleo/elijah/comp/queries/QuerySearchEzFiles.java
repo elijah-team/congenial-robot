@@ -16,16 +16,16 @@ import java.util.regex.Pattern;
 
 public class QuerySearchEzFiles {
 	private final          Compilation        c;
-	private final @NotNull CompilationClosure cc;
+	private final @NonNull CompilationClosure cc;
 	private final          FilenameFilter     ez_files_filter = new EzFilesFilter();
 
-	public QuerySearchEzFiles(final @NotNull CompilationClosure ccl) {
+	public QuerySearchEzFiles(final @NonNull CompilationClosure ccl) {
 		c = ccl.getCompilation();
 
 		this.cc = ccl;
 	}
 
-	public @NotNull Operation2<List<CompilerInstructions>> process(final @NotNull File directory) {
+	public @NonNull Operation2<List<CompilerInstructions>> process(final @NonNull File directory) {
 		final List<CompilerInstructions> R = new ArrayList<CompilerInstructions>();
 
 		var errSink = cc.errSink();
@@ -48,7 +48,7 @@ public class QuerySearchEzFiles {
 		return Operation2.success(R);
 	}
 
-	@Nullable CompilerInstructions parseEzFile(final @NotNull File f, final @NotNull String file_name, final @NotNull CompilationClosure cc) {
+	@Nullable CompilerInstructions parseEzFile(final @NonNull File f, final @NonNull String file_name, final @NonNull CompilationClosure cc) {
 		var p = new SourceFileParserParams(null, f, file_name, cc);
 		return c.getCompilationEnclosure().getCompilationRunner().parseEzFile(p).success();
 	}

@@ -23,7 +23,7 @@ import tripleo.elijah.lang.i.Qualident;
 public class ParserClosureImpl extends ProgramClosureImpl implements tripleo.elijah.lang.i.ParserClosure {
 	public final OS_Module module;
 
-	public ParserClosureImpl(final String fn, @NotNull final Compilation compilation) {
+	public ParserClosureImpl(final String fn, @NonNull final Compilation compilation) {
 		module = compilation.moduleBuilder().withFileName(fn).addToCompilation().build();
 	}
 
@@ -33,7 +33,7 @@ public class ParserClosureImpl extends ProgramClosureImpl implements tripleo.eli
 	}
 
 	@Override
-	public @NotNull OS_Module module() {
+	public @NonNull OS_Module module() {
 		return module;
 	}
 }

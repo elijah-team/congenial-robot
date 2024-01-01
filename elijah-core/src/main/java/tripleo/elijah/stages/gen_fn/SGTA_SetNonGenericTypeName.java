@@ -6,14 +6,14 @@ import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action;
 import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action_Arena;
 
 public class SGTA_SetNonGenericTypeName implements setup_GenType_Action {
-	private final @NotNull TypeName typeName;
+	private final @NonNull TypeName typeName;
 
-	public SGTA_SetNonGenericTypeName(final @NotNull TypeName aTypeName) {
+	public SGTA_SetNonGenericTypeName(final @NonNull TypeName aTypeName) {
 		typeName = aTypeName;
 	}
 
 	@Override
-	public void run(final @NotNull GenType gt, final @NotNull setup_GenType_Action_Arena arena) {
+	public void run(final @NonNull GenType gt, final @NonNull setup_GenType_Action_Arena arena) {
 		gt.setNonGenericTypeName(typeName);
 	}
 }

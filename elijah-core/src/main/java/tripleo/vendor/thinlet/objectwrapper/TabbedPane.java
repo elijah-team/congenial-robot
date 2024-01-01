@@ -45,7 +45,7 @@ public class TabbedPane extends OWWidget {
 		return EnumPlacement.fromString(fthinlet.getChoice(unwrap(), ThinletConstants.PLACEMENT));
 	}
 
-	public void setPlacement(@NotNull EnumPlacement value) {
+	public void setPlacement(@NonNull EnumPlacement value) {
 		fthinlet.setChoice(unwrap(), ThinletConstants.PLACEMENT, value.toString());
 	}
 
@@ -61,12 +61,12 @@ public class TabbedPane extends OWWidget {
 		fthinlet.defineMethod(fcomponent, ThinletConstants.ACTION, method);
 	}
 
-	public void add(@NotNull Tab tab, @NotNull OWWidget component) {
+	public void add(@NonNull Tab tab, @NonNull OWWidget component) {
 		fthinlet.add(unwrap(), tab.unwrap());
 		fthinlet.add(unwrap(), component.unwrap());
 	}
 
-	public void remove(@NotNull Tab tab) {
+	public void remove(@NonNull Tab tab) {
 		fthinlet.remove(tab.unwrap());
 	}
 
@@ -82,7 +82,7 @@ public class TabbedPane extends OWWidget {
 		return (OWWidget) fthinlet.wrap(fthinlet.getItem(unwrap(), index * 2 + 1));
 	}
 
-	public OWWidget @NotNull [] getChildren() {
+	public OWWidget @NonNull [] getChildren() {
 		Object[]   o   = fthinlet.getItems(unwrap());
 		OWWidget[] ret = new OWWidget[o.length / 2];
 		for (int i = 0; i < ret.length / 2; i++)

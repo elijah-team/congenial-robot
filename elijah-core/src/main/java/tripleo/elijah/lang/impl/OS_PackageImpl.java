@@ -51,7 +51,7 @@ public class OS_PackageImpl implements tripleo.elijah.lang.i.OS_Package {
 	}
 
 	@Override
-	public @NotNull List<OS_Element> getElements() {
+	public @NonNull List<OS_Element> getElements() {
 		return elements;
 	}
 

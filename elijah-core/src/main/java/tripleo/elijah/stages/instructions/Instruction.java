@@ -74,7 +74,7 @@ public class Instruction {
 	}
 
 	@Override
-	public @NotNull String toString() {
+	public @NonNull String toString() {
 		return "Instruction{" +
 				"name=" + name +
 				", index=" + index +

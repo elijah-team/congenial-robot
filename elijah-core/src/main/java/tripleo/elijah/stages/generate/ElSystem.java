@@ -37,9 +37,9 @@ public class ElSystem {
 		c                     = aC;
 	}
 
-	String getFilenameForNode(final @NotNull EvaNode node,
+	String getFilenameForNode(final @NonNull EvaNode node,
 							  final Old_GenerateResult.TY ty,
-							  final @NotNull OutputStrategyC outputStrategyC) {
+							  final @NonNull OutputStrategyC outputStrategyC) {
 		final String s;
 
 		if (node instanceof EvaNamespace evaNamespace) {
@@ -79,7 +79,7 @@ public class ElSystem {
 	}
 
 	@Contract(pure = true)
-	private void logProgress(final int code, final @NotNull /*@NotNull*/ EvaNode evaNode, final String s) {
+	private void logProgress(final int code, final @NonNull /*@NonNull*/ EvaNode evaNode, final String s) {
 		// code:
 		//   41:  EvaNamespace
 		//   48:  EvaClass
@@ -89,7 +89,7 @@ public class ElSystem {
 		SimplePrintLoggerToRemoveSoon.println_out_2(MessageFormat.format("{0} {1} {2}", code, evaNode.toString(), s));
 	}
 
-	public String getFilenameForNode__(final @NotNull GenerateResultItem aGenerateResultItem) {
+	public String getFilenameForNode__(final @NonNull GenerateResultItem aGenerateResultItem) {
 		return getFilenameForNode(aGenerateResultItem.node(), aGenerateResultItem.__ty(), this._os);
 	}
 }

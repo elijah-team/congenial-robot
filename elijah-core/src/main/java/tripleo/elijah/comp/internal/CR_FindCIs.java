@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class CR_FindCIs extends DefaultStateful implements CR_Action {
-	private final @NotNull List<CompilerInput> inputs;
-	private final @NotNull CCI                 cci;
-	private final @NotNull IProgressSink       _ps;
+	private final @NonNull List<CompilerInput> inputs;
+	private final @NonNull CCI                 cci;
+	private final @NonNull IProgressSink       _ps;
 
-	public CR_FindCIs(final @NotNull CompilerBeginning beginning) {
+	public CR_FindCIs(final @NonNull CompilerBeginning beginning) {
 		State st = CompilationRunner.ST.INITIAL; // que?? 07/01
 
 		inputs = beginning.compilerInput();
@@ -38,7 +38,7 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 	}
 
 	@Override
-	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final @NotNull CB_Output aO) {
+	public @NonNull Operation<Ok> execute(final @NonNull CR_State st, final @NonNull CB_Output aO) {
 		final Compilation c = st.ca().getCompilation();
 
 		final List<CompilerInput> x = find_cis(inputs, c, c.getErrSink());
@@ -50,12 +50,12 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 	}
 
 	@Override
-	public void attach(final @NotNull CompilationRunner cr) {
+	public void attach(final @NonNull CompilationRunner cr) {
 	}
 
-	protected @NotNull List<CompilerInput> find_cis(final @NotNull List<CompilerInput> inputs,
-													final @NotNull Compilation c,
-													final @NotNull ErrSink errSink) {
+	protected @NonNull List<CompilerInput> find_cis(final @NonNull List<CompilerInput> inputs,
+													final @NonNull Compilation c,
+													final @NonNull ErrSink errSink) {
 		final List<CompilerInput> x = new ArrayList<>();
 
 		for (final CompilerInput input : inputs) {
@@ -65,10 +65,10 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 		return x;
 	}
 
-	private void _processInput(final @NotNull Compilation c,
-							   final @NotNull ErrSink errSink,
-							   final @NotNull List<CompilerInput> x,
-							   final @NotNull CompilerInput input) {
+	private void _processInput(final @NonNull Compilation c,
+							   final @NonNull ErrSink errSink,
+							   final @NonNull List<CompilerInput> x,
+							   final @NonNull CompilerInput input) {
 		CompilerInstructions ez_file;
 		switch (input.ty()) {
 		case NULL -> {
@@ -100,15 +100,15 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 		}
 	}
 
-	private void _inputIsDirectory(final @NotNull Compilation c,
-								   final @NotNull List<CompilerInput> x,
-								   final @NotNull CompilerInput input,
-								   final @NotNull File f) {
-		new CW_inputIsDirectory().apply(input, c, f, (final @NotNull CompilerInput inp) -> x.add(inp));
+	private void _inputIsDirectory(final @NonNull Compilation c,
+								   final @NonNull List<CompilerInput> x,
+								   final @NonNull CompilerInput input,
+								   final @NonNull File f) {
+		new CW_inputIsDirectory().apply(input, c, f, (final @NonNull CompilerInput inp) -> x.add(inp));
 	}
 
 	@Override
-	public @NotNull String name() {
+	public @NonNull String name() {
 		return "find cis";
 	}
 }

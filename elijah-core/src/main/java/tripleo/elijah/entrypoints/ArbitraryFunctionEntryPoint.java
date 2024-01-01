@@ -20,7 +20,7 @@ import tripleo.elijah.lang.i.OS_Element;
 public class ArbitraryFunctionEntryPoint implements EntryPoint {
 	FunctionDef fd;
 
-	public ArbitraryFunctionEntryPoint(@NotNull FunctionDef aFunction) {
+	public ArbitraryFunctionEntryPoint(@NonNull FunctionDef aFunction) {
 		final OS_Element parent = aFunction.getParent();
 		if (!(parent instanceof ClassStatement || parent instanceof NamespaceStatement))
 			throw new IllegalStateException("Invalid parent");

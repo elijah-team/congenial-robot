@@ -19,7 +19,7 @@ public class LangGlobals {
 	public final static  ConstructorDef defaultVirtualCtor = new ConstructorDefImpl(null, null, null);
 	private static final OS_Package     _dp                = new OS_PackageImpl(null, 0);
 
-	public static @NotNull OS_Package defaultPackage() {
+	public static @NonNull OS_Package defaultPackage() {
 		return _dp;
 	}
 

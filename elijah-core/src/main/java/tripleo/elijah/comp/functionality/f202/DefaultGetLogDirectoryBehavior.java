@@ -26,7 +26,7 @@ public class DefaultGetLogDirectoryBehavior implements GetLogDirectoryBehavior {
 	}
 
 	@Override
-	public @NotNull File getLogDirectory() {
+	public @NonNull File getLogDirectory() {
 		final File file1 = new File("COMP", c.getCompilationNumberString());
 		final File file2 = new File(file1, "logs");
 

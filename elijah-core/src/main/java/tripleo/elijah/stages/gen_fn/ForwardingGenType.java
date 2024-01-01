@@ -18,7 +18,7 @@ import java.util.List;
 public class ForwardingGenType implements GenType {
 	enum Mode {GENERATIONAL, NORMAL}
 
-	final @NotNull Mode    mode;
+	final @NonNull Mode    mode;
 	private final  GenType base;
 
 	private final           List<setup_GenType_Action> list = new ArrayList<>();
@@ -36,7 +36,7 @@ public class ForwardingGenType implements GenType {
 		}
 	}
 
-	public @NotNull GenType unsparkled() {
+	public @NonNull GenType unsparkled() {
 		if (g != null) {
 			for (setup_GenType_Action setupGenTypeAction : list) {
 				setupGenTypeAction.run(base, g);
@@ -122,7 +122,7 @@ public class ForwardingGenType implements GenType {
 	}
 
 	@Override
-	public void set(@NotNull final OS_Type aType) {
+	public void set(@NonNull final OS_Type aType) {
 		if (mode == Mode.GENERATIONAL) {
 			list.add(new SGTA_Set(aType));
 		} else {
@@ -158,7 +158,7 @@ public class ForwardingGenType implements GenType {
 	}
 
 	@Override
-	public void setNonGenericTypeName(@NotNull final TypeName typeName) {
+	public void setNonGenericTypeName(@NonNull final TypeName typeName) {
 		if (mode == Mode.GENERATIONAL) {
 			list.add(new SGTA_SetNonGenericTypeName(typeName));
 		} else {

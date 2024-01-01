@@ -33,7 +33,7 @@ public class CaseContext extends ContextImpl {
 	}
 
 	@Override
-	public LookupResultList lookup(final String name, final int level, final LookupResultList Result, final @NotNull SearchList alreadySearched, final boolean one) {
+	public LookupResultList lookup(final String name, final int level, final LookupResultList Result, final @NonNull SearchList alreadySearched, final boolean one) {
 		alreadySearched.add(carrier.getContext());
 
 /*

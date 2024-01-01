@@ -23,7 +23,7 @@ class __GenerateClass {
 		passthruEnv = aPassthruEnv;
 	}
 
-	void processItem(@NotNull ClassStatement klass, final @NotNull ClassItem item, final @NotNull EvaClass gc) {
+	void processItem(@NonNull ClassStatement klass, final @NonNull ClassItem item, final @NonNull EvaClass gc) {
 		@Nullable AccessNotation an = null;
 
 		if (item instanceof AliasStatement) {
@@ -31,24 +31,24 @@ class __GenerateClass {
 //				throw new NotImplementedException();
 		} else if (item instanceof ClassStatement) {
 //				final ClassStatement classStatement = (ClassStatement) item;
-//				@NotNull EvaClass gen_c = generateClass(classStatement);
+//				@NonNull EvaClass gen_c = generateClass(classStatement);
 //				gc.addClass(classStatement, gen_c);
 		} else if (item instanceof ConstructorDef) {
 //				final ConstructorDef constructorDef = (ConstructorDef) item;
-//				@NotNull GeneratedConstructor f = generateConstructor(constructorDef, klass, null); // TODO remove this null
+//				@NonNull GeneratedConstructor f = generateConstructor(constructorDef, klass, null); // TODO remove this null
 //				gc.addConstructor(constructorDef, f);
 		} else if (item instanceof DestructorDef) {
 			throw new NotImplementedException();
 		} else if (item instanceof DefFunctionDef) {
-//				@NotNull EvaFunction f = generateFunction((DefFunctionDef) item, klass);
+//				@NonNull EvaFunction f = generateFunction((DefFunctionDef) item, klass);
 //				gc.addFunction((DefFunctionDef) item, f);
 		} else if (item instanceof FunctionDef) {
 			// README handled in WlGenerateFunction
-//				@NotNull EvaFunction f = generateFunction((FunctionDef) item, klass);
+//				@NonNull EvaFunction f = generateFunction((FunctionDef) item, klass);
 //				gc.addFunction((FunctionDef) item, f);
 		} else if (item instanceof NamespaceStatement) {
 			throw new NotImplementedException();
-		} else if (item instanceof @NotNull final VariableSequence vsq) {
+		} else if (item instanceof @NonNull final VariableSequence vsq) {
 			for (VariableStatement vs : vsq.items()) {
 //					LOG.info("6999 "+vs);
 				gc.addVarTableEntry(an, vs, passthruEnv);
@@ -60,7 +60,7 @@ class __GenerateClass {
 			//
 			an = (AccessNotation) item;
 //				gc.addAccessNotation(an);
-		} else if (item instanceof @NotNull final PropertyStatement ps) {
+		} else if (item instanceof @NonNull final PropertyStatement ps) {
 			LOG.err("307 Skipping property for now");
 		} else {
 			LOG.err("305 " + item.getClass().getName());

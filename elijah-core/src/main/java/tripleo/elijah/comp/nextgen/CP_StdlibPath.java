@@ -28,17 +28,17 @@ public class CP_StdlibPath implements CP_Path, _CP_RootPath {
 	}
 
 	@Override
-	public @NotNull Path getPath() {
+	public @NonNull Path getPath() {
 		return Path.of("lib_elijjah");
 	}
 
 	@Override
-	public @NotNull Promise<Path, Void, Void> getPathPromise() {
+	public @NonNull Promise<Path, Void, Void> getPathPromise() {
 		return _pathPromise;
 	}
 
 	@Override
-	public @NotNull File toFile() {
+	public @NonNull File toFile() {
 		return getPath().toFile();
 	}
 
@@ -58,7 +58,7 @@ public class CP_StdlibPath implements CP_Path, _CP_RootPath {
 	}
 
 	@Override
-	public @NotNull _CP_RootPath getRootPath() {
+	public @NonNull _CP_RootPath getRootPath() {
 		return this;
 	}
 }

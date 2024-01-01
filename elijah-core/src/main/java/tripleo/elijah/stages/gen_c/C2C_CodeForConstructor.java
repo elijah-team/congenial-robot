@@ -26,7 +26,7 @@ class C2C_CodeForConstructor implements Generate_Code_For_Method.C2C_Results {
 	private C2C_Result buf;
 	private C2C_Result bufHdr;
 
-	public C2C_CodeForConstructor(final Generate_Code_For_Method aGenerateCodeForMethod, final EvaConstructor aGf, final GenerateResultEnv aFileGen, final @NotNull WhyNotGarish_Constructor aYf) {
+	public C2C_CodeForConstructor(final Generate_Code_For_Method aGenerateCodeForMethod, final EvaConstructor aGf, final GenerateResultEnv aFileGen, final @NonNull WhyNotGarish_Constructor aYf) {
 		generateCodeForMethod = aGenerateCodeForMethod;
 
 		this.yf = aYf;
@@ -37,10 +37,10 @@ class C2C_CodeForConstructor implements Generate_Code_For_Method.C2C_Results {
 	}
 
 	public C2C_CodeForConstructor(
-			@NotNull Generate_Code_For_Method aGenerateCodeForMethod,
-			@NotNull DeducedEvaConstructor gf2, 
-			@NotNull GenerateResultEnv aFileGen, 
-			@NotNull WhyNotGarish_Constructor aYf) {
+			@NonNull Generate_Code_For_Method aGenerateCodeForMethod,
+			@NonNull DeducedEvaConstructor gf2,
+			@NonNull GenerateResultEnv aFileGen,
+			@NonNull WhyNotGarish_Constructor aYf) {
 		generateCodeForMethod = aGenerateCodeForMethod;
 
 		yf 		= aYf;
@@ -50,7 +50,7 @@ class C2C_CodeForConstructor implements Generate_Code_For_Method.C2C_Results {
 	}
 
 	@Override
-	public @NotNull List<C2C_Result> getResults() {
+	public @NonNull List<C2C_Result> getResults() {
 		calculate();
 		return List_of(buf, bufHdr);
 	}

@@ -21,8 +21,8 @@ public class C2C_CodeForMethod implements Generate_Code_For_Method.C2C_Results {
 	private       C2C_Result               bufHdr;
 	private final WhyNotGarish_Function    whyNotGarishFunction;
 
-	public C2C_CodeForMethod(final @NotNull Generate_Code_For_Method aGenerateCodeForMethod,
-							 final @NotNull DeducedBaseEvaFunction aGf,
+	public C2C_CodeForMethod(final @NonNull Generate_Code_For_Method aGenerateCodeForMethod,
+							 final @NonNull DeducedBaseEvaFunction aGf,
 							 final GenerateResultEnv aFileGen) {
 		generateCodeForMethod = aGenerateCodeForMethod;
 		fileGen               = aFileGen;
@@ -37,7 +37,7 @@ public class C2C_CodeForMethod implements Generate_Code_For_Method.C2C_Results {
 	}
 
 	@Override
-	public @NotNull List<C2C_Result> getResults() {
+	public @NonNull List<C2C_Result> getResults() {
 		calculate();
 		return List_of(buf, bufHdr);
 	}

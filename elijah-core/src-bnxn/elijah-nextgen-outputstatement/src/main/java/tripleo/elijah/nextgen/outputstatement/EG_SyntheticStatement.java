@@ -37,7 +37,7 @@ public class EG_SyntheticStatement implements EG_Statement {
 		doNaming(naming, s);
 	}
 
-	private void doNaming(final @Nullable EG_Naming aNaming, final @NotNull ES_Item aS) {
+	private void doNaming(final @Nullable EG_Naming aNaming, final @NonNull ES_Item aS) {
 		if (aNaming == null) return;
 
 		final String ss = aNaming.s;

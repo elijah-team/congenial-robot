@@ -36,7 +36,7 @@ final class Util {
 	 * @param str The string from which the leading and trailing quotes should be removed.
 	 * @return The string without the leading and trailing quotes.
 	 */
-	static @NotNull String stripLeadingAndTrailingQuotes(@NotNull String str) {
+	static @NonNull String stripLeadingAndTrailingQuotes(@NonNull String str) {
 		final int length = str.length();
 		if (length > 1 && str.startsWith("\"") && str.endsWith("\"") && str.substring(1, length - 1).indexOf('"') == -1) {
 			str = str.substring(1, length - 1);

@@ -15,17 +15,17 @@ import tripleo.elijah.world.i.WorldModule;
 
 public class ModuleBuilder {
 	//		private final Compilation compilation;
-	private final @NotNull OS_Module mod;
+	private final @NonNull OS_Module mod;
 	private                boolean   _addToCompilation = false;
 	private @Nullable      String    _fn               = null;
 
-	public ModuleBuilder(@NotNull Compilation aCompilation) {
+	public ModuleBuilder(@NonNull Compilation aCompilation) {
 //			compilation = aCompilation;
 		mod = new OS_ModuleImpl();
 		mod.setParent(aCompilation);
 	}
 
-	public @NotNull ModuleBuilder addToCompilation() {
+	public @NonNull ModuleBuilder addToCompilation() {
 		_addToCompilation = true;
 		return this;
 	}
@@ -39,19 +39,19 @@ public class ModuleBuilder {
 		return mod;
 	}
 
-	public @NotNull ModuleBuilder setContext() {
+	public @NonNull ModuleBuilder setContext() {
 		final ModuleContext mctx = new ModuleContext(mod);
 		mod.setContext(mctx);
 		return this;
 	}
 
-	public @NotNull ModuleBuilder withFileName(String aFn) {
+	public @NonNull ModuleBuilder withFileName(String aFn) {
 		_fn = aFn;
 		mod.setFileName(aFn);
 		return this;
 	}
 
-	public @NotNull ModuleBuilder withPrelude(String aPrelude) {
+	public @NonNull ModuleBuilder withPrelude(String aPrelude) {
 		final Operation2<WorldModule>[] p = new Operation2[]{null};
 
 		if (false) {
