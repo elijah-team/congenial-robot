@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.i;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

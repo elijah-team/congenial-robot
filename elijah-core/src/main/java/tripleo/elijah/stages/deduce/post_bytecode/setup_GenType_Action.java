@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_fn.GenType;
 
 public interface setup_GenType_Action {

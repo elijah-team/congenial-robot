@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.deduce;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

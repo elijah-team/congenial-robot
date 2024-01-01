@@ -12,7 +12,7 @@
 package tripleo.elijah.lang.impl;
 
 import antlr.Token;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.nextgen.names.i.EN_Name;
 import tripleo.elijah.util.NotImplementedException;

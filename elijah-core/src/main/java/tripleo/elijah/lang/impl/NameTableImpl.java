@@ -3,7 +3,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;

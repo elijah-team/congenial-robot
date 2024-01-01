@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.deduce.tastic;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.i.FormalArgListItem;
 import tripleo.elijah.lang.i.OS_Type;

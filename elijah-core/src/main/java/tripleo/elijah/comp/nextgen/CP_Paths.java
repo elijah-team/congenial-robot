@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.nextgen;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.nextgen.i.CP_RootType;
 import tripleo.elijah.nextgen.ER_Node;

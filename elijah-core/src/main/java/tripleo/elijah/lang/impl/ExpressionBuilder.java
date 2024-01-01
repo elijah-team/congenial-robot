@@ -14,7 +14,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.ExpressionKind;
 import tripleo.elijah.lang.i.IBinaryExpression;
 import tripleo.elijah.lang.i.IExpression;

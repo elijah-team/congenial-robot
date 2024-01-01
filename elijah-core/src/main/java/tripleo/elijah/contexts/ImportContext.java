@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.contexts;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.ContextImpl;

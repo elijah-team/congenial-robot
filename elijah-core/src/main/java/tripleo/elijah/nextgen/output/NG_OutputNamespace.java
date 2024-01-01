@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.output;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.stages.garish.GarishNamespace;
 import tripleo.elijah.stages.gen_c.GenerateC;

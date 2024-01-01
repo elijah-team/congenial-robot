@@ -1,7 +1,7 @@
 package tripleo.vendor.batoull22;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.MessageFormat;
 

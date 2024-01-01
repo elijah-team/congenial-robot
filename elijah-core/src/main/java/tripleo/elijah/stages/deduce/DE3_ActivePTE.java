@@ -30,7 +30,7 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Consumer;

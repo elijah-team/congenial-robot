@@ -1,6 +1,6 @@
 package tripleo.vendor.thinlet;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * WORK IN PROGRESS - DON'T USE.

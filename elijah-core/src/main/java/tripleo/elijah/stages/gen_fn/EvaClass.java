@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.lang.i.AccessNotation;
 import tripleo.elijah.lang.i.ClassStatement;

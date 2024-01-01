@@ -2,7 +2,7 @@ package tripleo.vendor.mal;
 
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.vendor.mal.types.MalList;
 import tripleo.vendor.mal.types.MalVal;
 

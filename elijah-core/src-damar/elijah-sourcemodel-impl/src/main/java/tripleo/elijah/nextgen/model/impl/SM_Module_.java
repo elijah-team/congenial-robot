@@ -7,7 +7,7 @@ package tripleo.elijah.nextgen.model.impl;
 import tripleo.elijah.nextgen.model.SM_Module;
 import tripleo.elijah.nextgen.model.SM_ModuleItem;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

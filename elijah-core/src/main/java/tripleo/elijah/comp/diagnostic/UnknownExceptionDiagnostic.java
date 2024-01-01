@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.diagnostic;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.diagnostic.Locatable;
 import tripleo.elijah.util.Operation2;

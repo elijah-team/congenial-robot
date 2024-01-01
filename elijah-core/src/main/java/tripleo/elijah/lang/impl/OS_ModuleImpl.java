@@ -11,8 +11,10 @@ package tripleo.elijah.lang.impl;
 import antlr.Token;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.contexts.ModuleContext;

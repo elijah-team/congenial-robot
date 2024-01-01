@@ -8,8 +8,8 @@
 
 package tripleo.elijah.lang.impl;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 
 public class BasicBinaryExpressionImpl implements BasicBinaryExpression {

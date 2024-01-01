@@ -2,7 +2,7 @@ package tripleo.elijah.stages.write_stage.pipeline_impl;
 
 import com.google.common.collect.Multimap;
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.IPipelineAccess;

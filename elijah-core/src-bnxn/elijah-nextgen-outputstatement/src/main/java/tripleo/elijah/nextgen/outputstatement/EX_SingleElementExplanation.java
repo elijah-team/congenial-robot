@@ -1,7 +1,7 @@
 //package tripleo.elijah.nextgen.outputstatement;
 //
 //import org.jetbrains.annotations.Contract;
-//import org.jspecify.annotations.NonNull;
+//import org.jetbrains.annotations.NotNull;
 //import tripleo.elijah.lang.i.OS_Element;
 //
 //public class EX_SingleElementExplanation implements EX_Explanation {

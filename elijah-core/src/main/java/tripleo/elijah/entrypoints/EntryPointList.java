@@ -1,7 +1,7 @@
 package tripleo.elijah.entrypoints;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.work.WorkList;

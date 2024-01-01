@@ -1,7 +1,7 @@
 package tripleo.elijah.world.impl;
 
 import lombok.Getter;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.notation.GN_PL_Run2;

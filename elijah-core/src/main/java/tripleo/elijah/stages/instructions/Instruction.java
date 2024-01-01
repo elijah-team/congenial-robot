@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.stages.instructions;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.stages.deduce.DeduceElement;
 

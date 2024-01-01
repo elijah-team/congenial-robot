@@ -1,7 +1,7 @@
 package tripleo.elijah.nextgen;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.nextgen.CP_Path;
 import tripleo.elijah.comp.nextgen.i.CE_Path;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;

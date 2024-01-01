@@ -10,7 +10,7 @@
 package tripleo.elijah.work;
 
 import com.google.common.collect.ImmutableList;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

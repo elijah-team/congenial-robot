@@ -8,8 +8,8 @@
  */
 package tripleo.elijah.lang.impl;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.contexts.FunctionContext;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;

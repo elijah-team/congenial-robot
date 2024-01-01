@@ -11,7 +11,7 @@ package tripleo.elijah.comp;
 import com.google.common.base.Preconditions;
 import io.reactivex.rxjava3.annotations.NonNull;
 import lombok.Getter;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.i.Compilation;

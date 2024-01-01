@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.impl;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.contexts.ContextInfo;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.LookupResult;

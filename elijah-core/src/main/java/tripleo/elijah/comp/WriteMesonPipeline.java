@@ -9,8 +9,8 @@
 package tripleo.elijah.comp;
 
 import com.google.common.collect.Multimap;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.IPipelineAccess;

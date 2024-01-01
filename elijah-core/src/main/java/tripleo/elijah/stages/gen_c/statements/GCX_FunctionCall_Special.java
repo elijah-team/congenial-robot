@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.gen_c.statements;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.DeduceElement;

@@ -3,7 +3,7 @@ package tripleo.elijah.stages.write_stage.pipeline_impl;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.lang3.tuple.Pair;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.ICompilationAccess2;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
 import tripleo.elijah.nextgen.output.NG_OutputStatement;

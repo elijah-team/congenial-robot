@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.i;
 
 import org.jetbrains.annotations.Contract;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public interface DriverToken {
 	@Contract(value = "_ -> new", pure = true)

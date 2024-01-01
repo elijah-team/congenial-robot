@@ -1,7 +1,7 @@
 package tripleo.elijah.lang.types;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang2.BuiltInTypes;

@@ -8,8 +8,8 @@
  */
 package tripleo.elijah.contexts;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.DefFunctionDef;
 import tripleo.elijah.lang.i.LookupResultList;

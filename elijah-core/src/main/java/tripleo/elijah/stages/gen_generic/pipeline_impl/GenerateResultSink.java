@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_generic.pipeline_impl;
 
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.garish.GarishNamespace;
 import tripleo.elijah.stages.gen_c.C2C_Result;

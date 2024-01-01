@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.write_stage.pipeline_impl;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.inputtree.EIT_Input_HashSourceFile_Triple;
 import tripleo.elijah.nextgen.outputstatement.EG_Naming;
 import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;

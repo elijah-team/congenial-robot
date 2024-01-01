@@ -17,8 +17,8 @@
 
 package tripleo.vendor.org.apache.commons.cli;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.util.NotImplementedException;
 

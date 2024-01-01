@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.i;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.contexts.LoopContext;
 import tripleo.elijah.lang2.ElElementVisitor;
 

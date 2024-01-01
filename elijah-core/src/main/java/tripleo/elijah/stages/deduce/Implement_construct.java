@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.deduce;
 
 import com.google.common.base.Preconditions;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.lang.types.OS_UserType;

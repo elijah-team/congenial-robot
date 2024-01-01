@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.lang2;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Tripleo

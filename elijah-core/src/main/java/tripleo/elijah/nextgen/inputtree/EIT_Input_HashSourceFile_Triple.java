@@ -1,6 +1,6 @@
 package tripleo.elijah.nextgen.inputtree;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.Operation;

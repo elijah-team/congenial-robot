@@ -8,7 +8,7 @@
  */
 package tripleo.elijah.gen;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.GenBuffer;
 import tripleo.elijah.gen.nodes.*;
 import tripleo.elijah.lang.i.*;

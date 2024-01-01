@@ -1,7 +1,7 @@
 package tripleo.elijah.util;
 
 import com.google.common.base.MoreObjects;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.diagnostic.Diagnostic;
 
 public class Maybe<T> {

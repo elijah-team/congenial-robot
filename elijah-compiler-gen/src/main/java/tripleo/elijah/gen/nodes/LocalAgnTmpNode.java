@@ -8,8 +8,8 @@
  */
 package tripleo.elijah.gen.nodes;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.util.NotImplementedException;
 
 /**

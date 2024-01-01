@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.imports;
 
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.contexts.ImportContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.QualidentImpl;
