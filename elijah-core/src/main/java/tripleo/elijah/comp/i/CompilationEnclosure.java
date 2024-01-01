@@ -24,6 +24,7 @@ import tripleo.elijah.pre_world.Mirror_EntryPoint;
 import tripleo.elijah.stages.gen_fn.IClassGenerator;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.util.ArrayList;
@@ -340,6 +341,10 @@ public class CompilationEnclosure {
 		if (spiable instanceof SPI_ReactiveDimension) {
 			addReactiveDimension(((SPI_ReactiveDimension) spiable).spiGetReactiveDimension());
 		}
+	}
+
+	public void spi(final Object spiable, final Object cacheUnderKey) {
+		throw new NotImplementedException("12/31/23");
 	}
 
 	public void addLog(final ElLog aLOG) {

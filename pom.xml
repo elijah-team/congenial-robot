@@ -125,6 +125,7 @@
 				</dependency>
 		-->
 
+<!--
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
@@ -136,7 +137,9 @@
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
 		</dependency>
+-->
 
+<!--
 		<dependency>
 			<groupId>tripleo.buffers</groupId>
 			<artifactId>buffers-v1</artifactId>
@@ -148,7 +151,9 @@
 			<artifactId>range-v1</artifactId>
 			<version>${range.version}</version>
 		</dependency>
+-->
 
+<!--
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -160,35 +165,34 @@
 			<version>${kotlin.version}</version>
 			<scope>test</scope>
 		</dependency>
+-->
 
 	</dependencies>
 
 	<repositories>
+<!--
 		<repository>
 			<id>gitlab-maven-buffers</id>
 			<url>https://gitlab.com/api/v4/projects/20346374/packages/maven</url>
 		</repository>
+-->
+<!--
 		<repository>
 			<id>gitlab-good-api</id>
 			<url>https://gitlab.com/api/v4/projects/52876826/packages/maven</url>
 		</repository>
+-->
+<!--
 		<repository>
 			<id>gitlab-maven-range</id>
 			<url>https://gitlab.com/api/v4/projects/21223510/packages/maven</url>
 		</repository>
+-->
 	</repositories>
 
+<!--
 	<build>
 		<plugins>
-			<!-- To use the plugin goals in your POM or parent POM -->
-			<!--
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-surefire-report-plugin</artifactId>
-							<version>3.0.0-M5</version>
-						</plugin>
-			-->
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -264,4 +268,5 @@
 			</plugin>
 		</plugins>
 	</build>
+-->
 </project>

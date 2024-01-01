@@ -10,15 +10,36 @@ package tripleo.elijah.stages.gen_c;
 
 import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
 import org.jetbrains.annotations.NotNull;
+
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.lang.i.*;
+import tripleo.elijah.lang.i.AnnotationPart;
+import tripleo.elijah.lang.i.ClassStatement;
+import tripleo.elijah.lang.i.ConstructorDef;
+import tripleo.elijah.lang.i.FunctionDef;
+import tripleo.elijah.lang.i.IExpression;
+import tripleo.elijah.lang.i.IdentExpression;
+import tripleo.elijah.lang.i.NormalTypeName;
+import tripleo.elijah.lang.i.OS_Element;
+import tripleo.elijah.lang.i.OS_Module;
+import tripleo.elijah.lang.i.OS_Type;
+import tripleo.elijah.lang.i.ProcedureCallExpression;
+import tripleo.elijah.lang.i.PropertyStatement;
+import tripleo.elijah.lang.i.RegularTypeName;
+import tripleo.elijah.lang.i.TypeName;
+import tripleo.elijah.lang.i.VariableStatement;
 import tripleo.elijah.lang.types.OS_FuncExprType;
 import tripleo.elijah.lang2.BuiltInTypes;
 import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
@@ -49,9 +70,20 @@ import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
-import tripleo.elijah.stages.gen_generic.*;
+import tripleo.elijah.stages.gen_generic.CodeGenerator;
+import tripleo.elijah.stages.gen_generic.GenerateFiles;
+import tripleo.elijah.stages.gen_generic.GenerateResult;
+import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
+import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
+import tripleo.elijah.stages.gen_generic.OutputFileFactoryParams;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
-import tripleo.elijah.stages.instructions.*;
+import tripleo.elijah.stages.instructions.ConstTableIA;
+import tripleo.elijah.stages.instructions.FnCallArgs;
+import tripleo.elijah.stages.instructions.IdentIA;
+import tripleo.elijah.stages.instructions.Instruction;
+import tripleo.elijah.stages.instructions.InstructionArgument;
+import tripleo.elijah.stages.instructions.IntegerIA;
+import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.pp.IPP_Constructor;
 import tripleo.elijah.stages.pp.IPP_Function;
@@ -81,7 +113,7 @@ public class GenerateC
   private static final String PHASE = "GenerateC";
 
   private final GI_Repo _repo = new GI_Repo(this);
-  private final  Zone _zone = new Zone();
+  private final    Zone _zone = new Zone();
 
   private final GenerateResultProgressive generateResultProgressive =
       new GenerateResultProgressive();
@@ -106,6 +138,9 @@ public class GenerateC
     // final ElLog.Verbosity verbosity = aParams.getVerbosity();
 
     spi_save = new __SPI_Save(aParams, aFileGen, ce);
+	
+	System.err.println("************* GenC::for "+aParams.getMod().getFileName());
+	
 
     // created
     // LOG = new ElLog(mod.getFileName(), verbosity, PHASE);
@@ -588,10 +623,10 @@ public class GenerateC
   }
 
   public DeducedEvaConstructor deduced(final EvaConstructor aEvaConstructor) {
-    throw new UnintendedUseException();
+//    throw new UnintendedUseException();
+	  return new DefaultDeducedEvaConstructor(aEvaConstructor);
   }
 
-  @Override
   public GenerateC _this() {
     return this;
   }
@@ -1009,7 +1044,11 @@ public class GenerateC
       // README implement lagging, aka add to gr as well
       gr.addFunction(new PP_Function(gf), buf, aTY, lsp);
 
-      assert gr == _gr;
+      if (gr != _gr) {
+  		
+  		System.err.println("~~~~~~~~~~~~~ gr divergence ");
+  		
+      }
     }
 
     public void addFunction(
@@ -1046,7 +1085,7 @@ public class GenerateC
       final GenerateResult aGenerateResult, final WorkManager wm, final WorkList aWorkList) {
     assert _fileGen != null;
 
-    for (WhyNotGarish_Item value : new ArrayList<>(__directoryValues())) {
+	for (WhyNotGarish_Item value : __directoryValuesCopy()) {
       if (!value.hasFileGen()) value.provideFileGen(_fileGen);
     }
   }

@@ -8,10 +8,10 @@ import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import java.util.function.Consumer;
 
 public class PP_Function implements IPP_Function {
-	private final BaseEvaFunction carrier;
+	private final DeducedBaseEvaFunction carrier;
 
 	public PP_Function(final @NotNull DeducedBaseEvaFunction aGf) {
-		carrier = (BaseEvaFunction) aGf.getCarrier();
+		carrier = aGf;
 	}
 
 	public PP_Function(final DeducedBaseEvaFunction aDeduced, final Consumer<DeducedBaseEvaFunction> aO) {
@@ -19,12 +19,11 @@ public class PP_Function implements IPP_Function {
 	}
 
 	public BaseEvaFunction getCarrier() {
-		return carrier;
+		return (BaseEvaFunction) carrier.getCarrier();
 	}
 
 	@Override
 	public DeducedBaseEvaFunction get2Carrier() {
-		//return null
-		throw new UnintendedUseException();
+		return carrier;
 	}
 }

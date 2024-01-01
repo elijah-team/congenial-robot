@@ -18,7 +18,7 @@ import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ElijahInternal;
+import tripleo.elijah.u.ElijahInternal;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.i.Compilation;
@@ -211,7 +211,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	}
 
 	public @NotNull DeduceTypes2 deduceModule(DeducePhase_deduceModule_Request aRequest) {
-		OS_Module         m   = aRequest.getModule();
+//		OS_Module         m   = aRequest.getModule();
 		Iterable<EvaNode> lgf = aRequest.getListOfEvaFunctions();
 
 		final @NotNull DeduceTypes2 deduceTypes2 = DeducePhase_deduceModule_Request.Companion.createDeduceTypes2Singleton(aRequest);
