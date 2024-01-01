@@ -5,18 +5,15 @@
 	<parent>
 		<groupId>tripleo.elijah</groupId>
 		<artifactId>congenial-robot</artifactId>
-		<!--		<version>2023.congenial.12</version>-->
-		<version>2023.congenial.11.something-after-rosetta</version>
-
+		<version>congenial.2023-12</version>
 	</parent>
 
 	<artifactId>tripleo.elijah.core</artifactId>
-	<!--	<name>elijah-core</name> -->
 	<name>tripleo.elijah.core</name>
 	<description>elijah-core</description>
 	<properties>
-		<org.eclipse.xtend.lib.version>2.31.0</org.eclipse.xtend.lib.version>
-		<xtend-maven-plugin.version>2.31.0</xtend-maven-plugin.version>
+		<org.eclipse.xtend.lib.version>2.31.0.M3</org.eclipse.xtend.lib.version>
+		<xtend-maven-plugin.version>2.31.0.M3</xtend-maven-plugin.version>
 	</properties>
 	<packaging>jar</packaging>
 
@@ -32,58 +29,39 @@
 			<version>${org.eclipse.xtend.lib.version}</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.elijah.good-api</artifactId>
-			<version>congenial.2023-12</version>
-			<scope>compile</scope>
-		</dependency>
-<!--
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>elijah-core-api</artifactId>
-			<version>2023.congenial.2ep4</version>
-			<scope>compile</scope>
-		</dependency>
--->
-
-
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.elijah.sourcemodel-impl</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
-		</dependency>
-
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
-			<!--
-						<scope>compile</scope>
-			-->
-		</dependency>
-
 		<!--
 				<dependency>
 					<groupId>tripleo.elijah</groupId>
-					<artifactId>tripleo.small</artifactId>
-					<version>2023.congenial.12</version>
+					<artifactId>tripleo.elijah.good-api</artifactId>
+					<version>congenial.2023-12</version>
+					<scope>compile</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>tripleo.elijah</groupId>
+					<artifactId>tripleo.elijah.sourcemodel-impl</artifactId>
+					<version>congenial.2023-12</version>
+				</dependency>
+
+				<dependency>
+					<groupId>tripleo.elijah</groupId>
+					<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
+					<version>congenial.2023-12</version>
+				</dependency>
+
+				<dependency>
+					<groupId>tripleo.elijah</groupId>
+					<artifactId>tripleo.elijah.reactive</artifactId>
+					<version>congenial.2023-12</version>
+				</dependency>
+
+				<dependency>
+					<groupId>tripleo.elijah</groupId>
+					<artifactId>tripleo.elijah.stateful</artifactId>
+					<version>congenial.2023-12</version>
+					<scope>compile</scope>
 				</dependency>
 		-->
-
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.elijah.reactive</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
-		</dependency>
-
-		<dependency>
-			<groupId>tripleo.elijah</groupId>
-			<artifactId>tripleo.elijah.stateful</artifactId>
-			<version>2023.congenial.11.something-after-rosetta</version>
-			<scope>compile</scope>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.tngtech.archunit/archunit-junit4 -->
 		<dependency>
