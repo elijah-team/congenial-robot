@@ -649,7 +649,11 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 //									});
 //								}
 
-								deferredMember.externalRefDeferred().resolve(result);
+								if (true) {
+									throw new Error();
+								} else if (false) {
+									deferredMember.externalRefDeferred().resolve(result);
+								}
 /*
 							if (genType.resolved == null) {
 								// HACK need to resolve, but this shouldn't be here
