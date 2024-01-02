@@ -91,9 +91,9 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	private final          List<DE3_Active>                             _actives                = _inj().new_ArrayList__DE3_Active();
 	private final @NotNull Multimap<ClassStatement, ClassInvocation>    classInvocationMultimap = ArrayListMultimap.create();
 	private final @NotNull List<DeferredMember>                         deferredMembers         = _inj().new_ArrayList__DeferredMember();
-	private final @NotNull Multimap<ClassStatement, OnClass>       onclasses          = ArrayListMultimap.create();
-	private final @NotNull Multimap<OS_Element, ResolvedVariables> resolved_variables = ArrayListMultimap.create();
-	private final @NotNull DRS                                     drs                = _inj().new_DRS();
+	private final @NotNull Multimap<ClassStatement, OnClass>            onclasses               = ArrayListMultimap.create();
+	private final @NotNull Multimap<OS_Element, ResolvedVariables>      resolved_variables      = ArrayListMultimap.create();
+	private final @NotNull DRS                                          drs                     = _inj().new_DRS();
 	private final @NotNull WAITS                                        waits                   = _inj().new_WAITS();
 	public                 IPipelineAccess                              pa;
 
@@ -225,9 +225,9 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	private void logProgress(final @NotNull DeducePhaseProvenance aProvenance, final Object o) {
 		switch (aProvenance) {
 		case DeduceTypes_create -> {
-			List<? extends Object> l = (List<? extends Object>) o;
-			DeduceTypes2 deduceTypes2 = (DeduceTypes2) l.get(0);
-			List<EvaNode> lgf = ((GeneratedClasses) l.get(1)).generatedClasses;
+			List<? extends Object> l            = (List<? extends Object>) o;
+			DeduceTypes2           deduceTypes2 = (DeduceTypes2) l.get(0);
+			List<EvaNode>          lgf          = ((GeneratedClasses) l.get(1)).generatedClasses;
 			LOG.info("196 DeduceTypes " + deduceTypes2.getFileName());
 			{
 				final List<EvaNode> p = _inj().new_ArrayList__EvaNode();
