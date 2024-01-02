@@ -33,11 +33,13 @@ import java.util.function.Consumer;
 
 public class DeduceElement3_IdentTableEntry extends DefaultStateful implements IDeduceElement3 {
 
-	public final  IdentTableEntry     principal;
-	public        DeduceTypes2        deduceTypes2;
-	public        BaseEvaFunction     generatedFunction;
-	private       GenType             _resolved;
-	private final DeduceElement3_Type _type = new DeduceElement3_Type() {
+	public static final int                 __makeGenerated_fi__Eventual_ENTER            = 330;
+	public static final int                 __makeGenerated_fi__Eventual__TYPERESOLVE_VAR = 336;
+	public final        IdentTableEntry     principal;
+	public              DeduceTypes2        deduceTypes2;
+	public              BaseEvaFunction     generatedFunction;
+	private             GenType             _resolved;
+	private final       DeduceElement3_Type _type                                         = new DeduceElement3_Type() {
 
 		@Contract(pure = true)
 		@Override
@@ -68,7 +70,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	};
 	Context context;
 	Context fdCtx;
-	private       GenType             genType;
+	private GenType genType;
 
 	@Contract(pure = true)
 	public DeduceElement3_IdentTableEntry(final IdentTableEntry aIdentTableEntry) {
@@ -388,8 +390,8 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 							var ci = pte.getClassInvocation();
 							var fi = pte.getFunctionInvocation();
 
-							//System.err.println("322 " + ci);
-							//System.err.println("323 " + fi);
+							System.err.println("322 " + ci);
+							System.err.println("323 " + fi);
 
 
 							var pt = dt2._inj().new_DR_PossibleTypeCI(ci, fi);
@@ -399,68 +401,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 
 							// README taking a chance here
 							var eef = deduceTypes2.creationContext().makeGenerated_fi__Eventual(fi);
-
-							eef.then(new DoneCallback<BaseEvaFunction>() {
-								@Override
-								public void onDone(final BaseEvaFunction gf) {
-									printString(330, "" + gf);
-
-									InstructionArgument ret = (gf.vte_lookup("Result"));
-									if (ret instanceof IntegerIA aIntegerIA) {
-										var retvte = aIntegerIA.getEntry();
-										retvte.typeResolvePromise().then(gt -> {
-											printString(336, ""+gt);
-
-											System.exit(336);
-										});
-										var retvtept = retvte.potentialTypes();
-										for (TypeTableEntry typeTableEntry : retvtept) {
-
-										}
-
-										final TypeTableEntry retvtety = retvte.getType();
-										if (retvtety.getAttached() != null) {
-											var att  = retvtety.getAttached();
-											var resl = att.resolve(principal.getIdent().getContext());
-
-											if (resl != null) {
-												final ClassStatement classStatement = resl.getClassOf();
-
-												final RegisterClassInvocation_env env = new RegisterClassInvocation_env(classStatement,
-																														deduceTypes2,
-																														deduceTypes2._phase());
-												final RegisterClassInvocation_resp resp = new RegisterClassInvocation_resp();
-												final Rosetta.RCIE                       rcie = Rosetta.create(env, resp);
-												rcie.apply();
-
-												resp.onSuccess(ci3 -> {
-													final Compilation c = deduceTypes2.module.getCompilation();
-													if (c.reports().outputOn(Finally.Outs.Out_350)) {
-														printString(350, ""+ resl);
-													}
-
-													var pt2 = dt2._inj().new_DR_PossibleTypeCI(ci3, null);
-													b.addPossibleType(pt2);
-												});
-
-
-											} else {
-												final Compilation c = deduceTypes2.module.getCompilation();
-												if (c.reports().outputOn(Finally.Outs.Out_364)) {
-													System.err.println("364 " + principal.getIdent().getText());
-												}
-											}
-										}
-									}
-								}
-
-								private static void printString(final int code, final String txt) {
-									if (code == 330) return;
-									System.err.println(""+code+" "+txt);
-									if (code == 336)
-										printString(336, "********************");
-								}
-							});
+							eef.then(gf -> __makeGenerated_fi__Eventual(gf, b));
 						}
 					}
 
@@ -505,6 +446,71 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			final IDeduceElement3 de3 = pte1.getDeduceElement3();
 		}
 		return el;
+	}
+
+	private static void printString(final int code, final String txt) {
+		if (code != __makeGenerated_fi__Eventual_ENTER) {
+			System.err.println("" + code + " " + txt);
+		}
+		switch (code) {
+		case __makeGenerated_fi__Eventual__TYPERESOLVE_VAR -> {
+			// 24j2 let's see recursive
+			printString(__makeGenerated_fi__Eventual__TYPERESOLVE_VAR, "********************");
+		}
+		}
+	}
+
+	private void __makeGenerated_fi__Eventual(final BaseEvaFunction gf, final DR_Ident b) {
+		printString(__makeGenerated_fi__Eventual_ENTER, "" + gf);
+
+		InstructionArgument ret = (gf.vte_lookup("Result"));
+		if (ret instanceof IntegerIA aIntegerIA) {
+			var retvte = aIntegerIA.getEntry();
+			retvte.typeResolvePromise().then(gt -> {
+				printString(__makeGenerated_fi__Eventual__TYPERESOLVE_VAR, "" + gt);
+
+				System.exit(__makeGenerated_fi__Eventual__TYPERESOLVE_VAR);
+			});
+			var retvtept = retvte.potentialTypes();
+			for (TypeTableEntry typeTableEntry : retvtept) {
+
+			}
+
+			final TypeTableEntry retvtety = retvte.getType();
+			if (retvtety.getAttached() != null) {
+				var att  = retvtety.getAttached();
+				var resl = att.resolve(principal.getIdent().getContext());
+
+				if (resl != null) {
+					final ClassStatement classStatement = resl.getClassOf();
+
+					final RegisterClassInvocation_env env = new RegisterClassInvocation_env(classStatement,
+																							deduceTypes2,
+																							deduceTypes2._phase());
+					final RegisterClassInvocation_resp resp = new RegisterClassInvocation_resp();
+					final Rosetta.RCIE                 rcie = Rosetta.create(env, resp);
+					rcie.apply();
+
+					resp.onSuccess((ClassInvocation ci3) -> {
+						final Compilation c = deduceTypes2.module.getCompilation();
+						if (c.reports().outputOn(Finally.Outs.Out_350)) {
+							printString(350, "" + resl);
+						}
+
+						final DeduceTypes2 dt2 = deduceTypes2;
+						var pt2 = dt2._inj().new_DR_PossibleTypeCI(ci3, null);
+						b.addPossibleType(pt2);
+					});
+
+
+				} else {
+					final Compilation c = deduceTypes2.module.getCompilation();
+					if (c.reports().outputOn(Finally.Outs.Out_364)) {
+						System.err.println("364 " + principal.getIdent().getText());
+					}
+				}
+			}
+		}
 	}
 
 	@Nullable
@@ -649,9 +655,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 							final DeduceElement3_IdentTableEntry de3_ite = identTableEntry.getDeduceElement3();
 
 
-
 							assert de3_ite == ite_de;
-
 
 
 							if (result.getCi() == null && result.getNode() == null)
