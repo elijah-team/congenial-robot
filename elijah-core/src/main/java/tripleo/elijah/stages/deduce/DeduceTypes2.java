@@ -9,6 +9,7 @@
  */
 package tripleo.elijah.stages.deduce;
 
+import com.google.common.base.Preconditions;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -2739,6 +2740,7 @@ public class DeduceTypes2 {
 		}
 
 		public DeduceElement3_ProcTableEntry new_DeduceElement3_ProcTableEntry(final ProcTableEntry aPte, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+			Preconditions.checkNotNull(aDeduceTypes2);
 			return new DeduceElement3_ProcTableEntry(aPte, aDeduceTypes2, aGeneratedFunction);
 		}
 

@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
-	@Nullable
+	@NotNull
 	private final DeduceTypes2    deduceTypes2;
 	private final BaseEvaFunction generatedFunction;
 
@@ -36,7 +36,9 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 
 	private Instruction instruction;
 
-	public DeduceElement3_ProcTableEntry(final ProcTableEntry aProcTableEntry, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public DeduceElement3_ProcTableEntry(final ProcTableEntry aProcTableEntry,
+										 final @NotNull DeduceTypes2 aDeduceTypes2,
+										 final BaseEvaFunction aGeneratedFunction) {
 		principal         = aProcTableEntry;
 		deduceTypes2      = aDeduceTypes2;
 		generatedFunction = aGeneratedFunction;
@@ -88,7 +90,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 				fi = phase.newFunctionInvocation(null, pte, ci);
 			} else if (resolvedElement instanceof final @NotNull FunctionDef functionDef) {
 				final IInvocation invocation = dc.getInvocation((EvaFunction) generatedFunction);
-				fi = phase.newFunctionInvocation((BaseFunctionDef) functionDef, pte, invocation);
+				fi = phase.newFunctionInvocation(functionDef, pte, invocation);
 				if (functionDef.getParent() instanceof ClassStatement) {
 					final ClassStatement classStatement = (ClassStatement) fi.getFunction().getParent();
 					ci = _inj().new_ClassInvocation(classStatement, null, new ReadySupplier_1<>(dt2)); // TODO generics
@@ -331,7 +333,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		return principal;
 	}
 
-	private static @Nullable FunctionInvocation __lfoe_action__getFunctionInvocation(final @NotNull ProcTableEntry pte, final @NotNull DeduceTypes2 aDeduceTypes2) {
+	private @Nullable FunctionInvocation __lfoe_action__getFunctionInvocation(final @NotNull ProcTableEntry pte, final @NotNull DeduceTypes2 aDeduceTypes2) {
 		FunctionInvocation fi;
 		if (pte.__debug_expression != null && pte.expression_num != null) {
 			if (pte.__debug_expression instanceof final @NotNull ProcedureCallExpression exp) {

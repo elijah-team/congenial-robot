@@ -8,6 +8,7 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
@@ -183,6 +184,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 	public @NotNull IDeduceElement3 getDeduceElement3(final @NotNull DeduceTypes2 aDeduceTypes2,
 													  final @NotNull BaseEvaFunction aGeneratedFunction) {
 		if (_de3 == null) {
+			Preconditions.checkNotNull(aDeduceTypes2);
 			_de3 = new DeduceElement3_ProcTableEntry(this, aDeduceTypes2, aGeneratedFunction);
 		}
 		return _de3;

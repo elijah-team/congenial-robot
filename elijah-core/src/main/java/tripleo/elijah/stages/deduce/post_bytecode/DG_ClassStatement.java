@@ -36,6 +36,7 @@ public class DG_ClassStatement implements DG_Item {
 	public @NotNull ClassInvocation classInvocation() {
 		if (classInvocation == null) {
 			classInvocation = new ClassInvocation(classStatement, null, new NULL_DeduceTypes2()); // 08/28 !!
+			assert false;
 			//classInvocation = _inj().new_ClassInvocation((classStatement), null);
 		}
 		return classInvocation;

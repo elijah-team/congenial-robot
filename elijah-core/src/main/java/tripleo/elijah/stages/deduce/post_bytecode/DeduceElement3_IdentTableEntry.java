@@ -1,6 +1,5 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
-import io.reactivex.rxjava3.core.CompletableConverter;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -11,10 +10,7 @@ import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.imports.NormalImportStatement;
-import tripleo.elijah.nextgen.rosetta.DeduceTypes2.RegisterClassInvocationRequest;
-import tripleo.elijah.nextgen.rosetta.RegisterClassInvocationResponse;
 import tripleo.elijah.nextgen.rosetta.Rosetta;
-import tripleo.elijah.nextgen.rosetta.RosettaApplyable;
 import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.util.Mode;
