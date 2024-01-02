@@ -2,6 +2,7 @@ package tripleo.elijah.comp;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
+import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,7 +43,7 @@ public class Finally {
 		return outputs.stream().anyMatch(i -> i.name().equals(s));
 	}
 
-	public void addCodeOutput(final EOT_OutputFile.FileNameProvider aFileNameProvider, final EOT_OutputFile aOff) {
+	public void addCodeOutput(final EOT_FileNameProvider aFileNameProvider, final EOT_OutputFile aOff) {
 		outputs.add(new Output(aFileNameProvider, aOff));
 	}
 
@@ -107,10 +108,10 @@ public class Finally {
 	}
 
 	class Output {
-		private final EOT_OutputFile.FileNameProvider fileNameProvider;
-		private final EOT_OutputFile off;
+		private final EOT_FileNameProvider fileNameProvider;
+		private final EOT_OutputFile       off;
 
-		public Output(final EOT_OutputFile.FileNameProvider aFileNameProvider, final EOT_OutputFile aOff) {
+		public Output(final EOT_FileNameProvider aFileNameProvider, final EOT_OutputFile aOff) {
 			fileNameProvider = aFileNameProvider;
 			off              = aOff;
 		}

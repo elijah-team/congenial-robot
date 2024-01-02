@@ -2,7 +2,7 @@ package tripleo.elijah.nextgen.output;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
+import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 import tripleo.elijah.stages.gen_c.C2C_Result;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaConstructor;
@@ -38,7 +38,7 @@ public class NG_OutputFunction implements NG_OutputItem {
 	}
 
 	@Override
-	public EOT_OutputFile.FileNameProvider outName(final @NotNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NotNull TY ty) {
+	public EOT_FileNameProvider outName(final @NotNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NotNull TY ty) {
 		if (getGf() instanceof EvaFunction)
 			return aOutputStrategyC.nameForFunction1((EvaFunction) getGf(), ty);
 		else

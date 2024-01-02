@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.functionality.f291;
 
-import lombok.Getter;
+//import lombok.Getter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.inputtree.EIT_Input;
@@ -8,7 +8,7 @@ import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput;
 import tripleo.elijah.nextgen.outputstatement.EG_Naming;
 import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
+import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 import tripleo.elijah.stages.write_stage.pipeline_impl.NG_OutputRequest;
 import tripleo.elijah.util.Helpers;
 
@@ -17,11 +17,11 @@ import java.util.List;
 
 // TODO 09/04 Duplication madness
 public class MyWriteable implements Writeable {
-	private final          Collection<EG_Statement>        value;
-	private final          EOT_OutputFile.FileNameProvider filename;
-	private final @NotNull List<EG_Statement>              list;
+	private final          Collection<EG_Statement> value;
+	private final          EOT_FileNameProvider     filename;
+	private final @NotNull List<EG_Statement>       list;
 	private final @NotNull EG_SequenceStatement            statement;
-	@Getter
+	//@Getter
 	private final          NG_OutputRequest                outputRequest;
 
 	public MyWriteable(final @NotNull Pair<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
@@ -56,7 +56,7 @@ public class MyWriteable implements Writeable {
 	}
 
 	@Override
-	public EOT_OutputFile.FileNameProvider getFilenameProvider() {
+	public EOT_FileNameProvider getFilenameProvider() {
 		return this.filename;
 	}
 }

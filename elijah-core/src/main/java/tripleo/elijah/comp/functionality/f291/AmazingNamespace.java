@@ -1,8 +1,6 @@
 package tripleo.elijah.comp.functionality.f291;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.comp.functionality.f291.Amazing;
-import tripleo.elijah.comp.functionality.f291.WPIS_GenerateOutputs;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.lang.i.OS_Module;
@@ -12,12 +10,12 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
 
 class AmazingNamespace implements Amazing {
 	private final OS_Module                        mod;
-	private final Compilation                      compilation;
-	private final WPIS_GenerateOutputs.OutputItems itms;
-	private final EvaNamespace                     n;
+	private final Compilation  compilation;
+	private final OutputItems  itms;
+	private final EvaNamespace n;
 
 	public AmazingNamespace(final @NotNull EvaNamespace n,
-							final WPIS_GenerateOutputs.OutputItems itms,
+							final OutputItems itms,
 							final IPipelineAccess aPa) {
 		this.n              = n;
 		mod                 = n.module();

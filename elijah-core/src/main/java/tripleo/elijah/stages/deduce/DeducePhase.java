@@ -349,9 +349,9 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		resolved_variables.put(parent, resolvedVariable);
 	}
 
-	public @NotNull ClassInvocation registerClassInvocation(final @NotNull ClassStatement aParent) {
-		final Supplier<DeduceTypes2> deduceTypes2Supplier = new NULL_DeduceTypes2(); // !! 08/28
-		final ClassInvocation        classInvocation      = _inj().new_ClassInvocation(aParent, null, deduceTypes2Supplier);
+	public @NotNull ClassInvocation registerClassInvocation(final @NotNull ClassStatement aClassStatement, final DeduceTypes2 aDeduceTypes2) {
+		final Supplier<DeduceTypes2> deduceTypes2Supplier = () -> aDeduceTypes2;
+		final ClassInvocation        classInvocation      = _inj().new_ClassInvocation(aClassStatement, null, deduceTypes2Supplier);
 		return registerClassInvocation(classInvocation);
 	}
 
@@ -733,7 +733,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 	// helper function. no generics!
 	public @Nullable ClassInvocation registerClassInvocation(@NotNull ClassStatement aParent, String aConstructorName, final Supplier<DeduceTypes2> aDeduceTypes2) {
-		//@Nullable ClassInvocation ci = _inj().new_ClassInvocation(aParent, aConstructorName, aDeduceTypes2);
+		//@Nullable ClassInvocation ci = _inj().new_ClassInvocation(aParent, aConstructorName, deduceTypes2);
 		@Nullable ClassInvocation ci = _inj().new_ClassInvocation(aParent, aConstructorName, aDeduceTypes2); // !! 08/28
 		if (ci != null) {
 			ci = registerClassInvocation(ci);

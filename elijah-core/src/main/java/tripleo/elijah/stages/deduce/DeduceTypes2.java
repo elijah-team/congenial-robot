@@ -2655,7 +2655,7 @@ public class DeduceTypes2 {
 		}
 
 		public DR_Item new_DR_Ident(final IdentTableEntry aIdentTableEntry, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
-			return new DR_Ident(aIdentTableEntry, aGeneratedFunction/*, aDeduceTypes2*/);
+			return new DR_Ident(aIdentTableEntry, aGeneratedFunction/*, deduceTypes2*/);
 		}
 
 		public DT_Env new_DT_Env(final ElLog aLOG, final ErrSink aErrSink, final DeduceCentral aCentral) {

@@ -11,6 +11,12 @@ import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.imports.NormalImportStatement;
+import tripleo.elijah.nextgen.rosetta.DeduceTypes2.RegisterClassInvocationRequest;
+import tripleo.elijah.nextgen.rosetta.RegisterClassInvocationResponse;
+import tripleo.elijah.nextgen.rosetta.Rosetta;
+import tripleo.elijah.nextgen.rosetta.RosettaApplyable;
+import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
+import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
@@ -422,14 +428,30 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 											var resl = att.resolve(principal.getIdent().getContext());
 
 											if (resl != null) {
-												var ci11 = deduceTypes2.phase.registerClassInvocation(resl.getClassOf());
+												final ClassStatement classStatement = resl.getClassOf();
+												var ci11 = deduceTypes2.phase.registerClassInvocation(classStatement, deduceTypes2());
 
-												final Compilation c = deduceTypes2.module.getCompilation();
-												if (c.reports().outputOn(Finally.Outs.Out_350)) {
-													printString(350, ""+ resl);
-												}
-												var pt2 = dt2._inj().new_DR_PossibleTypeCI(ci11, null);
-												b.addPossibleType(pt2);
+												final RegisterClassInvocationRequest rcir = new RegisterClassInvocationRequest(deduceTypes2.phase, deduceTypes2, classStatement);
+												rsp = Rosetta.create(rcir);
+
+												final RegisterClassInvocation_env env = new RegisterClassInvocation_env(ci11, deduceTypes2, deduceTypes2._phase());
+												final RegisterClassInvocation_resp resp = new RegisterClassInvocation_resp();
+												final Rosetta.RCIE                       rcie = Rosetta.create(env, resp);
+												rcie.apply();
+
+												resp.onSuccess(ci3 -> {
+													final Compilation c = deduceTypes2.module.getCompilation();
+													if (c.reports().outputOn(Finally.Outs.Out_350)) {
+														printString(350, ""+ resl);
+													}
+
+													assert ci3 == ci11;
+
+													var pt2 = dt2._inj().new_DR_PossibleTypeCI(ci3, null);
+													b.addPossibleType(pt2);
+												});
+
+
 											} else {
 												final Compilation c = deduceTypes2.module.getCompilation();
 												if (c.reports().outputOn(Finally.Outs.Out_364)) {
