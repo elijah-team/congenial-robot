@@ -14,7 +14,12 @@ import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.CompilerDriver;
 import tripleo.elijah.comp.internal.__Plugins;
+import tripleo.elijah.comp.nextgen.CP_Path;
+import tripleo.elijah.factory.comp.NextgenFactory;
 import tripleo.elijah.lang.i.OS_Module;
+import tripleo.elijah.nextgen.ER_Node;
+import tripleo.elijah.nextgen.ER_Node_;
+import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.reactive.Reactivable;
 import tripleo.elijah.nextgen.reactive.Reactive;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
@@ -93,7 +98,8 @@ public class CompilationEnclosure {
 	private CompilerDriver      compilerDriver;
 	private List<CompilerInput> inp;
 	private IPipelineAccess     pa;
-	private PipelineLogic       pipelineLogic;
+	private PipelineLogic  pipelineLogic;
+	private NextgenFactory _nextgenFactory;
 
 	public CompilationEnclosure(final Compilation aCompilation) {
 		compilation = aCompilation;
@@ -357,6 +363,18 @@ public class CompilationEnclosure {
 
 	public ICompilationAccess2 ca2() {
 		return compilation.getCompilationAccess2();
+	}
+
+	public NextgenFactory nextgenFactory() {
+		if (_nextgenFactory == null) {
+			_nextgenFactory = new NextgenFactory(){
+				@Override
+				public ER_Node createERNode(final CP_Path aPath, final EG_Statement aSeq) {
+					return ER_Node_.of(aPath, aSeq);
+				}
+			};
+		}
+		return _nextgenFactory;
 	}
 
 	public interface ModuleListener {
