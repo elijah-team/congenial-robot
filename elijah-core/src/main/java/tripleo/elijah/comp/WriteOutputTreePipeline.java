@@ -96,7 +96,7 @@ public class WriteOutputTreePipeline implements PipelineMember {
 				stmts.add(new EG_SingleStatement(logentry + "\n"));
 			}
 
-			final EG_SequenceStatement seq      = new EG_SequenceStatement(new EG_Naming("wot.log.seq"), stmts);
+			final EG_SequenceStatement seq      = new EG_SequenceStatement(new EG_Naming("wot.log.seq"), stmts); // <- ??
 			final String               fileName = log.getFileName().replace("/", "~~");
 			final EOT_OutputFile       off      = new EOT_OutputFile(List_of(), fileName, EOT_OutputType.LOGS, seq);
 			l.add(off);
