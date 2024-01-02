@@ -1,18 +1,11 @@
-package tripleo.elijah.stages.write_stage.pipeline_impl;
+package tripleo.elijah.comp.functionality.f291;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
-import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.nextgen.CP_Paths;
 import tripleo.elijah.lang.i.OS_Module;
-import tripleo.elijah.nextgen.inputtree.EIT_Input;
-import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
-import tripleo.elijah.nextgen.outputstatement.EG_Naming;
-import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
-import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
@@ -20,10 +13,9 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.generate.OutputStrategy;
 import tripleo.elijah.stages.generate.OutputStrategyC;
-import tripleo.elijah.util.Helpers;
+import tripleo.elijah.stages.write_stage.pipeline_impl.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -101,65 +93,9 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 		this.st.pa.waitGenC(mod, cb);
 	}
 
-	interface Writeable {
-		String filename();
-
-		EG_Statement statement();
-
-		List<EIT_Input> inputs();
-
-		EOT_OutputFile.FileNameProvider getFilenameProvider();
-	}
-
 	@FunctionalInterface
 	public interface WPIS_GenerateOutputs_Behavior_PrintDBLString {
 		void print(String sps);
-	}
-
-	// TODO 09/04 Duplication madness
-	static class MyWriteable implements Writeable {
-		private final          Collection<EG_Statement>        value;
-		private final          EOT_OutputFile.FileNameProvider filename;
-		private final @NotNull List<EG_Statement>              list;
-		private final @NotNull EG_SequenceStatement            statement;
-		@Getter
-		private final          NG_OutputRequest                outputRequest;
-
-		public MyWriteable(final @NotNull Pair<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
-			this.outputRequest = aEntry.getKey();
-			filename           = outputRequest.fileName();
-			value              = aEntry.getValue();
-
-			list = value.stream().toList();
-
-			statement = new EG_SequenceStatement(new EG_Naming("writable-combined-file"), list);
-		}
-
-		@Override
-		public String filename() {
-			return filename.getFilename();
-		}
-
-		@Override
-		public EG_Statement statement() {
-			return statement;
-		}
-
-		@Override
-		public @NotNull List<EIT_Input> inputs() {
-			if (outputRequest == null) {
-				throw new IllegalStateException("shouldn't be here");
-			}
-
-			final EIT_ModuleInput moduleInput = outputRequest.outputStatment().getModuleInput();
-
-			return Helpers.List_of(moduleInput);
-		}
-
-		@Override
-		public EOT_OutputFile.FileNameProvider getFilenameProvider() {
-			return this.filename;
-		}
 	}
 
 	static class Default_WPIS_GenerateOutputs_Behavior_PrintDBLString implements WPIS_GenerateOutputs_Behavior_PrintDBLString {

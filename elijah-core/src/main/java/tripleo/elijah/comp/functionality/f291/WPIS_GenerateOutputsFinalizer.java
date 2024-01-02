@@ -1,9 +1,11 @@
-package tripleo.elijah.stages.write_stage.pipeline_impl;
+package tripleo.elijah.comp.functionality.f291;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.functionality.f291.MyWriteable;
+import tripleo.elijah.comp.functionality.f291.Writeable;
 import tripleo.elijah.comp.i.ICompilationAccess2;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
 import tripleo.elijah.nextgen.output.NG_OutputStatement;
@@ -17,6 +19,7 @@ import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.generate.OutputStrategyC;
+import tripleo.elijah.stages.write_stage.pipeline_impl.NG_OutputRequest;
 
 import java.util.*;
 
@@ -59,13 +62,13 @@ public enum WPIS_GenerateOutputsFinalizer {
 			mfss2.put(or2, new_st);
 		}
 
-		final List<WPIS_GenerateOutputs.Writeable> writables = new ArrayList<>();
+		final List<Writeable> writables = new ArrayList<>();
 
 		for (Map.Entry<NG_OutputRequest, Collection<EG_Statement>> entry : mfss2.asMap().entrySet()) {
-			writables.add(new WPIS_GenerateOutputs.MyWriteable(Pair.of(entry.getKey(), entry.getValue())));
+			writables.add(new MyWriteable(Pair.of(entry.getKey(), entry.getValue())));
 		}
 
-		for (WPIS_GenerateOutputs.Writeable writable : writables) {
+		for (Writeable writable : writables) {
 			final EOT_OutputFile.FileNameProvider filename   = writable.getFilenameProvider();
 			final EG_Statement                    statement0 = writable.statement();
 			final List<EG_Statement>              list2     = relist3(statement0);
