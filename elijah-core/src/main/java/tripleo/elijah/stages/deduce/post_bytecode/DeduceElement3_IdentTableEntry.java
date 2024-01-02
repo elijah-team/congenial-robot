@@ -431,9 +431,6 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 												final ClassStatement classStatement = resl.getClassOf();
 												var ci11 = deduceTypes2.phase.registerClassInvocation(classStatement, deduceTypes2());
 
-												final RegisterClassInvocationRequest rcir = new RegisterClassInvocationRequest(deduceTypes2.phase, deduceTypes2, classStatement);
-												rsp = Rosetta.create(rcir);
-
 												final RegisterClassInvocation_env env = new RegisterClassInvocation_env(ci11, deduceTypes2, deduceTypes2._phase());
 												final RegisterClassInvocation_resp resp = new RegisterClassInvocation_resp();
 												final Rosetta.RCIE                       rcie = Rosetta.create(env, resp);
