@@ -1,6 +1,8 @@
-package tripleo.elijah.stages.write_stage.pipeline_impl;
+package tripleo.elijah.comp.functionality.f291;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.functionality.f291.Amazing;
+import tripleo.elijah.comp.functionality.f291.WPIS_GenerateOutputs;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.lang.i.OS_Module;

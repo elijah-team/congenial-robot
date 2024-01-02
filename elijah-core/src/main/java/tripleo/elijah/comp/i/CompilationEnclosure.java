@@ -15,10 +15,10 @@ import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.CompilerDriver;
 import tripleo.elijah.comp.internal.__Plugins;
 import tripleo.elijah.comp.nextgen.CP_Path;
+import tripleo.elijah.comp.nextgen.i.CE_Path;
 import tripleo.elijah.factory.comp.NextgenFactory;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.ER_Node;
-import tripleo.elijah.nextgen.ER_Node_;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.reactive.Reactivable;
 import tripleo.elijah.nextgen.reactive.Reactive;
@@ -32,6 +32,7 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,8 +99,8 @@ public class CompilationEnclosure {
 	private CompilerDriver      compilerDriver;
 	private List<CompilerInput> inp;
 	private IPipelineAccess     pa;
-	private PipelineLogic  pipelineLogic;
-	private NextgenFactory _nextgenFactory;
+	private PipelineLogic       pipelineLogic;
+	private NextgenFactory      _nextgenFactory;
 
 	public CompilationEnclosure(final Compilation aCompilation) {
 		compilation = aCompilation;
@@ -322,7 +323,7 @@ public class CompilationEnclosure {
 		// throw new IllegalStateException("Error");
 
 		// aReactive.join();
-		System.err.println("reactiveJoin "+ aReactive.toString());
+		System.err.println("reactiveJoin " + aReactive.toString());
 	}
 
 	public void addModuleListener(final ModuleListener aModuleListener) {
@@ -367,10 +368,29 @@ public class CompilationEnclosure {
 
 	public NextgenFactory nextgenFactory() {
 		if (_nextgenFactory == null) {
-			_nextgenFactory = new NextgenFactory(){
+			_nextgenFactory = new NextgenFactory() {
 				@Override
 				public ER_Node createERNode(final CP_Path aPath, final EG_Statement aSeq) {
-					return ER_Node_.of(aPath, aSeq);
+					/**
+					 * See {@link tripleo.elijah.comp.nextgen.i.CompOutput#writeToPath(CE_Path, EG_Statement)}
+					 */
+					return new ER_Node() {
+						@Override
+						public @NotNull String toString() {
+							return "17 ER_Node " + aPath.toFile();
+						}
+
+						@Override
+						public Path getPath() {
+							final Path pp = aPath.getPath();
+							return pp;
+						}
+
+						@Override
+						public EG_Statement getStatement() {
+							return aSeq;
+						}
+					};
 				}
 			};
 		}

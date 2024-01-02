@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.write_stage.pipeline_impl;
+package tripleo.elijah.comp.functionality.f291;
 
 interface Amazing {
 	default void run() {

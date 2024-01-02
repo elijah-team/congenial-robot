@@ -1,8 +1,10 @@
-package tripleo.elijah.stages.write_stage.pipeline_impl;
+package tripleo.elijah.comp.functionality.f291;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah.comp.functionality.f291.Amazing;
+import tripleo.elijah.comp.functionality.f291.WPIS_GenerateOutputs;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
 import tripleo.elijah.comp.notation.GM_GenerateModuleRequest;
