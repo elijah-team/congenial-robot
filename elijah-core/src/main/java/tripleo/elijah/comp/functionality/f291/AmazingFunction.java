@@ -3,8 +3,7 @@ package tripleo.elijah.comp.functionality.f291;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.UnintendedUseException;
-import tripleo.elijah.comp.functionality.f291.Amazing;
-import tripleo.elijah.comp.functionality.f291.WPIS_GenerateOutputs;
+import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
 import tripleo.elijah.comp.notation.GM_GenerateModuleRequest;
@@ -39,13 +38,13 @@ import static tripleo.elijah.util.Helpers.List_of;
 class AmazingFunction implements Amazing {
 	private final NG_OutputFunction                of;
 	private final BaseEvaFunction                  f;
-	private final OS_Module                        mod;
-	private final WPIS_GenerateOutputs.OutputItems itms;
-	private final GenerateResult                   result;
+	private final OS_Module      mod;
+	private final OutputItems    itms;
+	private final GenerateResult result;
 	private final IPipelineAccess                  pa;
 
 	public AmazingFunction(final @NotNull BaseEvaFunction aBaseEvaFunction,
-						   final @NotNull WPIS_GenerateOutputs.OutputItems aOutputItems,
+						   final @NotNull OutputItems aOutputItems,
 						   final @NotNull GenerateResult aGenerateResult,
 						   final @NotNull IPipelineAccess aPa) {
 		// given
@@ -61,7 +60,7 @@ class AmazingFunction implements Amazing {
 
 	void waitGenC(final GenerateC ggc) {
 		// TODO latch
-		pa.getAccessBus().subscribePipelineLogic(pl0 -> {
+		pa.getAccessBus().subscribePipelineLogic((PipelineLogic pl0) -> {
 			// FIXME check arguments
 			var env = new GN_GenerateNodesIntoSinkEnv(List_of(),
 													  new DefaultGenerateResultSink(pa),

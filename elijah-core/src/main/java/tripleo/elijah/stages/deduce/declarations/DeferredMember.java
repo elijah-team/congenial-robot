@@ -8,20 +8,20 @@
  */
 package tripleo.elijah.stages.deduce.declarations;
 
-import lombok.Getter;
+//import lombok.Getter;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.lang.i.NamespaceStatement;
+//import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.lang.i.VariableStatement;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.stages.deduce.DeduceElementWrapper;
 import tripleo.elijah.stages.deduce.IInvocation;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_fn.GenType;
-import tripleo.elijah.util.NotImplementedException;
+//import tripleo.elijah.util.NotImplementedException;
 
 /**
  * Created 6/27/21 1:41 AM
@@ -67,22 +67,22 @@ public class DeferredMember {
 		return typePromise;
 	}
 
-	private final DeferredMemberInjector __inj = new DeferredMemberInjector();
+	//private final DeferredMemberInjector __inj = new DeferredMemberInjector();
 
-	public DeferredMemberInjector _inj() {
-		return __inj;
-	}
+	//public DeferredMemberInjector _inj() {
+	//	return __inj;
+	//}
 
-	public static class DeferredMemberInjector {
-
-		public DeferredObject<EvaNode, java.lang.Void, java.lang.Void> new_DeferredObject__EvaNode() {
-			return new DeferredObject<EvaNode, Void, Void>();
-		}
-
-		public DeferredObject<GenType, Diagnostic, Void> new_DeferredObject__GenType() {
-			return new DeferredObject<GenType, Diagnostic, Void>();
-		}
-	}
+	//public static class DeferredMemberInjector {
+	//
+	//	public DeferredObject<EvaNode, java.lang.Void, java.lang.Void> new_DeferredObject__EvaNode() {
+	//		return new DeferredObject<EvaNode, Void, Void>();
+	//	}
+	//
+	//	public DeferredObject<GenType, Diagnostic, Void> new_DeferredObject__GenType() {
+	//		return new DeferredObject<GenType, Diagnostic, Void>();
+	//	}
+	//}
 
 	public IInvocation getInvocation() {
 		return this.invocation;

@@ -139,7 +139,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 							vte.typePromise().then(left_type -> {
 								final ClassStatement cs = left_type.getResolved().getClassOf(); // TODO we want a DeduceClass here. EvaClass may suffice
 
-								final ClassInvocation ci = deduceTypes2._phase().registerClassInvocation(cs);
+								final ClassInvocation ci = deduceTypes2._phase().registerClassInvocation(cs, deduceTypes2());
 								ci.resolvePromise().then(gc2 -> {
 									gc[0] = gc2;
 								});
@@ -203,7 +203,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 	public void lfoe_action(final @NotNull DeduceTypes2 aDeduceTypes2,
 							final @NotNull WorkList wl,
 							final @NotNull Consumer<WorkList> addJobs) {
-		//assert aDeduceTypes2 == deduceTypes2; interesting
+		//assert deduceTypes2 == deduceTypes2; interesting
 
 		final __LFOE_Q q = new __LFOE_Q(aDeduceTypes2.wm, wl, aDeduceTypes2);
 
@@ -234,7 +234,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 			if (ci == null) {
 				if (/*fi.getClassInvocation() == null &&*/ fi.getNamespaceInvocation() == null) {
 					// Assume default constructor
-					ci = aDeduceTypes2.phase.registerClassInvocation((ClassStatement) principal.getResolvedElement());
+					ci = aDeduceTypes2.phase.registerClassInvocation((ClassStatement) principal.getResolvedElement(), deduceTypes2());
 					fi.setClassInvocation(ci);
 				} else
 					throw new NotImplementedException();
@@ -343,14 +343,14 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 						if (e instanceof ClassStatement) {
 							ClassStatement classStatement = (ClassStatement) e;
 
-							final ClassInvocation ci = aDeduceTypes2.phase.registerClassInvocation(classStatement);
+							final ClassInvocation ci = aDeduceTypes2.phase.registerClassInvocation(classStatement, deduceTypes2());
 							pte.setClassInvocation(ci);
 						} else if (e instanceof final @NotNull FunctionDef functionDef) {
 
 
 							ClassStatement classStatement = (ClassStatement) e.getParent();
 
-							final ClassInvocation ci = aDeduceTypes2.phase.registerClassInvocation(classStatement);
+							final ClassInvocation ci = aDeduceTypes2.phase.registerClassInvocation(classStatement, deduceTypes2());
 							pte.setClassInvocation(ci);
 						} else
 							throw new NotImplementedException();

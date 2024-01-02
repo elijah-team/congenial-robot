@@ -19,10 +19,12 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;
+import tripleo.elijah.comp.functionality.f291.B;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.i.AnnotationPart;
@@ -148,7 +150,8 @@ public class GenerateC
     // registration
     // ce.addLog(LOG);
     // ce.addReactiveDimension(this);
-    ce.getPipelineAccess().resolveWaitGenC(mod, this);
+
+    B.INSTANCE.resolve_GenerateC(mod, this);
   }
 
   static boolean isValue(@NotNull BaseEvaFunction gf, @NotNull String name) {
@@ -627,6 +630,7 @@ public class GenerateC
 	  return new DefaultDeducedEvaConstructor(aEvaConstructor);
   }
 
+  @Override
   public GenerateC _this() {
     return this;
   }
@@ -773,22 +777,22 @@ public class GenerateC
       if (gf instanceof EvaFunction) {
         final EvaFunction evaFunction = (EvaFunction) gf;
         final PP_Function ppFunction =
-            new PP_Function(
-                ((GenerateC) generateC).deduced(evaFunction),
-                (DeducedBaseEvaFunction dgf) -> {
-                  // dgf.generateCodeForMethod(gcfm, aFileGen);
-                  throw new UnintendedUseException();
-                });
+                new PP_Function(
+                        ((GenerateC) generateC).deduced(evaFunction),
+                        (DeducedBaseEvaFunction dgf) -> {
+                          // dgf.generateCodeForMethod(gcfm, aFileGen);
+                          throw new UnintendedUseException();
+                        });
         generateC.generate_function(ppFunction, gr, wl, resultSink);
       } else {
         final EvaConstructor evaConstructor = (EvaConstructor) gf;
         final PP_Constructor ppConstructor =
-            new PP_Constructor(
-                ((GenerateC) generateC).deduced(evaConstructor),
-                (DeducedBaseEvaFunction dgf) -> {
-                  // dgf.generateCodeForMethod(gcfm, aFileGen);
-                  throw new UnintendedUseException();
-                });
+                new PP_Constructor(
+                        ((GenerateC) generateC).deduced(evaConstructor),
+                        (DeducedBaseEvaFunction dgf) -> {
+                          // dgf.generateCodeForMethod(gcfm, aFileGen);
+                          throw new UnintendedUseException();
+                        });
         generateC.generate_constructor(ppConstructor, gr, wl, resultSink, aWorkManager, fileGen);
       }
       _isDone = true;

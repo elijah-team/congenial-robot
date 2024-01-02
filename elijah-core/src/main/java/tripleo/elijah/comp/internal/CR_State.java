@@ -30,6 +30,7 @@ import tripleo.elijah.comp.EvaPipeline;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.PipelineMember;
 import tripleo.elijah.comp.WritePipeline;
+import tripleo.elijah.comp.functionality.f291.B;
 import tripleo.elijah.comp.i.CB_Action;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationEnclosure;
@@ -141,7 +142,6 @@ public class CR_State {
 		private final @NotNull List<EvaNamespace>                                    activeNamespaces = new ArrayList<>();
 		private final @NotNull Eventual<PipelineLogic>                               _p_pipelineLogic = new Eventual<>();
 		private final @NotNull Eventual<EvaPipeline>                                 _p_EvaPipeline   = new Eventual<>();
-		private final          Map<OS_Module, DeferredObject<GenerateC, Void, Void>> gc2m_map         = new HashMap<>();
 		private final @NotNull Map<Provenance, Pair<Class, Class>>                   installs         = new HashMap<>();
 		private final          DeferredObject<List<EvaNode>, Void, Void>             nodeListPromise  = new DeferredObject<>();
 		private final          List<NG_OutputItem>                                   outputs          = new ArrayList<NG_OutputItem>();
@@ -305,20 +305,13 @@ public class CR_State {
 
 		@Override
 		public void waitGenC(final OS_Module mod, final Consumer<GenerateC> cb) {
-			final DeferredObject<GenerateC, Void, Void> v = gc2m_map.get(mod);
-			assert v != null;
-			v.then(ggc -> cb.accept(ggc));
+			B.INSTANCE.push(mod, cb);
 		}
 
 		@Override
-		public void resolveWaitGenC(final OS_Module mod, final GenerateC gc) {
-			DeferredObject<GenerateC, Void, Void> gcp = new DeferredObject<>();
-			gcp.resolve(gc);
-			gc2m_map.put(mod, gcp);
-		}
-
-		@Override
-		public void install_notate(final Provenance aProvenance, final Class<? extends GN_Notable> aRunClass, final Class<? extends GN_Env> aEnvClass) {
+		public void install_notate(final Provenance aProvenance,
+								   final Class<? extends GN_Notable> aRunClass,
+								   final Class<? extends GN_Env> aEnvClass) {
 			installs.put(aProvenance, Pair.of(aRunClass, aEnvClass));
 		}
 

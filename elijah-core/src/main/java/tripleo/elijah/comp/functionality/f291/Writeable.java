@@ -2,7 +2,7 @@ package tripleo.elijah.comp.functionality.f291;
 
 import tripleo.elijah.nextgen.inputtree.EIT_Input;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
+import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ public interface Writeable {
 
 	List<EIT_Input> inputs();
 
-	EOT_OutputFile.FileNameProvider getFilenameProvider();
+	EOT_FileNameProvider getFilenameProvider();
 }

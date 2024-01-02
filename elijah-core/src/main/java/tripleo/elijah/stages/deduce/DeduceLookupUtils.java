@@ -107,7 +107,7 @@ public enum DeduceLookupUtils {
 			@Nullable GenType R      = ((IDeduceElement3) de3_ite).genType();
 
 			final @NotNull DeduceTypes2 dt2 = ((IDeduceElement3) de3_ite).deduceTypes2();
-			//assert dt2 == aDeduceTypes2;
+			//assert dt2 == deduceTypes2;
 
 			final @NotNull IdentExpression ident = ((DeduceElement3_IdentTableEntry) de3_ite).principal.getIdent();
 			final Context                  ctx   = ident.getContext();
