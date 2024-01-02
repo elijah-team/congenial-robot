@@ -179,7 +179,7 @@ public class TestIdentNormal {
 
 		final DeduceTypes2 deduceTypes2 = boilerplate.defaultDeduceTypes2(mod);
 assert false;
-		ClassInvocation    ci   = phase.registerClassInvocation(cs, deduceTypes2);
+		final ClassInvocation    ci   = phase.registerClassInvocation(cs, deduceTypes2);
 		ProcTableEntry     pte2 = null;
 
 		final var dp = boilerplate.pipelineLogic().dp;

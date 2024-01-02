@@ -418,16 +418,17 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 
 										}
 
-										var retvtety = retvte.getType();
+										final TypeTableEntry retvtety = retvte.getType();
 										if (retvtety.getAttached() != null) {
 											var att  = retvtety.getAttached();
 											var resl = att.resolve(principal.getIdent().getContext());
 
 											if (resl != null) {
 												final ClassStatement classStatement = resl.getClassOf();
-												var ci11 = deduceTypes2.phase.registerClassInvocation(classStatement, deduceTypes2());
 
-												final RegisterClassInvocation_env env = new RegisterClassInvocation_env(ci11, deduceTypes2, deduceTypes2._phase());
+												final RegisterClassInvocation_env env = new RegisterClassInvocation_env(classStatement,
+																														deduceTypes2,
+																														deduceTypes2._phase());
 												final RegisterClassInvocation_resp resp = new RegisterClassInvocation_resp();
 												final Rosetta.RCIE                       rcie = Rosetta.create(env, resp);
 												rcie.apply();
@@ -437,8 +438,6 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 													if (c.reports().outputOn(Finally.Outs.Out_350)) {
 														printString(350, ""+ resl);
 													}
-
-													assert ci3 == ci11;
 
 													var pt2 = dt2._inj().new_DR_PossibleTypeCI(ci3, null);
 													b.addPossibleType(pt2);
