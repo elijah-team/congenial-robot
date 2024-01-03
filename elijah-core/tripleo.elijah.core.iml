@@ -3,6 +3,7 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/src-bnxn/tripleo-reactive/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/lombok" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/xtend-gen/src/main/java" isTestSource="false" />
     </content>
   </component>
@@ -10,7 +11,6 @@
     <option name="directories">
       <list>
         <option value="src-bnxn/elijah-nextgen-outputstatement/src/main/java" />
-        <option value="src-bnxn/elijah-reactive/src/main/java" />
         <option value="src-bnxn/elijah-stateful/src/main/java" />
         <option value="src-bnxn/tripleo-reactive/src/main/java" />
         <option value="src-bnxn/tripleo-small/src/main/java" />
