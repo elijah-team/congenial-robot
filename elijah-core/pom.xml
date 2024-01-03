@@ -103,7 +103,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.28</version>
+			<version>1.18.30</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -275,6 +275,7 @@
 								<source>./src-bnxn/elijah-nextgen-outputstatement/src/main/java</source>
 								<source>./src-bnxn/elijah-stateful/src/main/java</source>
 								<source>./src-bnxn/tripleo-small/src/main/java</source>
+								<source>./src-bnxn/tripleo-reactive/src/main/java</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -298,6 +299,7 @@
 								<source>xtend-gen/src/main/java</source>
 								<source>src-bnxn/elijah-nextgen-outputstatement/src/main/java</source>
 								<source>src-bnxn/elijah-stateful/src/main/java</source>
+								<source>src-bnxn/tripleo-reactive/src/main/java</source>
 								<source>src-bnxn/tripleo-small/src/main/java</source>
 								<source>src-damar/elijah-good-api/src/main/java</source>
 								<source>src-damar/elijah-sourcemodel-api/src/main/java</source>
