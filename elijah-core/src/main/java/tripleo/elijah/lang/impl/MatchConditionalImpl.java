@@ -181,6 +181,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 			throw new UnintendedUseException("24j3");
 		}
 
+		@Override
 		public TypeName getTypeName() {
 			return tn;
 		}

@@ -13,12 +13,11 @@ import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 
 import java.util.Collection;
 
-public class ProcessedNode1 implements ProcessedNode {
-
 @Getter
+public class ProcessedNodeImpl implements ProcessedNode {
 	private final EvaNode evaNode;
 
-	public ProcessedNode1(final EvaNode aEvaNode) {
+	public ProcessedNodeImpl(final EvaNode aEvaNode) {
 		evaNode = aEvaNode;
 	}
 
@@ -37,9 +36,31 @@ public class ProcessedNode1 implements ProcessedNode {
 		final EvaContainerNC nc = (EvaContainerNC) evaNode;
 
 		final @NotNull Collection<EvaNode> gn2 = GenerateFiles.classes_to_list_of_generated_nodes(nc.classMap.values());
-		GenerateResult                     gr4 = ggc.generateCode(gn2, aFileGen);
+		final GenerateResult               gr4 = ggc.generateCode(gn2, aFileGen);
 		aFileGen.gr().additional(gr4);
 		aFileGen.resultSink().additional(gr4);
+	}
+
+	@Override
+	public int process(final OS_Module mod, final GenerateFiles ggc, final GenerateResultEnv fileGen) {
+		var processedNode = ProcessedNodeImpl.this;
+
+		if (!processedNode.matchModule(mod)) {
+			return ProcessedNode.MODULE_MISMATCH;
+		}
+
+		if (processedNode.isContainerNode()) {
+			processedNode.processContainer(ggc, fileGen);
+
+			processedNode.processConstructors(ggc, fileGen);
+			processedNode.processFunctions(ggc, fileGen);
+			processedNode.processClassMap(ggc, fileGen);
+
+			return ProcessedNode.OK;
+		}
+
+		//return ProcessedNode.OTHER; // ??
+		return ProcessedNode.OK;
 	}
 
 	@Override

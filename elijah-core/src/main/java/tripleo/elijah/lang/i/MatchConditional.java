@@ -79,6 +79,8 @@ public interface MatchConditional extends OS_Element, StatementItem, FunctionIte
 		void scope(Scope3 aSco);
 
 		void setTypeName(TypeName aTn);
+
+		TypeName getTypeName();
 	}
 
 	interface MatchConditionalPart3 extends MatchConditional.MC1 {

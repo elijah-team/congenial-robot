@@ -10,19 +10,26 @@ import tripleo.elijah.stages.logging.ElLog;
 
 @Getter
 public class OutputFileFactoryParams {
-	private final CompilationEnclosure compilationEnclsure;
-	private final ErrSink              errSink;
+	private final CompilationEnclosure compilationEnclosure;
 	private final OS_Module            mod;
-	private final ElLog.Verbosity      verbosity;
 
 	@Contract(pure = true)
 	public OutputFileFactoryParams(final OS_Module aMod,
-								   final CompilationEnclosure aCompilationEnclsure) {
-		mod                 = aMod;
-		compilationEnclsure = aCompilationEnclsure;
-		//
-		errSink   = compilationEnclsure.getCompilationClosure().errSink();
-		verbosity = compilationEnclsure.getCompilationAccess().testSilence();
+								   final CompilationEnclosure aCompilationEnclosure) {
+		mod                  = aMod;
+		compilationEnclosure = aCompilationEnclosure;
+	}
+
+	public PipelineLogic getPipelineLogic() {
+		return getCompilationEnclosure().getPipelineLogic();
+	}
+
+	public ElLog.Verbosity getVerbosity() {
+		return compilationEnclosure.getCompilationAccess().testSilence();
+	}
+
+	public ErrSink getErrSink() {
+		return compilationEnclosure.getCompilationClosure().errSink();
 	}
 
 	public CompilationEnclosure getCompilationEnclosure() {
@@ -33,13 +40,5 @@ public class OutputFileFactoryParams {
 	public OS_Module getMod() {
 		// antilombok
 		return mod;
-	}
-
-	public PipelineLogic getPipelineLogic() {
-		return getCompilationEnclosure().getPipelineLogic();
-	}
-
-	public ElLog.Verbosity getVerbosity() {
-		return verbosity;
 	}
 }
