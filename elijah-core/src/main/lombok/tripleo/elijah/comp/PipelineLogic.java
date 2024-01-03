@@ -68,7 +68,7 @@ public class PipelineLogic implements EventualRegister {
 	}
 
 	public void addLog(ElLog aLog) {
-		elLogs.add(aLog);
+		pa.getCompilationEnclosure().addLog(aLog);
 	}
 
 	public void addModule(OS_Module m) {
