@@ -15,7 +15,7 @@
   limitations under the License.
  */
 
-package tripleo.vendor.org.apache.commons.cli;
+package tripleo.vendor.org_apache_commons_cli;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +26,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static tripleo.vendor.org.apache.commons.cli.Util.EMPTY_STRING_ARRAY;
+import static tripleo.vendor.org_apache_commons_cli.Util.EMPTY_STRING_ARRAY;
 
 /**
  * Represents list of arguments parsed against a {@link Options} descriptor.

@@ -15,7 +15,7 @@
   limitations under the License.
  */
 
-package tripleo.vendor.org.apache.commons.cli;
+package tripleo.vendor.org_apache_commons_cli;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static tripleo.vendor.org.apache.commons.cli.Util.EMPTY_STRING_ARRAY;
+import static tripleo.vendor.org_apache_commons_cli.Util.EMPTY_STRING_ARRAY;
 
 /**
  * Describes a single command-line option. It maintains information regarding the short-name of the option, the
