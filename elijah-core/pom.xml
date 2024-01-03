@@ -174,26 +174,26 @@
 						</goals>
 						<configuration>
 							<sourceDirs>
-<!--
-								<source>src/main/java</source>
-								<source>src-damar/elijah-good-api/src/main/java</source>
-								<source>src-damar/elijah-sourcemodel-api/src/main/java</source>
-								<source>src-damar/elijah-sourcemodel-impl/src/main/java</source>
-								<source>src-bnxn/elijah-nextgen-outputstatement/src/main/java</source>
-								<source>src-bnxn/elijah-stateful/src/main/java</source>
-								<source>src-bnxn/tripleo-reactive/src/main/java</source>
-								<source>src-bnxn/tripleo-small/src/main/java</source>
--->
-<!--
 
-								<source>src/main/lombok</source>
-								<source>target/generated-sources/delombok</source>
+								<sourceDir>src/main/java</sourceDir>
+								<sourceDir>src-damar/elijah-good-api/src/main/java</sourceDir>
+								<sourceDir>src-damar/elijah-sourcemodel-api/src/main/java</sourceDir>
+								<sourceDir>src-damar/elijah-sourcemodel-impl/src/main/java</sourceDir>
+								<sourceDir>src-bnxn/elijah-nextgen-outputstatement/src/main/java</sourceDir>
+								<sourceDir>src-bnxn/elijah-stateful/src/main/java</sourceDir>
+								<sourceDir>src-bnxn/tripleo-reactive/src/main/java</sourceDir>
+								<sourceDir>src-bnxn/tripleo-small/src/main/java</sourceDir>
 
-								<source>xtend-gen/src/main/java</source>
-								<source>target/generated-sources/annotations</source>
-								<source>target/generated-sources/kapt</source>
-								<source>target/generated-sources/kaptKotlin</source>
--->
+
+
+								<sourceDir>src/main/lombok</sourceDir>
+								<sourceDir>target/generated-sources/delombok</sourceDir>
+
+								<sourceDir>xtend-gen/src/main/java</sourceDir>
+								<sourceDir>target/generated-sources/annotations</sourceDir>
+								<sourceDir>target/generated-sources/kapt</sourceDir>
+								<sourceDir>target/generated-sources/kaptKotlin</sourceDir>
+
 							</sourceDirs>
 						</configuration>
 					</execution>
