@@ -1,5 +1,6 @@
 package tripleo.elijah.stages.gen_generic;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Contract;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
@@ -7,6 +8,7 @@ import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.logging.ElLog;
 
+@Getter
 public class OutputFileFactoryParams {
 	private final CompilationEnclosure compilationEnclsure;
 	private final ErrSink              errSink;
@@ -24,14 +26,12 @@ public class OutputFileFactoryParams {
 	}
 
 	public CompilationEnclosure getCompilationEnclosure() {
-		return compilationEnclsure;
-	}
-
-	public ErrSink getErrSink() {
-		return errSink;
+		// antilombok
+		return compilationEnclosure;
 	}
 
 	public OS_Module getMod() {
+		// antilombok
 		return mod;
 	}
 

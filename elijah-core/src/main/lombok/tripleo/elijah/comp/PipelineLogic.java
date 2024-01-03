@@ -27,6 +27,7 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn.GeneratePhase;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.stages.logging.ElLog.Verbosity;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
@@ -38,7 +39,6 @@ import java.util.function.Consumer;
  * Created 12/30/20 2:14 AM
  */
 public class PipelineLogic implements EventualRegister {
-	public final          List<ElLog>                                            elLogs                  = new LinkedList<>();
 	public final @NotNull DeducePhase                                            dp;
 	public final @NotNull GeneratePhase                                          generatePhase;
 	public final          ModuleCompletableProcess                               mcp                     = new ModuleCompletableProcess();
@@ -179,6 +179,11 @@ public class PipelineLogic implements EventualRegister {
 		public void close() {
 
 		}
+	}
+
+	public Verbosity getVerbosity() {
+		// antilombok
+		return verbosity;
 	}
 }
 

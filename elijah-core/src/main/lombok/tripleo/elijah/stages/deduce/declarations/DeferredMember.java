@@ -14,9 +14,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.diagnostic.Diagnostic;
-//import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.lang.i.VariableStatement;
-import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.stages.deduce.DeduceElementWrapper;
 import tripleo.elijah.stages.deduce.IInvocation;
 import tripleo.elijah.stages.gen_fn.EvaNode;
@@ -28,11 +26,11 @@ import tripleo.elijah.stages.gen_fn.GenType;
 public class DeferredMember {
 	@Getter private final IInvocation                               invocation;
 	@Getter private final DeduceElementWrapper                      parent;
-	@Getter private final VariableStatementImpl                     variableStatement;
+	@Getter private final VariableStatement                     variableStatement;
 	private final Eventual<EvaNode>                         externalRef = new Eventual<>();
 	private final DeferredObject<GenType, Diagnostic, Void> typePromise = new DeferredObject<>();
 
-	public DeferredMember(DeduceElementWrapper aParent, IInvocation aInvocation, VariableStatementImpl aVariableStatement) {
+	public DeferredMember(DeduceElementWrapper aParent, IInvocation aInvocation, VariableStatement aVariableStatement) {
 		parent            = aParent;
 		invocation        = aInvocation;
 		variableStatement = aVariableStatement;
@@ -61,6 +59,21 @@ public class DeferredMember {
 	// for DeducePhase
 	public @NotNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
 		return typePromise;
+	}
+
+	public IInvocation getInvocation() {
+		// antilombok
+		return invocation;
+	}
+
+	public DeduceElementWrapper getParent() {
+		// antilombok
+		return parent;
+	}
+
+	public VariableStatement getVariableStatement() {
+		// antilombok
+		return variableStatement;
 	}
 }
 

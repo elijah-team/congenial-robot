@@ -1,5 +1,6 @@
 package tripleo.elijah.stages.gen_generic.pipeline_impl;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.OS_Module;
 
@@ -14,14 +15,11 @@ import java.util.Collection;
 
 public class ProcessedNode1 implements ProcessedNode {
 
+@Getter
 	private final EvaNode evaNode;
 
 	public ProcessedNode1(final EvaNode aEvaNode) {
 		evaNode = aEvaNode;
-	}
-
-	public EvaNode getEvaNode() {
-		return evaNode;
 	}
 
 	@Override
@@ -81,5 +79,10 @@ public class ProcessedNode1 implements ProcessedNode {
 		final EvaContainerNC nc = (EvaContainerNC) evaNode;
 
 		nc.generateCode(aFileGen, ggc);
+	}
+
+	public EvaNode getEvaNode() {
+		// antilombok
+		return evaNode;
 	}
 }

@@ -7,6 +7,7 @@ import tripleo.elijah.Eventual;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.notation.GN_PL_Run2;
+import tripleo.elijah.comp.notation.GN_PL_Run2.GenerateFunctionsRequest;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput;
 import tripleo.elijah.stages.deduce.DeducePhase;
@@ -43,6 +44,11 @@ public class DefaultWorldModule implements WorldModule {
 		setThing(mt);
 	}
 
+	private void setThing(ModuleThing mt) {
+		// antilombok
+		this.thing = mt;
+	}
+
 	@Override
 	public Eventual<DeducePhase.GeneratedClasses> getEventual() {
 		return _p_GeneratedClasses;
@@ -50,5 +56,10 @@ public class DefaultWorldModule implements WorldModule {
 
 	public ModuleThing thing() {
 		return thing;
+	}
+
+	public void setRq(GenerateFunctionsRequest rq2) {
+		// antilombok
+		rq = rq2;
 	}
 }
