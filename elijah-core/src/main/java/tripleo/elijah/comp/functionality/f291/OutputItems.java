@@ -11,11 +11,8 @@ import java.util.List;
 
 public class OutputItems {
 	private final WPIS_GenerateOutputs   WPISGenerateOutputs;
-	//@Getter
 	private final OutputStrategy         osg;
-	//@Getter
 	private final List<NG_OutputRequest> outputRequestList;
-	//@Getter
 	private final List<NG_OutputItem>    itms;
 	private final OutputStrategyC        outputStrategyC;
 	private       int                    _readyCount;
