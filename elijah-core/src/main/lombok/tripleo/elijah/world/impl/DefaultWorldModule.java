@@ -1,8 +1,10 @@
 package tripleo.elijah.world.impl;
 
-//import lombok.Getter;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.notation.GN_PL_Run2;
 import tripleo.elijah.lang.i.OS_Module;
@@ -12,18 +14,12 @@ import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.world.i.WorldModule;
 
 public class DefaultWorldModule implements WorldModule {
+	private final Eventual<DeducePhase.GeneratedClasses> _p_GeneratedClasses = new Eventual<>();
 	private final OS_Module   mod;
+	@Setter
 	private       ModuleThing thing;
-
-	//@Getter
+	@Setter @Getter
 	private GN_PL_Run2.GenerateFunctionsRequest rq;
-
-	final Eventual<DeducePhase.GeneratedClasses> _p_GeneratedClasses = new Eventual<>();
-
-	public DefaultWorldModule(final OS_Module aMod, final GN_PL_Run2.GenerateFunctionsRequest aRq) {
-		mod = aMod;
-		rq  = aRq;
-	}
 
 	@Override
 	public OS_Module module() {
@@ -32,7 +28,8 @@ public class DefaultWorldModule implements WorldModule {
 
 	@Override
 	public EIT_ModuleInput input() {
-		return null;
+		//return null;
+		throw new UnintendedUseException("24j3 not implemented");
 	}
 
 	@Override
@@ -51,15 +48,7 @@ public class DefaultWorldModule implements WorldModule {
 		return _p_GeneratedClasses;
 	}
 
-	public void setRq(final GN_PL_Run2.GenerateFunctionsRequest aRq) {
-		rq = aRq;
-	}
-
 	public ModuleThing thing() {
 		return thing;
-	}
-
-	public void setThing(final ModuleThing aThing) {
-		thing = aThing;
 	}
 }
