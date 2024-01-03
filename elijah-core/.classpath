@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="tripleo/elijah/stages/gen_c/internal_t/_GenerateC_T.java" kind="src" output="target/classes" path="src/main/java">
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
@@ -40,16 +40,50 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src-bnxn/elijah-nextgen-outputstatement/src/main/java"/>
-	<classpathentry kind="src" path="src-bnxn/elijah-stateful/src/main/java"/>
-	<classpathentry kind="src" path="src-bnxn/tripleo-reactive/src/main/java"/>
-	<classpathentry kind="src" path="src-bnxn/tripleo-small/src/main/java"/>
-	<classpathentry kind="src" path="src-damar/elijah-good-api/src/main/java"/>
-	<classpathentry kind="src" path="src-damar/elijah-sourcemodel-api/src/main/java"/>
-	<classpathentry kind="src" path="src-damar/elijah-sourcemodel-impl/src/main/java"/>
+	<classpathentry kind="src" output="target/classes" path="src-bnxn/elijah-nextgen-outputstatement/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src-bnxn/elijah-stateful/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src-bnxn/tripleo-reactive/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src-bnxn/tripleo-small/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src-damar/elijah-good-api/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src-damar/elijah-sourcemodel-api/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src-damar/elijah-sourcemodel-impl/src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>

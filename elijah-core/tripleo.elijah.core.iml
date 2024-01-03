@@ -10,6 +10,7 @@
     <option name="directories">
       <list>
         <option value="src-bnxn/elijah-nextgen-outputstatement/src/main/java" />
+        <option value="src-bnxn/elijah-reactive/src/main/java" />
         <option value="src-bnxn/elijah-stateful/src/main/java" />
         <option value="src-bnxn/tripleo-reactive/src/main/java" />
         <option value="src-bnxn/tripleo-small/src/main/java" />
