@@ -33,6 +33,7 @@ import tripleo.elijah.nextgen.ClassDefinition;
 import tripleo.elijah.nextgen.diagnostic.CouldntGenerateClass;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Request;
+import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Rosetta;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_Request;
 import tripleo.elijah.nextgen.rosetta.Rosetta;
 import tripleo.elijah.sanaa.ElijahInternal;
@@ -367,11 +368,6 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
 	private void addDr(final BaseEvaFunction aGeneratedFunction, final DR_Item aDr) {
 		drs.add(aGeneratedFunction, aDr);
-	}
-
-	public void doneWait(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
-		NotImplementedException.raise_stop(); // same...
-		throw new UnintendedUseException("24j3 break on invoke for implementation");
 	}
 
 	public void waitOn(final DeduceTypes2 aDeduceTypes2) {
@@ -793,6 +789,11 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		R.register(this);
 
 		return R;
+	}
+
+	public void doneWait(final DeduceTypes2Rosetta aRosetta) {
+		//throw new UnintendedUseException("24j3 break for impl");
+		// README 24/01/03 Honesly, forgot what this was for...
 	}
 
 	public interface Country {

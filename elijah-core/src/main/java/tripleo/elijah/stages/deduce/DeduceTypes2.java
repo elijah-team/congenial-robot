@@ -1082,7 +1082,7 @@ public class DeduceTypes2 {
 
 			phase.addDrs(generatedFunction, generatedFunction.drs);
 
-			phase.doneWait(this, generatedFunction);
+			phase.doneWait(this.rosetta);
 		}
 
 		//
