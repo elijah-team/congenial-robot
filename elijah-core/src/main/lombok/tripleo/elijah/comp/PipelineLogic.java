@@ -30,7 +30,6 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
-import tripleo.elijah.world.impl.DefaultWorldModule;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -90,7 +89,7 @@ public class PipelineLogic implements EventualRegister {
 
 	public Eventual<DeducePhase.GeneratedClasses> handle(final GN_PL_Run2.@NotNull GenerateFunctionsRequest rq) {
 		final OS_Module          mod         = rq.mod();
-		final DefaultWorldModule worldModule = rq.worldModule();
+		final WorldModule worldModule = rq.worldModule();
 
 		final Eventual<DeducePhase.GeneratedClasses> modMapEventual = worldModule.getEventual();
 		modMap.put(mod, modMapEventual);

@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
@@ -361,17 +362,16 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	}
 
 	public void addDrs(final BaseEvaFunction aGeneratedFunction, final @NotNull List<DR_Item> aDrs) {
-		for (DR_Item dr : aDrs) {
-			addDr(Pair.of(aGeneratedFunction, dr));
-		}
+		aDrs.forEach(dr -> addDr(aGeneratedFunction, dr));
 	}
 
-	private void addDr(final Pair<BaseEvaFunction, DR_Item> drp) {
-		drs.add(drp);
+	private void addDr(final BaseEvaFunction aGeneratedFunction, final DR_Item aDr) {
+		drs.add(aGeneratedFunction, aDr);
 	}
 
 	public void doneWait(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
-		NotImplementedException.raise();
+		NotImplementedException.raise_stop(); // same...
+		throw new UnintendedUseException("24j3 break on invoke for implementation");
 	}
 
 	public void waitOn(final DeduceTypes2 aDeduceTypes2) {
@@ -795,10 +795,6 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 		return R;
 	}
 
-	enum DeducePhaseProvenance {
-		DeduceTypes_create // 196
-	}
-
 	public interface Country {
 		void sendClasses(Consumer<List<EvaNode>> ces);
 	}
@@ -806,8 +802,8 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 	static class DRS {
 		private final List<Pair<BaseEvaFunction, DR_Item>> drs = new ArrayList<>();
 
-		public void add(final Pair<BaseEvaFunction, DR_Item> aDrp) {
-			drs.add(aDrp);
+		public void add(final BaseEvaFunction bef, DR_Item aDri) {
+			drs.add(Pair.of(bef, aDri));
 		}
 
 		public Iterable<Pair<BaseEvaFunction, DR_Item>> iterator() {
