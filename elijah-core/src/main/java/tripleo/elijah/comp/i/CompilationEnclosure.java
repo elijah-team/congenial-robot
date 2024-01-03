@@ -13,6 +13,7 @@ import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.CompilerDriver;
+import tripleo.elijah.comp.internal.MalBulge;
 import tripleo.elijah.comp.internal.Provenance;
 import tripleo.elijah.comp.internal.__Plugins;
 import tripleo.elijah.comp.nextgen.CP_Path;
@@ -115,6 +116,9 @@ public class CompilationEnclosure {
 	private IPipelineAccess     pa;
 	private PipelineLogic       pipelineLogic;
 	private NextgenFactory      _nextgenFactory;
+
+
+	private MalBulge _mb;
 
 	public CompilationEnclosure(final Compilation aCompilation) {
 		compilation = aCompilation;
@@ -439,6 +443,14 @@ public class CompilationEnclosure {
 		final GN_WriteLogs aNotable = new GN_WriteLogs(ca, elLogs);
 		
 		pa.notate(Provenance.DefaultCompilationAccess__writeLogs, aNotable);
+	}
+
+	public void setMalbulge(MalBulge mb) {
+		this._mb = mb;
+	}
+
+	public MalBulge getMalBulge() {
+		return this._mb;
 	}
 }
 
