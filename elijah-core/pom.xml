@@ -30,40 +30,6 @@
 			<version>${org.eclipse.xtend.lib.version}</version>
 		</dependency>
 
-		<!--
-				<dependency>
-					<groupId>tripleo.elijah</groupId>
-					<artifactId>tripleo.elijah.good-api</artifactId>
-					<version>congenial.2023-12</version>
-					<scope>compile</scope>
-				</dependency>
-
-				<dependency>
-					<groupId>tripleo.elijah</groupId>
-					<artifactId>tripleo.elijah.sourcemodel-impl</artifactId>
-					<version>congenial.2023-12</version>
-				</dependency>
-
-				<dependency>
-					<groupId>tripleo.elijah</groupId>
-					<artifactId>tripleo.elijah.elijah-nextgen-outputstatement</artifactId>
-					<version>congenial.2023-12</version>
-				</dependency>
-
-				<dependency>
-					<groupId>tripleo.elijah</groupId>
-					<artifactId>tripleo.elijah.reactive</artifactId>
-					<version>congenial.2023-12</version>
-				</dependency>
-
-				<dependency>
-					<groupId>tripleo.elijah</groupId>
-					<artifactId>tripleo.elijah.stateful</artifactId>
-					<version>congenial.2023-12</version>
-					<scope>compile</scope>
-				</dependency>
-		-->
-
 		<!-- https://mvnrepository.com/artifact/com.tngtech.archunit/archunit-junit4 -->
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>
@@ -132,6 +98,7 @@
 
 	<build>
 		<plugins>
+<!--
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
@@ -145,6 +112,7 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
 
 
 			<plugin>
