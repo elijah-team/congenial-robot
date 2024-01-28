@@ -618,7 +618,8 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 				final IdentTableEntry ite1 = identIA.getEntry();
 
 				final OS_Element[] el = {null};
-				ite1._p_resolvedElementPromise.then(el1 -> el[0] = el1);
+				ite1.elementPromise((el1)->el[0]=el1, null);
+				//ite1._p_resolvedElementPromise.then(el1 -> el[0] = el1);
 
 				//assert el[0] != null;
 
