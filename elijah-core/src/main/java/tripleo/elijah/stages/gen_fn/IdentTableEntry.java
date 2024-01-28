@@ -90,7 +90,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		setupResolve();
 
 		_p_resolvedElementPromise.then(this::resolveLanguageLevelConstruct);
-		typeResolve.typeResolution().then(gt -> {
+		getTypeResolve().typeResolution().then(gt -> {
 			if (type != null && type.genType != null) // !! 07/30
 				type.genType.copy(gt);
 		});
@@ -125,16 +125,16 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		//
 		if (element instanceof FunctionDef fd) {
 			NotImplementedException.raise_stop();
-			if (_p_elementPromise.isResolved()) {
-				_p_elementPromise.then(e -> {
+			if (get_p_elementPromise().isResolved()) {
+				get_p_elementPromise().then(e -> {
 					assert e == fd;
 				});
 			} else {
-				_p_elementPromise.resolve(fd);
+				get_p_elementPromise().resolve(fd);
 			}
 		}
 
-		_p_elementPromise.then(x -> {
+		get_p_elementPromise().then(x -> {
 			NotImplementedException.raise_stop();
 			assert x == element;
 		});
@@ -252,7 +252,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	}
 
 	public DeduceElement3_IdentTableEntry getDeduceElement3() {
-		return getDeduceElement3(this._deduceTypes2(), __gf);
+		return getDeduceElement3(this._deduceTypes2(), get__gf());
 	}
 
 	public @NotNull DeduceElement3_IdentTableEntry getDeduceElement3(DeduceTypes2 aDeduceTypes2, BaseEvaFunction aGeneratedFunction) {
@@ -284,9 +284,9 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	public @Nullable OS_Element getResolvedElement() {
 		OS_Element resolved_element;
 
-		if (_p_elementPromise.isResolved()) {
+		if (get_p_elementPromise().isResolved()) {
 			final OS_Element[] r = new OS_Element[1];
-			_p_elementPromise.then(x -> r[0] = x);
+			get_p_elementPromise().then(x -> r[0] = x);
 			return r[0];
 		}
 
@@ -295,10 +295,10 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		insideGetResolvedElement = true;
 		resolved_element         = dei.getResolvedElement();
 		if (resolved_element != null) {
-			if (_p_elementPromise.isResolved()) {
+			if (get_p_elementPromise().isResolved()) {
 				NotImplementedException.raise();
 			} else {
-				_p_elementPromise.resolve(resolved_element);
+				get_p_elementPromise().resolve(resolved_element);
 			}
 		}
 		insideGetResolvedElement = false;
@@ -306,7 +306,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	}
 
 	public boolean hasResolvedElement() {
-		return !_p_elementPromise.isPending();
+		return !get_p_elementPromise().isPending();
 	}
 
 	public boolean isResolved() {
@@ -383,7 +383,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	}
 
 	public @NotNull BaseEvaFunction _generatedFunction() {
-		return __gf;
+		return get__gf();
 	}
 
 	public void onBacklinkSet(final DoneCallback<? super InstructionArgument> cb) {
@@ -400,7 +400,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 				"index=" + index +
 				", ident=" + ident.get() +
 				", backlink=" + backlink +
-				", status=" + status +
+				", status=" + getStatus() +
 				", resolved=" + resolvedType +
 				", potentialTypes=" + potentialTypes +
 				", type=" + type +

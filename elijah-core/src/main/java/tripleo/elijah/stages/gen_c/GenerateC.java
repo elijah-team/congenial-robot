@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.UnintendedUseException;
@@ -860,7 +859,7 @@ public class GenerateC
 
               final DeduceElement3_ProcTableEntry pte_de3 =
                   (DeduceElement3_ProcTableEntry)
-                      pte.getDeduceElement3(pte._deduceTypes2(), pte.__gf);
+                      pte.getDeduceElement3(pte._deduceTypes2(), pte.get__gf());
               var s = pte_de3.toString();
 
               // final DR_Ident id = pte.__gf.getIdent((IdentExpression) pte.expression);

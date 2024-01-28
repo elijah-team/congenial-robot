@@ -604,9 +604,9 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 				@NotNull final VariableTableEntry vte = integerIA.getEntry();
 
 				if (vte._vs == null) {
-					if (vte._p_elementPromise.isResolved()) {
+					if (vte.get_p_elementPromise().isResolved()) {
 						final @NotNull InstructionArgument finalOo = oo;
-						vte._p_elementPromise.then(el1 -> R.addFirst(DT_Resolvable.from(finalOo, el1, null)));
+						vte.get_p_elementPromise().then(el1 -> R.addFirst(DT_Resolvable.from(finalOo, el1, null)));
 					} else {
 						R.addFirst(DT_Resolvable.from(oo, null, null));
 					}
@@ -641,7 +641,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 				assert pte != null;
 
 				final OS_Element[] el = {null};
-				pte._p_elementPromise.then(el1 -> el[0] = el1);
+				pte.get_p_elementPromise().then(el1 -> el[0] = el1);
 
 				assert el[0] != null;
 
