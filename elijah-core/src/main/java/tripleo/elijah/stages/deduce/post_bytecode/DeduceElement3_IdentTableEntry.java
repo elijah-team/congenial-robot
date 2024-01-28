@@ -25,6 +25,7 @@ import tripleo.elijah.stateful.StateRegistrationToken;
 import tripleo.elijah.stateful._RegistrationTarget;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.Operation2;
+import tripleo.elijah_congenial.progress.X;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -390,8 +391,8 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 							var ci = pte.getClassInvocation();
 							var fi = pte.getFunctionInvocation();
 
-							System.err.println("322 " + ci);
-							System.err.println("323 " + fi);
+							X.xl_323("322 " + ci);
+							X.xl_323("323 " + fi);
 
 
 							var pt = dt2._inj().new_DR_PossibleTypeCI(ci, fi);
