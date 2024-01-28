@@ -31,7 +31,10 @@ public abstract class BaseTableEntry {
 	protected final DeferredObject2<OS_Element, Diagnostic, Void> _p_elementPromise = new DeferredObject2<OS_Element, Diagnostic, Void>() {
 		@Override
 		public Deferred<OS_Element, Diagnostic, Void> resolve(final @Nullable OS_Element resolve) {
-			return __elementPromise_resolve(resolve, (@Nullable OS_Element r) -> super.resolve(r), this);
+			return __elementPromise_resolve(resolve, (@Nullable OS_Element r) -> {
+				if (isResolved()) return this;
+				return super.resolve(r);
+			}, this);
 		}
 	};
 	private final   Eventual<DeduceTypes2>                        _p_DeduceTypes2   = new Eventual<>();
