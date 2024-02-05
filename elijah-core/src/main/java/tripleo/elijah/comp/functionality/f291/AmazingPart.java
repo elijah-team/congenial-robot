@@ -51,7 +51,7 @@ public class AmazingPart {
 		}
 	}
 
-	public void waitGenC(final OS_Module mod, final Consumer<GenerateC> cb) {
+	private void waitGenC(final OS_Module mod, final Consumer<GenerateC> cb) {
 		final Eventual<GenerateC> generateCEventual = B.INSTANCE.lookupModule(mod);
 		ElIntrinsics.checkNotNull(generateCEventual);
 		generateCEventual.then(cb::accept);
