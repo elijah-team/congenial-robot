@@ -82,7 +82,7 @@ public class CRI_Ident {
 																		  ite,
 																		  this,
 																		  (GI_FunctionDef) repo_element);
-					grrif.onResolve(repo_element::setEvaNode);
+					repo_element.setEvaNode_by(grrif);
 				} else if (resolved_element instanceof PropertyStatement) {
 					resolved2 = _re_is_PropertyStatement(addRef, aog, sSize, i, aValue, (x) -> skip[0] = true, (x) -> text[0] = x);
 

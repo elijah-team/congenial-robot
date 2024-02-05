@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.FunctionDef;
+import tripleo.elijah.sanaa.ElIntrinsics;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.world.i.LivingFunction;
 
@@ -78,12 +79,20 @@ public class GI_FunctionDef implements GenerateC_Item {
 
 	@Override
 	public void setEvaNode(final EvaNode aEvaNode) {
-		_evaNode = aEvaNode;
 		if (aEvaNode == null) {
-			int y=3;
+			int y = 3;
 			assert false;
+		} else {
+			ElIntrinsics.checkNotNull(aEvaNode);
+
+			_evaNode = aEvaNode;
+			_living  = _repo.generateC._ce().getCompilation().livingRepo().getFunction((BaseEvaFunction) _evaNode);
 		}
-		_living  = _repo.generateC._ce().getCompilation().livingRepo().getFunction((BaseEvaFunction) _evaNode);
+	}
+
+	@Override
+	public void setEvaNode_by(final GR_EvaNodeAble aKotlinEnvy) {
+		aKotlinEnvy.onResolve(this::setEvaNode);
 	}
 
 	public void resolving(final GRRR aGRReIsFunctionDef) {

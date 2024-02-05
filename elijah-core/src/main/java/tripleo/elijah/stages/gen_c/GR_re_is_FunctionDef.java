@@ -10,7 +10,7 @@ import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 
 import java.util.Objects;
 
-public final class GR_re_is_FunctionDef implements GRRR {
+public final class GR_re_is_FunctionDef implements GRRR, GR_EvaNodeAble {
 	private final ProcTableEntry  pte;
 	private final EvaClass        cheat;
 	private final IdentTableEntry ite;
@@ -64,6 +64,7 @@ public final class GR_re_is_FunctionDef implements GRRR {
 
 	private final Eventual<EvaNode> resolvedP = new Eventual<>();
 
+	@Override
 	public void onResolve(final DoneCallback<EvaNode> cb) {
 		((GI_FunctionDef) repo_element).resolving(this);
 		resolvedP.then(cb);
