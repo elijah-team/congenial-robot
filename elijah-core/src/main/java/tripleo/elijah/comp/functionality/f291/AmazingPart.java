@@ -64,6 +64,13 @@ public class AmazingPart {
 		amazings.add(amazingClass);
 	}
 
+	public void reverseOffer(final LivingNamespace ln) {
+		final EvaNamespace     n                = ln.evaNode();
+		final AmazingNamespace amazingNamespace = new AmazingNamespace(n, itms, compilationEnclosure.getPipelineAccess());
+		waitGenC(amazingNamespace.mod(), amazingNamespace::waitGenC);
+		amazings.add(amazingNamespace);
+	}
+
 	public void reverseOffer(final LivingFunction lf) {
 		final @Nullable BaseEvaFunction f               = lf.evaNode();
 		final WritePipelineSharedState  st              = wpisGenerateOutputs.__st();
@@ -71,12 +78,5 @@ public class AmazingPart {
 		final AmazingFunction           amazingFunction = new AmazingFunction(f, itms, result, compilationEnclosure.getPipelineAccess());
 		waitGenC(amazingFunction.mod(), amazingFunction::waitGenC);
 		amazings.add(amazingFunction);
-	}
-
-	public void reverseOffer(final LivingNamespace ln) {
-		final EvaNamespace     n                = ln.evaNode();
-		final AmazingNamespace amazingNamespace = new AmazingNamespace(n, itms, compilationEnclosure.getPipelineAccess());
-		waitGenC(amazingNamespace.mod(), amazingNamespace::waitGenC);
-		amazings.add(amazingNamespace);
 	}
 }
