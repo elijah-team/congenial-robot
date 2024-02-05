@@ -19,7 +19,7 @@ class GI_FunctionDef implements GenerateC_Item {
 	}
 
 	EvaNode _re_is_FunctionDef(final @Nullable ProcTableEntry pte, final EvaClass a_cheat, final @NotNull IdentTableEntry ite) {
-		EvaNode                 resolved  = null;
+
 		final Eventual<EvaNode> resolvedP = new Eventual<>();
 		final boolean[]         qq        = {false};
 
@@ -58,7 +58,7 @@ class GI_FunctionDef implements GenerateC_Item {
 		final EvaNode[] resolved2 = new EvaNode[1];
 		assert resolvedP.isResolved();
 		resolvedP.then(xx -> {
-			if (!qq[0])
+			if (qq[0])
 				resolved2[0] = xx;
 		});
 		return resolved2[0];
@@ -74,6 +74,7 @@ class GI_FunctionDef implements GenerateC_Item {
 		_evaNode = aEvaNode;
 		if (aEvaNode == null) {
 			int y=3;
+			assert false;
 		}
 		_living  = _repo.generateC._ce().getCompilation().livingRepo().getFunction((BaseEvaFunction) _evaNode);
 	}
