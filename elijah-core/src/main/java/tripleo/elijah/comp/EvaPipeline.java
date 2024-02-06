@@ -191,18 +191,24 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 			}
 
 			if (!DebugFlags.skip_DUMPS) {
-				final EG_Statement   seq = EG_Statement.of(sb.toString(), EX_Explanation.withMessage("dump"));
-				final EOT_OutputFile off = new EOT_OutputFile(List_of(), filename1, EOT_OutputType.DUMP, seq);
-				cot.add(off);
+				final EG_Statement          seq = EG_Statement.of(sb.toString(), EX_Explanation.withMessage("dump"));
+				final EOT_OutputFileCreator off = ce.ca2().createOutputFile2(EOT_OutputType.DUMP);
+				off.provideInputs(List_of());
+				off.provideFileName(filename1);
+				off.provideSeq(seq);
+				off.provideCompilation(ce.ca2());
 			}
 		}
 
 		if (!DebugFlags.skip_DUMPS) {
 			for (FunctionStatement functionStatement : functionStatements) {
-				final String         filename = functionStatement.getFilename(pa);
-				final EG_Statement   seq      = EG_Statement.of(functionStatement.getText(), EX_Explanation.withMessage("dump2"));
-				final EOT_OutputFile off      = new EOT_OutputFile(List_of(), filename, EOT_OutputType.DUMP, seq);
-				cot.add(off);
+				final String                filename = functionStatement.getFilename(pa);
+				final EG_Statement          seq      = EG_Statement.of(functionStatement.getText(), EX_Explanation.withMessage("dump2"));
+				final EOT_OutputFileCreator off      = ce.ca2().createOutputFile2(EOT_OutputType.DUMP);
+				off.provideInputs(List_of());
+				off.provideFileName(() -> filename);
+				off.provideSeq(seq);
+				off.provideCompilation(ce.ca2());
 			}
 		}
 
