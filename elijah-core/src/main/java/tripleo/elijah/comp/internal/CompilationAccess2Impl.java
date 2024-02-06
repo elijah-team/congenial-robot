@@ -34,7 +34,15 @@ public class CompilationAccess2Impl implements ICompilationAccess2 {
 
 	@Override
 	public void addCodeOutput(final EOT_FileNameProvider aFileNameProvider, final EOT_OutputFile aOutputFile) {
+		addCodeOutput(aFileNameProvider, aOutputFile, false);
+	}
+
+	@Override
+	public void addCodeOutput(final EOT_FileNameProvider aFileNameProvider, final EOT_OutputFile aOutputFile, final boolean addFlag) {
 		c.reports().addCodeOutput(aFileNameProvider, aOutputFile);
+		if (addFlag) {
+			getOutputTree().add(aOutputFile);
+		}
 	}
 
 	@Override
