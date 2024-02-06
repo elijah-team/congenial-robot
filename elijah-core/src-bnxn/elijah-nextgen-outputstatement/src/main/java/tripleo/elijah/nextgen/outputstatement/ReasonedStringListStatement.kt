@@ -1,35 +1,31 @@
-package tripleo.elijah.nextgen.outputstatement;
+package tripleo.elijah.nextgen.outputstatement
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.Supplier
 
-public class ReasonedStringListStatement implements EG_Statement {
-	@Override
-	public EX_Explanation getExplanation() {
-		return EX_Explanation.withMessage("xyz");
-	}
+class ReasonedStringListStatement : EG_Statement {
+	override fun getExplanation(): EX_Explanation = explanation
 
-	@Override
-	public String getText() {
-		final StringBuilder sb2 = new StringBuilder();
-		for (IReasonedString reasonedString : rss) {
-			sb2.append(reasonedString.text());
+	override fun getText(): String {
+		// TODO technically speaking, this is a Flow
+		val sb2 = StringBuilder()
+		rss.forEach {
+			sb2.append(it.text()) // TODO more, learn kotlin
 		}
-		return sb2.toString();
+		return sb2.toString()
 	}
 
-	public void append(final String aText, final String aReason) {
-		rss.add(new ReasonedString(aText, aReason));
+	fun append(aText: String, aReason: String) {
+		rss.add(ReasonedString(aText, aReason))
 	}
 
-	public void append(final Supplier<String> aText, final String aReason) {
-		rss.add(new ReasonedSuppliedString(aText, aReason));
+	fun append(aText: Supplier<String>, aReason: String) {
+		rss.add(ReasonedSuppliedString(aText, aReason))
 	}
 
-	public void append(final EG_Statement aText, final String aReason) {
-		rss.add(new ReasonedStatementString(aText, aReason));
+	fun append(aText: EG_Statement, aReason: String) {
+		rss.add(ReasonedStatementString(aText, aReason))
 	}
 
-	private final List<IReasonedString> rss = new ArrayList<>();
+	private val explanation: EX_Explanation = EX_Explanation.withMessage("ResonedStringListStatement")
+	private val rss: MutableList<IReasonedString> = ArrayList()
 }
