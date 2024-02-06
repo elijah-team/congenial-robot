@@ -23,10 +23,11 @@ import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.i.OS_NamedElement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
+import tripleo.elijah.nextgen.outputstatement.ReasonedStringListStatement;
+import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
+import tripleo.elijah.nextgen.outputtree.EOT_OutputFileCreator;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
-import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.DoubleLatch;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
@@ -246,43 +247,46 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		@Override
 		public @NotNull String getText() {
 			final StringBuilder sb = new StringBuilder();
+			final var           z  = new ReasonedStringListStatement();
 
 			final String str = "FUNCTION %d %s %s\n".formatted(evaFunction.getCode(),
 															   evaFunction.getFunctionName(),
 															   ((OS_NamedElement) evaFunction.getFD().getParent()).name());
-			sb.append(str);
+			z.append(str, "function-statement-header");
 
+			z.append("Instructions \n", "function-statement-header2");
 			final EvaFunction gf = (EvaFunction) evaFunction;
-
-			sb.append("Instructions \n");
-			for (Instruction instruction : (gf).instructionsList) {
-				sb.append("\t" + instruction + "\n");
+			for (Instruction instruction : gf.instructionsList) {
+				z.append("\t", "function-statement-instruction-spacer-left");
+				z.append("" + instruction, "function-statement-instruction-text");
+				z.append("\n", "function-statement-instruction-spacer-right");
 			}
+
 			{
 				//	EvaFunction.printTables(gf);
 				{
 					for (FormalArgListItem formalArgListItem : gf.getFD().getArgs()) {
-						sb.append("ARGUMENT " + formalArgListItem.name() + " " + formalArgListItem.typeName() + "\n");
+						z.append("ARGUMENT " + formalArgListItem.name() + " " + formalArgListItem.typeName() + "\n", "...fali");
 					}
 					sb.append("VariableTable \n");
 					for (VariableTableEntry variableTableEntry : gf.vte_list) {
-						sb.append("\t" + variableTableEntry + "\n");
+						z.append("\t" + variableTableEntry + "\n", "...vte-list-item");
 					}
 					sb.append("ConstantTable \n");
 					for (ConstantTableEntry constantTableEntry : gf.cte_list) {
-						sb.append("\t" + constantTableEntry + "\n");
+						z.append("\t" + constantTableEntry + "\n", "...cte-list-item");
 					}
-					sb.append("ProcTable     \n");
+					z.append("ProcTable     \n", "...pte-header");
 					for (ProcTableEntry procTableEntry : gf.prte_list) {
-						sb.append("\t" + procTableEntry + "\n");
+						z.append("\t" + procTableEntry + "\n", "...prte-list-item");
 					}
-					sb.append("TypeTable     \n");
+					z.append("TypeTable     \n", "...tte-header");
 					for (TypeTableEntry typeTableEntry : gf.tte_list) {
-						sb.append("\t" + typeTableEntry + "\n");
+						z.append("\t" + typeTableEntry + "\n", "...tte-list-item");
 					}
-					sb.append("IdentTable    \n");
+					z.append("IdentTable    \n", "...idte-list-header");
 					for (IdentTableEntry identTableEntry : gf.idte_list) {
-						sb.append("\t" + identTableEntry + "\n");
+						z.append("\t" + identTableEntry + "\n", "...idte-list-item");
 					}
 				}
 			}
