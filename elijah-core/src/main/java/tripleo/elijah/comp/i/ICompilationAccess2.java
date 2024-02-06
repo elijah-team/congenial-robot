@@ -4,10 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.inputtree.EIT_Input;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
+import tripleo.elijah.nextgen.outputtree.*;
 import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 import tripleo.elijah.world.i.LivingRepo;
@@ -32,4 +29,6 @@ public interface ICompilationAccess2 {
 									EG_Statement aStatement);
 
 	@NotNull Operation<Ok> mal_ReadEval(String string);
+
+	EOT_OutputFileCreator createOutputFile2(EOT_OutputType aOutputType);
 }
