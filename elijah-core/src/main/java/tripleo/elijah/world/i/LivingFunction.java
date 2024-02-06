@@ -12,4 +12,6 @@ public interface LivingFunction {
 	void offer(AmazingPart aAp);
 
 	BaseEvaFunction evaNode();
+
+	void codeRegistration(LF_CodeRegistration acr);
 }
