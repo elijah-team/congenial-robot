@@ -94,10 +94,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 	}
 
 	@Override
-	public void lgc_slot(final @NotNull List<EvaNode> aLgc1) {
-		var aLgc = new ArrayList<>(aLgc1);
-
-
+	public void lgc_slot(final @NotNull List<EvaNode> aLgc) {
 		final List<ProcessedNode> nodes = processLgc(aLgc);
 
 		for (EvaNode evaNode : aLgc) {
