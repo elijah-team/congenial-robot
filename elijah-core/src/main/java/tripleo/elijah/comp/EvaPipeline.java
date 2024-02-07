@@ -11,6 +11,7 @@ package tripleo.elijah.comp;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.DebugFlags;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.internal.CB_Output;
@@ -26,7 +27,6 @@ import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputstatement.ReasonedStringListStatement;
 import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFileCreator;
-import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.DoubleLatch;
@@ -34,6 +34,8 @@ import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNodeImpl;
 import tripleo.elijah.stages.instructions.Instruction;
+import tripleo.elijah.world.i.LivingFunction;
+import tripleo.elijah.world.i.LivingRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,15 +51,11 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 	private final @NotNull IPipelineAccess            pa;
 	private final @NotNull DefaultGenerateResultSink  grs;
 	private final @NotNull DoubleLatch<List<EvaNode>> latch2;
-	private                List<EvaNode>           _lgc;
-	private final @NotNull List<FunctionStatement> functionStatements = new ArrayList<>();
-	private                PipelineLogic           pipelineLogic;
+	private final @NotNull List<FunctionStatement>    functionStatements = new ArrayList<>();
+	private                List<EvaNode>              _lgc;
+	private                PipelineLogic              pipelineLogic;
 	private                CB_Output                  _processOutput;
 	private                CR_State                   _processState;
-
-	public void addFunctionStatement(final FunctionStatement aFunctionStatement) {
-		functionStatements.add(aFunctionStatement);
-	}
 
 	@Contract(pure = true)
 	public EvaPipeline(@NotNull IPipelineAccess pa0) {
@@ -89,10 +87,6 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		pa.install_notate(Provenance.EvaPipeline__lgc_slot, GN_GenerateNodesIntoSink.class, GN_GenerateNodesIntoSinkEnv.class);
 	}
 
-	public DefaultGenerateResultSink grs() {
-		return grs;
-	}
-
 	@Override
 	public void lgc_slot(final @NotNull List<EvaNode> aLgc) {
 		final List<ProcessedNode> nodes = processLgc(aLgc);
@@ -100,6 +94,17 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		for (EvaNode evaNode : aLgc) {
 			_processOutput.logProgress(160, "EvaPipeline.recieve >> " + evaNode);
 		}
+
+		//var flow = getMyEvents();
+		//try {
+		//	flow.collect { value ->
+		//			println("Received $value")
+		//	}
+		//	println("My events are consumed successfully")
+		//} catch (e: Throwable) {
+		//	println("Exception from the flow: $e")
+		//}
+		//var msf = Flow<ProcessedNode>();
 
 		EOT_FileNameProvider filename1;
 
@@ -148,7 +153,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 															compilationEnclosure.getCompilationAccess().testSilence(),
 															pa.getAccessBus().gr,
 															pa,
-															compilationEnclosure);;
+															compilationEnclosure);
 
 			final GN_GenerateNodesIntoSink generateNodesIntoSink = new GN_GenerateNodesIntoSink(env);
 			_processOutput.logProgress(117, "EvaPipeline >> GN_GenerateNodesIntoSink");
@@ -339,41 +344,35 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 
 		public @NotNull String getFilename(@NotNull IPipelineAccess pa) {
 			// HACK 07/07 register if not registered
-			EvaFunction v    = (EvaFunction) evaFunction;
-			int         code = v.getCode();
+			if (filename == null) {
+				EvaFunction v    = (EvaFunction) evaFunction;
+				int         code = v.getCode();
 
-			var ce = pa.getCompilationEnclosure();
+				final var            ce    = pa.getCompilationEnclosure();
+				final var            world = ce.getCompilation().world();
+				final LivingFunction funct = world.addFunction(v, LivingRepo.Add.NONE);
+				funct.codeRegistration((final EvaFunction ef, final Eventual<Integer> ccb)->{
+					int         code1 = ef.getCode();
+					assert  code1 == 0;
+					var cr = ce.getPipelineLogic().dp.codeRegistrar;
+					cr.registerFunction1(ef);
 
-			if (code == 0) {
-				var cr = ce.getPipelineLogic().dp.codeRegistrar;
-				cr.registerFunction1(v);
+					code1 = ef.getCode();
+					assert code1 != 0;
 
-				code = v.getCode();
-				assert code != 0;
+					ccb.resolve(code1);
+				});
+
+				assert funct.isRegistered();
+
+				funct.listenRegister((Integer code2) -> {
+					assert code2.intValue() != 0;
+
+					filename = String.format("F_%d%s", code2, evaFunction.getFunctionName());
+				});
 			}
-
-
-			filename = "F_" + evaFunction.getCode() + evaFunction.getFunctionName();
 			return filename;
 		}
-	}
-
-	private @NotNull List<ProcessedNode> processLgc(final @NotNull List<EvaNode> aLgc) {
-		final List<ProcessedNode> l = new ArrayList<>();
-
-		for (EvaNode evaNode : aLgc) {
-			l.add(new ProcessedNodeImpl(evaNode));
-		}
-
-		return l;
-	}
-
-	@Override
-	public void run(final CR_State aSt, final CB_Output aOutput) {
-		_processState  = aSt;
-		_processOutput = aOutput;
-
-		latch2.notifyLatch(true);
 	}
 
 //	public void simpleUsageExample() {
