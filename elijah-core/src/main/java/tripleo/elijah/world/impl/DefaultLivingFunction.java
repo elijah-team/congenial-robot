@@ -1,5 +1,6 @@
 package tripleo.elijah.world.impl;
 
+import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.functionality.f291.AmazingPart;
@@ -16,6 +17,7 @@ public class DefaultLivingFunction implements LivingFunction {
 	private final @NotNull FunctionDef     _element;
 	private final @NotNull BaseEvaFunction _gf;
 	private Eventual<Integer>               codeCallback;
+	private boolean __registered;
 
 	public DefaultLivingFunction(final @NotNull BaseEvaFunction aFunction) {
 		_element = aFunction.getFD();
@@ -57,6 +59,7 @@ public class DefaultLivingFunction implements LivingFunction {
 			codeCallback.then(i -> {
 				final IEvaFunctionBase evaFunction = evaNode();
 				evaFunction.setCode(i);
+				__registered = true;
 			});
 		}
 
@@ -65,5 +68,15 @@ public class DefaultLivingFunction implements LivingFunction {
 			final EvaFunction evaFunction = (EvaFunction) evaNode();
 			acr.accept(evaFunction, codeCallback);
 		}
+	}
+
+	@Override
+	public boolean isRegistered() {
+		return __registered;
+	}
+
+	@Override
+	public void listenRegister(final DoneCallback<Integer> aCodeCallback) {
+		codeCallback.then(aCodeCallback);
 	}
 }
