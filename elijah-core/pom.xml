@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>tripleo.elijah</groupId>
 		<artifactId>congenial-robot</artifactId>
-		<version>congenial.2023-12</version>
+		<version>congenial.2024-02</version>
 	</parent>
 
 	<artifactId>tripleo.elijah.core</artifactId>

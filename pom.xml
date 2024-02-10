@@ -5,7 +5,7 @@
 	<groupId>tripleo.elijah</groupId>
 	<artifactId>congenial-robot</artifactId>
 	<packaging>pom</packaging>
-	<version>congenial.2023-12</version>
+	<version>congenial.2024-02</version>
 
 	<!-- TODO 12/31 naming here -->
 	<name>eljc-almost-congenial-robot</name>
