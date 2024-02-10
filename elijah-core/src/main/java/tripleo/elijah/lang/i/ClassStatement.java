@@ -1,16 +1,15 @@
 package tripleo.elijah.lang.i;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.contexts.ClassContext;
 import tripleo.elijah.lang.impl.InvariantStatement;
 import tripleo.elijah.lang2.ElElementVisitor;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public interface ClassStatement
@@ -86,21 +85,8 @@ public interface ClassStatement
 
 	void walkAnnotations(AnnotationWalker aWalker);
 
-	public static final class __GetConstructorsHelper {
-		public static final Function<ClassItem, ConstructorDef> castClassItemToConstructor = new Function<ClassItem, ConstructorDef>() {
-			@Contract(value = "_ -> param1", pure = true)
-			@Nullable
-			@Override
-			public @org.jetbrains.annotations.Nullable ConstructorDef apply(@Nullable ClassItem input) {
-				return (ConstructorDef) input;
-			}
-		};
-		public static final Predicate<ClassItem>                selectForConstructors      = new Predicate<ClassItem>() {
-			@Contract(value = "null -> false", pure = true)
-			@Override
-			public boolean apply(@Nullable ClassItem input) {
-				return input instanceof ConstructorDef;
-			}
-		};
+	final class __GetConstructorsHelper {
+		public static final Function<ClassItem, ConstructorDef> castClassItemToConstructor = classItem -> (ConstructorDef) classItem;
+		public static final Predicate<ClassItem>                selectForConstructors      = classItem -> classItem instanceof ConstructorDef;
 	}
 }
