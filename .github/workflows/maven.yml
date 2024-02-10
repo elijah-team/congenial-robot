@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "2023-congenial-12wp" ]
   pull_request:
-    branches: [ "2023-congenial-12wp" ]
+# just in case we freeze this
+# remember, if you merge this in to 2024-congenial, you either succeeded greatly or failed humongouosly
 
 jobs:
   build:
