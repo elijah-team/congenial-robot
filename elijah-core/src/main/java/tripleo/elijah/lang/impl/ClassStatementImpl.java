@@ -18,6 +18,7 @@ import tripleo.elijah.lang.nextgen.names.impl.ENU_ClassName;
 import tripleo.elijah.lang.types.OS_UserClassType;
 import tripleo.elijah.lang2.ElElementVisitor;
 import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.anno.Cached;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -117,12 +118,13 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
 				.collect(Collectors.toList());
     }
 
-    @Override
+    @SuppressWarnings("UnnecessaryLocalVariable")
+	@Override
     public @NotNull Collection<ConstructorDef> getConstructors() {
-        final Collection<ClassItem> x = Collections2.filter(items,
-				__GetConstructorsHelper.selectForConstructors);
+        final Collection<ClassItem>      x = Collections2.filter(items,
+				__GetConstructorsHelper.selectForConstructors::test);
         final Collection<ConstructorDef> y = Collections2.transform(x,
-                __GetConstructorsHelper.castClassItemToConstructor);
+				__GetConstructorsHelper.castClassItemToConstructor::apply);
         return y;
     }
 
