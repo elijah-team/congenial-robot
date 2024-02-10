@@ -128,6 +128,7 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
         return y;
     }
 
+	@Cached
 	@Override
 	public @NotNull OS_Type getOS_Type() {
 		if (__cached_osType == null)
