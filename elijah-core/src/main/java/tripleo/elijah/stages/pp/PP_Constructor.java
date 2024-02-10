@@ -14,6 +14,8 @@ public class PP_Constructor implements IPP_Constructor {
 	}
 
 	public PP_Constructor(final DeducedEvaConstructor aDeduced, final Consumer<DeducedBaseEvaFunction> aDeducedBaseEvaFunctionConsumer) {
+		carrier = aDeduced;
+//		aDeducedBaseEvaFunctionConsumer.accept(carrier);
 		throw new UnintendedUseException();
 	}
 

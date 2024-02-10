@@ -186,10 +186,10 @@ public class CompilationEnclosure {
 //		aReactiveDimension.setReactiveSink(addReactive);
 	}
 
-	public void addReactive(@NotNull Reactivable r) {
+	public void addReactive(@NotNull Reactivable reactivable) {
 		int y = 2;
 		// reactivableObserver.onNext(r);
-		reactivableSubject.onNext(r);
+		reactivableSubject.onNext(reactivable);
 
 		// reactivableObserver.
 		dimensionSubject.subscribe(new Observer<ReactiveDimension>() {
@@ -201,7 +201,7 @@ public class CompilationEnclosure {
 			@Override
 			public void onNext(final ReactiveDimension aReactiveDimension) {
 				// r.join(aReactiveDimension);
-				r.respondTo(aReactiveDimension);
+				reactivable.respondTo(aReactiveDimension);
 			}
 
 			@Override

@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gen_fn;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.stages.deduce.ClassInvocation;

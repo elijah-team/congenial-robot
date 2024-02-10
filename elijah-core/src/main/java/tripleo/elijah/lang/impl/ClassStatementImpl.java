@@ -121,10 +121,8 @@ public class ClassStatementImpl extends _CommonNC implements ClassItem, tripleo.
     @SuppressWarnings("UnnecessaryLocalVariable")
 	@Override
     public @NotNull Collection<ConstructorDef> getConstructors() {
-        final Collection<ClassItem>      x = Collections2.filter(items,
-				__GetConstructorsHelper.selectForConstructors::test);
-        final Collection<ConstructorDef> y = Collections2.transform(x,
-				__GetConstructorsHelper.castClassItemToConstructor::apply);
+        final Collection<ClassItem>      x = Collections2.filter(items, __GetConstructorsHelper.selectForConstructors::test);
+        final Collection<ConstructorDef> y = Collections2.transform(x, __GetConstructorsHelper.castClassItemToConstructor::apply);
         return y;
     }
 

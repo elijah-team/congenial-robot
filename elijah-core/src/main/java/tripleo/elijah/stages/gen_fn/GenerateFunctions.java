@@ -11,17 +11,13 @@ package tripleo.elijah.stages.gen_fn;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.jdeferred2.DoneCallback;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
-
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.Finally;
-
 import tripleo.elijah.comp.notation.GN_PL_Run2;
-
 import tripleo.elijah.entrypoints.EntryPoint;
-
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.MatchConditionalImpl;
 import tripleo.elijah.lang.impl.MatchConditionalImpl.MatchArm_TypeMatch;
@@ -33,18 +29,14 @@ import tripleo.elijah.lang.types.OS_UnknownType;
 import tripleo.elijah.lang.types.OS_UserType;
 import tripleo.elijah.lang2.BuiltInTypes;
 import tripleo.elijah.lang2.SpecialFunctions;
-
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
-
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
-
 import tripleo.elijah.stages.gdm.GDM_DotExpression;
 import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.gdm.GDM_Item;
 import tripleo.elijah.stages.gdm.GDM_VariableTableEntry;
 import tripleo.elijah.stages.gen_fn_c.GenFnC;
-
 import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.stages.logging.ElLog;
@@ -54,11 +46,7 @@ import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 import tripleo.util.range.Range;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 import static tripleo.elijah.util.Helpers.List_of;
@@ -125,7 +113,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 						  @Nullable final IdentExpression name,
 						  @NotNull final BaseEvaFunction gf,
 						  @Nullable OS_Element el) {
-		final @org.jetbrains.annotations.Nullable String theName;
+		final @Nullable String theName;
 		final int                                        num;
 		final @NotNull TypeTableEntry                    tte;
 
@@ -341,7 +329,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 	}
 
-	void generate_item_dot_expression(@org.jetbrains.annotations.Nullable final InstructionArgument backlink,
+	void generate_item_dot_expression(@Nullable final InstructionArgument backlink,
 									  final IExpression left,
 									  @NotNull final IExpression right,
 									  final @NotNull BaseEvaFunction gf,
@@ -417,7 +405,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				final FormalArgListItem fali = fali_args.get(i);
 
 				final TypeTableEntry                              tte1     = fi_args.get(i);
-				final @org.jetbrains.annotations.Nullable OS_Type attached = tte1.getAttached();
+				final @Nullable OS_Type attached = tte1.getAttached();
 
 				// TODO for reference now...
 				final @NotNull GenType genType  = new GenTypeImpl();
@@ -426,7 +414,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 					genType.setTypeName(new OS_UserType(typeName));
 				genType.setResolved(attached);
 
-				final @org.jetbrains.annotations.Nullable OS_Type attached1;
+				final @Nullable OS_Type attached1;
 				if (attached == null && typeName != null)
 					attached1 = genType.getTypeName();
 				else
@@ -501,7 +489,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		//
 		for (final @NotNull FormalArgListItem arg : args) {
 			final @NotNull TypeTableEntry               tte;
-			@org.jetbrains.annotations.Nullable OS_Type ty;
+			@Nullable OS_Type ty;
 			if (arg.typeName() == null || arg.typeName().isNull())
 				ty = null;
 			else
@@ -523,7 +511,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 	void simplify_procedure_call(@NotNull final ProcedureCallExpression pce, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
 		final IExpression                                        left = pce.getLeft();
-		final @org.jetbrains.annotations.Nullable ExpressionList args = pce.getArgs();
+		final @Nullable ExpressionList args = pce.getArgs();
 		//
 		InstructionArgument expression_num = simplify_expression(left, gf, cctx);
 		if (expression_num == null) {
@@ -573,7 +561,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return pte.index;
 	}
 
-	@NotNull List<TypeTableEntry> get_args_types(@org.jetbrains.annotations.Nullable final ExpressionList args,
+	@NotNull List<TypeTableEntry> get_args_types(@Nullable final ExpressionList args,
 												 final @NotNull BaseEvaFunction gf,
 												 @NotNull final Context aContext) {
 		final @NotNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
@@ -583,7 +571,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final OS_Type type = arg.getType();
 //			LOG.err(String.format("108 %s %s", arg, type));
 			if (arg instanceof IdentExpression) {
-				final @org.jetbrains.annotations.Nullable InstructionArgument x = gf.vte_lookup(((IdentExpression) arg).getText());
+				final @Nullable InstructionArgument x = gf.vte_lookup(((IdentExpression) arg).getText());
 				final TypeTableEntry                                          tte;
 				if (x instanceof ConstTableIA) {
 					final @NotNull ConstantTableEntry cte = gf.getConstTableEntry(((ConstTableIA) x).getIndex());
@@ -658,7 +646,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			final FormalArgListItem fali = fali_args.get(i);
 
 			final TypeTableEntry                              tte1     = fi_args.get(i);
-			final @org.jetbrains.annotations.Nullable OS_Type attached = tte1.getAttached();
+			final @Nullable OS_Type attached = tte1.getAttached();
 
 			// TODO for reference now...
 			final @NotNull GenType genType  = new GenTypeImpl();
@@ -667,7 +655,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				genType.setTypeName(new OS_UserType(typeName));
 			genType.setResolved(attached);
 
-			final @org.jetbrains.annotations.Nullable OS_Type attached1;
+			final @Nullable OS_Type attached1;
 			if (attached == null && typeName != null)
 				attached1 = genType.getTypeName();
 			else
@@ -682,7 +670,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 	private static void __generateFunction__addResultVar(final @NotNull FunctionDef fd, final @NotNull EvaFunction gf) {
 		final @NotNull OS_Type                             returnType;
-		final @org.jetbrains.annotations.Nullable TypeName returnType1 = fd.returnType();
+		final @Nullable TypeName returnType1 = fd.returnType();
 
 		if (returnType1 == null) {
 			returnType = new OS_UnknownType(null);
@@ -708,7 +696,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	@NotNull
 	public EvaNamespace generateNamespace(@NotNull NamespaceStatement namespace1) {
 		@NotNull EvaNamespace                              gn = new EvaNamespace(namespace1, module);
-		@org.jetbrains.annotations.Nullable AccessNotation an = null;
+		@Nullable AccessNotation an = null;
 
 		for (ClassItem item : namespace1.getItems()) {
 			if (item instanceof AliasStatement) {
@@ -749,7 +737,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gn;
 	}
 
-	@NotNull List<InstructionArgument> simplify_args(@org.jetbrains.annotations.Nullable final ExpressionList args, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+	@NotNull List<InstructionArgument> simplify_args(@Nullable final ExpressionList args, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
 		final @NotNull List<InstructionArgument> R = new ArrayList<InstructionArgument>();
 		if (args == null) return R;
 		//
@@ -765,13 +753,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return R;
 	}
 
-	private @NotNull Collection<InstructionArgument> simplify_args2(@org.jetbrains.annotations.Nullable final ExpressionList args, @NotNull final EvaFunction gf, final @NotNull Context cctx) {
+	private @NotNull Collection<InstructionArgument> simplify_args2(@Nullable final ExpressionList args, @NotNull final EvaFunction gf, final @NotNull Context cctx) {
 		@NotNull Collection<InstructionArgument> R = new ArrayList<InstructionArgument>();
 		if (args == null) return R;
 		//
 		R = Collections2.transform(args.expressions(), new Function<IExpression, InstructionArgument>() {
 			@Override
-			public @Nullable @org.jetbrains.annotations.Nullable InstructionArgument apply(@Nullable final IExpression input) {
+			public @Nullable InstructionArgument apply(@Nullable final IExpression input) {
 				assert input != null;
 				@NotNull final IExpression expression = input;
 				final InstructionArgument  ia         = simplify_expression(expression, gf, cctx);
@@ -822,7 +810,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 		case IDENT:
 			String text = ((IdentExpression) expression).getText();
-			@org.jetbrains.annotations.Nullable InstructionArgument i = gf.vte_lookup(text);
+			@Nullable InstructionArgument i = gf.vte_lookup(text);
 			if (i == null) {
 				IdentTableEntry x = gf.getIdentTableEntryFor(expression);
 				if (x == null) {
@@ -1322,7 +1310,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		}
 
 		public void ident(@NotNull BaseEvaFunction gf, @NotNull IdentExpression left, @NotNull IdentExpression right, Context cctx) {
-			final @org.jetbrains.annotations.Nullable InstructionArgument vte_left = gf.vte_lookup(left.getText());
+			final @Nullable InstructionArgument vte_left = gf.vte_lookup(left.getText());
 			final int                                                     ident_left;
 			int                                                           ident_right;
 			InstructionArgument                                           some_left;
@@ -1331,7 +1319,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 				some_left  = new IdentIA(ident_left, gf);
 			} else
 				some_left = vte_left;
-			final @org.jetbrains.annotations.Nullable InstructionArgument vte_right = gf.vte_lookup(right.getText());
+			final @Nullable InstructionArgument vte_right = gf.vte_lookup(right.getText());
 			final int                                                     inst;
 			if (vte_right == null) {
 				ident_right = gf.addIdentTableEntry(right, cctx);

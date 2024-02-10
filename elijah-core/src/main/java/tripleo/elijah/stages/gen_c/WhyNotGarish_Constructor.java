@@ -44,12 +44,12 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 		//cfm.calculate();
 		final List<C2C_Result> rs   = cfm.getResults();
 		final GenerateResult   gr   = new Old_GenerateResult();
-		final GCFC             gcfc = new GCFC(rs, generateC.deduced(gf), gr); // TODO 08/12 preload this??
+		final GCFC             reactivable_gcfc = new GCFC(rs, generateC.deduced(gf), gr); // TODO 08/12 preload this??
 
-		gf.reactive().add(gcfc);
+		gf.reactive().add(reactivable_gcfc);
 
 		if (!DebugFlags.GenerateC_MANUAL_DISABLED) {
-			gcfc.respondTo(generateC);
+			reactivable_gcfc.respondTo(generateC);
 		}
 
 		// FIXME 06/17

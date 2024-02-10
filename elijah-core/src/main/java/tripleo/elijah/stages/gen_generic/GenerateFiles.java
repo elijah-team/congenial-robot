@@ -1,9 +1,7 @@
 package tripleo.elijah.stages.gen_generic;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaConstructor;
 import tripleo.elijah.stages.gen_fn.EvaFunction;
@@ -12,8 +10,6 @@ import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.pp.IPP_Constructor;
 import tripleo.elijah.stages.pp.IPP_Function;
-import tripleo.elijah.stages.pp.PP_Constructor;
-import tripleo.elijah.stages.pp.PP_Function;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 
@@ -37,34 +33,16 @@ public interface GenerateFiles extends CodeGenerator {
 
 	@NotNull
 	static Collection<EvaNode> classes_to_list_of_generated_nodes(@NotNull Collection<EvaClass> aEvaClasses) {
-		return Collections2.transform(aEvaClasses, new Function<EvaClass, EvaNode>() {
-			@org.checkerframework.checker.nullness.qual.Nullable
-			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaClass input) {
-				return input;
-			}
-		});
+		return Collections2.transform(aEvaClasses, input -> input);
 	}
 
 	@NotNull
 	static Collection<EvaNode> constructors_to_list_of_generated_nodes(@NotNull Collection<EvaConstructor> aEvaConstructors) {
-		return Collections2.transform(aEvaConstructors, new Function<EvaConstructor, EvaNode>() {
-			@org.checkerframework.checker.nullness.qual.Nullable
-			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaConstructor input) {
-				return input;
-			}
-		});
+		return Collections2.transform(aEvaConstructors, input -> input);
 	}
 
 	@NotNull
 	static Collection<EvaNode> functions_to_list_of_generated_nodes(@NotNull Collection<EvaFunction> generatedFunctions) {
-		return Collections2.transform(generatedFunctions, new Function<EvaFunction, EvaNode>() {
-			@org.checkerframework.checker.nullness.qual.Nullable
-			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaFunction input) {
-				return input;
-			}
-		});
+		return Collections2.transform(generatedFunctions, input -> input);
 	}
 }

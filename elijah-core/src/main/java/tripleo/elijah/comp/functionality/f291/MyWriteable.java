@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.functionality.f291;
 
-//import lombok.Getter;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.inputtree.EIT_Input;
@@ -21,7 +21,6 @@ public class MyWriteable implements Writeable {
 	private final          EOT_FileNameProvider     filename;
 	private final @NotNull List<EG_Statement>       list;
 	private final @NotNull EG_SequenceStatement            statement;
-	//@Getter
 	private final          NG_OutputRequest                outputRequest;
 
 	public MyWriteable(final @NotNull Pair<NG_OutputRequest, Collection<EG_Statement>> aEntry) {
@@ -46,9 +45,7 @@ public class MyWriteable implements Writeable {
 
 	@Override
 	public @NotNull List<EIT_Input> inputs() {
-		if (outputRequest == null) {
-			throw new IllegalStateException("shouldn't be here");
-		}
+		Preconditions.checkNotNull(outputRequest);
 
 		final EIT_ModuleInput moduleInput = outputRequest.outputStatment().getModuleInput();
 

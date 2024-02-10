@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gen_fn;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.stages.deduce.ClassInvocation;
@@ -18,7 +18,7 @@ public interface IClassGenerator {
 											 ProcTableEntry pte,
 											 ClassInvocation ci);
 
-	@Nullable @org.jetbrains.annotations.Nullable ClassInvocation registerClassInvocation(ClassStatement cs, String className);
+	@Nullable ClassInvocation registerClassInvocation(ClassStatement cs, String className);
 
 	void submitGenerateClass(ClassInvocation ci, GenerateFunctions gf);
 

@@ -9,12 +9,9 @@
 package tripleo.elijah.lang.impl;
 
 import antlr.Token;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.contexts.ModuleContext;
@@ -148,13 +145,10 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, tripleo.elijah.l
 				ClassStatement classStatement = (ClassStatement) item;
 				if (MainClassEntryPoint.isMainClass(classStatement)) {
 					Collection<ClassItem> x = classStatement.findFunction("main");
-					Collection<ClassItem> found = Collections2.filter(x, new Predicate<ClassItem>() {
-						@Override
-						public boolean apply(@org.checkerframework.checker.nullness.qual.Nullable ClassItem input) {
-							assert input != null;
-							FunctionDef fd = (FunctionDef) input;
-							return MainClassEntryPoint.is_main_function_with_no_args(fd);
-						}
+					Collection<ClassItem> found = Collections2.filter(x, input -> {
+						assert input != null;
+						FunctionDef fd = (FunctionDef) input;
+						return MainClassEntryPoint.is_main_function_with_no_args(fd);
 					});
 //					Iterator<ClassStatement> zz = x.stream()
 //							.filter(ci -> ci instanceof FunctionDef)

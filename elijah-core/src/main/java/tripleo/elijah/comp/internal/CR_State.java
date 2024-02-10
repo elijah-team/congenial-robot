@@ -9,34 +9,16 @@
  */
 package tripleo.elijah.comp.internal;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-
 import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
-import tripleo.elijah.comp.AccessBus;
-import tripleo.elijah.comp.CompilerInput;
-import tripleo.elijah.comp.EvaPipeline;
-import tripleo.elijah.comp.PipelineLogic;
-import tripleo.elijah.comp.PipelineMember;
-import tripleo.elijah.comp.WritePipeline;
+import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.functionality.f291.B;
-import tripleo.elijah.comp.i.CB_Action;
-import tripleo.elijah.comp.i.Compilation;
-import tripleo.elijah.comp.i.CompilationEnclosure;
-import tripleo.elijah.comp.i.ICompilationAccess;
-import tripleo.elijah.comp.i.IPipelineAccess;
-import tripleo.elijah.comp.i.ProcessRecord;
+import tripleo.elijah.comp.i.*;
 import tripleo.elijah.comp.notation.GN_Env;
 import tripleo.elijah.comp.notation.GN_Notable;
 import tripleo.elijah.lang.i.OS_Module;
@@ -50,6 +32,13 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class CR_State {
 	public CB_Action     cur;
@@ -233,10 +222,10 @@ public class CR_State {
 			notableAction._actual_run();
 		}
 
-		@Override
-		public PipelineLogic pipelineLogic() {
-			return getProcessRecord().pipelineLogic();
-		}
+//		@Override
+//		public PipelineLogic pipelineLogic() {
+//			return getProcessRecord().pipelineLogic();
+//		}
 
 		@Override
 		public void registerNodeList(final DoneCallback<List<EvaNode>> done) {

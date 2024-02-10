@@ -9,9 +9,7 @@
  */
 package tripleo.elijah.lang.impl;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.TypeName;
 import tripleo.elijah.util.Helpers;
@@ -45,14 +43,7 @@ public class TypeNameListImpl implements tripleo.elijah.lang.i.TypeNameList {
 
 	@Override
 	public @NotNull String toString() {
-		return Helpers.String_join(", ", Collections2.transform(p, new Function<TypeName, String>() {
-			@Nullable
-			@Override
-			public String apply(@Nullable TypeName input) {
-				assert input != null;
-				return input.toString();
-			}
-		}));
+		return Helpers.String_join(", ", Collections2.transform(p, Object::toString));
 	}
 }
 

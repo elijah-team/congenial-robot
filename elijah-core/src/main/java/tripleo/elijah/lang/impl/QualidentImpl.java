@@ -9,9 +9,7 @@
 package tripleo.elijah.lang.impl;
 
 import antlr.Token;
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.util.Helpers;
@@ -49,22 +47,7 @@ public class QualidentImpl implements tripleo.elijah.lang.i.Qualident {
 	@Override
 	@NotNull
 	public String asSimpleString() {
-		return Helpers.String_join(".", Collections2.transform(parts, new Function<IdentExpression, String>() {
-			@Nullable
-			@Override
-			public @NotNull String apply(@Nullable IdentExpression input) {
-				assert input != null;
-				return input.getText();
-			}
-		}));
-//		final StringBuilder sb=new StringBuilder();
-//		for (final Token part : parts) {
-//			sb.append(part.getText());
-//			sb.append('.');
-//		}
-//		final String s = sb.toString();
-//		final String substring = s.substring(0, s.length() - 1);
-//		return substring;
+		return Helpers.String_join(".", Collections2.transform(parts, IdentExpression::getText));
 	}
 
 	@Override

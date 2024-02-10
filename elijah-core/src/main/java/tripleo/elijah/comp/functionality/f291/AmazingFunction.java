@@ -145,7 +145,7 @@ class AmazingFunction implements Amazing {
 
 		@Override
 		public void addFunction(final PP_Constructor aPPConstructor, final List<C2C_Result> aRs, final GenerateC aGenerateC) {
-			throw new UnintendedUseException();
+throw new UnintendedUseException();
 		}
 	}
 }

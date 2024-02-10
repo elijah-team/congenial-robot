@@ -211,7 +211,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		compilationEnclosure.getPipelineAccessPromise().then((pa) -> {
 			final var env = new GN_GenerateNodesIntoSinkEnv(nodes,
 															grs,
-															pa.pipelineLogic().mods(),
+															null, //pa.pipelineLogic().mods(),
 															compilationEnclosure.getCompilationAccess().testSilence(),
 															pa.getAccessBus().gr,
 															pa,
