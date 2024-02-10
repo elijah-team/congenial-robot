@@ -12,13 +12,38 @@
 	<name>tripleo.elijah.core</name>
 	<description>elijah-core</description>
 	<properties>
-		<org.eclipse.xtend.lib.version>2.31.0.M3</org.eclipse.xtend.lib.version>
-		<xtend-maven-plugin.version>2.31.0.M3</xtend-maven-plugin.version>
+		<org.eclipse.xtend.lib.version>2.34.0.M1</org.eclipse.xtend.lib.version>
+		<xtend-maven-plugin.version>2.34.0.M1</xtend-maven-plugin.version>
+
 		<kotlin.version>1.9.22</kotlin.version>
+
+		<auto-service.version>1.0-rc2</auto-service.version>
+
+		<version.roaster>2.29.0.Final</version.roaster>
 	</properties>
 	<packaging>jar</packaging>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.jboss.forge.roaster</groupId>
+			<artifactId>roaster-api</artifactId>
+			<version>${version.roaster}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.forge.roaster</groupId>
+			<artifactId>roaster-jdt</artifactId>
+			<version>${version.roaster}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<version>${auto-service.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib</artifactId>
@@ -359,7 +384,6 @@
 					<target>17</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>
