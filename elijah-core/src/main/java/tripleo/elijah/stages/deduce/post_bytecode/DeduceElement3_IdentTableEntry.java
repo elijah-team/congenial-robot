@@ -1,6 +1,5 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
-import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,9 +31,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class DeduceElement3_IdentTableEntry extends DefaultStateful implements IDeduceElement3 {
-
 	public static final int                 __makeGenerated_fi__Eventual_ENTER            = 330;
 	public static final int                 __makeGenerated_fi__Eventual__TYPERESOLVE_VAR = 336;
+
 	public final        IdentTableEntry     principal;
 	public              DeduceTypes2        deduceTypes2;
 	public              BaseEvaFunction     generatedFunction;
