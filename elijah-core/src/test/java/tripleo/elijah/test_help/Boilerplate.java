@@ -1,6 +1,8 @@
 package tripleo.elijah.test_help;
 
+import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.StdErrSink;
@@ -32,6 +34,7 @@ public class Boilerplate {
 	public  GenerateFiles      generateFiles;
 	private CompilationRunner  cr;
 	OS_Module module;
+	private Eventual<DeducePhase> edp = new Eventual<>();
 
 	public void get() {
 //		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
@@ -142,5 +145,9 @@ public class Boilerplate {
 			final BaseEvaFunction evaFunction = ite._generatedFunction();
 			ite._fix_table(d2, evaFunction);
 		});
+	}
+
+	public void onDeducePhase(final DoneCallback<DeducePhase> cb) {
+		edp.then(cb);
 	}
 }
