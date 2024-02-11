@@ -22,6 +22,7 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah_congenial.pipelines.eva.FunctionStatement;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -29,7 +30,7 @@ import java.util.function.Consumer;
 public interface IPipelineAccess {
 	void _setAccessBus(AccessBus ab);
 
-	void addFunctionStatement(EvaPipeline.FunctionStatement aFunctionStatement);
+	void addFunctionStatement(FunctionStatement aFunctionStatement);
 
 	void addLog(ElLog aLOG);
 
