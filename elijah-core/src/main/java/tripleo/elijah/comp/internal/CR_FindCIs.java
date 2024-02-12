@@ -104,7 +104,7 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 								   final @NotNull List<CompilerInput> x,
 								   final @NotNull CompilerInput input,
 								   final @NotNull File f) {
-		new CW_inputIsDirectory().apply(input, c, f, (final @NotNull CompilerInput inp) -> x.add(inp));
+		CW_inputIsDirectory.apply(input, c, f, (final @NotNull CompilerInput inp) -> x.add(inp));
 	}
 
 	@Override
