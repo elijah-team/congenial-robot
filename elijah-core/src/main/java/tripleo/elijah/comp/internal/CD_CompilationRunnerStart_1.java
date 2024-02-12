@@ -23,7 +23,7 @@ public class CD_CompilationRunnerStart_1 implements CD_CompilationRunnerStart {
 					  final @NotNull CR_State crState,
 					  final @NotNull CB_Output out) {
 		final @NotNull CompilationRunner             cr             = crState.runner();
-		final Compilation                            compilation    = crState.ca().getCompilation();
+		final Compilation                            compilation    = crState.ce().getCompilation();
 		final @NotNull Compilation.CompilationConfig cfg            = compilation.cfg();
 		final CompilationEnclosure                   ce             = compilation.getCompilationEnclosure();
 		final List<CompilerInput>                    compilerInputs = ce.getCompilerInput();
@@ -39,11 +39,11 @@ public class CD_CompilationRunnerStart_1 implements CD_CompilationRunnerStart {
 	protected void ___start(final @NotNull CR_State crState,
 							final @NotNull CompilerBeginning beginning,
 							final @NotNull CB_Output out) {
-		if (crState.started) {
+		if (crState.started()) {
 			boolean should_never_happen = true;
 			assert should_never_happen;
 		} else {
-			crState.started = true;
+			crState.set_started();
 		}
 
 		final CR_FindCIs              f1 = crState.runner().cr_find_cis;

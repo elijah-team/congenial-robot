@@ -22,6 +22,7 @@ import tripleo.elijah.stages.gen_generic.DoubleLatch;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNodeImpl;
+import tripleo.elijah_congenial.pipelines.DGRS_Client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,8 @@ public class EvaPipelineImpl {
 
 		//
 
-		grs = new DefaultGenerateResultSink(pa);
+
+		grs = new DefaultGenerateResultSink(DGRS_Client.of(pa));
 		pa.registerNodeList(latch2::notifyData);
 		pa.setGenerateResultSink(grs);
 
@@ -115,7 +117,7 @@ public class EvaPipelineImpl {
 
 		if (!DebugFlags.skip_DUMPS) {
 			for (FunctionStatement functionStatement : functionStatements) {
-				final String                filename = functionStatement.getFilename(pa);
+				final String                filename = pa.getFilename_forfunctionStatement(functionStatement);
 				final EG_Statement          seq      = EG_Statement.of(functionStatement.getText(), EX_Explanation.withMessage("dump2"));
 				final EOT_OutputFileCreator off      = ce.ca2().createOutputFile2(EOT_OutputType.DUMP);
 				off.provideInputs(List_of());
@@ -255,8 +257,10 @@ public class EvaPipelineImpl {
 		functionStatements.add(aFunctionStatement);
 	}
 
+	/*
+	 * Used by DE3_ActivePTE
+	 */
 	public DefaultGenerateResultSink grs() {
-		return grs;
+		return grs;// [T097-053]  DE3_ActivePTE
 	}
-
 }

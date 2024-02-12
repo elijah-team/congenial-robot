@@ -26,7 +26,7 @@ public class WriteOutputTreePipelineImpl {
 	}
 
 	public void run(final CR_State st, final CB_Output aOutput) {
-		final Compilation  compilation = st.ca().getCompilation();
+		final Compilation  compilation = st.ce().getCompilation();
 		final EOT_OutputTree       ot = compilation.getOutputTree();
 		final List<EOT_OutputFile> l  = ot.getList();
 

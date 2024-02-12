@@ -1,36 +1,25 @@
 package tripleo.elijah.stages.deduce;
 
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
 import tripleo.elijah.comp.notation.GM_GenerateModuleRequest;
 import tripleo.elijah.comp.notation.GN_GenerateNodesIntoSink;
 import tripleo.elijah.comp.notation.GN_GenerateNodesIntoSinkEnv;
-
 import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
-
 import tripleo.elijah.nextgen.reactive.Reactivable;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
-
+import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
-
-import tripleo.elijah.stages.gen_c.GenerateC;
-
-import tripleo.elijah.stages.gen_generic.GenerateFiles;
-import tripleo.elijah.stages.gen_generic.GenerateResult;
-import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
-import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
-import tripleo.elijah.stages.gen_generic.Old_GenerateResultItem;
-
+import tripleo.elijah.stages.gen_generic.*;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
-
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
-
-import org.jetbrains.annotations.NotNull;
+import tripleo.elijah_congenial.pipelines.DGRS_Client;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -94,7 +83,7 @@ class DE3_ActivePTE implements DE3_Active {
 
 								ce.getPipelineAccessPromise().then(pa -> {
 									pa.getEvaPipelinePromise().then(ep -> {
-										final DefaultGenerateResultSink grs = ep.grs();
+										final DefaultGenerateResultSink grs = ep.grs(); // [T097-053]  DE3_ActivePTE
 										generateC.setResultSink(grs);
 									});
 								});
@@ -119,7 +108,7 @@ class DE3_ActivePTE implements DE3_Active {
 		if (fg0[0] == null) {
 			generateC._ce().getPipelineAccessPromise().then(pa -> {
 				var env = new GN_GenerateNodesIntoSinkEnv(List_of(),
-														  new DefaultGenerateResultSink(pa),
+														  new DefaultGenerateResultSink(DGRS_Client.of(pa)),
 														  new EIT_ModuleList(List_of()),
 														  ElLog.Verbosity.VERBOSE,
 														  new Old_GenerateResult(),

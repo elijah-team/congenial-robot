@@ -75,7 +75,7 @@ public class Boilerplate {
 		crState.ca();
 		assert comp.getCompilationEnclosure().getCompilationRunner().crState != null; // always true
 
-		pr            = cr.crState.pr;
+		pr            = cr.crState._access_pr();
 
 		if (module != null) {
 			module.setParent(comp);

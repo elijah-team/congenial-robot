@@ -39,7 +39,7 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 
 	@Override
 	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final @NotNull CB_Output aO) {
-		final Compilation c = st.ca().getCompilation();
+		final Compilation c = st.ce().getCompilation();
 
 		final List<CompilerInput> x = find_cis(inputs, c, c.getErrSink());
 		for (final CompilerInput compilerInput : x) {

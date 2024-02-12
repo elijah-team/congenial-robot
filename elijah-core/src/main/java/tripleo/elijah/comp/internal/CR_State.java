@@ -6,6 +6,7 @@ import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.PipelineMember;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ICompilationAccess;
+import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah_congenial.pipelines.comp_runner.CongenialRunnerState;
 import tripleo.elijah_congenial.pipelines.comp_runner.CongenialRunnerStateImpl;
 
@@ -22,7 +23,7 @@ public class CR_State {
 	}
 
 	public CompilationEnclosure ce() {
-		return carrier.ca().getCompilation().getCompilationEnclosure();
+		return carrier.ce();
 	}
 
 	public CompilationRunner runner() {
@@ -31,6 +32,18 @@ public class CR_State {
 
 	public void setRunner(CompilationRunner aCompilationRunner) {
 		carrier.setRunner(aCompilationRunner);
+	}
+
+	public ProcessRecord _access_pr() {
+		return carrier._access_pr();
+	}
+
+	public boolean started() {
+		return carrier.started();
+	}
+
+	public void set_started() {
+		carrier.set_started();
 	}
 
 	public interface PipelinePlugin {

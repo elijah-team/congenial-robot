@@ -25,7 +25,6 @@ import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
@@ -56,8 +55,6 @@ import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.gdm.GDM_VariableTableEntry;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
-import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
-import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.stages.logging.ElLog;
@@ -2511,9 +2508,9 @@ public class DeduceTypes2 {
 			return new ArrayList<>();
 		}
 
-		public GenerateResultSink new_DefaultGenerateResultSink(final IPipelineAccess aPa) {
-			return new DefaultGenerateResultSink(aPa);
-		}
+		//public GenerateResultSink new_DefaultGenerateResultSink(final IPipelineAccess aPa) {
+		//	return new DefaultGenerateResultSink(aPa);
+		//}
 
 		public List<EvaClass> new_LinkedList__EvaClass() {
 			return new ArrayList<>();
