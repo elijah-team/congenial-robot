@@ -441,6 +441,7 @@ public class CompilationEnclosure {
 
 	public void provide(final IPipelineAccess aPipelineAccess) {
 		this.pa = aPipelineAccess;
+		getCompilation().set_pa(aPipelineAccess);
 	}
 
 	public interface ModuleListener {
