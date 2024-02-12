@@ -6,30 +6,28 @@ import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.i.ProcessRecord;
+import tripleo.elijah_congenial.anno.ElLateInit;
 
 public class ProcessRecordImpl implements ProcessRecord {
 	private final @NotNull ICompilationAccess ca;
-	private final          IPipelineAccess    pa;
-	private final @NotNull PipelineLogic      pipelineLogic;
+	@ElLateInit
+	private                IPipelineAccess    pa;
+	@ElLateInit
+	private                PipelineLogic      pipelineLogic;
 
 	public ProcessRecordImpl(final @NotNull ICompilationAccess ca0) {
 		ca = ca0;
 
-		pa = ca.getCompilation().get_pa();
-
-		pipelineLogic = new PipelineLogic(pa, ca);
+		ca.getCompilation().getCompilationEnclosure().pipelineAccessPromise.then(apa -> {
+			pa = apa;
+			pipelineLogic = new PipelineLogic(pa, ca);
+		});
 	}
 
 	@Contract(pure = true)
 	@Override
 	public ICompilationAccess ca() {
 		return ca;
-	}
-
-	@Contract(pure = true)
-	@Override
-	public IPipelineAccess pa() {
-		return pa;
 	}
 
 	@Contract(pure = true)
