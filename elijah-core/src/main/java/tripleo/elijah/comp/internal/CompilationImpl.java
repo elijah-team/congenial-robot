@@ -225,8 +225,6 @@ public class CompilationImpl implements Compilation {
 
 		controller.processOptions();
 		controller.runner();
-
-		getFluffy().checkFinishEventuals();
 	}
 
 	@Override
