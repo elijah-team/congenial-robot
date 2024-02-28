@@ -669,7 +669,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 
 			ci.resolvePromise().then(principal::resolveTypeToClass);
 		} else {
-			// TODO 11/06
+			// TODO 23/11/06
 			@Nullable ClassInvocation ci = new ClassInvocation(classStatement, null, ()->deduceTypes2);
 			ci = phase.registerClassInvocation(ci);
 

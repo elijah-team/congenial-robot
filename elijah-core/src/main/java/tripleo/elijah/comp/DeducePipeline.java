@@ -16,7 +16,7 @@ public class DeducePipeline implements PipelineMember {
 		impl = new DeducePipelineImpl(aPipelineAccess);
 	}
 
-	// NOTES 11/10
+	// NOTES 23/11/10
 	//  1. #createWorldModule is only created here
 	//    - this is contrary to other branches where there are more than one location
 	//  2. mcp is a bit involved
