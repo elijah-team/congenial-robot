@@ -583,7 +583,7 @@ public class DeduceTypes2 {
 				var                   x   = identTableEntry.getIdent().getName();
 
 				List<EN_Understanding> understandings = x.getUnderstandings();
-				// README 11/10 optimized, better than streams
+				// README 23/11/10 optimized, better than streams
 				for (int i = 0, understandingsSize = understandings.size(); i < understandingsSize; i++) {
 					final EN_Understanding understanding = understandings.get(i);
 					if (understanding instanceof ENU_ResolveToFunction rtf1) {
@@ -1523,7 +1523,7 @@ public class DeduceTypes2 {
 			return deduceTypes2.newFunctionInvocation(constructorDef, pte, ci, deduceTypes2.phase);
 		}
 
-		// TODO 11/10 begging for promiseification
+		// TODO 23/11/10 begging for promiseification
 		//public @Nullable ClassInvocation registerClassInvocation(@NotNull ClassInvocation ci) {
 		//	return deduceTypes2.phase.registerClassInvocation(new RegisterClassInvocation_env(ci, deduceTypes2, deduceTypes2.phase));
 		//}
@@ -1658,7 +1658,7 @@ public class DeduceTypes2 {
 									 final @Nullable List<InstructionArgument> ss,
 									 final @NotNull BaseEvaFunction aGeneratedFunction,
 									 final @NotNull FoundElement aFoundElement) {
-			// README 11/10 overcomplication, but nicer
+			// README 23/11/10 overcomplication, but nicer
 			MonitorRequest_IdentTableEntry mr = new MonitorRequest_IdentTableEntry(aIdentIA);
 			mr.trigger(aEctx, ss, aFoundElement, deduceTypes2);
 			aGeneratedFunction.monitorRequest_IdentTableEntry(mr);

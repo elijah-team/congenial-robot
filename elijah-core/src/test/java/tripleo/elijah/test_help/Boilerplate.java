@@ -83,7 +83,7 @@ public class Boilerplate {
 	}
 
 	public void getGenerateFiles(final @NotNull OS_Module mod) {
-		// NOTE 11/08:
+		// NOTE 23/11/08:
 		//  fileGen can be null for [GetRealTargetNameTest], but (may) fail under other circumstances
 		final GenerateResultEnv fileGen = new GenerateResultEnv(null, null, null, null, null);
 		generateFiles = OutputFileFactory.create(Compilation.CompilationAlways.defaultPrelude(),

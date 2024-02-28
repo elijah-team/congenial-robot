@@ -91,7 +91,7 @@ public class EvaPipelineImpl {
 
 		EOT_FileNameProvider filename1;
 
-		// README 11/04 Really want a "Flow" i/o cot.add...
+		// README 23/11/04 Really want a "Flow" i/o cot.add...
 		for (EvaNode evaNode : aLgc) {
 			final var z = new ReasonedStringListStatement();
 
