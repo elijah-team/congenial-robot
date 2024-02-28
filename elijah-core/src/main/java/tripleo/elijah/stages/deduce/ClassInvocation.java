@@ -1,5 +1,6 @@
 package tripleo.elijah.stages.deduce;
 
+import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
@@ -93,6 +94,10 @@ public class ClassInvocation implements IInvocation {
 
     private DeduceTypes2.DeduceTypes2Injector _inj() {
         return _dt2s.get()._inj();
+    }
+
+    public void onResolve(final DoneCallback<? super EvaClass> aO) {
+        resolvePromise.then(aO);
     }
 
     public class CI_GenericPart {
