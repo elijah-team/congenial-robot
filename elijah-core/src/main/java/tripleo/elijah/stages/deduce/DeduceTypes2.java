@@ -3048,6 +3048,13 @@ public class DeduceTypes2 {
 		public WlGenerateFunction new_WlGenerateFunction(final OS_Module aModule, final FunctionInvocation aDependentFunction, final Deduce_CreationClosure aCl) {
 			return new WlGenerateFunction(aModule, aDependentFunction, aCl);
 		}
+
+		public GenType new_GenType_ofFunctionInvocation(final FunctionInvocation aFunctionInvocation, final BaseEvaFunction aEvaFunction) {
+            final GenType result = new_GenTypeImpl();
+			result.setFunctionInvocation(aFunctionInvocation);
+			result.setNode(aEvaFunction);
+			return result;
+		}
 	}
 
 	private class do_assign_normal_ident_deferred__DT_ResolveObserver implements DT_ResolveObserver {
