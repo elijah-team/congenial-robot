@@ -236,11 +236,11 @@ public class DeduceTypeResolve {
 			if (newStatus != BaseTableEntry.Status.KNOWN) return;
 
 			if (backlink instanceof final @NotNull IdentTableEntry identTableEntry) {
-				identTableEntry.typeResolvePromise().then(result -> _203_backlink_isIDTE(result, identTableEntry));
+				identTableEntry.onTypeResolve(result -> _203_backlink_isIDTE(result, identTableEntry));
 			} else if (backlink instanceof final @NotNull VariableTableEntry variableTableEntry) {
-				variableTableEntry.typeResolvePromise().then(result -> _203_backlink_is_VTE(result, eh, variableTableEntry));
+				variableTableEntry.onTypeResolve(result -> _203_backlink_is_VTE(result, eh, variableTableEntry));
 			} else if (backlink instanceof final ProcTableEntry procTableEntry) {
-				procTableEntry.typeResolvePromise().then(result -> _203_backlink_is_PTE(result, procTableEntry, eh));
+				procTableEntry.onTypeResolve(result -> _203_backlink_is_PTE(result, procTableEntry, eh));
 			}
 		}
 
@@ -260,7 +260,7 @@ public class DeduceTypeResolve {
 			// maybe set something in ci to INHERITED, but that's what DeduceProcCall is for
 			if (eh.getElement() instanceof FunctionDef) {
 				if (aGenType.getNode() instanceof final @NotNull EvaClass evaClass) {
-					evaClass.functionMapDeferred((FunctionDef) eh.getElement(), aGenType::setNode);
+					evaClass.functionMapDeferred((FunctionDef) eh.getElement()::setNode);
 				}
 			}
 			variableTableEntry.getType().setAttached(aGenType);

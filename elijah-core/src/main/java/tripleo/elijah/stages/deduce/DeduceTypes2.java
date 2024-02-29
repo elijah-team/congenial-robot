@@ -542,7 +542,7 @@ public class DeduceTypes2 {
 
 	private static void __post_vte_list_001(final @NotNull BaseEvaFunction generatedFunction) {
 		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
-			vte.typeResolvePromise().then(gt -> {
+			vte.onTypeResolve(gt -> {
 				var xx = vte.resolvedType();
 
 				if (xx instanceof EvaClass evaClass) {
@@ -664,7 +664,7 @@ public class DeduceTypes2 {
 		aVte.getGenType().setResolved(aA); // README assuming OS_Type cannot represent namespaces
 		aVte.getGenType().setCi(ci);
 
-		ci.resolvePromise().done(new DoneCallback<EvaClass>() {
+		ci. onResolve(new DoneCallback<EvaClass>() {
 			@Override
 			public void onDone(@NotNull EvaClass result) {
 				aVte.resolveTypeToClass(result);
@@ -1387,7 +1387,7 @@ public class DeduceTypes2 {
 	public void register_and_resolve(@NotNull VariableTableEntry aVte, @NotNull ClassStatement aKlass) {
 		@Nullable ClassInvocation ci = _inj().new_ClassInvocation(aKlass, null, new ReadySupplier_1<>(this));
 		ci = phase.registerClassInvocation(ci);
-		ci.resolvePromise().done(aVte::resolveTypeToClass);
+		ci. onResolve(aVte::resolveTypeToClass);
 	}
 
 	public void removeResolvePending(final IdentTableEntry aResolvable) {
@@ -2333,10 +2333,10 @@ public class DeduceTypes2 {
 					assert ni != null;
 					mod = ni.getNamespace().getContext().module();
 
-					ni.resolvePromise().then(result -> result.dependentFunctions().add(aDependentFunction));
+					ni. onResolve(result -> result.dependentFunctions().add(aDependentFunction));
 				} else {
 					mod = ci.getKlass().getContext().module();
-					ci.resolvePromise().then(result -> result.dependentFunctions().add(aDependentFunction));
+					ci. onResolve(result -> result.dependentFunctions().add(aDependentFunction) );
 				}
 				final @NotNull GenerateFunctions gf = getGenerateFunctions(mod);
 				gen = _inj().new_WlGenerateDefaultCtor(gf, aDependentFunction, creationContext(), phase.codeRegistrar);
@@ -3101,7 +3101,7 @@ public class DeduceTypes2 {
 
 			final @Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(fali_name);
 			assert vte_ia != null;
-			((IntegerIA) vte_ia).getEntry().typeResolvePromise().then(new DoneCallback<GenType>() {
+			((IntegerIA) vte_ia).getEntry().onTypeResolve(new DoneCallback<GenType>() {
 				@Override
 				public void onDone(final @NotNull GenType result) {
 					assert result.getResolved() != null;

@@ -42,8 +42,8 @@ public class ClassInvocation implements IInvocation {
     }
 
     public ClassInvocation(@NotNull ClassStatement aClassStatement, String aConstructorName, final @NotNull Supplier<DeduceTypes2> aDeduceTypes2) {
-        _dt2s = aDeduceTypes2;
-        cls = aClassStatement;
+        _dt2s           = aDeduceTypes2;
+        cls             = aClassStatement;
         constructorName = aConstructorName;
     }
 
@@ -98,6 +98,14 @@ public class ClassInvocation implements IInvocation {
 
     public void onResolve(final DoneCallback<? super EvaClass> aO) {
         resolvePromise.then(aO);
+    }
+
+    public interface XXX {
+        public void then(final DoneCallback<? super EvaClass> aO);
+    }
+
+    public XXX resolvePromise() {
+        return aO -> resolvePromise.then(aO);
     }
 
     public class CI_GenericPart {

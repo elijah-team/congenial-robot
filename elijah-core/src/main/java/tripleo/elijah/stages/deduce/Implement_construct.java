@@ -35,7 +35,7 @@ public class Implement_construct {
 		final String          s      = aTyn1.getName();
 		final ICH             ich    = _inj().new_ICH(aGenType, this);
 		final ClassStatement  best   = ich.lookupTypeName(aTyn1, s);
-		final ClassInvocation clsinv = ich.getClassInvocation(constructorName, aTyn1, aGenType, best);
+		final ClassInvocation clsinv = ich.getClassInvocation(constructorName, aTyn1, best);
 		if (co != null) {
 			genTypeCI_and_ResolveTypeToClass(co, clsinv);
 		}
@@ -101,13 +101,13 @@ public class Implement_construct {
 	private void genTypeCI_and_ResolveTypeToClass(@NotNull final Constructable co, final @NotNull ClassInvocation aClsinv) {
 		if (co instanceof final @Nullable IdentTableEntry idte3) {
 			idte3.type.genTypeCI(aClsinv);
-			aClsinv.resolvePromise().then(
-					idte3::resolveTypeToClass);
+			aClsinv. onResolve(
+					idte3::resolveTypeToClass );
 		} else if (co instanceof final @NotNull VariableTableEntry vte) {
 			vte.getType().genTypeCI(aClsinv);
-			aClsinv.resolvePromise().then(
-					vte::resolveTypeToClass
-										 );
+			aClsinv. onResolve(
+					vte::resolveTypeToClass 
+			);
 		}
 	}
 
@@ -360,14 +360,14 @@ public class Implement_construct {
 
 		TypeName tyn = aTy.getTypeName();
 		if (tyn instanceof final @NotNull NormalTypeName tyn1) {
-			_implement_construct_type(co, constructorName, tyn1, aGenType);
+			_implement_construct_type(co, constructorName, tyn1);
 		}
 
 		final ClassInvocation classInvocation = pte.getClassInvocation();
 		if (co != null) {
 			co.setConstructable(pte);
 			assert classInvocation != null;
-			classInvocation.resolvePromise().done(co::resolveTypeToClass);
+			classInvocation. onResolve(co::resolveTypeToClass);
 		}
 
 		if (classInvocation != null) {
@@ -387,7 +387,7 @@ public class Implement_construct {
 				WlGenerateCtor gen = _inj().new_WlGenerateCtor(generateFunctions, pte.getFunctionInvocation(), cc.getNameNode(), deduceTypes2._phase().codeRegistrar);
 				gen.run(null);
 				final EvaConstructor gc = gen.getResult();
-				classInvocation.resolveDeferred().then(result -> {
+				classInvocation. onResolve(result -> {
 					result.addConstructor(gc.cd, gc);
 
 					final WorkList              wl   = _inj().new_WorkList();
