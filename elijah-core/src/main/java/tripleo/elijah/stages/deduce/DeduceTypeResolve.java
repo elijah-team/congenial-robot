@@ -258,9 +258,10 @@ public class DeduceTypeResolve {
 				dc.genCIForGenType2(aGenType);
 			}
 			// maybe set something in ci to INHERITED, but that's what DeduceProcCall is for
-			if (eh.getElement() instanceof FunctionDef) {
+			final OS_Element element = eh.getElement();
+			if (element instanceof FunctionDef) {
 				if (aGenType.getNode() instanceof final @NotNull EvaClass evaClass) {
-					evaClass.functionMapDeferred((FunctionDef) eh.getElement()::setNode);
+					evaClass.functionMapDeferred((FunctionDef) eh.getElement(), aGenType::setNode);
 				}
 			}
 			variableTableEntry.getType().setAttached(aGenType);

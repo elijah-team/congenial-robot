@@ -224,7 +224,7 @@ class Found_Element_For_ITE {
 	public void genCIForGenType(final @NotNull GenType aGenType) {
 		//assert aGenType.nonGenericTypeName != null ;//&& ((NormalTypeName) aGenType.nonGenericTypeName).getGenericPart().size() > 0;
 
-		dc.genCI(aGenType.getNonGenericTypeName());
+		dc.genCI(aGenType, aGenType.getNonGenericTypeName());
 		final IInvocation invocation = aGenType.getCi();
 		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
 			namespaceInvocation. onResolve(new DoneCallback<EvaNamespace>() {

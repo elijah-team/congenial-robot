@@ -35,7 +35,7 @@ public class Implement_construct {
 		final String          s      = aTyn1.getName();
 		final ICH             ich    = _inj().new_ICH(aGenType, this);
 		final ClassStatement  best   = ich.lookupTypeName(aTyn1, s);
-		final ClassInvocation clsinv = ich.getClassInvocation(constructorName, aTyn1, best);
+		final ClassInvocation clsinv = ich.getClassInvocation(constructorName, aTyn1, aGenType, best);
 		if (co != null) {
 			genTypeCI_and_ResolveTypeToClass(co, clsinv);
 		}
@@ -360,7 +360,7 @@ public class Implement_construct {
 
 		TypeName tyn = aTy.getTypeName();
 		if (tyn instanceof final @NotNull NormalTypeName tyn1) {
-			_implement_construct_type(co, constructorName, tyn1);
+			_implement_construct_type(co, constructorName, tyn1, aGenType);
 		}
 
 		final ClassInvocation classInvocation = pte.getClassInvocation();

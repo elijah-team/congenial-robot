@@ -200,7 +200,7 @@ public class DT_External_2 implements DT_External {
 				final Eventual<GenType> egt = new Eventual<>();
 				egt.register(aDt2._phase());
 				egt.then(aGenType -> {
-					@NotNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT.getResolved()); // TODO there has to be a better way
+					@NotNull TypeTableEntry tte = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, aGenType.getResolved()); // TODO there has to be a better way
 					tte.genType.copy(aGenType);
 					vte.addPotentialType(instructionIndex, tte);
 				});

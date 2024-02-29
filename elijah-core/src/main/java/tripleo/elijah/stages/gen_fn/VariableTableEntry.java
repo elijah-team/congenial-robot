@@ -292,7 +292,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 			if (_resolveTypeCalled != null) { // TODO what a hack
 				if (_resolveTypeCalled.getResolved() != null) {
 					if (!aGenType.equals(_resolveTypeCalled)) {
-						SimplePrintLoggerToRemoveSoon.println_err_2(String.format("** 130 Attempting to replace %s with %s in %s", _resolveTypeCalled.asString().asString(), this));
+						SimplePrintLoggerToRemoveSoon.println_err_2(String.format("** 130 Attempting to replace %s with %s in %s", _resolveTypeCalled.asString(), this));
 						//					throw new AssertionError();
 					}
 				} else {
@@ -398,9 +398,9 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		return _p_resolvedTypePromise;
 	}
 
-	public void onTypeResolve(final DoneCallback<GenType> aDoneCallback) {
-		typePromise().then(aDoneCallback);
-	}
+	//public void onTypeResolve(final DoneCallback<GenType> aDoneCallback) {
+//		typePromise().then(aDoneCallback);
+//	}
 }
 
 //

@@ -332,7 +332,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
     }
 
     public @NotNull FunctionInvocation newFunctionInvocation(final FunctionDef f, final @Nullable ProcTableEntry aO, final @NotNull IInvocation ci) {
-        return _inj().new_FunctionInvocation(f, ci, this.generatePhase);
+        return _inj().new_FunctionInvocation(f, aO, ci, this.generatePhase);
     }
 
     public void onType(IdentTableEntry entry, OnType callback) {
