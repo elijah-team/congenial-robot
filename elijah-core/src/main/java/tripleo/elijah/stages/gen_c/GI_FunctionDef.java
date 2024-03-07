@@ -6,6 +6,7 @@ import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.sanaa.ElIntrinsics;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.util.ProgramMightBeWrongIfYouAreHere;
 import tripleo.elijah.world.i.LivingFunction;
 
 public class GI_FunctionDef implements GenerateC_Item {
@@ -20,21 +21,24 @@ public class GI_FunctionDef implements GenerateC_Item {
 	}
 
 	void _re_is_FunctionDef(final @Nullable ProcTableEntry pte,
-							   final EvaClass a_cheat,
-							   final @NotNull IdentTableEntry ite,
-							   final Eventual<EvaNode> resolvedP
-							  ) {
-		final boolean[]         qq        = {false};
+							final @Nullable EvaClass a_cheat,
+							final @NotNull  IdentTableEntry ite,
+							final @NotNull  Eventual<EvaNode> resolvedP
+						   ) {
+		final boolean[] qq = {false};
 
 		if (pte != null) {
 			pte.onFunctionInvocation(fi -> {
-				assert fi != null;
 				if (fi != null) {
 					fi.onGenerated(gen -> {
+						//noinspection unused
+						final var _fi = fi;
 						assert gen != null;
 						qq[0] = true;
 						resolvedP.resolve(gen);
 					});
+				} else {
+					throw new ProgramMightBeWrongIfYouAreHere("what in tarnation??");
 				}
 			});
 		}
