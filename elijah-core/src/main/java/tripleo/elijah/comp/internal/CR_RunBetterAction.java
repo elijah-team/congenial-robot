@@ -2,11 +2,11 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.Stages;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
-import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
@@ -24,7 +24,7 @@ public class CR_RunBetterAction implements CR_Action {
 		public static RuntimeProcesses get(final @NotNull Stages stage,
 										   final @NotNull ICompilationAccess ca,
 										   final @NotNull IPipelineAccess aPa) {
-			final RuntimeProcesses r             = new RuntimeProcesses(ca);
+			final RuntimeProcesses r = new RuntimeProcesses(ca);
 
 			r.add(stage.getProcess(ca));
 

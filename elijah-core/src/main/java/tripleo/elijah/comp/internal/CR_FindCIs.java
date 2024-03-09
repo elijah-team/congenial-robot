@@ -1,6 +1,7 @@
 package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.CompilerInput;
@@ -38,7 +39,7 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 	}
 
 	@Override
-	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final @NotNull CB_Output aO) {
+	public void execute(final @NotNull CR_State st, final @NotNull CB_Output aO, final Eventual<Operation<Ok>> aEoo) {
 		final Compilation c = st.ce().getCompilation();
 
 		final List<CompilerInput> x = find_cis(inputs, c, c.getErrSink());
@@ -46,7 +47,8 @@ public class CR_FindCIs extends DefaultStateful implements CR_Action {
 			cci.accept(compilerInput.acceptance_ci(), _ps);
 		}
 
-		return Operation.success(Ok.instance());
+		final Operation<Ok> success = Operation.success(Ok.instance());
+		aEoo.resolve(success);
 	}
 
 	@Override

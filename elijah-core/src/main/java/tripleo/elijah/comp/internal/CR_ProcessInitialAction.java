@@ -2,6 +2,7 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Eventual;
 import tripleo.elijah.ci.CompilerInstructionsImpl;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.util.Ok;
@@ -30,14 +31,16 @@ public class CR_ProcessInitialAction implements CR_Action {
 	}
 
 	@Override
-	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final CB_Output aO) {
+	public void execute(final @NotNull CR_State st, final CB_Output aO, final Eventual<Operation<Ok>> eoo) {
 		compilationRunner = st.runner();
 
 		try {
 			compilationRunner._accessCompilation().use(ci, do_out);
-			return Operation.success(Ok.instance());
+			final Operation<Ok> success = Operation.success(Ok.instance());
+			eoo.resolve(success);
+
 		} catch (final Exception aE) {
-			return Operation.failure(aE);
+			eoo.fail(aE);
 		}
 	}
 
