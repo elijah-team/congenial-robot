@@ -451,10 +451,12 @@ public class CompilationEnclosure {
 	}
 
 	public void writeLogs() {
-		final IPipelineAccess      pa            = compilation.pa();
+		final IPipelineAccess      xpa            = compilation.pa();
 		final GN_WriteLogs aNotable = new GN_WriteLogs(ca, elLogs);
+
+		assert pa == xpa;
 		
-		pa.notate(Provenance.DefaultCompilationAccess__writeLogs, aNotable);
+		xpa.notate(Provenance.DefaultCompilationAccess__writeLogs, aNotable);
 	}
 
 	public void setMalbulge(MalBulge mb) {
