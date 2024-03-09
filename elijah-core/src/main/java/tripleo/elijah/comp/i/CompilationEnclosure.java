@@ -48,6 +48,7 @@ import tripleo.elijah.nextgen.spi.SPI_ReactiveDimension;
 import tripleo.elijah.pre_world.Mirror_EntryPoint;
 
 import tripleo.elijah.stages.gen_fn.IClassGenerator;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah_congenial.pipelines.NextgenFactory;
 
 import tripleo.elijah.stages.inter.ModuleThing;
@@ -64,13 +65,13 @@ import java.util.*;
 import static tripleo.elijah.util.Helpers.List_of;
 
 public class CompilationEnclosure {
-	public final          List<ElLog>                                            elLogs                  = new LinkedList<>();
+	public final List<ElLog> elLogs = new LinkedList<>();
 
-	
+
 	public final  DeferredObject<IPipelineAccess, Void, Void> pipelineAccessPromise = new DeferredObject<>();
 	private final CB_Output                                   _cbOutput             = new CB_Output();
 	private final Compilation                                 compilation;
-	private final DeferredObject<AccessBus, Void, Void>       accessBusPromise      = new DeferredObject<>();
+	private final Eventual<AccessBus>                         accessBusPromise      = new Eventual<>();
 	private final Map<OS_Module, ModuleThing>                 moduleThings          = new HashMap<>();
 	private final Subject<ReactiveDimension>                  dimensionSubject      = ReplaySubject.<ReactiveDimension>create();
 	private final Subject<Reactivable>                        reactivableSubject    = ReplaySubject.<Reactivable>create();
@@ -121,17 +122,17 @@ public class CompilationEnclosure {
 		}
 	};
 	private AccessBus           ab;
-	private ICompilationAccess ca;
+	private ICompilationAccess  ca;
 	@Setter
-	private ICompilationBus   compilationBus;
+	private ICompilationBus     compilationBus;
 	@Setter
 	private CompilationRunner   compilationRunner;
 	@Setter
 	private CompilerDriver      compilerDriver;
 	private List<CompilerInput> inp;
 	private IPipelineAccess     pa;
-	private PipelineLogic  pipelineLogic;
-	private NextgenFactory _nextgenFactory;
+	private PipelineLogic       pipelineLogic;
+	private NextgenFactory      _nextgenFactory;
 
 
 	private MalBulge _mb;
@@ -252,7 +253,7 @@ public class CompilationEnclosure {
 		});
 	}
 
-	public @NotNull Promise<AccessBus, Void, Void> getAccessBusPromise() {
+	public @NotNull Eventual<AccessBus> getAccessBusPromise() {
 		return accessBusPromise;
 	}
 
@@ -340,8 +341,8 @@ public class CompilationEnclosure {
 		var mod = aWorldModule.module();
 		var aMt = aWorldModule.rq().mt();
 
-		 System.err.println("9998-0323 "+mod);
-		 System.err.println("9998-0324 "+aMt);
+		System.err.println("9998-0323 " + mod);
+		System.err.println("9998-0324 " + aMt);
 	}
 
 	public void reactiveJoin(final Reactive aReactive) {
@@ -419,8 +420,8 @@ public class CompilationEnclosure {
 	}
 
 	public void __addLogs(final @NotNull List<EOT_OutputFile> l) {
-		final List<ElLog>          logs                 = elLogs;
-		final String               s1                   = logs.get(0).getFileName();
+		final List<ElLog> logs = elLogs;
+		final String      s1   = logs.get(0).getFileName();
 
 		for (final ElLog log : logs) {
 			final List<EG_Statement> stmts = new ArrayList<>();
@@ -451,11 +452,11 @@ public class CompilationEnclosure {
 	}
 
 	public void writeLogs() {
-		final IPipelineAccess      xpa            = compilation.pa();
-		final GN_WriteLogs aNotable = new GN_WriteLogs(ca, elLogs);
+		final IPipelineAccess xpa      = compilation.pa();
+		final GN_WriteLogs    aNotable = new GN_WriteLogs(ca, elLogs);
 
 		assert pa == xpa;
-		
+
 		xpa.notate(Provenance.DefaultCompilationAccess__writeLogs, aNotable);
 	}
 
