@@ -5,6 +5,7 @@ import org.jdeferred2.FailCallback;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.diagnostic.ExceptionDiagnostic;
 import tripleo.elijah.diagnostic.Diagnostic;
 
 import java.util.Optional;
@@ -76,5 +77,9 @@ public class Eventual<P> {
 
 	public Promise.State state() {
 		return prom.state();
+	}
+
+	public void fail(final Exception aE) {
+		fail(new ExceptionDiagnostic(aE));
 	}
 }
