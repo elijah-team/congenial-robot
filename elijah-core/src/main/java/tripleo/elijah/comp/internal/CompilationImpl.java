@@ -163,6 +163,13 @@ public class CompilationImpl implements Compilation {
 	}
 
 	@Override
+	public void pushItem(final CSS_SimpleSignal aSimpleSignal) {
+		if (aSimpleSignal instanceof CSS_HasInstructions chi) {
+			hasInstructions(chi.rootCI());
+		} else assert false;
+	}
+
+	@Override
 	public Map<String, CompilerInstructions> fn2ci() {
 		return getFn2ci();
 	}

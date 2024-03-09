@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CIS;
+import tripleo.elijah.comp.internal.CSS_SimpleSignal;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.CompilerBeginning;
 import tripleo.elijah.comp.internal.USE;
@@ -85,7 +86,7 @@ public interface Compilation {
 
 	String getProjectName();
 
-	void hasInstructions(List<CompilerInstructions> cis);
+	void hasInstructions(final CompilerInstructions aRootCI);
 
 	boolean isPackage(@NotNull String pkg);
 
@@ -120,6 +121,8 @@ public interface Compilation {
 	Finally reports();
 
 	ICompilationAccess2 getCompilationAccess2();
+
+	void pushItem(final CSS_SimpleSignal aSimpleSignal);
 
 	enum CompilationAlways {
 		;
