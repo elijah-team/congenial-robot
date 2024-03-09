@@ -11,6 +11,28 @@ import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 
 public class CR_RunBetterAction implements CR_Action {
+	@Override
+	public void attach(final @NotNull CompilationRunner cr) {
+
+	}
+
+	@Override
+	public void execute(final @NotNull CR_State st, final CB_Output aCBOutput, final Eventual<Operation<Ok>> eoo) {
+		st.ce().getPipelineAccessPromise().then(
+				(IPipelineAccess pa) -> {
+					final RuntimeProcesses rt = StageToRuntime.get(pa);
+
+					try {
+						rt.run_better(st, aCBOutput);
+					} catch (Exception aE) {
+						aE.printStackTrace(); // TODO debug 07/26
+						eoo.fail(aE);
+					}
+
+					eoo.resolve(Operation.success(Ok.instance()));
+				});
+	}
+
 	public enum StageToRuntime {
 		;
 
@@ -29,24 +51,6 @@ public class CR_RunBetterAction implements CR_Action {
 			r.add(stage.getProcess(ca));
 
 			return r;
-		}
-	}
-
-	@Override
-	public void attach(final @NotNull CompilationRunner cr) {
-
-	}
-
-	@Override
-	public @NotNull Operation<Ok> execute(final @NotNull CR_State st, final CB_Output aO) {
-		try {
-			final RuntimeProcesses rt = StageToRuntime.get(st.ce().getCompilation().pa());
-			rt.run_better(st, aO);
-
-			return Operation.success(Ok.instance());
-		} catch (final Exception aE) {
-			aE.printStackTrace(); // TODO debug 07/26
-			return Operation.failure(aE);
 		}
 	}
 
