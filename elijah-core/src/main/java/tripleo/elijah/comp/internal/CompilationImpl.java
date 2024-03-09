@@ -328,23 +328,16 @@ public class CompilationImpl implements Compilation {
 		return rootCI.getName();
 	}
 
-	@Override
-	public void hasInstructions(final @NotNull List<CompilerInstructions> cis) {
-		assert cis.size() == 1;
+	private void hasInstructions(final CompilerInstructions aRootCI) {
 		final CompilationEnclosure ce = getCompilationEnclosure();
 		assert !ce.getCompilerInput().isEmpty();
-		hasInstructions(cis.get(0), pa(), ce);
-	}
 
-	public void hasInstructions(final @NotNull CompilerInstructions aRootCI,
-								final @NotNull IPipelineAccess pa,
-								final CompilationEnclosure ce) {
 		//this.signals().hasInstructions()
 		//		.signal(this.con().createSignal_hasInstructions(pa, cis)); // this is wrong
 		//		.signal(pa, List_of(cis.get(0)));
 
 		rootCI = aRootCI;
-		ce.getCompilationRunner().start(rootCI, pa);
+		ce.getCompilationRunner().start(rootCI, pa()); // .
 	}
 
 	@Override

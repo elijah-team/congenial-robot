@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.i.Compilation;
+import tripleo.elijah.comp.internal.CSS_HasInstructions;
 import tripleo.elijah.util.NotImplementedException;
 
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ public class CompilerInstructionsObserver implements Observer<CompilerInstructio
 	}
 
 	public void almostComplete() {
-		compilation.hasInstructions(l);
+		assert l.size() == 1;
+
+		compilation.pushItem(new CSS_HasInstructions(l.get(0)));
 	}
 
 	@Override

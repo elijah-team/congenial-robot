@@ -86,8 +86,6 @@ public interface Compilation {
 
 	String getProjectName();
 
-	void hasInstructions(final CompilerInstructions aRootCI);
-
 	boolean isPackage(@NotNull String pkg);
 
 	OS_Package makePackage(Qualident pkg_name);
