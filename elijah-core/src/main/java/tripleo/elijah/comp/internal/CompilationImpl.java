@@ -178,7 +178,7 @@ public class CompilationImpl implements Compilation {
 												  pa(),
 												  compilationEnclosure.getCompilationRunner(),
 												  compilationEnclosure.getCompilationDriver(),
-												  EventualExtract.of(compilationEnclosure.getAccessBusPromise());
+												  EventualExtract.of(compilationEnclosure.getAccessBusPromise()));
 			aSimpleSignal.simpleSignalRun(are);
 		} else {
 			if (aSimpleSignal instanceof CSS_HasInstructions chi) {
