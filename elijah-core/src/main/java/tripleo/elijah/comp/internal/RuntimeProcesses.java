@@ -39,7 +39,7 @@ public class RuntimeProcesses {
 		process.postProcess();
 
 		//tripleo.elijah.util.Stupidity.println_err_2("***** RuntimeProcess^ [postProcess/writeLogs]");
-		pr.writeLogs();
+		ca.writeLogs();
 	}
 
 	public int size() {

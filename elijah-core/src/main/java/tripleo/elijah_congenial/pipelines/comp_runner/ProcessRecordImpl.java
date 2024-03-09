@@ -35,9 +35,4 @@ public class ProcessRecordImpl implements ProcessRecord {
 	public PipelineLogic pipelineLogic() {
 		return pipelineLogic;
 	}
-
-	@Override
-	public void writeLogs() {
-		ca.getCompilation().cfg().stage.writeLogs(ca);
-	}
 }
