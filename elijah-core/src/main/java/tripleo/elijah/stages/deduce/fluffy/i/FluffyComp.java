@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.deduce.fluffy.i;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.lang.i.OS_Module;
 
 public interface FluffyComp extends EventualRegister {

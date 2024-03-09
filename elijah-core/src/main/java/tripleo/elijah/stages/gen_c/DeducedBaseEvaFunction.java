@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.OnGenClass;

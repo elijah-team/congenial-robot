@@ -1,6 +1,6 @@
 package tripleo.elijah.lang.nextgen.names.i;
 
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 
 import java.util.List;
 

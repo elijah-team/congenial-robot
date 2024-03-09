@@ -3,7 +3,7 @@ package tripleo.elijah.world.impl;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah_congenial.pipelines.pipeline_logic.GN_PL_Run2;

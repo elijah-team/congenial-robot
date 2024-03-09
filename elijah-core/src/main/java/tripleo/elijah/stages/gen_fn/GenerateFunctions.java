@@ -14,8 +14,8 @@ import org.jdeferred2.DoneCallback;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah.util.Eventual;
+import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.comp.Finally;
 
 import tripleo.elijah_congenial.pipelines.pipeline_logic.GN_PL_Run2;

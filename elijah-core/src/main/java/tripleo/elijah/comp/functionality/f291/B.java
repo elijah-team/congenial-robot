@@ -1,6 +1,6 @@
 package tripleo.elijah.comp.functionality.f291;
 
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.gen_c.GenerateC;
 

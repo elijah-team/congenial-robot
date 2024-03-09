@@ -1,7 +1,7 @@
 package tripleo.elijah_congenial.pipelines.eva;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.lang.i.FormalArgListItem;
 import tripleo.elijah.lang.i.OS_NamedElement;

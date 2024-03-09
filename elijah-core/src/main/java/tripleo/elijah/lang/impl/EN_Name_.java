@@ -2,7 +2,7 @@ package tripleo.elijah.lang.impl;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.lang.i.OS_ElementName;
 import tripleo.elijah.lang.nextgen.names.i.EN_Name;

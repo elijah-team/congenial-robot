@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.functionality.f291;
 
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 
 import tripleo.elijah.comp.i.CompilationEnclosure;
 

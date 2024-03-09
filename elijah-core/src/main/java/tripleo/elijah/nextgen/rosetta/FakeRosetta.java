@@ -1,7 +1,7 @@
 package tripleo.elijah.nextgen.rosetta;
 
 import org.jdeferred2.DoneCallback;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.stages.deduce.ClassInvocation;

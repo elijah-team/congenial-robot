@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.i;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.comp.internal.CompilationRunner;

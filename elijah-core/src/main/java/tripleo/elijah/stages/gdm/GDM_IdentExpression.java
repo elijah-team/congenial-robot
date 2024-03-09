@@ -2,7 +2,7 @@ package tripleo.elijah.stages.gdm;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.deduce.DeduceTypes2;

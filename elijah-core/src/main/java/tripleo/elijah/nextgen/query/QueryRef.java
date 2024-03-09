@@ -1,8 +1,8 @@
 package tripleo.elijah.nextgen.query;
 
 import org.jdeferred2.DoneCallback;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah.util.Eventual;
+import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.util.Ok;
 import tripleo.elijah.util._Extensionable;
 

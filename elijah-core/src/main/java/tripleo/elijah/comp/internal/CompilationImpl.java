@@ -10,6 +10,7 @@ package tripleo.elijah.comp.internal;
 
 import io.reactivex.rxjava3.core.Observer;
 //import io.smallrye.mutiny.Multi;
+import lombok.EqualsAndHashCode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.ci.LibraryStatementPart;
@@ -26,6 +27,7 @@ import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.stages.deduce.IFunctionMapHook;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyComp;
 import tripleo.elijah.stages.deduce.fluffy.impl.FluffyCompImpl;
+import tripleo.elijah.util.EventualExtract;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.Operation2;
 import tripleo.elijah.world.i.LivingRepo;
@@ -171,7 +173,13 @@ public class CompilationImpl implements Compilation {
 			}
 		}
 		if (aSimpleSignal.canRun()) {
-			aSimpleSignal.simpleSignalRun(null);
+			final CSS_RunEnv are = new CSS_RunEnv(getCompilationAccess2(),
+												  compilationEnclosure,
+												  pa(),
+												  compilationEnclosure.getCompilationRunner(),
+												  compilationEnclosure.getCompilationDriver(),
+												  EventualExtract.of(compilationEnclosure.getAccessBusPromise());
+			aSimpleSignal.simpleSignalRun(are);
 		} else {
 			if (aSimpleSignal instanceof CSS_HasInstructions chi) {
 				hasInstructions(chi.rootCI());

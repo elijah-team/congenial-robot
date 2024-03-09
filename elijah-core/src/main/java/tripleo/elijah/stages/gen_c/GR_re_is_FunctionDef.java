@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.jdeferred2.DoneCallback;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 
 import tripleo.elijah.lang.i.OS_Element;
 

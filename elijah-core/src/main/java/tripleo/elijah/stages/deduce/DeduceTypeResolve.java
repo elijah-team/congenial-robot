@@ -12,7 +12,7 @@ package tripleo.elijah.stages.deduce;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.PromiseReadySupplier;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.lang.i.*;

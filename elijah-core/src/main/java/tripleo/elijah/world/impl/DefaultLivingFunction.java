@@ -2,7 +2,7 @@ package tripleo.elijah.world.impl;
 
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.functionality.f291.AmazingPart;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.FunctionDef;

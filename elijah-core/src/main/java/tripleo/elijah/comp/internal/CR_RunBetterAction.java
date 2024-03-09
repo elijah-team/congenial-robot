@@ -2,7 +2,7 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.Stages;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.comp.i.ICompilationAccess;

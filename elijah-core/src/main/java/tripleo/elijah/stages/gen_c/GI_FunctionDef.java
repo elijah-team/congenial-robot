@@ -2,7 +2,7 @@ package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.sanaa.ElIntrinsics;
 import tripleo.elijah.stages.gen_fn.*;

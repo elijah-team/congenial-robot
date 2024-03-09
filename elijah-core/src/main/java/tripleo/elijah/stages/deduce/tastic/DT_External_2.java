@@ -5,7 +5,7 @@ import org.jdeferred2.DoneCallback;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.*;

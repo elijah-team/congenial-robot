@@ -19,7 +19,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.Finally;

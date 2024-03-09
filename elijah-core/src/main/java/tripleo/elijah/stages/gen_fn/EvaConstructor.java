@@ -10,7 +10,7 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.ConstructorDef;
 import tripleo.elijah.lang.i.FunctionDef;

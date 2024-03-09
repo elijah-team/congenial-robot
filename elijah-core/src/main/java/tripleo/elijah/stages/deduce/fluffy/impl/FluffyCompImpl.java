@@ -3,7 +3,7 @@ package tripleo.elijah.stages.deduce.fluffy.impl;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.comp.DefaultEventualRegister;
 import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.entrypoints.MainClassEntryPoint;

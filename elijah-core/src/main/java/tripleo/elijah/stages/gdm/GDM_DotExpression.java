@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.gdm;
 
-import tripleo.elijah.Eventual;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.DotExpression;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
