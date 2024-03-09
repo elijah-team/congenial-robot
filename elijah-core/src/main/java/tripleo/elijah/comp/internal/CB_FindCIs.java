@@ -8,6 +8,7 @@ import tripleo.elijah.comp.i.CB_OutputString;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static tripleo.elijah.util.Helpers.List_of;
@@ -17,7 +18,7 @@ class CB_FindCIs implements CB_Action {
 	//private final List<CompilerInput> _inputs;
 
 	@Contract(pure = true)
-	public CB_FindCIs(final CompilationRunner aCompilationRunner, final List<CompilerInput> aInputs) {
+	public CB_FindCIs(final CompilationRunner aCompilationRunner, final List<CompilerInput> ignoredAInputs) {
 		compilationRunner = aCompilationRunner;
 		//_inputs           = aInputs;
 		o                 = compilationRunner.getCompilationEnclosure().getCB_Output();
@@ -33,10 +34,13 @@ class CB_FindCIs implements CB_Action {
 															);
 
 		for (final CR_ActionSupplier actionSupplier : crActionList) {
-			CR_Action action = actionSupplier.get();
+			final CR_Action action = actionSupplier.get();
 
-			action.attach(compilationRunner);
-			action.execute(compilationRunner.crState, o);
+			U._run_action_list__internal(compilationRunner.crState, o, action, new ArrayList<>());
+
+			//action.attach(compilationRunner);
+			//final Eventual<Operation<Ok>> eoo = new Eventual<>();
+			//action.execute(compilationRunner.crState, o, eoo);
 		}
 
 		for (final CB_OutputString outputString : o.get()) {
@@ -44,10 +48,6 @@ class CB_FindCIs implements CB_Action {
 			SimplePrintLoggerToRemoveSoon.println_out_3("** CB_FindCIs :: outputString :: " + outputString.getText());
 		}
 	}
-
-	//private Compilation _accessCompilation() {
-	//	return compilationRunner._accessCompilation();
-	//}
 
 	@Contract(pure = true)
 	@Override
