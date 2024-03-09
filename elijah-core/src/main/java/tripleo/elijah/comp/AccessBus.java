@@ -75,7 +75,7 @@ public class AccessBus {
 		lgcPromise.then(lgc -> aLgcListener.lgc_slot(ImmutableList.copyOf(lgc)));
 	}
 
-	public void subscribePipelineLogic(final DoneCallback<PipelineLogic> aPipelineLogicDoneCallback) {
+	public void subscribe_PipelineLogic(final DoneCallback<PipelineLogic> aPipelineLogicDoneCallback) {
 		_pa.getPipelineLogicPromise().then(aPipelineLogicDoneCallback);
 	}
 

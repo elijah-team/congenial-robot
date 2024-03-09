@@ -21,7 +21,7 @@ public class OStageProcess implements RuntimeProcess {
 
 		ca.getCompilation().getCompilationEnclosure().getAccessBusPromise()
 				.then(iab -> {
-					iab.subscribePipelineLogic(pl -> {
+					iab.subscribe_PipelineLogic(pl -> {
 						// FIXME 24/01/03:
 						//  we need pl, but do we need ab?
 						final Compilation comp = ca.getCompilation();
