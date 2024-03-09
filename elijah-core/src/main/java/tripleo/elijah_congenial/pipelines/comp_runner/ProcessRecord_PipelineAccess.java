@@ -117,7 +117,7 @@ public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRe
 	}
 
 	@Override
-	public WritePipeline getWitePipeline() {
+	public WritePipeline getWritePipeline() {
 		return _wpl;
 	}
 
