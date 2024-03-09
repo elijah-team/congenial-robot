@@ -18,8 +18,8 @@ import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.internal.Provenance;
-import tripleo.elijah.comp.notation.GN_PL_Run2;
-import tripleo.elijah.comp.notation.GN_PL_Run2_Env;
+import tripleo.elijah_congenial.pipelines.pipeline_logic.GN_PL_Run2;
+import tripleo.elijah_congenial.pipelines.pipeline_logic.GN_PL_Run2_Env;
 import tripleo.elijah.diagnostic.Diagnostic;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
@@ -59,6 +59,7 @@ public class PipelineLogic implements EventualRegister {
 		ca.setPipelineLogic(this);
 		verbosity     = ca.testSilence();
 		generatePhase = new GeneratePhase(verbosity, pa, this);
+		//dp            = new DeducePhase(ca.getCompilation().getCompilationEnclosure());
 		dp            = new DeducePhase(ca, pa, this);
 
 		final Object dpc = ca.getExt(MDeducePhaseCatcher.class);

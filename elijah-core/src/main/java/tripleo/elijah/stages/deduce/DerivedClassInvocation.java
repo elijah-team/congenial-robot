@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 /**
  * Created 1/5/22 11:27 PM
  */
-class DerivedClassInvocation extends ClassInvocation {
+public class DerivedClassInvocation extends ClassInvocation {
 	private final ClassInvocation derivation;
 
 	public DerivedClassInvocation(final @NotNull ClassStatement aClassStatement, final ClassInvocation aClassInvocation, final Supplier<DeduceTypes2> aDeduceTypes2) {

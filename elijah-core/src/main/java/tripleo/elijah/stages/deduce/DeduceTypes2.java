@@ -51,6 +51,7 @@ import tripleo.elijah.stages.deduce.declarations.DeferredMemberFunction;
 import tripleo.elijah.stages.deduce.nextgen.*;
 import tripleo.elijah.stages.deduce.post_bytecode.*;
 import tripleo.elijah.stages.deduce.tastic.*;
+import tripleo.elijah_congenial.deduce.umbrella.DS_NamedEntity;
 import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.gdm.GDM_VariableTableEntry;
 import tripleo.elijah.stages.gen_fn.*;
@@ -670,6 +671,11 @@ public class DeduceTypes2 {
 				aVte.resolveTypeToClass(result);
 			}
 		});
+	}
+
+	public DS_NamedEntity namedEntityFor(final ProcTableEntry aProcTableEntry) {
+
+		return null;
 	}
 
 	interface DT_State {

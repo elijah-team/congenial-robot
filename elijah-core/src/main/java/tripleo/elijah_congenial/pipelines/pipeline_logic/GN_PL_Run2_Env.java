@@ -1,8 +1,9 @@
-package tripleo.elijah.comp.notation;
+package tripleo.elijah_congenial.pipelines.pipeline_logic;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
+import tripleo.elijah.comp.notation.GN_Env;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.util.function.Consumer;

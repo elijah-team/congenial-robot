@@ -1,4 +1,4 @@
-package tripleo.elijah.stages.deduce.umbrella;
+package tripleo.elijah_congenial.deduce.umbrella;
 
 import tripleo.elijah.sanaa.ROH;
 

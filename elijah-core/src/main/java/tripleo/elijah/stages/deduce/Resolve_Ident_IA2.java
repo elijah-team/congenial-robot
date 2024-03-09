@@ -12,18 +12,19 @@ import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.DefaultEventualRegister;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah.diagnostic.StringDiagnostic;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_LookupResult;
 import tripleo.elijah.lang.types.OS_UnknownType;
-import tripleo.elijah.stages.deduce.umbrella.DS_FunctionDef;
-import tripleo.elijah.stages.deduce.umbrella.DS_Rider;
+import tripleo.elijah_congenial.deduce.umbrella.DS_FunctionDef;
+import tripleo.elijah_congenial.deduce.umbrella.DS_NamedEntity;
+import tripleo.elijah_congenial.deduce.umbrella.DS_Rider;
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
@@ -497,6 +498,8 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 			TableEntryIV             xx = pot.get(0).tableEntry;
 			if (xx != null) {
 				if (xx instanceof final @NotNull ProcTableEntry procTableEntry) {
+					DS_NamedEntity nene = deduceTypes2.namedEntityFor(procTableEntry);
+
 					final __RIA2_DS_FunctionDef dsFunctionDef = new __RIA2_DS_FunctionDef(fd);
 					procTableEntry.resolveWith(dsFunctionDef, dsFunctionDef);
 					pte = procTableEntry;
@@ -513,8 +516,9 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 				if (best instanceof FunctionDef) {
 					fd.resolve((FunctionDef) best);
 				} else {
-					fd.reject(null); // TODO 12/25 null here
-					LOG.err("1195 Can't find match");
+					final String s = "Can't find match";
+					fd.reject(new StringDiagnostic("1195", s));
+					LOG.err("1195 " +s);
 				}
 			}
 

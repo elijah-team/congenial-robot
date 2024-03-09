@@ -1,6 +1,7 @@
-package tripleo.elijah.stages.deduce.umbrella;
+package tripleo.elijah_congenial.deduce.umbrella;
 
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah_congenial.deduce.umbrella.DS_Base;
 
 /**
  * This is a complement to {@link DS_Base} in resolveWith.<br/>

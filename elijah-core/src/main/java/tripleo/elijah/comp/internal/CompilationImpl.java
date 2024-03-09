@@ -18,10 +18,7 @@ import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.i.*;
 import tripleo.elijah.comp.nextgen.CP_Paths;
 import tripleo.elijah.comp.nextgen.i.CK_Marker;
-import tripleo.elijah.lang.i.ClassStatement;
-import tripleo.elijah.lang.i.OS_Module;
-import tripleo.elijah.lang.i.OS_Package;
-import tripleo.elijah.lang.i.Qualident;
+import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.QualidentImpl;
 import tripleo.elijah.nextgen.inputtree.EIT_InputTree;
 import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput;
@@ -61,6 +58,7 @@ public class CompilationImpl implements Compilation {
 	private                List<CompilerInput>               _inputs;
 	private                IPipelineAccess                   _pa;
 	private                IO                                io;
+	private /*gnu.trove.TIntList*/List<Integer> simpleSignals=new ArrayList<>();
 
 	public CompilationImpl(final ErrSink aErrSink, final IO aIo) {
 		this.errSink            = aErrSink;
@@ -164,9 +162,21 @@ public class CompilationImpl implements Compilation {
 
 	@Override
 	public void pushItem(final CSS_SimpleSignal aSimpleSignal) {
-		if (aSimpleSignal instanceof CSS_HasInstructions chi) {
-			hasInstructions(chi.rootCI());
-		} else assert false;
+		if (aSimpleSignal.isOnce()) {
+			final int klazzHash = aSimpleSignal.getClass().hashCode(); // assuming this is consistent
+			if (simpleSignals.contains(klazzHash))
+				return;
+			else {
+				simpleSignals.add(klazzHash);
+			}
+		}
+		if (aSimpleSignal.canRun()) {
+			aSimpleSignal.simpleSignalRun(null);
+		} else {
+			if (aSimpleSignal instanceof CSS_HasInstructions chi) {
+				hasInstructions(chi.rootCI());
+			} else assert false;
+		}
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.StdErrSink;
 import tripleo.elijah.comp.i.Compilation;
+import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah.comp.internal.*;
@@ -85,11 +86,13 @@ public class Boilerplate {
 	public void getGenerateFiles(final @NotNull OS_Module mod) {
 		// NOTE 23/11/08:
 		//  fileGen can be null for [GetRealTargetNameTest], but (may) fail under other circumstances
-		final GenerateResultEnv fileGen = new GenerateResultEnv(null, null, null, null, null);
-		generateFiles = OutputFileFactory.create(Compilation.CompilationAlways.defaultPrelude(),
-												 new OutputFileFactoryParams(mod,
-																			 comp.getCompilationEnclosure()),
-												 fileGen);
+
+		final GenerateResultEnv       fileGen = new GenerateResultEnv(null, null, null, null, null);
+		final CompilationEnclosure    ce      = comp.getCompilationEnclosure();
+		final String                  prelude = Compilation.CompilationAlways.defaultPrelude();
+		final OutputFileFactoryParams params  = new OutputFileFactoryParams(mod, ce);
+
+		generateFiles = OutputFileFactory.create(prelude, params, fileGen);
 	}
 
 	public OS_Module defaultMod() {

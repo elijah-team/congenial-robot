@@ -1,4 +1,4 @@
-package tripleo.elijah.comp.notation;
+package tripleo.elijah_congenial.pipelines.pipeline_logic;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
@@ -98,10 +98,15 @@ class ResolvedNodes {
 				});
 	}
 
-	public void part3(final @NotNull PipelineLogic pipelineLogic, final @NotNull WorldModule mod, final DeducePhase.GeneratedClasses lgc) {
+	public void part3(final @NotNull PipelineLogic pipelineLogic,
+					  final @NotNull WorldModule mod,
+					  final DeducePhase.GeneratedClasses lgc) {
 		final DeducePhase deducePhase = pipelineLogic.dp;
 
-		final DeducePhase_deduceModule_Request rq = new DeducePhase_deduceModule_Request(mod.module(), lgc, pipelineLogic.getVerbosity(), deducePhase);
+		final DeducePhase_deduceModule_Request rq = new DeducePhase_deduceModule_Request(mod.module(),
+																						 lgc,
+																						 pipelineLogic.getVerbosity(),
+																						 deducePhase);
 		deducePhase.deduceModule(rq);
 	}
 }

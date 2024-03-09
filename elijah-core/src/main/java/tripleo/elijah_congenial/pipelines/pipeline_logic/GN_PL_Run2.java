@@ -1,10 +1,12 @@
-package tripleo.elijah.comp.notation;
+package tripleo.elijah_congenial.pipelines.pipeline_logic;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.comp.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
+import tripleo.elijah.comp.notation.GN_Env;
+import tripleo.elijah.comp.notation.GN_Notable;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.DefaultClassGenerator;

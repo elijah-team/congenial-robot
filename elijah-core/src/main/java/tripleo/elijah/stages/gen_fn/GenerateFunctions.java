@@ -18,7 +18,7 @@ import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
 import tripleo.elijah.comp.Finally;
 
-import tripleo.elijah.comp.notation.GN_PL_Run2;
+import tripleo.elijah_congenial.pipelines.pipeline_logic.GN_PL_Run2;
 
 import tripleo.elijah.entrypoints.EntryPoint;
 
