@@ -46,7 +46,7 @@ import tripleo.elijah.world.impl.DefaultLivingClass;
 /**
  * Created 10/29/20 4:26 AM
  */
-public class EvaClass extends EvaContainerNC implements GNCoded {
+public class EvaClass extends EvaContainerNC implements IEvaClass {
 	public          DefaultLivingClass                  _living;
 	private final   ClassStatement                      klass;
 	private final   OS_Module                           module;
@@ -59,14 +59,17 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		module = aModule;
 	}
 
+	@Override
 	public void addAccessNotation(AccessNotation an) {
 		throw new NotImplementedException();
 	}
 
+	@Override
 	public void addConstructor(ConstructorDef aConstructorDef, @NotNull EvaConstructor aGeneratedFunction) {
 		constructors.put(aConstructorDef, aGeneratedFunction);
 	}
 
+	@Override
 	public void createCtor0() {
 		// TODO implement me
 		FunctionDef fd = new FunctionDefImpl(klass, klass.getContext());
@@ -88,6 +91,7 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		}
 	}
 
+	@Override
 	public void fixupUserClasses(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext) {
 		for (VarTableEntry varTableEntry : varTable) {
 			varTableEntry.updatePotentialTypesCB = new VarTableEntry_UpdatePotentialTypesCB(aDeduceTypes2,
@@ -122,10 +126,12 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return getKlass();
 	}
 
+	@Override
 	public ClassStatement getKlass() {
 		return this.klass;
 	}
 
+	@Override
 	@NotNull
 	public String getName() {
 		StringBuilder sb = new StringBuilder();
@@ -146,30 +152,10 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return sb.toString();
 	}
 
-	@NotNull
-	private static String getNameHelper(@NotNull Map<TypeName, OS_Type> aGenericPart) {
-		final List<String> ls = new ArrayList<String>();
-		for (Map.Entry<TypeName, OS_Type> entry : aGenericPart.entrySet()) { // TODO Is this guaranteed to be in order?
-			final OS_Type value = entry.getValue(); // This can be another ClassInvocation using GenType
-			final String  name;
-
-			if (value instanceof OS_UnknownType) {
-				name = "?";
-			} else {
-				name = value.getClassOf().getName();
-			}
-			ls.add(name); // TODO Could be nested generics
-		}
-		return Helpers.String_join(", ", ls);
-	}
-
+	@Override
 	@NotNull
 	public String getNumberedName() {
 		return getKlass().getName() + "_" + getCode();
-	}
-
-	private boolean getPragma(String auto_construct) { // TODO this should be part of ContextImpl
-		return false;
 	}
 
 	@Override
@@ -192,10 +178,12 @@ public class EvaClass extends EvaContainerNC implements GNCoded {
 		return module;
 	}
 
+	@Override
 	public boolean isGeneric() {
 		return klass.getGenericPart().size() > 0;
 	}
 
+	@Override
 	public boolean resolve_var_table_entries(@NotNull DeducePhase aDeducePhase) {
 		boolean Result = false;
 

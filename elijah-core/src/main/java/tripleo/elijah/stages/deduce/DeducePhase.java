@@ -1,12 +1,3 @@
-/* -*- Mode: Java; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/*
- * Elijjah compiler, copyright Tripleo <oluoluolu+elijah@gmail.com>
- *
- * The contents of this library are released under the LGPL licence v3,
- * the GNU Lesser General Public License text was downloaded from
- * http://www.gnu.org/licenses/lgpl.html from `Version 3, 29 June 2007'
- *
- */
 package tripleo.elijah.stages.deduce;
 
 import com.google.common.base.Preconditions;
@@ -17,6 +8,21 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.EvaConstructor;
+import tripleo.elijah.stages.gen_fn.EvaContainer;
+import tripleo.elijah.stages.gen_fn.EvaContainerNC;
+import tripleo.elijah.stages.gen_fn.EvaFunction;
+import tripleo.elijah.stages.gen_fn.EvaNamespace;
+import tripleo.elijah.stages.gen_fn.EvaNode;
+import tripleo.elijah.stages.gen_fn.GenType;
+import tripleo.elijah.stages.gen_fn.GenerateFunctions;
+import tripleo.elijah.stages.gen_fn.GeneratePhase;
+import tripleo.elijah.stages.gen_fn.IdentTableEntry;
+import tripleo.elijah.stages.gen_fn.ProcTableEntry;
+import tripleo.elijah.stages.gen_fn.TypeTableEntry;
+import tripleo.elijah.stages.gen_fn.WlGenerateClass;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.comp.i.Compilation;
@@ -41,7 +47,6 @@ import tripleo.elijah.stages.deduce.nextgen.DR_ProcCall;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VariableTableEntry;
 import tripleo.elijah.stages.deduce_c.ResolvedVariables;
-import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.logging.ElLog;
@@ -52,6 +57,7 @@ import tripleo.elijah.work.WorkManager;
 import tripleo.elijah_congenial.deduce.Country1;
 import tripleo.elijah_congenial.deduce.DeducePhaseInjector;
 import tripleo.elijah_congenial.deduce.RegisterClassInvocation;
+import tripleo.elijah_congenial.deduce.t.TEvaClass;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -549,11 +555,19 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
     }
 
     public void resolveAllVariableTableEntries() {
+        //DP_Kt_U.resolveAllVariableTableEntries(generatedClasses);
+
+        resolveAllVariableTableEntries1(generatedClasses);
+    }
+
+    private void resolveAllVariableTableEntries1(final @NotNull GeneratedClasses generatedClasses1) {
         @NotNull List<EvaClass> gcs                           = _inj().new_ArrayList__EvaClass();
         boolean                 all_resolve_var_table_entries = false;
         while (!all_resolve_var_table_entries) {
-            if (generatedClasses.size() == 0) break;
-            for (EvaNode evaNode : generatedClasses.copy()) {
+            if (generatedClasses1.size() == 0) break;
+            // not only am i insane, but i want to see if qodana/any body else is too
+            final List<EvaNode> copy = generatedClasses1.copy();
+            for (EvaNode evaNode : copy) {
                 if (evaNode instanceof final @NotNull EvaClass evaClass) {
                     all_resolve_var_table_entries = evaClass.resolve_var_table_entries(this); // TODO use a while loop to get all classes
                 }
@@ -953,17 +967,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         public void add(EvaNode aClass) {
             Preconditions.checkArgument(aClass instanceof EvaClass);
 
-            var tClass = new EvaNode() {
-                @Override
-                public String identityString() {
-                    return aClass.identityString();
-                }
-
-                @Override
-                public OS_Module module() {
-                    return aClass.module(); //
-                }
-            };
+            var tClass = new TEvaClass(aClass);
 
             pa._send_GeneratedClass(tClass);
 
@@ -983,6 +987,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         public int size() {
             return generatedClasses.size();
         }
+
     }
 
     //
@@ -1017,26 +1022,4 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
             }
         }
     }
-    //}
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-
 }
-
-//
-// vim:set shiftwidth=4 softtabstop=0 noexpandtab:
-//
