@@ -19,6 +19,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.nextgen.query.QueryRef;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.UnintendedUseException;
@@ -673,9 +674,16 @@ public class DeduceTypes2 {
 		});
 	}
 
-	public DS_NamedEntity namedEntityFor(final ProcTableEntry aProcTableEntry) {
+	Map<Object, DS_FunctionEntity> dsfes = new HashMap<>();
 
-		return null;
+	public DS_NamedEntity namedEntityFor(final ProcTableEntry aProcTableEntry) {
+		DS_FunctionEntity fe = new DS_FunctionEntity() {
+			@Override
+			public QueryRef getQueryRef() {
+				return null;
+			}
+		};
+		return fe;
 	}
 
 	interface DT_State {

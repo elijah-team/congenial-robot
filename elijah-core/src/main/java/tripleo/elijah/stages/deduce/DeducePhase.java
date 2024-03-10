@@ -953,9 +953,21 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         public void add(EvaNode aClass) {
             Preconditions.checkArgument(aClass instanceof EvaClass);
 
-            pa._send_GeneratedClass(aClass);
+            var tClass = new EvaNode() {
+                @Override
+                public String identityString() {
+                    return aClass.identityString();
+                }
 
-            generatedClasses.add(aClass);
+                @Override
+                public OS_Module module() {
+                    return aClass.module(); //
+                }
+            };
+
+            pa._send_GeneratedClass(tClass);
+
+            generatedClasses.add(tClass);
         }
 
         public @NotNull List<EvaNode> copy() {
