@@ -22,9 +22,9 @@ import tripleo.elijah.stages.gen_fn.IEvaClass;
  * Created 11/28/21 4:45 PM
  */
 public interface ICodeRegistrar {
-	void registerClass(IEvaClass aClass);
+	void registerClass(IREvaClass aClass);
 
-	void registerClass1(IEvaClass aClass);
+	void registerClass1(IREvaClass aClass);
 
 	void registerFunction(@NotNull IBaseEvaFunction aFunction);
 

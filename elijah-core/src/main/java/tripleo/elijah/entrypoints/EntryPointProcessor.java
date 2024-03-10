@@ -1,6 +1,7 @@
 package tripleo.elijah.entrypoints;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
@@ -11,6 +12,7 @@ import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.NULL_DeduceTypes2;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
+import tripleo.elijah.stages.gen_generic.IREvaClass;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.world.i.LivingRepo;
 
@@ -102,14 +104,24 @@ public interface EntryPointProcessor {
 			compilation = aC;
 		}
 
-		@Override
+		//@Override
 		public void registerClass(final IEvaClass aClass) {
 			compilation.livingRepo().addClass(aClass, LivingRepo.Add.MAIN_CLASS);
 		}
 
-		@Override
+		//@Override
 		public void registerClass1(final IEvaClass aClass) {
 			compilation.livingRepo().addClass(aClass, LivingRepo.Add.NONE);
+		}
+
+		@Override
+		public void registerClass(final IREvaClass aClass) {
+			throw new UnintendedUseException("fixme sooon");
+		}
+
+		@Override
+		public void registerClass1(final IREvaClass aClass) {
+			throw new UnintendedUseException("fixme sooon");
 		}
 
 		@Override
