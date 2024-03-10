@@ -3,10 +3,7 @@ package tripleo.elijah.stages.gen_fn;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.nextgen.names.i.EN_Understanding;
-import tripleo.elijah.stages.deduce.DeducePhase;
-import tripleo.elijah.stages.deduce.DeduceTypes2;
-import tripleo.elijah.stages.deduce.FunctionInvocation;
-import tripleo.elijah.stages.deduce.FunctionMapDeferred;
+import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.gen_generic.CodeGenerator;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
@@ -77,4 +74,6 @@ public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyR
 	void setLiving(LivingClass aLiving);
 
 	void singleGenerate(Class<?> aKey, Function<Void, Boolean> f);
+
+	ClassInvocation _ci();
 }

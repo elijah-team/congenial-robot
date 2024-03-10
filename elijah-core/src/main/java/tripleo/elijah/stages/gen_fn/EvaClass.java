@@ -233,6 +233,11 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 		sgs.add(aKey);
 	}
 
+	@Override
+	public ClassInvocation _ci() {
+		return ci;
+	}
+
 	//@Override
 	//public void functionMapDeferred(final FunctionDef aElement, final Object aO) {
 	//

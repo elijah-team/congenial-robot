@@ -10,7 +10,6 @@ import tripleo.elijah.lang.types.OS_UserClassType;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.gen_c.CClassDecl;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
@@ -63,7 +62,7 @@ public class GarishClass {
 		//_lc.setGarish(this);
 	}
 
-	public @NotNull BufferTabbedOutputStream getClassBuffer(final @NotNull EvaClass x,
+	public @NotNull BufferTabbedOutputStream getClassBuffer(final @NotNull IEvaClass x,
 															final @NotNull CClassDecl decl,
 															final String class_name,
 															final int class_code) {
@@ -83,7 +82,7 @@ public class GarishClass {
 			else
 				tos.put_string_ln("R->vsv = false;");
 		} else {
-			for (IEvaClass.VarTableEntry o : x.varTable) {
+			for (IEvaClass.VarTableEntry o : x.varTable()) {
 //					final String typeName = getTypeNameForVarTableEntry(o);
 				// TODO this should be the result of getDefaultValue for each type
 				tos.put_string_ln(String.format("R->vm%s = 0;", o.nameToken));
@@ -101,7 +100,7 @@ public class GarishClass {
 	}
 
 	public @NotNull BufferTabbedOutputStream getHeaderBuffer(final @NotNull GenerateC aGenerateC) {
-		final EvaClass evaClass = getLiving().evaNode();
+		final IEvaClass evaClass = getLiving().evaNode();
 
 		final CClassDecl decl = new CClassDecl(evaClass);
 		decl.evaluatePrimitive();
@@ -113,7 +112,7 @@ public class GarishClass {
 	}
 
 	public @NotNull BufferTabbedOutputStream getHeaderBuffer(final @NotNull GenerateC aGenerateC,
-															 final @NotNull EvaClass x,
+															 final IEvaClass x,
 															 final @NotNull CClassDecl decl,
 															 final String class_name) {
 		final BufferTabbedOutputStream tosHdr = new BufferTabbedOutputStream();
@@ -122,7 +121,7 @@ public class GarishClass {
 		tosHdr.incr_tabs();
 		tosHdr.put_string_ln("int _tag;");
 		if (!decl.prim) {
-			for (IEvaClass.VarTableEntry o : x.varTable) {
+			for (IEvaClass.VarTableEntry o : x.varTable()) {
 				final String typeName = aGenerateC.getTypeNameGNCForVarTableEntry(o);
 				tosHdr.put_string_ln(String.format("%s vm%s;", typeName, o.nameToken));
 			}
@@ -147,9 +146,9 @@ public class GarishClass {
 		return tosHdr;
 	}
 
-	public @NotNull String finalizedGenericPrintable(final @NotNull EvaClass evaClass) {
+	public @NotNull String finalizedGenericPrintable(final IEvaClass evaClass) {
 		final ClassStatement                 klass = evaClass.getKlass();
-		final ClassInvocation.CI_GenericPart x     = evaClass.ci.genericPart();
+		final ClassInvocation.CI_GenericPart x     = evaClass._ci().genericPart();
 
 		final String        name = klass.getName();
 		final StringBuilder sb   = new StringBuilder();
