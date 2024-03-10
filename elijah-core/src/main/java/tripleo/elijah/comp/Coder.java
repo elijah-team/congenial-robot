@@ -47,10 +47,8 @@ public class Coder {
 		codeRegistrar.registerFunction(generatedFunction);
 	}
 
-	public void codeNodeClass(@NotNull final EvaClass generatedClass, final OS_Module mod) {
-//		if (generatedClass.getCode() == 0)
-//			generatedClass.setCode(mod.parent.nextClassCode());
-		codeRegistrar.registerClass(generatedClass);
+	private void setClassmapNodeCodes(@NotNull final Map<ClassStatement, IEvaClass> aClassMap, final OS_Module mod) {
+		aClassMap.values().forEach(generatedClass -> codeNodeClass(generatedClass, mod));
 	}
 
 	public void codeNodeNamespace(@NotNull final EvaNamespace generatedNamespace, final OS_Module mod) {
@@ -81,7 +79,9 @@ public class Coder {
 		}
 	}
 
-	private void setClassmapNodeCodes(@NotNull final Map<ClassStatement, EvaClass> aClassMap, final OS_Module mod) {
-		aClassMap.values().forEach(generatedClass -> codeNodeClass(generatedClass, mod));
+	public void codeNodeClass(@NotNull final IEvaClass generatedClass, final OS_Module mod) {
+//		if (generatedClass.getCode() == 0)
+//			generatedClass.setCode(mod.parent.nextClassCode());
+		codeRegistrar.registerClass((EvaClass) generatedClass);
 	}
 }

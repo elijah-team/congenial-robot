@@ -10,10 +10,10 @@ import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.comp.internal.Provenance;
 import tripleo.elijah.comp.notation.GN_Env;
 import tripleo.elijah.comp.notation.GN_Notable;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.EvaNode;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah_congenial.pipelines.eva.EvaPipelineImpl;
@@ -102,7 +102,7 @@ public class EvaPipeline implements PipelineMember, AccessBus.AB_LgcListener {
 		}
 
 		@Override
-		public void activeClass(final EvaClass aEvaClass) {
+		public void activeClass(final IEvaClass aEvaClass) {
 			pa0.activeClass(aEvaClass);
 		}
 
