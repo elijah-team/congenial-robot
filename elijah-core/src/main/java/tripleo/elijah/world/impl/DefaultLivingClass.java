@@ -7,6 +7,7 @@ import tripleo.elijah.comp.functionality.f291.AmazingPart;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.world.i.LivingClass;
 
 public class DefaultLivingClass implements LivingClass {
@@ -42,7 +43,7 @@ public class DefaultLivingClass implements LivingClass {
 		return _gc.getCode();
 	}
 
-	public EvaClass gc() {
+	public IEvaClass gc() {
 		return _gc;
 	}
 

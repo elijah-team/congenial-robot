@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.comp.*;
@@ -18,10 +19,6 @@ import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah_congenial.pipelines.eva.FunctionStatement;
@@ -34,9 +31,9 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRegister {
-	private final @NotNull List<EvaNode>                             _l_classes       = new ArrayList<>();
-	private final @NotNull List<EvaClass>                            activeClasses    = new ArrayList<>();
-	private final @NotNull List<BaseEvaFunction>                     activeFunctions  = new ArrayList<>();
+	private final @NotNull List<EvaNode>         _l_classes      = new ArrayList<>();
+	private final @NotNull List<IEvaClass>       activeClasses   = new ArrayList<>();
+	private final @NotNull List<BaseEvaFunction> activeFunctions = new ArrayList<>();
 	private final @NotNull List<EvaNamespace>                        activeNamespaces = new ArrayList<>();
 	private final @NotNull Eventual<PipelineLogic>                   _p_pipelineLogic = new Eventual<>();
 	private final @NotNull Eventual<EvaPipeline>                     _p_EvaPipeline   = new Eventual<>();
@@ -159,7 +156,7 @@ public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRe
 	}
 
 	@Override
-	public void activeClass(final EvaClass aEvaClass) {
+	public void activeClass(final IEvaClass aEvaClass) {
 		activeClasses.add(aEvaClass);
 	}
 
@@ -179,7 +176,7 @@ public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRe
 	}
 
 	@Override
-	public @NotNull List<EvaClass> getActiveClasses() {
+	public @NotNull List<IEvaClass> getActiveClasses() {
 		return activeClasses;
 	}
 

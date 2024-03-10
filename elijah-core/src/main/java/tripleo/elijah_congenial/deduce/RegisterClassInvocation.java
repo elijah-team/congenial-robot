@@ -9,8 +9,8 @@ import tripleo.elijah.nextgen.ClassDefinition;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DerivedClassInvocation;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.work.WorkList;
 
@@ -50,7 +50,7 @@ public class RegisterClassInvocation {
 
 					/*if (ci.resolvePromise().isResolved())*/
 					{
-						ci.onResolve((final @NotNull EvaClass result) -> {
+						ci.onResolve((final @NotNull IEvaClass result) -> {
 							aClassInvocation.resolveDeferred().resolve(result);
 						});
 						return aClassInvocation;

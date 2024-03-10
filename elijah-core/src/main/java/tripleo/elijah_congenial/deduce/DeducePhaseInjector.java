@@ -135,7 +135,7 @@ public class DeducePhaseInjector {
 		return new ResolvedVariables(aIdentTableEntry, aParent, aVarName);
 	}
 
-	public List<EvaClass> new_ArrayList__EvaClass() {
+	public List<IEvaClass> new_ArrayList__EvaClass() {
 		return new ArrayList<>();
 	}
 
