@@ -28,12 +28,12 @@ public class TypeTableEntry {
 	@Nullable
 	public final    TableEntryIV    tableEntry;
 	final           int             index;
-	private         BaseEvaFunction __gf;
+	private         tripleo.elijah.stages.gen_fn.IBaseEvaFunction __gf;
 	private         DeduceTypes2    _dt2;
 	@Nullable
 	private         OS_Type         attached;
 
-	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull BaseEvaFunction aEvaFunction) {
+	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction) {
 		_dt2 = aDeduceTypes2;
 		__gf = aEvaFunction;
 	}

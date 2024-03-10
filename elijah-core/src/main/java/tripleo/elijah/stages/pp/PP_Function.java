@@ -3,7 +3,7 @@ package tripleo.elijah.stages.pp;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.stages.gen_c.DeducedBaseEvaFunction;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 
 import java.util.function.Consumer;
 
@@ -18,8 +18,8 @@ public class PP_Function implements IPP_Function {
 		throw new UnintendedUseException();
 	}
 
-	public BaseEvaFunction getCarrier() {
-		return (BaseEvaFunction) carrier.getCarrier();
+	public IBaseEvaFunction getCarrier() {
+		return (IBaseEvaFunction) carrier.getCarrier();
 	}
 
 	@Override

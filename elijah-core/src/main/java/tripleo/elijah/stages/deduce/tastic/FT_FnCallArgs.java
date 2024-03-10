@@ -33,7 +33,7 @@ public class FT_FnCallArgs implements ITastic {
 	private final  FnCallArgs   fca;
 
 	@Override
-	public void do_assign_call(final @NotNull BaseEvaFunction generatedFunction, final @NotNull Context ctx,
+	public void do_assign_call(final @NotNull IBaseEvaFunction generatedFunction, final @NotNull Context ctx,
 							   final @NotNull IdentTableEntry idte, final int instructionIndex) {
 		final @NotNull ProcTableEntry pte = generatedFunction.getProcTableEntry(to_int(fca.getArg(0)));
 		for (final @NotNull TypeTableEntry tte : pte.getArgs()) {
@@ -108,8 +108,11 @@ public class FT_FnCallArgs implements ITastic {
 	}
 
 	@Override
-	public void do_assign_call(final @NotNull BaseEvaFunction generatedFunction, final @NotNull Context ctx,
-							   final @NotNull VariableTableEntry vte, final @NotNull Instruction instruction, final OS_Element aName) {
+	public void do_assign_call(final @NotNull IBaseEvaFunction generatedFunction,
+							   final @NotNull Context ctx,
+							   final @NotNull VariableTableEntry vte,
+							   final @NotNull Instruction instruction,
+							   final OS_Element aName) {
 		// NOTE Interesting non static syntax
 		final DeduceTypes2.DeduceClient4 client4          = deduceTypes2._inj().new_DeduceClient4(deduceTypes2);
 		final DoAssignCall               dac              = deduceTypes2._inj().new_DoAssignCall(client4, generatedFunction, this);
@@ -174,9 +177,9 @@ public class FT_FnCallArgs implements ITastic {
 	 */
 	public class DoAssignCall {
 		final                  DeduceTypes2.DeduceClient4 dc;
-		final                  ErrSink                    errSink;
-		final @NotNull         BaseEvaFunction            generatedFunction;
-		final @NotNull         ElLog                      LOG;
+		final          ErrSink          errSink;
+		final          IBaseEvaFunction generatedFunction;
+		final @NotNull ElLog            LOG;
 		private final @NotNull OS_Module                  module;
 
 		public OS_Module getModule() {
@@ -184,7 +187,7 @@ public class FT_FnCallArgs implements ITastic {
 		}
 
 		public DoAssignCall(final DeduceTypes2.DeduceClient4 aDeduceClient4,
-							final @NotNull BaseEvaFunction aGeneratedFunction) {
+							final IBaseEvaFunction aGeneratedFunction) {
 			dc                = aDeduceClient4;
 			generatedFunction = aGeneratedFunction;
 			//

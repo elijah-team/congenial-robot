@@ -41,9 +41,9 @@ public abstract class AbstractDependencyTracker implements DependencyTracker {
 		}
 	};*/
 
-	public void addDependentFunction(@NotNull FunctionInvocation aFunction) {
+	public void addDependentFunction(@NotNull FunctionInvocation aFunctionInvocation) {
 //		dependentFunctions.add(aFunction);
-		dependentFunctionsSubject.onNext(aFunction);
+		dependentFunctionsSubject.onNext(aFunctionInvocation);
 	}
 
 	public void addDependentType(@NotNull GenType aType) {
@@ -51,7 +51,7 @@ public abstract class AbstractDependencyTracker implements DependencyTracker {
 		dependentTypesSubject.onNext(aType);
 	}
 
-	//	@Override
+	//@Override
 	public @NotNull List<FunctionInvocation> dependentFunctions() {
 		return dependentFunctions;
 	}

@@ -8,7 +8,6 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ import tripleo.elijah.lang.impl.ExpressionBuilder;
 import tripleo.elijah.lang.impl.FunctionDefImpl;
 import tripleo.elijah.lang.impl.Scope3Impl;
 import tripleo.elijah.lang.impl.StatementWrapperImpl;
-import tripleo.elijah.lang.types.OS_UnknownType;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
@@ -143,7 +141,7 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 
 				if (map != null) {
 					sb.append("[");
-					final String joined = getNameHelper(map);
+					final String joined = GenFnU.getNameHelper(map);
 					sb.append(joined);
 					sb.append("]");
 				}
@@ -196,6 +194,16 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 		resolve_var_table_entries_already = true; // TODO is this right?
 		return Result;
 	}
+
+	@Override
+	public List<VarTableEntry> varTable() {
+		return varTable;
+	}
+
+	//@Override
+	//public void functionMapDeferred(final FunctionDef aElement, final Object aO) {
+	//
+	//}
 
 	@Override
 	public @NotNull String toString() {

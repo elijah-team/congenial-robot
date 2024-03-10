@@ -41,7 +41,7 @@ public abstract class BaseTableEntry {
 	};
 	private final Eventual<DeduceTypes2>                        _p_DeduceTypes2   = new Eventual<>();
 	private final List<StatusListener> statusListenerList = new ArrayList<StatusListener>();
-	private       BaseEvaFunction      __gf;
+	private       tripleo.elijah.stages.gen_fn.IBaseEvaFunction      __gf;
 	private       DeduceTypes2         __dt2;
 	private       Status               status             = Status.UNCHECKED;
 	private       DeduceTypeResolve    typeResolve;
@@ -60,7 +60,7 @@ public abstract class BaseTableEntry {
 		return c.apply(resolve);
 	}
 
-	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull BaseEvaFunction aEvaFunction) {
+	public void _fix_table(final DeduceTypes2 aDeduceTypes2, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction) {
 		provide(aDeduceTypes2);
 		__gf = aEvaFunction;
 
@@ -146,11 +146,11 @@ public abstract class BaseTableEntry {
 		return _p_elementPromise;
 	}
 
-	public BaseEvaFunction get__gf() {
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction get__gf() {
 		return __gf;
 	}
 
-	public void set__gf(BaseEvaFunction a__gf) {
+	public void set__gf(tripleo.elijah.stages.gen_fn.IBaseEvaFunction a__gf) {
 		__gf = a__gf;
 	}
 

@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class GCX_FunctionCall_Special {
 	private final GenerateC   gc;
-	//private final BaseEvaFunction gf;
+	//private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf;
 	private final Instruction instruction;
 	private final ProcTableEntry  pte;
 

@@ -429,10 +429,10 @@ public class Generate_Code_For_Method {
 		final VariableTableEntry vte = vte_num.getEntry();
 
 		tripleo.elijah.stages.deduce.DeduceTypes2 dt2 = null;
-		BaseEvaFunction                           gf1 = null;
+		tripleo.elijah.stages.gen_fn.IBaseEvaFunction                           gf1 = null;
 		boolean                                   qqq = false;
 		{
-			List<DR_Item> x = gf.getGf().drs;
+			List<DR_Item> x = gf.getDrs();
 
 			if (x.size() > 0) {
 				if (x.get(0) instanceof DR_Ident ident) {

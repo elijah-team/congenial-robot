@@ -9,17 +9,18 @@
 package tripleo.elijah.stages.instructions;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 
 /**
  * Created 9/10/20 3:35 PM
  */
 public class ConstTableIA implements InstructionArgument {
-	private final BaseEvaFunction gf;
+	private final IBaseEvaFunction gf;
 	private final int             index;
 
-	public ConstTableIA(final int index, final BaseEvaFunction generatedFunction) {
+	public ConstTableIA(final int index, final IBaseEvaFunction generatedFunction) {
 		this.index = index;
 		this.gf    = generatedFunction;
 	}

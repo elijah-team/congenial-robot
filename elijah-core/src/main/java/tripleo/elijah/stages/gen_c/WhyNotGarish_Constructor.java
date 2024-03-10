@@ -69,7 +69,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 	}
 
 	@Override
-	public BaseEvaFunction getGf() {
+	public IBaseEvaFunction getGf() {
 		return gf;
 	}
 
@@ -121,7 +121,7 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 				// TODO constructor
 				int y = 2;
 			} else {
-				BaseEvaFunction gf = fi.getEva();
+				tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf = fi.getEva();
 				if (gf != null) {
 					aWl.addJob(new GenerateC.WlGenerateFunctionC(aFileGen, gf, generateC));
 				}

@@ -73,7 +73,7 @@ public enum VTE_TypePromises {
 	}
 
 	static void found_parent(final @NotNull DeduceTypes2.PromiseExpectation<GenType> aPromiseExpectation,
-							 final @NotNull BaseEvaFunction generatedFunction,
+							 final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 							 final @NotNull VariableTableEntry aBte,
 							 final @NotNull IdentTableEntry ite,
 							 final @NotNull DeduceTypes2 aDeduceTypes2) {
@@ -136,7 +136,7 @@ public enum VTE_TypePromises {
 
 	// region DeduceTypes2
 
-	public static void getItemFali(final @NotNull BaseEvaFunction generatedFunction,
+	public static void getItemFali(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 								   final @NotNull Context ctx,
 								   final @NotNull VariableTableEntry aVte2,
 								   final @NotNull DeduceTypes2 aDeduceTypes2) {

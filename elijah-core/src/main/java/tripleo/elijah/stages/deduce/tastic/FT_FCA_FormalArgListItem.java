@@ -5,16 +5,17 @@ import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.i.FormalArgListItem;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang.types.OS_UserType;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GenType;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
 
 public class FT_FCA_FormalArgListItem {
 	private final FormalArgListItem fali;
-	private final BaseEvaFunction   generatedFunction;
+	private final IBaseEvaFunction   generatedFunction;
 
-	public FT_FCA_FormalArgListItem(final FormalArgListItem aFali, final BaseEvaFunction aGeneratedFunction) {
+	public FT_FCA_FormalArgListItem(final FormalArgListItem aFali, final IBaseEvaFunction aGeneratedFunction) {
 		fali              = aFali;
 		generatedFunction = aGeneratedFunction;
 	}

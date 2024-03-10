@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DefaultDeducedBaseEvaFunction implements DeducedBaseEvaFunction {
-	private final BaseEvaFunction carrier;
+	private final IBaseEvaFunction carrier;
 	private final LF_CodeRegistration codeRegistration = new LF_CodeRegistration() {
 		@Override
 		public void accept(final EvaFunction aEvaFunction, final Eventual<Integer> aCodeCallback) {
@@ -35,11 +35,11 @@ public class DefaultDeducedBaseEvaFunction implements DeducedBaseEvaFunction {
 		}
 	};
 
-	public DefaultDeducedBaseEvaFunction(final BaseEvaFunction aEvaFunction) {
+	public DefaultDeducedBaseEvaFunction(final IBaseEvaFunction aEvaFunction) {
 		carrier = aEvaFunction;
 
-		assert carrier._living != null; // forgot how to do this right
-		carrier._living.codeRegistration(codeRegistration);
+		assert carrier.hasLiving(); // forgot how to do this right
+		carrier.setLiving_codeRegistration(codeRegistration);
 	}
 
 	public void addDependentFunction(@NotNull final FunctionInvocation aFunction) {

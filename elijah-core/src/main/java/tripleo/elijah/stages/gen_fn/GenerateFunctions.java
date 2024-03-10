@@ -66,11 +66,22 @@ import static tripleo.elijah.util.Helpers.List_of;
  * Created 9/10/20 2:28 PM
  */
 public class GenerateFunctions implements ReactiveDimension, EventualRegister {
-	private static final   String          PHASE = "GenerateFunctions";
-	final                  OS_Module       module;
-	final          GeneratePhase   phase;
-	final @NotNull ElLog  LOG;
-	private final  GenFnC bc;
+	private static final String        PHASE = "GenerateFunctions";
+	final                OS_Module     module;
+	final                GeneratePhase phase;
+	final @NotNull       ElLog         LOG;
+	private final        GenFnC        bc;
+
+	public GenerateFunctions(final OS_Module aModule, final GenFnC aBc) {
+		bc = aBc;
+
+		phase  = bc.getGeneratePhase();
+		module = aModule;
+
+		LOG = new ElLog(module.getFileName(), phase.getVerbosity(), PHASE);
+
+		bc.addLog(LOG);
+	}
 
 	/**
 	 * Add a Constant Table Entry of type with Type Table Entry type {@link TypeTableEntry.Type#SPECIFIED}
@@ -81,10 +92,10 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	 * @param gf
 	 * @return the cte table index
 	 */
-	int addConstantTableEntry(final String name, final IExpression initialValue, final OS_Type type, final @NotNull BaseEvaFunction gf) {
+	int addConstantTableEntry(final String name, final IExpression initialValue, final OS_Type type, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final @NotNull TypeTableEntry     tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, type, initialValue);
-		final @NotNull ConstantTableEntry cte = new ConstantTableEntry(gf.cte_list.size(), name, initialValue, tte);
-		gf.cte_list.add(cte);
+		final @NotNull ConstantTableEntry cte = new ConstantTableEntry(gf._cte_list().size(), name, initialValue, tte);
+		gf._cte_list().add(cte);
 		return cte.index;
 	}
 
@@ -97,9 +108,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	 * @param gf
 	 * @return the cte table index
 	 */
-	private int addConstantTableEntry2(final String name, final IExpression initialValue, final OS_Type type, final @NotNull BaseEvaFunction gf) {
+	private int addConstantTableEntry2(final String name, final IExpression initialValue, final OS_Type type, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final @NotNull TypeTableEntry     tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, type, initialValue);
-		final @NotNull ConstantTableEntry cte = new ConstantTableEntry(gf.cte_list.size(), name, initialValue, tte);
+		final @NotNull ConstantTableEntry cte = new ConstantTableEntry(gf._cte_list().size(), name, initialValue, tte);
 
 /*
 		gf.b(new BuildaBear() {
@@ -112,17 +123,17 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		});
 */
 
-		gf.cte_list.add(cte);
+		gf._cte_list().add(cte);
 		return cte.index;
 	}
 
-	int addTempTableEntry(final OS_Type type, final @NotNull BaseEvaFunction gf) {
+	int addTempTableEntry(final OS_Type type, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		return addTempTableEntry(type, null, gf, null);
 	}
 
 	int addTempTableEntry(final OS_Type type,
 						  @Nullable final IdentExpression name,
-						  @NotNull final BaseEvaFunction gf,
+						  @NotNull final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 						  @Nullable OS_Element el) {
 		final @org.jetbrains.annotations.Nullable String theName;
 		final int                                        num;
@@ -141,23 +152,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		final int                         vte_index = gf.addVariableTableEntry(theName, VariableTableType.TEMP, tte, el);
 		final @NotNull VariableTableEntry vte       = gf.getVarTableEntry(vte_index);
 		vte.setTempNum(num);
-		gf.vte_list.add(vte);
+		gf._vte_list().add(vte);
 		return vte.getIndex();
 	}
 
-	int addVariableTableEntry(final String name, final TypeTableEntry type, final @NotNull BaseEvaFunction gf, OS_Element el) {
+	int addVariableTableEntry(final String name, final TypeTableEntry type, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, OS_Element el) {
 		return gf.addVariableTableEntry(name, VariableTableType.VAR, type, el);
-	}
-
-	public GenerateFunctions(final OS_Module aModule, final GenFnC aBc) {
-		bc = aBc;
-
-		phase = bc.getGeneratePhase();
-		module = aModule;
-
-		LOG = new ElLog(module.getFileName(), phase.getVerbosity(), PHASE);
-
-		bc.addLog(LOG);
 	}
 
 	//public GenerateFunctions(final OS_Module aModule, @NotNull PipelineLogic aPipelineLogic, final IPipelineAccess pa0) {
@@ -173,12 +173,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	//	bc.addLog(LOG);
 	//}
 
-	int add_i(@NotNull final BaseEvaFunction gf, final InstructionName x, final List<InstructionArgument> list_of, final Context ctx) {
+	int add_i(@NotNull final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final InstructionName x, final List<InstructionArgument> list_of, final Context ctx) {
 		final int i = gf.add(x, list_of, ctx);
 		return i;
 	}
 
-	void assign_variable(final @NotNull BaseEvaFunction gf, final int vte, @NotNull final IExpression value, final @NotNull Context cctx) {
+	void assign_variable(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final int vte, @NotNull final IExpression value, final @NotNull Context cctx) {
 		if (value == IExpression.UNASSIGNED) return; // default_expression
 		switch (value.getKind()) {
 		case PROCEDURE_CALL:
@@ -227,7 +227,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	}
 
 	private @NotNull Instruction expression_to_call(@NotNull final ProcedureCallExpression pce,
-													@NotNull final BaseEvaFunction gf,
+													@NotNull final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 													@NotNull final Context cctx) {
 		final IExpression left = pce.getLeft();
 		switch (left.getKind()) {
@@ -259,7 +259,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	}
 
 	@NotNull
-	private Instruction expression_to_call_add_entry(final @NotNull BaseEvaFunction gf,
+	private Instruction expression_to_call_add_entry(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 													 @NotNull final ProcedureCallExpression pce,
 													 final @NotNull IExpression left,
 													 final @NotNull Context cctx) {
@@ -277,7 +277,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	}
 
 	@NotNull
-	private Instruction expression_to_call_add_entry(final @NotNull BaseEvaFunction gf,
+	private Instruction expression_to_call_add_entry(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 													 @NotNull final ProcedureCallExpression pce,
 													 final IExpression left,
 													 final InstructionArgument left1,
@@ -303,7 +303,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return i;
 	}
 
-	void generate_item_assignment(final StatementWrapper aStatementWrapper, @NotNull final IExpression x, @NotNull final BaseEvaFunction gf, final @NotNull Context cctx) {
+	void generate_item_assignment(final StatementWrapper aStatementWrapper, @NotNull final IExpression x, @NotNull final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Context cctx) {
 //		LOG.err(String.format("801 %s %s", x.getLeft(), ((BasicBinaryExpressionImpl) x).getRight()));
 		final @NotNull BasicBinaryExpression    bbe    = (BasicBinaryExpression) x;
 		final IExpression                       right1 = bbe.getRight();
@@ -343,7 +343,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	void generate_item_dot_expression(@org.jetbrains.annotations.Nullable final InstructionArgument backlink,
 									  final IExpression left,
 									  final @NotNull IExpression right,
-									  final @NotNull BaseEvaFunction gf,
+									  final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 									  final Context cctx) {
 		final int                      index   = gf.addIdentTableEntry((IdentExpression) left, cctx);
 		final @NotNull IdentIA         identIA = new IdentIA(index, gf);
@@ -436,7 +436,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gf;
 	}
 
-	void generate_item(final OS_Element item, @NotNull final BaseEvaFunction gf, final @NotNull Context cctx) {
+	void generate_item(final OS_Element item, @NotNull final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Context cctx) {
 		@NotNull Generate_Item gi = new Generate_Item(this);
 		if (item instanceof AliasStatement) {
 			gi.generate_alias_statement((AliasStatement) item);
@@ -444,13 +444,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			gi.generate_case_conditional((CaseConditional) item);
 		} else if (item instanceof final ClassStatement klass) {
 			// TODO this still has no ClassInvocation
-			@NotNull IEvaClass gc        = generateClass(klass);
-			int                ite_index = gf.addIdentTableEntry((klass).getNameNode(), cctx);
+			@NotNull IEvaClass       gc        = generateClass(klass);
+			int                      ite_index = gf.addIdentTableEntry((klass).getNameNode(), cctx);
 			@NotNull IdentTableEntry ite       = gf.getIdentTableEntry(ite_index);
 			ite.resolveTypeToClass(gc);
 			ite.onDeduceTypes2(dt2 -> {
 				var _ci = dt2._phase().registerClassInvocation(klass, dt2);
-				System.err.println("453 "+_ci.asString());
+				System.err.println("453 " + _ci.asString());
 			});
 		} else if (item instanceof final @NotNull StatementWrapper sw) {
 			final IExpression    x              = sw.getExpr();
@@ -480,7 +480,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	}
 
 	private @NotNull List<TypeTableEntry> get_args_types(final @NotNull List<FormalArgListItem> args,
-														 final @NotNull BaseEvaFunction gf) {
+														 final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final @NotNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
 		//
 		for (final @NotNull FormalArgListItem arg : args) {
@@ -499,13 +499,13 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return R;
 	}
 
-	private @NotNull InstructionArgument simplify_dot_expression(final @NotNull DotExpression dotExpression, final @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+	private @NotNull InstructionArgument simplify_dot_expression(final @NotNull DotExpression dotExpression, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 		@NotNull InstructionArgument x = gf.get_assignment_path(dotExpression, this, cctx);
 		LOG.info("1117 " + x);
 		return x;
 	}
 
-	void simplify_procedure_call(@NotNull final ProcedureCallExpression pce, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+	void simplify_procedure_call(@NotNull final ProcedureCallExpression pce, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Context cctx) {
 		final IExpression                                        left = pce.getLeft();
 		final @org.jetbrains.annotations.Nullable ExpressionList args = pce.getArgs();
 		//
@@ -547,9 +547,9 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gc;
 	}
 
-	public int addProcTableEntry(final IExpression expression, final InstructionArgument expression_num, final List<TypeTableEntry> args, final @NotNull BaseEvaFunction gf) {
-		final @NotNull ProcTableEntry pte = new ProcTableEntry(gf.prte_list.size(), expression, expression_num, args);
-		gf.prte_list.add(pte);
+	public int addProcTableEntry(final IExpression expression, final InstructionArgument expression_num, final List<TypeTableEntry> args, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
+		final @NotNull ProcTableEntry pte = new ProcTableEntry(gf._prte_list().size(), expression, expression_num, args);
+		gf._prte_list().add(pte);
 		if (expression_num instanceof final @NotNull IdentIA identIA) {
 			if (identIA.getEntry().getCallablePTE() == null)
 				identIA.getEntry().setCallablePTE(pte);
@@ -558,7 +558,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	}
 
 	@NotNull List<TypeTableEntry> get_args_types(@org.jetbrains.annotations.Nullable final ExpressionList args,
-												 final @NotNull BaseEvaFunction gf,
+												 final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 												 @NotNull final Context aContext) {
 		final @NotNull List<TypeTableEntry> R = new ArrayList<TypeTableEntry>();
 		if (args == null) return R;
@@ -733,7 +733,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return gn;
 	}
 
-	@NotNull List<InstructionArgument> simplify_args(@org.jetbrains.annotations.Nullable final ExpressionList args, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+	@NotNull List<InstructionArgument> simplify_args(@org.jetbrains.annotations.Nullable final ExpressionList args, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Context cctx) {
 		final @NotNull List<InstructionArgument> R = new ArrayList<InstructionArgument>();
 		if (args == null) return R;
 		//
@@ -770,12 +770,12 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		return R;
 	}
 
-	private @NotNull TypeTableEntry getType(@NotNull final IExpression arg, final @NotNull BaseEvaFunction gf) {
+	private @NotNull TypeTableEntry getType(@NotNull final IExpression arg, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, arg.getType(), arg);
 		return tte;
 	}
 
-	InstructionArgument simplify_expression(@NotNull final IExpression expression, final @NotNull BaseEvaFunction gf, final @NotNull Context cctx) {
+	InstructionArgument simplify_expression(@NotNull final IExpression expression, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Context cctx) {
 		// TODO 23/11/10 this double resolves, ie cache the result??
 		gf._informGF(this);
 
@@ -1001,7 +1001,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	}
 
 	@NotNull
-	private InstructionArgument simplify_expression_procedure_call(@NotNull IExpression expression, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+	private InstructionArgument simplify_expression_procedure_call(@NotNull IExpression expression, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 		final @NotNull ProcedureCallExpression   pce  = (ProcedureCallExpression) expression;
 		final IExpression                        left = pce.getLeft();
 		final ExpressionList                     args = pce.getArgs();
@@ -1110,7 +1110,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			@Override
 			public List<InstructionArgument> getIdentIAPathList() {
 				final InstructionArgument s = simplify();
-				return BaseEvaFunction._getIdentIAPathList(s);
+				return GenFnU._getIdentIAPathList(s);
 			}
 
 			private @Nullable InstructionArgument simplifed = null;
@@ -1167,25 +1167,25 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	public void checkFinishEventuals() {
 		for (Eventual<?> eventual : _rs) {
 			if (!eventual.isResolved()) {
-				System.err.println("8899-1200 [GenerateFunctions] Eventual did not complete: "+eventual.description());
+				System.err.println("8899-1200 [GenerateFunctions] Eventual did not complete: " + eventual.description());
 			}
 		}
 	}
 
 	static class GIA__procedure_call__one {
 
-		final @NotNull         Instruction               expression_to_call;
-		final                  IExpression               left;
-		final @NotNull         List<InstructionArgument> list_of_fn_call;
-		final                  InstructionArgument       lookup;
-		final @NotNull         TypeTableEntry            tte;
-		private final          Context                   cctx;
-		private final @NotNull Generate_item_assignment  generate_item_assign;
-		private final          BaseEvaFunction           gf;
-		private final          GenerateFunctions         gfs;
+		final @NotNull         Instruction                                   expression_to_call;
+		final                  IExpression                                   left;
+		final @NotNull         List<InstructionArgument>                     list_of_fn_call;
+		final                  InstructionArgument                           lookup;
+		final @NotNull         TypeTableEntry                                tte;
+		private final          Context                                       cctx;
+		private final @NotNull Generate_item_assignment                      generate_item_assign;
+		private final          tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf;
+		private final          GenerateFunctions                             gfs;
 
 		public GIA__procedure_call__one(final @NotNull BasicBinaryExpression bbe,
-										final @NotNull BaseEvaFunction gf,
+										final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 										final @NotNull Context cctx,
 										final @NotNull Generate_item_assignment generate_item_assignment,
 										final @NotNull ProcedureCallExpression pce,
@@ -1255,11 +1255,11 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 		//
 
-		int add_i(final @NotNull BaseEvaFunction aGf, final InstructionName aAgn, final List<InstructionArgument> aList_of_fn_call, final Context aCctx) {
+		int add_i(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final InstructionName aAgn, final List<InstructionArgument> aList_of_fn_call, final Context aCctx) {
 			return gfs.add_i(aGf, aAgn, aList_of_fn_call, aCctx);
 		}
 
-		int addVariableTableEntry(final String aText, final @NotNull TypeTableEntry aTte, final @NotNull BaseEvaFunction aGf, final IdentExpression aIdentExpression) {
+		int addVariableTableEntry(final String aText, final @NotNull TypeTableEntry aTte, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final IdentExpression aIdentExpression) {
 			return gfs.addVariableTableEntry(aText, aTte, aGf, aIdentExpression);
 		}
 
@@ -1267,7 +1267,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 
 	class Generate_item_assignment {
 
-		public void dot(@NotNull BaseEvaFunction gf, @NotNull DotExpression left, @NotNull IExpression right, @NotNull Context cctx) {
+		public void dot(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull DotExpression left, @NotNull IExpression right, @NotNull Context cctx) {
 			final InstructionArgument simple_left  = simplify_expression(left, gf, cctx);
 			final InstructionArgument simple_right = simplify_expression(right, gf, cctx);
 
@@ -1305,7 +1305,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			int y = 2;
 		}
 
-		public void ident(@NotNull BaseEvaFunction gf, @NotNull IdentExpression left, @NotNull IdentExpression right, Context cctx) {
+		public void ident(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull IdentExpression left, @NotNull IdentExpression right, Context cctx) {
 			final @org.jetbrains.annotations.Nullable InstructionArgument vte_left = gf.vte_lookup(left.getText());
 			final int                                                     ident_left;
 			int                                                           ident_right;
@@ -1333,7 +1333,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 		}
 
-		public void mathematical(@NotNull BaseEvaFunction gf, @NotNull IExpression left, ExpressionKind kind, @NotNull IExpression right1, @NotNull Context cctx) {
+		public void mathematical(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull IExpression left, ExpressionKind kind, @NotNull IExpression right1, @NotNull Context cctx) {
 			// TODO doesn't use kind
 			final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, right1.getType(), right1);
 
@@ -1354,7 +1354,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 		}
 
-		public void neg(@NotNull BaseEvaFunction gf, @NotNull IExpression left, ExpressionKind aKind, @NotNull IExpression right1, @NotNull Context cctx) {
+		public void neg(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull IExpression left, ExpressionKind aKind, @NotNull IExpression right1, @NotNull Context cctx) {
 			// TODO doesn't use kind
 			final @NotNull TypeTableEntry tte = gf.newTypeTableEntry(TypeTableEntry.Type.SPECIFIED, right1.getType(), right1);
 
@@ -1375,7 +1375,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			}
 		}
 
-		public void numeric(@NotNull BaseEvaFunction gf, @NotNull IExpression left, @NotNull NumericExpression ne, @NotNull Context cctx) {
+		public void numeric(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull IExpression left, @NotNull NumericExpression ne, @NotNull Context cctx) {
 			@NotNull final InstructionArgument agn_path = gf.get_assignment_path(left, GenerateFunctions.this, cctx);
 			final int                          cte      = addConstantTableEntry("", ne, ne.getType(), gf);
 
@@ -1383,7 +1383,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			// TODO what now??
 		}
 
-		public void procedure_call(final StatementWrapper aStatementWrapper, @NotNull BaseEvaFunction gf, @NotNull BasicBinaryExpression bbe, @NotNull ProcedureCallExpression pce, @NotNull Context cctx) {
+		public void procedure_call(final StatementWrapper aStatementWrapper, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull BasicBinaryExpression bbe, @NotNull ProcedureCallExpression pce, @NotNull Context cctx) {
 /*
 			final IExpression left = bbe.getLeft();
 
@@ -1435,7 +1435,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 */
 		}
 
-		public void string_literal(@NotNull BaseEvaFunction gf, @NotNull IExpression left, StringExpression right, @NotNull Context aContext) {
+		public void string_literal(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull IExpression left, StringExpression right, @NotNull Context aContext) {
 			@NotNull final InstructionArgument agn_path = gf.get_assignment_path(left, GenerateFunctions.this, aContext);
 			final int                          cte      = addConstantTableEntry("", right, new OS_BuiltinType(BuiltInTypes.String_)/*right.getType()*/, gf);
 
@@ -1455,7 +1455,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 //			throw new NotImplementedException();
 		}
 
-		public void generate_construct_statement(@NotNull ConstructStatement aConstructStatement, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+		public void generate_construct_statement(@NotNull ConstructStatement aConstructStatement, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 			final IExpression    left = aConstructStatement.getExpr(); // TODO need type of this expr, not expr!!
 			final ExpressionList args = aConstructStatement.getArgs();
 			//
@@ -1665,7 +1665,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		private void generate_statement_wrapper(final StatementWrapper aStatementWrapper,
 												@NotNull IExpression x,
 												@NotNull ExpressionKind expressionKind,
-												@NotNull BaseEvaFunction gf,
+												@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 												@NotNull Context cctx) {
 //			LOG.err("106-1 "+x.getKind()+" "+x);
 			if (x.is_simple()) {
@@ -1693,8 +1693,8 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 						if (argument_type.getAttached() == null) {
 							// still dont know the argument types at this point, which creates a problem
 							// for resolving functions, so wait until later when more information is available
-							if (!gf.deferred_calls.contains(i))
-								gf.deferred_calls.add(i);
+							if (!gf.deferred_calls_contains(i))
+								gf.add_deferred_call(i);
 							break;
 						}
 					}

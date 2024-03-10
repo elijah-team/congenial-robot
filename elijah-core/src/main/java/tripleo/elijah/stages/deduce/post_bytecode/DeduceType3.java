@@ -21,7 +21,7 @@ class DeduceType3 implements DED {
 		diagnostic     = aDiagnostic;
 	}
 
-	public static IDeduceElement3 dispatch(final @NotNull IdentTableEntry aIdentTableEntry, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public static IDeduceElement3 dispatch(final @NotNull IdentTableEntry aIdentTableEntry, final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		return aIdentTableEntry.getDeduceElement3(aDeduceTypes2, aGeneratedFunction);
 	}
 

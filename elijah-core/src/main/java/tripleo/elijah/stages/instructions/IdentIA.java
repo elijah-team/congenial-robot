@@ -16,7 +16,7 @@ import tripleo.elijah.stages.gen_fn.*;
  * Created 10/2/20 2:36 PM
  */
 public class IdentIA implements InstructionArgument, Constructable {
-	public final  BaseEvaFunction gf;
+	public final  tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf;
 	private final int             id;
 //	private InstructionArgument prev;
 
@@ -27,7 +27,7 @@ public class IdentIA implements InstructionArgument, Constructable {
 	}
 */
 
-	public IdentIA(final int ite, final BaseEvaFunction generatedFunction) {
+	public IdentIA(final int ite, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
 		this.gf = generatedFunction;
 		this.id = ite;
 	}

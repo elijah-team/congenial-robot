@@ -16,7 +16,7 @@ public class DT_Resolvabley {
 		x = aX;
 	}
 
-	public @NotNull String getNormalPath(final @NotNull BaseEvaFunction generatedFunction, final IdentIA identIA) {
+	public @NotNull String getNormalPath(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final IdentIA identIA) {
 		final List<String> rr = new LinkedList<>();
 
 		for (DT_Resolvable resolvable : x) {

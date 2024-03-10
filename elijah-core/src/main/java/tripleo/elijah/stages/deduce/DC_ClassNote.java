@@ -2,7 +2,8 @@ package tripleo.elijah.stages.deduce;
 
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.Context;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 
 class DC_ClassNote {
@@ -17,17 +18,17 @@ class DC_ClassNote {
 		central = aCentral;
 	}
 
-	public void attach(final IdentTableEntry aIte, final BaseEvaFunction aGeneratedFunction) {
+	public void attach(final IdentTableEntry aIte, final IBaseEvaFunction aGeneratedFunction) {
 		final DeduceTypes2 deduceTypes2 = central.getDeduceTypes2();
 		dc_classNote_dt2 = deduceTypes2._inj().new_DC_ClassNote_DT2(aIte, aGeneratedFunction, deduceTypes2);
 	}
 
 	static class DC_ClassNote_DT2 {
 		private final DeduceTypes2    deduceTypes2;
-		private final BaseEvaFunction generatedFunction;
+		private final IBaseEvaFunction generatedFunction;
 		private final IdentTableEntry ite;
 
-		public DC_ClassNote_DT2(final IdentTableEntry aIte, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+		public DC_ClassNote_DT2(final IdentTableEntry aIte, final IBaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
 			ite               = aIte;
 			generatedFunction = aGeneratedFunction;
 			deduceTypes2      = aDeduceTypes2;
@@ -37,7 +38,7 @@ class DC_ClassNote {
 			return deduceTypes2;
 		}
 
-		public BaseEvaFunction getGeneratedFunction() {
+		public IBaseEvaFunction getGeneratedFunction() {
 			return generatedFunction;
 		}
 

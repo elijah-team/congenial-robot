@@ -12,6 +12,7 @@ package tripleo.elijah.stages.gen_fn;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
@@ -19,12 +20,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import tripleo.elijah.lang.i.IExpression;
-import tripleo.elijah.lang.i.IdentExpression;
-import tripleo.elijah.lang.i.OS_Element;
-import tripleo.elijah.lang.i.OS_Type;
-import tripleo.elijah.lang.i.TypeName;
-import tripleo.elijah.lang.i.VariableStatement;
+import tripleo.elijah.lang.i.*;
+import tripleo.elijah.lang.impl.OS_ElementName_;
 import tripleo.elijah.lang.types.OS_UserType;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VarTableEntry;
@@ -125,6 +122,10 @@ public interface EvaContainer extends EvaNode {
 
 		public @Nullable EvaNode resolvedType() {
 			return _resolvedType;
+		}
+
+		public OS_ElementName elementName() {
+			return OS_ElementName_.ofString(nameToken.asString());
 		}
 
 		public interface UpdatePotentialTypesCB {

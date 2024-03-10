@@ -35,7 +35,7 @@ class Generate_Method_Header {
 	@Nullable              OS_Type      type;
 	TypeTableEntry tte;
 
-	public Generate_Method_Header(final @NotNull BaseEvaFunction gf, @NotNull final GenerateC aGenerateC, final @NotNull ElLog LOG) {
+	public Generate_Method_Header(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull final GenerateC aGenerateC, final @NotNull ElLog LOG) {
 		gc   = aGenerateC;
 		name = gf.getFD().name().asString();
 		//
@@ -45,12 +45,12 @@ class Generate_Method_Header {
 		header_string  = find_header_string(gf, LOG);
 	}
 
-	@NotNull String find_return_type(final BaseEvaFunction gf, final ElLog LOG) {
+	@NotNull String find_return_type(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final ElLog LOG) {
 		return discriminator(gf, LOG, gc)
 				.find_return_type(this);
 	}
 
-	@NotNull EG_Statement find_args_statement(final @NotNull BaseEvaFunction gf) {
+	@NotNull EG_Statement find_args_statement(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 
 		final String rule = "gen_c:gcfm:Generate_Method_Header:find_args_statement";
 
@@ -67,7 +67,7 @@ class Generate_Method_Header {
 		return args;
 	}
 
-	@NotNull String find_header_string(final @NotNull BaseEvaFunction gf, final @NotNull ElLog LOG) {
+	@NotNull String find_header_string(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull ElLog LOG) {
 		// NOTE getGenClass is always a class or namespace, getParent can be a function
 		final EvaContainerNC parent = (EvaContainerNC) gf.getGenClass();
 
@@ -89,7 +89,7 @@ class Generate_Method_Header {
 		return s2;
 	}
 
-	static @NotNull GCM_D discriminator(final BaseEvaFunction bgf, final ElLog aLOG, final GenerateC aGc) {
+	static @NotNull GCM_D discriminator(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction bgf, final ElLog aLOG, final GenerateC aGc) {
 		if (bgf instanceof EvaConstructor) {
 			return new GCM_GC((EvaConstructor) bgf, aLOG, aGc);
 		} else if (bgf instanceof EvaFunction) {
@@ -99,7 +99,7 @@ class Generate_Method_Header {
 		throw new IllegalStateException();
 	}
 
-	String __find_header_string(final @NotNull BaseEvaFunction gf, final @NotNull ElLog LOG) {
+	String __find_header_string(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull ElLog LOG) {
 		final String result;
 		// TODO buffer for gf.parent.<element>.locatable
 
@@ -223,7 +223,7 @@ class Generate_Method_Header {
 		return returnType;
 	}
 
-	@NotNull String find_args_string(final @NotNull BaseEvaFunction gf) {
+	@NotNull String find_args_string(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final String args;
 		if (false) {
 			args = Helpers.String_join(", ", Collections2.transform(gf.getFD().fal().falis(), new Function<FormalArgListItem, String>() {

@@ -82,8 +82,32 @@ public class DeduceTypes2 {
 	private static final DeduceTypes2Injector __inj = new DeduceTypes2Injector(); // TODO 12/31 kt,etc singleton
 	private final DeduceTypes2Rosetta  rosetta;
 
-	public DeduceElement3_IdentTableEntry _zero_getIdent(final IdentTableEntry aIdentTableEntryBte, final BaseEvaFunction aGf, final DeduceTypes2 aDt2) {
-		return _p_zero.getIdent(aIdentTableEntryBte, aGf, aDt2);
+	private static void __post_vte_list_001(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
+			vte.onTypeResolve(gt -> {
+				var xx = vte.resolvedType();
+
+				if (xx instanceof EvaClass evaClass) {
+					if (gt.getCi() == null) {
+						gt.setCi(evaClass.ci);
+					}
+
+					gt.setResolved(evaClass.getKlass().getOS_Type());
+					gt.setTypeName(gt.getResolved());
+
+					vte.getType().setAttached(gt);
+				} else if (xx instanceof EvaConstructor evaConstructor) {
+					if (gt.getCi() == null) {
+//						gt.ci = evaConstructor.ci;
+					}
+
+					gt.setResolved(evaConstructor.fi.getClassInvocation().getKlass().getOS_Type());
+					gt.setTypeName(gt.getResolved());
+
+					vte.getType().setAttached(gt);
+				}
+			});
+		}
 	}
 
 	public CompilationEnclosure _ce() {
@@ -129,16 +153,8 @@ public class DeduceTypes2 {
 
 	private final @NotNull List<DT_External> externals = _inj().new_LinkedList__DT_External();
 
-	private void checkEvaClassVarTable(final @NotNull BaseEvaFunction generatedFunction) {
-		//for (VariableTableEntry variableTableEntry : generatedFunction.vte_list) {
-		//	variableTableEntry.setDeduceTypes2(this, aContext, generatedFunction);
-		//}
-		for (IdentTableEntry identTableEntry : generatedFunction.idte_list) {
-			identTableEntry.getDeduceElement3(this, generatedFunction)
-					.mvState(null, DeduceElement3_IdentTableEntry.ST.CHECK_EVA_CLASS_VAR_TABLE);
-			//identTableEntry.setDeduceTypes2(this, aContext, generatedFunction);
-
-		}
+	public DeduceElement3_IdentTableEntry _zero_getIdent(final IdentTableEntry aIdentTableEntryBte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final DeduceTypes2 aDt2) {
+		return _p_zero.getIdent(aIdentTableEntryBte, aGf, aDt2);
 	}
 
 	public void addResolvePending(final IDeduceResolvable aResolvable, final IDeduceElement_old aDeduceElement, final Holder<OS_Element> aHolder) {
@@ -223,7 +239,7 @@ public class DeduceTypes2 {
 	}
 
 	public void assign_type_to_idte(@NotNull IdentTableEntry ite,
-									@NotNull BaseEvaFunction generatedFunction,
+									@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 									@NotNull Context aFunctionContext,
 									@NotNull Context aContext) {
 
@@ -267,33 +283,23 @@ public class DeduceTypes2 {
 		} while (size > 0);
 	}
 
-	public IInvocation getInvocation(@NotNull EvaFunction generatedFunction) {
-		final ClassInvocation     classInvocation = generatedFunction.fi.getClassInvocation();
-		final NamespaceInvocation ni;
-		if (classInvocation == null) {
-			ni = generatedFunction.fi.getNamespaceInvocation();
-			return ni;
-		} else
-			return classInvocation;
-	}
-
 	public boolean deduceOneFunction(@NotNull EvaFunction aGeneratedFunction, @NotNull DeducePhase aDeducePhase) {
 		var ce = aDeducePhase.ca().getCompilation().getCompilationEnclosure();
 		var mt = ce.getModuleThing(aGeneratedFunction.module());
 
 
-		if (aGeneratedFunction.deducedAlready) return false;
+		if (aGeneratedFunction._deducedAlready()) return false;
 		deduce_generated_function(aGeneratedFunction, mt);
 
 		mt.addFunction(aGeneratedFunction);
 
 
-		aGeneratedFunction.deducedAlready = true;
+		aGeneratedFunction.setDeducedAlready();
 		__post_dof_idte_register_resolved(aGeneratedFunction, aDeducePhase);
 		__post_dof_result_type(aGeneratedFunction);
 		aDeducePhase.addFunction(aGeneratedFunction, aGeneratedFunction.getFD());
 
-		for (IdentTableEntry identTableEntry : aGeneratedFunction.idte_list) {
+		for (IdentTableEntry identTableEntry : aGeneratedFunction._idte_list()) {
 			final DR_Ident drIdent = aGeneratedFunction.getIdent(identTableEntry);
 			aGeneratedFunction.onInformGF(gf-> {
 				final GDM_IdentExpression mie = gf.monitor(identTableEntry.getIdent());
@@ -301,7 +307,7 @@ public class DeduceTypes2 {
 				mie.resolveDrIdent(drIdent);
 
 			});
-			aGeneratedFunction.drs.add(drIdent);
+			aGeneratedFunction.addDr(drIdent);
 		}
 		for (VariableTableEntry variableTableEntry : aGeneratedFunction.vte_list) {
 			final DR_Ident drIdent = aGeneratedFunction.getIdent(variableTableEntry);
@@ -309,11 +315,29 @@ public class DeduceTypes2 {
 				final GDM_VariableTableEntry mie = gf.monitor(variableTableEntry);
 				mie.resolveDrIdent(drIdent);
 			});
-			aGeneratedFunction.drs.add(drIdent);
+			aGeneratedFunction.addDr(drIdent);
 		}
 
 
 		return true;
+	}
+
+	public DT_Function deduce_generated_function_base(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
+													  final @NotNull FunctionDef fd,
+													  final @NotNull ModuleThing aMt) {
+		DT_Function f = new DT_Function(generatedFunction, this);
+
+		f.fix_tables();
+		f.log();
+		f.loop();
+
+		final Context fd_ctx = fd.getContext();
+
+		f.__post_vte_list_001();
+		f.__post_vte_list_002(fd_ctx);
+		f.__post_deferred_calls(fd_ctx);
+
+		return f;
 	}
 
 	private void __post_dof_result_type(final @NotNull EvaFunction aGeneratedFunction) {
@@ -399,37 +423,11 @@ public class DeduceTypes2 {
 	}
 	ST2_ ST2 = new ST2_();
 
-	public DT_Function deduce_generated_function_base(final @NotNull BaseEvaFunction generatedFunction,
-													  final @NotNull FunctionDef fd,
-													  final @NotNull ModuleThing aMt) {
-		DT_Function f = new DT_Function(generatedFunction, this);
-
-		f.fix_tables();
-		f.log();
-		f.loop();
-
-		final Context fd_ctx = fd.getContext();
-
-		f.__post_vte_list_001();
-		f.__post_vte_list_002(fd_ctx);
-		f.__post_deferred_calls(fd_ctx);
-
-		return f;
-	}
-
-	public Implement_construct newImplement_construct(final BaseEvaFunction aGeneratedFunction, final Instruction aInstruction) {
+	public Implement_construct newImplement_construct(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final Instruction aInstruction) {
 		return _inj().new_Implement_construct(this, aGeneratedFunction, aInstruction);
 	}
 
-	private /*static*/ void __post_dof_idte_register_resolved(final @NotNull EvaFunction aGeneratedFunction, final @NotNull DeducePhase aDeducePhase) {
-		final DT_Function dtFunction = new DT_Function(aGeneratedFunction, this);
-
-		dtFunction.set__state_dp(aDeducePhase);
-		dtFunction.eachIdent()
-				.applyState(ST2.getState___post_dof_idte_register_resolved(), new Times.Once(), __CHAIN__post_dof_idte_register_resolved);
-	}
-
-	void implement_is_a(final @NotNull BaseEvaFunction gf, final @NotNull Instruction instruction) {
+	void implement_is_a(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Instruction instruction) {
 		final IntegerIA testing_var_  = (IntegerIA) instruction.getArg(0);
 		final IntegerIA testing_type_ = (IntegerIA) instruction.getArg(1);
 		final Label     target_label  = ((LabelIA) instruction.getArg(2)).label;
@@ -466,7 +464,15 @@ public class DeduceTypes2 {
 		assert testing_type__.isResolved();
 	}
 
-	void do_agnk(final @NotNull BaseEvaFunction generatedFunction, final @NotNull Instruction instruction) {
+	private /*static*/ void __post_dof_idte_register_resolved(final @NotNull EvaFunction aGeneratedFunction, final @NotNull DeducePhase aDeducePhase) {
+		final DT_Function dtFunction = new DT_Function(aGeneratedFunction, this);
+
+		dtFunction.set__state_dp(aDeducePhase);
+		dtFunction.eachIdent()
+				.applyState(ST2.getState___post_dof_idte_register_resolved(), new Times.Once(), __CHAIN__post_dof_idte_register_resolved);
+	}
+
+	void do_agnk(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull Instruction instruction) {
 		final @NotNull IntegerIA          arg  = (IntegerIA) instruction.getArg(0);
 		final @NotNull VariableTableEntry vte  = generatedFunction.getVarTableEntry(arg.getIndex());
 		final InstructionArgument         i2   = instruction.getArg(1);
@@ -486,13 +492,13 @@ public class DeduceTypes2 {
 		}
 	}
 
-	void do_calls(final @NotNull BaseEvaFunction generatedFunction, final @NotNull Context fd_ctx, final @NotNull Instruction instruction) {
+	void do_calls(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull Context fd_ctx, final @NotNull Instruction instruction) {
 		final int                     i1  = to_int(instruction.getArg(0));
 		final InstructionArgument     i2  = (instruction.getArg(1));
 		final @NotNull ProcTableEntry fn1 = generatedFunction.getProcTableEntry(i1);
 		{
 			final int pc = instruction.getIndex();
-			if (generatedFunction.deferred_calls.contains(pc)) {
+			if (generatedFunction.deferred_calls_contains(pc)) {
 				LOG.err("Call is deferred "/*+gf.getInstruction(pc)*/ + " " + fn1);
 			} else {
 				Implement_Calls_ ic = _inj().new_Implement_Calls_(generatedFunction, fd_ctx, i2, fn1, pc, this);
@@ -509,68 +515,7 @@ public class DeduceTypes2 {
 */
 	}
 
-	/**
-	 * Deduce functions or constructors contained in classes list
-	 *
-	 * @param aGeneratedClasses assumed to be a list of {@link EvaContainerNC}
-	 * @param dfhi              specifies what to select for:<br>
-	 *                          {@link dfhi_functions} will select all functions from {@code functionMap}, and <br>
-	 *                          {@link dfhi_constructors} will select all constructors from {@code constructors}.
-	 * @param <T>               generic parameter taken from {@code dfhi}
-	 * @return the number of deduced functions or constructors, or 0
-	 */
-	<T> int df_helper(@NotNull List<EvaNode> aGeneratedClasses, @NotNull df_helper_i<T> dfhi) {
-		int size = 0;
-		for (EvaNode evaNode : aGeneratedClasses) {
-			@NotNull EvaContainerNC      generatedContainerNC = (EvaContainerNC) evaNode;
-			final @Nullable df_helper<T> dfh                  = dfhi.get(generatedContainerNC);
-			if (dfh == null) continue;
-			@NotNull Collection<T> lgf2 = dfh.collection();
-			for (final T generatedConstructor : lgf2) {
-				if (dfh.deduce(generatedConstructor))
-					size++;
-			}
-		}
-		return size;
-	}
-
-	public void deduceClasses(final @NotNull List<EvaNode> lgc) {
-		for (EvaNode evaNode : lgc) {
-			if (!(evaNode instanceof final @NotNull EvaClass evaClass)) continue;
-
-			deduceOneClass(evaClass);
-		}
-	}
-
-	private static void __post_vte_list_001(final @NotNull BaseEvaFunction generatedFunction) {
-		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
-			vte.onTypeResolve(gt -> {
-				var xx = vte.resolvedType();
-
-				if (xx instanceof EvaClass evaClass) {
-					if (gt.getCi() == null) {
-						gt.setCi(evaClass.ci);
-					}
-
-					gt.setResolved(evaClass.getKlass().getOS_Type());
-					gt.setTypeName(gt.getResolved());
-
-					vte.getType().setAttached(gt);
-				} else if (xx instanceof EvaConstructor evaConstructor) {
-					if (gt.getCi() == null) {
-//						gt.ci = evaConstructor.ci;
-					}
-
-					gt.setResolved(evaConstructor.fi.getClassInvocation().getKlass().getOS_Type());
-					gt.setTypeName(gt.getResolved());
-
-					vte.getType().setAttached(gt);
-				}
-			});
-		}
-	}
-
-	void do_call(final @NotNull BaseEvaFunction generatedFunction, final @NotNull FunctionDef fd, final @NotNull Instruction instruction, final @NotNull Context context) {
+	void do_call(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull FunctionDef fd, final @NotNull Instruction instruction, final @NotNull Context context) {
 		final int                     pte_num = ((ProcIA) instruction.getArg(0)).index();
 		final @NotNull ProcTableEntry pte     = generatedFunction.getProcTableEntry(pte_num);
 //				final InstructionArgument constTableIA = (instruction.getArg(1));
@@ -648,6 +593,51 @@ public class DeduceTypes2 {
 		}
 	}
 
+	/**
+	 * Deduce functions or constructors contained in classes list
+	 *
+	 * @param aGeneratedClasses assumed to be a list of {@link EvaContainerNC}
+	 * @param dfhi              specifies what to select for:<br>
+	 *                          {@link dfhi_functions} will select all functions from {@code functionMap}, and <br>
+	 *                          {@link dfhi_constructors} will select all constructors from {@code constructors}.
+	 * @param <T>               generic parameter taken from {@code dfhi}
+	 * @return the number of deduced functions or constructors, or 0
+	 */
+	<T> int df_helper(@NotNull List<EvaNode> aGeneratedClasses, @NotNull df_helper_i<T> dfhi) {
+		int size = 0;
+		for (EvaNode evaNode : aGeneratedClasses) {
+			@NotNull EvaContainerNC      generatedContainerNC = (EvaContainerNC) evaNode;
+			final @Nullable df_helper<T> dfh                  = dfhi.get(generatedContainerNC);
+			if (dfh == null) continue;
+			@NotNull Collection<T> lgf2 = dfh.collection();
+			for (final T generatedConstructor : lgf2) {
+				if (dfh.deduce(generatedConstructor))
+					size++;
+			}
+		}
+		return size;
+	}
+
+	public void deduceClasses(final @NotNull List<EvaNode> lgc) {
+		for (EvaNode evaNode : lgc) {
+			if (!(evaNode instanceof final @NotNull EvaClass evaClass)) continue;
+
+			deduceOneClass(evaClass);
+		}
+	}
+
+	@Deprecated
+	public void resolveIdentIA_(@NotNull Context context, @NotNull IdentIA identIA, IBaseEvaFunction generatedFunction, @NotNull FoundElement foundElement) {
+		@NotNull Resolve_Ident_IA ria = _inj().new_Resolve_Ident_IA(_inj().new_DeduceClient3(this), context, identIA, generatedFunction, foundElement, errSink);
+		ria.action();
+	}
+
+	public void found_element_for_ite(tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, @NotNull IdentTableEntry ite, @Nullable OS_Element y, Context ctx, final DeduceCentral central) {
+		final DT_Env env = central.getEnv();
+
+		found_element_for_ite(generatedFunction, ite, y, ctx, central, env);
+	}
+
 	public DeduceTypes2Injector _inj() {
 		return this.__inj;
 	}
@@ -657,21 +647,14 @@ public class DeduceTypes2 {
 		deduce_generated_function_base(generatedFunction, fd, aMt);
 	}
 
-	private void dof_uc(@NotNull VariableTableEntry aVte, @NotNull OS_Type aA) {
-		// we really want a ci from somewhere
-		assert aA.getClassOf().getGenericPart().size() == 0;
-		@Nullable ClassInvocation ci = _inj().new_ClassInvocation(aA.getClassOf(), null, new ReadySupplier_1<>(this));
-		ci = phase.registerClassInvocation(ci);
-
-		aVte.getGenType().setResolved(aA); // README assuming OS_Type cannot represent namespaces
-		aVte.getGenType().setCi(ci);
-
-		ci. onResolve(new DoneCallback<IEvaClass>() {
-			@Override
-			public void onDone(@NotNull EvaClass result) {
-				aVte.resolveTypeToClass(result);
-			}
-		});
+	public IInvocation getInvocation(@NotNull EvaFunction generatedFunction) {
+		final ClassInvocation     classInvocation = generatedFunction._fi().getClassInvocation();
+		final NamespaceInvocation ni;
+		if (classInvocation == null) {
+			ni = generatedFunction._fi().getNamespaceInvocation();
+			return ni;
+		} else
+			return classInvocation;
 	}
 
 	Map<Object, DS_FunctionEntity> dsfes = new HashMap<>();
@@ -690,7 +673,39 @@ public class DeduceTypes2 {
 		void applyState(Times.T aTimes, CHAIN aCHAIN, Object xx);
 	}
 
-	public void do_assign_normal(final @NotNull BaseEvaFunction generatedFunction,
+	public void found_element_for_ite(tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
+									  @NotNull IdentTableEntry ite,
+									  @Nullable OS_Element y,
+									  Context ctx,
+									  final DeduceCentral central,
+									  final DT_Env env) {
+		if (y != ite.getResolvedElement()) {
+			final Finally REPORTS = module.getCompilation().reports();
+
+			final String s = String.format("2571 Setting FoundElement for ite %s to %s when it is already %s", ite, y, ite.getResolvedElement());
+			if (REPORTS.outputOn(Finally.Outs.Out_6011189)) {
+				SimplePrintLoggerToRemoveSoon.println_err_2(s);
+			}
+			LOG.info(s);
+		}
+
+		@NotNull Found_Element_For_ITE fefi = _inj().new_Found_Element_For_ITE(generatedFunction, ctx, env, _inj().new_DeduceClient1(this));
+		fefi.action(ite);
+	}
+
+	private void dof_uc(@NotNull VariableTableEntry aVte, @NotNull OS_Type aA) {
+		// we really want a ci from somewhere
+		assert aA.getClassOf().getGenericPart().size() == 0;
+		@Nullable ClassInvocation ci = _inj().new_ClassInvocation(aA.getClassOf(), null, new ReadySupplier_1<>(this));
+		ci = phase.registerClassInvocation(ci);
+
+		aVte.getGenType().setResolved(aA); // README assuming OS_Type cannot represent namespaces
+		aVte.getGenType().setCi(ci);
+
+		ci. onResolve(aVte::resolveTypeToClass);
+	}
+
+	public void do_assign_normal(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 								 final @NotNull Context aFd_ctx,
 								 final @NotNull Instruction instruction,
 								 final @NotNull Context aContext) {
@@ -769,29 +784,6 @@ public class DeduceTypes2 {
 		}
 	}
 
-	public record DM_DoAssignIdent(
-			BaseEvaFunction generatedFunction,
-			Context fd_ctx,
-			Instruction instruction,
-			IdentIA identIA,
-			IdentTableEntry agn_lhs_ite
-	) {}
-
-	private void do_assign_ident(final DM_DoAssignIdent dai) {
-		final @NotNull BaseEvaFunction generatedFunction = dai.generatedFunction();
-		final @NotNull Context         aFd_ctx           = dai.fd_ctx();
-		final @NotNull Instruction     instruction       = dai.instruction();
-		final IdentIA                  identIA           = dai.identIA();
-		final @NotNull IdentTableEntry agn_lhs_ite       = dai.agn_lhs_ite();
-
-		if (agn_lhs_ite.getResolvedElement() instanceof VariableStatementImpl) {
-			do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_lhs_ite);
-		}
-		@NotNull IdentTableEntry agn_rhs_ite = identIA.getEntry();
-		do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_rhs_ite);
-		agn_lhs_ite.addPotentialType(instruction.getIndex(), agn_rhs_ite.type);
-	}
-
 	public static int to_int(@NotNull final InstructionArgument arg) {
 		if (arg instanceof IntegerIA)
 			return ((IntegerIA) arg).getIndex();
@@ -817,66 +809,39 @@ public class DeduceTypes2 {
 		return r;
 	}
 
-	private void __post_vte_list_002(final @NotNull BaseEvaFunction generatedFunction, final Context fd_ctx) {
-		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
-			if (vte.getType().getAttached() == null) {
-				int potential_size = vte.potentialTypes().size();
-				if (potential_size == 1)
-					vte.getType().setAttached(getPotentialTypesVte(vte).get(0).getAttached());
-				else if (potential_size > 1) {
-					// TODO Check type compatibility
-					LOG.err("703 " + vte.getName() + " " + vte.potentialTypes());
-					errSink.reportDiagnostic(_inj().new_CantDecideType(vte, vte.potentialTypes()));
-				} else {
-					// potential_size == 0
-					// Result is handled by phase.typeDecideds, self is always valid
-					if (/*vte.getName() != null &&*/ !(vte.getVtt() == VariableTableType.RESULT || vte.getVtt() == VariableTableType.SELF))
-						errSink.reportDiagnostic(_inj().new_CantDecideType(vte, vte.potentialTypes()));
-				}
-			} else if (vte.getVtt() == VariableTableType.RESULT) {
+	private void do_assign_ident(final DM_DoAssignIdent dai) {
+		final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction = dai.generatedFunction();
+		final @NotNull Context         aFd_ctx           = dai.fd_ctx();
+		final @NotNull Instruction     instruction       = dai.instruction();
+		final IdentIA                  identIA           = dai.identIA();
+		final @NotNull IdentTableEntry agn_lhs_ite       = dai.agn_lhs_ite();
 
-				int           state    = 0;
-				final OS_Type attached = vte.getType().getAttached();
-				if (attached.getType() == OS_Type.Type.USER) {
-					try {
-						// FIXME 07/03 HACK
-
-						if (attached.getTypeName() instanceof RegularTypeName rtn) {
-							if (rtn.getName().equals("Unit")) {
-								state = 1;
-							}
-						} else if (attached instanceof OS_UnitType) {
-							state = 1;
-						}
-
-
-						if (state == 0)
-							vte.getType().setAttached(resolve_type(attached, fd_ctx));
-					} catch (ResolveError aResolveError) {
-						aResolveError.printStackTrace();
-						assert false;
-					}
-				}
-			}
+		if (agn_lhs_ite.getResolvedElement() instanceof VariableStatementImpl) {
+			do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_lhs_ite);
 		}
+		@NotNull IdentTableEntry agn_rhs_ite = identIA.getEntry();
+		do_assign_normal_ident_deferred(generatedFunction, aFd_ctx, agn_rhs_ite);
+		agn_lhs_ite.addPotentialType(instruction.getIndex(), agn_rhs_ite.type);
 	}
 
-	public void fix_tables(final @NotNull BaseEvaFunction evaFunction) {
-		for (VariableTableEntry variableTableEntry : evaFunction.vte_list) {
-			variableTableEntry._fix_table(this, evaFunction);
+	private void do_assign_constant(DM_DoAssignConstant dac) {
+		final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction = dac.generatedFunction();
+		final @NotNull Instruction     instruction       = dac.instruction();
+		final @NotNull IdentTableEntry idte              = dac.idte();
+		final @NotNull ConstTableIA    i2                = dac.constTableIA();
+
+		if (idte.type != null && idte.type.getAttached() != null) {
+			// TODO check types
 		}
-		for (IdentTableEntry identTableEntry : evaFunction.idte_list) {
-			identTableEntry._fix_table(this, evaFunction);
+		final @NotNull ConstantTableEntry cte = generatedFunction.getConstTableEntry(i2.getIndex());
+		if (cte.type.getAttached() == null) {
+			LOG.err("*** ERROR: Null type in CTE " + cte);
 		}
-		for (TypeTableEntry typeTableEntry : evaFunction.tte_list) {
-			typeTableEntry._fix_table(this, evaFunction);
-		}
-		for (ProcTableEntry procTableEntry : evaFunction.prte_list) {
-			procTableEntry._fix_table(this, evaFunction);
-		}
+		// idte.type may be null, but we still addPotentialType here
+		idte.addPotentialType(instruction.getIndex(), cte.type);
 	}
 
-	public void do_assign_normal_ident_deferred(final @NotNull BaseEvaFunction generatedFunction,
+	public void do_assign_normal_ident_deferred(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 												final @NotNull Context aContext,
 												final @NotNull IdentTableEntry aIdentTableEntry) {
 		if (aIdentTableEntry.type == null) {
@@ -921,11 +886,47 @@ public class DeduceTypes2 {
 		}
 	}
 
-	private void add_proc_table_listeners(@NotNull BaseEvaFunction generatedFunction) {
-		__Add_Proc_Table_Listeners aptl = _inj().new___Add_Proc_Table_Listeners();
+	private void __post_vte_list_002(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final Context fd_ctx) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
+			if (vte.getType().getAttached() == null) {
+				int potential_size = vte.potentialTypes().size();
+				if (potential_size == 1)
+					vte.getType().setAttached(getPotentialTypesVte(vte).get(0).getAttached());
+				else if (potential_size > 1) {
+					// TODO Check type compatibility
+					LOG.err("703 " + vte.getName() + " " + vte.potentialTypes());
+					errSink.reportDiagnostic(_inj().new_CantDecideType(vte, vte.potentialTypes()));
+				} else {
+					// potential_size == 0
+					// Result is handled by phase.typeDecideds, self is always valid
+					if (/*vte.getName() != null &&*/ !(vte.getVtt() == VariableTableType.RESULT || vte.getVtt() == VariableTableType.SELF))
+						errSink.reportDiagnostic(_inj().new_CantDecideType(vte, vte.potentialTypes()));
+				}
+			} else if (vte.getVtt() == VariableTableType.RESULT) {
 
-		for (final @NotNull ProcTableEntry pte : generatedFunction.prte_list) {
-			aptl.add_proc_table_listeners(generatedFunction, pte, this);
+				int           state    = 0;
+				final OS_Type attached = vte.getType().getAttached();
+				if (attached.getType() == OS_Type.Type.USER) {
+					try {
+						// FIXME 07/03 HACK
+
+						if (attached.getTypeName() instanceof RegularTypeName rtn) {
+							if (rtn.getName().equals("Unit")) {
+								state = 1;
+							}
+						} else if (attached instanceof OS_UnitType) {
+							state = 1;
+						}
+
+
+						if (state == 0)
+							vte.getType().setAttached(resolve_type(attached, fd_ctx));
+					} catch (ResolveError aResolveError) {
+						aResolveError.printStackTrace();
+						assert false;
+					}
+				}
+			}
 		}
 	}
 
@@ -935,39 +936,18 @@ public class DeduceTypes2 {
 		return promiseExpectation;
 	}
 
-	static class ST2_ {
-		State___post_dof_idte_register_resolved state___postDofIdteRegisterResolved;
-
-		public DT_State getState___post_dof_idte_register_resolved() {
-			if (state___postDofIdteRegisterResolved == null) {
-				state___postDofIdteRegisterResolved = new State___post_dof_idte_register_resolved();
-			}
-			return state___postDofIdteRegisterResolved;
+	public void fix_tables(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction evaFunction) {
+		for (VariableTableEntry variableTableEntry : evaFunction._vte_list()) {
+			variableTableEntry._fix_table(this, evaFunction);
 		}
-
-		class State___post_dof_idte_register_resolved implements DT_State {
-			@Override
-			public void applyState(final Times.T aTimes, final CHAIN aCHAIN, final Object xx) {
-				//X x = (X)xx;
-				DT_Function x = (DT_Function) xx;
-
-				final BaseEvaFunction      generatedFunction = x.state_generatedFunction();
-				final @NotNull DeducePhase deducePhase       = x.state_deducePhase();
-				for (@NotNull IdentTableEntry identTableEntry : generatedFunction.idte_list) {
-					if (identTableEntry.getResolvedElement() instanceof final @NotNull VariableStatementImpl vs) {
-						OS_Element el  = vs.getParent().getParent();
-						OS_Element el2 = generatedFunction.getFD().getParent();
-						if (el != el2) {
-							if (el instanceof ClassStatement || el instanceof NamespaceStatement)
-								// NOTE there is no concept of gf here
-								deducePhase.registerResolvedVariable(identTableEntry, el, vs.getName());
-						}
-					}
-				}
-			}
-
-			public record X(EvaFunction generatedFunction, DeducePhase deducePhase) {
-			}
+		for (IdentTableEntry identTableEntry : evaFunction._idte_list()) {
+			identTableEntry._fix_table(this, evaFunction);
+		}
+		for (TypeTableEntry typeTableEntry : evaFunction._tte_list()) {
+			typeTableEntry._fix_table(this, evaFunction);
+		}
+		for (ProcTableEntry procTableEntry : evaFunction._prte_list()) {
+			procTableEntry._fix_table(this, evaFunction);
 		}
 	}
 
@@ -983,21 +963,21 @@ public class DeduceTypes2 {
 		}
 	}
 
-	public void onEnterFunction(final @NotNull BaseEvaFunction generatedFunction, final Context aContext) {
-		for (VariableTableEntry variableTableEntry : generatedFunction.vte_list) {
+	public void onEnterFunction(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final Context aContext) {
+		for (VariableTableEntry variableTableEntry : generatedFunction._vte_list()) {
 			variableTableEntry.setDeduceTypes2(this, aContext, generatedFunction);
 		}
-		for (IdentTableEntry identTableEntry : generatedFunction.idte_list) {
+		for (IdentTableEntry identTableEntry : generatedFunction._idte_list()) {
 			identTableEntry.setDeduceTypes2(this, aContext, generatedFunction);
 			//identTableEntry._fix_table(this, generatedFunction);
 		}
-		for (ProcTableEntry procTableEntry : generatedFunction.prte_list) {
+		for (ProcTableEntry procTableEntry : generatedFunction._prte_list()) {
 			procTableEntry.setDeduceTypes2(this, aContext, generatedFunction, errSink);
 		}
 		//
 		// resolve all cte expressions
 		//
-		for (final @NotNull ConstantTableEntry cte : generatedFunction.cte_list) {
+		for (final @NotNull ConstantTableEntry cte : generatedFunction._cte_list()) {
 			resolve_cte_expression(cte, aContext);
 		}
 		//
@@ -1008,11 +988,11 @@ public class DeduceTypes2 {
 		// resolve ident table
 		//
 		{
-			for (@NotNull IdentTableEntry ite : generatedFunction.idte_list) {
+			for (@NotNull IdentTableEntry ite : generatedFunction._idte_list()) {
 				ite.resolveExpectation = promiseExpectation(ite, "Element Resolved");
 				ite.addResolver(_inj().new_Unnamed_ITE_Resolver1(this, ite, generatedFunction, aContext));
 			}
-			for (@NotNull IdentTableEntry ite : generatedFunction.idte_list) {
+			for (@NotNull IdentTableEntry ite : generatedFunction._idte_list()) {
 				ite.resolvers_round();
 			}
 		}
@@ -1026,22 +1006,24 @@ public class DeduceTypes2 {
 		} else {
 			connector = _inj().new_NullConnector();
 		}
-		for (@NotNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (@NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
 			rvte.action(vte, connector);
 		}
 	}
 
-	@Deprecated
-	public void resolveIdentIA_(@NotNull Context context, @NotNull IdentIA identIA, @NotNull BaseEvaFunction generatedFunction, @NotNull FoundElement foundElement) {
-		@NotNull Resolve_Ident_IA ria = _inj().new_Resolve_Ident_IA(_inj().new_DeduceClient3(this), context, identIA, generatedFunction, foundElement, errSink);
-		ria.action();
+	private void add_proc_table_listeners(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
+		__Add_Proc_Table_Listeners aptl = _inj().new___Add_Proc_Table_Listeners();
+
+		for (final @NotNull ProcTableEntry pte : generatedFunction._prte_list()) {
+			aptl.add_proc_table_listeners(generatedFunction, pte, this);
+		}
 	}
 
-	public void onExitFunction(final @NotNull BaseEvaFunction generatedFunction, final Context aFd_ctx, final Context aContext) {
+	public void onExitFunction(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final Context aFd_ctx, final Context aContext) {
 		//
 		// resolve var table. moved from `E'
 		//
-		for (@NotNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (@NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
 			vte.resolve_var_table_entry_for_exit_function();
 		}
 		for (@NotNull Runnable runnable : onRunnables) {
@@ -1052,7 +1034,7 @@ public class DeduceTypes2 {
 		// ATTACH A TYPE TO VTE'S
 		// CONVERT USER TYPES TO USER_CLASS TYPES
 		//
-		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
 //                                              LOG.info("704 "+vte.type.attached+" "+vte.potentialTypes());
 			final DeduceElement3_VariableTableEntry vte_de = vte.getDeduceElement3();
 			vte_de.setDeduceTypes2(this, generatedFunction);
@@ -1062,7 +1044,7 @@ public class DeduceTypes2 {
 		//
 		// ATTACH A TYPE TO IDTE'S
 		//
-		for (@NotNull final IdentTableEntry ite : generatedFunction.idte_list) {
+		for (@NotNull final IdentTableEntry ite : generatedFunction._idte_list()) {
 			final DeduceElement3_IdentTableEntry ite_de = ite.getDeduceElement3(this, generatedFunction);
 			ite_de._ctxts(aFd_ctx, aContext);
 			ite_de.mvState(null, DeduceElement3_IdentTableEntry.ST.EXIT_GET_TYPE);
@@ -1070,7 +1052,7 @@ public class DeduceTypes2 {
 		{
 			// TODO why are we doing this?
 			final Resolve_each_typename ret = _inj().new_Resolve_each_typename(phase, this, errSink);
-			for (final TypeTableEntry typeTableEntry : generatedFunction.tte_list) {
+			for (final TypeTableEntry typeTableEntry : generatedFunction._tte_list()) {
 				ret.action(typeTableEntry);
 			}
 		}
@@ -1091,7 +1073,7 @@ public class DeduceTypes2 {
 			workManager.drain();
 
 
-			phase.addDrs(generatedFunction, generatedFunction.drs);
+			phase.addDrs(generatedFunction.getAddDrsSource());
 
 			phase.doneWait(this.rosetta);
 		}
@@ -1109,7 +1091,7 @@ public class DeduceTypes2 {
 		{
 			@NotNull WorkList wl = _inj().new_WorkList();
 
-			for (@NotNull ProcTableEntry pte : generatedFunction.prte_list) {
+			for (@NotNull ProcTableEntry pte : generatedFunction._prte_list()) {
 				final DeduceElement3_ProcTableEntry de3_pte = (DeduceElement3_ProcTableEntry) pte.getDeduceElement3(DeduceTypes2.this, generatedFunction);
 				de3_pte.lfoe_action(DeduceTypes2.this, wl, (j) -> wm.addJobs(j));
 			}
@@ -1124,14 +1106,14 @@ public class DeduceTypes2 {
 
 		phase.addActives(_actives);
 
-		for (IdentTableEntry identTableEntry : generatedFunction.idte_list) {
-			generatedFunction.drs.add(_inj().new_DR_Ident(identTableEntry, generatedFunction, this));
+		for (IdentTableEntry identTableEntry : generatedFunction._idte_list()) {
+			generatedFunction.addDr(_inj().new_DR_Ident(identTableEntry, generatedFunction, this));
 		}
-		for (VariableTableEntry variableTableEntry : generatedFunction.vte_list) {
-			generatedFunction.drs.add(DR_Ident.create(variableTableEntry, generatedFunction));
+		for (VariableTableEntry variableTableEntry : generatedFunction._vte_list()) {
+			generatedFunction.addDr(DR_Ident.create(variableTableEntry, generatedFunction));
 		}
 
-		phase.addDrs(generatedFunction, generatedFunction.drs);
+		phase.addDrs(generatedFunction.getAddDrsSource());
 
 		for (DT_External external : externals) {
 			//external.onTargetModule(tm -> {phase.modulePromise(tm, external::actualise);}); //[T1160118]
@@ -1139,13 +1121,13 @@ public class DeduceTypes2 {
 		}
 	}
 
-	private void __checkVteList(final @NotNull BaseEvaFunction generatedFunction) {
-		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
+	private void __checkVteList(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
 			__checkVteList_each(vte);
 		}
 	}
 
-	void resolve_function_return_type(@NotNull BaseEvaFunction generatedFunction) {
+	void resolve_function_return_type(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
 		final DeduceElement3_Function f = _p_zero.get(DeduceTypes2.this, generatedFunction);
 
 		final GenType gt = f.resolve_function_return_type_int(errSink);
@@ -1154,9 +1136,9 @@ public class DeduceTypes2 {
 			generatedFunction.resolveTypeDeferred(gt);
 	}
 
-	private void __on_exit__post_vte_something(final @NotNull BaseEvaFunction generatedFunction, final Context aFd_ctx) {
+	private void __on_exit__post_vte_something(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final Context aFd_ctx) {
 		int y = 2;
-		for (VariableTableEntry variableTableEntry : generatedFunction.vte_list) {
+		for (VariableTableEntry variableTableEntry : generatedFunction._vte_list()) {
 			final @NotNull Collection<TypeTableEntry> pot = variableTableEntry.potentialTypes();
 			if (pot.size() == 1 && variableTableEntry.getGenType().isNull()) {
 				final OS_Type x = pot.iterator().next().getAttached();
@@ -1197,30 +1179,21 @@ public class DeduceTypes2 {
 		return pte_string;
 	}
 
-	public void found_element_for_ite(BaseEvaFunction generatedFunction, @NotNull IdentTableEntry ite, @Nullable OS_Element y, Context ctx, final DeduceCentral central) {
-		final DT_Env env = central.getEnv();
+	private void checkEvaClassVarTable(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
+		//for (VariableTableEntry variableTableEntry : generatedFunction.vte_list) {
+		//	variableTableEntry.setDeduceTypes2(this, aContext, generatedFunction);
+		//}
+		for (IdentTableEntry identTableEntry : generatedFunction._idte_list()) {
+			identTableEntry.getDeduceElement3(this, generatedFunction)
+					.mvState(null, DeduceElement3_IdentTableEntry.ST.CHECK_EVA_CLASS_VAR_TABLE);
+			//identTableEntry.setDeduceTypes2(this, aContext, generatedFunction);
 
-		found_element_for_ite(generatedFunction, ite, y, ctx, central, env);
+		}
 	}
 
-	public void found_element_for_ite(BaseEvaFunction generatedFunction,
-									  @NotNull IdentTableEntry ite,
-									  @Nullable OS_Element y,
-									  Context ctx,
-									  final DeduceCentral central,
-									  final DT_Env env) {
-		if (y != ite.getResolvedElement()) {
-			final Finally REPORTS = module.getCompilation().reports();
-
-			final String s = String.format("2571 Setting FoundElement for ite %s to %s when it is already %s", ite, y, ite.getResolvedElement());
-			if (REPORTS.outputOn(Finally.Outs.Out_6011189)) {
-				SimplePrintLoggerToRemoveSoon.println_err_2(s);
-			}
-			LOG.info(s);
-		}
-
-		@NotNull Found_Element_For_ITE fefi = _inj().new_Found_Element_For_ITE(generatedFunction, ctx, env, _inj().new_DeduceClient1(this));
-		fefi.action(ite);
+	public void resolveIdentIA_(@NotNull Context context, @NotNull DeduceElementIdent dei, tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, @NotNull FoundElement foundElement) {
+		@NotNull Resolve_Ident_IA ria = _inj().new_Resolve_Ident_IA(_inj().new_DeduceClient3(this), context, dei, generatedFunction, foundElement, errSink);
+		ria.action();
 	}
 
 	private void __checkVteList_each(final @NotNull VariableTableEntry vte) {
@@ -1267,28 +1240,12 @@ public class DeduceTypes2 {
 		return _inj().new_ArrayList__TypeTableEntry(vte.potentialTypes());
 	}
 	
-	public record DM_DoAssignConstant(
-			@NotNull BaseEvaFunction generatedFunction,
-			@NotNull Instruction instruction,
-			@NotNull IdentTableEntry idte,
-			@NotNull ConstTableIA constTableIA
-	) {}
+	public DeduceElement3_ProcTableEntry zeroGet(final ProcTableEntry aPte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction) {
+		return _p_zero.get(aPte, aEvaFunction, this);
+	}
 	
-	private void do_assign_constant(DM_DoAssignConstant dac) {
-		final @NotNull BaseEvaFunction generatedFunction = dac.generatedFunction();
-		final @NotNull Instruction     instruction       = dac.instruction();
-		final @NotNull IdentTableEntry idte              = dac.idte();
-		final @NotNull ConstTableIA    i2                = dac.constTableIA();
-
-		if (idte.type != null && idte.type.getAttached() != null) {
-			// TODO check types
-		}
-		final @NotNull ConstantTableEntry cte = generatedFunction.getConstTableEntry(i2.getIndex());
-		if (cte.type.getAttached() == null) {
-			LOG.err("*** ERROR: Null type in CTE " + cte);
-		}
-		// idte.type may be null, but we still addPotentialType here
-		idte.addPotentialType(instruction.getIndex(), cte.type);
+	public DeduceElement3_VariableTableEntry zeroGet(final VariableTableEntry aVte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+		return _p_zero.get(aVte, aGeneratedFunction);
 	}
 
 	public boolean deduceOneConstructor(@NotNull EvaConstructor aEvaConstructor, @NotNull DeducePhase aDeducePhase) {
@@ -1365,22 +1322,60 @@ public class DeduceTypes2 {
 		return ResolveType.resolve_type(module, type, ctx, LOG, this);
 	}
 
-	public void resolveIdentIA_(@NotNull Context context, @NotNull DeduceElementIdent dei, BaseEvaFunction generatedFunction, @NotNull FoundElement foundElement) {
-		@NotNull Resolve_Ident_IA ria = _inj().new_Resolve_Ident_IA(_inj().new_DeduceClient3(this), context, dei, generatedFunction, foundElement, errSink);
-		ria.action();
-	}
+	public record DM_DoAssignIdent(
+			tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
+			Context fd_ctx,
+			Instruction instruction,
+			IdentIA identIA,
+			IdentTableEntry agn_lhs_ite
+	) {}
 
-	public DeduceElement3_ProcTableEntry zeroGet(final ProcTableEntry aPte, final BaseEvaFunction aEvaFunction) {
-		return _p_zero.get(aPte, aEvaFunction, this);
+	static class ST2_ {
+		State___post_dof_idte_register_resolved state___postDofIdteRegisterResolved;
+
+		public DT_State getState___post_dof_idte_register_resolved() {
+			if (state___postDofIdteRegisterResolved == null) {
+				state___postDofIdteRegisterResolved = new State___post_dof_idte_register_resolved();
+			}
+			return state___postDofIdteRegisterResolved;
+		}
+
+		class State___post_dof_idte_register_resolved implements DT_State {
+			@Override
+			public void applyState(final Times.T aTimes, final CHAIN aCHAIN, final Object xx) {
+				//X x = (X)xx;
+				DT_Function x = (DT_Function) xx;
+
+				final tripleo.elijah.stages.gen_fn.IBaseEvaFunction      generatedFunction = x.state_generatedFunction();
+				final @NotNull DeducePhase deducePhase       = x.state_deducePhase();
+				for (@NotNull IdentTableEntry identTableEntry : generatedFunction._idte_list()) {
+					if (identTableEntry.getResolvedElement() instanceof final @NotNull VariableStatementImpl vs) {
+						OS_Element el  = vs.getParent().getParent();
+						OS_Element el2 = generatedFunction.getFD().getParent();
+						if (el != el2) {
+							if (el instanceof ClassStatement || el instanceof NamespaceStatement)
+								// NOTE there is no concept of gf here
+								deducePhase.registerResolvedVariable(identTableEntry, el, vs.getName());
+						}
+					}
+				}
+			}
+
+			public record X(EvaFunction generatedFunction, DeducePhase deducePhase) {
+			}
+		}
 	}
 
 	public String getFileName() {
 		return module.getFileName();
 	}
 
-	public DeduceElement3_VariableTableEntry zeroGet(final VariableTableEntry aVte, final BaseEvaFunction aGeneratedFunction) {
-		return _p_zero.get(aVte, aGeneratedFunction);
-	}
+	public record DM_DoAssignConstant(
+			@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
+			@NotNull Instruction instruction,
+			@NotNull IdentTableEntry idte,
+			@NotNull ConstTableIA constTableIA
+	) {}
 
 	private @Nullable IInvocation getInvocationFromBacklink(@Nullable InstructionArgument aBacklink) {
 		if (aBacklink == null) return null;
@@ -1563,7 +1558,7 @@ public class DeduceTypes2 {
 			return dt2.deferred_member(aParent, aInvocation, aVariableStatement, aIdentTableEntry);
 		}
 
-		public void found_element_for_ite(BaseEvaFunction aGeneratedFunction, @NotNull IdentTableEntry aIte, OS_Element aX, Context aCtx) {
+		public void found_element_for_ite(tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, @NotNull IdentTableEntry aIte, OS_Element aX, Context aCtx) {
 			dt2.found_element_for_ite(aGeneratedFunction, aIte, aX, aCtx, dt2.central());
 		}
 
@@ -1615,7 +1610,7 @@ public class DeduceTypes2 {
 			deduceTypes2.wm.addJobs(aWl);
 		}
 
-		public void found_element_for_ite(final BaseEvaFunction generatedFunction,
+		public void found_element_for_ite(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 										  final @NotNull IdentTableEntry ite,
 										  final @Nullable OS_Element y,
 										  final Context ctx) {
@@ -1670,7 +1665,7 @@ public class DeduceTypes2 {
 		public void resolveIdentIA2_(final @NotNull Context aEctx,
 									 final IdentIA aIdentIA,
 									 final @Nullable List<InstructionArgument> ss,
-									 final @NotNull BaseEvaFunction aGeneratedFunction,
+									 final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction,
 									 final @NotNull FoundElement aFoundElement) {
 			// README 23/11/10 overcomplication, but nicer
 			MonitorRequest_IdentTableEntry mr = new MonitorRequest_IdentTableEntry(aIdentIA);
@@ -1740,12 +1735,12 @@ public class DeduceTypes2 {
 	}
 
 	public static class OS_SpecialVariable implements OS_Element {
-		private final BaseEvaFunction                      generatedFunction;
+		private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction                      generatedFunction;
 		private final VariableTableType                    type;
 		private final VariableTableEntry                   variableTableEntry;
 		public        DeduceLocalVariable.MemberInvocation memberInvocation;
 
-		public OS_SpecialVariable(final VariableTableEntry aVariableTableEntry, final VariableTableType aType, final BaseEvaFunction aGeneratedFunction) {
+		public OS_SpecialVariable(final VariableTableEntry aVariableTableEntry, final VariableTableType aType, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 			variableTableEntry = aVariableTableEntry;
 			type               = aType;
 			generatedFunction  = aGeneratedFunction;
@@ -1845,124 +1840,573 @@ public class DeduceTypes2 {
 		}
 	}
 
-	public class DeduceClient4 {
-		private final DeduceTypes2 deduceTypes2;
-
-		public DeduceClient4(final DeduceTypes2 aDeduceTypes2) {
-			deduceTypes2 = aDeduceTypes2;
+	public static class DeduceTypes2Injector {
+		public List<DE3_Active> new_ArrayList__DE3_Active() {
+			return new ArrayList<>();
 		}
 
-		public @Nullable OS_Element _resolveAlias(final @NotNull AliasStatement aAliasStatement) {
-			return DeduceLookupUtils._resolveAlias(aAliasStatement, deduceTypes2);
+		public DeduceCreationContext new_DefaultDeduceCreationContext(final DeduceTypes2 aDeduceTypes2) {
+			return new DefaultDeduceCreationContext(aDeduceTypes2);
 		}
 
-		public @Nullable OS_Element _resolveAlias2(final @NotNull AliasStatementImpl aAliasStatement) throws ResolveError {
-			return DeduceLookupUtils._resolveAlias2(aAliasStatement, deduceTypes2);
+		public WorkManager new_WorkManager() {
+			return new WorkManager();
 		}
 
-		public @NotNull DeferredMemberFunction deferred_member_function(final OS_Element aParent, final IInvocation aInvocation, final @NotNull FunctionDef aFunctionDef, final @NotNull FunctionInvocation aFunctionInvocation) {
-			return deduceTypes2.deferred_member_function(aParent, aInvocation, aFunctionDef, aFunctionInvocation);
+		public Zero new_Zero(final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new Zero();
 		}
 
-		public void forFunction(final @NotNull FunctionInvocation aFunctionInvocation, final @NotNull ForFunction aForFunction) {
-			deduceTypes2.forFunction(aFunctionInvocation, aForFunction);
+		public List<Reactivable> new_ArrayList__Ables() {
+			return new ArrayList<>();
 		}
 
-		public void found_element_for_ite(final BaseEvaFunction aGeneratedFunction, final @NotNull IdentTableEntry aEntry, final OS_Element aE, final Context aCtx) {
-			deduceTypes2.found_element_for_ite(aGeneratedFunction, aEntry, aE, aCtx, central());
+		//public GenerateResultSink new_DefaultGenerateResultSink(final IPipelineAccess aPa) {
+		//	return new DefaultGenerateResultSink(aPa);
+		//}
+
+		public List<IEvaClass> new_LinkedList__EvaClass() {
+			return new ArrayList<>();
 		}
 
-		public ClassInvocation genCI(final @NotNull GenType aType, final TypeName aGenericTypeName) {
-			return aType.genCI(aGenericTypeName, deduceTypes2, deduceTypes2.errSink, deduceTypes2.phase);
+		public ITasticMap new_TasticMap() {
+			return new TasticMap_1();
 		}
 
-		public DeduceTypes2 get() {
-			return deduceTypes2;
+		public DeduceCentral new_DeduceCentral(final DeduceTypes2 aDeduceTypes2) {
+			return new DeduceCentral(aDeduceTypes2);
 		}
 
-		public ErrSink getErrSink() {
-			return deduceTypes2.errSink;
+		public Map<OS_Element, DG_Item> new_HashMap_DGS() {
+			return new HashMap<>();
 		}
 
-		public IInvocation getInvocation(final @NotNull EvaFunction aGeneratedFunction) {
-			return deduceTypes2.getInvocation(aGeneratedFunction);
+		public List<Runnable> new_ArrayList__Runnable() {
+			return new ArrayList<>();
 		}
 
-		public @NotNull ElLog getLOG() {
-			return LOG;
+		public List<FunctionInvocation> new_ArrayList__FunctionInvocation() {
+			return new ArrayList<>();
 		}
 
-		public @NotNull OS_Module getModule() {
-			return module;
+		public PromiseExpectations new_PromiseExpectations(final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new PromiseExpectations();
 		}
 
-		public @NotNull DeducePhase getPhase() {
-			return deduceTypes2.phase;
+		public List<IDeduceResolvable> new_ArrayList__IDeduceResolvable() {
+			return new ArrayList<>();
 		}
 
-		public @NotNull List<TypeTableEntry> getPotentialTypesVte(final @NotNull EvaFunction aGeneratedFunction, final @NotNull InstructionArgument aVte_ia) {
-			return deduceTypes2.getPotentialTypesVte(aGeneratedFunction, aVte_ia);
+		public ElLog new_ElLog(final String aFileName, final ElLog.Verbosity aVerbosity, final String aPhase) {
+			return new ElLog(aFileName, aVerbosity, aPhase);
 		}
 
-		public OS_Type gt(final @NotNull GenType aType) {
-			return deduceTypes2.gt(aType);
+		public List<DT_External> new_LinkedList__DT_External() {
+			return new ArrayList<>();
 		}
 
-		public void implement_calls(final @NotNull BaseEvaFunction aGeneratedFunction, final @NotNull Context aParent, final @NotNull InstructionArgument aArg, final @NotNull ProcTableEntry aPte, final int aInstructionIndex) {
-			if (aGeneratedFunction.deferred_calls.contains(aInstructionIndex)) {
-				deduceTypes2.LOG.err("Call is deferred "/*+gf.getInstruction(pc)*/ + " " + aPte);
-				return;
-			}
-			Implement_Calls_ ic = _inj().new_Implement_Calls_(aGeneratedFunction, aParent, aArg, aPte, aInstructionIndex, deduceTypes2);
-			ic.action();
+		public OS_Type new_OS_BuiltinType(final BuiltInTypes aBuiltInType) {
+			return new OS_BuiltinType(aBuiltInType);
 		}
 
-		public @Nullable OS_Element lookup(final @NotNull IdentExpression aElement, final @NotNull Context aContext) throws ResolveError {
-			return DeduceLookupUtils.lookup(aElement, aContext, deduceTypes2);
+		public @NotNull DeferredMember new_DeferredMember(final DeduceElementWrapper aParent, final IInvocation aInvocation, final VariableStatementImpl aVariableStatement) {
+			return new DeferredMember(aParent, aInvocation, aVariableStatement);
 		}
 
-		public LookupResultList lookupExpression(final @NotNull IExpression aExpression, final @NotNull Context aContext) throws ResolveError {
-			return DeduceLookupUtils.lookupExpression(aExpression, aContext, deduceTypes2);
+		public WlGenerateClass new_WlGenerateClass(final GenerateFunctions aGenerateFunctions, final ClassInvocation aCi, final DeducePhase.GeneratedClasses aGeneratedClasses, final ICodeRegistrar aCodeRegistrar) {
+			return new WlGenerateClass(aGenerateFunctions, aCi, aGeneratedClasses, aCodeRegistrar);
 		}
 
-		public @NotNull FunctionInvocation newFunctionInvocation(final FunctionDef aElement, final ProcTableEntry aPte, final @NotNull IInvocation aInvocation) {
-			return deduceTypes2.newFunctionInvocation(aElement, aPte, aInvocation, deduceTypes2.phase);
+		public WlGenerateNamespace new_WlGenerateNamespace(final GenerateFunctions aGenerateFunctions, final NamespaceInvocation aCi, final DeducePhase.GeneratedClasses aGeneratedClasses, final ICodeRegistrar aCodeRegistrar) {
+			return new WlGenerateNamespace(aGenerateFunctions, aCi, aGeneratedClasses, aCodeRegistrar);
 		}
 
-		public void onFinish(final Runnable aRunnable) {
-			deduceTypes2.onFinish(aRunnable);
+		public ClassInvocation new_ClassInvocation(final ClassStatement aClassOf, final String aO, final @NotNull Supplier<DeduceTypes2> aDeduceTypes2) {
+			return new ClassInvocation(aClassOf, aO, aDeduceTypes2);
 		}
 
-		public <T> @NotNull PromiseExpectation<T> promiseExpectation(final BaseEvaFunction aGeneratedFunction, final String aName) {
-			return deduceTypes2.promiseExpectation(aGeneratedFunction, aName);
+		public ITastic new_FT_FnCallArgs(final DeduceTypes2 aDeduceTypes2, final FnCallArgs aO) {
+			return new FT_FnCallArgs(aDeduceTypes2, aO);
 		}
 
-		public void register_and_resolve(final @NotNull VariableTableEntry aVte, final @NotNull ClassStatement aClassStatement) {
-			deduceTypes2.register_and_resolve(aVte, aClassStatement);
+		public CantDecideType new_CantDecideType(final VariableTableEntry aVte, final Collection<TypeTableEntry> aTypeTableEntries) {
+			return new CantDecideType(aVte, aTypeTableEntries);
 		}
 
-		public @NotNull ClassInvocation registerClassInvocation(final @NotNull ClassInvocation aCi) {
-			return deduceTypes2.phase.registerClassInvocation(aCi);
+		public IElementHolder new_GenericElementHolder(final OS_Element aBest) {
+			return new GenericElementHolder(aBest);
 		}
 
-		public @Nullable ClassInvocation registerClassInvocation(final @NotNull ClassStatement aClassStatement, final String constructorName) {
-			return deduceTypes2.phase.registerClassInvocation(aClassStatement, constructorName, new ReadySupplier_1<>(deduceTypes2));
+		public GenType new_GenTypeImpl() {
+			return new GenTypeImpl();
 		}
 
-		public NamespaceInvocation registerNamespaceInvocation(final NamespaceStatement aNamespaceStatement) {
-			return deduceTypes2.phase.registerNamespaceInvocation(aNamespaceStatement);
+		public __Add_Proc_Table_Listeners new___Add_Proc_Table_Listeners() {
+			return new __Add_Proc_Table_Listeners();
 		}
 
-		public void reportDiagnostic(final ResolveError aResolveError) {
-			deduceTypes2.errSink.reportDiagnostic(aResolveError);
+		public <B> PromiseExpectation<B> new_PromiseExpectation(final ExpectationBase aBase, final String aDesc, final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new PromiseExpectation<B>(aBase, aDesc);
 		}
 
-		public @NotNull GenType resolve_type(final @NotNull OS_Type aTy, final Context aCtx) throws ResolveError {
-			return deduceTypes2.resolve_type(aTy, aCtx);
+		public Implement_Calls_ new_Implement_Calls_(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final Context aFdCtx, final InstructionArgument aI2, final ProcTableEntry aFn1, final int aPc, final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new Implement_Calls_(aGeneratedFunction, aFdCtx, aI2, aFn1, aPc);
 		}
 
-		public void resolveIdentIA_(final @NotNull Context aCtx, final @NotNull IdentIA aIdentIA, final @NotNull BaseEvaFunction aGeneratedFunction, final @NotNull FoundElement aFoundElement) {
-			deduceTypes2.resolveIdentIA_(aCtx, aIdentIA, aGeneratedFunction, aFoundElement);
+		public EN_Understanding new_ENU_FunctionInvocation(final ProcTableEntry aCallablePte) {
+			return new ENU_FunctionInvocation(aCallablePte);
+		}
+
+		public IElementHolder new_ConstructableElementHolder(final OS_Element aE, final IdentIA aIdentIA) {
+			return new ConstructableElementHolder(aE, aIdentIA);
+		}
+
+		public ITE_Resolver new_Unnamed_ITE_Resolver1(final DeduceTypes2 aDeduceTypes2, final IdentTableEntry aIte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final Context aContext) {
+			return new Unnamed_ITE_Resolver1(aDeduceTypes2, aIte, aGeneratedFunction, aContext);
+		}
+
+		public Resolve_Variable_Table_Entry new_Resolve_Variable_Table_Entry(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final Context aContext, final DeduceTypes2 aDeduceTypes2) {
+			return new Resolve_Variable_Table_Entry(aGeneratedFunction, aContext, aDeduceTypes2);
+		}
+
+		public IVariableConnector new_CtorConnector(final EvaConstructor aGeneratedFunction) {
+			return new CtorConnector(aGeneratedFunction);
+		}
+
+		public IVariableConnector new_NullConnector() {
+			return new NullConnector();
+		}
+
+		public DeduceClient3 new_DeduceClient3(final DeduceTypes2 aDeduceTypes2) {
+			return new DeduceClient3(aDeduceTypes2);
+		}
+
+		public DeduceClient1 new_DeduceClient1(final DeduceTypes2 aDeduceTypes2) {
+			return new DeduceClient1(aDeduceTypes2);
+		}
+
+		public DeduceClient4 new_DeduceClient4(final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new DeduceClient4(aDeduceTypes2);
+		}
+
+		public Resolve_Ident_IA new_Resolve_Ident_IA(final DeduceClient3 aDeduceClient3, final Context aContext, final IdentIA aIdentIA, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final FoundElement aFoundElement, final ErrSink aErrSink) {
+			return new Resolve_Ident_IA(aDeduceClient3, aContext, aIdentIA, aGeneratedFunction, aFoundElement, aErrSink);
+		}
+
+		public Resolve_each_typename new_Resolve_each_typename(final DeducePhase aPhase, final DeduceTypes2 aDeduceTypes2, final ErrSink aErrSink) {
+			return aDeduceTypes2.new Resolve_each_typename(aPhase, aDeduceTypes2, aErrSink);
+		}
+
+		public Dependencies new_Dependencies(final WorkManager aWorkManager, final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new Dependencies(aWorkManager);
+		}
+
+		public WorkList new_WorkList() {
+			return new WorkList();
+		}
+
+		public DR_Ident new_DR_Ident(final IdentTableEntry aIdentTableEntry, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+			return new DR_Ident(aIdentTableEntry, aGeneratedFunction/*, deduceTypes2*/);
+		}
+
+		public DT_Env new_DT_Env(final ElLog aLOG, final ErrSink aErrSink, final DeduceCentral aCentral) {
+			return new DT_Env(aLOG, aErrSink, aCentral);
+		}
+
+		public Found_Element_For_ITE new_Found_Element_For_ITE(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final Context aCtx, final DT_Env aEnv, final DeduceClient1 aDeduceClient1) {
+			return new Found_Element_For_ITE(aGeneratedFunction, aCtx, aEnv, aDeduceClient1);
+		}
+
+		public List<TypeTableEntry> new_ArrayList__TypeTableEntry(final Collection<TypeTableEntry> aTypeTableEntries) {
+			return new ArrayList<>(aTypeTableEntries);
+		}
+
+		public Implement_construct new_Implement_construct(final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final Instruction aInstruction) {
+			return new Implement_construct(aDeduceTypes2, aGeneratedFunction, aInstruction);
+		}
+
+		public DeferredMemberFunction new_DeferredMemberFunction(final OS_Element aParent, final IInvocation aInvocation, final FunctionDef aFunctionDef, final DeduceTypes2 aDeduceTypes2, final FunctionInvocation aFunctionInvocation) {
+			return new DeferredMemberFunction(aParent, aInvocation, aFunctionDef, aDeduceTypes2, aFunctionInvocation);
+		}
+
+		public DG_AliasStatement new_DG_AliasStatement(final AliasStatementImpl aE, final DeduceTypes2 aDt2) {
+			return new DG_AliasStatement(aE, aDt2);
+		}
+
+		public DG_ClassStatement new_DG_ClassStatement(final ClassStatement aClassStatement) {
+			return new DG_ClassStatement(aClassStatement);
+		}
+
+		public DG_FunctionDef new_DG_FunctionDef(final FunctionDef aFunctionDef) {
+			return new DG_FunctionDef(aFunctionDef);
+		}
+
+		public Resolve_Ident_IA new_Resolve_Ident_IA(final DeduceClient3 aDeduceClient3, final Context aContext, final DeduceElementIdent aDei, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final FoundElement aFoundElement, final ErrSink aErrSink) {
+			return new Resolve_Ident_IA(aDeduceClient3, aContext, aDei, aGeneratedFunction, aFoundElement, aErrSink);
+		}
+
+		public Resolve_Ident_IA2 new_Resolve_Ident_IA2(final DeduceTypes2 aDeduceTypes2, final ErrSink aErrSink, final DeducePhase aPhase, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final FoundElement aFoundElement) {
+			return new Resolve_Ident_IA2(aDeduceTypes2, aErrSink, aPhase, aGeneratedFunction, aFoundElement);
+		}
+
+		public DE3_Active new_DE3_ActivePTE(final DeduceTypes2 aDeduceTypes2, final ProcTableEntry aPte, final ClassInvocation aClassInvocation) {
+			return new DE3_ActivePTE(aDeduceTypes2, aPte, aClassInvocation);
+		}
+
+		public GenericPart new_GenericPart(final ClassStatement aBest, final NormalTypeName aTyn1) {
+			return new GenericPart(aBest, aTyn1);
+		}
+
+		public OS_UserType new_OS_UserType(final TypeName aTypeName) {
+			return new OS_UserType(aTypeName);
+		}
+
+		public DC_ClassNote.DC_ClassNote_DT2 new_DC_ClassNote_DT2(final IdentTableEntry aIte, final IBaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+			return new DC_ClassNote.DC_ClassNote_DT2(aIte, aGeneratedFunction, aDeduceTypes2);
+		}
+
+		public DC_ClassNote new_DC_ClassNote(final ClassStatement aE, final Context aCtx, final DeduceCentral aDeduceCentral) {
+			return new DC_ClassNote(aE, aCtx, aDeduceCentral);
+		}
+
+		public IElementHolder new_GenericElementHolderWithType(final OS_Element aElement, final OS_Type aTypeName, final DeduceTypes2 aDeduceTypes2) {
+			return new GenericElementHolderWithType(aElement, aTypeName, aDeduceTypes2);
+		}
+
+		public @NotNull WlGenerateDefaultCtor new_WlGenerateDefaultCtor(final GenerateFunctions aGf, final FunctionInvocation aDependentFunction, final DeduceCreationContext aDeduceCreationContext, final ICodeRegistrar aCodeRegistrar) {
+			return new WlGenerateDefaultCtor(aGf, aDependentFunction, aDeduceCreationContext, aCodeRegistrar);
+		}
+
+		public @Nullable WlGenerateFunction new_WlGenerateFunction(final GenerateFunctions aGf, final FunctionInvocation aDependentFunction, final ICodeRegistrar aCodeRegistrar) {
+			return new WlGenerateFunction(aGf, aDependentFunction, aCodeRegistrar);
+		}
+
+		public WorkJob new_WlDeduceFunction(final WorkJob aGen, final List<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> aColl, final DeduceTypes2 aDeduceTypes2) {
+			return aDeduceTypes2.new WlDeduceFunction(aGen, aColl);
+		}
+
+		public DeduceElement3_Function new_DeduceElement3_Function(final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+			return new DeduceElement3_Function(aDeduceTypes2, aGeneratedFunction);
+		}
+
+		public DeduceElement3_ProcTableEntry new_DeduceElement3_ProcTableEntry(final ProcTableEntry aPte, final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+			Preconditions.checkNotNull(aDeduceTypes2);
+			return new DeduceElement3_ProcTableEntry(aPte, aDeduceTypes2, aGeneratedFunction);
+		}
+
+		public DeduceElement3_VariableTableEntry new_DeduceElement3_VariableTableEntry(final VariableTableEntry aVte, final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+			return new DeduceElement3_VariableTableEntry(aVte, aDeduceTypes2, aGeneratedFunction);
+		}
+
+		public DeduceElement3_IdentTableEntry new_DeduceElement3_IdentTableEntry(final IdentTableEntry aIte) {
+			return new DeduceElement3_IdentTableEntry(aIte);
+		}
+
+		public @NotNull IdentIA new_IdentIA(int index, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
+			return new IdentIA(index, generatedFunction);
+		}
+
+		public BaseTableEntry.StatusListener new__StatusListener__BTE_203(final DeduceTypeResolve aDeduceTypeResolve) {
+			return aDeduceTypeResolve.new _StatusListener__BTE_203();
+		}
+
+		public GenType new_GenTypeImpl(final ClassStatement aKlass) {
+			return new GenTypeImpl(aKlass);
+		}
+
+		public SGTA_SetResolvedClass new_SGTA_SetResolvedClass(final ClassStatement aKlass) {
+			return new SGTA_SetResolvedClass(aKlass);
+		}
+
+		public EN_Usage new_EN_DeduceUsage(final InstructionArgument aBacklink, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final IdentTableEntry aIte) {
+			return new EN_DeduceUsage(aBacklink, aGf, aIte);
+		}
+
+		public IdentTableEntry.ITE_Resolver_Result new_ITE_Resolver_Result(final OS_Element aE) {
+			return new IdentTableEntry.ITE_Resolver_Result(aE);
+		}
+
+		public EN_Usage new_EN_NameUsage(final EN_Name aName, final DeduceElement3_IdentTableEntry aDe3Ite) {
+			return new EN_NameUsage(aName, aDe3Ite);
+		}
+
+		public DTR_IdentExpression new_DTR_IdentExpression(final DeduceTypeResolve aDeduceTypeResolve, final IdentExpression aIdentExpression, final BaseTableEntry aBte) {
+			return new DTR_IdentExpression(aDeduceTypeResolve, aIdentExpression, aBte);
+		}
+
+		public DTR_VariableStatement new_DTR_VariableStatement(final DeduceTypeResolve aDeduceTypeResolve, final VariableStatement aVariableStatement) {
+			return new DTR_VariableStatement(aDeduceTypeResolve, aVariableStatement);
+		}
+
+		public TypeTableEntry new_TypeTableEntry(final int aI, final TypeTableEntry.Type aType, final OS_Type aTypeName, final IdentExpression aIdent, final TableEntryIV aO) {
+			return new TypeTableEntry(aI, aType, aTypeName, aIdent, aO);
+		}
+
+		public BaseTableEntry.StatusListener new__StatusListener__BTE_86(final DeduceTypeResolve aDeduceTypeResolve) {
+			return aDeduceTypeResolve.new _StatusListener__BTE_86();
+		}
+
+		public BaseTableEntry.StatusListener new_StatusListener__RIA__176(final IdentTableEntry aY, final FoundElement aFoundElement, final Resolve_Ident_IA aResolve_Ident_IA) {
+			return aResolve_Ident_IA.new StatusListener__RIA__176(aY, aFoundElement);
+		}
+
+		public WlGenerateCtor new_WlGenerateCtor(final GenerateFunctions aGenerateFunctions, final FunctionInvocation aFi, final IdentExpression aO, final ICodeRegistrar aCodeRegistrar) {
+			return new WlGenerateCtor(aGenerateFunctions, aFi, aO, aCodeRegistrar);
+		}
+
+		public GenType new_GenTypeImpl(final NamespaceStatement aParent) {
+			return new GenTypeImpl(aParent);
+		}
+
+		public EN_Understanding new_ENU_AliasedFrom(final AliasStatement aOrigE) {
+			return new ENU_AliasedFrom(aOrigE);
+		}
+
+		public FT_FCA_FunctionDef new_FT_FCA_FunctionDef(final FunctionDef aEl, final DeduceTypes2 aDeduceTypes2) {
+			return new FT_FCA_FunctionDef(aEl, aDeduceTypes2);
+		}
+
+		public FT_FCA_ClassStatement new_FT_FCA_ClassStatement(final ClassStatement aEl) {
+			return new FT_FCA_ClassStatement(aEl);
+		}
+
+		public FT_FCA_IdentIA.FakeDC4 new_FakeDC4(final DeduceClient4 aDc4, final FT_FCA_IdentIA aFT_FCA_IdentIA) {
+			return aFT_FCA_IdentIA.new FakeDC4(aDc4);
+		}
+
+		public FT_FCA_IdentIA.FT_FCA_Ctx new_FT_FCA_Ctx(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final TypeTableEntry aTte, final Context aCtx, final ErrSink aErrSink, final DeduceClient4 aDc) {
+			return new FT_FCA_IdentIA.FT_FCA_Ctx(aGeneratedFunction, aTte, aCtx, aErrSink, aDc);
+		}
+
+		public FT_FCA_FormalArgListItem new_FT_FCA_FormalArgListItem(final FormalArgListItem aFali, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+			return new FT_FCA_FormalArgListItem(aFali, aGeneratedFunction);
+		}
+
+		public FT_FCA_VariableStatement new_FT_FCA_VariableStatement(final VariableStatementImpl aVs, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+			return new FT_FCA_VariableStatement(aVs, aGeneratedFunction);
+		}
+
+		public FT_FCA_IdentIA.FT_FCA_ProcedureCall new_FT_FCA_ProcedureCall(final ProcedureCallExpression aPce, final Context aCtx, final FT_FCA_IdentIA aFT_FCA_IdentIA) {
+			return aFT_FCA_IdentIA.new FT_FCA_ProcedureCall(aPce, aCtx);
+		}
+
+		public StatementWrapperImpl new_StatementWrapperImpl(final IExpression aLeft, final Context aO, final OS_Element aO1) {
+			return new StatementWrapperImpl(aLeft, aO, aO1);
+		}
+
+		public OS_Type new_OS_UnknownType(final StatementWrapperImpl aStatementWrapper) {
+			return new OS_UnknownType(aStatementWrapper);
+		}
+
+		public FoundElement new_FT_FnCallArgs_DoAssignCall_NullFoundElement(final DeduceClient4 aDc) {
+			return new FT_FnCallArgs.DoAssignCall.NullFoundElement(aDc);
+		}
+
+		public DT_External_2 new_DT_External_2(final IdentTableEntry aEntry, final OS_Module aModule, final ProcTableEntry aPte, final FT_FCA_IdentIA.FakeDC4 aDc, final ElLog aLOG, final Context aCtx, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final int aInstructionIndex, final IdentIA aIdentIA, final VariableTableEntry aVte) {
+			return new DT_External_2(aEntry, aModule, aPte, aDc, aLOG, aCtx, aGeneratedFunction, aInstructionIndex, aIdentIA, aVte);
+		}
+
+		public DR_Ident.ElementUnderstanding new_DR_Ident_ElementUnderstanding(final OS_Element aEl) {
+			return new DR_Ident.ElementUnderstanding(aEl);
+		}
+
+		public EN_Understanding new_ENU_LangConstVar() {
+			return new ENU_LangConstVar();
+		}
+
+		public EN_Understanding new_ENU_FunctionName() {
+			return new ENU_FunctionName();
+		}
+
+		public EN_Understanding new_ENU_ResolveToFunction(final FunctionDef aFd) {
+			return new ENU_ResolveToFunction(aFd);
+		}
+
+		public IElementHolder new_DE3_EH_GroundedVariableStatement(final VariableStatement aE, final DeduceElement3_IdentTableEntry aDeduceElement3IdentTableEntry) {
+			return aDeduceElement3IdentTableEntry.new DE3_EH_GroundedVariableStatement(aE, aDeduceElement3IdentTableEntry);
+		}
+
+		public EN_Understanding new_ENU_LookupResult(final LookupResultList aLrl) {
+			return new ENU_LookupResult(aLrl);
+		}
+
+		public DeduceElement3_IdentTableEntry.DE3_ITE_Holder new_DE3_ITE_Holder(final OS_Element aEl, final DeduceElement3_IdentTableEntry aDeduceElement3IdentTableEntry) {
+			return aDeduceElement3IdentTableEntry.new DE3_ITE_Holder(aEl);
+		}
+
+		public DR_PossibleTypeCI new_DR_PossibleTypeCI(final ClassInvocation aCi, final FunctionInvocation aFi) {
+			return new DR_PossibleTypeCI(aCi, aFi);
+		}
+
+		public EN_Understanding new_ENU_VariableName() {
+			return new ENU_VariableName();
+		}
+
+		public setup_GenType_Action new_SGTA_SetResolvedNamespace(final NamespaceStatement aNamespaceStatement) {
+			return new SGTA_SetResolvedNamespace(aNamespaceStatement);
+		}
+
+		public setup_GenType_Action new_SGTA_RegisterNamespaceInvocation(final NamespaceStatement aNamespaceStatement, final DeducePhase aPhase) {
+			return new SGTA_RegisterNamespaceInvocation(aNamespaceStatement, aPhase);
+		}
+
+		public setup_GenType_Action new_SGTA_SetNamespaceInvocation() {
+			return new SGTA_SetNamespaceInvocation();
+		}
+
+		public setup_GenType_Action new_SGTA_RegisterClassInvocation(final ClassStatement aClassStatement, final DeducePhase aPhase) {
+			return new SGTA_RegisterClassInvocation(aClassStatement, aPhase);
+		}
+
+		public setup_GenType_Action new_SGTA_SetClassInvocation() {
+			return new SGTA_SetClassInvocation();
+		}
+
+		public GenType new_GenTypeImpl(final OS_Type aAttached, final OS_Type aOSType, final boolean aB, final TypeName aX, final DeduceTypes2 aDt2, final ErrSink aErrSink, final DeducePhase aPhase) {
+			return new GenTypeImpl(aAttached, aOSType, aB, aX, aDt2, aErrSink, aPhase);
+		}
+
+		public Diagnostic new_ResolveError(final TypeName aX, final LookupResultList aLrl) {
+			return new ResolveError(aX, aLrl);
+		}
+
+		public Diagnostic new_Diagnostic_8884(final VariableTableEntry aVte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
+			return new DeduceElement3_VariableTableEntry.Diagnostic_8884(aVte, aGf);
+		}
+
+		public IdentTableEntry new_IdentTableEntry(final int aI, final IdentExpression aIdentExpression, final Context aContext, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+			return new IdentTableEntry(aI, aIdentExpression, aContext, aGeneratedFunction);
+		}
+
+		public Implement_construct.ICH new_ICH(final GenType aGenType, final Implement_construct aImplement_construct) {
+			return aImplement_construct.new ICH(aGenType);
+		}
+
+		public OS_Type new_OS_UnknownType(final OS_Element aElement) {
+			return new OS_UnknownType(aElement);
+		}
+
+		public DeduceProcCall new_DeduceProcCall(final ProcTableEntry aPte) {
+			return new DeduceProcCall(aPte);
+		}
+
+		public ClassInvocation.CI_GenericPart new_CI_GenericPart(final List<TypeName> aGenericPart, final ClassInvocation aClassInvocation) {
+			return aClassInvocation.new CI_GenericPart(aGenericPart);
+		}
+
+		public RegularTypeName new_RegularTypeNameImpl(final Context aContext) {
+			return new RegularTypeNameImpl(aContext);
+		}
+
+		public IElementHolder new_GenericElementHolderWithDC(final OS_Element aEl, final DeduceClient3 aDc, final Resolve_Ident_IA aResolve_Ident_IA) {
+			return aResolve_Ident_IA.new GenericElementHolderWithDC(aEl, aDc);
+		}
+
+		public FunctionDef new_FunctionDefImpl(final NamespaceStatement aModNs, final Context aContext) {
+			return new FunctionDefImpl(aModNs, aContext);
+		}
+
+		public NamespaceInvocation new_NamespaceInvocation(final NamespaceStatement aModNs) {
+			return new NamespaceInvocation(aModNs);
+		}
+
+		public NamespaceStatement new_NamespaceStatementImpl(final OS_Module aModule, final Context aContext) {
+			return new NamespaceStatementImpl(aModule, aContext);
+		}
+
+		public DeduceLocalVariable.MemberInvocation new_MemberInvocation(final ClassStatement aB, final DeduceLocalVariable.MemberInvocation.Role aRole) {
+			return new DeduceLocalVariable.MemberInvocation(aB, aRole);
+		}
+
+		public OS_Element new_DeduceTypes2_OS_SpecialVariable(final VariableTableEntry aEntry, final VariableTableType aVariableTableType, final @NotNull IBaseEvaFunction aGeneratedFunction) {
+			return new OS_SpecialVariable(aEntry, aVariableTableType, aGeneratedFunction);
+		}
+
+		public Diagnostic new_Diagnostic_8885(final VariableTableEntry aVte) {
+			return new DeduceElement3_VariableTableEntry.Diagnostic_8885(aVte);
+		}
+
+		public DeduceElement new_DeclTarget(final FunctionDef aBest, final OS_Element aDeclAnchor, final DeclAnchor.AnchorType aAnchorType, final DeduceProcCall aDeduceProcCall) throws FCA_Stop {
+			return aDeduceProcCall.new DeclTarget(aBest, aDeclAnchor, aAnchorType);
+		}
+
+		public DeclAnchor new_DeclAnchor(final OS_Element aDeclAnchor, final DeclAnchor.AnchorType aAnchorType) {
+			return new DeclAnchor(aDeclAnchor, aAnchorType);
+		}
+
+		public IInvocation new_DerivedClassInvocation(final ClassStatement aDeclAnchor, final ClassInvocation aDeclaredInvocation, final Supplier<DeduceTypes2> aDeduceTypes2) {
+			return new DerivedClassInvocation(aDeclAnchor, aDeclaredInvocation, aDeduceTypes2);
+		}
+
+		public Diagnostic new_ResolveError(final IdentExpression aIdent, final LookupResultList aLrl) {
+			return new ResolveError(aIdent, aLrl);
+		}
+
+		public Resolve_Ident_IA2.RIA_Clear_98 new_RIA_Clear_98(final IdentTableEntry aIdte, final VariableStatementImpl aVs, final Context aCtx, final Resolve_Ident_IA2 aResolve_Ident_IA2) {
+			return aResolve_Ident_IA2.new RIA_Clear_98(aIdte, aVs, aCtx);
+		}
+
+		public EN_Understanding new_ENU_FunctionCallTarget(final ProcTableEntry aPte) {
+			return new ENU_FunctionCallTarget(aPte);
+		}
+
+		public EN_Understanding new_ENU_TypeTransitiveOver(final ProcTableEntry aPte) {
+			return new ENU_TypeTransitiveOver(aPte);
+		}
+
+		public FT_FnCallArgs.DoAssignCall new_DoAssignCall(final DeduceClient4 aClient4, final IBaseEvaFunction aGeneratedFunction, final FT_FnCallArgs aFT_FnCallArgs) {
+			return aFT_FnCallArgs.new DoAssignCall(aClient4, aGeneratedFunction);
+		}
+
+		public FT_FCA_IdentIA new_FT_FCA_IdentIA(final FT_FnCallArgs aFTFnCallArgs, final IdentIA aIdentIA, final VariableTableEntry aVte) {
+			return new FT_FCA_IdentIA(aFTFnCallArgs, aIdentIA, aVte);
+		}
+
+		public FT_FCA_IdentIA.Resolve_VTE new_FT_FCA_IdentIA_Resolve_VTE(final VariableTableEntry aVte, final Context aCtx, final ProcTableEntry aPte, final Instruction aInstruction, final FnCallArgs aFca) {
+			return new FT_FCA_IdentIA.Resolve_VTE(aVte, aCtx, aPte, aInstruction, aFca);
+		}
+
+		public EN_Understanding new_ENU_ClassName() {
+			return new ENU_ClassName();
+		}
+
+		public EN_Understanding new_ENU_ConstructorCallTarget() {
+			return new ENU_ConstructorCallTarget();
+		}
+
+		public DeduceClient2 new_DeduceClient2(final DeduceTypes2 aDeduceTypes2) {
+			return new DeduceClient2(aDeduceTypes2);
+		}
+
+		public BaseTableEntry.StatusListener new_ProcTableListener(final ProcTableEntry aPte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final DeduceClient2 aO) {
+			return new ProcTableListener(aPte, aGeneratedFunction, aO);
+		}
+
+		public DeferredObject<GenType, Diagnostic, Void> new_DeferredObject__GenType() {
+			return new DeferredObject<>();
+		}
+
+		public DeferredObject<tripleo.elijah.stages.gen_fn.IBaseEvaFunction, Void, Void> new_DeferredObject__BaseEvaFunction() {
+			return new DeferredObject<>();
+		}
+
+		public WlGenerateDefaultCtor new_WlGenerateDefaultCtor(final OS_Module aModule, final FunctionInvocation aFunctionInvocation, final Deduce_CreationClosure aCl) {
+			return new WlGenerateDefaultCtor(aModule, aFunctionInvocation, aCl);
+		}
+
+		public WlGenerateCtor new_WlGenerateCtor(final OS_Module aModule, final IdentExpression aNameNode, final FunctionInvocation aFunctionInvocation, final Deduce_CreationClosure aCl) {
+			return new WlGenerateCtor(aModule, aFunctionInvocation.getFunction().getNameNode(), aFunctionInvocation, aCl);
+		}
+
+		public WlGenerateFunction new_WlGenerateFunction(final OS_Module aModule, final FunctionInvocation aDependentFunction, final Deduce_CreationClosure aCl) {
+			return new WlGenerateFunction(aModule, aDependentFunction, aCl);
+		}
+
+		public GenType new_GenType_ofFunctionInvocation(final FunctionInvocation aFunctionInvocation, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction) {
+            final GenType result = new_GenTypeImpl();
+			result.setFunctionInvocation(aFunctionInvocation);
+			result.setNode(aEvaFunction);
+			return result;
 		}
 	}
 
@@ -2084,12 +2528,133 @@ public class DeduceTypes2 {
 		}
 	}
 
+	public class DeduceClient4 {
+		private final DeduceTypes2 deduceTypes2;
+
+		public DeduceClient4(final DeduceTypes2 aDeduceTypes2) {
+			deduceTypes2 = aDeduceTypes2;
+		}
+
+		public @Nullable OS_Element _resolveAlias(final @NotNull AliasStatement aAliasStatement) {
+			return DeduceLookupUtils._resolveAlias(aAliasStatement, deduceTypes2);
+		}
+
+		public @Nullable OS_Element _resolveAlias2(final @NotNull AliasStatementImpl aAliasStatement) throws ResolveError {
+			return DeduceLookupUtils._resolveAlias2(aAliasStatement, deduceTypes2);
+		}
+
+		public @NotNull DeferredMemberFunction deferred_member_function(final OS_Element aParent, final IInvocation aInvocation, final @NotNull FunctionDef aFunctionDef, final @NotNull FunctionInvocation aFunctionInvocation) {
+			return deduceTypes2.deferred_member_function(aParent, aInvocation, aFunctionDef, aFunctionInvocation);
+		}
+
+		public void forFunction(final @NotNull FunctionInvocation aFunctionInvocation, final @NotNull ForFunction aForFunction) {
+			deduceTypes2.forFunction(aFunctionInvocation, aForFunction);
+		}
+
+		public void found_element_for_ite(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final @NotNull IdentTableEntry aEntry, final OS_Element aE, final Context aCtx) {
+			deduceTypes2.found_element_for_ite(aGeneratedFunction, aEntry, aE, aCtx, central());
+		}
+
+		public ClassInvocation genCI(final @NotNull GenType aType, final TypeName aGenericTypeName) {
+			return aType.genCI(aGenericTypeName, deduceTypes2, deduceTypes2.errSink, deduceTypes2.phase);
+		}
+
+		public DeduceTypes2 get() {
+			return deduceTypes2;
+		}
+
+		public ErrSink getErrSink() {
+			return deduceTypes2.errSink;
+		}
+
+		public IInvocation getInvocation(final @NotNull EvaFunction aGeneratedFunction) {
+			return deduceTypes2.getInvocation(aGeneratedFunction);
+		}
+
+		public @NotNull ElLog getLOG() {
+			return LOG;
+		}
+
+		public @NotNull OS_Module getModule() {
+			return module;
+		}
+
+		public @NotNull DeducePhase getPhase() {
+			return deduceTypes2.phase;
+		}
+
+		public @NotNull List<TypeTableEntry> getPotentialTypesVte(final @NotNull EvaFunction aGeneratedFunction, final @NotNull InstructionArgument aVte_ia) {
+			return deduceTypes2.getPotentialTypesVte(aGeneratedFunction, aVte_ia);
+		}
+
+		public OS_Type gt(final @NotNull GenType aType) {
+			return deduceTypes2.gt(aType);
+		}
+
+		public void implement_calls(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final @NotNull Context aParent, final @NotNull InstructionArgument aArg, final @NotNull ProcTableEntry aPte, final int aInstructionIndex) {
+			if (aGeneratedFunction.deferred_calls_contains(aInstructionIndex)) {
+				deduceTypes2.LOG.err("Call is deferred "/*+gf.getInstruction(pc)*/ + " " + aPte);
+				return;
+			}
+			Implement_Calls_ ic = _inj().new_Implement_Calls_(aGeneratedFunction, aParent, aArg, aPte, aInstructionIndex, deduceTypes2);
+			ic.action();
+		}
+
+		public @Nullable OS_Element lookup(final @NotNull IdentExpression aElement, final @NotNull Context aContext) throws ResolveError {
+			return DeduceLookupUtils.lookup(aElement, aContext, deduceTypes2);
+		}
+
+		public LookupResultList lookupExpression(final @NotNull IExpression aExpression, final @NotNull Context aContext) throws ResolveError {
+			return DeduceLookupUtils.lookupExpression(aExpression, aContext, deduceTypes2);
+		}
+
+		public @NotNull FunctionInvocation newFunctionInvocation(final FunctionDef aElement, final ProcTableEntry aPte, final @NotNull IInvocation aInvocation) {
+			return deduceTypes2.newFunctionInvocation(aElement, aPte, aInvocation, deduceTypes2.phase);
+		}
+
+		public void onFinish(final Runnable aRunnable) {
+			deduceTypes2.onFinish(aRunnable);
+		}
+
+		public <T> @NotNull PromiseExpectation<T> promiseExpectation(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final String aName) {
+			return deduceTypes2.promiseExpectation(aGeneratedFunction, aName);
+		}
+
+		public void register_and_resolve(final @NotNull VariableTableEntry aVte, final @NotNull ClassStatement aClassStatement) {
+			deduceTypes2.register_and_resolve(aVte, aClassStatement);
+		}
+
+		public @NotNull ClassInvocation registerClassInvocation(final @NotNull ClassInvocation aCi) {
+			return deduceTypes2.phase.registerClassInvocation(aCi);
+		}
+
+		public @Nullable ClassInvocation registerClassInvocation(final @NotNull ClassStatement aClassStatement, final String constructorName) {
+			return deduceTypes2.phase.registerClassInvocation(aClassStatement, constructorName, new ReadySupplier_1<>(deduceTypes2));
+		}
+
+		public NamespaceInvocation registerNamespaceInvocation(final NamespaceStatement aNamespaceStatement) {
+			return deduceTypes2.phase.registerNamespaceInvocation(aNamespaceStatement);
+		}
+
+		public void reportDiagnostic(final ResolveError aResolveError) {
+			deduceTypes2.errSink.reportDiagnostic(aResolveError);
+		}
+
+		public @NotNull GenType resolve_type(final @NotNull OS_Type aTy, final Context aCtx) throws ResolveError {
+			return deduceTypes2.resolve_type(aTy, aCtx);
+		}
+
+		public void resolveIdentIA_(final @NotNull Context aCtx, final @NotNull IdentIA aIdentIA, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final @NotNull FoundElement aFoundElement) {
+			deduceTypes2.resolveIdentIA_(aCtx, aIdentIA, aGeneratedFunction, aFoundElement);
+		}
+	}
+
 	class WlDeduceFunction implements WorkJob {
-		private final List<BaseEvaFunction> coll;
+		private final List<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> coll;
 		private final WorkJob               workJob;
 		private       boolean               _isDone;
 
-		public WlDeduceFunction(final WorkJob aWorkJob, List<BaseEvaFunction> aColl) {
+		public WlDeduceFunction(final WorkJob aWorkJob, List<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> aColl) {
 			workJob = aWorkJob;
 			coll    = aColl;
 		}
@@ -2143,14 +2708,18 @@ public class DeduceTypes2 {
 		}
 	}
 
+	public DeduceCreationContext creationContext() {
+		return _defaultCreationContext;
+	}
+
 	class Implement_Calls_ {
 		private final @NotNull Context             context;
-		private final @NotNull BaseEvaFunction     gf;
+		private final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction     gf;
 		private final @NotNull InstructionArgument i2;
 		private final          int                 pc;
 		private final @NotNull ProcTableEntry      pte;
 
-		public Implement_Calls_(final @NotNull BaseEvaFunction aGf,
+		public Implement_Calls_(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf,
 								final @NotNull Context aContext,
 								final @NotNull InstructionArgument aI2,
 								final @NotNull ProcTableEntry aPte,
@@ -2300,10 +2869,6 @@ public class DeduceTypes2 {
 		}
 	}
 
-	public DeduceCreationContext creationContext() {
-		return _defaultCreationContext;
-	}
-
 	class Dependencies {
 		final WorkList    wl = _inj().new_WorkList();
 		final WorkManager wm;
@@ -2350,7 +2915,7 @@ public class DeduceTypes2 {
 					ni. onResolve(result -> result.dependentFunctions().add(aDependentFunction));
 				} else {
 					mod = ci.getKlass().getContext().module();
-					ci. onResolve(result -> result.dependentFunctions().add(aDependentFunction) );
+					ci. onResolve(result -> result.addDependentFunction(aDependentFunction) );
 				}
 				final @NotNull GenerateFunctions gf = getGenerateFunctions(mod);
 				gen = _inj().new_WlGenerateDefaultCtor(gf, aDependentFunction, creationContext(), phase.codeRegistrar);
@@ -2360,7 +2925,7 @@ public class DeduceTypes2 {
 				gen = _inj().new_WlGenerateFunction(gf, aDependentFunction, phase.codeRegistrar);
 			}
 			wl.addJob(gen);
-			List<BaseEvaFunction> coll = new ArrayList<>();
+			List<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> coll = new ArrayList<>();
 			wl.addJob(_inj().new_WlDeduceFunction(gen, coll, DeduceTypes2.this));
 			wm.addJobs(wl);
 		}
@@ -2437,580 +3002,10 @@ public class DeduceTypes2 {
 		}
 	}
 
-	public static class DeduceTypes2Injector {
-		public List<DE3_Active> new_ArrayList__DE3_Active() {
-			return new ArrayList<>();
-		}
-
-		public DeduceCreationContext new_DefaultDeduceCreationContext(final DeduceTypes2 aDeduceTypes2) {
-			return new DefaultDeduceCreationContext(aDeduceTypes2);
-		}
-
-		public WorkManager new_WorkManager() {
-			return new WorkManager();
-		}
-
-		public Zero new_Zero(final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new Zero();
-		}
-
-		public List<Reactivable> new_ArrayList__Ables() {
-			return new ArrayList<>();
-		}
-
-		//public GenerateResultSink new_DefaultGenerateResultSink(final IPipelineAccess aPa) {
-		//	return new DefaultGenerateResultSink(aPa);
-		//}
-
-		public List<IEvaClass> new_LinkedList__EvaClass() {
-			return new ArrayList<>();
-		}
-
-		public ITasticMap new_TasticMap() {
-			return new TasticMap_1();
-		}
-
-		public DeduceCentral new_DeduceCentral(final DeduceTypes2 aDeduceTypes2) {
-			return new DeduceCentral(aDeduceTypes2);
-		}
-
-		public Map<OS_Element, DG_Item> new_HashMap_DGS() {
-			return new HashMap<>();
-		}
-
-		public List<Runnable> new_ArrayList__Runnable() {
-			return new ArrayList<>();
-		}
-
-		public List<FunctionInvocation> new_ArrayList__FunctionInvocation() {
-			return new ArrayList<>();
-		}
-
-		public PromiseExpectations new_PromiseExpectations(final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new PromiseExpectations();
-		}
-
-		public List<IDeduceResolvable> new_ArrayList__IDeduceResolvable() {
-			return new ArrayList<>();
-		}
-
-		public ElLog new_ElLog(final String aFileName, final ElLog.Verbosity aVerbosity, final String aPhase) {
-			return new ElLog(aFileName, aVerbosity, aPhase);
-		}
-
-		public List<DT_External> new_LinkedList__DT_External() {
-			return new ArrayList<>();
-		}
-
-		public OS_Type new_OS_BuiltinType(final BuiltInTypes aBuiltInType) {
-			return new OS_BuiltinType(aBuiltInType);
-		}
-
-		public @NotNull DeferredMember new_DeferredMember(final DeduceElementWrapper aParent, final IInvocation aInvocation, final VariableStatementImpl aVariableStatement) {
-			return new DeferredMember(aParent, aInvocation, aVariableStatement);
-		}
-
-		public WlGenerateClass new_WlGenerateClass(final GenerateFunctions aGenerateFunctions, final ClassInvocation aCi, final DeducePhase.GeneratedClasses aGeneratedClasses, final ICodeRegistrar aCodeRegistrar) {
-			return new WlGenerateClass(aGenerateFunctions, aCi, aGeneratedClasses, aCodeRegistrar);
-		}
-
-		public WlGenerateNamespace new_WlGenerateNamespace(final GenerateFunctions aGenerateFunctions, final NamespaceInvocation aCi, final DeducePhase.GeneratedClasses aGeneratedClasses, final ICodeRegistrar aCodeRegistrar) {
-			return new WlGenerateNamespace(aGenerateFunctions, aCi, aGeneratedClasses, aCodeRegistrar);
-		}
-
-		public ClassInvocation new_ClassInvocation(final ClassStatement aClassOf, final String aO, final @NotNull Supplier<DeduceTypes2> aDeduceTypes2) {
-			return new ClassInvocation(aClassOf, aO, aDeduceTypes2);
-		}
-
-		public ITastic new_FT_FnCallArgs(final DeduceTypes2 aDeduceTypes2, final FnCallArgs aO) {
-			return new FT_FnCallArgs(aDeduceTypes2, aO);
-		}
-
-		public CantDecideType new_CantDecideType(final VariableTableEntry aVte, final Collection<TypeTableEntry> aTypeTableEntries) {
-			return new CantDecideType(aVte, aTypeTableEntries);
-		}
-
-		public IElementHolder new_GenericElementHolder(final OS_Element aBest) {
-			return new GenericElementHolder(aBest);
-		}
-
-		public GenType new_GenTypeImpl() {
-			return new GenTypeImpl();
-		}
-
-		public __Add_Proc_Table_Listeners new___Add_Proc_Table_Listeners() {
-			return new __Add_Proc_Table_Listeners();
-		}
-
-		public <B> PromiseExpectation<B> new_PromiseExpectation(final ExpectationBase aBase, final String aDesc, final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new PromiseExpectation<B>(aBase, aDesc);
-		}
-
-		public Implement_Calls_ new_Implement_Calls_(final BaseEvaFunction aGeneratedFunction, final Context aFdCtx, final InstructionArgument aI2, final ProcTableEntry aFn1, final int aPc, final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new Implement_Calls_(aGeneratedFunction, aFdCtx, aI2, aFn1, aPc);
-		}
-
-		public EN_Understanding new_ENU_FunctionInvocation(final ProcTableEntry aCallablePte) {
-			return new ENU_FunctionInvocation(aCallablePte);
-		}
-
-		public IElementHolder new_ConstructableElementHolder(final OS_Element aE, final IdentIA aIdentIA) {
-			return new ConstructableElementHolder(aE, aIdentIA);
-		}
-
-		public ITE_Resolver new_Unnamed_ITE_Resolver1(final DeduceTypes2 aDeduceTypes2, final IdentTableEntry aIte, final BaseEvaFunction aGeneratedFunction, final Context aContext) {
-			return new Unnamed_ITE_Resolver1(aDeduceTypes2, aIte, aGeneratedFunction, aContext);
-		}
-
-		public Resolve_Variable_Table_Entry new_Resolve_Variable_Table_Entry(final BaseEvaFunction aGeneratedFunction, final Context aContext, final DeduceTypes2 aDeduceTypes2) {
-			return new Resolve_Variable_Table_Entry(aGeneratedFunction, aContext, aDeduceTypes2);
-		}
-
-		public IVariableConnector new_CtorConnector(final EvaConstructor aGeneratedFunction) {
-			return new CtorConnector(aGeneratedFunction);
-		}
-
-		public IVariableConnector new_NullConnector() {
-			return new NullConnector();
-		}
-
-		public DeduceClient3 new_DeduceClient3(final DeduceTypes2 aDeduceTypes2) {
-			return new DeduceClient3(aDeduceTypes2);
-		}
-
-		public DeduceClient1 new_DeduceClient1(final DeduceTypes2 aDeduceTypes2) {
-			return new DeduceClient1(aDeduceTypes2);
-		}
-
-		public DeduceClient4 new_DeduceClient4(final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new DeduceClient4(aDeduceTypes2);
-		}
-
-		public Resolve_Ident_IA new_Resolve_Ident_IA(final DeduceClient3 aDeduceClient3, final Context aContext, final IdentIA aIdentIA, final BaseEvaFunction aGeneratedFunction, final FoundElement aFoundElement, final ErrSink aErrSink) {
-			return new Resolve_Ident_IA(aDeduceClient3, aContext, aIdentIA, aGeneratedFunction, aFoundElement, aErrSink);
-		}
-
-		public Resolve_each_typename new_Resolve_each_typename(final DeducePhase aPhase, final DeduceTypes2 aDeduceTypes2, final ErrSink aErrSink) {
-			return aDeduceTypes2.new Resolve_each_typename(aPhase, aDeduceTypes2, aErrSink);
-		}
-
-		public Dependencies new_Dependencies(final WorkManager aWorkManager, final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new Dependencies(aWorkManager);
-		}
-
-		public WorkList new_WorkList() {
-			return new WorkList();
-		}
-
-		public DR_Item new_DR_Ident(final IdentTableEntry aIdentTableEntry, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
-			return new DR_Ident(aIdentTableEntry, aGeneratedFunction/*, deduceTypes2*/);
-		}
-
-		public DT_Env new_DT_Env(final ElLog aLOG, final ErrSink aErrSink, final DeduceCentral aCentral) {
-			return new DT_Env(aLOG, aErrSink, aCentral);
-		}
-
-		public Found_Element_For_ITE new_Found_Element_For_ITE(final BaseEvaFunction aGeneratedFunction, final Context aCtx, final DT_Env aEnv, final DeduceClient1 aDeduceClient1) {
-			return new Found_Element_For_ITE(aGeneratedFunction, aCtx, aEnv, aDeduceClient1);
-		}
-
-		public List<TypeTableEntry> new_ArrayList__TypeTableEntry(final Collection<TypeTableEntry> aTypeTableEntries) {
-			return new ArrayList<>(aTypeTableEntries);
-		}
-
-		public Implement_construct new_Implement_construct(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction, final Instruction aInstruction) {
-			return new Implement_construct(aDeduceTypes2, aGeneratedFunction, aInstruction);
-		}
-
-		public DeferredMemberFunction new_DeferredMemberFunction(final OS_Element aParent, final IInvocation aInvocation, final FunctionDef aFunctionDef, final DeduceTypes2 aDeduceTypes2, final FunctionInvocation aFunctionInvocation) {
-			return new DeferredMemberFunction(aParent, aInvocation, aFunctionDef, aDeduceTypes2, aFunctionInvocation);
-		}
-
-		public DG_AliasStatement new_DG_AliasStatement(final AliasStatementImpl aE, final DeduceTypes2 aDt2) {
-			return new DG_AliasStatement(aE, aDt2);
-		}
-
-		public DG_ClassStatement new_DG_ClassStatement(final ClassStatement aClassStatement) {
-			return new DG_ClassStatement(aClassStatement);
-		}
-
-		public DG_FunctionDef new_DG_FunctionDef(final FunctionDef aFunctionDef) {
-			return new DG_FunctionDef(aFunctionDef);
-		}
-
-		public Resolve_Ident_IA new_Resolve_Ident_IA(final DeduceClient3 aDeduceClient3, final Context aContext, final DeduceElementIdent aDei, final BaseEvaFunction aGeneratedFunction, final FoundElement aFoundElement, final ErrSink aErrSink) {
-			return new Resolve_Ident_IA(aDeduceClient3, aContext, aDei, aGeneratedFunction, aFoundElement, aErrSink);
-		}
-
-		public Resolve_Ident_IA2 new_Resolve_Ident_IA2(final DeduceTypes2 aDeduceTypes2, final ErrSink aErrSink, final DeducePhase aPhase, final BaseEvaFunction aGeneratedFunction, final FoundElement aFoundElement) {
-			return new Resolve_Ident_IA2(aDeduceTypes2, aErrSink, aPhase, aGeneratedFunction, aFoundElement);
-		}
-
-		public DE3_Active new_DE3_ActivePTE(final DeduceTypes2 aDeduceTypes2, final ProcTableEntry aPte, final ClassInvocation aClassInvocation) {
-			return new DE3_ActivePTE(aDeduceTypes2, aPte, aClassInvocation);
-		}
-
-		public GenericPart new_GenericPart(final ClassStatement aBest, final NormalTypeName aTyn1) {
-			return new GenericPart(aBest, aTyn1);
-		}
-
-		public OS_UserType new_OS_UserType(final TypeName aTypeName) {
-			return new OS_UserType(aTypeName);
-		}
-
-		public DC_ClassNote.DC_ClassNote_DT2 new_DC_ClassNote_DT2(final IdentTableEntry aIte, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
-			return new DC_ClassNote.DC_ClassNote_DT2(aIte, aGeneratedFunction, aDeduceTypes2);
-		}
-
-		public DC_ClassNote new_DC_ClassNote(final ClassStatement aE, final Context aCtx, final DeduceCentral aDeduceCentral) {
-			return new DC_ClassNote(aE, aCtx, aDeduceCentral);
-		}
-
-		public IElementHolder new_GenericElementHolderWithType(final OS_Element aElement, final OS_Type aTypeName, final DeduceTypes2 aDeduceTypes2) {
-			return new GenericElementHolderWithType(aElement, aTypeName, aDeduceTypes2);
-		}
-
-		public @NotNull WlGenerateDefaultCtor new_WlGenerateDefaultCtor(final GenerateFunctions aGf, final FunctionInvocation aDependentFunction, final DeduceCreationContext aDeduceCreationContext, final ICodeRegistrar aCodeRegistrar) {
-			return new WlGenerateDefaultCtor(aGf, aDependentFunction, aDeduceCreationContext, aCodeRegistrar);
-		}
-
-		public @Nullable WlGenerateFunction new_WlGenerateFunction(final GenerateFunctions aGf, final FunctionInvocation aDependentFunction, final ICodeRegistrar aCodeRegistrar) {
-			return new WlGenerateFunction(aGf, aDependentFunction, aCodeRegistrar);
-		}
-
-		public WorkJob new_WlDeduceFunction(final WorkJob aGen, final List<BaseEvaFunction> aColl, final DeduceTypes2 aDeduceTypes2) {
-			return aDeduceTypes2.new WlDeduceFunction(aGen, aColl);
-		}
-
-		public DeduceElement3_Function new_DeduceElement3_Function(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
-			return new DeduceElement3_Function(aDeduceTypes2, aGeneratedFunction);
-		}
-
-		public DeduceElement3_ProcTableEntry new_DeduceElement3_ProcTableEntry(final ProcTableEntry aPte, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
-			Preconditions.checkNotNull(aDeduceTypes2);
-			return new DeduceElement3_ProcTableEntry(aPte, aDeduceTypes2, aGeneratedFunction);
-		}
-
-		public DeduceElement3_VariableTableEntry new_DeduceElement3_VariableTableEntry(final VariableTableEntry aVte, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
-			return new DeduceElement3_VariableTableEntry(aVte, aDeduceTypes2, aGeneratedFunction);
-		}
-
-		public DeduceElement3_IdentTableEntry new_DeduceElement3_IdentTableEntry(final IdentTableEntry aIte) {
-			return new DeduceElement3_IdentTableEntry(aIte);
-		}
-
-		public @NotNull IdentIA new_IdentIA(int index, @NotNull BaseEvaFunction generatedFunction) {
-			return new IdentIA(index, generatedFunction);
-		}
-
-		public BaseTableEntry.StatusListener new__StatusListener__BTE_203(final DeduceTypeResolve aDeduceTypeResolve) {
-			return aDeduceTypeResolve.new _StatusListener__BTE_203();
-		}
-
-		public GenType new_GenTypeImpl(final ClassStatement aKlass) {
-			return new GenTypeImpl(aKlass);
-		}
-
-		public SGTA_SetResolvedClass new_SGTA_SetResolvedClass(final ClassStatement aKlass) {
-			return new SGTA_SetResolvedClass(aKlass);
-		}
-
-		public EN_Usage new_EN_DeduceUsage(final InstructionArgument aBacklink, final BaseEvaFunction aGf, final IdentTableEntry aIte) {
-			return new EN_DeduceUsage(aBacklink, aGf, aIte);
-		}
-
-		public IdentTableEntry.ITE_Resolver_Result new_ITE_Resolver_Result(final OS_Element aE) {
-			return new IdentTableEntry.ITE_Resolver_Result(aE);
-		}
-
-		public EN_Usage new_EN_NameUsage(final EN_Name aName, final DeduceElement3_IdentTableEntry aDe3Ite) {
-			return new EN_NameUsage(aName, aDe3Ite);
-		}
-
-		public DTR_IdentExpression new_DTR_IdentExpression(final DeduceTypeResolve aDeduceTypeResolve, final IdentExpression aIdentExpression, final BaseTableEntry aBte) {
-			return new DTR_IdentExpression(aDeduceTypeResolve, aIdentExpression, aBte);
-		}
-
-		public DTR_VariableStatement new_DTR_VariableStatement(final DeduceTypeResolve aDeduceTypeResolve, final VariableStatement aVariableStatement) {
-			return new DTR_VariableStatement(aDeduceTypeResolve, aVariableStatement);
-		}
-
-		public TypeTableEntry new_TypeTableEntry(final int aI, final TypeTableEntry.Type aType, final OS_Type aTypeName, final IdentExpression aIdent, final TableEntryIV aO) {
-			return new TypeTableEntry(aI, aType, aTypeName, aIdent, aO);
-		}
-
-		public BaseTableEntry.StatusListener new__StatusListener__BTE_86(final DeduceTypeResolve aDeduceTypeResolve) {
-			return aDeduceTypeResolve.new _StatusListener__BTE_86();
-		}
-
-		public BaseTableEntry.StatusListener new_StatusListener__RIA__176(final IdentTableEntry aY, final FoundElement aFoundElement, final Resolve_Ident_IA aResolve_Ident_IA) {
-			return aResolve_Ident_IA.new StatusListener__RIA__176(aY, aFoundElement);
-		}
-
-		public WlGenerateCtor new_WlGenerateCtor(final GenerateFunctions aGenerateFunctions, final FunctionInvocation aFi, final IdentExpression aO, final ICodeRegistrar aCodeRegistrar) {
-			return new WlGenerateCtor(aGenerateFunctions, aFi, aO, aCodeRegistrar);
-		}
-
-		public GenType new_GenTypeImpl(final NamespaceStatement aParent) {
-			return new GenTypeImpl(aParent);
-		}
-
-		public EN_Understanding new_ENU_AliasedFrom(final AliasStatement aOrigE) {
-			return new ENU_AliasedFrom(aOrigE);
-		}
-
-		public FT_FCA_FunctionDef new_FT_FCA_FunctionDef(final FunctionDef aEl, final DeduceTypes2 aDeduceTypes2) {
-			return new FT_FCA_FunctionDef(aEl, aDeduceTypes2);
-		}
-
-		public FT_FCA_ClassStatement new_FT_FCA_ClassStatement(final ClassStatement aEl) {
-			return new FT_FCA_ClassStatement(aEl);
-		}
-
-		public FT_FCA_IdentIA.FakeDC4 new_FakeDC4(final DeduceClient4 aDc4, final FT_FCA_IdentIA aFT_FCA_IdentIA) {
-			return aFT_FCA_IdentIA.new FakeDC4(aDc4);
-		}
-
-		public FT_FCA_IdentIA.FT_FCA_Ctx new_FT_FCA_Ctx(final BaseEvaFunction aGeneratedFunction, final TypeTableEntry aTte, final Context aCtx, final ErrSink aErrSink, final DeduceClient4 aDc) {
-			return new FT_FCA_IdentIA.FT_FCA_Ctx(aGeneratedFunction, aTte, aCtx, aErrSink, aDc);
-		}
-
-		public FT_FCA_FormalArgListItem new_FT_FCA_FormalArgListItem(final FormalArgListItem aFali, final BaseEvaFunction aGeneratedFunction) {
-			return new FT_FCA_FormalArgListItem(aFali, aGeneratedFunction);
-		}
-
-		public FT_FCA_VariableStatement new_FT_FCA_VariableStatement(final VariableStatementImpl aVs, final BaseEvaFunction aGeneratedFunction) {
-			return new FT_FCA_VariableStatement(aVs, aGeneratedFunction);
-		}
-
-		public FT_FCA_IdentIA.FT_FCA_ProcedureCall new_FT_FCA_ProcedureCall(final ProcedureCallExpression aPce, final Context aCtx, final FT_FCA_IdentIA aFT_FCA_IdentIA) {
-			return aFT_FCA_IdentIA.new FT_FCA_ProcedureCall(aPce, aCtx);
-		}
-
-		public StatementWrapperImpl new_StatementWrapperImpl(final IExpression aLeft, final Context aO, final OS_Element aO1) {
-			return new StatementWrapperImpl(aLeft, aO, aO1);
-		}
-
-		public OS_Type new_OS_UnknownType(final StatementWrapperImpl aStatementWrapper) {
-			return new OS_UnknownType(aStatementWrapper);
-		}
-
-		public FoundElement new_FT_FnCallArgs_DoAssignCall_NullFoundElement(final DeduceClient4 aDc) {
-			return new FT_FnCallArgs.DoAssignCall.NullFoundElement(aDc);
-		}
-
-		public DT_External_2 new_DT_External_2(final IdentTableEntry aEntry, final OS_Module aModule, final ProcTableEntry aPte, final FT_FCA_IdentIA.FakeDC4 aDc, final ElLog aLOG, final Context aCtx, final BaseEvaFunction aGeneratedFunction, final int aInstructionIndex, final IdentIA aIdentIA, final VariableTableEntry aVte) {
-			return new DT_External_2(aEntry, aModule, aPte, aDc, aLOG, aCtx, aGeneratedFunction, aInstructionIndex, aIdentIA, aVte);
-		}
-
-		public DR_Ident.ElementUnderstanding new_DR_Ident_ElementUnderstanding(final OS_Element aEl) {
-			return new DR_Ident.ElementUnderstanding(aEl);
-		}
-
-		public EN_Understanding new_ENU_LangConstVar() {
-			return new ENU_LangConstVar();
-		}
-
-		public EN_Understanding new_ENU_FunctionName() {
-			return new ENU_FunctionName();
-		}
-
-		public EN_Understanding new_ENU_ResolveToFunction(final FunctionDef aFd) {
-			return new ENU_ResolveToFunction(aFd);
-		}
-
-		public IElementHolder new_DE3_EH_GroundedVariableStatement(final VariableStatement aE, final DeduceElement3_IdentTableEntry aDeduceElement3IdentTableEntry) {
-			return aDeduceElement3IdentTableEntry.new DE3_EH_GroundedVariableStatement(aE, aDeduceElement3IdentTableEntry);
-		}
-
-		public EN_Understanding new_ENU_LookupResult(final LookupResultList aLrl) {
-			return new ENU_LookupResult(aLrl);
-		}
-
-		public DeduceElement3_IdentTableEntry.DE3_ITE_Holder new_DE3_ITE_Holder(final OS_Element aEl, final DeduceElement3_IdentTableEntry aDeduceElement3IdentTableEntry) {
-			return aDeduceElement3IdentTableEntry.new DE3_ITE_Holder(aEl);
-		}
-
-		public DR_PossibleTypeCI new_DR_PossibleTypeCI(final ClassInvocation aCi, final FunctionInvocation aFi) {
-			return new DR_PossibleTypeCI(aCi, aFi);
-		}
-
-		public EN_Understanding new_ENU_VariableName() {
-			return new ENU_VariableName();
-		}
-
-		public setup_GenType_Action new_SGTA_SetResolvedNamespace(final NamespaceStatement aNamespaceStatement) {
-			return new SGTA_SetResolvedNamespace(aNamespaceStatement);
-		}
-
-		public setup_GenType_Action new_SGTA_RegisterNamespaceInvocation(final NamespaceStatement aNamespaceStatement, final DeducePhase aPhase) {
-			return new SGTA_RegisterNamespaceInvocation(aNamespaceStatement, aPhase);
-		}
-
-		public setup_GenType_Action new_SGTA_SetNamespaceInvocation() {
-			return new SGTA_SetNamespaceInvocation();
-		}
-
-		public setup_GenType_Action new_SGTA_RegisterClassInvocation(final ClassStatement aClassStatement, final DeducePhase aPhase) {
-			return new SGTA_RegisterClassInvocation(aClassStatement, aPhase);
-		}
-
-		public setup_GenType_Action new_SGTA_SetClassInvocation() {
-			return new SGTA_SetClassInvocation();
-		}
-
-		public GenType new_GenTypeImpl(final OS_Type aAttached, final OS_Type aOSType, final boolean aB, final TypeName aX, final DeduceTypes2 aDt2, final ErrSink aErrSink, final DeducePhase aPhase) {
-			return new GenTypeImpl(aAttached, aOSType, aB, aX, aDt2, aErrSink, aPhase);
-		}
-
-		public Diagnostic new_ResolveError(final TypeName aX, final LookupResultList aLrl) {
-			return new ResolveError(aX, aLrl);
-		}
-
-		public Diagnostic new_Diagnostic_8884(final VariableTableEntry aVte, final BaseEvaFunction aGf) {
-			return new DeduceElement3_VariableTableEntry.Diagnostic_8884(aVte, aGf);
-		}
-
-		public IdentTableEntry new_IdentTableEntry(final int aI, final IdentExpression aIdentExpression, final Context aContext, final BaseEvaFunction aGeneratedFunction) {
-			return new IdentTableEntry(aI, aIdentExpression, aContext, aGeneratedFunction);
-		}
-
-		public Implement_construct.ICH new_ICH(final GenType aGenType, final Implement_construct aImplement_construct) {
-			return aImplement_construct.new ICH(aGenType);
-		}
-
-		public OS_Type new_OS_UnknownType(final OS_Element aElement) {
-			return new OS_UnknownType(aElement);
-		}
-
-		public DeduceProcCall new_DeduceProcCall(final ProcTableEntry aPte) {
-			return new DeduceProcCall(aPte);
-		}
-
-		public ClassInvocation.CI_GenericPart new_CI_GenericPart(final List<TypeName> aGenericPart, final ClassInvocation aClassInvocation) {
-			return aClassInvocation.new CI_GenericPart(aGenericPart);
-		}
-
-		public RegularTypeName new_RegularTypeNameImpl(final Context aContext) {
-			return new RegularTypeNameImpl(aContext);
-		}
-
-		public IElementHolder new_GenericElementHolderWithDC(final OS_Element aEl, final DeduceClient3 aDc, final Resolve_Ident_IA aResolve_Ident_IA) {
-			return aResolve_Ident_IA.new GenericElementHolderWithDC(aEl, aDc);
-		}
-
-		public FunctionDef new_FunctionDefImpl(final NamespaceStatement aModNs, final Context aContext) {
-			return new FunctionDefImpl(aModNs, aContext);
-		}
-
-		public NamespaceInvocation new_NamespaceInvocation(final NamespaceStatement aModNs) {
-			return new NamespaceInvocation(aModNs);
-		}
-
-		public NamespaceStatement new_NamespaceStatementImpl(final OS_Module aModule, final Context aContext) {
-			return new NamespaceStatementImpl(aModule, aContext);
-		}
-
-		public DeduceLocalVariable.MemberInvocation new_MemberInvocation(final ClassStatement aB, final DeduceLocalVariable.MemberInvocation.Role aRole) {
-			return new DeduceLocalVariable.MemberInvocation(aB, aRole);
-		}
-
-		public OS_Element new_DeduceTypes2_OS_SpecialVariable(final VariableTableEntry aEntry, final VariableTableType aVariableTableType, final BaseEvaFunction aGeneratedFunction) {
-			return new OS_SpecialVariable(aEntry, aVariableTableType, aGeneratedFunction);
-		}
-
-		public Diagnostic new_Diagnostic_8885(final VariableTableEntry aVte) {
-			return new DeduceElement3_VariableTableEntry.Diagnostic_8885(aVte);
-		}
-
-		public DeduceElement new_DeclTarget(final FunctionDef aBest, final OS_Element aDeclAnchor, final DeclAnchor.AnchorType aAnchorType, final DeduceProcCall aDeduceProcCall) throws FCA_Stop {
-			return aDeduceProcCall.new DeclTarget(aBest, aDeclAnchor, aAnchorType);
-		}
-
-		public DeclAnchor new_DeclAnchor(final OS_Element aDeclAnchor, final DeclAnchor.AnchorType aAnchorType) {
-			return new DeclAnchor(aDeclAnchor, aAnchorType);
-		}
-
-		public IInvocation new_DerivedClassInvocation(final ClassStatement aDeclAnchor, final ClassInvocation aDeclaredInvocation, final Supplier<DeduceTypes2> aDeduceTypes2) {
-			return new DerivedClassInvocation(aDeclAnchor, aDeclaredInvocation, aDeduceTypes2);
-		}
-
-		public Diagnostic new_ResolveError(final IdentExpression aIdent, final LookupResultList aLrl) {
-			return new ResolveError(aIdent, aLrl);
-		}
-
-		public Resolve_Ident_IA2.RIA_Clear_98 new_RIA_Clear_98(final IdentTableEntry aIdte, final VariableStatementImpl aVs, final Context aCtx, final Resolve_Ident_IA2 aResolve_Ident_IA2) {
-			return aResolve_Ident_IA2.new RIA_Clear_98(aIdte, aVs, aCtx);
-		}
-
-		public EN_Understanding new_ENU_FunctionCallTarget(final ProcTableEntry aPte) {
-			return new ENU_FunctionCallTarget(aPte);
-		}
-
-		public EN_Understanding new_ENU_TypeTransitiveOver(final ProcTableEntry aPte) {
-			return new ENU_TypeTransitiveOver(aPte);
-		}
-
-		public FT_FnCallArgs.DoAssignCall new_DoAssignCall(final DeduceClient4 aClient4, final BaseEvaFunction aGeneratedFunction, final FT_FnCallArgs aFT_FnCallArgs) {
-			return aFT_FnCallArgs.new DoAssignCall(aClient4, aGeneratedFunction);
-		}
-
-		public FT_FCA_IdentIA new_FT_FCA_IdentIA(final FT_FnCallArgs aFTFnCallArgs, final IdentIA aIdentIA, final VariableTableEntry aVte) {
-			return new FT_FCA_IdentIA(aFTFnCallArgs, aIdentIA, aVte);
-		}
-
-		public FT_FCA_IdentIA.Resolve_VTE new_FT_FCA_IdentIA_Resolve_VTE(final VariableTableEntry aVte, final Context aCtx, final ProcTableEntry aPte, final Instruction aInstruction, final FnCallArgs aFca) {
-			return new FT_FCA_IdentIA.Resolve_VTE(aVte, aCtx, aPte, aInstruction, aFca);
-		}
-
-		public EN_Understanding new_ENU_ClassName() {
-			return new ENU_ClassName();
-		}
-
-		public EN_Understanding new_ENU_ConstructorCallTarget() {
-			return new ENU_ConstructorCallTarget();
-		}
-
-		public DeduceClient2 new_DeduceClient2(final DeduceTypes2 aDeduceTypes2) {
-			return new DeduceClient2(aDeduceTypes2);
-		}
-
-		public BaseTableEntry.StatusListener new_ProcTableListener(final ProcTableEntry aPte, final BaseEvaFunction aGeneratedFunction, final DeduceClient2 aO) {
-			return new ProcTableListener(aPte, aGeneratedFunction, aO);
-		}
-
-		public DeferredObject<GenType, Diagnostic, Void> new_DeferredObject__GenType() {
-			return new DeferredObject<>();
-		}
-
-		public DeferredObject<BaseEvaFunction, Void, Void> new_DeferredObject__BaseEvaFunction() {
-			return new DeferredObject<>();
-		}
-
-		public WlGenerateDefaultCtor new_WlGenerateDefaultCtor(final OS_Module aModule, final FunctionInvocation aFunctionInvocation, final Deduce_CreationClosure aCl) {
-			return new WlGenerateDefaultCtor(aModule, aFunctionInvocation, aCl);
-		}
-
-		public WlGenerateCtor new_WlGenerateCtor(final OS_Module aModule, final IdentExpression aNameNode, final FunctionInvocation aFunctionInvocation, final Deduce_CreationClosure aCl) {
-			return new WlGenerateCtor(aModule, aFunctionInvocation.getFunction().getNameNode(), aFunctionInvocation, aCl);
-		}
-
-		public WlGenerateFunction new_WlGenerateFunction(final OS_Module aModule, final FunctionInvocation aDependentFunction, final Deduce_CreationClosure aCl) {
-			return new WlGenerateFunction(aModule, aDependentFunction, aCl);
-		}
-
-		public GenType new_GenType_ofFunctionInvocation(final FunctionInvocation aFunctionInvocation, final BaseEvaFunction aEvaFunction) {
-            final GenType result = new_GenTypeImpl();
-			result.setFunctionInvocation(aFunctionInvocation);
-			result.setNode(aEvaFunction);
-			return result;
-		}
-	}
-
 	public class Zero {
 		private final Map<Object, IDeduceElement3> l = new HashMap<>();
 
-		public DeduceElement3_Function get(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+		public DeduceElement3_Function get(final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 			if (l.containsKey(aGeneratedFunction)) {
 				return (DeduceElement3_Function) l.get(aGeneratedFunction);
 			}
@@ -3020,7 +3015,7 @@ public class DeduceTypes2 {
 			return de3;
 		}
 
-		public DeduceElement3_ProcTableEntry get(final ProcTableEntry pte, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+		public DeduceElement3_ProcTableEntry get(final ProcTableEntry pte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
 			if (l.containsKey(pte)) {
 				return (DeduceElement3_ProcTableEntry) l.get(pte);
 			}
@@ -3030,7 +3025,7 @@ public class DeduceTypes2 {
 			return de3;
 		}
 
-		public DeduceElement3_VariableTableEntry get(final VariableTableEntry vte, final BaseEvaFunction aGeneratedFunction) {
+		public DeduceElement3_VariableTableEntry get(final VariableTableEntry vte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 			if (l.containsKey(vte)) {
 				return (DeduceElement3_VariableTableEntry) l.get(vte);
 			}
@@ -3040,7 +3035,7 @@ public class DeduceTypes2 {
 			return de3;
 		}
 
-		public DeduceElement3_IdentTableEntry getIdent(final IdentTableEntry ite, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+		public DeduceElement3_IdentTableEntry getIdent(final IdentTableEntry ite, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
 			if (l.containsKey(ite)) {
 				return (DeduceElement3_IdentTableEntry) l.get(ite);
 			}
@@ -3073,9 +3068,9 @@ public class DeduceTypes2 {
 
 	private class do_assign_normal_ident_deferred__DT_ResolveObserver implements DT_ResolveObserver {
 		private final @NotNull IdentTableEntry identTableEntry;
-		private final @NotNull BaseEvaFunction generatedFunction;
+		private final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 
-		public do_assign_normal_ident_deferred__DT_ResolveObserver(final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull BaseEvaFunction aGeneratedFunction) {
+		public do_assign_normal_ident_deferred__DT_ResolveObserver(final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 			identTableEntry   = aIdentTableEntry;
 			generatedFunction = aGeneratedFunction;
 		}
@@ -3097,9 +3092,9 @@ public class DeduceTypes2 {
 			}
 		}
 
-		private void do_assign_normal_ident_deferred_FALI(final @NotNull BaseEvaFunction generatedFunction, final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull FormalArgListItem fali) {
+		private void do_assign_normal_ident_deferred_FALI(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull FormalArgListItem fali) {
 			final GenType            genType            = _inj().new_GenTypeImpl();
-			final FunctionInvocation functionInvocation = generatedFunction.fi;
+			final FunctionInvocation functionInvocation = generatedFunction._fi();
 			final String             fali_name          = fali.name().asString();
 
 			IInvocation invocation = null;
@@ -3126,29 +3121,7 @@ public class DeduceTypes2 {
 			DebugPrint.addDependentType(generatedFunction, genType);
 		}
 
-		class X_S implements Supplier<IInvocation> {
-			private final BaseEvaFunction generatedFunction1;
-
-			public X_S(final BaseEvaFunction aGeneratedFunction) {
-				generatedFunction1 = aGeneratedFunction;
-			}
-
-			@Override
-			@NotNull
-			public IInvocation get() {
-				final IInvocation invocation;
-
-				if (generatedFunction1.fi.getClassInvocation() != null) {
-					invocation = generatedFunction1.fi.getClassInvocation();
-				} else {
-					invocation = generatedFunction1.fi.getNamespaceInvocation();
-				}
-
-				return invocation;
-			}
-		}
-
-		public void do_assign_normal_ident_deferred_VariableStatement(final @NotNull BaseEvaFunction generatedFunction, final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull VariableStatementImpl vs) {
+		public void do_assign_normal_ident_deferred_VariableStatement(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull VariableStatementImpl vs) {
 			final DeduceElementWrapper parent = new DeduceElementWrapper(vs.getParent().getParent());
 			final DeferredMember       dm     = deferred_member(parent, new X_S(generatedFunction).get(), vs, aIdentTableEntry);
 
@@ -3168,6 +3141,28 @@ public class DeduceTypes2 {
 				throw new IllegalStateException();
 			}
 			generatedFunction.addDependentType(genType);
+		}
+
+		class X_S implements Supplier<IInvocation> {
+			private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction1;
+
+			public X_S(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+				generatedFunction1 = aGeneratedFunction;
+			}
+
+			@Override
+			@NotNull
+			public IInvocation get() {
+				final IInvocation invocation;
+
+				if (generatedFunction1._fi().getClassInvocation() != null) {
+					invocation = generatedFunction1._fi().getClassInvocation();
+				} else {
+					invocation = generatedFunction1._fi().getNamespaceInvocation();
+				}
+
+				return invocation;
+			}
 		}
 	}
 }

@@ -10,10 +10,10 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 
 public class FT_FCA_VariableStatement {
 
-	private final @NotNull BaseEvaFunction       generatedFunction;
+	private final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction       generatedFunction;
 	private final          VariableStatementImpl vs;
 
-	public FT_FCA_VariableStatement(final VariableStatementImpl aVs, final @NotNull BaseEvaFunction aGeneratedFunction) {
+	public FT_FCA_VariableStatement(final VariableStatementImpl aVs, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		vs                = aVs;
 		generatedFunction = aGeneratedFunction;
 	}

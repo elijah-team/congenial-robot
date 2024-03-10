@@ -10,9 +10,11 @@ import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.OS_PackageImpl;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.util.ObservableCompletableProcess;
 import tripleo.elijah.world.i.*;
@@ -22,15 +24,15 @@ import java.util.*;
 public class DefaultLivingRepo implements LivingRepo {
 	private final          Map<String, OS_Package>                          _packages     = new HashMap<String, OS_Package>();
 	private final @NotNull ObservableCompletableProcess<WorldModule>        wmo           = new ObservableCompletableProcess<>();
-	private final @NotNull List<LivingNode>                                 repo          = new ArrayList<>();
-	private final @NotNull Multimap<BaseEvaFunction, DefaultLivingFunction> functionMap   = ArrayListMultimap.create();
-	private final          Set<WorldModule>                                 _modules    = new HashSet<>();
+	private final @NotNull List<LivingNode>                                  repo        = new ArrayList<>();
+	private final          Multimap<IBaseEvaFunction, DefaultLivingFunction> functionMap = ArrayListMultimap.create();
+	private final          Set<WorldModule>                                  _modules    = new HashSet<>();
 	private                int                                              _classCode    = 101;
 	private                int                                              _functionCode = 1001;
 	private                int      _packageCode  = 1;
 
 	@Override
-	public @NotNull DefaultLivingClass addClass(final @NotNull EvaClass aClass, final @NotNull Add addFlag) {
+	public @NotNull DefaultLivingClass addClass(final IEvaClass aClass, final @NotNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
 			if (aClass.getCode() == 0) {
@@ -67,7 +69,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull DefaultLivingFunction addFunction(final @NotNull BaseEvaFunction aFunction, final @NotNull Add addFlag) {
+	public @NotNull DefaultLivingFunction addFunction(final @NotNull IBaseEvaFunction aFunction, final @NotNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
 			aFunction.setCode(nextFunctionCode());
@@ -87,7 +89,7 @@ public class DefaultLivingRepo implements LivingRepo {
 		}
 
 		final DefaultLivingFunction living = new DefaultLivingFunction(aFunction);
-		aFunction._living = living;
+		aFunction.setLiving(living);
 
 		functionMap.put(aFunction, living);
 
@@ -179,7 +181,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @Nullable LivingFunction getFunction(final BaseEvaFunction aBaseEvaFunction) {
+	public @Nullable LivingFunction getFunction(final IBaseEvaFunction aBaseEvaFunction) {
 		var c = functionMap.get(aBaseEvaFunction);
 
 		if (!c.isEmpty())

@@ -39,7 +39,7 @@ public class DeduceElement3_Constructor implements IDeduceElement3 {
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		return evaConstructor;
 	}
 

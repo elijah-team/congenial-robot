@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.nextgen.CP_Paths;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
@@ -58,7 +58,7 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 			final LivingClass lc = world.getClass(c);
 			lc.offer(ap);
 		}
-		for (BaseEvaFunction f : fs) {
+		for (tripleo.elijah.stages.gen_fn.IBaseEvaFunction f : fs) {
 			final LivingFunction lf = world.getFunction(f);
 			lf.offer(ap);
 		}

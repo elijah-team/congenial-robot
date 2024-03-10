@@ -12,7 +12,7 @@ import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 public class __Add_Proc_Table_Listeners {
-	void add_proc_table_listeners(final @NotNull BaseEvaFunction generatedFunction, final @NotNull ProcTableEntry pte, final DeduceTypes2 aDeduceTypes2) {
+	void add_proc_table_listeners(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull ProcTableEntry pte, final DeduceTypes2 aDeduceTypes2) {
 		pte.addStatusListener(aDeduceTypes2._inj().new_ProcTableListener(pte, generatedFunction, aDeduceTypes2._inj().new_DeduceClient2(aDeduceTypes2)));
 
 		InstructionArgument en = pte.expression_num;
@@ -52,13 +52,13 @@ public class __Add_Proc_Table_Listeners {
 	}
 
 	class SL implements BaseTableEntry.StatusListener {
-		private final BaseEvaFunction generatedFunction;
+		private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 		private final IdentTableEntry idte;
 		private final ProcTableEntry  pte;
 		private final IdentIA         identIA;
 		private final DeduceTypes2    deduceTypes2;
 
-		SL(final BaseEvaFunction aGeneratedFunction, final IdentTableEntry aIdte, final ProcTableEntry aPte, final IdentIA aIdentIA, final DeduceTypes2 aADeduceTypes2) {
+		SL(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final IdentTableEntry aIdte, final ProcTableEntry aPte, final IdentIA aIdentIA, final DeduceTypes2 aADeduceTypes2) {
 			generatedFunction = aGeneratedFunction;
 			idte              = aIdte;
 			pte               = aPte;

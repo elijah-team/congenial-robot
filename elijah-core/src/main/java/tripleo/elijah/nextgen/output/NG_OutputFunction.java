@@ -4,9 +4,10 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 import tripleo.elijah.stages.gen_c.C2C_Result;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaConstructor;
 import tripleo.elijah.stages.gen_fn.EvaFunction;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.generate.OutputStrategyC;
@@ -45,7 +46,7 @@ public class NG_OutputFunction implements NG_OutputItem {
 			return aOutputStrategyC.nameForConstructor1((EvaConstructor) getGf(), ty);
 	}
 
-	public BaseEvaFunction getGf() {
+	public IBaseEvaFunction getGf() {
 		return ((PP_Function) ppf).getCarrier();
 	}
 

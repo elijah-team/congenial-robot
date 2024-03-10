@@ -22,7 +22,7 @@ public class GDM_IdentExpression implements GDM_Item {
 	private final GenerateFunctions         generateFunctions;
 	private final IdentExpression           identExpression;
 	private final Eventual<IdentTableEntry> _p_IdentTableEntry = new Eventual<>();
-	private final Eventual<BaseEvaFunction> _p_bef             = new Eventual<>();
+	private final Eventual<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> _p_bef             = new Eventual<>();
 
 	public GDM_IdentExpression(final GenerateFunctions aGenerateFunctions, final IdentExpression aIdentExpression) {
 		generateFunctions = aGenerateFunctions;
@@ -42,7 +42,7 @@ public class GDM_IdentExpression implements GDM_Item {
 								final List<InstructionArgument> aSs,
 								final FoundElement aFoundElement,
 								final DeduceTypes2 aDeduceTypes2,
-								final @Nullable BaseEvaFunction aEvaFunction) {
+								final @Nullable tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction) {
 		if (aEvaFunction != null && _p_bef.isPending()) {
 			_p_bef.resolve(aEvaFunction);
 		}
@@ -52,7 +52,7 @@ public class GDM_IdentExpression implements GDM_Item {
 		});
 	}
 
-	public void resolveIdentIA(final BaseEvaFunction aBaseEvaFunction, final int aIndex) {
+	public void resolveIdentIA(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction, final int aIndex) {
 		// README this should always be true (if attached to a ...)
 		if (false) {
 			final IdentIA identIA1 = new IdentIA(aIndex, aBaseEvaFunction);

@@ -28,9 +28,9 @@ public class DeduceElement3_Function implements IDeduceElement3 {
 
 	private final GenType         _gt;
 	private final DeduceTypes2    deduceTypes2;
-	private final BaseEvaFunction generatedFunction;
+	private final IBaseEvaFunction generatedFunction;
 
-	public DeduceElement3_Function(final @NotNull DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public DeduceElement3_Function(final @NotNull DeduceTypes2 aDeduceTypes2, final IBaseEvaFunction aGeneratedFunction) {
 		deduceTypes2      = aDeduceTypes2;
 		generatedFunction = aGeneratedFunction;
 
@@ -53,7 +53,7 @@ public class DeduceElement3_Function implements IDeduceElement3 {
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		return generatedFunction;
 	}
 

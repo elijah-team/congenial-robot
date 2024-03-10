@@ -3,7 +3,8 @@ package tripleo.elijah.world.i;
 import org.jdeferred2.DoneCallback;
 import tripleo.elijah.comp.functionality.f291.AmazingPart;
 import tripleo.elijah.lang.i.FunctionDef;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+
 
 public interface LivingFunction {
 	int getCode();
@@ -12,7 +13,7 @@ public interface LivingFunction {
 
 	void offer(AmazingPart aAp);
 
-	BaseEvaFunction evaNode();
+	IBaseEvaFunction evaNode();
 
 	void codeRegistration(LF_CodeRegistration acr);
 

@@ -26,7 +26,7 @@ import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Reque
 import tripleo.elijah.nextgen.rosetta.Rosetta;
 import tripleo.elijah.stages.deduce.Resolve_Ident_IA.DeduceElementIdent;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 import tripleo.elijah.stages.logging.ElLog;
@@ -87,7 +87,7 @@ public class DeduceTypesTest {
 		boilerplate.onDeducePhase(dp -> {
 			final DeducePhase_deduceModule_Request dmr     = new DeducePhase_deduceModule_Request(mod, dp.generatedClasses, verbosity, dp);
 			final DeduceTypes2                     d       = Rosetta.create(dmr);
-			final BaseEvaFunction                  bgf     = mock(BaseEvaFunction.class);
+			final tripleo.elijah.stages.gen_fn.IBaseEvaFunction                  bgf     = mock(tripleo.elijah.stages.gen_fn.IBaseEvaFunction.class);
 			final IdentTableEntry                  ite     = new IdentTableEntry(0, x1, x1.getContext(), bgf);
 			final DeduceElementIdent               dei     = new DeduceElementIdent(ite); // TODO 12/24 This is here to say why is this here?
 			final DeduceElement3_IdentTableEntry   de3_ite = ite.getDeduceElement3(d, bgf);

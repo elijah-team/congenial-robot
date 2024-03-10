@@ -5,15 +5,16 @@ import tripleo.elijah.lang.i.RegularTypeName;
 import tripleo.elijah.lang.i.TypeName;
 import tripleo.elijah.lang.nextgen.names.i.EN_Usage;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_IsTypeName;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.util.NotImplementedException;
 
 public class DR_Type {
-	private final BaseEvaFunction evaFunction;
-	private final RegularTypeName nonGenericTypeName;
+	private final IBaseEvaFunction evaFunction;
+	private final RegularTypeName  nonGenericTypeName;
 	private       IdentExpression base;
 
-	public DR_Type(final BaseEvaFunction aEvaFunction, final TypeName aNonGenericTypeName) {
+	public DR_Type(final IBaseEvaFunction aEvaFunction, final TypeName aNonGenericTypeName) {
 		evaFunction        = aEvaFunction;
 		nonGenericTypeName = (RegularTypeName) aNonGenericTypeName;
 	}

@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 	@NotNull
 	private final DeduceTypes2    deduceTypes2;
-	private final BaseEvaFunction generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 
 	private final ProcTableEntry principal;
 
@@ -37,7 +37,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 
 	public DeduceElement3_ProcTableEntry(final ProcTableEntry aProcTableEntry,
 										 final @NotNull DeduceTypes2 aDeduceTypes2,
-										 final BaseEvaFunction aGeneratedFunction) {
+										 final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		principal         = aProcTableEntry;
 		deduceTypes2      = aDeduceTypes2;
 		generatedFunction = aGeneratedFunction;
@@ -304,7 +304,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		return generatedFunction;
 	}
 
@@ -313,7 +313,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		throw new UnsupportedOperationException("no type for PTE");
 	} // TODO check correctness
 
-	public BaseEvaFunction getGeneratedFunction() {
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction getGeneratedFunction() {
 		return generatedFunction;
 	}
 
@@ -378,7 +378,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 		// FIXME use `q'
 		final WlGenerateDefaultCtor wldc = aDeduceTypes2._inj().new_WlGenerateDefaultCtor(aDeduceTypes2.getGenerateFunctions(invocation.getKlass().getContext().module()), fi2, aDeduceTypes2.creationContext(), aDeduceTypes2._phase().codeRegistrar);
 		wldc.run(null);
-		BaseEvaFunction ef = wldc.getResult();
+		tripleo.elijah.stages.gen_fn.IBaseEvaFunction ef = wldc.getResult();
 
 
 		DeduceElement3_ProcTableEntry zp = aDeduceTypes2.zeroGet(pte, ef);

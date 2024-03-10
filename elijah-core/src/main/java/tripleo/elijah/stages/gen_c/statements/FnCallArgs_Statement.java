@@ -7,7 +7,7 @@ import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.nextgen.outputstatement.ReasonedStringListStatement;
 import tripleo.elijah.stages.gen_c.Emit;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.util.Helpers;
@@ -18,14 +18,14 @@ public class FnCallArgs_Statement implements EG_Statement {
 	private final GenerateC                    generateC;
 	private final GenerateC.GetAssignmentValue getAssignmentValue;
 	private final Instruction inst;
-	private final BaseEvaFunction gf;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf;
 	private final ProcTableEntry pte;
 
 	public FnCallArgs_Statement(final GenerateC aGenerateC,
 								final GenerateC.GetAssignmentValue aGetAssignmentValue,
 								final ProcTableEntry aPte,
 								final Instruction aInst,
-								final BaseEvaFunction aGf) {
+								final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
 		generateC = aGenerateC;
 		getAssignmentValue = aGetAssignmentValue;
 		pte = aPte;
@@ -70,10 +70,10 @@ public class FnCallArgs_Statement implements EG_Statement {
 //	private final GenerateC                    generateC;
 //	private final GenerateC.GetAssignmentValue getAssignmentValue;
 //	private final Instruction                  inst;
-//	private final BaseEvaFunction              gf;
+//	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction              gf;
 //	private final ProcTableEntry               pte;
 //
-//	public FnCallArgs_Statement(final GenerateC aGenerateC, final GenerateC.GetAssignmentValue aGetAssignmentValue, final ProcTableEntry aPte, final Instruction aInst, final BaseEvaFunction aGf) {
+//	public FnCallArgs_Statement(final GenerateC aGenerateC, final GenerateC.GetAssignmentValue aGetAssignmentValue, final ProcTableEntry aPte, final Instruction aInst, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
 //		generateC          = aGenerateC;
 //		getAssignmentValue = aGetAssignmentValue;
 //		pte                = aPte;

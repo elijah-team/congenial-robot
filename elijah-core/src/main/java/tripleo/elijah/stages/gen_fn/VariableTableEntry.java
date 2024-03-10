@@ -252,7 +252,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		return _de3;
 	}
 
-	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final BaseEvaFunction aGeneratedFunction) {
+	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		getDlv().setDeduceTypes2(aDeduceTypes2, aContext, aGeneratedFunction);
 	}
 
@@ -381,7 +381,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 		return _resolvedType != null;
 	}
 
-	public DeduceElement3_VariableTableEntry getDeduceElement3(final DeduceTypes2 aDt2, final BaseEvaFunction aGf1) {
+	public DeduceElement3_VariableTableEntry getDeduceElement3(final DeduceTypes2 aDt2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf1) {
 		if (_de3 == null) {
 			_de3 = new DeduceElement3_VariableTableEntry(this);
 			_de3.setDeduceTypes2(aDt2, aGf1);

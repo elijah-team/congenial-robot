@@ -30,7 +30,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 	private final          FunctionInvocation    functionInvocation;
 	private final @NotNull GenerateFunctions     generateFunctions;
 	private                boolean               _isDone = false;
-	private                BaseEvaFunction       Result;
+	private                tripleo.elijah.stages.gen_fn.IBaseEvaFunction       Result;
 	private                DeduceCreationContext dcc;
 	private final          ICodeRegistrar        codeRegistrar;
 
@@ -50,7 +50,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 		return false;
 	}
 
-	public BaseEvaFunction getResult() {
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction getResult() {
 		return Result;
 	}
 
@@ -72,9 +72,9 @@ public class WlGenerateDefaultCtor implements WorkJob {
 				}
 			} );
 		} else {
-			functionInvocation.generatePromise().then(new DoneCallback<BaseEvaFunction>() {
+			functionInvocation.generatePromise().then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
 				@Override
-				public void onDone(final BaseEvaFunction result) {
+				public void onDone(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction result) {
 					Result = result;
 					//_isDone = true;
 

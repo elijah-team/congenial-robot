@@ -18,7 +18,7 @@ public interface EvaNode {
 
 	OS_Module module();
 
-	//BaseEvaFunction _definedFunction();
+	//tripleo.elijah.stages.gen_fn.IBaseEvaFunction _definedFunction();
 
 	//DeduceTypes2 _definedModule();
 }

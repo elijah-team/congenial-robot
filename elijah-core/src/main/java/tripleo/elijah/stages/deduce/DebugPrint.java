@@ -3,13 +3,14 @@ package tripleo.elijah.stages.deduce;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.stages.deduce.declarations.DeferredMember;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah.stages.gen_fn.GenType;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
 
 public class DebugPrint {
-	public static void addDependentType(final BaseEvaFunction aGeneratedFunction, final GenType aGenType) {
+	public static void addDependentType(final IBaseEvaFunction aGeneratedFunction, final GenType aGenType) {
 		System.err.println("**** addDependentType " + aGeneratedFunction + " " + aGenType);
 	}
 

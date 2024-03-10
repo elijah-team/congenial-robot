@@ -1,7 +1,8 @@
 package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
@@ -15,7 +16,7 @@ import static tripleo.elijah.stages.gen_c.CReference._getIdentIAPathList;
 public class Zone {
 	private final Map<Object, ZoneMember> members = new HashMap<Object, ZoneMember>();
 
-	public ZoneVTE get(final VariableTableEntry aVarTableEntry, final BaseEvaFunction aGf) {
+	public ZoneVTE get(final VariableTableEntry aVarTableEntry, final @NotNull IBaseEvaFunction aGf) {
 		if (members.containsKey(aVarTableEntry)) {
 			return (ZoneVTE) members.get(aVarTableEntry);
 		}

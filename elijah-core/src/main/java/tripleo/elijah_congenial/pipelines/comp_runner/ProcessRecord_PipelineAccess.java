@@ -33,7 +33,7 @@ import java.util.function.Consumer;
 public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRegister {
 	private final @NotNull List<EvaNode>         _l_classes      = new ArrayList<>();
 	private final @NotNull List<IEvaClass>       activeClasses   = new ArrayList<>();
-	private final @NotNull List<BaseEvaFunction> activeFunctions = new ArrayList<>();
+	private final @NotNull List<IBaseEvaFunction> activeFunctions = new ArrayList<>();
 	private final @NotNull List<EvaNamespace>                        activeNamespaces = new ArrayList<>();
 	private final @NotNull Eventual<PipelineLogic>                   _p_pipelineLogic = new Eventual<>();
 	private final @NotNull Eventual<EvaPipeline>                     _p_EvaPipeline   = new Eventual<>();
@@ -151,8 +151,8 @@ public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRe
 	}
 
 	@Override
-	public void activeFunction(final BaseEvaFunction aEvaFunction) {
-		activeFunctions.add(aEvaFunction);
+	public @NotNull List<IBaseEvaFunction> getActiveFunctions() {
+		return activeFunctions;
 	}
 
 	@Override
@@ -171,8 +171,8 @@ public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRe
 	}
 
 	@Override
-	public @NotNull List<BaseEvaFunction> getActiveFunctions() {
-		return activeFunctions;
+	public void activeFunction(final IBaseEvaFunction aEvaFunction) {
+		activeFunctions.add(aEvaFunction);
 	}
 
 	@Override

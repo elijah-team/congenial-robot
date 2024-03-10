@@ -2,24 +2,25 @@ package tripleo.elijah.world.impl;
 
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.functionality.f291.AmazingPart;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyComp;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaFunctionBase;
 import tripleo.elijah.world.i.LF_CodeRegistration;
 import tripleo.elijah.world.i.LivingFunction;
 
 public class DefaultLivingFunction implements LivingFunction {
-	private final @NotNull FunctionDef     _element;
-	private final @NotNull BaseEvaFunction _gf;
-	private Eventual<Integer>               codeCallback;
+	private final @NotNull FunctionDef       _element;
+	private final @NotNull IBaseEvaFunction  _gf;
+	private                Eventual<Integer> codeCallback;
 	private boolean __registered;
 
-	public DefaultLivingFunction(final @NotNull BaseEvaFunction aFunction) {
+	public DefaultLivingFunction(final @NotNull IBaseEvaFunction aFunction) {
 		_element = aFunction.getFD();
 		_gf      = aFunction;
 	}
@@ -40,7 +41,7 @@ public class DefaultLivingFunction implements LivingFunction {
 	}
 
 	@Override
-	public BaseEvaFunction evaNode() {
+	public IBaseEvaFunction evaNode() {
 		return _gf;
 	}
 

@@ -52,15 +52,15 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 	private final VariableTableEntry principal;
 	private final State              st;
 	private       DeduceTypes2       deduceTypes2;
-	private       BaseEvaFunction    generatedFunction;
+	private       tripleo.elijah.stages.gen_fn.IBaseEvaFunction    generatedFunction;
 	private       GenType            genType;
 
-	public DeduceElement3_VariableTableEntry(final VariableTableEntry aVariableTableEntry, final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public DeduceElement3_VariableTableEntry(final VariableTableEntry aVariableTableEntry, final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		this(aVariableTableEntry);
 		setDeduceTypes2(aDeduceTypes2, aGeneratedFunction);
 	}
 
-	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		deduceTypes2      = aDeduceTypes2;
 		generatedFunction = aGeneratedFunction;
 	}
@@ -375,7 +375,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		return generatedFunction;
 	}
 
@@ -394,7 +394,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 		return principal.getResolvedElement();
 	}
 
-	public @NotNull Operation2<OS_Type> decl_test_001(final BaseEvaFunction gf) {
+	public @NotNull Operation2<OS_Type> decl_test_001(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		//var dt2 = principal.getDeduceElement3().deduceTypes2();
 		//assert dt2 != null;
 
@@ -833,10 +833,10 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 
 	public static class Diagnostic_8884 implements GCFM_Diagnostic {
 		private final int                _code = 8884;
-		private final BaseEvaFunction    gf;
+		private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction    gf;
 		private final VariableTableEntry vte;
 
-		public Diagnostic_8884(final VariableTableEntry aVte, final BaseEvaFunction aGf) {
+		public Diagnostic_8884(final VariableTableEntry aVte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
 			vte = aVte;
 			gf  = aGf;
 		}

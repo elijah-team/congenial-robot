@@ -24,12 +24,12 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 	private final DeduceTypes2    dt2;
 	private final Context         ctx;
 	private final IdentTableEntry ite;
-	private final BaseEvaFunction generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 
 	private boolean             _done;
 	private ITE_Resolver_Result _resolve_result;
 
-	Unnamed_ITE_Resolver1(final DeduceTypes2 aDeduceTypes2, IdentTableEntry aIte, BaseEvaFunction aEvaFunction, Context aCtx) {
+	Unnamed_ITE_Resolver1(final DeduceTypes2 aDeduceTypes2, IdentTableEntry aIte, tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction, Context aCtx) {
 		dt2               = aDeduceTypes2;
 		ctx               = aCtx;
 		generatedFunction = aEvaFunction;
@@ -135,11 +135,11 @@ class Unnamed_ITE_Resolver1 implements ITE_Resolver {
 	public class FoundParent implements BaseTableEntry.StatusListener {
 		private final BaseTableEntry  bte;
 		private final Context         ctx;
-		private final BaseEvaFunction generatedFunction;
+		private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 		private final IdentTableEntry ite;
 
 		@Contract(pure = true)
-		public FoundParent(BaseTableEntry aBte, IdentTableEntry aIte, Context aCtx, BaseEvaFunction aGeneratedFunction) {
+		public FoundParent(BaseTableEntry aBte, IdentTableEntry aIte, Context aCtx, tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 			bte               = aBte;
 			ite               = aIte;
 			ctx               = aCtx;

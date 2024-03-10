@@ -27,13 +27,13 @@ public class DR_Ident implements DR_Item {
 	private final @Nullable VariableTableEntry                          vteBl1;
 	private final @NotNull  List<DoneCallback<DR_PossibleType>>         typePossibles        = new ArrayList<>();
 	private final @Nullable IdentTableEntry                             _identTableEntry;
-	private final           BaseEvaFunction                             baseEvaFunction;
+	private final           tripleo.elijah.stages.gen_fn.IBaseEvaFunction                             baseEvaFunction;
 	private final           int                                         mode;
 	private final           DeferredObject<DR_PossibleType, Void, Void> typePossibleDeferred = new DeferredObject<>();
 	private final           List<DR_PossibleType>                       typeProposals        = new ArrayList<>();
 	boolean _b;
 
-	public DR_Ident(final @NotNull IdentTableEntry aIdentTableEntry, final BaseEvaFunction aBaseEvaFunction) {
+	public DR_Ident(final @NotNull IdentTableEntry aIdentTableEntry, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction) {
 		ident            = aIdentTableEntry.getIdent();
 		vteBl1           = null;
 		_identTableEntry = aIdentTableEntry;
@@ -49,7 +49,7 @@ public class DR_Ident implements DR_Item {
 		mode                  = 1;
 	}
 
-	public DR_Ident(final IdentExpression aIdent, final VariableTableEntry aVteBl1, final BaseEvaFunction aBaseEvaFunction) {
+	public DR_Ident(final IdentExpression aIdent, final VariableTableEntry aVteBl1, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction) {
 		ident                 = aIdent;
 		vteBl1                = aVteBl1;
 		this._identTableEntry = null;
@@ -57,7 +57,7 @@ public class DR_Ident implements DR_Item {
 		mode                  = 1;
 	}
 
-	public DR_Ident(final VariableTableEntry aVteBl1, final BaseEvaFunction aBaseEvaFunction) {
+	public DR_Ident(final VariableTableEntry aVteBl1, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction) {
 		vteBl1           = aVteBl1;
 		baseEvaFunction  = aBaseEvaFunction;
 		mode             = 2;
@@ -65,15 +65,15 @@ public class DR_Ident implements DR_Item {
 		ident            = null;
 	}
 
-	public static @NotNull DR_Ident create(final IdentExpression aIdent, final VariableTableEntry aVteBl1, final BaseEvaFunction aBaseEvaFunction) {
+	public static @NotNull DR_Ident create(final IdentExpression aIdent, final VariableTableEntry aVteBl1, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction) {
 		return new DR_Ident(aIdent, aVteBl1, aBaseEvaFunction);
 	}
 
-	public static @NotNull DR_Ident create(@NotNull IdentTableEntry aIdentTableEntry, BaseEvaFunction aGeneratedFunction) {
+	public static @NotNull DR_Ident create(@NotNull IdentTableEntry aIdentTableEntry, tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		return new DR_Ident(aIdentTableEntry, aGeneratedFunction);
 	}
 
-	public static @NotNull DR_Ident create(final VariableTableEntry aVariableTableEntry, final BaseEvaFunction aGeneratedFunction) {
+	public static @NotNull DR_Ident create(final VariableTableEntry aVariableTableEntry, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		return new DR_Ident(aVariableTableEntry, aGeneratedFunction);
 	}
 
@@ -268,7 +268,7 @@ public class DR_Ident implements DR_Item {
 		ident.getName().addUnderstanding(u);
 	}
 
-	public BaseEvaFunction getNode() {
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction getNode() {
 		return baseEvaFunction;
 	}
 

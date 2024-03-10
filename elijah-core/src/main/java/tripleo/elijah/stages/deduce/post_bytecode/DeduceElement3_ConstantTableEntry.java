@@ -11,9 +11,10 @@ import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.DeduceTypes2.DeduceTypes2Injector;
 import tripleo.elijah.stages.deduce.FoundElement;
 import tripleo.elijah.stages.deduce.post_bytecode.DED.DED_CTE;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah.stages.gen_fn.GenType;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.util.NotImplementedException;
 
@@ -24,7 +25,7 @@ public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 	public           Diagnostic         diagnostic;
 	public           IDeduceElement3    deduceElement3;
 	private          GenType            genType;
-	public           BaseEvaFunction    generatedFunction;
+	public           IBaseEvaFunction    generatedFunction;
 	public @Nullable OS_Type            osType;
 
 	@Contract(pure = true)
@@ -47,7 +48,7 @@ public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		return generatedFunction;
 	}
 

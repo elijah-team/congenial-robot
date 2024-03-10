@@ -39,8 +39,14 @@ public class DeduceLocalVariable {
 	private final   VariableTableEntry                   variableTableEntry;
 	public @NotNull DeferredObject2<GenType, Void, Void> type = new DeferredObject2<>();
 
+	private tripleo.elijah.stages.gen_fn.IBaseEvaFunction                   generatedFunction;
+
+	private Context                           context;
+	private DeduceElement3_VariableTableEntry de3;
+	private DeduceTypes2                      deduceTypes2;
+
 	@Nullable
-	private OS_Element ___pt1_work_001b(final @NotNull BaseEvaFunction generatedFunction,
+	private OS_Element ___pt1_work_001b(final @NotNull IBaseEvaFunction generatedFunction,
 										final @NotNull DeducePath dp,
 										final OS_Element self_class,
 										final Object[] aO) {
@@ -63,9 +69,9 @@ public class DeduceLocalVariable {
 		//
 		//
 		//
-		
-		
-		
+
+
+
 		final OS_Element e_parent = e.getParent();
 
 		short          state = 0;
@@ -101,11 +107,6 @@ public class DeduceLocalVariable {
 		}
 		return Self;
 	}
-
-	private Context                           context;
-	private DeduceElement3_VariableTableEntry de3;
-	private DeduceTypes2                      deduceTypes2;
-	private BaseEvaFunction                   generatedFunction;
 
 	public DeduceLocalVariable(final VariableTableEntry aVariableTableEntry) {
 		variableTableEntry = aVariableTableEntry;
@@ -245,30 +246,27 @@ public class DeduceLocalVariable {
 					}
 
 					if (genType.getCi() != null) { // TODO we may need this call...
-						((ClassInvocation) genType.getCi()). onResolve(new DoneCallback<IEvaClass>() {
-							@Override
-							public void onDone(@NotNull EvaClass result) {
-								genType.setNode(result);
-								if (!vte.typePromise().isResolved()) { // HACK
-									if (genType.getResolved() instanceof final @NotNull OS_FuncType resolved) {
-										result.functionMapDeferred(((FunctionDef) resolved.getElement()), aGeneratedFunction -> {
-											// TODO check args (hint functionInvocation.pte)
-											//  but against what? (vte *should* have callable_pte)
-											//  if not, then try potential types for a PCE
-											aGeneratedFunction.typePromise().then(vte::resolveType);
-										});
-									} else
-										vte.resolveType(genType);
-								}
+						((ClassInvocation) genType.getCi()). onResolve(aIEvaClass -> {
+							genType.setNode(aIEvaClass);
+							if (!vte.typePromise().isResolved()) { // HACK
+								if (genType.getResolved() instanceof final @NotNull OS_FuncType resolved) {
+									aIEvaClass.functionMapDeferred(((FunctionDef) resolved.getElement()), aGeneratedFunction -> {
+										// TODO check args (hint functionInvocation.pte)
+										//  but against what? (vte *should* have callable_pte)
+										//  if not, then try potential types for a PCE
+										aGeneratedFunction.typePromise().then(vte::resolveType);
+									});
+								} else
+									vte.resolveType(genType);
 							}
-						} );
+						});
 					}
 				}
 			}
 		}
 	}
 
-	public void resolve_var_table_entry_potential_types_1(final @NotNull VariableTableEntry vte, final @NotNull BaseEvaFunction generatedFunction) {
+	public void resolve_var_table_entry_potential_types_1(final @NotNull VariableTableEntry vte, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
 		// TODO 06/26 getIdent / reduce potential types...
 		if (vte.potentialTypes().size() == 1) {
 			final TypeTableEntry tte1 = vte.potentialTypes().iterator().next();
@@ -325,7 +323,7 @@ public class DeduceLocalVariable {
 	}
 
 	@Nullable
-	private OS_Element ___pt1_work_001(final @NotNull BaseEvaFunction generatedFunction,
+	private OS_Element ___pt1_work_001(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 									   final @NotNull OS_Element e,
 									   final OS_Element self_class) {
 		final OS_Element Self;
@@ -365,14 +363,6 @@ public class DeduceLocalVariable {
 		return Self;
 	}
 
-	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final BaseEvaFunction aGeneratedFunction) {
-		deduceTypes2      = aDeduceTypes2;
-		context           = aContext;
-		generatedFunction = aGeneratedFunction;
-
-		de3 = deduceTypes2._inj().new_DeduceElement3_VariableTableEntry(variableTableEntry, aDeduceTypes2, aGeneratedFunction);
-	}
-
 	private void __pt_work_002b(final @NotNull VariableTableEntry vte,
 								final @NotNull ProcTableEntry procTableEntry,
 								final Object @NotNull [] o) {
@@ -410,9 +400,9 @@ public class DeduceLocalVariable {
 		}
 
 		final @Nullable DeferredMemberFunction dm = deduceTypes2.deferred_member_function(Self, null, (BaseFunctionDef) resolvedElement0, procTableEntry.getFunctionInvocation());
-		dm.externalRef().then(new DoneCallback<BaseEvaFunction>() {
+		dm.externalRef().then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
 			@Override
-			public void onDone(final BaseEvaFunction result) {
+			public void onDone(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction result) {
 				NotImplementedException.raise();
 			}
 		});
@@ -437,9 +427,9 @@ public class DeduceLocalVariable {
 		final DeferredObject<DeferredMemberFunction, Void, Void> pdm = new DeferredObject<>();
 
 		pdm.then(dm1 -> {
-			dm1.externalRef().then(new DoneCallback<BaseEvaFunction>() {
+			dm1.externalRef().then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
 				@Override
-				public void onDone(final BaseEvaFunction result) {
+				public void onDone(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction result) {
 					NotImplementedException.raise();
 				}
 			});
@@ -487,6 +477,14 @@ public class DeduceLocalVariable {
 				}
 			});
 		}
+	}
+
+	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
+		deduceTypes2      = aDeduceTypes2;
+		context           = aContext;
+		generatedFunction = aGeneratedFunction;
+
+		de3 = deduceTypes2._inj().new_DeduceElement3_VariableTableEntry(variableTableEntry, aDeduceTypes2, aGeneratedFunction);
 	}
 
 	public static class MemberInvocation {

@@ -21,7 +21,7 @@ class ExitGetType implements State {
 	public void apply(final DefaultStateful element) {
 		final DeduceElement3_IdentTableEntry ite_de             = ((DeduceElement3_IdentTableEntry) element);
 		final IdentTableEntry                ite                = ite_de.principal;
-		final BaseEvaFunction                generatedFunction1 = ite_de.generatedFunction();
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction                generatedFunction1 = ite_de.generatedFunction();
 		final DeduceTypes2                   dt2                = ite_de.deduceTypes2;
 		final DeducePhase                    phase1             = ite_de.deduceTypes2._phase();
 		final Context                        aFd_ctx            = ite_de.fdCtx;
@@ -31,7 +31,7 @@ class ExitGetType implements State {
 	}
 
 	public void assign_type_to_idte(@NotNull final IdentTableEntry ite,
-									@NotNull final BaseEvaFunction generatedFunction,
+									@NotNull final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 									@NotNull final Context aFunctionContext,
 									@NotNull final Context aContext,
 									@NotNull final DeduceTypes2 dt2,

@@ -30,7 +30,7 @@ public class DT_External_2 implements DT_External {
 	private final ElLog                                 LOG;
 	private final OS_Element                            resolved_element;
 	private final Context                               ctx;
-	private final BaseEvaFunction                       generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction                       generatedFunction;
 	private final int                                   instructionIndex;
 	private final IdentIA                               identIA;
 	private final VariableTableEntry                    vte;
@@ -45,7 +45,7 @@ public class DT_External_2 implements DT_External {
 						 final FT_FCA_IdentIA.FakeDC4 aDc,
 						 final ElLog aLOG,
 						 final Context aCtx,
-						 final BaseEvaFunction aGeneratedFunction,
+						 final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction,
 						 final int aInstructionIndex,
 						 final IdentIA aIdentIA,
 						 final VariableTableEntry aVte) {
@@ -196,7 +196,7 @@ public class DT_External_2 implements DT_External {
 		}
 
 		pte.onFunctionInvocation((@NotNull FunctionInvocation functionInvocation) -> {
-			functionInvocation.generateDeferred().done((@NotNull BaseEvaFunction bgf) -> {
+			functionInvocation.generateDeferred().done((@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction bgf) -> {
 				final Eventual<GenType> egt = new Eventual<>();
 				egt.register(aDt2._phase());
 				egt.then(aGenType -> {
@@ -214,7 +214,7 @@ public class DT_External_2 implements DT_External {
 	}
 
 	private /*static*/ void __make2_1__hasFunctionInvocation(final @NotNull ProcTableEntry pte, final @NotNull FunctionInvocation fi) {
-		fi.generateDeferred().then((BaseEvaFunction ef) -> {
+		fi.generateDeferred().then((tripleo.elijah.stages.gen_fn.IBaseEvaFunction ef) -> {
 			var result = _inj().new_GenType_ofFunctionInvocation(fi, ef);
 
 			assert fi.pte != pte;

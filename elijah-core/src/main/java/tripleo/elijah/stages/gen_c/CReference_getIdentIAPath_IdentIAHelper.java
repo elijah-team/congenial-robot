@@ -16,7 +16,7 @@ import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import java.util.List;
 
 class CReference_getIdentIAPath_IdentIAHelper {
-	private final BaseEvaFunction     generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction     generatedFunction;
 	private final int                 i;
 	private final EvaNode             resolved;
 	private final OS_Element          resolved_element;
@@ -60,7 +60,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 	}
 
 	@Contract(pure = true)
-	CReference_getIdentIAPath_IdentIAHelper(final InstructionArgument ia_next, final List<String> sl, final int i, final int sSize, final OS_Element resolved_element, final BaseEvaFunction generatedFunction, final EvaNode aResolved, final String aValue) {
+	CReference_getIdentIAPath_IdentIAHelper(final InstructionArgument ia_next, final List<String> sl, final int i, final int sSize, final OS_Element resolved_element, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final EvaNode aResolved, final String aValue) {
 		this.ia_next           = ia_next;
 		this.sl                = sl;
 		this.i                 = i;
@@ -115,7 +115,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		assert getI() == getsSize() - 1; // Make sure we are ending with a constructor call
 		final int code;
 		if (getResolved() != null) {
-			code = ((BaseEvaFunction) getResolved()).getCode();
+			code = ((tripleo.elijah.stages.gen_fn.IBaseEvaFunction) getResolved()).getCode();
 		} else {
 			code = -1;
 			SimplePrintLoggerToRemoveSoon.println_err("** 31161 not resolved " + getResolved_element());
@@ -132,7 +132,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		final EvaNode    resolved_node = getResolved();
 
 		if (resolved_node != null) {
-			if (resolved_node instanceof final @NotNull BaseEvaFunction resolvedFunction) {
+			if (resolved_node instanceof final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction resolvedFunction) {
 
 				resolvedFunction.onGenClass(gc -> {
 //						GeneratedNode gc = rf.getGenClass();
@@ -172,8 +172,8 @@ class CReference_getIdentIAPath_IdentIAHelper {
 		final OS_Element parent = getResolved_element().getParent();
 		final int        code;
 		if (getResolved() != null) {
-			assert getResolved() instanceof BaseEvaFunction;
-			final BaseEvaFunction rf = (BaseEvaFunction) getResolved();
+			assert getResolved() instanceof tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+			final tripleo.elijah.stages.gen_fn.IBaseEvaFunction rf = (tripleo.elijah.stages.gen_fn.IBaseEvaFunction) getResolved();
 			final EvaNode         gc = rf.getGenClass();
 			if (gc instanceof EvaContainerNC) // and not another function
 				code = ((EvaContainerNC) gc).getCode();
@@ -253,7 +253,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 	}
 
 	@Contract(pure = true)
-	public BaseEvaFunction getGeneratedFunction() {
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction getGeneratedFunction() {
 		return generatedFunction;
 	}
 

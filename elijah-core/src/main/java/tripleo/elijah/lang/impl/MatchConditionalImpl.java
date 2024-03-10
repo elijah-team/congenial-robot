@@ -18,7 +18,7 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.types.OS_UserType;
 import tripleo.elijah.lang.xlang.GenerateFunctions3;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
@@ -202,7 +202,7 @@ public class MatchConditionalImpl implements MatchConditional, OS_Element, State
 		}
 
 		@NotNull
-		public Label generate_match_conditional(final @NotNull BaseEvaFunction gf,
+		public Label generate_match_conditional(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 												final @NotNull Context cctx,
 												final @NotNull InstructionArgument i,
 												final @NotNull Label label_next,

@@ -2,15 +2,15 @@ package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang2.SpecialVariables;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
 
 class ZoneVTE__1 implements ZoneVTE {
-	private final BaseEvaFunction    _g_gf;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction    _g_gf;
 	private final VariableTableEntry _g_varTableEntry;
 	private       String             _realTargetName;
 
-	public ZoneVTE__1(final VariableTableEntry aVarTableEntry, final BaseEvaFunction aGf) {
+	public ZoneVTE__1(final VariableTableEntry aVarTableEntry, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
 		_g_varTableEntry = aVarTableEntry;
 		_g_gf            = aGf;
 	}

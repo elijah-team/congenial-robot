@@ -45,8 +45,8 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 	}
 
 	public void loop1(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) {
-		var generatedFunction = dac.generatedFunction;
-		var dc                = dac.dc;
+		IBaseEvaFunction generatedFunction = dac.generatedFunction;
+		var              dc                = dac.dc;
 		var errSink           = dac.errSink;
 		var ctx               = rvte.ctx();
 		var pte               = rvte.pte();
@@ -108,7 +108,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             aTte              = fdctx.tte();
-		final BaseEvaFunction            generatedFunction = fdctx.generatedFunction();
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction            generatedFunction = fdctx.generatedFunction();
 		final Context                    ctx               = fdctx.ctx();
 
 		var dt2 = dc.get();
@@ -234,7 +234,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             tte               = fdctx.tte();
-		final BaseEvaFunction            generatedFunction = fdctx.generatedFunction();
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction            generatedFunction = fdctx.generatedFunction();
 		final Context                    ctx               = fdctx.ctx();
 
 		var dt2 = dc.get();
@@ -289,7 +289,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             tte               = fdctx.tte();
-		final BaseEvaFunction            generatedFunction = fdctx.generatedFunction();
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction            generatedFunction = fdctx.generatedFunction();
 		final Context                    ctx               = fdctx.ctx();
 
 		try {
@@ -328,7 +328,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 		final DeduceTypes2.DeduceClient4 dc                = fdctx.dc();
 		final ErrSink                    errSink           = fdctx.errSink();
 		final TypeTableEntry             tte               = fdctx.tte();
-		final BaseEvaFunction            generatedFunction = fdctx.generatedFunction();
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction            generatedFunction = fdctx.generatedFunction();
 		final Context                    ctx               = fdctx.ctx();
 
 		var dt2 = dc.get();
@@ -516,8 +516,8 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 	}
 
 	public void make2(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) throws FCA_Stop {
-		var generatedFunction = dac.generatedFunction;
-		var dc4               = dac.dc;
+		IBaseEvaFunction generatedFunction = dac.generatedFunction;
+		var              dc4               = dac.dc;
 		var errSink           = dac.errSink;
 		var LOG               = dac.LOG;
 		var module            = dac.getModule();
@@ -552,8 +552,8 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 	}
 
 	public void resolve_vte(final FT_FnCallArgs.@NotNull DoAssignCall dac, final @NotNull Resolve_VTE rvte) {
-		var aGeneratedFunction = dac.generatedFunction;
-		var dc                 = dac.dc;
+		IBaseEvaFunction aGeneratedFunction = dac.generatedFunction;
+		var              dc                 = dac.dc;
 		var ctx                = rvte.ctx();
 		var pte                = rvte.pte();
 
@@ -608,7 +608,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 	) { }
 
 	public record FT_FCA_Ctx(
-			BaseEvaFunction generatedFunction,
+			tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 			TypeTableEntry tte,
 			Context ctx,
 			ErrSink errSink,
@@ -634,7 +634,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			return dc4.deferred_member_function(aParent, aInvocation2, aResolvedElement, aFi);
 		}
 
-		public void resolveIdentIA_(final Context aCtx, final IdentIA aIdentIA, final BaseEvaFunction aGeneratedFunction, final FoundElement aFunctionResultType) {
+		public void resolveIdentIA_(final Context aCtx, final IdentIA aIdentIA, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final FoundElement aFunctionResultType) {
 			dc4.resolveIdentIA_(aCtx, aIdentIA, aGeneratedFunction, aFunctionResultType);
 		}
 
@@ -642,7 +642,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			return dc4.getPhase();
 		}
 
-		public void found_element_for_ite(final BaseEvaFunction aGeneratedFunction, final IdentTableEntry aIte, final OS_Element aE, final Context aCtx) {
+		public void found_element_for_ite(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final IdentTableEntry aIte, final OS_Element aE, final Context aCtx) {
 			dc4.found_element_for_ite(aGeneratedFunction, aIte, aE, aCtx);
 		}
 
@@ -650,7 +650,7 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
 			return dc4._resolveAlias(aAliasStatement);
 		}
 
-		public DeduceTypes2.PromiseExpectation<GenType> promiseExpectation(final BaseEvaFunction aBgf, final String aFunctionResultType) {
+		public DeduceTypes2.PromiseExpectation<GenType> promiseExpectation(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBgf, final String aFunctionResultType) {
 			return dc4.promiseExpectation(aBgf, aFunctionResultType);
 		}
 

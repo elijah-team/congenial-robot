@@ -52,7 +52,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	private final @NotNull EvaExpression<IdentExpression>                  ident;
 	private final          int                                             index;
 	private final          Context                                         pc;
-	private final          BaseEvaFunction                                 _definedFunction;
+	private final          tripleo.elijah.stages.gen_fn.IBaseEvaFunction                                 _definedFunction;
 	private final          List<ITE_Resolver>                              resolvers                  = new ArrayList<>();
 	public                 EvaNode                                         externalRef;
 	public                 ProcTableEntry                                  constructable_pte;
@@ -71,7 +71,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 	private _Reactive_IDTE                 _reactive;
 	private ITE_Resolver_Result            _resolver_result;
 
-	public IdentTableEntry(final int index, final IdentExpression ident, Context pc, final BaseEvaFunction aBaseEvaFunction) {
+	public IdentTableEntry(final int index, final IdentExpression ident, Context pc, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction) {
 		this.index = index;
 		this.ident = new EvaExpression<>(ident, this);
 		this.pc    = pc;
@@ -176,8 +176,8 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		}
 	}
 
-	public @NotNull DeducePath buildDeducePath(BaseEvaFunction generatedFunction) {
-		@NotNull List<InstructionArgument> x = BaseEvaFunction._getIdentIAPathList(new IdentIA(index, generatedFunction));
+	public @NotNull DeducePath buildDeducePath(tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction) {
+		@NotNull List<InstructionArgument> x = GenFnU._getIdentIAPathList(new IdentIA(index, generatedFunction));
 		return new DeducePath(this, x);
 	}
 
@@ -255,7 +255,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return getDeduceElement3(this._deduceTypes2(), get__gf());
 	}
 
-	public @NotNull DeduceElement3_IdentTableEntry getDeduceElement3(DeduceTypes2 aDeduceTypes2, BaseEvaFunction aGeneratedFunction) {
+	public @NotNull DeduceElement3_IdentTableEntry getDeduceElement3(DeduceTypes2 aDeduceTypes2, tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		if (_de3 == null) {
 			_de3                   = new DeduceElement3_IdentTableEntry(this);
 			_de3.deduceTypes2      = aDeduceTypes2;
@@ -313,11 +313,11 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return _p_resolvedType.isResolved();
 	}
 
-	public void makeType(final @NotNull BaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NotNull Type aType, final IExpression aExpression) {
+	public void makeType(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NotNull Type aType, final IExpression aExpression) {
 		type = aGeneratedFunction.newTypeTableEntry(aType, null, aExpression, this);
 	}
 
-	public void makeType(final @NotNull BaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NotNull Type aType, final OS_Type aOS_Type) {
+	public void makeType(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final TypeTableEntry.@NotNull Type aType, final OS_Type aOS_Type) {
 		type = aGeneratedFunction.newTypeTableEntry(aType, aOS_Type, getIdent(), this);
 	}
 
@@ -349,7 +349,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		return potentialTypes.values();
 	}
 
-	public void setDeduceTypes2(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext, final @NotNull BaseEvaFunction aGeneratedFunction) {
+	public void setDeduceTypes2(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		dei.setDeduceTypes2(aDeduceTypes2, aContext, aGeneratedFunction);
 	}
 
@@ -382,7 +382,7 @@ public class IdentTableEntry extends BaseTableEntry1 implements Constructable, T
 		}
 	}
 
-	public @NotNull BaseEvaFunction _generatedFunction() {
+	public @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction _generatedFunction() {
 		return get__gf();
 	}
 

@@ -38,13 +38,13 @@ import static tripleo.elijah.util.Helpers.List_of;
 
 class AmazingFunction implements Amazing {
 	private final NG_OutputFunction                of;
-	private final BaseEvaFunction                  f;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction                  f;
 	private final OS_Module      mod;
 	private final OutputItems    itms;
 	private final GenerateResult result;
 	private final IPipelineAccess                  pa;
 
-	public AmazingFunction(final @NotNull BaseEvaFunction aBaseEvaFunction,
+	public AmazingFunction(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction,
 						   final @NotNull OutputItems aOutputItems,
 						   final @NotNull GenerateResult aGenerateResult,
 						   final @NotNull IPipelineAccess aPa) {

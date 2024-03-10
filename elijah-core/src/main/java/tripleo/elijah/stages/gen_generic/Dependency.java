@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.gen_fn.AbstractDependencyTracker;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaContainerNC;
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
@@ -55,7 +55,7 @@ public class Dependency {
 								 @NotNull List<FunctionInvocation> aDependentFunctions,
 								 @NotNull List<GenType> aDependentTypes) {
 		for (FunctionInvocation dependentFunction : aDependentFunctions) {
-			final BaseEvaFunction generatedFunction = dependentFunction.getGenerated();
+			final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction = dependentFunction.getGenerated();
 			if (generatedFunction != null)
 				deps.add(generatedFunction.getDependency());
 			else

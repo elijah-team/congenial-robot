@@ -9,7 +9,7 @@ import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry;
 import tripleo.elijah.stages.gen_c.*;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
@@ -25,10 +25,10 @@ public class FnCallArgs_Statement2 implements EG_Statement {
 	private final ProcTableEntry pte;
 	private final GenerateC.GetAssignmentValue getAssignmentValue;
 	private final Instruction                  inst;
-	private final BaseEvaFunction              gf;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction              gf;
 	private final ElLog                        LOG;
 
-	public FnCallArgs_Statement2(final GenerateC aGenerateC, final BaseEvaFunction aGf, final ElLog aLOG, final Instruction aInst, final ProcTableEntry aPte, final GenerateC.GetAssignmentValue aGetAssignmentValue) {
+	public FnCallArgs_Statement2(final GenerateC aGenerateC, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final ElLog aLOG, final Instruction aInst, final ProcTableEntry aPte, final GenerateC.GetAssignmentValue aGetAssignmentValue) {
 		generateC          = aGenerateC;
 		gf                 = aGf;
 		LOG                = aLOG;
@@ -52,10 +52,10 @@ public class FnCallArgs_Statement2 implements EG_Statement {
 			if (idte.getStatus() == BaseTableEntry.Status.UNCHECKED) {
 
 				//final DeduceTypes2                   deduceTypes2 = pte.getDeduceElement3().deduceTypes2();
-				//final BaseEvaFunction                gf1          = ia2.gf;
+				//final tripleo.elijah.stages.gen_fn.IBaseEvaFunction                gf1          = ia2.gf;
 
 				final DeduceTypes2    deduceTypes2 = idte._deduceTypes2();
-				final BaseEvaFunction gf1          = idte._generatedFunction();
+				final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf1          = idte._generatedFunction();
 
 
 				final DeduceElement3_IdentTableEntry de3_idte = idte.getDeduceElement3(deduceTypes2, gf1);
@@ -73,7 +73,7 @@ public class FnCallArgs_Statement2 implements EG_Statement {
 					String path = reference.build();
 					sb.append(Emit.emit("/*829*/") + path);
 				} else {
-					final BaseEvaFunction pte_generated = functionInvocation.getEva();
+					final tripleo.elijah.stages.gen_fn.IBaseEvaFunction pte_generated = functionInvocation.getEva();
 					if (idte.resolvedType() == null && pte_generated != null)
 						idte.resolveTypeToClass(pte_generated);
 					reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);

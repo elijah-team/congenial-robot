@@ -81,7 +81,7 @@ public class TestIdentNormal {
 		final DeducePhase  phase = boilerplate.getDeducePhase();
 		final DeduceTypes2 d2    = boilerplate.defaultDeduceTypes2(mod);
 
-		final List<InstructionArgument> ss       = BaseEvaFunction._getIdentIAPathList(identIA);
+		final List<InstructionArgument> ss       = GenFnU._getIdentIAPathList(identIA);
 
 		var          xx = generatedFunction._getIdentIAResolvable(identIA);
 		System.err.println("8585 "+xx.getNormalPath(generatedFunction, identIA));
@@ -255,7 +255,7 @@ assert false;
 			}
 		};
 
-		final @NotNull List<InstructionArgument> s = BaseEvaFunction._getIdentIAPathList(identIA);
+		final @NotNull List<InstructionArgument> s = GenFnU._getIdentIAPathList(identIA);
 
 		final GDM_IdentExpression mix = generateFunctions.monitor(x);
 		boilerplate.fixTables(mix, mod, generatedFunction);

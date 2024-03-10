@@ -161,7 +161,7 @@ public class CReference {
 	}
 
 	public @NotNull String getIdentIAPath2(final @NotNull IdentIA ia2, final Generate_Code_For_Method.AOG aog, final String aValue) {
-		final BaseEvaFunction           generatedFunction = ia2.gf;
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction           generatedFunction = ia2.gf;
 		final List<InstructionArgument> s                 = _getIdentIAPathList(ia2);
 
 
@@ -186,7 +186,7 @@ public class CReference {
 		return String_join("->", texts);
 	}
 
-	public void getIdentIAPath(final @NotNull IdentIA aIa, final BaseEvaFunction aGf, final Generate_Code_For_Method.@NotNull AOG aGet, final String aO) {
+	public void getIdentIAPath(final @NotNull IdentIA aIa, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final Generate_Code_For_Method.@NotNull AOG aGet, final String aO) {
 		getIdentIAPath(aIa, aGet, aO);
 	}
 
@@ -196,7 +196,7 @@ public class CReference {
 	}
 
 	public @NotNull String getIdentIAPath(final @NotNull IdentIA ia2, final Generate_Code_For_Method.@NotNull AOG aog, final String aValue) {
-		final BaseEvaFunction           generatedFunction = ia2.gf;
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction           generatedFunction = ia2.gf;
 		final List<InstructionArgument> s                 = _getIdentIAPathList(ia2);
 		refs = new ArrayList<Reference>(s.size());
 
@@ -281,7 +281,7 @@ public class CReference {
 	}
 
 	@NotNull
-	private String getIdentIAPath__IntegerIA(final @NotNull BaseEvaFunction generatedFunction, final int i, final @NotNull CR_ReferenceItem1 item, final @NotNull InstructionArgument ia) {
+	private String getIdentIAPath__IntegerIA(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final int i, final @NotNull CR_ReferenceItem1 item, final @NotNull InstructionArgument ia) {
 		String text;
 		item.setType(InstructionArgument.t.VARIABLE);
 
@@ -464,7 +464,7 @@ public class CReference {
 		item.setType(InstructionArgument.t.IDENT);
 
 		final IdentTableEntry idte = identIA.getEntry();
-		final BaseEvaFunction gf   = identIA.gf;
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf   = identIA.gf;
 
 		if (idte._deduceTypes2() == null) {
 			System.err.println("169169 ");

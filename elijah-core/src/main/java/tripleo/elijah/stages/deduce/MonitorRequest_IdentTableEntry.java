@@ -1,9 +1,10 @@
 package tripleo.elijah.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.Context;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gdm.GDM_IdentExpression;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 import tripleo.elijah.stages.instructions.IdentIA;
@@ -26,7 +27,7 @@ public class MonitorRequest_IdentTableEntry {
 		eg.then(mie -> mie.trigger_resolve(aEctx, ss, aFoundElement, deduceTypes2, null));
 	}
 
-	public void backstage_trigger(final @NotNull BaseEvaFunction aGeneratedFunction) {
+	public void backstage_trigger(final @NotNull IBaseEvaFunction aGeneratedFunction) {
 		aGeneratedFunction.onInformGF(gf -> {
 			final @NotNull IdentTableEntry entry = identIA.getEntry();
 			final GDM_IdentExpression      mie   = gf.monitor(entry.getIdent());

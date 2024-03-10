@@ -2,7 +2,7 @@ package tripleo.elijah.stages.gen_c.statements;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_c.*;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
@@ -14,7 +14,7 @@ public class GCFM_Inst_AGN implements GenerateC_Statement {
 	private final Generate_Code_For_Method  generateCodeForMethod;
 	private final WhyNotGarish_BaseFunction yf;
 	private final Instruction               instruction;
-	private final BaseEvaFunction           gf;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction           gf;
 
 	public GCFM_Inst_AGN(final Generate_Code_For_Method aGenerateCodeForMethod,
 						 final GenerateC aGc,

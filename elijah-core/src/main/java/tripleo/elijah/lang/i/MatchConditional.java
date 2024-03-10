@@ -5,8 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.contexts.MatchContext;
 import tripleo.elijah.lang.xlang.GenerateFunctions3;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.InstructionName;
 import tripleo.elijah.stages.instructions.IntegerIA;
@@ -134,7 +135,7 @@ public interface MatchConditional extends OS_Element, StatementItem, FunctionIte
 
 		void scope(Scope3 sco);
 
-		default void generate_match_conditional(@NotNull BaseEvaFunction gf,
+		default void generate_match_conditional(@NotNull IBaseEvaFunction gf,
 												Context cctx,
 												InstructionArgument i,
 												@NotNull Label label_next,

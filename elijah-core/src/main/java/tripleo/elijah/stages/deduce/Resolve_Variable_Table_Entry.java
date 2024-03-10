@@ -40,12 +40,12 @@ class Resolve_Variable_Table_Entry {
 	private final DeduceTypes2 deduceTypes2;
 
 	private final          ErrSink         errSink;
-	private final          BaseEvaFunction generatedFunction;
+	private final          tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 	private final @NotNull ElLog           LOG;
 	private final @NotNull DeducePhase     phase;
 	private final @NotNull WorkManager     wm;
 
-	public Resolve_Variable_Table_Entry(BaseEvaFunction aGeneratedFunction, Context aCtx, DeduceTypes2 aDeduceTypes2) {
+	public Resolve_Variable_Table_Entry(tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, Context aCtx, DeduceTypes2 aDeduceTypes2) {
 		generatedFunction = aGeneratedFunction;
 		ctx               = aCtx;
 		deduceTypes2      = aDeduceTypes2;
@@ -357,7 +357,7 @@ class Resolve_Variable_Table_Entry {
 		}
 	}
 
-	private @Nullable ProcTableEntry findProcTableEntry(@NotNull BaseEvaFunction aGeneratedFunction, IExpression aExpression) {
+	private @Nullable ProcTableEntry findProcTableEntry(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, IExpression aExpression) {
 		for (@NotNull ProcTableEntry procTableEntry : aGeneratedFunction.prte_list) {
 			if (procTableEntry.__debug_expression == aExpression)
 				return procTableEntry;

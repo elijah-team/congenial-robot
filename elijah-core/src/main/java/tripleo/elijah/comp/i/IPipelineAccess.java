@@ -3,6 +3,7 @@ package tripleo.elijah.comp.i;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.EvaPipeline;
@@ -16,7 +17,6 @@ import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
 import tripleo.elijah.nextgen.output.NG_OutputItem;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.EvaNode;
@@ -40,8 +40,8 @@ public interface IPipelineAccess {
 	void activeNamespace(EvaNamespace aEvaNamespace);
 	List<EvaNamespace> getActiveNamespaces();
 
-	List<BaseEvaFunction> getActiveFunctions();
-	void activeFunction(BaseEvaFunction aEvaFunction);
+	List<IBaseEvaFunction> getActiveFunctions();
+	void activeFunction(IBaseEvaFunction aEvaFunction);
 	void addFunctionStatement(FunctionStatement aFunctionStatement);
 
 	void _send_GeneratedClass(EvaNode aClass);

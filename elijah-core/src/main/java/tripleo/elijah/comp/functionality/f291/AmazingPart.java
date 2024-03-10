@@ -15,7 +15,7 @@ import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_c.GenerateC;
 
 import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.world.i.LivingClass;
 import tripleo.elijah.world.i.LivingFunction;
@@ -72,7 +72,7 @@ public class AmazingPart {
 	}
 
 	public void reverseOffer(final LivingFunction lf) {
-		final @Nullable BaseEvaFunction f               = lf.evaNode();
+		final @Nullable tripleo.elijah.stages.gen_fn.IBaseEvaFunction f               = lf.evaNode();
 		final WritePipelineSharedState  st              = wpisGenerateOutputs.__st();
 		final GenerateResult            result          = st.getGr();
 		final AmazingFunction           amazingFunction = new AmazingFunction(f, itms, result, compilationEnclosure.getPipelineAccess());

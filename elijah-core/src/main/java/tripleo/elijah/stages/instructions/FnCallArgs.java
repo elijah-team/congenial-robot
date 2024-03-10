@@ -10,7 +10,8 @@ package tripleo.elijah.stages.instructions;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
 import tripleo.elijah.util.Helpers;
@@ -23,10 +24,10 @@ import java.util.List;
  */
 public class FnCallArgs implements InstructionArgument {
 	private                TypeTableEntry  _type; // the return type of the function call
-	public final           Instruction     expression_to_call;
-	private final @NotNull BaseEvaFunction gf;
+	public final           Instruction      expression_to_call;
+	private final @NotNull IBaseEvaFunction gf;
 
-	public FnCallArgs(final Instruction expression_to_call, final @NotNull BaseEvaFunction generatedFunction) {
+	public FnCallArgs(final Instruction expression_to_call, final @NotNull IBaseEvaFunction generatedFunction) {
 		this.expression_to_call = expression_to_call;
 		this.gf                 = generatedFunction;
 	}
@@ -61,7 +62,7 @@ public class FnCallArgs implements InstructionArgument {
 		final Collection<String> collect2        = Helpers.mapCollectionElementsToString(instructionArguments);
 		final @NotNull String    commaed_strings = Helpers.String_join(" ", collect2);
 		
-		final ProcTableEntry procTableEntry = gf.prte_list.get(index);
+		final ProcTableEntry procTableEntry = gf._prte_list().get(index);
 
 		return String.format("(call %d [%s(%s)] %s)",
 							 index, procTableEntry.__debug_expression, procTableEntry.args,

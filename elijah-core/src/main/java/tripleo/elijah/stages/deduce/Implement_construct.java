@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class Implement_construct {
 	private final InstructionArgument expression;
-	private final BaseEvaFunction     generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction     generatedFunction;
 	private final DeduceTypes2        deduceTypes2;
 	private final Instruction         instruction;
 
@@ -81,7 +81,7 @@ public class Implement_construct {
 
 	private final @NotNull ProcTableEntry pte;
 
-	public Implement_construct(final DeduceTypes2 aDeduceTypes2, BaseEvaFunction aGeneratedFunction, Instruction aInstruction) {
+	public Implement_construct(final DeduceTypes2 aDeduceTypes2, tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, Instruction aInstruction) {
 		deduceTypes2      = aDeduceTypes2;
 		generatedFunction = aGeneratedFunction;
 		instruction       = aInstruction;
@@ -391,7 +391,7 @@ public class Implement_construct {
 					result.addConstructor(gc.cd, gc);
 
 					final WorkList              wl   = _inj().new_WorkList();
-					final List<BaseEvaFunction> coll = new ArrayList<>();
+					final List<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> coll = new ArrayList<>();
 
 					wl.addJob(deduceTypes2._inj().new_WlDeduceFunction(gen, coll, deduceTypes2));
 					deduceTypes2.wm.addJobs(wl);

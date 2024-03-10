@@ -13,18 +13,18 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.VariableTableType;
 
 public class DT_Function {
-	public BaseEvaFunction getGeneratedFunction() {
-		return generatedFunction;
-	}
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 
-	private final BaseEvaFunction generatedFunction;
+	public DT_Function(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final DeduceTypes2 aD) {
+		generatedFunction = aGeneratedFunction;
+		d                 = aD;
+	}
 	private final DeduceTypes2    d;
 	private       boolean         deducedAlready;
 	private       DeducePhase     __state_dp;
 
-	public DT_Function(final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aD) {
-		generatedFunction = aGeneratedFunction;
-		d                 = aD;
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction getGeneratedFunction() {
+		return generatedFunction;
 	}
 
 	public void fix_tables() {
@@ -256,7 +256,7 @@ public class DT_Function {
 		//		aDeducePhase.addFunction(aGeneratedConstructor, (FunctionDef) aGeneratedConstructor.getFD()); // TODO do we need this?
 	}
 
-	public BaseEvaFunction state_generatedFunction() {
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction state_generatedFunction() {
 		return generatedFunction;
 	}
 

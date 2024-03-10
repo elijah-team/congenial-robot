@@ -34,11 +34,11 @@ import java.util.Map;
  */
 public class ProcTableListener implements BaseTableEntry.StatusListener {
 	private final          DeduceTypes2.@NotNull DeduceClient2 dc;
-	private final          BaseEvaFunction                     generatedFunction;
+	private final          tripleo.elijah.stages.gen_fn.IBaseEvaFunction                     generatedFunction;
 	private final @NotNull ElLog                               LOG;
 	private final          ProcTableEntry                      pte;
 
-	public ProcTableListener(ProcTableEntry pte, BaseEvaFunction generatedFunction, DeduceTypes2.@NotNull DeduceClient2 dc) {
+	public ProcTableListener(ProcTableEntry pte, tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, DeduceTypes2.@NotNull DeduceClient2 dc) {
 		this.pte               = pte;
 		this.generatedFunction = generatedFunction;
 		this.dc                = dc;

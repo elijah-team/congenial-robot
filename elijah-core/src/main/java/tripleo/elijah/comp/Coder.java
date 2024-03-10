@@ -41,7 +41,7 @@ public class Coder {
 		}
 	}
 
-	public void codeNodeFunction(@NotNull final BaseEvaFunction generatedFunction, final OS_Module mod) {
+	public void codeNodeFunction(@NotNull final IBaseEvaFunction generatedFunction, final OS_Module mod) {
 //		if (generatedFunction.getCode() == 0)
 //			generatedFunction.setCode(mod.parent.nextFunctionCode());
 		codeRegistrar.registerFunction(generatedFunction);

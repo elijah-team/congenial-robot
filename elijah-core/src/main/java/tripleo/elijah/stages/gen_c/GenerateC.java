@@ -139,7 +139,7 @@ public class GenerateC
     B.INSTANCE.resolve_GenerateC(mod, this);
   }
 
-  static boolean isValue(@NotNull BaseEvaFunction gf, @NotNull String name) {
+  static boolean isValue(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull String name) {
     if (!name.equals("Value")) return false;
     //
     FunctionDef fd = (FunctionDef) gf.getFD();
@@ -170,7 +170,7 @@ public class GenerateC
 
   @NotNull
   public String getRealTargetName(
-          final @NotNull BaseEvaFunction gf,
+          final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
           final @NotNull IdentIA target,
           final Generate_Code_For_Method.AOG aog,
           final String value) {
@@ -247,7 +247,7 @@ public class GenerateC
   }
 
   String getRealTargetName(
-      final @NotNull BaseEvaFunction gf,
+      final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
       final @NotNull IntegerIA target,
       final Generate_Code_For_Method.AOG aog) {
     final VariableTableEntry varTableEntry = gf.getVarTableEntry(target.getIndex());
@@ -255,7 +255,7 @@ public class GenerateC
   }
 
   /*static*/ String getRealTargetName(
-      final BaseEvaFunction gf, final VariableTableEntry varTableEntry) {
+      final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final VariableTableEntry varTableEntry) {
 
     ZoneVTE zone_vte = _zone.get(varTableEntry, gf);
 
@@ -310,7 +310,7 @@ public class GenerateC
 
   String getRealTargetName(
       final @NotNull IntegerIA target, final Generate_Code_For_Method.AOG aog) {
-    final BaseEvaFunction gf = target.gf;
+    final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf = target.gf;
     final VariableTableEntry varTableEntry = gf.getVarTableEntry(target.getIndex());
 
     final ZoneVTE zone_vte = _zone.get(varTableEntry, gf);
@@ -342,7 +342,7 @@ public class GenerateC
 
   @NotNull
   List<String> getArgumentStrings(
-      final @NotNull BaseEvaFunction gf, final @NotNull Instruction instruction) {
+      final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final @NotNull Instruction instruction) {
     final WhyNotGarish_Function yf = a_lookup(gf);
     return yf.getArgumentStrings(instruction).getLeft();
   }
@@ -383,7 +383,7 @@ public class GenerateC
         // TODO constructor
         int y = 2;
       } else {
-        BaseEvaFunction gf = fi.getEva();
+        tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf = fi.getEva();
         if (gf != null) {
           wl.addJob(new WlGenerateFunctionC(aFileGen, gf, this));
         }
@@ -481,7 +481,7 @@ public class GenerateC
   public String getAssignmentValue(
           VariableTableEntry value_of_this,
           final InstructionArgument value,
-          final @NotNull BaseEvaFunction gf) {
+          final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
     GetAssignmentValue gav = new GetAssignmentValue(this);
     if (value instanceof final @NotNull FnCallArgs fca) {
       return gav.FnCallArgs(fca, gf, LOG).success().getText();
@@ -533,7 +533,7 @@ public class GenerateC
       if (fi == null) {
         // TODO constructor
       } else {
-        BaseEvaFunction gf = fi.getEva();
+        tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf = fi.getEva();
         if (gf != null) {
           wl.addJob(new WlGenerateFunctionC(fileGen, gf, this));
         }
@@ -726,18 +726,28 @@ public class GenerateC
     }
   }
 
+  public void generateCodeForMethod(
+      final GenerateResultEnv aFileGen, final IEvaFunctionBase aEvaFunction) {
+    assert aEvaFunction instanceof tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+
+    if (aEvaFunction instanceof tripleo.elijah.stages.gen_fn.IBaseEvaFunction ef1) {
+      final WhyNotGarish_Function cf = this.a_lookup(ef1);
+      cf.resolveFileGenPromise(aFileGen);
+    }
+  }
+
   static class WlGenerateFunctionC implements WorkJob {
 
     public final GenerateResultSink resultSink;
     private final GenerateFiles generateC;
-    private final BaseEvaFunction gf;
+    private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf;
     private final GenerateResult gr;
     private final WorkList wl;
     private final @NotNull GenerateResultEnv fileGen;
     private boolean _isDone = false;
 
     public WlGenerateFunctionC(
-        @NotNull GenerateResultEnv fileGen, BaseEvaFunction aGf, final GenerateFiles aGenerateC) {
+        @NotNull GenerateResultEnv fileGen, tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf, final GenerateFiles aGenerateC) {
       gf = aGf;
 
       gr = fileGen.gr();
@@ -777,196 +787,6 @@ public class GenerateC
         generateC.generate_constructor(ppConstructor, gr, wl, resultSink, aWorkManager, fileGen);
       }
       _isDone = true;
-    }
-  }
-
-  public static class GetAssignmentValue {
-
-    private final GenerateC gc;
-
-    public GetAssignmentValue(final GenerateC aGc) {
-      gc = aGc;
-    }
-
-    public String ConstTableIA(@NotNull ConstTableIA constTableIA, @NotNull BaseEvaFunction gf) {
-      final ConstantTableEntry cte = gf.getConstTableEntry(constTableIA.getIndex());
-      //			LOG.err(("9001-3 "+cte.initialValue));
-      switch (cte.initialValue.getKind()) {
-        case NUMERIC:
-          return const_to_string(cte.initialValue);
-        case STRING_LITERAL:
-          return const_to_string(cte.initialValue);
-        case IDENT:
-          final String text = ((IdentExpression) cte.initialValue).getText();
-          if (BuiltInTypes.isBooleanText(text)) return text;
-          else throw new NotImplementedException();
-        default:
-          throw new NotImplementedException();
-      }
-    }
-
-    public String const_to_string(final IExpression expression) {
-      final GCX_ConstantString cs = new GCX_ConstantString(gc, GetAssignmentValue.this, expression);
-
-      return cs.getText();
-    }
-
-    public @NotNull Operation<EG_Statement> FnCallArgs(
-        @NotNull FnCallArgs fca, @NotNull BaseEvaFunction gf, @NotNull ElLog LOG) {
-      final StringBuilder sb = new StringBuilder();
-      final Instruction inst = fca.getExpression();
-      //			LOG.err("9000 "+inst.getName());
-      final InstructionArgument x = inst.getArg(0);
-      assert x instanceof ProcIA;
-      final ProcTableEntry pte = gf.getProcTableEntry(to_int(x));
-      //			LOG.err("9000-2 "+pte);
-      switch (inst.getName()) {
-        case CALL:
-          {
-            final EG_Statement statement;
-            if (pte.expression_num == null) {
-              //					assert false; // TODO synthetic methods
-              statement = new FnCallArgs_Statement(gc, this, pte, inst, gf);
-            } else { // if (pte.expression_num != ) {
-              statement = new FnCallArgs_Statement2(gc, gf, LOG, inst, pte, this);
-              // } else {
-              //	return Operation.failure_simple("pte.expression==null && pte.exp_num==null");
-            }
-            return Operation.success(statement);
-          }
-        case CALLS:
-          {
-            CReference reference = null;
-            if (pte.expression_num == null) {
-              final int y = 2;
-              final IdentExpression ptex = (IdentExpression) pte.__debug_expression;
-              sb.append(Emit.emit("/*684*/"));
-              sb.append(ptex.getText());
-
-              final DeduceElement3_ProcTableEntry pte_de3 =
-                  (DeduceElement3_ProcTableEntry)
-                      pte.getDeduceElement3(pte._deduceTypes2(), pte.get__gf());
-              var s = pte_de3.toString();
-
-              // final DR_Ident id = pte.__gf.getIdent((IdentExpression) pte.expression);
-              // id.resolve();
-
-              int yy = 2;
-            } else {
-              // TODO Why not expression_num?
-              reference = new CReference(gc._repo, gc.ce);
-              final IdentIA ia2 = (IdentIA) pte.expression_num;
-              reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
-              final List<String> sll = getAssignmentValueArgs(inst, gf, LOG).stringList();
-              reference.args(sll);
-              String path = reference.build();
-              sb.append(Emit.emit("/*807*/") + path);
-
-              final IExpression ptex = pte.__debug_expression;
-              if (ptex instanceof IdentExpression) {
-                sb.append(Emit.emit("/*803*/"));
-                sb.append(((IdentExpression) ptex).getText());
-              } else if (ptex instanceof ProcedureCallExpression) {
-                sb.append(Emit.emit("/*806*/"));
-                sb.append(ptex.getLeft()); // TODO Qualident, IdentExpression, DotExpression
-              }
-            }
-            if (true /*reference == null*/) {
-              sb.append(Emit.emit("/*810*/") + "(");
-              {
-                final List<String> sll = getAssignmentValueArgs(inst, gf, LOG).stringList();
-                sb.append(Helpers.String_join(", ", sll));
-              }
-              sb.append(");");
-            }
-            return Operation.success(new EG_SingleStatement(sb.toString(), null));
-          }
-        default:
-          String s = "Illegal State: Unexpected value: " + inst.getName();
-          return Operation.failure_simple(s);
-      }
-    }
-
-    public GetAssignmentValueArgsStatement getAssignmentValueArgs(
-            final @NotNull Instruction inst, final @NotNull BaseEvaFunction gf, @NotNull ElLog LOG) {
-      var gavas = new GetAssignmentValueArgsStatement(inst);
-
-      final int args_size = inst.getArgsSize();
-
-      for (int i = 1; i < args_size; i++) {
-        final InstructionArgument ia = inst.getArg(i);
-        final int y = 2;
-
-        // LOG.err("7777 " + ia);
-
-        if (ia instanceof final ConstTableIA constTableIA) {
-          final ConstantTableEntry constTableEntry = gf.getConstTableEntry(constTableIA.getIndex());
-          gavas.add_string(const_to_string(constTableEntry.initialValue));
-        } else if (ia instanceof final IntegerIA integerIA) {
-          final VariableTableEntry variableTableEntry = gf.getVarTableEntry(integerIA.getIndex());
-          gavas.add_string(
-              Emit.emit("/*853*/") + gc._zone.get(variableTableEntry, gf).getRealTargetName());
-        } else if (ia instanceof final IdentIA identIA) {
-          final String path = gf.getIdentIAPathNormal(identIA); // return x.y.z
-          final IdentTableEntry ite = identIA.getEntry();
-
-          if (ite.getStatus() == BaseTableEntry.Status.UNKNOWN) {
-            gavas.add_string(String.format("%s is UNKNOWN", path));
-          } else {
-            final CReference reference = new CReference(gc._repo, gc.ce);
-            reference.getIdentIAPath(identIA, Generate_Code_For_Method.AOG.GET, null);
-            final String path2 = reference.build(); // return ZP105get_z(vvx.vmy)
-
-            if (path.equals(path2)) {
-              // should always fail
-              // throw new AssertionError();
-              LOG.err(String.format("864 should always fail but didn't %s %s", path, path2));
-            }
-
-            // assert ident != null;
-            // IdentTableEntry ite = gf.getIdentTableEntry(((IdentIA) ia).getIndex());
-            // sll.add(Emit.emit("/*748*/")+""+ite.getIdent().getText());
-            gavas.add_string(Emit.emit("/*748*/") + path2);
-            LOG.info("743 " + path2 + " " + path);
-          }
-        } else if (ia instanceof ProcIA) {
-          LOG.err("863 ProcIA");
-          throw new NotImplementedException();
-        } else {
-          throw new IllegalStateException("Cant be here: Invalid InstructionArgument");
-        }
-      }
-
-      return gavas;
-    }
-
-    // TODO look at me
-    public String forClassInvocation(
-        @NotNull Instruction aInstruction,
-        ClassInvocation aClsinv,
-        @NotNull BaseEvaFunction gf,
-        @NotNull ElLog LOG) {
-      InstructionArgument _arg0 = aInstruction.getArg(0);
-      @NotNull ProcTableEntry pte = gf.getProcTableEntry(((ProcIA) _arg0).index());
-      final CtorReference reference = new CtorReference();
-      assert pte.expression_num != null;
-      reference.getConstructorPath(pte.expression_num, gf);
-      @NotNull List<String> x = getAssignmentValueArgs(aInstruction, gf, LOG).stringList();
-      reference.args(x);
-      return reference.build(aClsinv);
-    }
-
-    public @NotNull String IdentIA(@NotNull IdentIA identIA, BaseEvaFunction gf) {
-      assert gf == identIA.gf; // yup
-      final CReference reference = new CReference(gc.get_repo(), gc._ce());
-      reference.getIdentIAPath(identIA, Generate_Code_For_Method.AOG.GET, null);
-      return reference.build();
-    }
-
-    public String IntegerIA(@NotNull IntegerIA integerIA, @NotNull BaseEvaFunction gf) {
-      VariableTableEntry vte = gf.getVarTableEntry(integerIA.getIndex());
-      String x = gc.getRealTargetName(gf, vte);
-      return x;
     }
   }
 
@@ -1080,13 +900,193 @@ public class GenerateC
     return this._fileGen;
   }
 
-  public void generateCodeForMethod(
-      final GenerateResultEnv aFileGen, final IEvaFunctionBase aEvaFunction) {
-    assert aEvaFunction instanceof BaseEvaFunction;
+  public static class GetAssignmentValue {
 
-    if (aEvaFunction instanceof BaseEvaFunction ef1) {
-      final WhyNotGarish_Function cf = this.a_lookup(ef1);
-      cf.resolveFileGenPromise(aFileGen);
+    private final GenerateC gc;
+
+    public GetAssignmentValue(final GenerateC aGc) {
+      gc = aGc;
+    }
+
+    public String ConstTableIA(@NotNull ConstTableIA constTableIA, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
+      final ConstantTableEntry cte = gf.getConstTableEntry(constTableIA.getIndex());
+      //			LOG.err(("9001-3 "+cte.initialValue));
+      switch (cte.initialValue.getKind()) {
+        case NUMERIC:
+          return const_to_string(cte.initialValue);
+        case STRING_LITERAL:
+          return const_to_string(cte.initialValue);
+        case IDENT:
+          final String text = ((IdentExpression) cte.initialValue).getText();
+          if (BuiltInTypes.isBooleanText(text)) return text;
+          else throw new NotImplementedException();
+        default:
+          throw new NotImplementedException();
+      }
+    }
+
+    public String const_to_string(final IExpression expression) {
+      final GCX_ConstantString cs = new GCX_ConstantString(gc, GetAssignmentValue.this, expression);
+
+      return cs.getText();
+    }
+
+    public @NotNull Operation<EG_Statement> FnCallArgs(
+        @NotNull FnCallArgs fca, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull ElLog LOG) {
+      final StringBuilder sb = new StringBuilder();
+      final Instruction inst = fca.getExpression();
+      //			LOG.err("9000 "+inst.getName());
+      final InstructionArgument x = inst.getArg(0);
+      assert x instanceof ProcIA;
+      final ProcTableEntry pte = gf.getProcTableEntry(to_int(x));
+      //			LOG.err("9000-2 "+pte);
+      switch (inst.getName()) {
+        case CALL:
+          {
+            final EG_Statement statement;
+            if (pte.expression_num == null) {
+              //					assert false; // TODO synthetic methods
+              statement = new FnCallArgs_Statement(gc, this, pte, inst, gf);
+            } else { // if (pte.expression_num != ) {
+              statement = new FnCallArgs_Statement2(gc, gf, LOG, inst, pte, this);
+              // } else {
+              //	return Operation.failure_simple("pte.expression==null && pte.exp_num==null");
+            }
+            return Operation.success(statement);
+          }
+        case CALLS:
+          {
+            CReference reference = null;
+            if (pte.expression_num == null) {
+              final int y = 2;
+              final IdentExpression ptex = (IdentExpression) pte.__debug_expression;
+              sb.append(Emit.emit("/*684*/"));
+              sb.append(ptex.getText());
+
+              final DeduceElement3_ProcTableEntry pte_de3 =
+                  (DeduceElement3_ProcTableEntry)
+                      pte.getDeduceElement3(pte._deduceTypes2(), pte.get__gf());
+              var s = pte_de3.toString();
+
+              // final DR_Ident id = pte.__gf.getIdent((IdentExpression) pte.expression);
+              // id.resolve();
+
+              int yy = 2;
+            } else {
+              // TODO Why not expression_num?
+              reference = new CReference(gc._repo, gc.ce);
+              final IdentIA ia2 = (IdentIA) pte.expression_num;
+              reference.getIdentIAPath(ia2, Generate_Code_For_Method.AOG.GET, null);
+              final List<String> sll = getAssignmentValueArgs(inst, gf, LOG).stringList();
+              reference.args(sll);
+              String path = reference.build();
+              sb.append(Emit.emit("/*807*/") + path);
+
+              final IExpression ptex = pte.__debug_expression;
+              if (ptex instanceof IdentExpression) {
+                sb.append(Emit.emit("/*803*/"));
+                sb.append(((IdentExpression) ptex).getText());
+              } else if (ptex instanceof ProcedureCallExpression) {
+                sb.append(Emit.emit("/*806*/"));
+                sb.append(ptex.getLeft()); // TODO Qualident, IdentExpression, DotExpression
+              }
+            }
+            if (true /*reference == null*/) {
+              sb.append(Emit.emit("/*810*/") + "(");
+              {
+                final List<String> sll = getAssignmentValueArgs(inst, gf, LOG).stringList();
+                sb.append(Helpers.String_join(", ", sll));
+              }
+              sb.append(");");
+            }
+            return Operation.success(new EG_SingleStatement(sb.toString(), null));
+          }
+        default:
+          String s = "Illegal State: Unexpected value: " + inst.getName();
+          return Operation.failure_simple(s);
+      }
+    }
+
+    public GetAssignmentValueArgsStatement getAssignmentValueArgs(
+            final @NotNull Instruction inst, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull ElLog LOG) {
+      var gavas = new GetAssignmentValueArgsStatement(inst);
+
+      final int args_size = inst.getArgsSize();
+
+      for (int i = 1; i < args_size; i++) {
+        final InstructionArgument ia = inst.getArg(i);
+        final int y = 2;
+
+        // LOG.err("7777 " + ia);
+
+        if (ia instanceof final ConstTableIA constTableIA) {
+          final ConstantTableEntry constTableEntry = gf.getConstTableEntry(constTableIA.getIndex());
+          gavas.add_string(const_to_string(constTableEntry.initialValue));
+        } else if (ia instanceof final IntegerIA integerIA) {
+          final VariableTableEntry variableTableEntry = gf.getVarTableEntry(integerIA.getIndex());
+          gavas.add_string(
+              Emit.emit("/*853*/") + gc._zone.get(variableTableEntry, gf).getRealTargetName());
+        } else if (ia instanceof final IdentIA identIA) {
+          final String path = gf.getIdentIAPathNormal(identIA); // return x.y.z
+          final IdentTableEntry ite = identIA.getEntry();
+
+          if (ite.getStatus() == BaseTableEntry.Status.UNKNOWN) {
+            gavas.add_string(String.format("%s is UNKNOWN", path));
+          } else {
+            final CReference reference = new CReference(gc._repo, gc.ce);
+            reference.getIdentIAPath(identIA, Generate_Code_For_Method.AOG.GET, null);
+            final String path2 = reference.build(); // return ZP105get_z(vvx.vmy)
+
+            if (path.equals(path2)) {
+              // should always fail
+              // throw new AssertionError();
+              LOG.err(String.format("864 should always fail but didn't %s %s", path, path2));
+            }
+
+            // assert ident != null;
+            // IdentTableEntry ite = gf.getIdentTableEntry(((IdentIA) ia).getIndex());
+            // sll.add(Emit.emit("/*748*/")+""+ite.getIdent().getText());
+            gavas.add_string(Emit.emit("/*748*/") + path2);
+            LOG.info("743 " + path2 + " " + path);
+          }
+        } else if (ia instanceof ProcIA) {
+          LOG.err("863 ProcIA");
+          throw new NotImplementedException();
+        } else {
+          throw new IllegalStateException("Cant be here: Invalid InstructionArgument");
+        }
+      }
+
+      return gavas;
+    }
+
+    // TODO look at me
+    public String forClassInvocation(
+        @NotNull Instruction aInstruction,
+        ClassInvocation aClsinv,
+        @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
+        @NotNull ElLog LOG) {
+      InstructionArgument _arg0 = aInstruction.getArg(0);
+      @NotNull ProcTableEntry pte = gf.getProcTableEntry(((ProcIA) _arg0).index());
+      final CtorReference reference = new CtorReference();
+      assert pte.expression_num != null;
+      reference.getConstructorPath(pte.expression_num, gf);
+      @NotNull List<String> x = getAssignmentValueArgs(aInstruction, gf, LOG).stringList();
+      reference.args(x);
+      return reference.build(aClsinv);
+    }
+
+    public @NotNull String IdentIA(@NotNull IdentIA identIA, tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
+      assert gf == identIA.gf; // yup
+      final CReference reference = new CReference(gc.get_repo(), gc._ce());
+      reference.getIdentIAPath(identIA, Generate_Code_For_Method.AOG.GET, null);
+      return reference.build();
+    }
+
+    public String IntegerIA(@NotNull IntegerIA integerIA, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
+      VariableTableEntry vte = gf.getVarTableEntry(integerIA.getIndex());
+      String x = gc.getRealTargetName(gf, vte);
+      return x;
     }
   }
 

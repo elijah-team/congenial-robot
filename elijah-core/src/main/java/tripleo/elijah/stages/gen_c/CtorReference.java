@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.gen_c.c_ast1.C_Assignment;
 import tripleo.elijah.stages.gen_c.c_ast1.C_ProcedureCall;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaContainerNC;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
@@ -153,7 +153,7 @@ public class CtorReference {
 */
 	}
 
-	public void getConstructorPath(@NotNull InstructionArgument ia2, @NotNull BaseEvaFunction gf) {
+	public void getConstructorPath(@NotNull InstructionArgument ia2, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final List<InstructionArgument> s = CReference._getIdentIAPathList(ia2);
 
 		for (int i = 0, sSize = s.size(); i < sSize; i++) {

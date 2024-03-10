@@ -41,7 +41,7 @@ class ResolvedNodes {
 
 			switch (coded.getRole()) {
 			case FUNCTION -> {
-				cr.registerFunction1((BaseEvaFunction) evaNode);
+				cr.registerFunction1((tripleo.elijah.stages.gen_fn.IBaseEvaFunction) evaNode);
 			}
 			case CLASS -> {
 				final EvaClass evaClass = (EvaClass) evaNode;

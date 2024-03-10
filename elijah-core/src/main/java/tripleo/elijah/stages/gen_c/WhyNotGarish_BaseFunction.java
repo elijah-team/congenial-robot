@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import tripleo.elijah.stages.deduce.nextgen.DR_Item;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.stages.deduce.DeduceElement;
@@ -27,7 +28,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	protected final Eventual<GenerateResultEnv> fileGenPromise = new Eventual<>();
 
 	@Deprecated
-	public BaseEvaFunction cheat() {
+	public IBaseEvaFunction cheat() {
 		return getGf();
 	}
 
@@ -99,7 +100,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 
 	public abstract Optional<GenerateC> getGenerateC();
 
-	public abstract BaseEvaFunction getGf();
+	public abstract IBaseEvaFunction getGf();
 
 	public @NotNull ProcTableEntry getProcTableEntry(final int aIndex) {
 		return getGf().getProcTableEntry(aIndex);
@@ -202,7 +203,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	}
 
 	public ZoneVTE zoneHelper(final IntegerIA ia) {
-		final @NotNull BaseEvaFunction gf = this.getGf();
+		final @NotNull IBaseEvaFunction gf = this.getGf();
 		final VariableTableEntry varTableEntry = this.getVarTableEntry(ia.getIndex());
 		final ZoneVTE zone_vte = getGenerateC().get().get_zone().get(varTableEntry, gf);
 
@@ -210,8 +211,12 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	}
 
 	public ZoneVTE zoneHelper(final VariableTableEntry varTableEntry) {
-		final @NotNull BaseEvaFunction gf = this.getGf();
+		final @NotNull var gf = this.getGf();
 		final ZoneVTE zone_vte = getGenerateC().get().get_zone().get(varTableEntry, gf);
 		return zone_vte;
+	}
+
+	public List<DR_Item> getDrs() {
+		return ((tripleo.elijah.stages.gen_fn.IBaseEvaFunction) getGf()).drs;
 	}
 }

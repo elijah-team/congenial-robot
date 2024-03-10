@@ -9,13 +9,14 @@
 package tripleo.elijah.stages.instructions;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 
 /**
  * Created 1/12/21 4:22 AM
  */
-public record ProcIA(int index, BaseEvaFunction generatedFunction) implements InstructionArgument {
+public record ProcIA(int index, IBaseEvaFunction generatedFunction) implements InstructionArgument {
 	@Override
 	public @NotNull String toString() {
 		return "ProcIA{" +

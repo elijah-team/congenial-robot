@@ -28,8 +28,9 @@ import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.FoundElement;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GenType;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.instructions.IdentIA;
 
 public interface IDeduceElement3 {
@@ -39,7 +40,7 @@ public interface IDeduceElement3 {
 
 	OS_Element getPrincipal();
 
-	BaseEvaFunction generatedFunction();
+	IBaseEvaFunction generatedFunction();
 
 	GenType genType();
 

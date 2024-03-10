@@ -18,7 +18,7 @@ import tripleo.elijah.nextgen.rosetta.Rosetta;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.gdm.GDM_IdentExpression;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaFunction;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn_c.GenFnC;
@@ -127,7 +127,7 @@ public class Boilerplate {
 		return new GenerateFunctions(defaultMod(), bc);
 	}
 
-	//public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod, final @NotNull BaseEvaFunction aBaseEvaFunction) {
+	//public void fixTables(final GDM_IdentExpression gdm, final OS_Module aMod, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseEvaFunction) {
 	//	gdm.onIdentTableEntry(ite -> {
 	//		fixTables(gdm, aMod, ite._generatedFunction());
 	//	});
@@ -145,7 +145,7 @@ public class Boilerplate {
 		var d2 = defaultDeduceTypes2(aMod);
 
 		gdm.onIdentTableEntry(ite -> {
-			final BaseEvaFunction evaFunction = ite._generatedFunction();
+			final tripleo.elijah.stages.gen_fn.IBaseEvaFunction evaFunction = ite._generatedFunction();
 			ite._fix_table(d2, evaFunction);
 		});
 	}

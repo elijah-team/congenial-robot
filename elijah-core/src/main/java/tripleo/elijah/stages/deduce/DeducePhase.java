@@ -262,10 +262,10 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
             }
 
             for (EvaNode evaNode : lgf) {
-                final BaseEvaFunction bef;
+                final tripleo.elijah.stages.gen_fn.IBaseEvaFunction bef;
 
-                if (evaNode instanceof BaseEvaFunction) {
-                    bef = (BaseEvaFunction) evaNode;
+                if (evaNode instanceof tripleo.elijah.stages.gen_fn.IBaseEvaFunction) {
+                    bef = (tripleo.elijah.stages.gen_fn.IBaseEvaFunction) evaNode;
                 } else continue;
                 for (final IFunctionMapHook hook : functionMapHooks) {
                     if (hook.matches(bef.getFD())) {
@@ -347,18 +347,6 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         return rci.registerClassInvocation(aClassInvocation);
     }
 
-    public void addDrs(final BaseEvaFunction aGeneratedFunction, final @NotNull List<DR_Item> aDrs) {
-        aDrs.forEach(dr -> addDr(aGeneratedFunction, dr));
-    }
-
-    private void addDr(final BaseEvaFunction aGeneratedFunction, final DR_Item aDr) {
-        drs.add(aGeneratedFunction, aDr);
-    }
-
-    public void waitOn(final DeduceTypes2 aDeduceTypes2) {
-        waits.add(aDeduceTypes2);
-    }
-
     public void finish() {
         setGeneratedClassParents();
 		/*
@@ -416,8 +404,8 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
             pa.getCompilationEnclosure().addReactive(de3_Active);
         }
 
-        for (Pair<BaseEvaFunction, DR_Item> pair : drs.iterator()) {
-            final BaseEvaFunction ef = pair.getLeft();
+        for (Pair<IBaseEvaFunction, DR_Item> pair : drs.iterator()) {
+            final IBaseEvaFunction ef = pair.getLeft();
             final DR_Item         dr = pair.getRight();
 
             //System.err.println("611a " + ef);
@@ -426,7 +414,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
             if (dr instanceof DR_ProcCall drpc) {
                 var fi = drpc.getFunctionInvocation();
                 if (fi != null) {
-                    final BaseEvaFunction[] ef1 = new BaseEvaFunction[1];
+                    final IBaseEvaFunction[] ef1 = new IBaseEvaFunction[1];
                     fi.generatePromise().then(x -> ef1[0] = x);
 
                     if (ef1[0] == null) {
@@ -459,6 +447,99 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
                 }
             }
         }
+    }
+
+    public void handleDeferredMembers() {
+        for (@NotNull final DeferredMember deferredMember : deferredMembers) {
+            if (deferredMember.getParent().isNamespaceStatement()) {
+                final @NotNull NamespaceStatement parent = (NamespaceStatement) deferredMember.getParent().element();
+                final NamespaceInvocation         nsi    = registerNamespaceInvocation(parent);
+                nsi.resolveDeferred()
+                        .done(result -> {
+                            @NotNull Maybe<EvaContainer.VarTableEntry> v_m = result.getVariable(deferredMember.getVariableStatement().getName());
+
+                            assert !v_m.isException();
+
+                            EvaContainer.VarTableEntry v = v_m.o;
+
+                            // TODO varType, potentialTypes and _resolved: which?
+                            //final OS_Type varType = v.varType;
+
+                            assert v != null;
+                            v.resolve_varType_cb((varType) -> {
+                                final @NotNull GenType genType = _inj().new_GenTypeImpl();
+                                genType.set(varType);
+
+//								if (deferredMember.getInvocation() instanceof NamespaceInvocation) {
+//									((NamespaceInvocation) deferredMember.getInvocation()).resolveDeferred().done(new DoneCallback<EvaNamespace>() {
+//										@Override
+//										public void onDone(EvaNamespace result) {
+//											result;
+//										}
+//									});
+//								}
+
+                                if (true) {
+                                    throw new Error();
+                                } else if (false) {
+                                    deferredMember.externalRefDeferred().resolve(result);
+                                }
+/*
+							if (genType.resolved == null) {
+								// HACK need to resolve, but this shouldn't be here
+								try {
+									@NotNull OS_Type rt = DeduceTypes2.resolve_type(null, varType, varType.getTypeName().getContext());
+									genType.set(rt);
+								} catch (ResolveError aResolveError) {
+									aResolveError.printStackTrace();
+								}
+							}
+							deferredMember.typeResolved().resolve(genType);
+*/
+                            });
+                        });
+            } else if (deferredMember.getParent().element() instanceof ClassStatement) {
+                // TODO do something
+                final ClassStatement parent = (ClassStatement) deferredMember.getParent().element();
+                final String         name   = deferredMember.getVariableStatement().getName();
+
+                // because deferredMember.invocation is null, we must create one here
+                final @Nullable ClassInvocation ci = registerClassInvocation(parent, null, new NULL_DeduceTypes2());
+                assert ci != null;
+                ci.onResolve(result -> {
+                    final List<EvaContainer.VarTableEntry> vt = result.varTable();
+                    for (EvaContainer.VarTableEntry gc_vte : vt) {
+                        if (gc_vte.elementName().sameName(name)) {
+                            // check connections
+                            // unify pot. types (prol. shuld be done already -- we don't want to be reporting errors here)
+                            // call typePromises and externalRefPromisess
+
+                            // TODO just getting first element here (without processing of any kind); HACK
+                            final List<EvaContainer.VarTableEntry.ConnectionPair> connectionPairs = gc_vte.connectionPairs;
+                            if (connectionPairs.size() > 0) {
+                                final GenType ty = connectionPairs.get(0).vte.getType().genType;
+                                assert ty.getResolved() != null;
+                                gc_vte.varType = ty.getResolved(); // TODO make sure this is right in all cases
+                                if (deferredMember.typeResolved().isPending())
+                                    deferredMember.typeResolved().resolve(ty);
+                                break;
+                            } else {
+                                NotImplementedException.raise();
+                            }
+                        }
+                    }
+                });
+            } else
+                throw new NotImplementedException();
+        }
+    }
+
+    public void waitOn(final DeduceTypes2 aDeduceTypes2) {
+        waits.add(aDeduceTypes2);
+    }
+
+    public void addDrs(final AddDrsSource aAddDrsSource) {
+        addDrs(aAddDrsSource.getFunction(), aAddDrsSource.getItems());
     }
 
     public void setGeneratedClassParents() {
@@ -607,89 +688,8 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         }
     }
 
-    public void handleDeferredMembers() {
-        for (@NotNull final DeferredMember deferredMember : deferredMembers) {
-            if (deferredMember.getParent().isNamespaceStatement()) {
-                final @NotNull NamespaceStatement parent = (NamespaceStatement) deferredMember.getParent().element();
-                final NamespaceInvocation         nsi    = registerNamespaceInvocation(parent);
-                nsi.resolveDeferred()
-                        .done(result -> {
-                            @NotNull Maybe<EvaContainer.VarTableEntry> v_m = result.getVariable(deferredMember.getVariableStatement().getName());
-
-                            assert !v_m.isException();
-
-                            EvaContainer.VarTableEntry v = v_m.o;
-
-                            // TODO varType, potentialTypes and _resolved: which?
-                            //final OS_Type varType = v.varType;
-
-                            assert v != null;
-                            v.resolve_varType_cb((varType) -> {
-                                final @NotNull GenType genType = _inj().new_GenTypeImpl();
-                                genType.set(varType);
-
-//								if (deferredMember.getInvocation() instanceof NamespaceInvocation) {
-//									((NamespaceInvocation) deferredMember.getInvocation()).resolveDeferred().done(new DoneCallback<EvaNamespace>() {
-//										@Override
-//										public void onDone(EvaNamespace result) {
-//											result;
-//										}
-//									});
-//								}
-
-                                if (true) {
-                                    throw new Error();
-                                } else if (false) {
-                                    deferredMember.externalRefDeferred().resolve(result);
-                                }
-/*
-							if (genType.resolved == null) {
-								// HACK need to resolve, but this shouldn't be here
-								try {
-									@NotNull OS_Type rt = DeduceTypes2.resolve_type(null, varType, varType.getTypeName().getContext());
-									genType.set(rt);
-								} catch (ResolveError aResolveError) {
-									aResolveError.printStackTrace();
-								}
-							}
-							deferredMember.typeResolved().resolve(genType);
-*/
-                            });
-                        });
-            } else if (deferredMember.getParent().element() instanceof ClassStatement) {
-                // TODO do something
-                final ClassStatement parent = (ClassStatement) deferredMember.getParent().element();
-                final String         name   = deferredMember.getVariableStatement().getName();
-
-                // because deferredMember.invocation is null, we must create one here
-                final @Nullable ClassInvocation ci = registerClassInvocation(parent, null, new NULL_DeduceTypes2());
-                assert ci != null;
-                ci.onResolve(result -> {
-                    final List<EvaContainer.VarTableEntry> vt = result.varTable;
-                    for (EvaContainer.VarTableEntry gc_vte : vt) {
-                        if (gc_vte.nameToken.getText().equals(name)) {
-                            // check connections
-                            // unify pot. types (prol. shuld be done already -- we don't want to be reporting errors here)
-                            // call typePromises and externalRefPromisess
-
-                            // TODO just getting first element here (without processing of any kind); HACK
-                            final List<EvaContainer.VarTableEntry.ConnectionPair> connectionPairs = gc_vte.connectionPairs;
-                            if (connectionPairs.size() > 0) {
-                                final GenType ty = connectionPairs.get(0).vte.getType().genType;
-                                assert ty.getResolved() != null;
-                                gc_vte.varType = ty.getResolved(); // TODO make sure this is right in all cases
-                                if (deferredMember.typeResolved().isPending())
-                                    deferredMember.typeResolved().resolve(ty);
-                                break;
-                            } else {
-                                NotImplementedException.raise();
-                            }
-                        }
-                    }
-                });
-            } else
-                throw new NotImplementedException();
-        }
+    public void addDrs(final IBaseEvaFunction aGeneratedFunction, final @NotNull List<DR_Item> aDrs) {
+        aDrs.forEach(dr -> addDr(aGeneratedFunction, dr));
     }
 
     private void sanityChecks() {
@@ -796,18 +796,22 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         classInvocationMultimap.put(aKlass, aClassInvocation);
     }
 
+    private void addDr(final IBaseEvaFunction aGeneratedFunction, final DR_Item aDr) {
+        drs.add(aGeneratedFunction, aDr);
+    }
+
     public interface Country {
         void sendClasses(Consumer<List<EvaNode>> ces);
     }
 
     public static class DRS {
-        private final List<Pair<BaseEvaFunction, DR_Item>> drs = new ArrayList<>();
+        private final List<Pair<tripleo.elijah.stages.gen_fn.IBaseEvaFunction, DR_Item>> drs = new ArrayList<>();
 
-        public void add(final BaseEvaFunction bef, DR_Item aDri) {
+        public void add(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction bef, DR_Item aDri) {
             drs.add(Pair.of(bef, aDri));
         }
 
-        public Iterable<Pair<BaseEvaFunction, DR_Item>> iterator() {
+        public Iterable<Pair<tripleo.elijah.stages.gen_fn.IBaseEvaFunction, DR_Item>> iterator() {
             return drs;
         }
     }
@@ -886,9 +890,9 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
                 case INHERITED:
                     final FunctionInvocation functionInvocation = deferredMemberFunction.functionInvocation();
                     functionInvocation.generatePromise().
-                            then(new DoneCallback<BaseEvaFunction>() {
+                            then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
                                 @Override
-                                public void onDone(final @NotNull BaseEvaFunction gf) {
+                                public void onDone(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
                                     deferredMemberFunction.externalRefDeferred().resolve(gf);
                                     gf.typePromise().then(aGenType -> deferredMemberFunction.typeResolved().resolve(aGenType));
                                 }

@@ -2,7 +2,8 @@ package tripleo.elijah_congenial.deduce.umbrella;
 
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+
 
 /**
  * This is a callback for resolveWith.
@@ -12,6 +13,6 @@ import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
  */
 public interface DS_FunctionDef extends DS_Base {
 	void accept(FunctionDef fd);
-	void accept(BaseEvaFunction gf);
+	void accept(IBaseEvaFunction gf);
 	void accept(FunctionInvocation aFunctionInvocation);
 }

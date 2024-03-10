@@ -20,7 +20,7 @@ import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.IInvocation;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaConstructor;
 import tripleo.elijah.stages.gen_fn.EvaFunction;
 import tripleo.elijah.stages.gen_fn.GenType;
@@ -30,7 +30,7 @@ import tripleo.elijah.stages.gen_fn.GenType;
  */
 public class DeferredMemberFunction {
 	private final @NotNull DeduceTypes2                                deduceTypes2;
-	private final          DeferredObject<BaseEvaFunction, Void, Void> externalRef;
+	private final          DeferredObject<tripleo.elijah.stages.gen_fn.IBaseEvaFunction, Void, Void> externalRef;
 	private final @NotNull FunctionDef                                 functionDef;
 	private final @NotNull FunctionInvocation                          functionInvocation;
 	private final @NotNull OS_Element                                  parent;
@@ -57,9 +57,9 @@ public class DeferredMemberFunction {
 		typePromise = _inj().new_DeferredObject__GenType();
 		externalRef = _inj().new_DeferredObject__BaseEvaFunction();
 
-		functionInvocation.generatePromise().then(new DoneCallback<BaseEvaFunction>() {
+		functionInvocation.generatePromise().then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
 			@Override
-			public void onDone(final BaseEvaFunction result) {
+			public void onDone(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction result) {
 				if (result instanceof EvaFunction) {
 					deduceTypes2.deduceOneFunction((EvaFunction) result, deduceTypes2._phase()); // !!
 				} else {
@@ -79,11 +79,11 @@ public class DeferredMemberFunction {
 		return deduceTypes2._inj();
 	}
 
-	public Promise<BaseEvaFunction, Void, Void> externalRef() {
+	public Promise<tripleo.elijah.stages.gen_fn.IBaseEvaFunction, Void, Void> externalRef() {
 		return externalRef.promise();
 	}
 
-	public @NotNull DeferredObject<BaseEvaFunction, Void, Void> externalRefDeferred() {
+	public @NotNull DeferredObject<tripleo.elijah.stages.gen_fn.IBaseEvaFunction, Void, Void> externalRefDeferred() {
 		return externalRef;
 	}
 

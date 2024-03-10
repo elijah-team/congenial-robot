@@ -10,9 +10,11 @@
 
 package tripleo.elijah.stages.gen_generic;
 
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 
 /**
  * Move this to Mir or Lir layer ASAP
@@ -20,13 +22,13 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
  * Created 11/28/21 4:45 PM
  */
 public interface ICodeRegistrar {
-	void registerClass(EvaClass aClass);
+	void registerClass(IEvaClass aClass);
 
-	void registerClass1(EvaClass aClass);
+	void registerClass1(IEvaClass aClass);
 
-	void registerFunction(BaseEvaFunction aFunction);
+	void registerFunction(@NotNull IBaseEvaFunction aFunction);
 
-	void registerFunction1(BaseEvaFunction aFunction);
+	void registerFunction1(IBaseEvaFunction aFunction);
 
 	void registerNamespace(EvaNamespace aNamespace);
 }

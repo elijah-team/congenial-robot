@@ -29,11 +29,11 @@ class Found_Element_For_ITE {
 	private final Context       ctx;
 	private final DeduceTypes2.DeduceClient1 dc;
 	private final ErrSink                    errSink;
-	private final BaseEvaFunction            generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction            generatedFunction;
 	private final ElLog                      LOG;
 	private final DeduceTypes2               deduceTypes2;
 
-	public Found_Element_For_ITE(BaseEvaFunction aGeneratedFunction, Context aCtx, final @NotNull DT_Env aEnv, DeduceTypes2.DeduceClient1 aDeduceClient1) {
+	public Found_Element_For_ITE(tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, Context aCtx, final @NotNull DT_Env aEnv, DeduceTypes2.DeduceClient1 aDeduceClient1) {
 		generatedFunction = aGeneratedFunction;
 		ctx               = aCtx;
 		dc                = aDeduceClient1;

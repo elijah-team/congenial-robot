@@ -3,8 +3,9 @@ package tripleo.elijah.stages.deduce;
 import tripleo.elijah.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah.stages.gen_c.DeducedBaseEvaFunction;
 import tripleo.elijah.stages.gen_c.DefaultDeducedBaseEvaFunction;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.EvaFunction;
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 
 import java.util.function.Consumer;
 
@@ -13,7 +14,7 @@ public class DeduceTypes2_TWO extends DeduceTypes2 {
 		super(aDeduceTypes2Request);
 	}
 
-	public void pass(final BaseEvaFunction aEvaFunction, final Consumer<DeducedBaseEvaFunction> c) {
+	public void pass(final IBaseEvaFunction aEvaFunction, final Consumer<DeducedBaseEvaFunction> c) {
 		deduceOneFunction((EvaFunction) aEvaFunction, this._phase());
 		c.accept(new DefaultDeducedBaseEvaFunction(aEvaFunction));
 	}

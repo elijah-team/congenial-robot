@@ -37,7 +37,7 @@ class Generate_Item {
 //			throw new NotImplementedException();
 	}
 
-	public void generate_construct_statement(@NotNull ConstructStatement aConstructStatement, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+	public void generate_construct_statement(@NotNull ConstructStatement aConstructStatement, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 		final IExpression    left = aConstructStatement.getExpr(); // TODO need type of this expr, not expr!!
 		final ExpressionList args = aConstructStatement.getArgs();
 		//
@@ -54,7 +54,7 @@ class Generate_Item {
 		final int instruction_number = generateFunctions.add_i(gf, InstructionName.CONSTRUCT, l, cctx);
 	}
 
-	void generate_if(@NotNull final IfConditional ifc, final @NotNull BaseEvaFunction gf) {
+	void generate_if(@NotNull final IfConditional ifc, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final Context                  cctx         = ifc.getContext();
 		final @NotNull IdentExpression Boolean_true = Helpers.string_to_ident("true");
 		final @NotNull Label           label_next   = gf.addLabel();
@@ -101,7 +101,7 @@ class Generate_Item {
 		}
 	}
 
-	void generate_loop(@NotNull final Loop loop, final @NotNull BaseEvaFunction gf) {
+	void generate_loop(@NotNull final Loop loop, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final Context cctx = loop.getContext();
 		final int     e2   = generateFunctions.add_i(gf, InstructionName.ES, null, cctx);
 //			LOG.info("702 "+loop.getType());
@@ -126,7 +126,7 @@ class Generate_Item {
 		gf.addContext(loop.getContext(), r);
 	}
 
-	private void generate_loop_FROM_TO_TYPE(@NotNull Loop loop, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+	private void generate_loop_FROM_TO_TYPE(@NotNull Loop loop, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 		final IdentExpression iterNameToken = loop.getIterNameToken();
 		final String          iterName      = iterNameToken.getText();
 		final int             iter_temp     = generateFunctions.addTempTableEntry(null, iterNameToken, gf, iterNameToken); // TODO deduce later
@@ -152,7 +152,7 @@ class Generate_Item {
 		gf.place(label_bottom);
 	}
 
-	private void generate_loop_EXPR_TYPE(@NotNull Loop loop, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+	private void generate_loop_EXPR_TYPE(@NotNull Loop loop, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 		final int loop_iterator = generateFunctions.addTempTableEntry(null, gf); // TODO deduce later
 		generateFunctions.add_i(gf, InstructionName.DECL, List_of(new SymbolIA("tmp"), new IntegerIA(loop_iterator, gf)), cctx);
 		final int                          i2  = generateFunctions.addConstantTableEntry("", new NumericExpressionImpl(0), new OS_BuiltinType(BuiltInTypes.SystemInteger), gf);
@@ -179,7 +179,7 @@ class Generate_Item {
 		gf.place(label_bottom);
 	}
 
-	void generate_match_conditional(@NotNull final MatchConditional mc, final @NotNull BaseEvaFunction gf) {
+	void generate_match_conditional(@NotNull final MatchConditional mc, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 		final int     y    = 2;
 		final Context cctx = mc.getParent().getContext(); // TODO MatchConditional.getContext returns NULL!!!
 		{
@@ -214,22 +214,22 @@ class Generate_Item {
 		final GenerateFunctions xgf = this.generateFunctions;
 		final GenerateFunctions3 generateFunctions3 = new GenerateFunctions3() {
 			@Override
-			public int add_i(final BaseEvaFunction aEvaFunction, final InstructionName aInstructionName, final List<InstructionArgument> aInstructionArgumentList, final Context aContext) {
+			public int add_i(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction, final InstructionName aInstructionName, final List<InstructionArgument> aInstructionArgumentList, final Context aContext) {
 				return xgf.add_i(aEvaFunction, aInstructionName, aInstructionArgumentList, aContext);
 			}
 
 			@Override
-			public int addTempTableEntry(final OS_Type aOSType, final IdentExpression aIdentExpression, final BaseEvaFunction aEvaFunction, final IdentExpression aIdentExpression1) {
+			public int addTempTableEntry(final OS_Type aOSType, final IdentExpression aIdentExpression, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction, final IdentExpression aIdentExpression1) {
 				return xgf.addTempTableEntry(aOSType, aIdentExpression, aEvaFunction, aIdentExpression1);
 			}
 
 			@Override
-			public void generate_item(final FunctionItem aFunctionItem, final BaseEvaFunction aEvaFunction, final Context aContext) {
+			public void generate_item(final FunctionItem aFunctionItem, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction, final Context aContext) {
 				xgf.generate_item(aFunctionItem, aEvaFunction, aContext);
 			}
 
 			@Override
-			public InstructionArgument simplify_expression(final IExpression aExpression, final BaseEvaFunction aEvaFunction, final Context aContext) {
+			public InstructionArgument simplify_expression(final IExpression aExpression, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aEvaFunction, final Context aContext) {
 				return xgf.simplify_expression(aExpression, aEvaFunction, aContext);
 			}
 
@@ -244,7 +244,7 @@ class Generate_Item {
 	void generate_statement_wrapper(final StatementWrapper aStatementWrapper,
 									@NotNull IExpression x,
 									@NotNull ExpressionKind expressionKind,
-									@NotNull BaseEvaFunction gf,
+									@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf,
 									@NotNull Context cctx) {
 //			LOG.err("106-1 "+x.getKind()+" "+x);
 		if (x.is_simple()) {
@@ -304,7 +304,7 @@ class Generate_Item {
 		}
 	}
 
-	void generate_variable_sequence(@NotNull VariableSequence item, @NotNull BaseEvaFunction gf, @NotNull Context cctx) {
+	void generate_variable_sequence(@NotNull VariableSequence item, @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, @NotNull Context cctx) {
 		for (final @NotNull VariableStatement vs : item.items()) {
 			int state = 0;
 //				LOG.info("8004 " + vs);

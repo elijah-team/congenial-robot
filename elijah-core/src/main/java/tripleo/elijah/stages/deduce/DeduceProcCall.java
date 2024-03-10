@@ -20,7 +20,7 @@ import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.stages.deduce.nextgen.DR_Variable;
 import tripleo.elijah.stages.deduce.tastic.FCA_Stop;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.DeferredObject2;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.util.Operation;
@@ -35,19 +35,15 @@ public class DeduceProcCall {
 	private                Context                                        _g_context;
 	private                DeduceTypes2                                   _g_deduceTypes2;
 	private                ErrSink                                        _g_errSink;
-	private                BaseEvaFunction                                _g_generatedFunction;
+	private                tripleo.elijah.stages.gen_fn.IBaseEvaFunction                                _g_generatedFunction;
 	private                DeduceElement                                  target;
-
-	public BaseEvaFunction _generatedFunction() {
-		return _g_generatedFunction;
-	}
 
 	@Contract(pure = true)
 	public DeduceProcCall(final @NotNull ProcTableEntry aProcTableEntry) {
 		procTableEntry = aProcTableEntry;
 
 		procTableEntry.onFunctionInvocation((final @NotNull FunctionInvocation functionInvocation) -> {
-			functionInvocation.generatePromise().then((BaseEvaFunction evaFunction) -> {
+			functionInvocation.generatePromise().then((tripleo.elijah.stages.gen_fn.IBaseEvaFunction evaFunction) -> {
 				final @NotNull FunctionDef best = evaFunction.getFD();
 
 				final DeclAnchor.AnchorType anchorType = DeclAnchor.AnchorType.MEMBER;
@@ -63,6 +59,10 @@ public class DeduceProcCall {
 		});
 	}
 
+	public tripleo.elijah.stages.gen_fn.IBaseEvaFunction _generatedFunction() {
+		return _g_generatedFunction;
+	}
+
 	public DeduceElement getTarget() {
 		return target;
 	}
@@ -73,7 +73,7 @@ public class DeduceProcCall {
 
 	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2,
 								final Context aContext,
-								final BaseEvaFunction aGeneratedFunction,
+								final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction,
 								final ErrSink aErrSink) {
 		_g_deduceTypes2      = aDeduceTypes2;
 		_g_context           = aContext;

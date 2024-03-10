@@ -6,7 +6,7 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.Deduce_CreationClosure;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GeneratePhase;
 
 public class DefaultDeduceCreationContext implements DeduceCreationContext {
@@ -17,7 +17,7 @@ public class DefaultDeduceCreationContext implements DeduceCreationContext {
 	}
 
 	@Override
-	public Eventual<BaseEvaFunction> makeGenerated_fi__Eventual(final @NotNull FunctionInvocation aFunctionInvocation) {
+	public Eventual<tripleo.elijah.stages.gen_fn.IBaseEvaFunction> makeGenerated_fi__Eventual(final @NotNull FunctionInvocation aFunctionInvocation) {
 		final GeneratePhase generatePhase = getGeneratePhase();
 		final DeducePhase   deducePhase   = getDeducePhase();
 

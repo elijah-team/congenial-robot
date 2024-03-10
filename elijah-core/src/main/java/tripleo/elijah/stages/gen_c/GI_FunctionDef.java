@@ -86,7 +86,7 @@ public class GI_FunctionDef implements GenerateC_Item {
 			ElIntrinsics.checkNotNull(aEvaNode);
 
 			_evaNode = aEvaNode;
-			_living  = _repo.generateC._ce().getCompilation().livingRepo().getFunction((BaseEvaFunction) _evaNode);
+			_living  = _repo.generateC._ce().getCompilation().livingRepo().getFunction((tripleo.elijah.stages.gen_fn.IBaseEvaFunction) _evaNode);
 		}
 	}
 

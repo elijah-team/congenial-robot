@@ -34,10 +34,10 @@ import static tripleo.elijah.util.Helpers.List_of;
 public class FunctionInvocation implements IInvocation {
 	public final      ProcTableEntry                              pte;
 	final             FunctionDef                                 fd;
-	private final     DeferredObject<BaseEvaFunction, Void, Void> generateDeferred = new DeferredObject<BaseEvaFunction, Void, Void>();
-	private final     Eventual<BaseEvaFunction>                   _p_generated     = new Eventual<>();
+	private final     DeferredObject<IBaseEvaFunction, Void, Void> generateDeferred = new DeferredObject<IBaseEvaFunction, Void, Void>();
+	private final     Eventual<IBaseEvaFunction>                   _p_generated     = new Eventual<>();
 	public            CI_Hint                                     hint;
-	private @Nullable BaseEvaFunction                             _generated       = null;
+	private @Nullable IBaseEvaFunction                             _generated       = null;
 	private           NamespaceInvocation                         namespaceInvocation;
 	private           ClassInvocation                             classInvocation;
 
@@ -63,7 +63,7 @@ public class FunctionInvocation implements IInvocation {
 	}
 */
 
-	public @NotNull DeferredObject<BaseEvaFunction, Void, Void> generateDeferred() {
+	public @NotNull DeferredObject<IBaseEvaFunction, Void, Void> generateDeferred() {
 		return generateDeferred;
 	}
 
@@ -71,7 +71,7 @@ public class FunctionInvocation implements IInvocation {
 		throw new IllegalStateException("Error");
 	}
 
-	public Promise<BaseEvaFunction, Void, Void> generatePromise() {
+	public Promise<IBaseEvaFunction, Void, Void> generatePromise() {
 		return generateDeferred.promise();
 	}
 
@@ -89,7 +89,7 @@ public class FunctionInvocation implements IInvocation {
 		classInvocation = aClassInvocation;
 	}
 
-	public @Nullable BaseEvaFunction getEva() {
+	public @Nullable IBaseEvaFunction getEva() {
 		return null; // TODO 04/15
 	}
 
@@ -97,15 +97,15 @@ public class FunctionInvocation implements IInvocation {
 		return fd;
 	}
 
-	public @Nullable BaseEvaFunction getGenerated() {
+	public @Nullable IBaseEvaFunction getGenerated() {
 		return _generated;
 	}
 
-	public void setGenerated(BaseEvaFunction aGeneratedFunction) {
+	public void setGenerated(IBaseEvaFunction aGeneratedFunction) {
 		_generated = aGeneratedFunction;
 		_p_generated.resolve(aGeneratedFunction);
 	}
-	public void onGenerated(DoneCallback<BaseEvaFunction> cb) {
+	public void onGenerated(DoneCallback<IBaseEvaFunction> cb) {
 		_p_generated.then(cb);
 	}
 
@@ -122,10 +122,10 @@ public class FunctionInvocation implements IInvocation {
 		throw new IllegalStateException("maybe this shouldn't be done?");
 	}
 
-	public Eventual<BaseEvaFunction> makeGenerated__Eventual(final @NotNull Deduce_CreationClosure cl, final EventualRegister register) {
+	public Eventual<IBaseEvaFunction> makeGenerated__Eventual(final @NotNull Deduce_CreationClosure cl, final EventualRegister register) {
 		final DeduceTypes2 deduceTypes2 = cl.deduceTypes2();
 
-		final Eventual<BaseEvaFunction> eef = new Eventual<>();
+		final Eventual<IBaseEvaFunction> eef = new Eventual<>();
 
 		if (register != null) {
 			eef.register(register);
@@ -158,28 +158,28 @@ public class FunctionInvocation implements IInvocation {
 	}
 
 	@NotNull
-	private BaseEvaFunction xxx___forDefaultVirtualCtor(final Deduce_CreationClosure cl,
+	private tripleo.elijah.stages.gen_fn.IBaseEvaFunction xxx___forDefaultVirtualCtor(final Deduce_CreationClosure cl,
 														final DeduceTypes2.@NotNull DeduceTypes2Injector injector,
 														final @NotNull OS_Module module) {
 		@NotNull WlGenerateDefaultCtor wlgdc = injector.new_WlGenerateDefaultCtor(module, this, cl);
 		wlgdc.run(null);
-		BaseEvaFunction gf = wlgdc.getResult();
+		tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf = wlgdc.getResult();
 		return gf;
 	}
 
 	@NotNull
-	private BaseEvaFunction xxxForConstructorDef(final Deduce_CreationClosure cl,
+	private tripleo.elijah.stages.gen_fn.IBaseEvaFunction xxxForConstructorDef(final Deduce_CreationClosure cl,
 												 final @NotNull ConstructorDef cd,
 												 final DeduceTypes2.@NotNull DeduceTypes2Injector injector,
 												 final @NotNull OS_Module module) {
 		@NotNull WlGenerateCtor wlgf = injector.new_WlGenerateCtor(module, cd.getNameNode(), this, cl);
 		wlgf.run(null);
-		BaseEvaFunction gf = wlgf.getResult();
+		tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf = wlgf.getResult();
 		return gf;
 	}
 
 	@NotNull
-	private BaseEvaFunction xxx__forFunction(final @NotNull Deduce_CreationClosure cl,
+	private tripleo.elijah.stages.gen_fn.IBaseEvaFunction xxx__forFunction(final @NotNull Deduce_CreationClosure cl,
 											 final DeduceTypes2.@NotNull DeduceTypes2Injector injector,
 											 final @NotNull OS_Module module) {
 

@@ -49,7 +49,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 	private final @NotNull ElLog        LOG;
 	private final          DeducePhase  phase;
 	Context ectx;
-	private final @NotNull BaseEvaFunction generatedFunction;
+	private final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 	@Nullable              OS_Element      el = null;
 
 	/* @requires idte2.type.getAttached() != null; */
@@ -89,7 +89,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 	public Resolve_Ident_IA2(final DeduceTypes2 aDeduceTypes2,
 							 ErrSink aErrSink,
 							 DeducePhase aPhase,
-							 @NotNull BaseEvaFunction aGeneratedFunction,
+							 @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction,
 							 @NotNull FoundElement aFoundElement) {
 		deduceTypes2      = aDeduceTypes2;
 		errSink           = aErrSink;
@@ -102,70 +102,98 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 
 	//record
 
-	private @NotNull RIA_STATE ia2_IdentIA(@NotNull IdentIA ia2, @NotNull Context ectx) {
-		final @NotNull IdentTableEntry idte2 = ia2.getEntry();
-		final String                   text  = idte2.getIdent().getText();
+	private void __inner(final @NotNull Context ctx,
+						 final @Nullable IdentIA identIA,
+						 @Nullable List<InstructionArgument> s) {
+		boolean found = false;
+		try {
+			el   = null;
+			ectx = ctx;
 
-		if (idte2.getStatus() == BaseTableEntry.Status.KNOWN) {
-			el = idte2.getResolvedElement();
-			//assert el != null;
-			if (el == null) {
-				if (idte2.get_ident() != null) {
-					var ident = idte2.get_ident();
+			if (identIA == null) {
+				if (s == null) {
+					throw new AssertionError();
+				}
+			}
 
-					if (ident.getNode() != null) {
-						BaseEvaFunction evaFunction = ident.getNode();
-						el = evaFunction.getFD();
+			if (s == null) {
+				s = GenFnU._getIdentIAPathList(identIA);
+			}
+
+			if (identIA != null) {
+				DeducePath          dp    = identIA.getEntry().buildDeducePath(generatedFunction);
+				int                 index = dp.size() - 1;
+				InstructionArgument ia2   = dp.getIA(index);
+				// ia2 is not == equals to identIA, but functionally equivalent
+				if (ia2 instanceof IdentIA) {
+					final @NotNull IdentTableEntry ite = ((IdentIA) ia2).getEntry();
+					if (ite.getBacklink() != null) {
+						InstructionArgument backlink = ite.getBacklink();
+						if (backlink instanceof final @NotNull IntegerIA integerIA) {
+							@NotNull VariableTableEntry                    vte = integerIA.getEntry();
+							final DeduceTypes2.PromiseExpectation<GenType> pe  = deduceTypes2.promiseExpectation(vte, "TypePromise for vte " + vte);
+							final Eventual<DeduceTypes2.PromiseExpectation<GenType>> pev = deduceTypes2._phase().new_Eventual();
+							vte.typePromise().then(result -> {
+								pe.satisfy(result);
+								pev.resolve(pe);
+								switch (result.getResolved().getType()) {
+								case FUNCTION -> ectx = result.getResolved().getElement().getContext();
+								case USER_CLASS -> ectx = result.getResolved().getClassOf().getContext();
+								default ->
+										throw new IllegalStateException("Unexpected value: " + result.getResolved().getType());
+								}
+								ia2_IdentIA((IdentIA) ia2, ectx);
+								foundElement.doFoundElement(el);
+							});
+						} else if (backlink instanceof IdentIA) {
+							dp.getElementPromise(index, result -> {
+								el   = result;
+								ectx = result.getContext();
+								ia2_IdentIA((IdentIA) ia2, ectx);
+								foundElement.doFoundElement(el);
+							}, result -> foundElement.doNoFoundElement());
+							dp.getElementPromise(index - 1, result -> {
+								ia2_IdentIA((IdentIA) dp.getIA(index - 1), result.getContext()); // might fail
+							}, null);
+
+						}
+					} else {
+						if (!ite.hasResolvedElement()) {
+							ia2_IdentIA((IdentIA) ia2, ectx);
+							foundElement.doFoundElement(el);
+						}
 					}
 				}
-			}
-		} else {
-			final LookupResultList lrl = ectx.lookup(text);
-			el = lrl.chooseBest(null);
-
-			DeduceElement3_IdentTableEntry de3_idte2 = idte2.getDeduceElement3(deduceTypes2, generatedFunction);
-			DR_Ident                       drIdent      = de3_idte2.getDR();
-
-			drIdent.resolve();
-
-
-
-			if (el == null) {
-				errSink.reportDiagnostic(deduceTypes2._inj().new_ResolveError(idte2.getIdent(), lrl));
-//				errSink.reportError("1007 Can't resolve " + text);
-				foundElement.doNoFoundElement();
-				return RIA_STATE.RETURN;
+	//			el = dp.getElement(dp.size()-1);
 			} else {
-				drIdent.addUnderstanding(new DR_Ident.ElementUnderstanding(el));
-				drIdent.addUnderstanding(new ENU_LookupResult(lrl));
-			}
-		}
+				for (InstructionArgument ia2 : s) {
+					if (ia2 instanceof IntegerIA) {
+						ia2_IntegerIA((IntegerIA) ia2, ectx);
+					} else if (ia2 instanceof IdentIA) {
+						@NotNull RIA_STATE st = ia2_IdentIA((IdentIA) ia2, ectx);
 
-		if (!idte2.hasResolvedElement()) {
-			idte2.setStatus(BaseTableEntry.Status.KNOWN, deduceTypes2._inj().new_GenericElementHolder(el));
-		}
-		if (idte2.type == null) {
-			if (el instanceof @NotNull final VariableStatementImpl vs) {
-				var op = ia2_IdentIA_VariableStatement(idte2, vs, ectx);
-				if (op.mode() == Mode.FAILURE) {
-					return RIA_STATE.RETURN;
+						switch (st) {
+						case CONTINUE:
+							continue;
+						case NEXT:
+							break;
+						case RETURN:
+							return;
+						}
+					} else if (ia2 instanceof ProcIA) {
+						LOG.err("1373 ProcIA");
+	//						@NotNull ProcTableEntry pte = ((ProcIA) ia2).getEntry(); // README ectx seems to be set up already
+						return;
+					} else
+						throw new NotImplementedException();
 				}
-			} else if (el instanceof FunctionDef) {
-				ia2_IdentIA_FunctionDef(idte2);
+				foundElement.doFoundElement(el);
+			}
+		} finally {
+			if (found == false) {
+				foundElement.noFoundElement();
 			}
 		}
-		if (idte2.type != null) {
-			//assert idte2.type.getAttached() != null;
-			if (idte2.type.getAttached() == null) {
-				return RIA_STATE.CONTINUE; // FIXME/TODO 06/19
-			}
-			if (findResolved(idte2, ectx)) return RIA_STATE.CONTINUE;
-		} else {
-//			throw new IllegalStateException("who knows");
-			errSink.reportWarning("2010 idte2.type == null for " + text);
-		}
-
-		return RIA_STATE.NEXT;
 	}
 
 	private Operation2<Ok> ia2_IdentIA_VariableStatement(@NotNull IdentTableEntry idte, @NotNull VariableStatementImpl vs, @NotNull Context ctx) {
@@ -252,6 +280,77 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 		return deduceTypes2._inj();
 	}
 
+	private @NotNull RIA_STATE ia2_IdentIA(@NotNull IdentIA ia2, @NotNull Context ectx) {
+		final @NotNull IdentTableEntry idte2 = ia2.getEntry();
+		final String                   text  = idte2.getIdent().getText();
+
+		if (idte2.getStatus() == BaseTableEntry.Status.KNOWN) {
+			el = idte2.getResolvedElement();
+			//assert el != null;
+			if (el == null) {
+				if (idte2.get_ident() != null) {
+					var ident = idte2.get_ident();
+
+					if (ident.getNode() != null) {
+						tripleo.elijah.stages.gen_fn.IBaseEvaFunction evaFunction = ident.getNode();
+						el = evaFunction.getFD();
+					}
+				}
+			}
+		} else {
+			final LookupResultList lrl = ectx.lookup(text);
+			el = lrl.chooseBest(null);
+
+			DeduceElement3_IdentTableEntry de3_idte2 = idte2.getDeduceElement3(deduceTypes2, generatedFunction);
+			DR_Ident                       drIdent      = de3_idte2.getDR();
+
+			drIdent.resolve();
+
+
+
+			if (el == null) {
+				errSink.reportDiagnostic(deduceTypes2._inj().new_ResolveError(idte2.getIdent(), lrl));
+//				errSink.reportError("1007 Can't resolve " + text);
+				foundElement.doNoFoundElement();
+				return RIA_STATE.RETURN;
+			} else {
+				drIdent.addUnderstanding(new DR_Ident.ElementUnderstanding(el));
+				drIdent.addUnderstanding(new ENU_LookupResult(lrl));
+			}
+		}
+
+		if (!idte2.hasResolvedElement()) {
+			idte2.setStatus(BaseTableEntry.Status.KNOWN, deduceTypes2._inj().new_GenericElementHolder(el));
+		}
+		if (idte2.type == null) {
+			if (el instanceof @NotNull final VariableStatementImpl vs) {
+				var op = ia2_IdentIA_VariableStatement(idte2, vs, ectx);
+				if (op.mode() == Mode.FAILURE) {
+					return RIA_STATE.RETURN;
+				}
+			} else if (el instanceof FunctionDef) {
+				ia2_IdentIA_FunctionDef(idte2);
+			}
+		}
+		if (idte2.type != null) {
+			//assert idte2.type.getAttached() != null;
+			if (idte2.type.getAttached() == null) {
+				return RIA_STATE.CONTINUE; // FIXME/TODO 06/19
+			}
+			if (findResolved(idte2, ectx)) return RIA_STATE.CONTINUE;
+		} else {
+//			throw new IllegalStateException("who knows");
+			errSink.reportWarning("2010 idte2.type == null for " + text);
+		}
+
+		return RIA_STATE.NEXT;
+	}
+
+	public void resolveIdentIA2_(final @NotNull Context ctx, final @Nullable IdentIA identIA, final @Nullable List<InstructionArgument> s) {
+		__inner(ctx, identIA, s);
+		checkFinishEventuals();
+	}
+
 	private void ia2_IdentIA_FunctionDef(@NotNull IdentTableEntry idte2) {
 		@Nullable OS_Type       attached = _inj().new_OS_UnknownType(el);
 		@NotNull TypeTableEntry tte      = generatedFunction.newTypeTableEntry(TypeTableEntry.Type.TRANSIENT, attached, null, idte2);
@@ -317,9 +416,9 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 				pte.setFunctionInvocation(fi);
 			}
 
-			pte.getFunctionInvocation().generatePromise().then(new DoneCallback<BaseEvaFunction>() {
+			pte.getFunctionInvocation().generatePromise().then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
 				@Override
-				public void onDone(@NotNull BaseEvaFunction result) {
+				public void onDone(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction result) {
 					result.typePromise().then(new DoneCallback<GenType>() {
 						@Override
 						public void onDone(GenType result) {
@@ -329,105 +428,6 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 					});
 				}
 			});
-		}
-	}
-
-	public void resolveIdentIA2_(final @NotNull Context ctx, final @Nullable IdentIA identIA, final @Nullable List<InstructionArgument> s) {
-		__inner(ctx, identIA, s);
-		checkFinishEventuals();
-	}
-
-	private void __inner(final @NotNull Context ctx,
-						 final @Nullable IdentIA identIA,
-						 @Nullable List<InstructionArgument> s) {
-		boolean found = false;
-		try {
-			el   = null;
-			ectx = ctx;
-
-			if (identIA == null) {
-				if (s == null) {
-					throw new AssertionError();
-				}
-			}
-
-			if (s == null) {
-				s = BaseEvaFunction._getIdentIAPathList(identIA);
-			}
-
-			if (identIA != null) {
-				DeducePath          dp    = identIA.getEntry().buildDeducePath(generatedFunction);
-				int                 index = dp.size() - 1;
-				InstructionArgument ia2   = dp.getIA(index);
-				// ia2 is not == equals to identIA, but functionally equivalent
-				if (ia2 instanceof IdentIA) {
-					final @NotNull IdentTableEntry ite = ((IdentIA) ia2).getEntry();
-					if (ite.getBacklink() != null) {
-						InstructionArgument backlink = ite.getBacklink();
-						if (backlink instanceof final @NotNull IntegerIA integerIA) {
-							@NotNull VariableTableEntry                    vte = integerIA.getEntry();
-							final DeduceTypes2.PromiseExpectation<GenType> pe  = deduceTypes2.promiseExpectation(vte, "TypePromise for vte " + vte);
-							final Eventual<DeduceTypes2.PromiseExpectation<GenType>> pev = deduceTypes2._phase().new_Eventual();
-							vte.typePromise().then(result -> {
-								pe.satisfy(result);
-								pev.resolve(pe);
-								switch (result.getResolved().getType()) {
-								case FUNCTION -> ectx = result.getResolved().getElement().getContext();
-								case USER_CLASS -> ectx = result.getResolved().getClassOf().getContext();
-								default ->
-										throw new IllegalStateException("Unexpected value: " + result.getResolved().getType());
-								}
-								ia2_IdentIA((IdentIA) ia2, ectx);
-								foundElement.doFoundElement(el);
-							});
-						} else if (backlink instanceof IdentIA) {
-							dp.getElementPromise(index, result -> {
-								el   = result;
-								ectx = result.getContext();
-								ia2_IdentIA((IdentIA) ia2, ectx);
-								foundElement.doFoundElement(el);
-							}, result -> foundElement.doNoFoundElement());
-							dp.getElementPromise(index - 1, result -> {
-								ia2_IdentIA((IdentIA) dp.getIA(index - 1), result.getContext()); // might fail
-							}, null);
-
-						}
-					} else {
-						if (!ite.hasResolvedElement()) {
-							ia2_IdentIA((IdentIA) ia2, ectx);
-							foundElement.doFoundElement(el);
-						}
-					}
-				}
-	//			el = dp.getElement(dp.size()-1);
-			} else {
-				for (InstructionArgument ia2 : s) {
-					if (ia2 instanceof IntegerIA) {
-						ia2_IntegerIA((IntegerIA) ia2, ectx);
-					} else if (ia2 instanceof IdentIA) {
-						@NotNull RIA_STATE st = ia2_IdentIA((IdentIA) ia2, ectx);
-
-						switch (st) {
-						case CONTINUE:
-							continue;
-						case NEXT:
-							break;
-						case RETURN:
-							return;
-						}
-					} else if (ia2 instanceof ProcIA) {
-						LOG.err("1373 ProcIA");
-	//						@NotNull ProcTableEntry pte = ((ProcIA) ia2).getEntry(); // README ectx seems to be set up already
-						return;
-					} else
-						throw new NotImplementedException();
-				}
-				foundElement.doFoundElement(el);
-			}
-		} finally {
-			if (found == false) {
-				foundElement.noFoundElement();
-			}
 		}
 	}
 
@@ -620,7 +620,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 		}
 
 		@Override
-		public void accept(final BaseEvaFunction gf) {
+		public void accept(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf) {
 			// README 12/24 this will trigger when new functionality is implemented
 			//  Either you are going the right way
 			//  you changed the design
@@ -638,7 +638,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 		}
 
 		@Override
-		public BaseEvaFunction generatedFunction() {
+		public tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction() {
 			return generatedFunction;
 		}
 	}

@@ -46,7 +46,7 @@ public class Resolve_Ident_IA {
 	private final @NotNull ErrSink                    errSink;
 	private final @NotNull DeduceTypes2.DeduceClient3 dc;
 	private final @NotNull FoundElement               foundElement;
-	private final          BaseEvaFunction            generatedFunction;
+	private final          tripleo.elijah.stages.gen_fn.IBaseEvaFunction            generatedFunction;
 	private final @NotNull IdentIA                    identIA;
 	private final @NotNull ElLog                      LOG;
 	private final @NotNull DeducePhase                phase;
@@ -57,7 +57,7 @@ public class Resolve_Ident_IA {
 	public Resolve_Ident_IA(final DeduceTypes2.@NotNull DeduceClient3 aDeduceClient3,
 							final @NotNull Context aContext,
 							final DeduceElementIdent aDei,
-							final BaseEvaFunction aGeneratedFunction,
+							final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction,
 							final @NotNull FoundElement aFoundElement,
 							final @NotNull ErrSink aErrSink) {
 		dc       = aDeduceClient3;
@@ -79,7 +79,7 @@ public class Resolve_Ident_IA {
 	public Resolve_Ident_IA(final @NotNull DeduceTypes2.DeduceClient3 aDeduceClient3,
 							final @NotNull Context aContext,
 							final @NotNull IdentIA aIdentIA,
-							final @NotNull BaseEvaFunction aGeneratedFunction,
+							final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction,
 							final @NotNull FoundElement aFoundElement,
 							final @NotNull ErrSink aErrSink) {
 		dc                = aDeduceClient3;
@@ -106,7 +106,7 @@ public class Resolve_Ident_IA {
 
 			SimplePrintLoggerToRemoveSoon.println_out_2("  70 " + el2);
 
-			final @NotNull List<InstructionArgument> s = BaseEvaFunction._getIdentIAPathList(identIA);
+			final @NotNull List<InstructionArgument> s = GenFnU._getIdentIAPathList(identIA);
 
 			ectx = context;
 			el   = null;
@@ -162,7 +162,7 @@ public class Resolve_Ident_IA {
 		var dt2 = dc.deduceTypes2;
 
 
-		final var    normal_path1 = BaseEvaFunction._getIdentIAResolvableList(identIA);
+		final var    normal_path1 = GenFnU._getIdentIAResolvableList(identIA);
 		final String normal_path  = generatedFunction.getIdentIAPathNormal(identIA);
 		if (s.size() > 1) {
 			InstructionArgument x = s.get(s.size() - 1);
@@ -469,14 +469,11 @@ public class Resolve_Ident_IA {
 			FunctionInvocation fi = pte.getFunctionInvocation();
 			ClassInvocation    ci = fi.getClassInvocation();
 			if (fi.getFunction() instanceof ConstructorDef) {
-				@NotNull GenType genType = dt2._inj().new_GenTypeImpl(ci.getKlass());
+				final @NotNull GenType genType = dt2._inj().new_GenTypeImpl(ci.getKlass());
+
 				genType.setCi(ci);
-				ci. onResolve(new DoneCallback<IEvaClass>() {
-					@Override
-					public void onDone(EvaClass result) {
-						genType.setNode(result);
-					}
-				} );
+				ci. onResolve(genType::setNode);
+
 				final @NotNull WorkList          wl                = dt2._inj().new_WorkList();
 				final @NotNull OS_Module         module            = ci.getKlass().getContext().module();
 				final @NotNull GenerateFunctions generateFunctions = dc.getGenerateFunctions(module);
@@ -605,12 +602,7 @@ public class Resolve_Ident_IA {
 		if (fi.getFunction() instanceof ConstructorDef) {
 			@NotNull GenType genType = dt2._inj().new_GenTypeImpl(ci.getKlass());
 			genType.setCi(ci);
-			ci. onResolve(new DoneCallback<IEvaClass>() {
-				@Override
-				public void onDone(EvaClass result) {
-					genType.setNode(result);
-				}
-			} );
+			ci. onResolve(genType::setNode);
 			generatedFunction.addDependentType(genType);
 			generatedFunction.addDependentFunction(fi);
 		} else
@@ -642,7 +634,7 @@ public class Resolve_Ident_IA {
 		private final Eventual<OS_Element> _p_resolvedElementPromise;
 		private final IdentTableEntry      identTableEntry;
 		private       Context              context;
-		private       BaseEvaFunction      generatedFunction;
+		private       tripleo.elijah.stages.gen_fn.IBaseEvaFunction      generatedFunction;
 		private       DeduceTypes2         deduceTypes2;
 
 		public DeduceElementIdent(final IdentTableEntry aIdentTableEntry) {
@@ -754,7 +746,7 @@ public class Resolve_Ident_IA {
 			return _p_resolvedElementPromise;
 		}
 
-		public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final @NotNull BaseEvaFunction aGeneratedFunction) {
+		public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 			deduceTypes2      = aDeduceTypes2;
 			context           = aContext;
 			generatedFunction = aGeneratedFunction;
@@ -792,7 +784,7 @@ public class Resolve_Ident_IA {
 			y            = aY;
 			foundElement = aFoundElement;
 
-			normal_path1 = BaseEvaFunction._getIdentIAResolvableList(identIA);
+			normal_path1 = GenFnU._getIdentIAResolvableList(identIA);
 			normal_path  = generatedFunction.getIdentIAPathNormal(identIA);
 		}
 

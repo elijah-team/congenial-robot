@@ -72,7 +72,7 @@ public class GI_ProcIA implements GenerateC_Item {
 	}
 
 	public String getAssignmentValue(final @NotNull Instruction aInstruction, final @NotNull GenerateC gc) {
-		final BaseEvaFunction gf     = carrier.generatedFunction();
+		final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf     = carrier.generatedFunction();
 		final ClassInvocation clsinv = carrier.getEntry().getClassInvocation();
 
 		//return gc.getAssignmentValue(gf.getSelf(), aInstruction, clsinv, gf);
@@ -113,7 +113,7 @@ public class GI_ProcIA implements GenerateC_Item {
 		}
 
 		/*final*/
-		BaseEvaFunction                     generated = fi.getGenerated();
+		tripleo.elijah.stages.gen_fn.IBaseEvaFunction                     generated = fi.getGenerated();
 		final DeduceElement3_ProcTableEntry de_pte    = (DeduceElement3_ProcTableEntry) pte.getDeduceElement3();
 
 		if (generated == null) {

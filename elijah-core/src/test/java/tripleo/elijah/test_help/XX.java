@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.lang.types.OS_UserType;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.stages.gen_fn.GenTypeImpl;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
@@ -18,7 +18,7 @@ public class XX {
 	}
 
 	public @NotNull TypeTableEntry regularTypeName_specifyTableEntry(final @NotNull IdentExpression aIdentExpression,
-																	 final @NotNull BaseEvaFunction aBaseGeneratedFunction,
+																	 final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aBaseGeneratedFunction,
 																	 final @NotNull String aTypeName) {
 		final RegularTypeName typeName = RegularTypeName.makeWithStringTypeName(aTypeName);
 		final OS_Type         type     = new OS_UserType(typeName);

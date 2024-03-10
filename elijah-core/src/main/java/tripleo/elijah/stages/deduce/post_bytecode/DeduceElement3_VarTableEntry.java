@@ -178,7 +178,7 @@ public class DeduceElement3_VarTableEntry implements IDeduceElement3 {
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		throw new NotImplementedException();
 		//return null;
 	}

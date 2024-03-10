@@ -181,7 +181,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 	}
 
 	public @NotNull IDeduceElement3 getDeduceElement3(final @NotNull DeduceTypes2 aDeduceTypes2,
-													  final @NotNull BaseEvaFunction aGeneratedFunction) {
+													  final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		if (_de3 == null) {
 			Preconditions.checkNotNull(aDeduceTypes2);
 			_de3 = new DeduceElement3_ProcTableEntry(this, aDeduceTypes2, aGeneratedFunction);
@@ -243,7 +243,7 @@ public class ProcTableEntry extends BaseTableEntry implements TableEntryIV {
 		_p_onFunctionInvocations.then(callback);
 	}
 
-	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final BaseEvaFunction aGeneratedFunction, final ErrSink aErrSink) {
+	public void setDeduceTypes2(final DeduceTypes2 aDeduceTypes2, final Context aContext, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, final ErrSink aErrSink) {
 		dpc.setDeduceTypes2(aDeduceTypes2, aContext, aGeneratedFunction, aErrSink);
 	}
 

@@ -18,18 +18,18 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class CRI_Ident {
-	private final BaseEvaFunction generatedFunction;
+	private final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction;
 
-	@Contract(value = "_, _ -> new", pure = true)
-	public static @NotNull CRI_Ident of(final IdentTableEntry aIdte, final BaseEvaFunction aGf) {
-		return new CRI_Ident(aIdte, aGf);
+	public CRI_Ident(final IdentTableEntry aIdte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
+		ite               = aIdte;
+		generatedFunction = aGf;
 	}
 
 	private final IdentTableEntry ite;
 
-	public CRI_Ident(final IdentTableEntry aIdte, final BaseEvaFunction aGf) {
-		ite               = aIdte;
-		generatedFunction = aGf;
+	@Contract(value = "_, _ -> new", pure = true)
+	public static @NotNull CRI_Ident of(final IdentTableEntry aIdte, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
+		return new CRI_Ident(aIdte, aGf);
 	}
 
 	boolean _getIdentIAPath_IdentIAHelper(final InstructionArgument ia_next,
@@ -37,7 +37,7 @@ public class CRI_Ident {
 										  final int i,
 										  final int sSize,
 										  final OS_Element resolved_element,
-										  final BaseEvaFunction generatedFunction,
+										  final tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 										  final EvaNode aResolved,
 										  final String aValue, final CReference aCReference) {
 		return new CReference_getIdentIAPath_IdentIAHelper(ia_next, sl, i, sSize, resolved_element, generatedFunction, aResolved, aValue).action(this, aCReference);

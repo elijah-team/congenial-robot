@@ -1,6 +1,8 @@
 package tripleo.elijah_congenial.deduce.umbrella;
 
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+
+import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
+//import tripleo.elijah_congenial.deduce.umbrella.DS_Base;
 import tripleo.elijah_congenial.deduce.umbrella.DS_Base;
 
 /**
@@ -11,5 +13,5 @@ import tripleo.elijah_congenial.deduce.umbrella.DS_Base;
  * {@code #generatedFunction} is the function in which the name is being looked up from
  */
 public interface DS_Rider {
-	BaseEvaFunction generatedFunction();
+	IBaseEvaFunction generatedFunction();
 }

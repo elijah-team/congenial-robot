@@ -37,7 +37,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	public static final int                 __makeGenerated_fi__Eventual__TYPERESOLVE_VAR = 336;
 	public final        IdentTableEntry     principal;
 	public              DeduceTypes2        deduceTypes2;
-	public              BaseEvaFunction     generatedFunction;
+	public              IBaseEvaFunction     generatedFunction;
 	private             GenType             _resolved;
 	private final       DeduceElement3_Type _type                                         = new DeduceElement3_Type() {
 
@@ -161,7 +161,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	@Override
-	public BaseEvaFunction generatedFunction() {
+	public IBaseEvaFunction generatedFunction() {
 		return generatedFunction;
 	}
 
@@ -255,7 +255,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 	}
 
-	public void setDeduceTypes(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+	public void setDeduceTypes(final DeduceTypes2 aDeduceTypes2, final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction) {
 		assert principal.get__gf() != null;
 		assert principal._deduceTypes2() != null;
 
@@ -326,7 +326,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			@NotNull final ProcTableEntry callable = principal.getCallablePTE();
 
 			DeduceTypes2    dt2 = callable._deduceTypes2();
-			BaseEvaFunction gf  = callable.get__gf();
+			tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf  = callable.get__gf();
 
 			if (dt2 == null) dt2 = principal._deduceTypes2();
 			if (gf == null) gf = principal._generatedFunction();
@@ -460,7 +460,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		}
 	}
 
-	private void __makeGenerated_fi__Eventual(final BaseEvaFunction gf, final DR_Ident b) {
+	private void __makeGenerated_fi__Eventual(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction gf, final DR_Ident b) {
 		printString(__makeGenerated_fi__Eventual_ENTER, "" + gf);
 
 		InstructionArgument ret = (gf.vte_lookup("Result"));
@@ -563,7 +563,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 		return _type;
 	}
 
-	public void dan(final @NotNull BaseEvaFunction generatedFunction,
+	public void dan(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
 					final @NotNull Instruction instruction,
 					final @NotNull Context aContext,
 					final @NotNull VariableTableEntry vte,
