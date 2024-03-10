@@ -11,12 +11,7 @@ import tripleo.elijah.stages.gen_c.WhyNotGarish_Constructor;
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Function;
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Item;
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Namespace;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaConstructor;
-import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.stages.gen_fn.EvaNode;
-import tripleo.elijah.stages.gen_fn.IEvaFunctionBase;
+import tripleo.elijah.stages.gen_fn.*;
 
 @SuppressWarnings("all")
 public abstract class _GenerateC_T {
@@ -55,7 +50,7 @@ public abstract class _GenerateC_T {
     return ncf;
   }
 
-  public WhyNotGarish_Class a_lookup(final EvaClass aGc) {
+  public WhyNotGarish_Class a_lookup(final IEvaClass aGc) {
     boolean _containsKey = this.a_directory.containsKey(aGc);
     if (_containsKey) {
       WhyNotGarish_Item _get = this.a_directory.get(aGc);

@@ -1,0 +1,27 @@
+[In Code] References to 'EvaClass' to be replaced with references to 'IEvaClass' (107 references in 54 files) in   103 results
+  tripleo.elijah.comp   2 results
+    Coder   1 result
+      setClassmapNodeCodes(Map<ClassStatement, EvaClass>, OS_Module)   1 result
+        84 private void setClassmapNodeCodes(@NotNull final Map<ClassStatement, EvaClass> aClassMap, final OS_Module mod) {
+    EvaPipeline.EvaPipelineImpl_PipelineAccessImpl   1 result
+  tripleo.elijah.comp.i   2 results
+  tripleo.elijah.nextgen.output   2 results
+  tripleo.elijah.nextgen.rosetta   1 result
+  tripleo.elijah.stages.deduce   26 results
+  tripleo.elijah.stages.deduce.post_bytecode   7 results
+  tripleo.elijah.stages.deduce.tastic   1 result
+  tripleo.elijah.stages.garish   2 results
+  tripleo.elijah.stages.gen_c   20 results
+  tripleo.elijah.stages.gen_c.c_ast1   1 result
+  tripleo.elijah.stages.gen_c.internal_t   1 result
+  tripleo.elijah.stages.gen_c.statements   1 result
+  tripleo.elijah.stages.gen_fn   18 results
+  tripleo.elijah.stages.gen_fn_r   1 result
+  tripleo.elijah.stages.gen_generic   3 results
+  tripleo.elijah.stages.generate   6 results
+  tripleo.elijah.stages.pp   1 result
+  tripleo.elijah.world.impl   1 result
+  tripleo.elijah_congenial.deduce   2 results
+  tripleo.elijah_congenial.deduce.t   1 result
+  tripleo.elijah_congenial.pipelines.comp_runner   3 results
+  tripleo.elijah_congenial.pipelines.eva   1 result
