@@ -30,10 +30,10 @@ jobs:
 
       - name: Run tests as per instructions in README
 #        run: mvn test
-        run: nix-shell -p jdk17 maven --pure --command "mvn test" # "clean"
+        run: nix-shell -p jdk17_headless maven --pure --command "mvn test" # "clean"
 
 #      - name: Pacakge for deployment
-#        run: nix-shell -p jdk17 maven --pure --command "mvn -B package --file pom.xml"
+#        run: nix-shell -p jdk17_headless maven --pure --command "mvn -B package --file pom.xml"
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #      - name: Update dependency graph
