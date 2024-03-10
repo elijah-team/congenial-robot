@@ -9,7 +9,7 @@ import tripleo.elijah.stages.gen_c.WhyNotGarish_Constructor
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Function
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Item
 import tripleo.elijah.stages.gen_c.WhyNotGarish_Namespace
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction
+import tripleo.elijah.stages.gen_fn.tripleo.elijah.stages.gen_fn.IBaseEvaFunction
 import tripleo.elijah.stages.gen_fn.EvaClass
 import tripleo.elijah.stages.gen_fn.EvaConstructor
 import tripleo.elijah.stages.gen_fn.EvaNamespace
@@ -33,7 +33,7 @@ abstract class _GenerateC_T {
 	  return ncc1907;
 	}
 
-	def WhyNotGarish_Function a_lookup(/*final*/ BaseEvaFunction aGf) {
+	def WhyNotGarish_Function a_lookup(/*final*/ tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
 	  if (a_directory.containsKey(aGf)) {
 		return a_directory.get(aGf) as WhyNotGarish_Function;
 	  }
@@ -67,6 +67,6 @@ abstract class _GenerateC_T {
 	def GenerateC _this()
 
 	def WhyNotGarish_Function a_lookup(/*final*/ DeducedBaseEvaFunction aGf) {
-	  return a_lookup(aGf.getCarrier() as BaseEvaFunction);
+	  return a_lookup(aGf.getCarrier() as tripleo.elijah.stages.gen_fn.IBaseEvaFunction);
 	}
 }
