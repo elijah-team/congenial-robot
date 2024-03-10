@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputtree.EOT_FileNameProvider;
 import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.generate.OutputStrategyC;
 import tripleo.elijah.util.BufferTabbedOutputStream;
@@ -19,7 +19,7 @@ public class NG_OutputClass implements NG_OutputItem {
 
 	@Override
 	public @NotNull List<NG_OutputStatement> getOutputs() {
-		final EvaClass x = garishClass.getLiving().evaNode();
+		final IEvaClass x = garishClass.getLiving().evaNode();
 
 		final BufferTabbedOutputStream tos = garishClass.getClassBuffer(generateC);
 
@@ -34,7 +34,7 @@ public class NG_OutputClass implements NG_OutputItem {
 
 	@Override
 	public EOT_FileNameProvider outName(final @NotNull OutputStrategyC aOutputStrategyC, final GenerateResult.@NotNull TY ty) {
-		final EvaClass x = garishClass.getLiving().evaNode();
+		final IEvaClass x = garishClass.getLiving().evaNode();
 
 		return aOutputStrategyC.nameForClass1(x, ty);
 	}

@@ -12,8 +12,8 @@ import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.DeduceTypes2_TWO;
 import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions2;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_fn_r.GenerateEvaClassRequest;
 import tripleo.elijah.stages.gen_fn_r.GenerateEvaClassResponse;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
@@ -77,7 +77,7 @@ public class Rosetta {
 
 		@Override
 		public void apply() {
-			@NotNull EvaClass kl = new GenerateFunctions2(rq.getGenerateFunctions()).generateClass(rq.getClassStatement(), rq.getClassInvocation(), rq.getPassthruEnv());
+			@NotNull IEvaClass kl = new GenerateFunctions2(rq.getGenerateFunctions()).generateClass(rq.getClassStatement(), rq.getClassInvocation(), rq.getPassthruEnv());
 			rsp.getEvaClassPromise().resolve(kl);
 		}
 	}
