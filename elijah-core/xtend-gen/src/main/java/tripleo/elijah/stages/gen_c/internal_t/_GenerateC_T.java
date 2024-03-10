@@ -38,16 +38,9 @@ public abstract class _GenerateC_T {
     return ncc1907;
   }
 
-  public WhyNotGarish_Function a_lookup(final BaseEvaFunction aGf) {
-    boolean _containsKey = this.a_directory.containsKey(aGf);
-    if (_containsKey) {
-      WhyNotGarish_Item _get = this.a_directory.get(aGf);
-      return ((WhyNotGarish_Function) _get);
-    }
-    GenerateC __this = this._this();
-    WhyNotGarish_Function ncf = new WhyNotGarish_Function(aGf, __this);
-    this.a_directory.put(aGf, ncf);
-    return ncf;
+  public WhyNotGarish_Function a_lookup(final DeducedBaseEvaFunction aGf) {
+    IEvaFunctionBase _carrier = aGf.getCarrier();
+    return this.a_lookup(((tripleo.elijah.stages.gen_fn.IBaseEvaFunction) _carrier));
   }
 
   public WhyNotGarish_Class a_lookup(final IEvaClass aGc) {
@@ -76,8 +69,15 @@ public abstract class _GenerateC_T {
 
   public abstract GenerateC _this();
 
-  public WhyNotGarish_Function a_lookup(final DeducedBaseEvaFunction aGf) {
-    IEvaFunctionBase _carrier = aGf.getCarrier();
-    return this.a_lookup(((BaseEvaFunction) _carrier));
+  public WhyNotGarish_Function a_lookup(final tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGf) {
+    boolean _containsKey = this.a_directory.containsKey(aGf);
+    if (_containsKey) {
+      WhyNotGarish_Item _get = this.a_directory.get(aGf);
+      return ((WhyNotGarish_Function) _get);
+    }
+    GenerateC __this = this._this();
+    WhyNotGarish_Function ncf = new WhyNotGarish_Function(aGf, __this);
+    this.a_directory.put(aGf, ncf);
+    return ncf;
   }
 }
