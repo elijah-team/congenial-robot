@@ -14,6 +14,7 @@ import tripleo.elijah.lang.impl.OS_PackageImpl;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
+import tripleo.elijah.stages.gen_generic.IREvaClass;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.util.ObservableCompletableProcess;
 import tripleo.elijah.world.i.*;
@@ -31,7 +32,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	private                int      _packageCode  = 1;
 
 	@Override
-	public @NotNull DefaultLivingClass addClass(final IEvaClass aClass, final @NotNull Add addFlag) {
+	public @NotNull DefaultLivingClass addClass(final IREvaClass aClass, final @NotNull Add addFlag) {
 		switch (addFlag) {
 		case NONE -> {
 			if (aClass.getCode() == 0) {

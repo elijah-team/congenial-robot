@@ -7,6 +7,7 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
+import tripleo.elijah.stages.gen_generic.IREvaClass;
 import tripleo.elijah.world.i.LivingRepo;
 
 public class DefaultCodeRegistrar implements ICodeRegistrar {
@@ -17,12 +18,12 @@ public class DefaultCodeRegistrar implements ICodeRegistrar {
 	}
 
 	@Override
-	public void registerClass(final IEvaClass aClass) {
+	public void registerClass(final IREvaClass aClass) {
 		compilation.livingRepo().addClass(aClass, LivingRepo.Add.MAIN_CLASS);
 	}
 
 	@Override
-	public void registerClass1(final IEvaClass aClass) {
+	public void registerClass1(final IREvaClass aClass) {
 		compilation.livingRepo().addClass(aClass, LivingRepo.Add.NONE);
 	}
 

@@ -12,6 +12,7 @@ import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
+import tripleo.elijah.stages.gen_generic.IREvaClass;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.world.impl.DefaultLivingClass;
 import tripleo.elijah.world.impl.DefaultLivingFunction;
@@ -21,7 +22,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface LivingRepo {
-	DefaultLivingClass addClass(IEvaClass aClass, Add addFlag);
+	DefaultLivingClass addClass(IREvaClass aClass, Add addFlag);
 
 	LivingClass addClass(ClassStatement cs);
 

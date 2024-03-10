@@ -23,6 +23,7 @@ public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyR
 	@Override
 	OS_Element getElement();
 
+	@Override
 	ClassStatement getKlass();
 
 	@NotNull String getName();
@@ -33,8 +34,8 @@ public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyR
 		return false;
 	}
 
-	@Override
-	@NotNull Role getRole();
+	//@Override
+	//@NotNull Role getRole();
 
 	@Override
 	void register(@NotNull ICodeRegistrar aCr);
@@ -65,6 +66,7 @@ public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyR
 
 	void putConstructor(ConstructorDef aCd, EvaConstructor aGf);
 
+	@Override
 	void setLiving(LivingClass aLiving);
 
 	void singleGenerate(Class<?> aKey, Function<Void, Boolean> f);

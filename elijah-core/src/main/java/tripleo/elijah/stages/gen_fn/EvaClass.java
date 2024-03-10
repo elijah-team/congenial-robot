@@ -16,6 +16,10 @@ import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
 
+import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.util.ProgramMightBeWrongIfYouAreHere;
+import tripleo.elijah.UnintendedUseException;
+
 import tripleo.elijah.lang.i.AccessNotation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.ConstructorDef;
@@ -40,7 +44,6 @@ import tripleo.elijah.stages.gen_generic.CodeGenerator;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.world.i.LivingClass;
 
 /**
@@ -108,6 +111,12 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 	}
 
 	@Override
+	public IEvaClass getEvaClass() {
+		throw new ProgramMightBeWrongIfYouAreHere();
+		//return this;
+	}
+
+	@Override
 	@NotNull
 	public String getName() {
 		StringBuilder sb = new StringBuilder();
@@ -134,10 +143,10 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 		return getKlass().getName() + "_" + getCode();
 	}
 
-	@Override
-	public @NotNull Role getRole() {
-		return Role.CLASS;
-	}
+	//@Override
+	//public @NotNull Role getRole() {
+	//	return Role.CLASS;
+	//}
 
 	@Override
 	public void register(final @NotNull ICodeRegistrar aCr) {
