@@ -125,11 +125,11 @@ public class DeduceProcCall {
 			}
 			default -> {
 				if (element instanceof FunctionDef fd) {
-					invocation = _g_generatedFunction.fi;
+					invocation = _g_generatedFunction._fi();
 				} else {
-					IInvocation declaredInvocation = _g_generatedFunction.fi.getClassInvocation();
+					IInvocation declaredInvocation = _g_generatedFunction._fi().getClassInvocation();
 					if (declaredInvocation == null) {
-						declaredInvocation = _g_generatedFunction.fi.getNamespaceInvocation();
+						declaredInvocation = _g_generatedFunction._fi().getNamespaceInvocation();
 					}
 					if (aAnchorType == DeclAnchor.AnchorType.INHERITED) {
 						assert declaredInvocation instanceof ClassInvocation;

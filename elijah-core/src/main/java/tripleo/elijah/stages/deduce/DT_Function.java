@@ -30,23 +30,23 @@ public class DT_Function {
 	public void fix_tables() {
 		var evaFunction = generatedFunction;
 
-		for (VariableTableEntry variableTableEntry : evaFunction.vte_list) {
+		for (VariableTableEntry variableTableEntry : evaFunction._vte_list()) {
 			variableTableEntry._fix_table(d, evaFunction);
 		}
-		for (IdentTableEntry identTableEntry : evaFunction.idte_list) {
+		for (IdentTableEntry identTableEntry : evaFunction._idte_list()) {
 			identTableEntry._fix_table(d, evaFunction);
 		}
-		for (TypeTableEntry typeTableEntry : evaFunction.tte_list) {
+		for (TypeTableEntry typeTableEntry : evaFunction._tte_list()) {
 			typeTableEntry._fix_table(d, evaFunction);
 		}
-		for (ProcTableEntry procTableEntry : evaFunction.prte_list) {
+		for (ProcTableEntry procTableEntry : evaFunction._prte_list()) {
 			procTableEntry._fix_table(d, evaFunction);
 		}
 	}
 
 	public void log() {
 		final var             fd         = generatedFunction.getFD();
-		final ProcTableEntry  pte        = generatedFunction.fi.pte;
+		final ProcTableEntry  pte        = generatedFunction._fi().pte;
 		final @NotNull String pte_string = d.getPTEString(pte);
 		d.LOG.info("** deduce_generated_function " + fd.name() + " " + pte_string);//+" "+((OS_Container)((FunctionDef)fd).getParent()).name());
 	}
@@ -117,14 +117,14 @@ public class DT_Function {
 	}
 
 	public void __post_vte_list_001() {
-		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
 			var de3_vte = vte.getDeduceElement3();
 			de3_vte.__post_vte_list_001();
 		}
 	}
 
 	public void __post_vte_list_002(final Context aFdCtx) {
-		for (final @NotNull VariableTableEntry vte : generatedFunction.vte_list) {
+		for (final @NotNull VariableTableEntry vte : generatedFunction._vte_list()) {
 			if (vte.getType().getAttached() == null) {
 				int potential_size = vte.potentialTypes().size();
 				if (potential_size == 1)
@@ -170,7 +170,7 @@ public class DT_Function {
 		// NOW CALCULATE DEFERRED CALLS
 		//
 
-		for (final Integer deferred_call : generatedFunction.deferred_calls) {
+		for (final Integer deferred_call : generatedFunction._deferred_calls()) {
 			final Instruction instruction = generatedFunction.getInstruction(deferred_call);
 
 			final int                     i1  = DeduceTypes2.to_int(instruction.getArg(0));

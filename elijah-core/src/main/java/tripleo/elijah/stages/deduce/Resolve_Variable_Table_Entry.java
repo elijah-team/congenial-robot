@@ -100,8 +100,8 @@ class Resolve_Variable_Table_Entry {
 					LOG.err("Can't resolve argument type " + attached);
 					return;
 				}
-				if (generatedFunction.fi.getClassInvocation() != null)
-					genNodeForGenType(genType, generatedFunction.fi.getClassInvocation());
+				if (generatedFunction._fi().getClassInvocation() != null)
+					genNodeForGenType(genType, generatedFunction._fi().getClassInvocation());
 				else
 					genCIForGenType(genType);
 				vte.resolveType(genType);
@@ -131,6 +131,80 @@ class Resolve_Variable_Table_Entry {
 			} else {
 				action_VAR_potsize_1_other(vte, pot);
 			}
+		}
+	}
+
+	/**
+	 * Sets the invocation ({@code genType#ci}) and the node for a GenType
+	 *
+	 * @param aGenType the GenType to modify. must be set to a nonGenericTypeName that is non-null and generic
+	 */
+	private void genCIForGenType(final @NotNull GenType aGenType) {
+
+
+
+
+
+
+
+
+		//assert aGenType.getNonGenericTypeName() != null;//&& ((NormalTypeName) aGenType.nonGenericTypeName).getGenericPart().size() > 0;
+		if (aGenType.getNonGenericTypeName() == null) return;
+
+
+
+
+
+
+		aGenType.genCI(aGenType.getNonGenericTypeName(), deduceTypes2, deduceTypes2._errSink(), deduceTypes2.phase);
+		final IInvocation invocation = aGenType.getCi();
+		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+			namespaceInvocation. onResolve(aGenType::setNode);
+		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+			classInvocation. onResolve(aGenType::setNode);
+		} else
+			throw new IllegalStateException("invalid invocation");
+	}
+
+	/**
+	 * Sets the node for a GenType, given an invocation
+	 *
+	 * @param aGenType the GenType to modify. must be set to a nonGenericTypeName that is non-null and generic
+	 */
+	private void genNodeForGenType(final @NotNull GenType aGenType, IInvocation invocation) {
+		//assert aGenType.getNonGenericTypeName() != null;
+
+		assert aGenType.getCi() == null || aGenType.getCi() == invocation;
+
+		aGenType.setCi(invocation);
+		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+			namespaceInvocation. onResolve(aGenType::setNode);
+		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+			classInvocation. onResolve(aGenType::setNode );
+		} else
+			throw new IllegalStateException("invalid invocation");
+	}
+
+	/**
+	 * Sets the invocation ({@code genType#ci}) and the node for a GenType
+	 *
+	 * @param aGenType the GenType to modify. doesn;t care about  nonGenericTypeName
+	 */
+	private void genCIForGenType2(final @NotNull GenType aGenType) {
+		final List<setup_GenType_Action> list  = new ArrayList<>();
+		final setup_GenType_Action_Arena arena = new setup_GenType_Action_Arena();
+
+		aGenType.genCI(aGenType.getNonGenericTypeName(), deduceTypes2, deduceTypes2._errSink(), deduceTypes2.phase);
+		final IInvocation invocation = aGenType.getCi();
+		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
+			namespaceInvocation. onResolve(aGenType::setNode);
+		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
+			classInvocation. onResolve(aGenType::setNode);
+		} else
+			throw new IllegalStateException("invalid invocation");
+
+		for (setup_GenType_Action action : list) {
+			action.run(aGenType, arena);
 		}
 	}
 
@@ -181,12 +255,9 @@ class Resolve_Variable_Table_Entry {
 					return "FuncType..."; // TODO
 				}
 			}, "FuncType Result");
-			((EvaFunction) aGenType.getNode()).typePromise().then(new DoneCallback<GenType>() {
-				@Override
-				public void onDone(@NotNull GenType result) {
-					pe.satisfy(result);
-					vte.resolveType(result);
-				}
+			((EvaFunction) aGenType.getNode()).typePromise().then(result -> {
+				pe.satisfy(result);
+				vte.resolveType(result);
 			});
 
 			//vte.typeDeferred().resolve(pot.genType); // this is wrong
@@ -194,80 +265,6 @@ class Resolve_Variable_Table_Entry {
 
 		if (callable_pte != null)
 			vte.setCallablePTE(callable_pte);
-	}
-
-	/**
-	 * Sets the node for a GenType, given an invocation
-	 *
-	 * @param aGenType the GenType to modify. must be set to a nonGenericTypeName that is non-null and generic
-	 */
-	private void genNodeForGenType(final @NotNull GenType aGenType, IInvocation invocation) {
-		//assert aGenType.getNonGenericTypeName() != null;
-
-		assert aGenType.getCi() == null || aGenType.getCi() == invocation;
-
-		aGenType.setCi(invocation);
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
-			namespaceInvocation. onResolve(aGenType::setNode);
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(aGenType::setNode );
-		} else
-			throw new IllegalStateException("invalid invocation");
-	}
-
-	/**
-	 * Sets the invocation ({@code genType#ci}) and the node for a GenType
-	 *
-	 * @param aGenType the GenType to modify. must be set to a nonGenericTypeName that is non-null and generic
-	 */
-	private void genCIForGenType(final @NotNull GenType aGenType) {
-
-
-
-
-
-
-
-
-		//assert aGenType.getNonGenericTypeName() != null;//&& ((NormalTypeName) aGenType.nonGenericTypeName).getGenericPart().size() > 0;
-		if (aGenType.getNonGenericTypeName() == null) return;
-
-
-
-
-
-
-		aGenType.genCI(aGenType.getNonGenericTypeName(), deduceTypes2, deduceTypes2._errSink(), deduceTypes2.phase);
-		final IInvocation invocation = aGenType.getCi();
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
-			namespaceInvocation. onResolve(result -> aGenType.setNode(result));
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(result -> aGenType.setNode(result) );
-		} else
-			throw new IllegalStateException("invalid invocation");
-	}
-
-	/**
-	 * Sets the invocation ({@code genType#ci}) and the node for a GenType
-	 *
-	 * @param aGenType the GenType to modify. doesn;t care about  nonGenericTypeName
-	 */
-	private void genCIForGenType2(final @NotNull GenType aGenType) {
-		final List<setup_GenType_Action> list  = new ArrayList<>();
-		final setup_GenType_Action_Arena arena = new setup_GenType_Action_Arena();
-
-		aGenType.genCI(aGenType.getNonGenericTypeName(), deduceTypes2, deduceTypes2._errSink(), deduceTypes2.phase);
-		final IInvocation invocation = aGenType.getCi();
-		if (invocation instanceof final @NotNull NamespaceInvocation namespaceInvocation) {
-			namespaceInvocation. onResolve(result -> aGenType.setNode(result));
-		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(result -> aGenType.setNode(result) );
-		} else
-			throw new IllegalStateException("invalid invocation");
-
-		for (setup_GenType_Action action : list) {
-			action.run(aGenType, arena);
-		}
 	}
 
 	private void action_VAR_potsize_1_other(@NotNull VariableTableEntry vte, @NotNull TypeTableEntry aPot) {
@@ -358,7 +355,7 @@ class Resolve_Variable_Table_Entry {
 	}
 
 	private @Nullable ProcTableEntry findProcTableEntry(@NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction aGeneratedFunction, IExpression aExpression) {
-		for (@NotNull ProcTableEntry procTableEntry : aGeneratedFunction.prte_list) {
+		for (@NotNull ProcTableEntry procTableEntry : aGeneratedFunction._prte_list()) {
 			if (procTableEntry.__debug_expression == aExpression)
 				return procTableEntry;
 		}

@@ -8,10 +8,10 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
-import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.stages.deduce.ClassInvocation;
@@ -70,13 +70,8 @@ public class WlGenerateCtor implements WorkJob {
 		if (functionInvocation.generateDeferred().isPending()) {
 			final ClassStatement klass     = functionInvocation.getClassInvocation().getKlass();
 			Holder<IEvaClass>    hGenClass = new Holder<>();
-			functionInvocation.getClassInvocation(). onResolve(new DoneCallback<IEvaClass>() {
-				@Override
-				public void onDone(EvaClass result) {
-					hGenClass.set(result);
-				}
-			} );
-			EvaClass genClass = hGenClass.get();
+			functionInvocation.getClassInvocation(). onResolve(hGenClass::set);
+			IEvaClass genClass = hGenClass.get();
 			assert genClass != null;
 
 			ConstructorDef ccc = null;
@@ -95,7 +90,7 @@ public class WlGenerateCtor implements WorkJob {
 				cd = new ConstructorDefImpl(constructorName, (_CommonNC) klass, klass.getContext());
 				Scope3Impl scope3 = new Scope3Impl(cd);
 				cd.scope(scope3);
-				for (EvaContainer.VarTableEntry varTableEntry : genClass.varTable) {
+				for (EvaContainer.VarTableEntry varTableEntry : genClass.varTable()) {
 					if (varTableEntry.initialValue != IExpression.UNASSIGNED) {
 						IExpression left  = varTableEntry.nameToken;
 						IExpression right = varTableEntry.initialValue;
@@ -167,16 +162,13 @@ public class WlGenerateCtor implements WorkJob {
 //		lgf.add(gf);
 
 			final ClassInvocation ci = functionInvocation.getClassInvocation();
-			ci. onResolve(new DoneCallback<IEvaClass>() {
-				@Override
-				public void onDone(@NotNull EvaClass result) {
+			ci. onResolve(result -> {
 
-					codeRegistrar.registerFunction1(gf);
-					//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
+				codeRegistrar.registerFunction1(gf);
+				//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
 
-					gf.setClass(result);
-					result.constructors.put(cd, gf);
-				}
+				gf.setClass(result);
+				result.putConstructor(cd, gf);
 			});
 
 			functionInvocation.generateDeferred().resolve(gf);

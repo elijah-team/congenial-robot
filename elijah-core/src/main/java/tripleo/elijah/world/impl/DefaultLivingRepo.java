@@ -11,7 +11,6 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.OS_PackageImpl;
 
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
@@ -56,7 +55,7 @@ public class DefaultLivingRepo implements LivingRepo {
 		}
 
 		final DefaultLivingClass living = new DefaultLivingClass(aClass);
-		aClass._living = living;
+		aClass.setLiving(living);
 
 		repo.add(living);
 
@@ -151,7 +150,7 @@ public class DefaultLivingRepo implements LivingRepo {
 	}
 
 	@Override
-	public @NotNull LivingClass getClass(final @NotNull EvaClass aEvaClass) {
+	public @NotNull LivingClass getClass(final IEvaClass aEvaClass) {
 		for (LivingNode livingNode : repo) {
 			if (livingNode instanceof final @NotNull LivingClass livingClass) {
 				if (livingClass.evaNode().equals(aEvaClass))

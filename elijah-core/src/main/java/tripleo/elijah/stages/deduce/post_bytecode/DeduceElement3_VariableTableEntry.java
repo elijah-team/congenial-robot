@@ -625,7 +625,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 			case CLASS:
 				aGt.setResolved(((ClassStatement) parent).getOS_Type());
 				inv = phase.registerClassInvocation((ClassStatement) parent, null, new ReadySupplier_1<>(deduceTypes2));
-				((ClassInvocation) inv). onResolve((final @NotNull EvaClass result) -> {
+				((ClassInvocation) inv). onResolve((final @NotNull IEvaClass result) -> {
 					result.functionMapDeferred(functionDef, aGt::setNode);
 				});
 				break;

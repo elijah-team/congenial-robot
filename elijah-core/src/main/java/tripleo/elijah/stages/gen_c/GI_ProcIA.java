@@ -129,7 +129,7 @@ public class GI_ProcIA implements GenerateC_Item {
 			wlgf.run(null);
 			generated = wlgf.getResult();
 
-			for (IdentTableEntry identTableEntry : generated.idte_list) {
+			for (IdentTableEntry identTableEntry : generated._idte_list()) {
 				identTableEntry._fix_table(de_pte.deduceTypes2(), de_pte.generatedFunction());
 			}
 

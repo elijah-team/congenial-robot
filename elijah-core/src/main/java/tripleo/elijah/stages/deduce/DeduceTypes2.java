@@ -2991,10 +2991,10 @@ public class DeduceTypes2 {
 				final Eventual<ClassDefinition> pcd = phase.generateClass(gf, ci);
 
 				pcd.then(result -> {
-					final EvaClass genclass = result.getNode();
+					final IEvaClass genclass = result.getNode();
 
 					genType.setNode(genclass);
-					genclass.dependentTypes().add(genType);
+					genclass.addDependentType(genType);
 				});
 			}
 			//
@@ -3092,7 +3092,9 @@ public class DeduceTypes2 {
 			}
 		}
 
-		private void do_assign_normal_ident_deferred_FALI(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction, final @NotNull IdentTableEntry aIdentTableEntry, final @NotNull FormalArgListItem fali) {
+		private void do_assign_normal_ident_deferred_FALI(final @NotNull tripleo.elijah.stages.gen_fn.IBaseEvaFunction generatedFunction,
+														  final @NotNull IdentTableEntry aIdentTableEntry,
+														  final @NotNull FormalArgListItem fali) {
 			final GenType            genType            = _inj().new_GenTypeImpl();
 			final FunctionInvocation functionInvocation = generatedFunction._fi();
 			final String             fali_name          = fali.name().asString();
@@ -3110,12 +3112,9 @@ public class DeduceTypes2 {
 
 			final @Nullable InstructionArgument vte_ia = generatedFunction.vte_lookup(fali_name);
 			assert vte_ia != null;
-			((IntegerIA) vte_ia).getEntry().onTypeResolve(new DoneCallback<GenType>() {
-				@Override
-				public void onDone(final @NotNull GenType result) {
-					assert result.getResolved() != null;
-					aIdentTableEntry.type.setAttached(result);
-				}
+			((IntegerIA) vte_ia).getEntry().onTypeResolve(result -> {
+				assert result.getResolved() != null;
+				aIdentTableEntry.type.setAttached(result);
 			});
 			generatedFunction.addDependentType(genType);
 			DebugPrint.addDependentType(generatedFunction, genType);

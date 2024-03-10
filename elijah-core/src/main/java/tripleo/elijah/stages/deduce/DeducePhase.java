@@ -841,12 +841,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
         void action() {
             if (invocation instanceof ClassInvocation)
-                ((ClassInvocation) invocation).onResolve(new DoneCallback<IEvaClass>() {
-                    @Override
-                    public void onDone(final EvaClass result) {
-                        defaultAction(result);
-                    }
-                });
+                ((ClassInvocation) invocation).onResolve(this::defaultAction);
             else if (invocation instanceof NamespaceInvocation)
                 ((NamespaceInvocation) invocation).onResolve(new DoneCallback<EvaNamespace>() {
                     @Override
@@ -907,7 +902,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
                             // once again we need EvaFunction, not FunctionDef
                             // we seem to have it below, but there can be multiple
                             // specializations of each function
-                            final EvaFunction gf = element_generated.functionMap.get(deferredMemberFunction.getFunctionDef());
+                            final EvaFunction gf = element_generated.functionMapGet(deferredMemberFunction.getFunctionDef());
                             deferredMemberFunction.externalRefDeferred().resolve(gf);
                             gf.typePromise().then(result -> deferredMemberFunction.typeResolved().resolve(result));
                         });
@@ -957,7 +952,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
         public void add(EvaNode aClass) {
             Preconditions.checkArgument(aClass instanceof EvaClass);
 
-            var tClass = new TEvaClass(aClass);
+            var tClass = new TEvaClass((IEvaClass) aClass);
 
             pa._send_GeneratedClass(tClass);
 

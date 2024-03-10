@@ -6,10 +6,14 @@ import tripleo.elijah.lang.nextgen.names.i.EN_Understanding;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
+import tripleo.elijah.stages.deduce.FunctionMapDeferred;
+import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.gen_generic.CodeGenerator;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.gen_generic.IDependencyReferent;
+import tripleo.elijah.world.i.LivingClass;
+import tripleo.elijah.world.impl.DefaultLivingClass;
 
 import java.util.List;
 import java.util.function.Function;
@@ -61,6 +65,16 @@ public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyR
 	void addFunction(FunctionDef aFunctionDef, EvaFunction aGf);
 
 	List<VarTableEntry> varTable();
+
+	EvaFunction functionMapGet(FunctionDef aFunctionDef);
+
+	void functionMapDeferred(final FunctionDef aFunctionDef, final FunctionMapDeferred aFunctionMapDeferred);
+
+	void addDependentType(GenType aGenType);
+
+	void putConstructor(ConstructorDef aCd, EvaConstructor aGf);
+
+	void setLiving(LivingClass aLiving);
 
 	void singleGenerate(Class<?> aKey, Function<Void, Boolean> f);
 }

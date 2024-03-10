@@ -1,7 +1,6 @@
 package tripleo.elijah.stages.gen_c;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +54,7 @@ class Generate_Method_Header {
 		final String rule = "gen_c:gcfm:Generate_Method_Header:find_args_statement";
 
 		// TODO EG_Statement, rule
-		final List<String> args_list = gf.vte_list
+		final List<String> args_list = gf._vte_list()
 				.stream()
 				.filter(input -> input.getVtt() == VariableTableType.ARG)
 
@@ -235,12 +234,9 @@ class Generate_Method_Header {
 				}
 			}));
 		} else {
-			final Collection<VariableTableEntry> x = Collections2.filter(gf.vte_list, new Predicate<VariableTableEntry>() {
-				@Override
-				public boolean apply(@Nullable final VariableTableEntry input) {
-					assert input != null;
-					return input.getVtt() == VariableTableType.ARG;
-				}
+			final Collection<VariableTableEntry> x = Collections2.filter(gf._vte_list(), input -> {
+				assert input != null;
+				return input.getVtt() == VariableTableType.ARG;
 			});
 			args = Helpers.String_join(", ", Collections2.transform(x, new Function<VariableTableEntry, String>() {
 				@Nullable

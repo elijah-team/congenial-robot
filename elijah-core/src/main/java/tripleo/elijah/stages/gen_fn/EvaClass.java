@@ -41,13 +41,13 @@ import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.world.impl.DefaultLivingClass;
+import tripleo.elijah.world.i.LivingClass;
 
 /**
  * Created 10/29/20 4:26 AM
  */
 public class EvaClass extends EvaContainerNC implements IEvaClass {
-	public          DefaultLivingClass                  _living;
+	private final List<Class<?>> sgs = new ArrayList<>();
 	private final   ClassStatement                      klass;
 	private final   OS_Module                           module;
 	public          ClassInvocation                     ci;
@@ -90,31 +90,7 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 			}
 		}
 	}
-
-	@Override
-	public void fixupUserClasses(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext) {
-		for (VarTableEntry varTableEntry : varTable) {
-			varTableEntry.updatePotentialTypesCB = new VarTableEntry_UpdatePotentialTypesCB(aDeduceTypes2,
-					varTableEntry, aContext, this);
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			/*=======================================*/
-			if (!varTableEntry._p_updatePotentialTypesCBPromise.isResolved()) {
-				varTableEntry._p_updatePotentialTypesCBPromise.resolve(varTableEntry.updatePotentialTypesCB);
-			}
-		}
-	}
+	public          LivingClass                         _living;
 
 	@Override
 	public void generateCode(GenerateResultEnv aFileGen, @NotNull CodeGenerator aCodeGenerator) {
@@ -240,11 +216,6 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 	@Override
 	public void setLiving(final LivingClass aLiving) {
 		_living = aLiving;
-	}
-
-	@Override
-	public boolean generatedAlready() {
-		return generatedAlready; // !! HACK
 	}
 
 	@Override

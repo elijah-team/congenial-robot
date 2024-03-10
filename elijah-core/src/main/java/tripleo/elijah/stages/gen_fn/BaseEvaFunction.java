@@ -680,6 +680,11 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		deferred_calls.add(aI);
 	}
 
+	@Override
+	public Iterable<? extends Integer> _deferred_calls() {
+		return deferred_calls;
+	}
+
 	public ReactiveDimension _evaCreationDimension() {
 		if (__evaCreationDimension == null) {
 			__evaCreationDimension = new _EvaCreationDimension(this);

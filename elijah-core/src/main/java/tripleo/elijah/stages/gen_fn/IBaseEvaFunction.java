@@ -203,4 +203,6 @@ public interface IBaseEvaFunction extends DependencyTracker, EvaNode, DeduceType
 	AddDrsSource getAddDrsSource();
 
 	void add_deferred_call(int aI);
+
+	Iterable<? extends Integer> _deferred_calls();
 }

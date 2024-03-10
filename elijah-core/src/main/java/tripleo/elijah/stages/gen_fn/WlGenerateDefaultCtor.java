@@ -63,14 +63,11 @@ public class WlGenerateDefaultCtor implements WorkJob {
 	public void run(WorkManager aWorkManager) {
 		if (functionInvocation.generateDeferred().isPending()) {
 			final ClassStatement klass     = functionInvocation.getClassInvocation().getKlass();
-			functionInvocation.getClassInvocation(). onResolve(new DoneCallback<IEvaClass>() {
-				@Override
-				public void onDone(EvaClass genClass) {
-					assert Result == null;
-					Result = xx(klass, genClass);
-					_isDone = true;
-				}
-			} );
+			functionInvocation.getClassInvocation(). onResolve(genClass -> {
+				assert Result == null;
+				Result = xx(klass, genClass);
+				_isDone = true;
+			});
 		} else {
 			functionInvocation.generatePromise().then(new DoneCallback<tripleo.elijah.stages.gen_fn.IBaseEvaFunction>() {
 				@Override
@@ -87,12 +84,12 @@ public class WlGenerateDefaultCtor implements WorkJob {
 	}
 
 	@NotNull
-	private EvaConstructor xx(final ClassStatement klass, final EvaClass genClass) {
+	private EvaConstructor xx(final ClassStatement klass, final IEvaClass genClass) {
 		ConstructorDef cd = new ConstructorDefImpl(null, (_CommonNC) klass, klass.getContext());
 		cd.setName(LangGlobals.emptyConstructorName);
 		Scope3Impl scope3 = new Scope3Impl(cd);
 		cd.scope(scope3);
-		for (EvaContainer.VarTableEntry varTableEntry : genClass.varTable) {
+		for (EvaContainer.VarTableEntry varTableEntry : genClass.varTable()) {
 			if (varTableEntry.initialValue != IExpression.UNASSIGNED) {
 				IExpression left  = varTableEntry.nameToken;
 				IExpression right = varTableEntry.initialValue;
@@ -112,15 +109,12 @@ public class WlGenerateDefaultCtor implements WorkJob {
 //		lgf.add(gf);
 
 		final ClassInvocation ci = functionInvocation.getClassInvocation();
-		ci. onResolve(new DoneCallback<IEvaClass>() {
-			@Override
-			public void onDone(@NotNull EvaClass result) {
-				codeRegistrar.registerFunction1(gf);
-				//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
+		ci. onResolve(result -> {
+			codeRegistrar.registerFunction1(gf);
+			//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
 
-				gf.setClass(result);
-				result.constructors.put(cd, gf);
-			}
+			gf.setClass(result);
+			result.putConstructor(cd, gf);
 		});
 
 		functionInvocation.generateDeferred().resolve(gf);

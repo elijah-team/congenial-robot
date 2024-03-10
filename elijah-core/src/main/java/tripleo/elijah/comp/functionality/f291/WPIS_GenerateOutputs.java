@@ -1,17 +1,15 @@
 package tripleo.elijah.comp.functionality.f291;
 
 import com.google.common.base.Preconditions;
-//import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.nextgen.CP_Paths;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.gen_c.GenerateC;
-
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.stages.gen_generic.GenerateResult;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.write_stage.pipeline_impl.*;
-import tripleo.elijah.world.i.*;
+import tripleo.elijah.world.i.LivingClass;
+import tripleo.elijah.world.i.LivingFunction;
 import tripleo.elijah.world.i.LivingNamespace;
 import tripleo.elijah.world.i.LivingRepo;
 
@@ -54,7 +52,7 @@ public class WPIS_GenerateOutputs implements WP_Indiviual_Step {
 
 		this.ap = new AmazingPart(this, itms, this.st.c.getCompilationEnclosure());
 
-		for (EvaClass c : cs) {
+		for (IEvaClass c : cs) {
 			final LivingClass lc = world.getClass(c);
 			lc.offer(ap);
 		}

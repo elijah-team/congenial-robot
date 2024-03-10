@@ -33,7 +33,7 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	}
 
 	public @Nullable Map<TypeName, OS_Type> classInvcationGenericPart() {
-		return getGf().fi.getClassInvocation().genericPart().getMap();
+		return getGf()._fi().getClassInvocation().genericPart().getMap();
 	}
 
 	public @Nullable Label findLabel(final int aIndex) {
@@ -217,6 +217,6 @@ public abstract class WhyNotGarish_BaseFunction implements WhyNotGarish_Item {
 	}
 
 	public List<DR_Item> getDrs() {
-		return ((tripleo.elijah.stages.gen_fn.IBaseEvaFunction) getGf()).drs;
+		return ((BaseEvaFunction) getGf()).drs;
 	}
 }

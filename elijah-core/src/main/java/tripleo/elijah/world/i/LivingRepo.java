@@ -9,7 +9,6 @@ import tripleo.elijah.lang.i.OS_Package;
 import tripleo.elijah.lang.i.Qualident;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.IBaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
@@ -40,7 +39,7 @@ public interface LivingRepo {
 
 	LivingNamespace getNamespace(EvaNamespace aEvaNamespace);
 
-	LivingClass getClass(EvaClass aEvaClass);
+	LivingClass getClass(IEvaClass aEvaClass);
 
 	OS_Package getPackage(String aPackageName);
 

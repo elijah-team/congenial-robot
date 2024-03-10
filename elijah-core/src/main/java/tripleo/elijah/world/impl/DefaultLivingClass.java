@@ -6,13 +6,12 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.functionality.f291.AmazingPart;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.stages.garish.GarishClass;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.world.i.LivingClass;
 
 public class DefaultLivingClass implements LivingClass {
 	private final           ClassStatement _element;
-	private final @Nullable EvaClass       _gc;
+	private final @Nullable IEvaClass       _gc;
 	private @Nullable       GarishClass    _garish;
 
 	@Contract(pure = true)
@@ -22,14 +21,14 @@ public class DefaultLivingClass implements LivingClass {
 		_garish  = null;
 	}
 
-	public DefaultLivingClass(final @NotNull EvaClass aClass) {
+	public DefaultLivingClass(final @NotNull IEvaClass aClass) {
 		_element = aClass.getKlass();
 		_gc      = aClass;
 		_garish  = null;
 	}
 
 	@Override
-	public EvaClass evaNode() {
+	public @Nullable IEvaClass evaNode() {
 		return _gc;
 	}
 

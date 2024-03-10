@@ -50,12 +50,7 @@ public class FT_FCA_FunctionDef {
 					if (vte.resolvedType() == null) {
 						final @Nullable ClassInvocation ci = aDoAssignCall.dc.genCI(aType, null);
 						vte.getType().genTypeCI(ci);
-						ci. onResolve(new DoneCallback<IEvaClass>() {
-							@Override
-							public void onDone(@NotNull EvaClass result) {
-								vte.resolveTypeToClass(result);
-							}
-						} );
+						ci. onResolve(vte::resolveTypeToClass);
 					}
 					aDoAssignCall.LOG.err("2041 type already found " + vte);
 					return; // type already found

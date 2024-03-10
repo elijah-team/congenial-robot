@@ -42,8 +42,9 @@ public class GarishClass {
 		});
 	}
 
+
 	public @NotNull BufferTabbedOutputStream getClassBuffer(final @NotNull GenerateC aGenerateC) {
-		final EvaClass evaClass = getLiving().evaNode();
+		final IEvaClass evaClass = getLiving().evaNode();
 
 		final CClassDecl decl = new CClassDecl(evaClass);
 		decl.evaluatePrimitive();
