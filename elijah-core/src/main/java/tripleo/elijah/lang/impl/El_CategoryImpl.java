@@ -8,17 +8,14 @@
  */
 package tripleo.elijah.lang.impl;
 
-import antlr.Token;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.util.Helpers;
 
 /**
  * Created 3/26/21 4:47 AM
  */
 public class El_CategoryImpl implements El_Category {
-
 	private final AccessNotation notation;
 
 	public El_CategoryImpl(AccessNotation aNotation) {
@@ -27,11 +24,12 @@ public class El_CategoryImpl implements El_Category {
 
 	@Nullable
 	public String getCategoryName() {
-		final Token category = notation.getCategory();
+		final var category = notation.getCategory();
 		if (category == null)
 			return null;
-		String x = category.getText();
-		return Helpers.remove_single_quotes_from_string(x);
+		final String x = category.asString();
+		return x; // luckily you dont use this because you broke it
+		//return Helpers.remove_single_quotes_from_string(x);
 	}
 
 	@Override
