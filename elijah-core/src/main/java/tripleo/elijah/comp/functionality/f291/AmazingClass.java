@@ -7,7 +7,7 @@ import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.output.NG_OutputClass;
 import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.world.i.LivingClass;
 import tripleo.elijah.world.i.LivingRepo;
 
@@ -15,10 +15,10 @@ class AmazingClass implements Amazing {
 	private final OS_Module            mod;
 	private final Compilation          compilation;
 	private final OutputItems          itms;
-	private final EvaClass             c;
+	private final IEvaClass            c;
 	private final CompilationEnclosure ce;
 
-	public AmazingClass(final @NotNull EvaClass aEvaClass,
+	public AmazingClass(final IEvaClass aEvaClass,
 						final @NotNull OutputItems aOutputItems,
 						final CompilationEnclosure aCompilationEnclosure) {
 		this.c      = aEvaClass;

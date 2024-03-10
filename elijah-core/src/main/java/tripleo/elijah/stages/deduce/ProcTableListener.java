@@ -53,11 +53,15 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 			co = constructableElementHolder.getConstructable();
 		}
 		if (newStatus != BaseTableEntry.Status.UNKNOWN) { // means eh is null
-			@Nullable AbstractDependencyTracker depTracker;
+			@Nullable AbstractDependencyTracker depTracker = null;
 			if (co instanceof final @NotNull IdentIA identIA) {
-				depTracker = identIA.gf;
+				final DependencyTracker depTracker1 = identIA.gf.getDepTracker();
+				if (depTracker1 != null)
+					depTracker = (AbstractDependencyTracker) depTracker1;
 			} else if (co instanceof final @Nullable IntegerIA integerIA) {
-				depTracker = integerIA.gf;
+				final DependencyTracker depTracker1 = integerIA.gf.getDepTracker();
+				if (depTracker1 != null)
+					depTracker = (AbstractDependencyTracker) depTracker1;
 			} else
 				depTracker = null;
 

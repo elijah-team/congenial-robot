@@ -53,7 +53,7 @@ class ResolvedNodes {
 					// complain
 				}
 
-				for (EvaClass evaClass2 : evaClass.classMap.values()) {
+				for (IEvaClass evaClass2 : evaClass.classMap.values()) {
 					if (evaClass2.getCode() == 0) {
 						cr.registerClass1(evaClass2);
 					}
@@ -70,7 +70,7 @@ class ResolvedNodes {
 					//coded.setCode(mod.getCompilation().nextClassCode());
 					cr.registerNamespace(evaNamespace);
 				}
-				for (EvaClass evaClass3 : evaNamespace.classMap.values()) {
+				for (IEvaClass evaClass3 : evaNamespace.classMap.values()) {
 					if (evaClass3.getCode() == 0) {
 						//evaClass.setCode(mod.getCompilation().nextClassCode());
 						cr.registerClass1(evaClass3);

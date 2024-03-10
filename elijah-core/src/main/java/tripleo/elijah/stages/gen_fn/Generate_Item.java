@@ -272,8 +272,8 @@ class Generate_Item {
 					if (argument_type.getAttached() == null) {
 						// still dont know the argument types at this point, which creates a problem
 						// for resolving functions, so wait until later when more information is available
-						if (!gf.deferred_calls.contains(i))
-							gf.deferred_calls.add(i);
+						if (!gf.deferred_calls_contains(i))
+							gf.add_deferred_call(i);
 						break;
 					}
 				}

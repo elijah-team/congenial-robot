@@ -1,6 +1,7 @@
 package tripleo.elijah.comp.functionality.f291;
 
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.util.Eventual;
 
 import tripleo.elijah.comp.i.CompilationEnclosure;
@@ -58,7 +59,7 @@ public class AmazingPart {
 	}
 
 	public void reverseOffer(final LivingClass lc) {
-		final EvaClass     c            = lc.evaNode();
+		final IEvaClass    c            = lc.evaNode();
 		final AmazingClass amazingClass = new AmazingClass(c, itms, compilationEnclosure);
 		waitGenC(amazingClass.mod(), amazingClass::waitGenC);
 		amazings.add(amazingClass);

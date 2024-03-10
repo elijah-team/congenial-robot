@@ -192,20 +192,17 @@ public enum VTE_TypePromises {
 													   final @NotNull ProcTableEntry aProcTableEntry,
 													   final @NotNull ClassInvocation aCi,
 													   final @NotNull ProcTableListener aProcTableListener) {
-		aCi. onResolve(new DoneCallback<IEvaClass>() {
-			@Override
-			public void onDone(final @NotNull EvaClass result) {
-				for (EvaContainer.VarTableEntry varTableEntry : result.varTable) {
-					if (varTableEntry.nameToken.getText().equals(variableStatement.getName())) {
-						assert varTableEntry.varType.getClassOf() == fd.getParent();
+		aCi. onResolve(result -> {
+			for (EvaContainer.VarTableEntry varTableEntry : result.varTable()) {
+				if (varTableEntry.nameToken.getText().equals(variableStatement.getName())) {
+					assert varTableEntry.varType.getClassOf() == fd.getParent();
 
-						@NotNull ProcTableListener.E_Is_FunctionDef e_Is_FunctionDef = aProcTableListener.new E_Is_FunctionDef(aProcTableEntry, fd, fd.getParent()).invoke(null/*variableTableEntry.type.genType.nonGenericTypeName*/);
-						@Nullable FunctionInvocation                fi1              = e_Is_FunctionDef.getFi();
-						GenType                                     genType1         = e_Is_FunctionDef.getGenType();
-						aProcTableListener.finish(co, depTracker, fi1, genType1);
+					@NotNull ProcTableListener.E_Is_FunctionDef e_Is_FunctionDef = aProcTableListener.new E_Is_FunctionDef(aProcTableEntry, fd, fd.getParent()).invoke(null/*variableTableEntry.type.genType.nonGenericTypeName*/);
+					@Nullable FunctionInvocation                fi1              = e_Is_FunctionDef.getFi();
+					GenType                                     genType1         = e_Is_FunctionDef.getGenType();
+					aProcTableListener.finish(co, depTracker, fi1, genType1);
 
-						break;
-					}
+					break;
 				}
 			}
 		});

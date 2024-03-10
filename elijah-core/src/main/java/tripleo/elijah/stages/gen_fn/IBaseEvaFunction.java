@@ -205,4 +205,12 @@ public interface IBaseEvaFunction extends DependencyTracker, EvaNode, DeduceType
 	void add_deferred_call(int aI);
 
 	Iterable<? extends Integer> _deferred_calls();
+
+	@Nullable DependencyTracker getDepTracker();
+
+	List<FunctionInvocation> dependentFunctions();
+
+	List<GenType> dependentTypes();
+
+	void noteDependencies(Dependency aD);
 }

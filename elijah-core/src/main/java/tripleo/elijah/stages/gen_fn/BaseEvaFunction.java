@@ -685,6 +685,11 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		return deferred_calls;
 	}
 
+	@Override
+	public @Nullable DependencyTracker getDepTracker() {
+		return this;
+	}
+
 	public ReactiveDimension _evaCreationDimension() {
 		if (__evaCreationDimension == null) {
 			__evaCreationDimension = new _EvaCreationDimension(this);

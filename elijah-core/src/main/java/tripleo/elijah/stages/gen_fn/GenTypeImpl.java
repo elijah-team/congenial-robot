@@ -122,12 +122,7 @@ public class GenTypeImpl implements GenType {
 				}
 			});
 		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(new DoneCallback<IEvaClass>() {
-				@Override
-				public void onDone(final EvaClass result) {
-					node = result;
-				}
-			} );
+			classInvocation. onResolve(result -> node = result);
 		} else {
 			if (resolved instanceof OS_BuiltinType bit) {
 				//
@@ -157,12 +152,7 @@ public class GenTypeImpl implements GenType {
 				}
 			});
 		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(new DoneCallback<IEvaClass>() {
-				@Override
-				public void onDone(final EvaClass result) {
-					node = result;
-				}
-			} );
+			classInvocation. onResolve(result -> node = result);
 		} else {
 			if (resolved instanceof final @NotNull OS_FuncExprType funcExprType) {
 				final @NotNull GenerateFunctions genf = aDeduceTypes2.getGenerateFunctions(funcExprType.getElement().getContext().module());
