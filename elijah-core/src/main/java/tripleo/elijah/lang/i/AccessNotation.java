@@ -4,7 +4,7 @@ import antlr.Token;
 import tripleo.elijah.lang2.ElElementVisitor;
 
 public interface AccessNotation extends OS_Element {
-	Token getCategory();
+	El_Category getCategory();
 
 	@Override
 	Context getContext();
