@@ -21,12 +21,12 @@ import tripleo.elijjah.ElijjahTokenTypes;
  */
 // TODO Does this need to be Element?
 public class AccessNotationImpl implements OS_Element, AccessNotation {
-	private Token        category;
+	private El_Category        category;
 	private Token        shorthand;
 	private TypeNameList tnl;
 
 	@Override
-	public Token getCategory() {
+	public El_Category getCategory() {
 		return category;
 	}
 
@@ -45,7 +45,7 @@ public class AccessNotationImpl implements OS_Element, AccessNotation {
 		if (category == null)
 			return;
 		assert category.getType() == ElijjahTokenTypes.STRING_LITERAL;
-		this.category = category;
+		this.category = new El_CategoryImpl(this, category);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class AccessNotationImpl implements OS_Element, AccessNotation {
 
 	@Override
 	public void serializeTo(@NotNull SmallWriter sw) {
-		sw.fieldToken("category", category);
+		sw.fieldToken("category", category.getToken());
 		sw.fieldToken("shorthand", shorthand);
 		var tnl1 = sw.createTypeNameList();
 		for (TypeName iterable_element : tnl.p()) {

@@ -8,6 +8,7 @@
  */
 package tripleo.elijah.lang.impl;
 
+import antlr.Token;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang2.ElElementVisitor;
@@ -20,6 +21,11 @@ public class El_CategoryImpl implements El_Category {
 
 	public El_CategoryImpl(AccessNotation aNotation) {
 		notation = aNotation;
+	}
+
+	public El_CategoryImpl(final AccessNotationImpl aNotation, final Token aCategory) {
+		notation = aNotation;
+		//category = aCategory;
 	}
 
 	@Nullable
@@ -52,6 +58,11 @@ public class El_CategoryImpl implements El_Category {
 	@Override
 	public void serializeTo(final SmallWriter sw) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Token getToken() {
+		return notation.getCategory().getToken();
 	}
 }
 
