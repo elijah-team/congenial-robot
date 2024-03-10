@@ -192,7 +192,7 @@ public enum VTE_TypePromises {
 													   final @NotNull ProcTableEntry aProcTableEntry,
 													   final @NotNull ClassInvocation aCi,
 													   final @NotNull ProcTableListener aProcTableListener) {
-		aCi. onResolve(new DoneCallback<EvaClass>() {
+		aCi. onResolve(new DoneCallback<IEvaClass>() {
 			@Override
 			public void onDone(final @NotNull EvaClass result) {
 				for (EvaContainer.VarTableEntry varTableEntry : result.varTable) {

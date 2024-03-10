@@ -471,7 +471,7 @@ public class Resolve_Ident_IA {
 			if (fi.getFunction() instanceof ConstructorDef) {
 				@NotNull GenType genType = dt2._inj().new_GenTypeImpl(ci.getKlass());
 				genType.setCi(ci);
-				ci. onResolve(new DoneCallback<EvaClass>() {
+				ci. onResolve(new DoneCallback<IEvaClass>() {
 					@Override
 					public void onDone(EvaClass result) {
 						genType.setNode(result);
@@ -605,7 +605,7 @@ public class Resolve_Ident_IA {
 		if (fi.getFunction() instanceof ConstructorDef) {
 			@NotNull GenType genType = dt2._inj().new_GenTypeImpl(ci.getKlass());
 			genType.setCi(ci);
-			ci. onResolve(new DoneCallback<EvaClass>() {
+			ci. onResolve(new DoneCallback<IEvaClass>() {
 				@Override
 				public void onDone(EvaClass result) {
 					genType.setNode(result);

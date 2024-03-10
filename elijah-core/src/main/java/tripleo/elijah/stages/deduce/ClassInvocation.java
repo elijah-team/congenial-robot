@@ -3,13 +3,13 @@ package tripleo.elijah.stages.deduce;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang.i.TypeName;
 import tripleo.elijah.lang.types.OS_UnknownType;
 import tripleo.elijah.lang.types.OS_UserClassType;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaContainer;
 
 import java.util.Collection;
@@ -22,7 +22,7 @@ import java.util.function.Supplier;
  * Created 3/5/21 3:51 AM
  */
 public class ClassInvocation implements IInvocation {
-    private final Eventual<EvaClass> resolvePromise = new Eventual<>();
+    private final Eventual<IEvaClass> resolvePromise = new Eventual<>();
 
     private final @NotNull ClassStatement         cls;
     private final @NotNull Supplier<DeduceTypes2> _dt2s;
@@ -55,7 +55,7 @@ public class ClassInvocation implements IInvocation {
         return cls;
     }
 
-    public @NotNull Eventual<EvaClass> resolveDeferred() {
+    public @NotNull Eventual<IEvaClass> resolveDeferred() {
         return resolvePromise;
     }
 
@@ -96,12 +96,12 @@ public class ClassInvocation implements IInvocation {
         return _dt2s.get()._inj();
     }
 
-    public void onResolve(final DoneCallback<? super EvaClass> aO) {
+    public void onResolve(final DoneCallback<? super IEvaClass> aO) {
         resolvePromise.then(aO);
     }
 
     public interface XXX {
-        public void then(final DoneCallback<? super EvaClass> aO);
+        public void then(final DoneCallback<? super IEvaClass> aO);
     }
 
     public XXX resolvePromise() {

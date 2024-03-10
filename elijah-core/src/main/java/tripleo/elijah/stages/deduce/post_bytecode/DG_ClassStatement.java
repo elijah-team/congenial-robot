@@ -12,9 +12,9 @@ import tripleo.elijah.stages.gen_fn.*;
 // DeduceGrand
 public class DG_ClassStatement implements DG_Item {
 	private final ClassStatement       classStatement;
-	private       GenericElementHolder genericElementHolder;
-	private       EvaClass             _evaNode;
-	private       ClassInvocation      classInvocation;
+	private GenericElementHolder genericElementHolder;
+	private IEvaClass            _evaNode;
+	private ClassInvocation      classInvocation;
 	private       FunctionInvocation   fi;
 	private       ProcTableEntry       pte;
 
@@ -27,7 +27,7 @@ public class DG_ClassStatement implements DG_Item {
 		pte = aPte;
 	}
 
-	public void attachClass(final EvaClass aResult) {
+	public void attachClass(final IEvaClass aResult) {
 		_evaNode = aResult;
 	}
 
@@ -45,7 +45,7 @@ public class DG_ClassStatement implements DG_Item {
 		return new ConstructableElementHolder(classStatement, aVte);
 	}
 
-	public EvaClass evaClass() {
+	public IEvaClass evaClass() {
 		return _evaNode;
 	}
 

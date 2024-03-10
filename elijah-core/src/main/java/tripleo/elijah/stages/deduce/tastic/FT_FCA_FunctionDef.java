@@ -50,7 +50,7 @@ public class FT_FCA_FunctionDef {
 					if (vte.resolvedType() == null) {
 						final @Nullable ClassInvocation ci = aDoAssignCall.dc.genCI(aType, null);
 						vte.getType().genTypeCI(ci);
-						ci. onResolve(new DoneCallback<EvaClass>() {
+						ci. onResolve(new DoneCallback<IEvaClass>() {
 							@Override
 							public void onDone(@NotNull EvaClass result) {
 								vte.resolveTypeToClass(result);

@@ -666,7 +666,7 @@ public class DeduceTypes2 {
 		aVte.getGenType().setResolved(aA); // README assuming OS_Type cannot represent namespaces
 		aVte.getGenType().setCi(ci);
 
-		ci. onResolve(new DoneCallback<EvaClass>() {
+		ci. onResolve(new DoneCallback<IEvaClass>() {
 			@Override
 			public void onDone(@NotNull EvaClass result) {
 				aVte.resolveTypeToClass(result);
@@ -2437,70 +2437,6 @@ public class DeduceTypes2 {
 		}
 	}
 
-	public class Zero {
-		private final Map<Object, IDeduceElement3> l = new HashMap<>();
-
-		public DeduceElement3_Function get(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
-			if (l.containsKey(aGeneratedFunction)) {
-				return (DeduceElement3_Function) l.get(aGeneratedFunction);
-			}
-
-			final DeduceElement3_Function de3 = _inj().new_DeduceElement3_Function(aDeduceTypes2, aGeneratedFunction);
-			l.put(aGeneratedFunction, de3);
-			return de3;
-		}
-
-		public DeduceElement3_ProcTableEntry get(final ProcTableEntry pte, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
-			if (l.containsKey(pte)) {
-				return (DeduceElement3_ProcTableEntry) l.get(pte);
-			}
-
-			final DeduceElement3_ProcTableEntry de3 = _inj().new_DeduceElement3_ProcTableEntry(pte, aDeduceTypes2, aGeneratedFunction);
-			l.put(pte, de3);
-			return de3;
-		}
-
-		public DeduceElement3_VariableTableEntry get(final VariableTableEntry vte, final BaseEvaFunction aGeneratedFunction) {
-			if (l.containsKey(vte)) {
-				return (DeduceElement3_VariableTableEntry) l.get(vte);
-			}
-
-			final DeduceElement3_VariableTableEntry de3 = _inj().new_DeduceElement3_VariableTableEntry(vte, DeduceTypes2.this, aGeneratedFunction);
-			l.put(vte, de3);
-			return de3;
-		}
-
-		public DeduceElement3_IdentTableEntry getIdent(final IdentTableEntry ite, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
-			if (l.containsKey(ite)) {
-				return (DeduceElement3_IdentTableEntry) l.get(ite);
-			}
-
-			final DeduceElement3_IdentTableEntry de3 = _inj().new_DeduceElement3_IdentTableEntry(ite);
-			de3.setDeduceTypes(aDeduceTypes2, aGeneratedFunction);
-			l.put(ite, de3);
-			return de3;
-		}
-
-		// TODO search living classes?
-		public @NotNull List<EvaClass> findClassesFor(ClassStatement classStatement) {
-			List<EvaClass> c = _inj().new_LinkedList__EvaClass();
-
-			for (Map.Entry<Object, IDeduceElement3> entry : l.entrySet()) {
-				if (entry.getKey() instanceof EvaFunction evaFunction) {
-					if (evaFunction.getFD().getParent() == classStatement) {
-						var cls = (EvaClass) entry.getValue().generatedFunction().getGenClass();
-
-						assert cls.getKlass() == classStatement;
-
-						c.add(cls);
-					}
-				}
-			}
-
-			return c;
-		}
-	}
-
 	public static class DeduceTypes2Injector {
 		public List<DE3_Active> new_ArrayList__DE3_Active() {
 			return new ArrayList<>();
@@ -2526,7 +2462,7 @@ public class DeduceTypes2 {
 		//	return new DefaultGenerateResultSink(aPa);
 		//}
 
-		public List<EvaClass> new_LinkedList__EvaClass() {
+		public List<IEvaClass> new_LinkedList__EvaClass() {
 			return new ArrayList<>();
 		}
 
@@ -3068,6 +3004,70 @@ public class DeduceTypes2 {
 			result.setFunctionInvocation(aFunctionInvocation);
 			result.setNode(aEvaFunction);
 			return result;
+		}
+	}
+
+	public class Zero {
+		private final Map<Object, IDeduceElement3> l = new HashMap<>();
+
+		public DeduceElement3_Function get(final DeduceTypes2 aDeduceTypes2, final BaseEvaFunction aGeneratedFunction) {
+			if (l.containsKey(aGeneratedFunction)) {
+				return (DeduceElement3_Function) l.get(aGeneratedFunction);
+			}
+
+			final DeduceElement3_Function de3 = _inj().new_DeduceElement3_Function(aDeduceTypes2, aGeneratedFunction);
+			l.put(aGeneratedFunction, de3);
+			return de3;
+		}
+
+		public DeduceElement3_ProcTableEntry get(final ProcTableEntry pte, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+			if (l.containsKey(pte)) {
+				return (DeduceElement3_ProcTableEntry) l.get(pte);
+			}
+
+			final DeduceElement3_ProcTableEntry de3 = _inj().new_DeduceElement3_ProcTableEntry(pte, aDeduceTypes2, aGeneratedFunction);
+			l.put(pte, de3);
+			return de3;
+		}
+
+		public DeduceElement3_VariableTableEntry get(final VariableTableEntry vte, final BaseEvaFunction aGeneratedFunction) {
+			if (l.containsKey(vte)) {
+				return (DeduceElement3_VariableTableEntry) l.get(vte);
+			}
+
+			final DeduceElement3_VariableTableEntry de3 = _inj().new_DeduceElement3_VariableTableEntry(vte, DeduceTypes2.this, aGeneratedFunction);
+			l.put(vte, de3);
+			return de3;
+		}
+
+		public DeduceElement3_IdentTableEntry getIdent(final IdentTableEntry ite, final BaseEvaFunction aGeneratedFunction, final DeduceTypes2 aDeduceTypes2) {
+			if (l.containsKey(ite)) {
+				return (DeduceElement3_IdentTableEntry) l.get(ite);
+			}
+
+			final DeduceElement3_IdentTableEntry de3 = _inj().new_DeduceElement3_IdentTableEntry(ite);
+			de3.setDeduceTypes(aDeduceTypes2, aGeneratedFunction);
+			l.put(ite, de3);
+			return de3;
+		}
+
+		// TODO search living classes?
+		public @NotNull List<IEvaClass> findClassesFor(ClassStatement classStatement) {
+			List<IEvaClass> c = _inj().new_LinkedList__EvaClass();
+
+			for (Map.Entry<Object, IDeduceElement3> entry : l.entrySet()) {
+				if (entry.getKey() instanceof EvaFunction evaFunction) {
+					if (evaFunction.getFD().getParent() == classStatement) {
+						var cls = (IEvaClass) entry.getValue().generatedFunction().getGenClass();
+
+						assert cls.getKlass() == classStatement;
+
+						c.add(cls);
+					}
+				}
+			}
+
+			return c;
 		}
 	}
 

@@ -234,7 +234,7 @@ class Found_Element_For_ITE {
 				}
 			});
 		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(new DoneCallback<EvaClass>() {
+			classInvocation. onResolve(new DoneCallback<IEvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {
 					aGenType.setNode(result);

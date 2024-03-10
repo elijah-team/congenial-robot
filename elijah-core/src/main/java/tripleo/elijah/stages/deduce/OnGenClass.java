@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.deduce;
 
-import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 
 @FunctionalInterface
 public interface OnGenClass {
-	void accept(final EvaClass aGeneratedClass);
+	void accept(final IEvaClass aGeneratedClass);
 }

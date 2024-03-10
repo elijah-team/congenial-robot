@@ -172,7 +172,7 @@ public class DeduceLocalVariable {
 					vte.getType().genType.genCI(null, deduceTypes2, deduceTypes2._errSink(), deduceTypes2.phase);
 					final @Nullable ClassInvocation classInvocation = (ClassInvocation) vte.getType().genType.getCi();
 					if (classInvocation != null) {
-						classInvocation. onResolve((EvaClass aEvaClass) -> {
+						classInvocation. onResolve((IEvaClass aEvaClass) -> {
                             vte.resolveTypeToClass(aEvaClass);
                             vte.getGenType().copy(vte.getType().genType); // TODO who knows if this is necessary?
                         });
@@ -245,7 +245,7 @@ public class DeduceLocalVariable {
 					}
 
 					if (genType.getCi() != null) { // TODO we may need this call...
-						((ClassInvocation) genType.getCi()). onResolve(new DoneCallback<EvaClass>() {
+						((ClassInvocation) genType.getCi()). onResolve(new DoneCallback<IEvaClass>() {
 							@Override
 							public void onDone(@NotNull EvaClass result) {
 								genType.setNode(result);

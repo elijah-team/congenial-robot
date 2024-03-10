@@ -11,7 +11,7 @@ import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
 import tripleo.elijah.nextgen.reactive.Reactivable;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 import tripleo.elijah.stages.gen_generic.*;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.DefaultGenerateResultSink;
@@ -128,7 +128,7 @@ class DE3_ActivePTE implements DE3_Active {
 
     //@SuppressWarnings("unused")
     private void __do_001(final @NotNull GenerateFiles generateC,
-                          final EvaClass node,
+                          final IEvaClass node,
                           final DeducePhase deducePhase,
                           final GenerateResultSink resultSink,
                           final GenerateResultEnv fg) {

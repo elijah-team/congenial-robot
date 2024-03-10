@@ -200,8 +200,8 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 	}
 
 	public @Nullable EvaNode getResolved() {
-		EvaClass R    = null;
-		Context  ectx = principal.getIdent().getContext();
+		IEvaClass R    = null;
+		Context   ectx = principal.getIdent().getContext();
 
 		if (_type.typeTableEntry().genType.getTypeName() == null) {
 			// README we don't actually care about the typeName, we just
@@ -237,7 +237,7 @@ public class DeduceElement3_IdentTableEntry extends DefaultStateful implements I
 			// produce results.
 			final Operation2<GenType> or = _type.resolved(ectx);
 			if (or.mode() == Mode.SUCCESS) {
-				R = (EvaClass) or.success().getResolved();
+				R = (IEvaClass) or.success().getResolved();
 			}
 
 			assert R != null;

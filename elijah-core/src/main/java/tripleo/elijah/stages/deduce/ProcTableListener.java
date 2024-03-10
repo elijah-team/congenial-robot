@@ -112,7 +112,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 
 			if (co != null) {
 				co.setConstructable(pte);
-				ci2. onResolve((EvaClass  evaClass) -> {
+				ci2. onResolve((IEvaClass evaClass) -> {
 					resolved_element_pte_ClassStatement_EvaClass(evaClass, e, co, dcs);
 				} );
 			}
@@ -125,7 +125,7 @@ public class ProcTableListener implements BaseTableEntry.StatusListener {
 	//	this.fi = aFi2;
 	//}
 
-	private static void resolved_element_pte_ClassStatement_EvaClass(final EvaClass result, final @NotNull ClassStatement e, final @NotNull Constructable co, final @NotNull DG_ClassStatement dcs) {
+	private static void resolved_element_pte_ClassStatement_EvaClass(final IEvaClass result, final @NotNull ClassStatement e, final @NotNull Constructable co, final @NotNull DG_ClassStatement dcs) {
 		//System.err.println("828282 "+((ClassStatement) e).name());
 		if ((e.name()).sameName("Foo")) {
 			System.out.println("828282 Foo found");

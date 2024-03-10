@@ -6,7 +6,6 @@ import tripleo.elijah.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
-import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.types.OS_FuncType;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.gen_fn.*;
@@ -130,7 +129,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 					if (dotleft.getLeft() instanceof final @NotNull IdentExpression rl && dotleft.getRight() instanceof final @NotNull IdentExpression rr) {
 
 						if (rl.getText().equals("a1")) {
-							final EvaClass[] gc = new EvaClass[1];
+							final IEvaClass[] gc = new IEvaClass[1];
 
 							final InstructionArgument vrl = generatedFunction.vte_lookup(rl.getText());
 
@@ -168,7 +167,7 @@ public class DeduceElement3_ProcTableEntry implements IDeduceElement3 {
 
 									if (attached instanceof final @NotNull OS_FuncType funcType) {
 
-										final EvaClass x = gc[0];
+										final IEvaClass x = gc[0];
 
 										fi2.generatePromise().then(gf -> {
 											final int y4 = 4;

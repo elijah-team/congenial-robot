@@ -8,21 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaConstructor;
-import tripleo.elijah.stages.gen_fn.EvaContainer;
-import tripleo.elijah.stages.gen_fn.EvaContainerNC;
-import tripleo.elijah.stages.gen_fn.EvaFunction;
-import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.stages.gen_fn.EvaNode;
-import tripleo.elijah.stages.gen_fn.GenType;
-import tripleo.elijah.stages.gen_fn.GenerateFunctions;
-import tripleo.elijah.stages.gen_fn.GeneratePhase;
-import tripleo.elijah.stages.gen_fn.IdentTableEntry;
-import tripleo.elijah.stages.gen_fn.ProcTableEntry;
-import tripleo.elijah.stages.gen_fn.TypeTableEntry;
-import tripleo.elijah.stages.gen_fn.WlGenerateClass;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.util.EventualRegister;
 import tripleo.elijah.comp.i.Compilation;
@@ -503,8 +489,8 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
                             k.classFound(evaClass);
                         }
                     } else {
-                        @NotNull Collection<EvaClass> cmv = evaClass.classMap.values();
-                        for (@NotNull EvaClass aClass : cmv) {
+                        @NotNull Collection<IEvaClass> cmv = evaClass.classMap.values();
+                        for (@NotNull IEvaClass aClass : cmv) {
                             if (aClass.getKlass() == classStatement) {
                                 Collection<OnClass> ks = onclasses.get(classStatement);
                                 for (@NotNull OnClass k : ks) {
@@ -561,14 +547,14 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
     }
 
     private void resolveAllVariableTableEntries1(final @NotNull GeneratedClasses generatedClasses1) {
-        @NotNull List<EvaClass> gcs                           = _inj().new_ArrayList__EvaClass();
-        boolean                 all_resolve_var_table_entries = false;
+        @NotNull List<IEvaClass> gcs                           = _inj().new_ArrayList__EvaClass();
+        boolean                  all_resolve_var_table_entries = false;
         while (!all_resolve_var_table_entries) {
             if (generatedClasses1.size() == 0) break;
             // not only am i insane, but i want to see if qodana/any body else is too
             final List<EvaNode> copy = generatedClasses1.copy();
             for (EvaNode evaNode : copy) {
-                if (evaNode instanceof final @NotNull EvaClass evaClass) {
+                if (evaNode instanceof final @NotNull IEvaClass evaClass) {
                     all_resolve_var_table_entries = evaClass.resolve_var_table_entries(this); // TODO use a while loop to get all classes
                 }
             }
@@ -851,7 +837,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 
         void action() {
             if (invocation instanceof ClassInvocation)
-                ((ClassInvocation) invocation).onResolve(new DoneCallback<EvaClass>() {
+                ((ClassInvocation) invocation).onResolve(new DoneCallback<IEvaClass>() {
                     @Override
                     public void onDone(final EvaClass result) {
                         defaultAction(result);
