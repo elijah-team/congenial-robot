@@ -33,9 +33,9 @@ public class WlGenerateClass implements WorkJob {
     private final          GenerateFunctions           generateFunctions;
     private final @NotNull RegisterClassInvocation_env __passthru_env;
     private                boolean                     _isDone       = false;
-    private final          ICodeRegistrar              cr;
+    private final          ICodeRegistrar      cr;
     //private       EvaClass       Result;
-    private final          Eventual<EvaClass>          resultPromise = new Eventual<>();
+    private final          Eventual<IEvaClass> resultPromise = new Eventual<>();
 
     public WlGenerateClass(GenerateFunctions aGenerateFunctions,
                            @NotNull ClassInvocation aClassInvocation,
@@ -77,7 +77,7 @@ public class WlGenerateClass implements WorkJob {
 
     @Override
     public void run(WorkManager aWorkManager) {
-        final Eventual<EvaClass> resolvePromise = classInvocation.resolveDeferred();
+        final Eventual<IEvaClass> resolvePromise = classInvocation.resolveDeferred();
 
         resolvePromise.then(resultPromise::resolve); // 24/02/28 whoa
 
@@ -102,7 +102,7 @@ public class WlGenerateClass implements WorkJob {
 
 			break;
 		case RESOLVED:
-			Holder<EvaClass> hgc = new Holder<EvaClass>();
+			Holder<IEvaClass> hgc = new Holder<IEvaClass>();
 			resolvePromise.then(hgc::set);
 			//Result = hgc.get();
 			break;
@@ -112,7 +112,7 @@ public class WlGenerateClass implements WorkJob {
 		_isDone = true;
 	}
 
-	public void resultPromise(final DoneCallback<EvaClass> cb) {
+	public void resultPromise(final DoneCallback<IEvaClass> cb) {
 		resultPromise.then(cb);
 	}
 }

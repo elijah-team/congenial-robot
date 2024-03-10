@@ -122,7 +122,7 @@ public class GenTypeImpl implements GenType {
 				}
 			});
 		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(new DoneCallback<EvaClass>() {
+			classInvocation. onResolve(new DoneCallback<IEvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {
 					node = result;
@@ -157,7 +157,7 @@ public class GenTypeImpl implements GenType {
 				}
 			});
 		} else if (invocation instanceof final @NotNull ClassInvocation classInvocation) {
-			classInvocation. onResolve(new DoneCallback<EvaClass>() {
+			classInvocation. onResolve(new DoneCallback<IEvaClass>() {
 				@Override
 				public void onDone(final EvaClass result) {
 					node = result;

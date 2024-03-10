@@ -63,7 +63,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 	public void run(WorkManager aWorkManager) {
 		if (functionInvocation.generateDeferred().isPending()) {
 			final ClassStatement klass     = functionInvocation.getClassInvocation().getKlass();
-			functionInvocation.getClassInvocation(). onResolve(new DoneCallback<EvaClass>() {
+			functionInvocation.getClassInvocation(). onResolve(new DoneCallback<IEvaClass>() {
 				@Override
 				public void onDone(EvaClass genClass) {
 					assert Result == null;
@@ -112,7 +112,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 //		lgf.add(gf);
 
 		final ClassInvocation ci = functionInvocation.getClassInvocation();
-		ci. onResolve(new DoneCallback<EvaClass>() {
+		ci. onResolve(new DoneCallback<IEvaClass>() {
 			@Override
 			public void onDone(@NotNull EvaClass result) {
 				codeRegistrar.registerFunction1(gf);

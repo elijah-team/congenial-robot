@@ -34,9 +34,9 @@ import java.util.Map;
  */
 public abstract class EvaContainerNC extends AbstractDependencyTracker implements EvaContainer, IDependencyReferent {
 	static @NotNull Diagnostic                                 _def_VarNotFound     = new VarNotFound();
-	private final   Dependency                                 dependency           = new Dependency(this);
-	public @NotNull Map<ClassStatement, EvaClass>              classMap             = new HashMap<ClassStatement, EvaClass>();
-	public @NotNull Map<FunctionDef, EvaFunction>              functionMap          = new HashMap<FunctionDef, EvaFunction>();
+	private final   Dependency                     dependency  = new Dependency(this);
+	public @NotNull Map<ClassStatement, IEvaClass> classMap    = new HashMap<ClassStatement, IEvaClass>();
+	public @NotNull Map<FunctionDef, EvaFunction>  functionMap = new HashMap<FunctionDef, EvaFunction>();
 	public          boolean                                    generatedAlready     = false;
 	public @NotNull List<VarTableEntry>                        varTable             = new ArrayList<VarTableEntry>();
 	@NotNull        Multimap<FunctionDef, FunctionMapDeferred> functionMapDeferreds = ArrayListMultimap.create();
@@ -47,7 +47,7 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		varTable.add(new VarTableEntry(vs, vs.getNameToken(), vs.initialValue(), vs.typeName(), vs.getParent().getParent(), aPassthruEnv));
 	}
 
-	public void addClass(ClassStatement aClassStatement, EvaClass aEvaClass) {
+	public void addClass(ClassStatement aClassStatement, IEvaClass aEvaClass) {
 		classMap.put(aClassStatement, aEvaClass);
 	}
 

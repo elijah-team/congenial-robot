@@ -22,9 +22,9 @@ public class GenerateFunctions2 {
 		this.LOG = gf1.LOG;
 	}
 
-	public EvaClass generateClass(final ClassStatement aClassStatement,
-								  final ClassInvocation aClassInvocation,
-								  final RegisterClassInvocation_env aPassthruEnv) {
+	public IEvaClass generateClass(final ClassStatement aClassStatement,
+								   final ClassInvocation aClassInvocation,
+								   final RegisterClassInvocation_env aPassthruEnv) {
 		final EvaClass        gc   = new EvaClass(aClassStatement, module);
 		final __GenerateClass gcgc = new __GenerateClass(LOG, aPassthruEnv);
 

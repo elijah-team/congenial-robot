@@ -4,16 +4,11 @@ import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaConstructor;
-import tripleo.elijah.stages.gen_fn.EvaFunction;
-import tripleo.elijah.stages.gen_fn.EvaNode;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.pp.IPP_Constructor;
 import tripleo.elijah.stages.pp.IPP_Function;
-import tripleo.elijah.stages.pp.PP_Constructor;
-import tripleo.elijah.stages.pp.PP_Function;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 
@@ -36,11 +31,11 @@ public interface GenerateFiles extends CodeGenerator {
 	void finishUp(final GenerateResult aGenerateResult, final WorkManager wm, final WorkList aWorkList);
 
 	@NotNull
-	static Collection<EvaNode> classes_to_list_of_generated_nodes(@NotNull Collection<EvaClass> aEvaClasses) {
-		return Collections2.transform(aEvaClasses, new Function<EvaClass, EvaNode>() {
+	static Collection<EvaNode> classes_to_list_of_generated_nodes(@NotNull Collection<IEvaClass> aEvaClasses) {
+		return Collections2.transform(aEvaClasses, new Function<IEvaClass, EvaNode>() {
 			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaClass input) {
+			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable IEvaClass input) {
 				return input;
 			}
 		});

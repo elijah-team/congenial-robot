@@ -371,7 +371,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 	/**
 	 * See {@link WlGenerateClass#run(WorkManager)}
 	 */
-	public @NotNull EvaClass generateClass(@NotNull ClassStatement aClassStatement, ClassInvocation aClassInvocation) {
+	public @NotNull IEvaClass generateClass(@NotNull ClassStatement aClassStatement, ClassInvocation aClassInvocation) {
 		@NotNull EvaClass Result = generateClass(aClassStatement);
 		Result.ci = aClassInvocation;
 		return Result;
@@ -444,8 +444,8 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 			gi.generate_case_conditional((CaseConditional) item);
 		} else if (item instanceof final ClassStatement klass) {
 			// TODO this still has no ClassInvocation
-			@NotNull EvaClass        gc        = generateClass(klass);
-			int                      ite_index = gf.addIdentTableEntry((klass).getNameNode(), cctx);
+			@NotNull IEvaClass gc        = generateClass(klass);
+			int                ite_index = gf.addIdentTableEntry((klass).getNameNode(), cctx);
 			@NotNull IdentTableEntry ite       = gf.getIdentTableEntry(ite_index);
 			ite.resolveTypeToClass(gc);
 			ite.onDeduceTypes2(dt2 -> {

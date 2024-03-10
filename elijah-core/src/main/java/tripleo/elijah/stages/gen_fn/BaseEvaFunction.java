@@ -44,8 +44,8 @@ import static tripleo.elijah.stages.deduce.DeduceTypes2.to_int;
  * Created 9/10/20 2:57 PM
  */
 public abstract class BaseEvaFunction extends AbstractDependencyTracker implements EvaNode, DeduceTypes2.ExpectationBase, IDependencyReferent, IEvaFunctionBase {
-	private final DeferredObject<EvaClass, Void, Void> _p_assignEvaClass = new DeferredObject<>();
-	private final Dependency                           dependency        = new Dependency(this);
+	private final DeferredObject<IEvaClass, Void, Void> _p_assignEvaClass = new DeferredObject<>();
+	private final Dependency                            dependency        = new Dependency(this);
 	private final   List<Label>                         labelList         = new ArrayList<Label>();
 	//
 	// region INSTRUCTIONS
@@ -495,7 +495,7 @@ public abstract class BaseEvaFunction extends AbstractDependencyTracker implemen
 		genClass = aNode;
 
 		if (aNode instanceof EvaClass)
-			_p_assignEvaClass.resolve((EvaClass) aNode);
+			_p_assignEvaClass.resolve((IEvaClass) aNode);
 	}
 
 	@Override
