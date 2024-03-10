@@ -8,18 +8,12 @@ import tripleo.elijah.util.Operation;
 
 import java.util.List;
 
-public enum U {
-	;
-
+public enum U { ;
 	public static void _run_action_list__internal(final @NotNull CR_State crState, final @NotNull CB_Output out, final CR_Action each, final @NotNull List<Operation<Ok>> crActionResultList) {
 		each.attach(crState.runner());
 		final Eventual<Operation<Ok>> eoo = new Eventual<>();
-		eoo.then(res -> {
-			crActionResultList.add(res);
-		});
+		eoo.then(crActionResultList::add);
 		each.execute(crState, out, eoo);
 		assert eoo.isResolved(); // !?
 	}
-
-
 }
