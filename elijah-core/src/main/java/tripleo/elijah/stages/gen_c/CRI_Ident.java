@@ -57,7 +57,7 @@ public class CRI_Ident {
 		final OS_Element resolved_element = ite.getResolvedElement();
 		final String[]   text             = {null};
 
-		final EvaClass _cheat = aCReference._cheat;
+		final IEvaClass _cheat = aCReference._cheat;
 
 		final @Nullable GenerateC_Item repo_element = aCReference._repo().itemFor(resolved_element);
 
@@ -152,7 +152,7 @@ public class CRI_Ident {
 							addRef.accept(new CReference.Reference(text3, CReference.Ref.LITERAL, null));
 						} else if (externalRef instanceof EvaClass) {
 							assert false;
-							final String text3 = String.format("zN%d_instance", ((EvaClass) externalRef).getCode());
+							final String text3 = String.format("zN%d_instance", ((IEvaClass) externalRef).getCode());
 							addRef.accept(new CReference.Reference(text3, CReference.Ref.LITERAL, null));
 						} else
 							throw new IllegalStateException();

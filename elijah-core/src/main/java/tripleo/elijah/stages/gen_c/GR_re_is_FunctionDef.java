@@ -6,15 +6,10 @@ import lombok.Getter;
 
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.jdeferred2.DoneCallback;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.util.Eventual;
 
 import tripleo.elijah.lang.i.OS_Element;
-
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaNode;
-
-import tripleo.elijah.stages.gen_fn.IdentTableEntry;
-import tripleo.elijah.stages.gen_fn.ProcTableEntry;
 
 @EqualsAndHashCode
 // @EqualsHashCode
@@ -23,7 +18,7 @@ public final class GR_re_is_FunctionDef implements GRRR, GR_EvaNodeAble {
 	@Getter
 	private final ProcTableEntry  pte;
 	@Getter
-	private final EvaClass        cheatClass;
+	private final IEvaClass       cheatClass;
 	@Getter
 	private final IdentTableEntry ite;
 	@Getter
@@ -35,7 +30,7 @@ public final class GR_re_is_FunctionDef implements GRRR, GR_EvaNodeAble {
 
 	// TODO too many params make jack feel like a cheater
 	public GR_re_is_FunctionDef(final ProcTableEntry aPte,
-								final EvaClass a_cheat,
+								final IEvaClass a_cheat,
 								final IdentTableEntry aIte,
 								final CRI_Ident aCRIIdent,
 								final GI_FunctionDef aGiItem) {

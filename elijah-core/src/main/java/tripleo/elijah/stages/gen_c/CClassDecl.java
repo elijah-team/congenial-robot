@@ -10,7 +10,7 @@ package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
-import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
@@ -20,11 +20,11 @@ import java.util.ArrayList;
  * Created 12/24/20 7:42 AM
  */
 public class CClassDecl {
-	private final EvaClass evaClass;
-	public        boolean  prim = false;
+	private final IEvaClass evaClass;
+	public        boolean   prim = false;
 	public        String   prim_decl;
 
-	public CClassDecl(EvaClass aEvaClass) {
+	public CClassDecl(IEvaClass aEvaClass) {
 		this.evaClass = aEvaClass;
 	}
 

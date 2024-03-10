@@ -56,21 +56,7 @@ import tripleo.elijah.stages.gen_c.statements.FnCallArgs_Statement;
 import tripleo.elijah.stages.gen_c.statements.FnCallArgs_Statement2;
 import tripleo.elijah.stages.gen_c.statements.GCX_ConstantString;
 import tripleo.elijah.stages.gen_c.statements.GetAssignmentValueArgsStatement;
-import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
-import tripleo.elijah.stages.gen_fn.BaseTableEntry;
-import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaConstructor;
-import tripleo.elijah.stages.gen_fn.EvaContainer;
-import tripleo.elijah.stages.gen_fn.EvaContainerNC;
-import tripleo.elijah.stages.gen_fn.EvaFunction;
-import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.stages.gen_fn.EvaNode;
-import tripleo.elijah.stages.gen_fn.IEvaFunctionBase;
-import tripleo.elijah.stages.gen_fn.IdentTableEntry;
-import tripleo.elijah.stages.gen_fn.ProcTableEntry;
-import tripleo.elijah.stages.gen_fn.TypeTableEntry;
-import tripleo.elijah.stages.gen_fn.VariableTableEntry;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.CodeGenerator;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
@@ -473,7 +459,7 @@ public class GenerateC
 
   @NotNull
   public String getTypeName(EvaNode aNode) {
-    if (aNode instanceof EvaClass ec) {
+    if (aNode instanceof IEvaClass ec) {
       return a_lookup(ec).getTypeNameString();
     }
     if (aNode instanceof EvaNamespace en) {
@@ -565,7 +551,7 @@ public class GenerateC
     if (o.resolvedType() != null) {
       EvaNode xx = o.resolvedType();
       if (xx instanceof EvaClass) {
-        typeName = GetTypeName.forGenClass((EvaClass) xx);
+        typeName = GetTypeName.forGenClass((IEvaClass) xx);
       } else if (xx instanceof EvaNamespace) {
         typeName = GetTypeName.forGenNamespace((EvaNamespace) xx);
       } else throw new NotImplementedException();
@@ -721,13 +707,13 @@ public class GenerateC
 
     static String getTypeNameForEvaNode(@NotNull EvaNode aEvaNode) {
       String ty;
-      if (aEvaNode instanceof EvaClass) ty = forGenClass((EvaClass) aEvaNode);
+      if (aEvaNode instanceof EvaClass) ty = forGenClass((IEvaClass) aEvaNode);
       else if (aEvaNode instanceof EvaNamespace) ty = forGenNamespace((EvaNamespace) aEvaNode);
       else ty = "Error_Unknown_GenClass";
       return ty;
     }
 
-    static String forGenClass(@NotNull EvaClass aEvaClass) {
+    static String forGenClass(@NotNull IEvaClass aEvaClass) {
       String z;
       z = String.format("Z%d", aEvaClass.getCode());
       return z;

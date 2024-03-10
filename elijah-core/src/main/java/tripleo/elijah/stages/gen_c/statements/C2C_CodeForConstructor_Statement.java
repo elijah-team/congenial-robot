@@ -5,6 +5,7 @@ import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.stages.gen_c.CClassDecl;
 import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.util.BufferTabbedOutputStream;
 
 public class C2C_CodeForConstructor_Statement implements EG_Statement {
@@ -53,7 +54,7 @@ public class C2C_CodeForConstructor_Statement implements EG_Statement {
 			else if (decl.prim_decl.equals("bool"))
 				tos.put_string_ln("R->vsv = false;");
 		} else {
-			for (final EvaClass.VarTableEntry o : x.varTable) {
+			for (final IEvaClass.VarTableEntry o : x.varTable) {
 //					final String typeName = getTypeNameForVarTableEntry(o);
 				// TODO this should be the result of getDefaultValue for each type
 				tos.put_string_ln(String.format("R->vm%s = 0;", o.nameToken));

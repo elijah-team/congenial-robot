@@ -475,7 +475,7 @@ public class Generate_Code_For_Method {
 
 		final EvaNode res = vte.resolvedType();
 		if (res instanceof EvaClass) {
-			final String z = GenerateC.GetTypeName.forGenClass((EvaClass) res);
+			final String z = GenerateC.GetTypeName.forGenClass((IEvaClass) res);
 			final String s = String.format("%s* %s;", z, target_name);
 			return Operation2.success(new EG_SingleStatement(s, EX_Explanation.withMessage("actionDECL with resolved type")));
 		}

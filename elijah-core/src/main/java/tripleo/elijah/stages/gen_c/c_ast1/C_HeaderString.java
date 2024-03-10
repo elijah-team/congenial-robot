@@ -2,15 +2,15 @@ package tripleo.elijah.stages.gen_c.c_ast1;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaContainerNC;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.logging.ElLog;
 
 import java.util.function.Supplier;
 
 public class C_HeaderString {
-	public static @NotNull C_HeaderString forClass(final EvaClass aEvaClass,
+	public static @NotNull C_HeaderString forClass(final IEvaClass aEvaClass,
 												   final @NotNull Supplier<String> classNameSupplier,
 												   final String return_type,
 												   final String name,

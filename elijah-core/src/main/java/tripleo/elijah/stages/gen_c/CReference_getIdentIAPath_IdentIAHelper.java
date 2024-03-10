@@ -151,7 +151,7 @@ class CReference_getIdentIAPath_IdentIAHelper {
 					}
 				}
 
-			} else if (resolved_node instanceof final @NotNull EvaClass generatedClass) {
+			} else if (resolved_node instanceof final @NotNull IEvaClass generatedClass) {
 				this.code = generatedClass.getCode();
 			}
 		}

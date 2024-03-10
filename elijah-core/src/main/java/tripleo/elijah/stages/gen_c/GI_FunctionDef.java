@@ -20,7 +20,7 @@ public class GI_FunctionDef implements GenerateC_Item {
 	}
 
 	void _re_is_FunctionDef(final @Nullable ProcTableEntry pte,
-							   final EvaClass a_cheat,
+							   final IEvaClass a_cheat,
 							   final @NotNull IdentTableEntry ite,
 							   final Eventual<EvaNode> resolvedP
 							  ) {

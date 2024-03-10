@@ -74,7 +74,7 @@ class Generate_Method_Header {
 		final String         s2;
 		final C_HeaderString headerString;
 
-		if (parent instanceof EvaClass st) {
+		if (parent instanceof IEvaClass st) {
 			var st2 = gc.a_lookup(st);
 
 			headerString = C_HeaderString.forClass(st, () -> st2.getTypeNameString(), return_type, name, args_string, LOG);
@@ -107,7 +107,7 @@ class Generate_Method_Header {
 		final EvaContainerNC parent = (EvaContainerNC) gf.getGenClass();
 
 		if (parent instanceof EvaClass) {
-			final EvaClass st = (EvaClass) parent;
+			final IEvaClass st = (IEvaClass) parent;
 
 			@NotNull final C_HeaderString chs = C_HeaderString.forClass(st,
 																		() -> GenerateC.GetTypeName.forGenClass(st),
@@ -172,7 +172,7 @@ class Generate_Method_Header {
 				final int code = nc.getCode();
 
 				// HACK
-				if (res instanceof EvaClass ec) {
+				if (res instanceof IEvaClass ec) {
 					var classStatement = ec.getKlass();
 
 					final OS_Module module             = classStatement.getContext().module();

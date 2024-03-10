@@ -11,6 +11,7 @@ import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.gen_c.CClassDecl;
 import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_fn.EvaClass;
+import tripleo.elijah.stages.gen_fn.IEvaClass;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.util.BufferTabbedOutputStream;
@@ -80,7 +81,7 @@ public class GarishClass {
 			else
 				tos.put_string_ln("R->vsv = false;");
 		} else {
-			for (EvaClass.VarTableEntry o : x.varTable) {
+			for (IEvaClass.VarTableEntry o : x.varTable) {
 //					final String typeName = getTypeNameForVarTableEntry(o);
 				// TODO this should be the result of getDefaultValue for each type
 				tos.put_string_ln(String.format("R->vm%s = 0;", o.nameToken));
@@ -119,7 +120,7 @@ public class GarishClass {
 		tosHdr.incr_tabs();
 		tosHdr.put_string_ln("int _tag;");
 		if (!decl.prim) {
-			for (EvaClass.VarTableEntry o : x.varTable) {
+			for (IEvaClass.VarTableEntry o : x.varTable) {
 				final String typeName = aGenerateC.getTypeNameGNCForVarTableEntry(o);
 				tosHdr.put_string_ln(String.format("%s vm%s;", typeName, o.nameToken));
 			}

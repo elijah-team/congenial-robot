@@ -42,10 +42,10 @@ public class CReference {
 	//
 	public        String                       __cheat_ret;
 	private       List<String>                 args;
-	private       ArrayList<CR_ReferenceItem1> items;
 	//
 	//
-	@Nullable     EvaClass                     _cheat = null;
+	@Nullable IEvaClass                    _cheat = null;
+	private   ArrayList<CR_ReferenceItem1> items;
 
 	public GI_Repo _repo() {
 		return _repo;

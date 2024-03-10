@@ -3,10 +3,7 @@ package tripleo.elijah.stages.gen_c;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.stages.gen_c.statements.C2C_CodeForConstructor_Statement;
-import tripleo.elijah.stages.gen_fn.EvaClass;
-import tripleo.elijah.stages.gen_fn.EvaConstructor;
-import tripleo.elijah.stages.gen_fn.EvaContainerNC;
-import tripleo.elijah.stages.gen_fn.EvaNamespace;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.util.buffer.Buffer;
@@ -115,7 +112,7 @@ class C2C_CodeForConstructor implements Generate_Code_For_Method.C2C_Results {
 		}
 	}
 
-	private String getHeaderString(final EvaClass x, final String class_name, final int class_code, final String constructorName) {
+	private String getHeaderString(final IEvaClass x, final String class_name, final int class_code, final String constructorName) {
 		final String                 header_string;
 		final Generate_Method_Header gmh         = new Generate_Method_Header(gf, generateCodeForMethod._gc(), generateCodeForMethod.LOG);
 		final String                 args_string = gmh.args_string;

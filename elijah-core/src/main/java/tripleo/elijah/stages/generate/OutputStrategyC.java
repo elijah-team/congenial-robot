@@ -61,14 +61,14 @@ public class OutputStrategyC {
 			c = generatedFunction.getParent(); // TODO fixme
 		}
 		if (c instanceof EvaClass)
-			return nameForClass((EvaClass) c, aTy);
+			return nameForClass((IEvaClass) c, aTy);
 		else if (c instanceof EvaNamespace)
 			return nameForNamespace((EvaNamespace) c, aTy);
 		assert false;
 		return null;
 	}
 
-	public String nameForClass(final @NotNull EvaClass aX, final GenerateResult.@NotNull TY aTy) {
+	public String nameForClass(final @NotNull IEvaClass aX, final GenerateResult.@NotNull TY aTy) {
 		return nameForClass1(aX, aTy).getFilename();
 	}
 
@@ -107,7 +107,7 @@ public class OutputStrategyC {
 		return new OFC_NFN(lsp0, name0, filename, extension0).getFilename();
 	}
 
-	public @NotNull EOT_FileNameProvider nameForClass1(@NotNull EvaClass aEvaClass, GenerateResult.@NotNull TY aTy) {
+	public @NotNull EOT_FileNameProvider nameForClass1(@NotNull IEvaClass aEvaClass, GenerateResult.@NotNull TY aTy) {
 		if (aEvaClass.module().isPrelude()) {
 			// We are dealing with the Prelude
 /*
@@ -227,7 +227,7 @@ public class OutputStrategyC {
 	}
 
 	@Contract(pure = true)
-	private @NotNull String a_pkg(final @NotNull EvaClass aEvaClass) {
+	private @NotNull String a_pkg(final @NotNull IEvaClass aEvaClass) {
 		final OS_Package pkg0 = aEvaClass.getKlass().getPackageName();
 		final OS_Package pkg;
 
@@ -247,7 +247,7 @@ public class OutputStrategyC {
 		return dir0;
 	}
 
-	private @NotNull String a_name(final @NotNull EvaClass aEvaClass, final @NotNull LibraryStatementPart lsp) {
+	private @NotNull String a_name(final @NotNull IEvaClass aEvaClass, final @NotNull LibraryStatementPart lsp) {
 		String name0;
 
 		switch (outputStrategy.per()) {
@@ -325,7 +325,7 @@ public class OutputStrategyC {
 		EvaNode c = aEvaConstructor.getGenClass();
 		if (c == null) c = aEvaConstructor.getParent(); // TODO fixme
 		if (c instanceof EvaClass)
-			return nameForClass((EvaClass) c, aTy);
+			return nameForClass((IEvaClass) c, aTy);
 		else if (c instanceof EvaNamespace)
 			return nameForNamespace((EvaNamespace) c, aTy);
 		return null;
