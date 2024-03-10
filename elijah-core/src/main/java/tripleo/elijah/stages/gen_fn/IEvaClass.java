@@ -12,6 +12,7 @@ import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
 import tripleo.elijah.stages.gen_generic.IDependencyReferent;
 
 import java.util.List;
+import java.util.function.Function;
 
 public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyReferent, GNCoded {
 	void addAccessNotation(AccessNotation an);
@@ -60,4 +61,6 @@ public interface IEvaClass extends DependencyTracker, EvaContainer, IDependencyR
 	void addFunction(FunctionDef aFunctionDef, EvaFunction aGf);
 
 	List<VarTableEntry> varTable();
+
+	void singleGenerate(Class<?> aKey, Function<Void, Boolean> f);
 }

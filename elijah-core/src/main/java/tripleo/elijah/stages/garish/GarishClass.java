@@ -23,22 +23,23 @@ public class GarishClass {
 
 	public void garish(final GenerateC aGenerateC, final GenerateResult gr, final @NotNull GenerateResultSink aResultSink) {
 		final LivingClass dlc = _lc;
-		final EvaClass    x   = dlc.evaNode();
+		final IEvaClass   x   = dlc.evaNode();
 
-		if (x.generatedAlready)
-			return; ///////////////////////////////////////////////////////////////////////////////////////throw new IllegalStateException("Error");
+		x.singleGenerate(getClass(), (nullVoid) -> {
+			switch (x.getKlass().getType()) {
+			// Don't generate class definition for these three
+			case INTERFACE:
+			case SIGNATURE:
+			case ABSTRACT:
+				return Boolean.FALSE;
+			default:
+				// FIXME this nonsense was supposed to be temporary ...
 
-		switch (x.getKlass().getType()) {
-		// Don't generate class definition for these three
-		case INTERFACE:
-		case SIGNATURE:
-		case ABSTRACT:
-			return;
-		}
-
-		//aResultSink.addClass_0(this, tos.getBuffer(), tosHdr.getBuffer());
-		aResultSink.addClass_1(this, gr, aGenerateC);
-		x.generatedAlready = true;
+				//aResultSink.addClass_0(this, tos.getBuffer(), tosHdr.getBuffer());
+				aResultSink.addClass_1(this, gr, aGenerateC);
+				return Boolean.TRUE;
+			}
+		});
 	}
 
 	public @NotNull BufferTabbedOutputStream getClassBuffer(final @NotNull GenerateC aGenerateC) {

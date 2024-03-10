@@ -8,9 +8,11 @@
  */
 package tripleo.elijah.stages.gen_fn;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -198,6 +200,66 @@ public class EvaClass extends EvaContainerNC implements IEvaClass {
 	@Override
 	public List<VarTableEntry> varTable() {
 		return varTable;
+	}
+
+	@Override
+	public void fixupUserClasses(final @NotNull DeduceTypes2 aDeduceTypes2, final Context aContext) {
+		for (VarTableEntry varTableEntry : varTable) {
+			varTableEntry.updatePotentialTypesCB = new VarTableEntry_UpdatePotentialTypesCB(aDeduceTypes2,
+																							varTableEntry, aContext, this);
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			/*=======================================*/
+			if (!varTableEntry._p_updatePotentialTypesCBPromise.isResolved()) {
+				varTableEntry._p_updatePotentialTypesCBPromise.resolve(varTableEntry.updatePotentialTypesCB);
+			}
+		}
+	}
+
+	@Override
+	public EvaFunction functionMapGet(final FunctionDef aFunctionDef) {
+		return functionMap.get(aFunctionDef);
+	}
+
+	@Override
+	public void putConstructor(final ConstructorDef aCd, final EvaConstructor aGf) {
+		constructors.put(aCd, aGf);
+	}
+
+	@Override
+	public void setLiving(final LivingClass aLiving) {
+		_living = aLiving;
+	}
+
+	@Override
+	public boolean generatedAlready() {
+		return generatedAlready; // !! HACK
+	}
+
+	@Override
+	public void singleGenerate(final Class<?> aKey, final Function<Void, Boolean> f) {
+		if (sgs.contains(aKey)) {
+			return;
+		}
+
+		Boolean b = f.apply(null);
+		if (b.booleanValue()) {
+		} else if (!(b.booleanValue())) {
+			// case indeterminate -> {//now we're talking}
+		}
+
+		sgs.add(aKey);
 	}
 
 	//@Override
