@@ -6,6 +6,8 @@ import tripleo.elijah.Eventual;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.sanaa.ElIntrinsics;
 import tripleo.elijah.stages.gen_fn.*;
+import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.util.ProgramMightBeWrongIfYouAreHere;
 import tripleo.elijah.world.i.LivingFunction;
 
 public class GI_FunctionDef implements GenerateC_Item {
@@ -20,56 +22,61 @@ public class GI_FunctionDef implements GenerateC_Item {
 	}
 
 	void _re_is_FunctionDef(final @Nullable ProcTableEntry pte,
-							   final EvaClass a_cheat,
-							   final @NotNull IdentTableEntry ite,
-							   final Eventual<EvaNode> resolvedP
-							  ) {
-		final boolean[]         qq        = {false};
+							final @Nullable EvaClass a_cheat,
+							final @NotNull  IdentTableEntry ite,
+							final @NotNull  Eventual<EvaNode> resolvedP
+						   ) {
+		final Z3 z3 = new Z3();
 
 		if (pte != null) {
 			pte.onFunctionInvocation(fi -> {
-				assert fi != null;
 				if (fi != null) {
-					fi.onGenerated(gen -> {
+					fi.onGenerated((BaseEvaFunction gen) -> {
+						//noinspection unused
+						final var _fi = fi;
 						assert gen != null;
-						qq[0] = true;
-						resolvedP.resolve(gen);
+						z3.a = gen;
 					});
+				} else {
+					throw new ProgramMightBeWrongIfYouAreHere("what in tarnation??");
 				}
 			});
 		}
 
 		{
-			ite.onResolvedType( resolved1->{
-				if (resolved1 instanceof EvaFunction) {
-					if (!qq[0]) resolvedP.resolve(resolved1);
-				} else if (resolved1 instanceof EvaClass) {
-					if (!qq[0]) resolvedP.resolve(resolved1);
+			ite.onResolvedType(resolvedIteEvaNode -> {
+				if (resolvedIteEvaNode instanceof EvaFunction) {
+					z3.b = resolvedIteEvaNode;
+				} else if (resolvedIteEvaNode instanceof EvaClass) {
+					z3.b = resolvedIteEvaNode;
 
 					// FIXME Bar#quux is not being resolves as a BGF in Hier
+					// FIXME 24/03/07 do a special case with COMP*.debug.some-shit
 
-//								FunctionInvocation fi = pte.getFunctionInvocation();
-//								fi.setClassInvocation();
+					//FunctionInvocation fi = pte.getFunctionInvocation();
+					//fi.setClassInvocation();
 
-					int y=2;
+					NotImplementedException.raise_stop();
 				}
 			});
 		}
 
-		if (!qq[0]) {
-			resolvedP.resolve(a_cheat);
-		}
+		z3.c = a_cheat;
 
-		// this is safe to remove
-		assert resolvedP.isResolved();
-/*
-		resolvedP.then(xx -> {
-			if (qq[0]) {
-				final EvaNode[] resolved2 = new EvaNode[1];
-				resolved2[0] = xx;
-			}
-		});
-*/
+		do {
+			if (z3.a != null) { resolvedP.resolve(z3.a); break; }
+			if (z3.b != null) { resolvedP.resolve(z3.b); break; }
+			if (z3.c != null) { resolvedP.resolve(z3.c); break; }
+			throw new ProgramMightBeWrongIfYouAreHere();
+		} while (false);
+	}
+
+	/**
+	 * Maybe better as an array?
+	 * What does hotspot(name??) have to say
+	 */
+	final class Z3 {
+		EvaNode a, b, c; // once sets
 	}
 
 	@Override

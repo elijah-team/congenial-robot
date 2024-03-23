@@ -1,8 +1,10 @@
 package tripleo.elijah.stages.deduce;
 
+import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationEnclosure;
+import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;
 import tripleo.elijah.comp.notation.GM_GenerateModuleRequest;
 import tripleo.elijah.comp.notation.GN_GenerateNodesIntoSink;
@@ -92,38 +94,49 @@ class DE3_ActivePTE implements DE3_Active {
                 }
 
                 var               resultSink  = generateC.getResultSink();
-                var               fg          = getResultEnv(generateC, resultSink);
-                final DeducePhase deducePhase = deduceTypes2._phase();
+                getResultEnv(generateC, resultSink, fg -> {
+                    final DeducePhase deducePhase = deduceTypes2._phase();
 
-                __do_001(generateC, node, deducePhase, resultSink, fg);
+                    __do_001(generateC, node, deducePhase, resultSink, fg);
+                });
             });
         }
     }
 
     @NotNull
-    private GenerateResultEnv getResultEnv(final @NotNull GenerateC generateC, final GenerateResultSink resultSink) {
-        final GenerateResultEnv[] fg0 = {generateC.getFileGen()};
+    private void getResultEnv(final @NotNull GenerateC generateC,
+                              final @NotNull GenerateResultSink resultSink,
+                              final @NotNull Consumer<@NotNull GenerateResultEnv> cfg) {
+        final GenerateResultEnv fileGen = generateC.getFileGen();
 
-        assert fg0[0] != null;
-        if (fg0[0] == null) {
-            generateC._ce().getPipelineAccessPromise().then(pa -> {
-                var env = new GN_GenerateNodesIntoSinkEnv(List_of(),
-                        new DefaultGenerateResultSink(DGRS_Client.of(pa)),
-                        new EIT_ModuleList(List_of()),
-                        ElLog.Verbosity.VERBOSE,
-                        new Old_GenerateResult(),
-                        pa,
-                        pa.getCompilationEnclosure());
-                var mod = pte.get__gf().getFD().getContext().module();
-                var tt  = new GM_GenerateModuleRequest(new GN_GenerateNodesIntoSink(env), mod, env);
-                var t   = new GM_GenerateModule(tt);
-                fg0[0] = new GenerateResultEnv(resultSink, new Old_GenerateResult(), new WorkManager(), new WorkList(), t);
-            });
+        if (fileGen != null) {
+            cfg.accept(fileGen);
+            return;
         }
 
-        var fg = fg0[0];
-        assert fg != null;
-        return fg;
+        // sometimes, I wonder about you
+        // that being said, the below abmost certainly does not work
+        assert false;
+
+        onPipelineAccess(generateC, pa -> {
+            var env = new GN_GenerateNodesIntoSinkEnv(List_of(),
+                                                      new DefaultGenerateResultSink(DGRS_Client.of(pa)),
+                                                      new EIT_ModuleList(List_of()),
+                                                      ElLog.Verbosity.VERBOSE,
+                                                      new Old_GenerateResult(),
+                                                      pa,
+                                                      pa.getCompilationEnclosure());
+            var mod = pte.get__gf().getFD().getContext().module();
+            var tt  = new GM_GenerateModuleRequest(new GN_GenerateNodesIntoSink(env), mod, env);
+            var t   = new GM_GenerateModule(tt);
+
+            var fg1 = new GenerateResultEnv(resultSink, new Old_GenerateResult(), new WorkManager(), new WorkList(), t);
+            cfg.accept(fg1); // eventualregister
+        });
+    }
+
+    private void onPipelineAccess(final @NotNull GenerateC generateC, final DoneCallback<IPipelineAccess> cb) {
+        generateC._ce().getPipelineAccessPromise().then(cb);
     }
 
     //@SuppressWarnings("unused")
