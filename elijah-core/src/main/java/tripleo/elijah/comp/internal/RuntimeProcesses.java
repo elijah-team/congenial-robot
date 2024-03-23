@@ -3,19 +3,15 @@ package tripleo.elijah.comp.internal;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.Stages;
-import tripleo.elijah.comp.i.ICompilationAccess;
-import tripleo.elijah.comp.i.ProcessRecord;
-import tripleo.elijah.comp.i.RuntimeProcess;
+import tripleo.elijah.comp.i.*;
 
 public class RuntimeProcesses {
 	private final @NotNull ICompilationAccess ca;
-	private final @NotNull ProcessRecord      pr;
 	private                RuntimeProcess     process;
 
 	@Contract(pure = true)
-	public RuntimeProcesses(final @NotNull ICompilationAccess aca, final @NotNull ProcessRecord aPr) {
+	public RuntimeProcesses(final @NotNull ICompilationAccess aca) {
 		ca = aca;
-		pr = aPr;
 	}
 
 	public void add(final RuntimeProcess aProcess) {
@@ -39,7 +35,7 @@ public class RuntimeProcesses {
 		process.postProcess();
 
 		//tripleo.elijah.util.Stupidity.println_err_2("***** RuntimeProcess^ [postProcess/writeLogs]");
-		pr.writeLogs();
+		ca.writeLogs();
 	}
 
 	public int size() {

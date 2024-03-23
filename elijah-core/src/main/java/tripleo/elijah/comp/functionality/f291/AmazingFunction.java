@@ -61,7 +61,7 @@ class AmazingFunction implements Amazing {
 
 	void waitGenC(final GenerateC ggc) {
 		// TODO latch
-		pa.getAccessBus().subscribePipelineLogic((PipelineLogic pl0) -> {
+		pa.getAccessBus().subscribe_PipelineLogic((PipelineLogic pl0) -> {
 			// FIXME check arguments
 			var env = new GN_GenerateNodesIntoSinkEnv(List_of(),
 													  new DefaultGenerateResultSink(DGRS_Client.of(pa)),

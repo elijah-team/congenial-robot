@@ -8,6 +8,4 @@ public interface ProcessRecord {
 	//IPipelineAccess pa();
 
 	PipelineLogic pipelineLogic();
-
-	void writeLogs();
 }

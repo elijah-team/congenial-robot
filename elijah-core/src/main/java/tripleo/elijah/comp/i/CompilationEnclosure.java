@@ -156,7 +156,7 @@ public class CompilationEnclosure {
 
 			pa._setAccessBus(ab);
 
-			_ce.provide(pa);
+			//_ce.provide(pa);
 		});
 	}
 

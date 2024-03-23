@@ -55,7 +55,7 @@ public class WriteMesonPipeline implements PipelineMember, @NotNull Consumer<Sup
 	public WriteMesonPipeline(final @NotNull IPipelineAccess pa0) {
 		final AccessBus     ab             = pa0.getAccessBus();
 		final Compilation   compilation    = ab.getCompilation();
-		final WritePipeline writePipeline1 = ab.getPipelineAccess().getWitePipeline();
+		final WritePipeline writePipeline1 = ab.getPipelineAccess().getWritePipeline(); // FIXME we want product not producer
 
 		pa            = pa0;
 		c             = compilation;

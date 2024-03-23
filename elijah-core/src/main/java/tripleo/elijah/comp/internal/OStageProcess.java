@@ -5,7 +5,6 @@ import tripleo.elijah.comp.Pipeline;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.ICompilationAccess2;
-import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah.comp.i.RuntimeProcess;
 
 import java.util.logging.Level;
@@ -15,13 +14,13 @@ public class OStageProcess implements RuntimeProcess {
 	private final ICompilationAccess ca;
 	private final ICompilationAccess2 ca2;
 
-	public OStageProcess(final ICompilationAccess aCa, final @NotNull ProcessRecord aPr) {
+	public OStageProcess(final ICompilationAccess aCa) {
 		ca  = aCa;
 		ca2 = aCa.getCompilation().getCompilationAccess2();
 
 		ca.getCompilation().getCompilationEnclosure().getAccessBusPromise()
 				.then(iab -> {
-					iab.subscribePipelineLogic(pl -> {
+					iab.subscribe_PipelineLogic(pl -> {
 						// FIXME 24/01/03:
 						//  we need pl, but do we need ab?
 						final Compilation comp = ca.getCompilation();

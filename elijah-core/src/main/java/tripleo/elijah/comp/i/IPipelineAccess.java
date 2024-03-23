@@ -48,9 +48,7 @@ public interface IPipelineAccess {
 
 	@NotNull Eventual<PipelineLogic> getPipelineLogicPromise();
 
-	ProcessRecord getProcessRecord();
-
-	WritePipeline getWitePipeline();
+	WritePipeline getWritePipeline();
 
 	void notate(Provenance provenance, GN_Notable aNotable);
 

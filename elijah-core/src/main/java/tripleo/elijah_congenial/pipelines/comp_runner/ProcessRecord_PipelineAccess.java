@@ -6,7 +6,6 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Eventual;
 import tripleo.elijah.EventualRegister;
-import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.functionality.f291.B;
 import tripleo.elijah.comp.i.*;
@@ -111,13 +110,7 @@ public class ProcessRecord_PipelineAccess implements IPipelineAccess, EventualRe
 	}
 
 	@Override
-	public ProcessRecord getProcessRecord() {
-		throw new UnintendedUseException("fix or remove");
-		/*return null;*/
-	}
-
-	@Override
-	public WritePipeline getWitePipeline() {
+	public WritePipeline getWritePipeline() {
 		return _wpl;
 	}
 
