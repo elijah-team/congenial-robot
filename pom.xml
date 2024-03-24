@@ -171,11 +171,14 @@
 				</configuration>
 				<dependencies>
 					<!-- force to run with JUnit4 -->
+					<!-- test later to see if it matters -->
+<!--
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit47</artifactId>
 						<version>${maven-surefire-version}</version>
 					</dependency>
+-->
 				</dependencies>
 			</plugin>
 
