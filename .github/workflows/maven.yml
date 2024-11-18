@@ -2,9 +2,7 @@ name: Elijah Congenial with Maven 3.8.2
 
 on:
   push:
-#    branches: [ "2024-congenial-update" ]
-#  pull_request:  // this one or that one?
-#    branches: [ "2024-congenial-update" ]
+  workflow_run:
 
 jobs:
   build:
