@@ -2,7 +2,7 @@ name: Elijah Congenial with Maven 3.8.2
 
 on:
   push:
-  workflow_run:
+  workflow_dispatch:
 
 jobs:
   build:
