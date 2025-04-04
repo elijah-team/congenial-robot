@@ -1,9 +1,7 @@
 package tripleo.vendor.batoull22;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.util.Operation;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -137,17 +135,6 @@ public class EK_ExpertSystem {
 					else Forwardchaining(goal);
 				}
 			}
-		}
-	}
-
-	public @NotNull Operation<EK_Reader> openfile_2() {
-		try {
-			final InputStream stream = getClass().getResourceAsStream("KB3.txt");
-			assert stream != null;
-			return Operation.success(new EK_Reader1(this, stream));
-		} catch (Exception ex) {
-			System.out.println("Error:the input file dose not exist");
-			return Operation.failure(ex);
 		}
 	}
 

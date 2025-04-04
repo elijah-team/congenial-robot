@@ -30,10 +30,7 @@ class EK_Production {
 		}
 
 		EK_Fact[] ch = Arrays.asList(ch1.toArray()).toArray(new EK_Fact[0]);
-		//.stream()
-		//		.map((ch11) -> {return new EK_Fact((Character) ch11)
-		//				;}
-		//					 ).collect(Collectors.toList()).toArray(new EK_Fact[0]);
+
 		System.out.println("3737 " + Arrays.asList(ch));
 		EK_Factarray result = new EK_Factarray(st, ch);
 		return result;
