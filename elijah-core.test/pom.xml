@@ -12,7 +12,7 @@
 	<name>Elijah Congenial CORE TEST</name>
 	<description>Tests for elijah-congenial-core</description>
 	<properties>
-		<kotlin.version>2.0.21</kotlin.version>
+		<kotlin.version>2.1.20</kotlin.version>
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 		<auto-service.version>1.1.1</auto-service.version>
 	</properties>
@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-test</artifactId>
-			<version>2.0.21</version>
+			<version>2.1.20</version>
 			<scope>test</scope>
 		</dependency>
 
