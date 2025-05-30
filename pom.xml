@@ -39,8 +39,8 @@
 		<module>annotation-processing</module>
 		<module>annotation-user</module>
 -->
-		<module>elijah-core</module>
-		<module>elijah-core.test</module>
+		<module>elijah-congenial-core</module>
+		<module>elijah-congenial-core.test</module>
 	</modules>
 
 	<dependencies>
