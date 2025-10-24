@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.18.0</version>			<!-- Use 1.6 for java 1.5 -->
+			<version>1.18.0</version> 				<!-- Use 1.6 for java 1.5 -->
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/antlr/antlr -->
@@ -70,6 +70,13 @@
 			<artifactId>kotlin-stdlib-jdk8</artifactId>
 			<version>${kotlin.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.checkerframework</groupId>
+			<artifactId>checker-qual</artifactId>
+			<version>3.34.0</version>
+			<scope>provided</scope>
+		</dependency>
 <!--
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
@@ -77,7 +84,7 @@
 			<version>${auto-service.version}</version>
 			<scope>provided</scope>
 		</dependency>
--->
+--> 
 	</dependencies>
 
 	<build>
@@ -101,7 +108,7 @@
 								<source>./src-bnxn/elijah-stateful/src/main/java</source>
 								<source>./src-bnxn/tripleo-small/src/main/java</source>
 								<source>./src-bnxn/tripleo-reactive/src/main/java</source>
-
+								
 								<source>./src-bnxn/tripleo-buffers/src/main/java</source>
 								<source>./src-bnxn/tripleo-range/src/main/java</source>
 							</sources>
@@ -128,21 +135,6 @@
 							</sourceDirs>
 						</configuration>
 					</execution>
-<!--
-					<execution>
-						<id>test-compile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>test-compile</goal>
-						</goals>
-						<configuration>
-							<sourceDirs>
-								<source>src/test/java</source>
-								<source>target/generated-test-sources/test-annotations</source>
-							</sourceDirs>
-						</configuration>
-					</execution>
--->
 				</executions>
 				<configuration>
 					<jvmTarget>1.8</jvmTarget>
@@ -157,12 +149,6 @@
 						<id>default-compile</id>
 						<phase>none</phase>
 					</execution>
-<!--
-					<execution>
-						<id>default-testCompile</id>
-						<phase>none</phase>
-					</execution>
--->
 					<execution>
 						<id>compile</id>
 						<phase>compile</phase>
@@ -170,21 +156,12 @@
 							<goal>compile</goal>
 						</goals>
 					</execution>
-<!--
-					<execution>
-						<id>testCompile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
--->
 				</executions>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
-		</plugins>
+			</plugins>
 	</build>
 </project>
