@@ -17,15 +17,19 @@ import java.io.File;
 import java.util.List;
 
 class DefaultCompFactory implements CompFactory {
-	private final CompilationImpl compilation;
+	//private final CompilationImpl compilation;
+	private final CompilationEnclosure ce;
 
 	public DefaultCompFactory(final CompilationImpl aCompilation) {
-		compilation = aCompilation;
+		//compilation = aCompilation;
+		final CompilationEnclosure ce1 = aCompilation.getCompilationEnclosure();
+		assert ce1 != null;
+		ce = ce1;
 	}
 
 	@Override
 	public @NotNull EIT_ModuleInput createModuleInput(final OS_Module aModule) {
-		return new EIT_ModuleInput(aModule, compilation);
+		return new EIT_ModuleInput(aModule, ce.getCompilation());
 	}
 
 	@Override
@@ -44,9 +48,8 @@ class DefaultCompFactory implements CompFactory {
 
 	@Override
 	public @NotNull WorldModule createWorldModule(final OS_Module m) {
-		CompilationEnclosure ce = compilation.getCompilationEnclosure();
-		final WorldModule    R  = new DefaultWorldModule(m, ce);
-
+		final WorldModule R = new DefaultWorldModule(m, ce);
+		assert R.module() == m;
 		return R;
 	}
 }

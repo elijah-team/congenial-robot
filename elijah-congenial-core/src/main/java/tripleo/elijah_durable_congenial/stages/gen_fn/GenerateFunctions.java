@@ -10,9 +10,9 @@ package tripleo.elijah_durable_congenial.stages.gen_fn;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.nextgen.reactive.Reactive;
 import tripleo.elijah.nextgen.reactive.ReactiveDimension;
 import tripleo.elijah.util.Eventual;
@@ -749,7 +749,7 @@ public class GenerateFunctions implements ReactiveDimension, EventualRegister {
 		//
 		R = Collections2.transform(args.expressions(), new Function<IExpression, InstructionArgument>() {
 			@Override
-			public @Nullable @org.jetbrains.annotations.Nullable InstructionArgument apply(@Nullable final IExpression input) {
+			public @Nullable InstructionArgument apply(@Nullable final IExpression input) {
 				assert input != null;
 				@NotNull final IExpression expression = input;
 				final InstructionArgument  ia         = simplify_expression(expression, gf, cctx);

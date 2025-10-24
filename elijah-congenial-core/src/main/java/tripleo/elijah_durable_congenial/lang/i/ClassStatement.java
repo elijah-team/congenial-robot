@@ -2,9 +2,9 @@ package tripleo.elijah_durable_congenial.lang.i;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.contexts.ClassContext;
 import tripleo.elijah_durable_congenial.lang.impl.InvariantStatement;
 import tripleo.elijah_durable_congenial.lang2.ElElementVisitor;
@@ -90,9 +90,8 @@ public interface ClassStatement
 		;
 		public static final Function<ClassItem, ConstructorDef> castClassItemToConstructor = new Function<ClassItem, ConstructorDef>() {
 			@Contract(value = "_ -> param1", pure = true)
-			@Nullable
-			@Override
-			public @org.jetbrains.annotations.Nullable ConstructorDef apply(@Nullable ClassItem input) {
+			public @Nullable @Override
+			ConstructorDef apply(@Nullable ClassItem input) {
 				return (ConstructorDef) input;
 			}
 		};

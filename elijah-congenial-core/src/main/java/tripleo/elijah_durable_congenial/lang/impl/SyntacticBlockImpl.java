@@ -12,11 +12,8 @@ import antlr.Token;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah_durable_congenial.contexts.SyntacticBlockContext;
-import tripleo.elijah_durable_congenial.lang.i.*;
-import tripleo.elijah_durable_congenial.lang2.ElElementVisitor;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.contexts.SyntacticBlockContext;
 import tripleo.elijah_durable_congenial.lang.i.*;
 import tripleo.elijah_durable_congenial.lang2.ElElementVisitor;
@@ -90,7 +87,7 @@ public class SyntacticBlockImpl
 		Collection<OS_NamedElement> c = Collections2.transform(items, new Function<OS_Element, OS_NamedElement>() {
 			@Nullable
 			@Override
-			public @org.jetbrains.annotations.Nullable OS_NamedElement apply(@Nullable OS_Element input) {
+			public OS_NamedElement apply(@Nullable OS_Element input) {
 				return (OS_NamedElement) input;
 			}
 		});

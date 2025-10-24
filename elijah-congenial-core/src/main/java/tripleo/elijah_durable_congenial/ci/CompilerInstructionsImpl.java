@@ -3,7 +3,7 @@ package tripleo.elijah_durable_congenial.ci;
 import antlr.Token;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.*;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah_durable_congenial.ci.i.CompilerInstructions;
 import tripleo.elijah_durable_congenial.lang.i.IExpression;

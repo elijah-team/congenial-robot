@@ -1,7 +1,7 @@
 package tripleo.elijah_durable_congenial.pre_world;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.entrypoints.MainClassEntryPoint;
 import tripleo.elijah_durable_congenial.lang.i.ClassStatement;
 import tripleo.elijah_durable_congenial.lang.i.FunctionDef;
@@ -10,9 +10,6 @@ import tripleo.elijah_durable_congenial.stages.deduce.FunctionInvocation;
 import tripleo.elijah_durable_congenial.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah_durable_congenial.stages.gen_fn.IClassGenerator;
 import tripleo.elijah_durable_congenial.stages.inter.ModuleThing;
-import tripleo.elijah_durable_congenial.entrypoints.MainClassEntryPoint;
-import tripleo.elijah_durable_congenial.lang.i.ClassStatement;
-import tripleo.elijah_durable_congenial.lang.i.FunctionDef;
 import tripleo.small.ES_Symbol;
 
 import java.util.Objects;

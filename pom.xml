@@ -13,21 +13,15 @@
 
 	<properties>
 		<project.build.outputTimestamp>1</project.build.outputTimestamp>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<downloadSources>true</downloadSources>
 
 		<jacoco.version>0.8.9</jacoco.version>
-		<guava.version>33.3.1-jre</guava.version>
-
-		<buffers.version>0.0.3</buffers.version>
-		<range.version>0.0.3b</range.version>
-
-		<jdeferred.version>2.0.0</jdeferred.version>
 
 		<!-- for edu 2022.2 -->
 		<!--		<kotlin.version>1.7.10</kotlin.version>-->
@@ -35,44 +29,41 @@
 	</properties>
 
 	<modules>
-<!--
-		<module>annotation-processing</module>
-		<module>annotation-user</module>
--->
+		<!--
+				<module>annotation-processing</module>
+				<module>annotation-user</module>
+		-->
 		<module>elijah-congenial-core</module>
 		<module>elijah-congenial-core.test</module>
 	</modules>
 
 	<dependencies>
 		<!--
-				<dependency>
-					<groupId>com.github.elijah-team.lombok</groupId>
-					<artifactId>lombok</artifactId>
-					<version>master-SNAPSHOT</version>
-					<scope>provided</scope>
-				</dependency>
+		<dependency>
+			<groupId>com.github.elijah-team.lombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>master-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 		-->
 
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
 		</dependency>
-		<!-- https://search.maven.org/artifact/fr.inria.gforge.spoon.labs/gumtree-spoon-ast-diff/1.69/jar-->
-		<!--
-                <dependency>
-                    <groupId>fr.inria.gforge.spoon.labs</groupId>
-                    <artifactId>gumtree-spoon-ast-diff</artifactId>
-                    <version>1.69</version>
-                </dependency>
-    -->
-
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.13.2</version>
 		</dependency>
 
+		<!-- https://search.maven.org/artifact/fr.inria.gforge.spoon.labs/gumtree-spoon-ast-diff/1.69/jar-->
+		<!--
+    <dependency>
+        <groupId>fr.inria.gforge.spoon.labs</groupId>
+        <artifactId>gumtree-spoon-ast-diff</artifactId>
+        <version>1.69</version>
+    </dependency>
+    -->
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -124,10 +115,6 @@
 
 	<repositories>
 		<repository>
-			<id>central</id>
-			<url>https://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
@@ -136,22 +123,22 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-<!--
-				<plugin>
-					<groupId>org.eclipse.sisu</groupId>
-					<artifactId>sisu-maven-plugin</artifactId>
-					<version>0.3.5</version>
-					<executions>
-						<execution>
-							<id>generate-index</id>
-							<goals>
-								<goal>main-index</goal>
-								<goal>test-index</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
--->
+				<!--
+								<plugin>
+									<groupId>org.eclipse.sisu</groupId>
+									<artifactId>sisu-maven-plugin</artifactId>
+									<version>0.3.5</version>
+									<executions>
+										<execution>
+											<id>generate-index</id>
+											<goals>
+												<goal>main-index</goal>
+												<goal>test-index</goal>
+											</goals>
+										</execution>
+									</executions>
+								</plugin>
+				-->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>versions-maven-plugin</artifactId>
@@ -160,4 +147,24 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>33.4.8-jre</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.13.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jetbrains</groupId>
+				<artifactId>annotations</artifactId>
+				<version>23.0.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

@@ -36,9 +36,8 @@ public interface GenerateFiles extends CodeGenerator {
 	@NotNull
 	static Collection<EvaNode> classes_to_list_of_generated_nodes(@NotNull Collection<EvaClass> aEvaClasses) {
 		return Collections2.transform(aEvaClasses, new Function<EvaClass, EvaNode>() {
-			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaClass input) {
+			public @Nullable EvaNode apply(@org.jetbrains.annotations.Nullable EvaClass input) {
 				return input;
 			}
 		});
@@ -47,9 +46,8 @@ public interface GenerateFiles extends CodeGenerator {
 	@NotNull
 	static Collection<EvaNode> constructors_to_list_of_generated_nodes(@NotNull Collection<EvaConstructor> aEvaConstructors) {
 		return Collections2.transform(aEvaConstructors, new Function<EvaConstructor, EvaNode>() {
-			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaConstructor input) {
+			public @Nullable EvaNode apply(@org.jetbrains.annotations.Nullable EvaConstructor input) {
 				return input;
 			}
 		});
@@ -58,9 +56,8 @@ public interface GenerateFiles extends CodeGenerator {
 	@NotNull
 	static Collection<EvaNode> functions_to_list_of_generated_nodes(@NotNull Collection<EvaFunction> generatedFunctions) {
 		return Collections2.transform(generatedFunctions, new Function<EvaFunction, EvaNode>() {
-			@org.checkerframework.checker.nullness.qual.Nullable
 			@Override
-			public @Nullable EvaNode apply(@org.checkerframework.checker.nullness.qual.Nullable EvaFunction input) {
+			public @Nullable EvaNode apply(@org.jetbrains.annotations.Nullable EvaFunction input) {
 				return input;
 			}
 		});

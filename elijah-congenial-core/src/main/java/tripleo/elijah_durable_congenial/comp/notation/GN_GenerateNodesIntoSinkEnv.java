@@ -1,6 +1,6 @@
 package tripleo.elijah_durable_congenial.comp.notation;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.OutputFileFactoryParams;

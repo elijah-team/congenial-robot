@@ -13,13 +13,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah_durable_congenial.ci.LibraryStatementPart;
-import tripleo.elijah_durable_congenial.comp.i.Compilation;
-import tripleo.elijah_durable_congenial.contexts.ModuleContext;
-import tripleo.elijah_durable_congenial.entrypoints.EntryPoint;
-import tripleo.elijah_durable_congenial.entrypoints.MainClassEntryPoint;
-import tripleo.elijah_durable_congenial.lang.i.*;
-import tripleo.elijah_durable_congenial.lang2.ElElementVisitor;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah_durable_congenial.ci.LibraryStatementPart;
@@ -28,6 +21,7 @@ import tripleo.elijah_durable_congenial.contexts.ModuleContext;
 import tripleo.elijah_durable_congenial.entrypoints.EntryPoint;
 import tripleo.elijah_durable_congenial.entrypoints.MainClassEntryPoint;
 import tripleo.elijah_durable_congenial.lang.i.*;
+import tripleo.elijah_durable_congenial.lang2.ElElementVisitor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -153,17 +147,17 @@ public class OS_ModuleImpl implements OS_Element, OS_Container, OS_Module {
 					Collection<ClassItem> x = classStatement.findFunction("main");
 					Collection<ClassItem> found = Collections2.filter(x, new Predicate<ClassItem>() {
 						@Override
-						public boolean apply(@org.checkerframework.checker.nullness.qual.Nullable ClassItem input) {
+						public boolean apply(@org.jetbrains.annotations.Nullable ClassItem input) {
 							assert input != null;
 							FunctionDef fd = (FunctionDef) input;
 							return MainClassEntryPoint.is_main_function_with_no_args(fd);
 						}
 					});
-//					Iterator<ClassStatement> zz = x.stream()
-//							.filter(ci -> ci instanceof FunctionDef)
-//							.filter(fd -> is_main_function_with_no_args((FunctionDef) fd))
-//							.map(found1 -> (ClassStatement) found1.getParent())
-//							.iterator();
+					//Iterator<ClassStatement> zz = x.stream()
+					//		.filter(ci -> ci instanceof FunctionDef)
+					//		.filter(fd -> is_main_function_with_no_args((FunctionDef) fd))
+					//		.map(found1 -> (ClassStatement) found1.getParent())
+					//		.iterator();
 
 					/*
 					 * List<ClassStatement> entrypoints_stream = x.stream() .filter(ci -> ci
