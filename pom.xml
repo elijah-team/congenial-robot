@@ -237,7 +237,7 @@
 				<groupId>com.github.elijah-team.congenial-upper</groupId>
 				<!--<artifactId>congenial-robot</artifactId>-->
 				<artifactId>elijah-congenial-upper</artifactId>
-				<version>3fe9f95656</version>
+				<version>637a62ea07</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
