@@ -1,7 +1,5 @@
 package tripleo.elijah_durable_congenial.comp.queries;
 
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.Operation;
@@ -11,6 +9,8 @@ import tripleo.elijah_durable_congenial.lang.i.OS_Module;
 import tripleo.elijah_durable_congenial.nextgen.query.QueryDatabase;
 import tripleo.elijjah.ElijjahLexer;
 import tripleo.elijjah.ElijjahParser;
+import tripleo.vendor.antlr277.RecognitionException;
+import tripleo.vendor.antlr277.TokenStreamException;
 
 import java.io.InputStream;
 
@@ -35,9 +35,7 @@ public class QuerySourceFileToModule {
 		parser.setFilename(f);
 		try {
 			parser.program();
-		} catch (RecognitionException aE) {
-			return Operation.failure(aE);
-		} catch (TokenStreamException aE) {
+		} catch (RecognitionException | TokenStreamException aE) {
 			return Operation.failure(aE);
 		}
 		final OS_Module module = parser.out.module();
