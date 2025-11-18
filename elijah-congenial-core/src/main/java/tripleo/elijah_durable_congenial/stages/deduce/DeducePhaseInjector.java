@@ -2,7 +2,7 @@ package tripleo.elijah_durable_congenial.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.DeferredMember;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;

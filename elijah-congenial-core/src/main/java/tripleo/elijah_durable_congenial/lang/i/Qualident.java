@@ -1,6 +1,6 @@
 package tripleo.elijah_durable_congenial.lang.i;
 
-import antlr.Token;
+import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -11,7 +11,7 @@ package tripleo.elijah_durable_congenial.stages.gen_c;
 import com.google.common.base.Supplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;

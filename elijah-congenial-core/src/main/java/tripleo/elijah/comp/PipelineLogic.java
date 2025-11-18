@@ -10,7 +10,7 @@ package tripleo.elijah.comp;
 
 import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.util.CompletableProcess;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.util.EventualRegister;

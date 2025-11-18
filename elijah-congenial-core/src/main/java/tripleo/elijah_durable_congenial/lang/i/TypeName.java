@@ -8,7 +8,7 @@
  */
 package tripleo.elijah_durable_congenial.lang.i;
 
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah_congenial_durable.model.source2.SM2_TypeName;
 
 /**

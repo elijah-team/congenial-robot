@@ -1,6 +1,6 @@
 package tripleo.elijah_durable_congenial.stages.hooligan.pipeline_impl;
 
-import antlr.Token;
+import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.lang.i.*;

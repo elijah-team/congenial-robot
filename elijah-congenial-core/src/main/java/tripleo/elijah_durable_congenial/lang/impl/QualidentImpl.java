@@ -8,7 +8,7 @@
  */
 package tripleo.elijah_durable_congenial.lang.impl;
 
-import antlr.Token;
+import tripleo.vendor.antlr277.Token;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.jetbrains.annotations.*;

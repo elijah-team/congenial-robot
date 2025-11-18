@@ -9,7 +9,7 @@
 package tripleo.elijah_durable_congenial.comp.i;
 
 import org.apache.commons.lang3.tuple.Pair;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 
 import java.util.List;
 

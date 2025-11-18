@@ -2,8 +2,8 @@
 
 package tripleo.elijjah;
 
-import antlr.*;
-import antlr.collections.impl.BitSet;
+import tripleo.vendor.antlr277.*;
+import tripleo.vendor.antlr277.collections.impl.BitSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +15,7 @@ import tripleo.elijah_durable_congenial.lang.impl.*;
 import tripleo.elijah_durable_congenial.lang.types.OS_BuiltinType;
 import tripleo.elijah_durable_congenial.lang2.BuiltInTypes;
 
-public class EzParser extends antlr.LLkParser implements EzTokenTypes {
+public class EzParser extends LLkParser implements EzTokenTypes {
 
 	public static final String[] _tokenNames  = {
 			"<0>",

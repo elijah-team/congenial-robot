@@ -2,15 +2,10 @@
 
 package tripleo.elijjah;
 
-import antlr.*;
-import antlr.collections.impl.BitSet;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.comp.internal.Out;
-
 import tripleo.elijah_durable_congenial.contexts.*;
 import tripleo.elijah_durable_congenial.lang.builder.TypeAliasBuilder;
-import tripleo.elijah_durable_congenial.lang.i.*;
-
 import tripleo.elijah_durable_congenial.lang.i.*;
 import tripleo.elijah_durable_congenial.lang.impl.*;
 import tripleo.elijah_durable_congenial.lang.imports.AssigningImportStatement;
@@ -19,12 +14,14 @@ import tripleo.elijah_durable_congenial.lang.imports.QualifiedImportStatement;
 import tripleo.elijah_durable_congenial.lang.imports.RootedImportStatement;
 import tripleo.elijah_durable_congenial.lang.types.OS_BuiltinType;
 import tripleo.elijah_durable_congenial.lang2.BuiltInTypes;
+import tripleo.vendor.antlr277.*;
+import tripleo.vendor.antlr277.collections.impl.BitSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("DataFlowIssue")
-public class ElijjahParser extends antlr.LLkParser implements ElijjahTokenTypes {
+public class ElijjahParser extends LLkParser implements ElijjahTokenTypes {
 
 	public static final String[] _tokenNames  = {
 			"<0>",

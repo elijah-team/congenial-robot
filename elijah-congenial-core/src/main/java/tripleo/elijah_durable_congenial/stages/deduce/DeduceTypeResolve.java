@@ -12,7 +12,7 @@ package tripleo.elijah_durable_congenial.stages.deduce;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.util.Eventual;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.util.PromiseReadySupplier;

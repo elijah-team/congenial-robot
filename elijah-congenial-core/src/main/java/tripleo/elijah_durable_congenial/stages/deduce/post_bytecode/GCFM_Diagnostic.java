@@ -1,8 +1,8 @@
 package tripleo.elijah_durable_congenial.stages.deduce.post_bytecode;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 
 import java.io.PrintStream;
 import java.util.List;

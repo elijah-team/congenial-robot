@@ -2,7 +2,7 @@ package tripleo.elijah_congenial_durable.deduce2;
 
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah_durable_congenial.lang.i.ClassStatement;
 import tripleo.elijah_durable_congenial.lang.i.OS_Module;

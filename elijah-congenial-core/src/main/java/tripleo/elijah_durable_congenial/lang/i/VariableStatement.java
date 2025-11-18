@@ -1,7 +1,7 @@
 package tripleo.elijah_durable_congenial.lang.i;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah_durable_congenial.lang2.ElElementVisitor;
 
 public interface VariableStatement extends @NotNull Locatable, OS_Element {

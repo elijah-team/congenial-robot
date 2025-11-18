@@ -8,7 +8,7 @@
  */
 package tripleo.elijah_durable_congenial.ci.i;
 
-import antlr.Token;
+import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.ci.CiIndexingStatement;
 import tripleo.elijah_durable_congenial.ci.GenerateStatement;

@@ -2,7 +2,7 @@ package tripleo.elijah_durable_congenial.lang.i;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah_durable_congenial.lang.impl.IdentExpressionImpl;
 import tripleo.elijah_durable_congenial.lang.nextgen.names.i.EN_Name;
 import tripleo.elijah_durable_congenial.util.Helpers;

@@ -1,11 +1,9 @@
 package tripleo.elijah_durable_congenial.stages.deduce.fluffy.impl;
 
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah_durable_congenial.nextgen.composable.IComposable;
 import tripleo.elijah_durable_congenial.stages.deduce.fluffy.i.FluffyVar;
-import tripleo.elijah_durable_congenial.stages.deduce.fluffy.i.FluffyVarTarget;
-import tripleo.elijah_durable_congenial.nextgen.composable.IComposable;
 import tripleo.elijah_durable_congenial.stages.deduce.fluffy.i.FluffyVarTarget;
 
 public class FluffyVarImpl implements FluffyVar {

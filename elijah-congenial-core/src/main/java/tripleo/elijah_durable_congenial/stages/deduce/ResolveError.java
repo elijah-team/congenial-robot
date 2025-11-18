@@ -9,12 +9,8 @@
 package tripleo.elijah_durable_congenial.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
-import tripleo.elijah_durable_congenial.lang.i.IdentExpression;
-import tripleo.elijah_durable_congenial.lang.i.LookupResult;
-import tripleo.elijah_durable_congenial.lang.i.LookupResultList;
-import tripleo.elijah_durable_congenial.lang.i.TypeName;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah_durable_congenial.lang.i.IdentExpression;
 import tripleo.elijah_durable_congenial.lang.i.LookupResult;
 import tripleo.elijah_durable_congenial.lang.i.LookupResultList;

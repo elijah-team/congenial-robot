@@ -8,7 +8,7 @@
  */
 package tripleo.elijah_durable_congenial.lang.impl;
 
-import antlr.Token;
+import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.util.NotImplementedException;

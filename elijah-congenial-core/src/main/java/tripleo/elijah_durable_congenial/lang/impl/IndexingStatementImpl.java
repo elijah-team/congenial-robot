@@ -8,10 +8,8 @@
  */
 package tripleo.elijah_durable_congenial.lang.impl;
 
-import antlr.Token;
-import tripleo.elijah_durable_congenial.lang.i.ExpressionList;
-import tripleo.elijah_durable_congenial.lang.i.IndexingItem;
-import tripleo.elijah_durable_congenial.lang.i.OS_Module;
+import lombok.*;
+import tripleo.elijah.xlang.LocatableString;
 import tripleo.elijah_durable_congenial.lang.i.ExpressionList;
 import tripleo.elijah_durable_congenial.lang.i.IndexingItem;
 import tripleo.elijah_durable_congenial.lang.i.IndexingStatement;
@@ -25,12 +23,17 @@ import java.util.List;
  * <p>
  * Created Apr 15, 2020 at 4:59:21 AM
  */
+@AllArgsConstructor
+@Getter @Setter
+@EqualsAndHashCode
 public class IndexingStatementImpl implements IndexingStatement {
-
-	private       ExpressionList     exprs;
-	private final List<IndexingItem> items = new ArrayList<IndexingItem>();
-	private       Token              name;
+	private final List<IndexingItem> items = new ArrayList<>();
+	//@With // ??
 	private final OS_Module          parent;
+	@With
+	private       ExpressionList     exprs;
+	@With
+	private       LocatableString    name;
 
 	public IndexingStatementImpl(final OS_Module aModule) {
 		parent = aModule;
@@ -47,7 +50,7 @@ public class IndexingStatementImpl implements IndexingStatement {
 	}
 
 	@Override
-	public void setName(final Token i1) {
+	public void setName(final LocatableString i1) {
 		name = i1;
 	}
 

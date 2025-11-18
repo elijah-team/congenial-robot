@@ -1,8 +1,8 @@
 package tripleo.elijah_durable_congenial.comp.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 
 import java.io.File;
 import java.io.PrintStream;

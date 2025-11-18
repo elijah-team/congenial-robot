@@ -2,7 +2,7 @@ package tripleo.elijah.util;
 
 import com.google.common.base.MoreObjects;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 
 public class Maybe<T> {
 	public final @Nullable Diagnostic exc;

@@ -3,12 +3,9 @@ package tripleo.elijah_durable_congenial.stages.deduce.post_bytecode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.comp.i.ErrSink;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah_durable_congenial.lang.i.OS_Type;
 import tripleo.elijah_durable_congenial.stages.deduce.DeduceTypes2;
-import tripleo.elijah_durable_congenial.stages.gen_fn.*;
-import tripleo.elijah_durable_congenial.comp.i.ErrSink;
-import tripleo.elijah_durable_congenial.lang.i.OS_Type;
 import tripleo.elijah_durable_congenial.stages.gen_fn.*;
 
 class DeduceType3 implements DED {

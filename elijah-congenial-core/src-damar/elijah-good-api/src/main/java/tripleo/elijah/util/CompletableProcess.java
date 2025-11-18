@@ -1,6 +1,6 @@
 package tripleo.elijah.util;
 
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 
 public interface CompletableProcess<T> {
 	void add(T item);

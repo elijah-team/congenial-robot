@@ -1,7 +1,7 @@
 package tripleo.elijah.util;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 
 /**
  * An emulation of Rust's Result type

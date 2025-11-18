@@ -1,7 +1,7 @@
 package tripleo.elijah_durable_congenial.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.util.Maybe;
 import tripleo.elijah.util.Operation2;
 import tripleo.elijah_durable_congenial.ci.i.CompilerInstructions;

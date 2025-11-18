@@ -4,7 +4,7 @@ import org.jdeferred2.DoneCallback;
 import org.jdeferred2.FailCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah.util.Operation;
 import tripleo.elijah_durable_congenial.comp.diagnostic.ExceptionDiagnostic;
 import tripleo.elijah_durable_congenial.lang.i.OS_Type;

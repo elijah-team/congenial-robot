@@ -8,8 +8,7 @@
  */
 package tripleo.elijah_durable_congenial.util;
 
-import antlr.CommonToken;
-import antlr.Token;
+import tripleo.vendor.antlr277.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.codec.digest.MessageDigestAlgorithms;
 import org.jetbrains.annotations.NotNull;

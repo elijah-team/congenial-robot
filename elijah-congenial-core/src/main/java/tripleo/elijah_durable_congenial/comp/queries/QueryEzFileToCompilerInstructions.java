@@ -1,7 +1,6 @@
 package tripleo.elijah_durable_congenial.comp.queries;
 
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
+import tripleo.vendor.antlr277.*;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.util.NotImplementedException;

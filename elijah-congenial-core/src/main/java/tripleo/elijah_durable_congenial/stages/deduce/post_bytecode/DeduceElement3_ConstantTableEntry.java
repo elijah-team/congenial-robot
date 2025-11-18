@@ -3,7 +3,7 @@ package tripleo.elijah_durable_congenial.stages.deduce.post_bytecode;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah_durable_congenial.lang.i.Context;
 import tripleo.elijah_durable_congenial.lang.i.OS_Element;
 import tripleo.elijah_durable_congenial.lang.i.OS_Type;
@@ -16,11 +16,6 @@ import tripleo.elijah_durable_congenial.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah_durable_congenial.stages.gen_fn.GenType;
 import tripleo.elijah_durable_congenial.stages.instructions.IdentIA;
 import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah_durable_congenial.lang.i.Context;
-import tripleo.elijah_durable_congenial.lang.i.OS_Type;
-import tripleo.elijah_durable_congenial.stages.gen_fn.BaseEvaFunction;
-import tripleo.elijah_durable_congenial.stages.gen_fn.GenType;
-import tripleo.elijah_durable_congenial.stages.instructions.IdentIA;
 
 public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 

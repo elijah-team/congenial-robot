@@ -10,14 +10,12 @@
 package tripleo.elijah_durable_congenial.nextgen.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah_durable_congenial.nextgen.ClassDefinition;
 import tripleo.elijah_durable_congenial.stages.deduce.ClassInvocation;
 import tripleo.elijah_durable_congenial.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah_durable_congenial.nextgen.ClassDefinition;
-import tripleo.elijah_durable_congenial.stages.deduce.ClassInvocation;
 
 import java.io.PrintStream;
 import java.util.List;

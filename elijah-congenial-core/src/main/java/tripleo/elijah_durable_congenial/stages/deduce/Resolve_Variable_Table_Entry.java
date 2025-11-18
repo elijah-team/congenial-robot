@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah_durable_congenial.comp.i.ErrSink;
 import tripleo.elijah_durable_congenial.contexts.FunctionContext;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah_durable_congenial.lang.impl.BaseFunctionDef;
 import tripleo.elijah_durable_congenial.lang.impl.FuncTypeNameImpl;
 import tripleo.elijah_durable_congenial.lang.types.OS_FuncExprType;
