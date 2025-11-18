@@ -1,7 +1,7 @@
 package tripleo.elijah.xlang;
 
-import antlr.Token;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.vendor.antlr277.Token;
+import tripleo.elijah_fluffy_congenial.diagnostic.Locatable;
 import tripleo.elijah.util.UnintendedUseException;
 
 import java.util.Objects;
