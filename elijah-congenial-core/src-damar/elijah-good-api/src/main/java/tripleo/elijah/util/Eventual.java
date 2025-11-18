@@ -5,13 +5,24 @@ import org.jdeferred2.FailCallback;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah_durable_congenial.util.EventualExtract;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public class Eventual<P> {
 	private final DeferredObject<P, Diagnostic, Void> prom = new DeferredObject<>();
+	private final String mDescription;
+	private Diagnostic diag;
+
+	public Eventual(final String aMDescription) {
+		mDescription = aMDescription;
+	}
+
+	public Eventual() {
+		mDescription = "GENERIC-DESCRIPTION";
+	}
 
 	public void resolve(final P p) {
 		prom.resolve(p);
@@ -39,19 +50,18 @@ public class Eventual<P> {
 		return prom.isResolved();
 	}
 
-	/**
-	 * Please overload this
-	 */
 	public String description() {
-		return "GENERIC-DESCRIPTION";
+		return mDescription;
 	}
 
 	public boolean isPending() {
 		return prom.isPending();
 	}
 
-	public void reject(final Diagnostic aX) {
-		System.err.println("8899 [Eventual::reject] "+aX);
+	public void reject(final Diagnostic aDiagnostic) {
+		this.diag = aDiagnostic;
+		//System.err.println("8899 [Eventual::reject] "+aDiagnostic);
+		prom.reject(aDiagnostic);
 	}
 
 	public void onFail(final FailCallback<? super Diagnostic> aO) {
@@ -94,5 +104,17 @@ public class Eventual<P> {
 	@Deprecated
 	public Promise.State state() {
 		return prom.state();
+	}
+
+	public Operation<P> asOperation() {
+		switch (state()) {
+		case RESOLVED -> {
+			return Operation.success(EventualExtract.of(this));
+		}
+		case REJECTED -> {
+			return Operation.failure(this.diag);
+		}
+		}
+		return null;
 	}
 }
