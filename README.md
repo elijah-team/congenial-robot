@@ -21,8 +21,8 @@ Oh yeah, and patience.
 GOALS
 ------
 
-- Less noise
-- More verification
+- Less noise (compose or fx)
+- More verification (lightweight testing - clj may or may not be fine)
   - on the road to correctness
 - Build confidence to reduce procrastination
 - 
@@ -45,3 +45,10 @@ TODO
 - Finish vision
 - Stop fuddling
 - Stop fiddling (act is broken too, i dont think its just me)
+
+
+CURRENT
+---------
+
+* `congenial-upper` (Removed jena, esp)
+* Need to/will refaster to antlr(277)
