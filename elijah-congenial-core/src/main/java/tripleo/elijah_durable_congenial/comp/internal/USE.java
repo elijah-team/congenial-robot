@@ -62,7 +62,16 @@ public class USE {
 
 	private Operation2<WorldModule> parseElijjahFile(final CompFactory.@NotNull InputRequest aInputRequest) {
 		var owm = __parseElijjahFile(aInputRequest);
-		aInputRequest.setOp(owm);
+		//aInputRequest.setOp(owm);
+		switch (owm.mode()) {
+		case SUCCESS -> {
+			aInputRequest.setWorldModule(owm.success());
+		}
+		case FAILURE -> {
+			aInputRequest.setFailure(owm.failure());
+		}
+		default -> throw new IllegalStateException("Unexpected value: " + owm.mode());
+		}
 		return owm;
 	}
 
