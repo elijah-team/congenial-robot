@@ -1,7 +1,9 @@
 package tripleo.elijah_durable_congenial.comp;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
 import tripleo.elijah_durable_congenial.ci.LibraryStatementPart;
 import tripleo.elijah_durable_congenial.lang.i.OS_Module;
 import tripleo.elijah_durable_congenial.lang.i.Qualident;
@@ -18,13 +20,18 @@ public interface CompFactory {
 
 	InputRequest createInputRequest(File aFile, final boolean aDo_out, final @Nullable LibraryStatementPart aLsp);
 
-	WorldModule createWorldModule(OS_Module aM);
+	WorldModule createWorldModule(OS_Module aModule);
 
 	class InputRequest {
-		private final File    _file;
-		private final boolean _do_out;
-		private final LibraryStatementPart    lsp;
-		private       Operation2<WorldModule> op;
+		private final File                 _file;
+		private final boolean              _do_out;
+		private final LibraryStatementPart lsp;
+		@Getter
+		@Setter
+		private       Diagnostic           failure;
+		@Getter
+		@Setter
+		private       WorldModule          worldModule;
 
 		public InputRequest(final File aFile, final boolean aDoOut, final @Nullable LibraryStatementPart aLsp) {
 			_file   = aFile;
@@ -42,10 +49,6 @@ public interface CompFactory {
 
 		public LibraryStatementPart lsp() {
 			return lsp;
-		}
-
-		public void setOp(final Operation2<WorldModule> aOwm) {
-			op = aOwm;
 		}
 	}
 }

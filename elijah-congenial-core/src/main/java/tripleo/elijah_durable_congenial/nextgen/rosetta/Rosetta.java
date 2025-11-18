@@ -3,6 +3,13 @@ package tripleo.elijah_durable_congenial.nextgen.rosetta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.GenerateEvaClassResponse;
+import tripleo.elijah.util.Eventual;
+import tripleo.elijah.util.Operation;
+import tripleo.elijah_durable_congenial.comp.diagnostic.ExceptionDiagnostic;
+import tripleo.elijah_durable_congenial.comp.i.Compilation;
+import tripleo.elijah_durable_congenial.comp.queries.QuerySourceFileToModule;
+import tripleo.elijah_durable_congenial.comp.queries.QuerySourceFileToModuleParams;
+import tripleo.elijah_durable_congenial.lang.i.OS_Module;
 import tripleo.elijah_durable_congenial.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request;
 import tripleo.elijah_durable_congenial.nextgen.rosetta.DeduceTypes2.DeduceTypes2Request_TWO;
 import tripleo.elijah_durable_congenial.nextgen.rosetta.DeduceTypes2.DeduceTypes2_deduceFunctions_Request;
@@ -18,7 +25,8 @@ import tripleo.elijah_durable_congenial.stages.gen_fn_r.RegisterClassInvocation_
 
 @SuppressWarnings({"UtilityClassCanBeEnum", "ClassWithOnlyPrivateConstructors", "NonFinalUtilityClass"})
 public class Rosetta {
-	private Rosetta() { }
+	private Rosetta() {
+	}
 
 	@Contract("_ -> new")
 	public static @NotNull DeduceTypes2 create(final DeduceTypes2Request aDeduceTypes2Request) {
@@ -41,11 +49,11 @@ public class Rosetta {
 
 	@SuppressWarnings("FinalClass")
 	public static final class RCIE implements RosettaApplyable {
-		private final RegisterClassInvocation_env env;
+		private final RegisterClassInvocation_env  env;
 		private final RegisterClassInvocation_resp resp;
 
 		public RCIE(final RegisterClassInvocation_env aEnv, final RegisterClassInvocation_resp aResp) {
-			env = aEnv;
+			env  = aEnv;
 			resp = aResp;
 		}
 
@@ -62,7 +70,7 @@ public class Rosetta {
 		private final GenerateEvaClassResponse rsp;
 
 		public GECR(final GenerateEvaClassRequest aRq, final GenerateEvaClassResponse aRsp) {
-			rq = aRq;
+			rq  = aRq;
 			rsp = aRsp;
 		}
 
@@ -77,5 +85,22 @@ public class Rosetta {
 	public static @NotNull GECR create(final GenerateEvaClassRequest aRq, final GenerateEvaClassResponse aRsp) {
 		GECR gecr = new GECR(aRq, aRsp);
 		return gecr;
+	}
+
+	public static void sourceFileToModule(final QuerySourceFileToModuleParams p,
+								   final Compilation c,
+								   final Eventual<OS_Module> ev) {
+		QuerySourceFileToModule q = new QuerySourceFileToModule(p, c);
+		Operation<OS_Module>    o = q.calculate();
+		switch (o.mode()) {
+		case FAILURE -> {
+			final Exception failure = o.failure();
+			ev.reject(new ExceptionDiagnostic(failure));
+		}
+		case SUCCESS -> {
+			ev.resolve(o.success());
+		}
+		default -> throw new IllegalStateException("Unexpected value: " + o.mode());
+		}
 	}
 }
