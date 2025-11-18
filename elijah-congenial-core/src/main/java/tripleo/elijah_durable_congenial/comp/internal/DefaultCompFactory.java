@@ -47,9 +47,9 @@ class DefaultCompFactory implements CompFactory {
 	}
 
 	@Override
-	public @NotNull WorldModule createWorldModule(final OS_Module m) {
-		final WorldModule R = new DefaultWorldModule(m, ce);
-		assert R.module() == m;
+	public @NotNull WorldModule createWorldModule(final OS_Module aModule) {
+		final WorldModule R = new DefaultWorldModule(aModule, ce);
+		assert R.module() == aModule;
 		return R;
 	}
 }
