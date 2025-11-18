@@ -2,7 +2,8 @@ package tripleo.elijah_durable_congenial.comp.internal;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah.util.Eventual;
 import tripleo.elijah.util.Operation;
 import tripleo.elijah.util.Operation2;
 import tripleo.elijah_durable_congenial.ci.LibraryStatementPart;
@@ -20,6 +21,7 @@ import tripleo.elijah_durable_congenial.comp.i.ErrSink;
 import tripleo.elijah_durable_congenial.comp.queries.QuerySourceFileToModule;
 import tripleo.elijah_durable_congenial.comp.queries.QuerySourceFileToModuleParams;
 import tripleo.elijah_durable_congenial.lang.i.OS_Module;
+import tripleo.elijah_durable_congenial.nextgen.rosetta.Rosetta;
 import tripleo.elijah_durable_congenial.util.Helpers;
 import tripleo.elijah_durable_congenial.world.i.WorldModule;
 import tripleo.elijah_durable_congenial.world.impl.DefaultWorldModule;
@@ -36,7 +38,7 @@ import static tripleo.elijah.util.Mode.FAILURE;
 import static tripleo.elijah.util.Mode.SUCCESS;
 
 public class USE {
-	private static final FilenameFilter         accept_source_files = new FilenameFilter() {
+	private static final FilenameFilter           accept_source_files = new FilenameFilter() {
 		@Override
 		public boolean accept(final File directory, final String file_name) {
 			final boolean matches = Pattern.matches(".+\\.elijah$", file_name)
@@ -44,9 +46,9 @@ public class USE {
 			return matches;
 		}
 	};
-	private final        Compilation            c;
-	private final        ErrSink                errSink;
-	private final        Map<String, WorldModule> fn2m = new HashMap<String, WorldModule>();
+	private final        Compilation              c;
+	private final        ErrSink                  errSink;
+	private final        Map<String, WorldModule> fn2m                = new HashMap<String, WorldModule>();
 
 	@Contract(pure = true)
 	public USE(final Compilation aCompilation) {
@@ -55,7 +57,7 @@ public class USE {
 	}
 
 	public void addModule(final OS_Module aModule, final String aFn) {
-		final @NotNull CompilationEnclosure ce = c.getCompilationEnclosure();
+		final @NotNull CompilationEnclosure ce     = c.getCompilationEnclosure();
 		final WorldModule                   module = new DefaultWorldModule(aModule, ce);
 		fn2m.put(aFn, module);
 	}
@@ -76,7 +78,7 @@ public class USE {
 	}
 
 	private Operation2<WorldModule> __parseElijjahFile(final CompFactory.@NotNull InputRequest aInputRequest) {
-		final File f = aInputRequest.file();
+		final File                 f   = aInputRequest.file();
 		final LibraryStatementPart lsp = aInputRequest.lsp();
 
 		//08/13 System.out.printf("   %s%n", f.getAbsolutePath());
@@ -132,9 +134,10 @@ public class USE {
 		case SUCCESS:
 			return Operation2.success(om.success());
 		case FAILURE:
-			final Exception e = om.failure();
-			errSink.exception(e);
-			return Operation2.failure(new ExceptionDiagnostic(e));
+			final var e = om.failure();
+			final ExceptionDiagnostic d = new ExceptionDiagnostic(e);
+			errSink.reportDiagnostic(d);
+			return Operation2.failure(d);
 		default:
 			throw new IllegalStateException("Unexpected value: " + om.mode());
 		}
@@ -160,19 +163,25 @@ public class USE {
 			// tree add something
 
 			final InputStream          s  = io.readFile(file);
-			final Operation<OS_Module> om = parseFile_(f, s, do_out);
-			if (om.mode() != SUCCESS) {
-				final Exception e = om.failure();
-				assert e != null;
+			final Operation<OS_Module> om;
+			if (false) {
+				om = parseFile_(f, s, do_out);
+				if (om.mode() != SUCCESS) {
+					final var e = om.failure();
+					assert e != null;
 
-				System.err.println("parser exception: " + e);
-				e.printStackTrace(System.err);
-				s.close();
-				return Operation.failure(e);
+					System.err.println("parser exception: " + e);
+					e.printStackTrace(System.err);
+					s.close();
+					return Operation.failure(e);
+				}
+			} else {
+				final Eventual<OS_Module> ev = parseFile2(f, s, do_out);
+				om = ev.asOperation();
 			}
 
 			@NotNull final CompilationEnclosure ce = c.getCompilationEnclosure();
-			final WorldModule                   R = new DefaultWorldModule(om.success(), ce);
+			final WorldModule                   R  = new DefaultWorldModule(om.success(), ce);
 			fn2m.put(absolutePath, R);
 			s.close();
 			return Operation.success(R);
@@ -187,6 +196,13 @@ public class USE {
 		return q.calculate();
 	}
 
+	public Eventual<OS_Module> parseFile2(final String f, final InputStream s, final boolean do_out) {
+		final QuerySourceFileToModuleParams qp  = new QuerySourceFileToModuleParams(do_out, s, f);
+		final Eventual<OS_Module>           res = new Eventual<>();
+		Rosetta.sourceFileToModule(qp, c, res);
+		return res;
+	}
+
 	public Operation2<WorldModule> findPrelude(final String prelude_name) {
 		final File local_prelude = new File("lib_elijjah/lib-" + prelude_name + "/Prelude.elijjah");
 
@@ -194,7 +210,9 @@ public class USE {
 			return Operation2.failure(new FileNotFoundDiagnostic(local_prelude));
 		}
 
-		final Operation2<WorldModule> om = realParseElijjahFile2(c.con().createInputRequest(local_prelude, c.cfg().do_out, null)); // TODO 09/05 fix null
+		// TODO 09/05 fix null
+		final CompFactory.InputRequest inp = c.con().createInputRequest(local_prelude, c.cfg().do_out, null);
+		final Operation2<WorldModule>  om  = realParseElijjahFile2(inp);
 		if (om.mode() == FAILURE) {
 			om.failure().report(System.out);
 			return om;
