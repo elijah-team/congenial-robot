@@ -1,5 +1,6 @@
 package tripleo.elijah
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -54,6 +55,15 @@ class TestBasicFact1VerificationTest {
     @Test
     fun testOutputs_code2_main2_Main_c() {
         assertTrue(REPORTS!!.containsCodeOutput("/main2/Main.c"))
+    }
+
+    @Test
+    fun testOutputs_code2_main2_Main_c__names() {
+        val names = REPORTS!!.namesForCodeInput("test/basic/fact1/main2/main2.elijah")
+            .stream().map { it.text }
+        assertThat(names).containsExactlyInAnyOrderElementsOf(
+            listOf("a","b")
+        )
     }
 
     /*
