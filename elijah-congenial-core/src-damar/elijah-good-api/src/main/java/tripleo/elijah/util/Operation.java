@@ -1,6 +1,8 @@
 package tripleo.elijah.util;
 
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy_congenial.util.DiagnosticException;
 
 import static tripleo.elijah.util.Mode.FAILURE;
 import static tripleo.elijah.util.Mode.SUCCESS;
@@ -11,12 +13,11 @@ import static tripleo.elijah.util.Mode.SUCCESS;
  * @param <T> the success type
  */
 public class Operation<T> {
-	private final Mode mode;
-	private final T    succ;
+	private final Mode      mode;
+	private final T         succ;
+	private final Throwable exc;
 
-	private final Exception exc;
-
-	public static <T> @NotNull Operation<T> failure(final Exception aException) {
+	public static <T> @NotNull Operation<T> failure(final Throwable aException) {
 		final Operation<T> op = new Operation<>(null, aException, FAILURE);
 		return op;
 	}
@@ -26,7 +27,7 @@ public class Operation<T> {
 		return op;
 	}
 
-	public Operation(final T aSuccess, final Exception aException, final Mode aMode) {
+	public Operation(final T aSuccess, final Throwable aException, final Mode aMode) {
 		succ = aSuccess;
 		exc  = aException;
 		mode = aMode;
@@ -39,7 +40,12 @@ public class Operation<T> {
 		return R;
 	}
 
-	public Exception failure() {
+	public static <P> Operation<P> failure(final Diagnostic aDiag) {
+		Operation<P> R = new Operation<P>(null, new DiagnosticException(aDiag), FAILURE);
+		return R;
+	}
+
+	public Throwable failure() {
 		return exc;
 	}
 
