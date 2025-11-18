@@ -96,7 +96,7 @@ class EzM {
 			final Operation<CompilerInstructions> cio = getEzFileProduct(f, s, c).parse().getOp();
 
 			if (cio.mode() != SUCCESS) {
-				final Exception e = cio.failure();
+				final var e = cio.failure();
 				assert e != null;
 
 				SimplePrintLoggerToRemoveSoon.println_err_2(("parser exception: " + e));

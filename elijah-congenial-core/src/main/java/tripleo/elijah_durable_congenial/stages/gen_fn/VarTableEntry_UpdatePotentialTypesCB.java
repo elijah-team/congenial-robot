@@ -1,40 +1,24 @@
 package tripleo.elijah_durable_congenial.stages.gen_fn;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.jetbrains.annotations.NotNull;
-
-import tripleo.elijah_durable_congenial.lang.i.ClassStatement;
-import tripleo.elijah_durable_congenial.lang.i.Context;
-import tripleo.elijah_durable_congenial.lang.i.NormalTypeName;
-import tripleo.elijah_durable_congenial.lang.i.OS_Module;
-import tripleo.elijah_durable_congenial.lang.i.OS_Type;
-import tripleo.elijah_durable_congenial.lang.i.TypeName;
-import tripleo.elijah_durable_congenial.lang.i.TypeNameList;
-
-import tripleo.elijah_durable_congenial.lang.types.OS_BuiltinType;
-import tripleo.elijah_durable_congenial.lang.types.OS_GenericTypeNameType;
-import tripleo.elijah_durable_congenial.lang.types.OS_UserClassType;
-
-import tripleo.elijah_durable_congenial.stages.deduce.ClassInvocation;
-import tripleo.elijah_durable_congenial.stages.deduce.DeduceTypes2;
-import tripleo.elijah_durable_congenial.stages.deduce.ResolveError;
-import tripleo.elijah_durable_congenial.stages.deduce.ResolveType;
-
-import tripleo.elijah_durable_congenial.stages.gen_fn.EvaContainer.VarTableEntry;
-
-import tripleo.elijah_durable_congenial.util.Helpers;
-
 import tripleo.elijah.util.Mode;
 import tripleo.elijah.util.Ok;
 import tripleo.elijah.util.Operation;
 import tripleo.elijah_durable_congenial.lang.i.*;
+import tripleo.elijah_durable_congenial.lang.types.OS_BuiltinType;
+import tripleo.elijah_durable_congenial.lang.types.OS_GenericTypeNameType;
 import tripleo.elijah_durable_congenial.lang.types.OS_UserClassType;
 import tripleo.elijah_durable_congenial.stages.deduce.ClassInvocation;
 import tripleo.elijah_durable_congenial.stages.deduce.DeduceTypes2;
+import tripleo.elijah_durable_congenial.stages.deduce.ResolveError;
+import tripleo.elijah_durable_congenial.stages.deduce.ResolveType;
+import tripleo.elijah_durable_congenial.util.Helpers;
+import tripleo.elijah_fluffy_congenial.diagnostic.Diagnostic;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 final class VarTableEntry_UpdatePotentialTypesCB implements EvaContainer.VarTableEntry.UpdatePotentialTypesCB {
 	private final @NotNull DeduceTypes2               deduceTypes2;
@@ -77,7 +61,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements EvaContainer.VarTabl
 
 					potentialTypes = Helpers.List_of(rt);
 				} catch (ResolveError aE) {
-					return Operation.failure(aE);
+					return Operation.failure((Diagnostic) aE);
 				}
 			} else if (potentialTypes.get(0).getResolved() instanceof OS_BuiltinType && potentialTypes.get(1).getResolved() instanceof OS_UserClassType) {
 				OS_BuiltinType resolved = (OS_BuiltinType) potentialTypes.get(0).getResolved();
@@ -88,7 +72,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements EvaContainer.VarTabl
 
 					potentialTypes = Helpers.List_of(rt);
 				} catch (ResolveError aE) {
-					return Operation.failure(aE);
+					return Operation.failure((Diagnostic) aE);
 				}
 			} else {
 
@@ -128,7 +112,7 @@ final class VarTableEntry_UpdatePotentialTypesCB implements EvaContainer.VarTabl
 						} catch (ResolveError aResolveError) {
 							aResolveError.printStackTrace();
 							//assert false;
-							return Operation.failure(aResolveError);
+							return Operation.failure((Diagnostic) aResolveError);
 						}
 					}
 				}
@@ -176,12 +160,12 @@ final class VarTableEntry_UpdatePotentialTypesCB implements EvaContainer.VarTabl
 				potentialTypes.add(genType);
 			} catch (ResolveError aResolveError) {
 				aResolveError.printStackTrace();
-				return Operation.failure(aResolveError);
+				return Operation.failure((Diagnostic) aResolveError);
 			}
 		}
 
 		Set<GenType> set = new HashSet<>(potentialTypes);
-//					final Set<GenType> s = Collections.unmodifiableSet(set);
+		//final Set<GenType> s = Collections.unmodifiableSet(set);
 		return Operation.success(new ArrayList<>(set));
 	}
 }

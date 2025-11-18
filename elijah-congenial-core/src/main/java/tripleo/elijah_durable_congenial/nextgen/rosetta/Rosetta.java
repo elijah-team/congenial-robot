@@ -94,7 +94,7 @@ public class Rosetta {
 		Operation<OS_Module>    o = q.calculate();
 		switch (o.mode()) {
 		case FAILURE -> {
-			final Exception failure = o.failure();
+			final var failure = o.failure();
 			ev.reject(new ExceptionDiagnostic(failure));
 		}
 		case SUCCESS -> {
