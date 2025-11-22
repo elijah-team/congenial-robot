@@ -8,10 +8,11 @@
  */
 package tripleo.elijah;
 
+import org.junit.Assert;
 import org.junit.Test;
-import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.StdErrSink;
+import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.factory.comp.CompilationFactory;
 
 import static tripleo.elijah.util.Helpers.List_of;
@@ -23,45 +24,44 @@ public class Feb2021 {
 
 	@Test
 	public void testProperty() throws Exception {
-		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of("test/feb2021/property/"));
+		Assert.assertEquals(0, c.errorCount());
 	}
 
 	@Test
 	public void testProperty2() throws Exception {
-		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of("test/feb2021/property2/"));
 
-		//Assert.assertEquals(100, c.errorCount());
+		Assert.assertEquals(1, c.errorCount());
 	}
 
 	@Test
 	public void testProperty3() throws Exception {
-		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of("test/feb2021/property3/"));
 
-		//Assert.assertEquals(100, c.errorCount());
+		Assert.assertEquals(1, c.errorCount());
 	}
 
-	//	@Ignore
 	@Test
-	@SuppressWarnings("JUnit3StyleTestMethodInJUnit4Class")
 	public void testFunction() throws Exception {
-		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of("test/feb2021/function/"));
+		Assert.assertEquals(3, c.errorCount());
 	}
 
-	//	@Ignore
 	@Test
-	@SuppressWarnings("JUnit3StyleTestMethodInJUnit4Class")
 	public void testHier() throws Exception {
-		final Compilation  c    = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
+		final Compilation c = CompilationFactory.mkCompilationSilent(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of("test/feb2021/hier/"));
+		Assert.assertEquals(0, c.errorCount());
 	}
 
 }

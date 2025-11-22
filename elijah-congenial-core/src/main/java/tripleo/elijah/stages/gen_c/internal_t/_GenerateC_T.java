@@ -10,69 +10,91 @@ import java.util.Map;
 
 @SuppressWarnings("all")
 public abstract class _GenerateC_T {
-  protected final Map<EvaNode, WhyNotGarish_Item> a_directory = new HashMap<EvaNode, WhyNotGarish_Item>();
+	protected final Map<EvaNode, WhyNotGarish_Item> a_directory = new HashMap<EvaNode, WhyNotGarish_Item>();
 
-  public Collection<WhyNotGarish_Item> __directoryValues() {
-    return this.a_directory.values();
-  }
+	public Collection<WhyNotGarish_Item> __directoryValues() {
+		return this.a_directory.values();
+	}
 
-  public Collection<WhyNotGarish_Item> __directoryValuesCopy() {
-    Collection<WhyNotGarish_Item> _values = this.a_directory.values();
-    return new ArrayList<WhyNotGarish_Item>(_values);
-  }
+	public Collection<WhyNotGarish_Item> __directoryValuesCopy() {
+		Collection<WhyNotGarish_Item> _values = this.a_directory.values();
+		return new ArrayList<WhyNotGarish_Item>(_values);
+	}
 
-  public WhyNotGarish_Constructor a_lookup(final EvaConstructor aGf) {
-    boolean _containsKey = this.a_directory.containsKey(aGf);
-    if (_containsKey) {
-      WhyNotGarish_Item _get = this.a_directory.get(aGf);
-      return ((WhyNotGarish_Constructor) _get);
-    }
-    GenerateC __this = this._this();
-    WhyNotGarish_Constructor ncc1907 = new WhyNotGarish_Constructor(aGf, __this);
-    this.a_directory.put(aGf, ncc1907);
-    return ncc1907;
-  }
+	public WhyNotGarish_Constructor a_lookup(final EvaConstructor aGf) {
+		boolean _containsKey = this.a_directory.containsKey(aGf);
+		if (_containsKey) {
+			WhyNotGarish_Item _get = this.a_directory.get(aGf);
+			return ((WhyNotGarish_Constructor) _get);
+		}
+		GenerateC                __this  = this._this();
+		WhyNotGarish_Constructor ncc1907 = new WhyNotGarish_Constructor(aGf, __this);
+		this.a_directory.put(aGf, ncc1907);
+		return ncc1907;
+	}
 
-  public WhyNotGarish_Function a_lookup(final BaseEvaFunction aGf) {
-    boolean _containsKey = this.a_directory.containsKey(aGf);
-    if (_containsKey) {
-      WhyNotGarish_Item _get = this.a_directory.get(aGf);
-      return ((WhyNotGarish_Function) _get);
-    }
-    GenerateC __this = this._this();
-    WhyNotGarish_Function ncf = new WhyNotGarish_Function(aGf, __this);
-    this.a_directory.put(aGf, ncf);
-    return ncf;
-  }
+	public WhyNotGarish_Function a_lookup(final BaseEvaFunction aGf) {
+		boolean _containsKey = this.a_directory.containsKey(aGf);
+		if (_containsKey) {
+			WhyNotGarish_Item _get = this.a_directory.get(aGf);
+			if (_get instanceof WhyNotGarish_Function _get2) {
+				return ((WhyNotGarish_Function) _get2);
+			} else {
+				System.err.println("********** 43");
+				return null;
+			}
+		}
+		GenerateC             __this = this._this();
+		WhyNotGarish_Function ncf    = new WhyNotGarish_Function(aGf, __this);
+		this.a_directory.put(aGf, ncf);
+		return ncf;
+	}
 
-  public WhyNotGarish_Class a_lookup(final EvaClass aGc) {
-    boolean _containsKey = this.a_directory.containsKey(aGc);
-    if (_containsKey) {
-      WhyNotGarish_Item _get = this.a_directory.get(aGc);
-      return ((WhyNotGarish_Class) _get);
-    }
-    GenerateC __this = this._this();
-    WhyNotGarish_Class ncc = new WhyNotGarish_Class(aGc, __this);
-    this.a_directory.put(aGc, ncc);
-    return ncc;
-  }
+	public WhyNotGarish_Constructor a_lookup_ctor(final BaseEvaFunction aGf) {
+		boolean _containsKey = this.a_directory.containsKey(aGf);
+		if (_containsKey) {
+			WhyNotGarish_Item _get = this.a_directory.get(aGf);
+			if (_get instanceof WhyNotGarish_Constructor _get2) {
+				return ((WhyNotGarish_Constructor) _get2);
+			} else {
+				System.err.println("********** 43-60");
+				return null;
+			}
+		}
+		GenerateC             __this = this._this();
+		var ncf    = new WhyNotGarish_Constructor((EvaConstructor) aGf, __this);
+		this.a_directory.put(aGf, ncf);
+		return ncf;
+	}
 
-  public WhyNotGarish_Namespace a_lookup(final EvaNamespace en) {
-    boolean _containsKey = this.a_directory.containsKey(en);
-    if (_containsKey) {
-      WhyNotGarish_Item _get = this.a_directory.get(en);
-      return ((WhyNotGarish_Namespace) _get);
-    }
-    GenerateC __this = this._this();
-    WhyNotGarish_Namespace ncn = new WhyNotGarish_Namespace(en, __this);
-    this.a_directory.put(en, ncn);
-    return ncn;
-  }
+	public WhyNotGarish_Class a_lookup(final EvaClass aGc) {
+		boolean _containsKey = this.a_directory.containsKey(aGc);
+		if (_containsKey) {
+			WhyNotGarish_Item _get = this.a_directory.get(aGc);
+			return ((WhyNotGarish_Class) _get);
+		}
+		GenerateC          __this = this._this();
+		WhyNotGarish_Class ncc    = new WhyNotGarish_Class(aGc, __this);
+		this.a_directory.put(aGc, ncc);
+		return ncc;
+	}
 
-  public abstract GenerateC _this();
+	public WhyNotGarish_Namespace a_lookup(final EvaNamespace en) {
+		boolean _containsKey = this.a_directory.containsKey(en);
+		if (_containsKey) {
+			WhyNotGarish_Item _get = this.a_directory.get(en);
+			return ((WhyNotGarish_Namespace) _get);
+		}
+		GenerateC              __this = this._this();
+		WhyNotGarish_Namespace ncn    = new WhyNotGarish_Namespace(en, __this);
+		this.a_directory.put(en, ncn);
+		return ncn;
+	}
 
-  public WhyNotGarish_Function a_lookup(final DeducedBaseEvaFunction aGf) {
-    IEvaFunctionBase _carrier = aGf.getCarrier();
-    return this.a_lookup(((BaseEvaFunction) _carrier));
-  }
+	public abstract GenerateC _this();
+
+	public WhyNotGarish_Function a_lookup(final DeducedBaseEvaFunction aGf) {
+		IEvaFunctionBase _carrier = aGf.getCarrier();
+		return this.a_lookup(((BaseEvaFunction) _carrier));
+	}
 }

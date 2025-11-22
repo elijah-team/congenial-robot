@@ -322,12 +322,12 @@ public class DefaultDeducedEvaConstructor implements DeducedEvaConstructor {
 
 	@Override
 	public EvaNode getEvaNodeEscapeHatch() {
-
+		final var _c = this;
 		// FIXME 12/21 Is this correct??
 		return new EvaNode() {
 			@Override
 			public String identityString() {
-				return identityString();
+				return _c.identityString();
 			}
 
 			@Override

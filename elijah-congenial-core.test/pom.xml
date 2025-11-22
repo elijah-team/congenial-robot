@@ -66,11 +66,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jdeferred.v2</groupId>
-			<artifactId>jdeferred-core</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
 			<version>26.0.2-1</version>
@@ -153,7 +148,6 @@
 								<source>./src-damar/elijah-good-api/src/main/java</source>
 								<source>./src-bnxn/elijah-nextgen-outputstatement/src/main/java</source>
 								<source>./src-bnxn/elijah-stateful/src/main/java</source>
-								<source>./src-bnxn/tripleo-small/src/main/java</source>
 								<source>./src-bnxn/tripleo-reactive/src/main/java</source>
 							</sources>
 						</configuration>
@@ -181,7 +175,6 @@
 								<sourceDir>src-bnxn/elijah-nextgen-outputstatement/src/main/java</sourceDir>
 								<sourceDir>src-bnxn/elijah-stateful/src/main/java</sourceDir>
 								<sourceDir>src-bnxn/tripleo-reactive/src/main/java</sourceDir>
-								<sourceDir>src-bnxn/tripleo-small/src/main/java</sourceDir>
 
 
 								<sourceDir>src/main/lombok</sourceDir>

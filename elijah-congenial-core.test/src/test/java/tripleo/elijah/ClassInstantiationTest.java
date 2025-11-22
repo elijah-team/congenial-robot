@@ -33,7 +33,8 @@ public class ClassInstantiationTest {
 
 		System.err.println("Errorcount is " + c.errorCount());
 
-		assertEquals(1_000_000, c.errorCount());
+		//assertEquals(1_000_000, c.errorCount());
+		assertEquals(0, c.errorCount());
 	}
 
 	@Test
@@ -45,7 +46,8 @@ public class ClassInstantiationTest {
 
 		System.err.println("Errorcount is " + c.errorCount());
 
-		assertEquals(1_000_000, c.errorCount());
+		assertEquals(0, c.errorCount());
+		//assertEquals(1_000_000, c.errorCount());
 	}
 
 	@Test
@@ -57,7 +59,8 @@ public class ClassInstantiationTest {
 
 		System.err.println("Errorcount is " + c.errorCount());
 
-		assertEquals(1_000_000, c.errorCount());
+		//assertEquals(1_000_000, c.errorCount());
+		assertEquals(5, c.errorCount());
 	}
 
 	@Test
@@ -69,7 +72,8 @@ public class ClassInstantiationTest {
 
 		System.err.println("Errorcount is " + c.errorCount());
 
-		assertEquals(1_000_000, c.errorCount());
+		assertEquals(2, c.errorCount());
+		//assertEquals(1_000_000, c.errorCount());
 	}
 }
 

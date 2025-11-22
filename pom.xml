@@ -24,7 +24,6 @@
 
 		<buffers.version>0.0.3</buffers.version>
 		<range.version>0.0.3b</range.version>
-		<jdeferred.version>2.0.0</jdeferred.version>
 
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<kotlin.version>2.1.10</kotlin.version>

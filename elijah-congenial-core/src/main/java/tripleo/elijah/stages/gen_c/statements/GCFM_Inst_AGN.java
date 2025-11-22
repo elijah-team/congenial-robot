@@ -3,6 +3,7 @@ package tripleo.elijah.stages.gen_c.statements;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
+import tripleo.elijah.stages.gen_fn.EvaConstructor;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
@@ -36,7 +37,9 @@ public class GCFM_Inst_AGN implements GenerateC_Statement {
 
 		final String realTarget, s;
 		if (target instanceof IntegerIA) {
-			realTarget = gc.getRealTargetName(gc.a_lookup(gf), (IntegerIA) target, Generate_Code_For_Method.AOG.ASSIGN);
+			if (gf instanceof EvaConstructor)
+			realTarget = gc.getRealTargetName(gc.a_lookup_ctor(gf), (IntegerIA) target, Generate_Code_For_Method.AOG.ASSIGN);
+			else realTarget = gc.getRealTargetName(gc.a_lookup(gf), (IntegerIA) target, Generate_Code_For_Method.AOG.ASSIGN);
 			final String assignmentValue = gc.getAssignmentValue(gf.getSelf(), value, gf);
 			s = String.format(Emit.emit("/*267*/") + "%s = %s;", realTarget, assignmentValue);
 		} else {

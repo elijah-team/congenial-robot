@@ -61,9 +61,8 @@ public class WhyNotGarish_Constructor extends WhyNotGarish_BaseFunction implemen
 	}
 
 	private DeducedEvaConstructor deduced(EvaConstructor gf2) {
-		// TODO Auto-generated method stub
-		return null;
-		//throw new UnintendedUseException();
+		// fixme do we need to record this?
+		return new DefaultDeducedEvaConstructor(gf2);
 	}
 
 	@Override
