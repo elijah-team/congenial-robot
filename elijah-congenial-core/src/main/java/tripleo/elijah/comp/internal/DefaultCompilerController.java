@@ -10,7 +10,7 @@ import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.CompilerController;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.OptionsProcessor;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 public class DefaultCompilerController implements CompilerController {
 	List<String> args;

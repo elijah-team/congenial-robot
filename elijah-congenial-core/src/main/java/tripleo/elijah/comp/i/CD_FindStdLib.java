@@ -3,8 +3,8 @@ package tripleo.elijah.comp.i;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.internal.CR_State;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.util.function.Consumer;
 

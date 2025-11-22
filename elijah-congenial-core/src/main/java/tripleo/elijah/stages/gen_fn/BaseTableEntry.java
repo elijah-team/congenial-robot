@@ -10,15 +10,14 @@ package tripleo.elijah.stages.gen_fn;
 import org.jdeferred2.Deferred;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.FailCallback;
-import org.jdeferred2.Promise;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.UnintendedUseException;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.*;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +27,17 @@ import java.util.function.Function;
  * Created 2/4/21 10:11 PM
  */
 public abstract class BaseTableEntry {
-	protected final DeferredObject2<OS_Element, Diagnostic, Void> _p_elementPromise = new DeferredObject2<OS_Element, Diagnostic, Void>() {
+	protected final DeferredObject2<OS_Element, ElDiagnostic, Void> _p_elementPromise = new DeferredObject2<OS_Element, ElDiagnostic, Void>() {
 		@Override
-		public Deferred<OS_Element, Diagnostic, Void> resolve(final @Nullable OS_Element resolve) {
+		public Deferred<OS_Element, ElDiagnostic, Void> resolve(final @Nullable OS_Element resolve) {
 			return __elementPromise_resolve(resolve, (@Nullable OS_Element r) -> super.resolve(r), this);
 		}
 	};
-	private final   Eventual<DeduceTypes2>                        _p_DeduceTypes2   = new Eventual<>();
+	private final   Eventual<DeduceTypes2>                          _p_DeduceTypes2   = new Eventual<>();
 
-	protected Deferred<OS_Element, Diagnostic, Void> __elementPromise_resolve(final OS_Element resolve,
-																			  final Function<@Nullable OS_Element, Deferred<OS_Element, Diagnostic, Void>> c,
-																			  final Deferred<OS_Element, Diagnostic, Void> identity) {
+	protected Deferred<OS_Element, ElDiagnostic, Void> __elementPromise_resolve(final OS_Element resolve,
+																				final Function<@Nullable OS_Element, Deferred<OS_Element, ElDiagnostic, Void>> c,
+																				final Deferred<OS_Element, ElDiagnostic, Void> identity) {
 		if (resolve == null) {
 /*
 			NotImplementedException.raise();
@@ -95,7 +94,7 @@ public abstract class BaseTableEntry {
 		statusListenerList.add(sl);
 	}
 
-	public void elementPromise(@Nullable DoneCallback<OS_Element> dc, @Nullable FailCallback<Diagnostic> fc) {
+	public void elementPromise(@Nullable DoneCallback<OS_Element> dc, @Nullable FailCallback<ElDiagnostic> fc) {
 		if (dc != null)
 			_p_elementPromise.then(dc);
 		if (fc != null)

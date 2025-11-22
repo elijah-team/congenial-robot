@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.EvaPipeline;
 import tripleo.elijah.context_mocks.PipelineLogic;

@@ -22,10 +22,10 @@ import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.deduce.nextgen.DR_Type;
 import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action;
 import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action_Arena;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,8 +4,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.CompilerInstructionsImpl;
 import tripleo.elijah.comp.i.CR_Action;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 public class CR_ProcessInitialAction implements CR_Action {
 	private final @NotNull CompilerInstructionsImpl ci;

@@ -4,7 +4,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class WhyNotGarish_Namespace implements WhyNotGarish_Item {
 	private final EvaNamespace                             en;

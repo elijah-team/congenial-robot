@@ -5,7 +5,7 @@ import org.junit.Test;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 public class QualidentToDotExpresstionTest {
 

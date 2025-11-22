@@ -11,7 +11,7 @@ package tripleo.elijah.lang.impl;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class YieldExpressionImpl extends BasicBinaryExpressionImpl
 		implements OS_Element, StatementItem, tripleo.elijah.lang.i.YieldExpression {

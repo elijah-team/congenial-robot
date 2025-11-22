@@ -14,8 +14,8 @@ import org.jdeferred2.DoneCallback;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.EventualRegister;
 import tripleo.elijah.comp.Finally;
 
 import tripleo.elijah.comp.notation.GN_PL_Run2;
@@ -48,7 +48,7 @@ import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 import tripleo.util.range.Range;

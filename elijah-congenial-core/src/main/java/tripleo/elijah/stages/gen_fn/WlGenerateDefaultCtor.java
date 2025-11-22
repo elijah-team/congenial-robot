@@ -20,7 +20,6 @@ import tripleo.elijah.stages.deduce.Deduce_CreationClosure;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.nextgen.DeduceCreationContext;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
-import tripleo.elijah.util.Holder;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkManager;
 

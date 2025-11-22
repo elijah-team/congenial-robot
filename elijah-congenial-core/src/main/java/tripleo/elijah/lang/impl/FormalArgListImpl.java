@@ -11,7 +11,7 @@ package tripleo.elijah.lang.impl;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.FormalArgListItem;
 import tripleo.elijah.lang.i.SmallWriter;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;

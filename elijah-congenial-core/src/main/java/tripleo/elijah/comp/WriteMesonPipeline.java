@@ -24,7 +24,7 @@ import tripleo.elijah.nextgen.outputtree.EOT_OutputType;
 import tripleo.elijah.stages.gen_generic.DoubleLatch;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.util.io.CharSink;
 import tripleo.util.io.FileCharSink;
 

@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.pp;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.lang.i.ClassStatement;
 
 import java.util.function.Consumer;

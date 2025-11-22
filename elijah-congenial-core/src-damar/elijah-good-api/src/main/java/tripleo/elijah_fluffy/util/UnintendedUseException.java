@@ -1,4 +1,4 @@
-package tripleo.elijah;
+package tripleo.elijah_fluffy.util;
 
 public class UnintendedUseException extends RuntimeException {
 	private static final long serialVersionUID = -1838486886356864300L;

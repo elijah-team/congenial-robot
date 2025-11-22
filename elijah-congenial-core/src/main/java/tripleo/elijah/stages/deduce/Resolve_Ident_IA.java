@@ -8,13 +8,12 @@
  */
 package tripleo.elijah.stages.deduce;
 
-import org.jdeferred2.Deferred;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
@@ -29,9 +28,9 @@ import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.util.Holder;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Holder;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkList;
 
 import java.text.MessageFormat;

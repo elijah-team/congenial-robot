@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.query.QueryDatabase;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
 import tripleo.elijjah.EzLexer;
 import tripleo.elijjah.EzParser;
 

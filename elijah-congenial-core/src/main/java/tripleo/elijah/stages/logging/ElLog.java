@@ -9,7 +9,7 @@
 package tripleo.elijah.stages.logging;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,11 +16,11 @@ import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.queries.QuerySourceFileToModule;
 import tripleo.elijah.comp.queries.QuerySourceFileToModuleParams;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.Operation;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.world.i.WorldModule;
 import tripleo.elijah.world.impl.DefaultWorldModule;
 
@@ -32,8 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static tripleo.elijah.util.Mode.FAILURE;
-import static tripleo.elijah.util.Mode.SUCCESS;
+import static tripleo.elijah_fluffy.util.Mode.FAILURE;
+import static tripleo.elijah_fluffy.util.Mode.SUCCESS;
 
 public class USE {
 	private static final FilenameFilter         accept_source_files = new FilenameFilter() {
@@ -95,15 +95,15 @@ public class USE {
 			} else {
 				// FIXME take a look at the later 06/19
 				if (om.failure() instanceof ExceptionDiagnostic) {
-					final Diagnostic e = om.failure();
+					final ElDiagnostic e = om.failure();
 					return Operation2.failure(e);
 				}
 
-				final Diagnostic e = new UnknownExceptionDiagnostic(om);
+				final ElDiagnostic e = new UnknownExceptionDiagnostic(om);
 				return Operation2.failure(e);
 			}
 		} else {
-			final Diagnostic e = new FileNotFoundDiagnostic(f);
+			final ElDiagnostic e = new FileNotFoundDiagnostic(f);
 
 			return Operation2.failure(e);
 		}

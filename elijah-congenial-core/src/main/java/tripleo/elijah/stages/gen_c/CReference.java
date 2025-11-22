@@ -11,7 +11,7 @@ package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.stages.gen_c.statements.GCR_Rule;
@@ -20,8 +20,8 @@ import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

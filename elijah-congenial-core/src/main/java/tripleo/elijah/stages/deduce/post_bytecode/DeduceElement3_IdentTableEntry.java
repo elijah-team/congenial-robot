@@ -1,6 +1,5 @@
 package tripleo.elijah.stages.deduce.post_bytecode;
 
-import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +12,7 @@ import tripleo.elijah.lang.imports.NormalImportStatement;
 import tripleo.elijah.nextgen.rosetta.Rosetta;
 import tripleo.elijah.stages.deduce_r.RegisterClassInvocation_resp;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
-import tripleo.elijah.util.Mode;
+import tripleo.elijah_fluffy.util.Mode;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.post_bytecode.DED.DED_ITE;
@@ -23,8 +22,8 @@ import tripleo.elijah.stateful.DefaultStateful;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;
 import tripleo.elijah.stateful._RegistrationTarget;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation2;
 
 import java.util.ArrayList;
 import java.util.Collection;

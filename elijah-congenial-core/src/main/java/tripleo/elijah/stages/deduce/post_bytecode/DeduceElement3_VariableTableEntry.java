@@ -16,11 +16,11 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Diagnostic.Severity;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic.Severity;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.AliasStatementImpl;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
@@ -35,9 +35,9 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stateful.DefaultStateful;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation2;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation2;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -402,7 +402,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 
 		final OS_Type x = vte.getType().getAttached();
 		if (x == null && vte.potentialTypes().isEmpty()) {
-			final Diagnostic diag;
+			final ElDiagnostic diag;
 			if (vte.getVtt() == VariableTableType.TEMP) {
 				diag = /*dt2._inj().new_*/new Diagnostic_8884(vte, gf);
 			} else {
@@ -847,7 +847,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 		}
 
 		@Override
-		public @NotNull Locatable primary() {
+		public @NotNull ElLocatable primary() {
 			return null;
 		}
 
@@ -862,7 +862,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 		}
 
 		@Override
-		public @NotNull List<Locatable> secondary() {
+		public @NotNull List<ElLocatable> secondary() {
 			return null;
 		}
 
@@ -886,7 +886,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 		}
 
 		@Override
-		public @NotNull Locatable primary() {
+		public @NotNull ElLocatable primary() {
 			return null;
 		}
 
@@ -901,7 +901,7 @@ public class DeduceElement3_VariableTableEntry extends DefaultStateful implement
 		}
 
 		@Override
-		public @NotNull List<Locatable> secondary() {
+		public @NotNull List<ElLocatable> secondary() {
 			return null;
 		}
 

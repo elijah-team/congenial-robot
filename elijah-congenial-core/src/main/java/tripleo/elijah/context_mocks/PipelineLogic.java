@@ -11,8 +11,8 @@ package tripleo.elijah.context_mocks;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.EventualRegister;
 import tripleo.elijah.comp.DefaultEventualRegister;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.Compilation;
@@ -22,7 +22,7 @@ import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.internal.Provenance;
 import tripleo.elijah.comp.notation.GN_PL_Run2;
 import tripleo.elijah.comp.notation.GN_PL_Run2_Env;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
 import tripleo.elijah.stages.deduce.DeducePhase;
@@ -30,8 +30,8 @@ import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn.GeneratePhase;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.logging.ElLog.Verbosity;
-import tripleo.elijah.util.CompletableProcess;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.CompletableProcess;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.util.*;
@@ -130,7 +130,7 @@ public class PipelineLogic implements EventualRegister {
 		}
 
 		@Override
-		public void error(final Diagnostic d) {
+		public void error(final ElDiagnostic d) {
 
 		}
 

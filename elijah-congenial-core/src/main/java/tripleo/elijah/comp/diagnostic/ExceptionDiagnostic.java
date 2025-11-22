@@ -1,13 +1,13 @@
 package tripleo.elijah.comp.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 
 import java.io.PrintStream;
 import java.util.List;
 
-public class ExceptionDiagnostic implements Diagnostic {
+public class ExceptionDiagnostic implements ElDiagnostic {
 	private final Exception e;
 
 	public ExceptionDiagnostic(final Exception aE) {
@@ -20,7 +20,7 @@ public class ExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		return null;
 	}
 
@@ -30,7 +30,7 @@ public class ExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return null;
 	}
 

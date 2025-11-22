@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.HashMap;
 import java.util.Map;

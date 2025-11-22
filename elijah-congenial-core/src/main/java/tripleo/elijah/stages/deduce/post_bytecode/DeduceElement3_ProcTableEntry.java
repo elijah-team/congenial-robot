@@ -2,11 +2,10 @@ package tripleo.elijah.stages.deduce.post_bytecode;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
-import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.types.OS_FuncType;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.gen_fn.*;
@@ -15,8 +14,8 @@ import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 

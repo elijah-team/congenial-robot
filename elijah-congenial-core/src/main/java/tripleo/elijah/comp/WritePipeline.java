@@ -29,8 +29,8 @@ import tripleo.elijah.stages.generate.ElSystem;
 import tripleo.elijah.stages.generate.OutputStrategy;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.write_stage.pipeline_impl.*;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.util.*;
 import java.util.function.Consumer;

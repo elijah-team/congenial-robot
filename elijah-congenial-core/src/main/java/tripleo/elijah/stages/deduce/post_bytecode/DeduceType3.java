@@ -3,19 +3,19 @@ package tripleo.elijah.stages.deduce.post_bytecode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.gen_fn.*;
 
 class DeduceType3 implements DED {
 	private final @Nullable IDeduceElement3 deduceElement3;
-	private final           Diagnostic      diagnostic;
+	private final           ElDiagnostic    diagnostic;
 
 	private       GenType _genType;
 	private final OS_Type osType;
 
-	public DeduceType3(final OS_Type aOSType, final Diagnostic aDiagnostic) {
+	public DeduceType3(final OS_Type aOSType, final ElDiagnostic aDiagnostic) {
 		deduceElement3 = null;
 		osType         = aOSType;
 		diagnostic     = aDiagnostic;
@@ -25,7 +25,7 @@ class DeduceType3 implements DED {
 		return aIdentTableEntry.getDeduceElement3(aDeduceTypes2, aGeneratedFunction);
 	}
 
-	public DeduceType3(final IDeduceElement3 aDeduceElement3, final OS_Type aOSType, final Diagnostic aDiagnostic1) {
+	public DeduceType3(final IDeduceElement3 aDeduceElement3, final OS_Type aOSType, final ElDiagnostic aDiagnostic1) {
 		deduceElement3 = aDeduceElement3;
 		osType         = aOSType;
 		diagnostic     = aDiagnostic1;

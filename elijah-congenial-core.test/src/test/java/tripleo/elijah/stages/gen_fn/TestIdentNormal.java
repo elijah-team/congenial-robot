@@ -11,7 +11,7 @@ package tripleo.elijah.stages.gen_fn;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Ignore;
 import org.junit.Test;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.context_mocks.ContextMock;
 import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.*;
@@ -25,7 +25,7 @@ import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.test_help.Boilerplate;
 import tripleo.elijah.test_help.XX;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 

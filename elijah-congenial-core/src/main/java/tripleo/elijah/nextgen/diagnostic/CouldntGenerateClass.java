@@ -10,12 +10,12 @@
 package tripleo.elijah.nextgen.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.nextgen.ClassDefinition;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.io.PrintStream;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created 3/5/22 4:55 PM
  */
-public class CouldntGenerateClass implements Diagnostic {
+public class CouldntGenerateClass implements ElDiagnostic {
 	private final ClassDefinition   classDefinition;
 	private final ClassInvocation   classInvocation;
 	private final GenerateFunctions generateFunctions;
@@ -54,7 +54,7 @@ public class CouldntGenerateClass implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		return null;
 	}
 
@@ -64,7 +64,7 @@ public class CouldntGenerateClass implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return null;
 	}
 

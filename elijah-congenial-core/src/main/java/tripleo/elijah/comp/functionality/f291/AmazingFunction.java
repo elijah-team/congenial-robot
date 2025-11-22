@@ -2,7 +2,7 @@ package tripleo.elijah.comp.functionality.f291;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.context_mocks.PipelineLogic;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.notation.GM_GenerateModule;

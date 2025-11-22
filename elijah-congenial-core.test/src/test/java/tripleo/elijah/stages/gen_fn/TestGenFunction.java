@@ -41,7 +41,7 @@
 //import tripleo.elijah.stages.instructions.InstructionName;
 //import tripleo.elijah.stages.logging.ElLog;
 //import tripleo.elijah.test_help.Boilerplate;
-//import tripleo.elijah.util.Operation;
+//import tripleo.elijah_fluffy.util.Operation;
 //import tripleo.elijah.work.WorkManager;
 //
 //import java.io.File;

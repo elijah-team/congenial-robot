@@ -9,7 +9,7 @@
 package tripleo.elijah.stages.gen_c;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.comp.functionality.f291.B;
 import tripleo.elijah.comp.i.CompilationEnclosure;
@@ -40,9 +40,9 @@ import tripleo.elijah.stages.pp.IPP_Function;
 import tripleo.elijah.stages.pp.PP_Constructor;
 import tripleo.elijah.stages.pp.PP_Function;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.IFixedList;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.IFixedList;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;

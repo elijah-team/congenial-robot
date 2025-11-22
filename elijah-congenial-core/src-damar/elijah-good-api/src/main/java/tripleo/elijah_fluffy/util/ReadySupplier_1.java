@@ -1,4 +1,4 @@
-package tripleo.elijah;
+package tripleo.elijah_fluffy.util;
 
 import org.jetbrains.annotations.NotNull;
 

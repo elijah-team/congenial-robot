@@ -15,7 +15,7 @@ import tripleo.elijah.lang.types.OS_UnitType;
 import tripleo.elijah.lang.types.OS_UserType;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 /**
  * Created 9/12/20 10:26 PM

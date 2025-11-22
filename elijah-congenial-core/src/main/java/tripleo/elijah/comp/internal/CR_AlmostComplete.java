@@ -2,8 +2,8 @@ package tripleo.elijah.comp.internal;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.CR_Action;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 public class CR_AlmostComplete implements CR_Action {
 	private CompilationRunner compilationRunner;

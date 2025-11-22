@@ -17,14 +17,14 @@ import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.EventualRegister;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.context_mocks.PipelineLogic;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.types.OS_UnknownType;
 import tripleo.elijah.nextgen.ClassDefinition;
@@ -50,8 +50,8 @@ import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.post_deduce.DefaultCodeRegistrar;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful._RegistrationTarget;
-import tripleo.elijah.util.Maybe;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Maybe;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
@@ -1076,7 +1076,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 				//return prom;
 				return null;
 			} else {
-				DeferredObject<ClassDefinition, Diagnostic, Void> prom = new DeferredObject<>();
+				DeferredObject<ClassDefinition, ElDiagnostic, Void> prom = new DeferredObject<>();
 
 				final GenerateFunctions generateFunctions = generatePhase.getGenerateFunctions(mod);
 				wl.addJob(_inj().new_WlGenerateClass(generateFunctions, aClassInvocation, generatedClasses, codeRegistrar, aEnv)); // TODO why add now?
@@ -1164,7 +1164,7 @@ public class DeducePhase extends _RegistrationTarget implements ReactiveDimensio
 			return new ArrayList<>();
 		}
 
-		public Diagnostic new_CouldntGenerateClass(final ClassDefinition aCd, final GenerateFunctions aGf, final ClassInvocation aCi) {
+		public ElDiagnostic new_CouldntGenerateClass(final ClassDefinition aCd, final GenerateFunctions aGf, final ClassInvocation aCi) {
 			return new CouldntGenerateClass(aCd, aGf, aCi);
 		}
 

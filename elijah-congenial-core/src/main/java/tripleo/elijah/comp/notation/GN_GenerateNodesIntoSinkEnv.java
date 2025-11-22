@@ -13,7 +13,7 @@ import tripleo.elijah.stages.gen_generic.*;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNode;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 import java.util.Objects;

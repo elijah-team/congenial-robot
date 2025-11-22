@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.contexts.NamespaceContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 /**
  * @author Tripleo(sb)

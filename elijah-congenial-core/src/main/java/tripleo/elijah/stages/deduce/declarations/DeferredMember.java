@@ -12,8 +12,8 @@ import lombok.Getter;
 import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.VariableStatement;
 import tripleo.elijah.stages.deduce.DeduceElementWrapper;
 import tripleo.elijah.stages.deduce.IInvocation;
@@ -27,8 +27,8 @@ public class DeferredMember {
 	@Getter private final IInvocation                               invocation;
 	@Getter private final DeduceElementWrapper                      parent;
 	@Getter private final VariableStatement                     variableStatement;
-	private final Eventual<EvaNode>                         externalRef = new Eventual<>();
-	private final DeferredObject<GenType, Diagnostic, Void> typePromise = new DeferredObject<>();
+	private final Eventual<EvaNode>                           externalRef = new Eventual<>();
+	private final DeferredObject<GenType, ElDiagnostic, Void> typePromise = new DeferredObject<>();
 
 	public DeferredMember(DeduceElementWrapper aParent, IInvocation aInvocation, VariableStatement aVariableStatement) {
 		parent            = aParent;
@@ -52,12 +52,12 @@ public class DeferredMember {
 				'}';
 	}
 
-	public @NotNull Promise<GenType, Diagnostic, Void> typePromise() {
+	public @NotNull Promise<GenType, ElDiagnostic, Void> typePromise() {
 		return typePromise;
 	}
 
 	// for DeducePhase
-	public @NotNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
+	public @NotNull DeferredObject<GenType, ElDiagnostic, Void> typeResolved() {
 		return typePromise;
 	}
 

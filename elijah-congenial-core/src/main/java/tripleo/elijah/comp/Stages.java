@@ -6,7 +6,7 @@ import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.ProcessRecord;
 import tripleo.elijah.comp.i.RuntimeProcess;
 import tripleo.elijah.comp.internal.OStageProcess;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public enum Stages {
 	D("D") {

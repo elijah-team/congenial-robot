@@ -1,4 +1,3 @@
-/* -*- Mode: Java; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Elijjah compiler, copyright Tripleo <oluoluolu+elijah@gmail.com>
  *
@@ -7,23 +6,19 @@
  * http://www.gnu.org/licenses/lgpl.html from `Version 3, 29 June 2007'
  *
  */
-package tripleo.elijah.util;
+package tripleo.elijah_fluffy.util;
 
 /**
- * Created 3/17/22 4:27 PM
+ * Created 8/15/20 3:52 PM
  */
-public class Holder<T> {
-	private T el;
+public enum LogEvent {
+	;
 
-	public T get() {
-		return el;
-	}
-
-	public void set(T el) {
-		this.el = el;
+	public static void logEvent(final int number, final String message) {
+		System.err.println(number + " " + message);
 	}
 }
 
 //
-// vim:set shiftwidth=4 softtabstop=0 noexpandtab:
+//
 //

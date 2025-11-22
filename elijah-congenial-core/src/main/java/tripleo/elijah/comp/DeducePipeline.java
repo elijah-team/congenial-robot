@@ -16,7 +16,7 @@ import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.context_mocks.PipelineLogic;
 import tripleo.elijah.stages.deduce.DeducePhase;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.world.i.LivingRepo;
 import tripleo.elijah.world.i.WorldModule;
 

@@ -11,7 +11,7 @@ import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stateful.DefaultStateful;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 //@StatefulProperty
 class ExitGetType implements State {

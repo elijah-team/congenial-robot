@@ -21,7 +21,7 @@ import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang.i.VariableStatement;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.Objects;
 

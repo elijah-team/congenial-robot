@@ -2,7 +2,7 @@ package tripleo.elijah.comp.notation;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.context_mocks.PipelineLogic;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.lang.i.OS_Module;

@@ -14,7 +14,7 @@ import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResultItem;
 import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.text.MessageFormat;
 import java.util.HashMap;

@@ -4,7 +4,7 @@ import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
 import tripleo.elijah.stages.instructions.*;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class GCFM_Inst_JE implements GenerateC_Statement {
 

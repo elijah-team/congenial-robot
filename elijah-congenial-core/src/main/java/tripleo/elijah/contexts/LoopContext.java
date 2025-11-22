@@ -16,7 +16,7 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.AliasStatementImpl;
 import tripleo.elijah.lang.impl.ContextImpl;
 import tripleo.elijah.lang.impl.VariableSequenceImpl;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 /**
  * @author Tripleo

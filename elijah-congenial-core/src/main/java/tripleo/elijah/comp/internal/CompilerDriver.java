@@ -5,7 +5,7 @@ import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilerDriven;
 import tripleo.elijah.comp.i.DriverToken;
 import tripleo.elijah.comp.i.ICompilationBus;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.util.HashMap;
 import java.util.Map;

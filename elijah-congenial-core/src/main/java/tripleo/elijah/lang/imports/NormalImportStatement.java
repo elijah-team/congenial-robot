@@ -7,7 +7,7 @@ import tripleo.elijah.lang.impl.QualidentListImpl;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_PackageElement;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_PackageRoot;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_PackageTerminator;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.List;
 

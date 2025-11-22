@@ -20,7 +20,7 @@ import tripleo.elijah.stages.gen_fn.EvaNamespace;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.pp.IPP_Function;
 import tripleo.elijah.stages.pp.PP_Constructor;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.util.buffer.Buffer;
 
 import java.util.ArrayList;

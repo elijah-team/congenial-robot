@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.factory.comp.CompilationFactory;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.io.File;
 import java.util.List;

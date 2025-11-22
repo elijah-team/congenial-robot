@@ -7,9 +7,9 @@ import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.i.*;
 import tripleo.elijah.stateful.DefaultStateful;
 import tripleo.elijah.stateful.State;
-import tripleo.elijah.util.Maybe;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Maybe;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.io.File;
 import java.nio.file.NotDirectoryException;

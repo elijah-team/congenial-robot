@@ -9,15 +9,15 @@ import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.queries.QueryEzFileToModule;
 import tripleo.elijah.comp.queries.QueryEzFileToModuleParams;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.Operation;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static tripleo.elijah.util.Mode.SUCCESS;
+import static tripleo.elijah_fluffy.util.Mode.SUCCESS;
 
 class EzM {
 	@NotNull Operation<CompilerInstructions> parseEzFile1(final @NotNull SourceFileParserParams p) {

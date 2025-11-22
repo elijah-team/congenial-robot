@@ -1,7 +1,7 @@
 package tripleo.elijah.stages.deduce.fluffy.impl;
 
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.nextgen.composable.IComposable;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyVar;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyVarTarget;
@@ -18,7 +18,7 @@ public class FluffyVarImpl implements FluffyVar {
 	}
 
 	@Override
-	public @Nullable Locatable nameLocatable() {
+	public @Nullable ElLocatable nameLocatable() {
 		return null;
 	}
 

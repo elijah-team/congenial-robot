@@ -1,14 +1,14 @@
 package tripleo.elijah.comp.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 
 import java.io.File;
 import java.io.PrintStream;
 import java.util.List;
 
-public class FileNotFoundDiagnostic implements Diagnostic {
+public class FileNotFoundDiagnostic implements ElDiagnostic {
 	private final File f;
 
 	public FileNotFoundDiagnostic(final File aLocal_prelude) {
@@ -21,7 +21,7 @@ public class FileNotFoundDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		return null;
 	}
 
@@ -31,7 +31,7 @@ public class FileNotFoundDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return null;
 	}
 

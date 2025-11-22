@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 
 import java.io.PrintStream;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created 9/9/21 6:25 AM
  */
-public class ResolveUnknown implements Diagnostic {
+public class ResolveUnknown implements ElDiagnostic {
 	@Override
 	public @NotNull String code() {
 		return "E1003";
@@ -29,7 +29,7 @@ public class ResolveUnknown implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		return null;
 	}
 
@@ -37,14 +37,14 @@ public class ResolveUnknown implements Diagnostic {
 	public void report(@NotNull PrintStream stream) {
 		stream.printf("---[%s]---: %s%n", code(), message());
 		// linecache.print(primary);
-		for (Locatable sec : secondary()) {
+		for (ElLocatable sec : secondary()) {
 			//linecache.print(sec)
 		}
 		stream.flush();
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return null;
 	}
 

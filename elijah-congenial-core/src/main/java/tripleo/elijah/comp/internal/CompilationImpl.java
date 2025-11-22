@@ -30,7 +30,7 @@ import tripleo.elijah.stages.deduce.IFunctionMapHook;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyComp;
 import tripleo.elijah.stages.deduce.fluffy.impl.FluffyCompImpl;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.world.i.LivingRepo;
 import tripleo.elijah.world.i.WorldModule;
 import tripleo.elijah.world.impl.DefaultLivingRepo;

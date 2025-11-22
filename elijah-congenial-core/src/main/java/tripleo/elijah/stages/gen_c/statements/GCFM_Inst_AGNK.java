@@ -1,11 +1,10 @@
 package tripleo.elijah.stages.gen_c.statements;
 
-import tripleo.elijah.UnintendedUseException;
 import tripleo.elijah.stages.gen_c.*;
 import tripleo.elijah.stages.instructions.Instruction;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class GCFM_Inst_AGNK implements GenerateC_Statement {
 

@@ -2,11 +2,10 @@ package tripleo.elijah.stages.gen_c;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
-import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.stages.deduce.DeduceElement;
 import tripleo.elijah.stages.deduce.OnGenClass;
@@ -17,7 +16,7 @@ import tripleo.elijah.stages.gen_c.statements.ArgumentString;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.instructions.*;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;

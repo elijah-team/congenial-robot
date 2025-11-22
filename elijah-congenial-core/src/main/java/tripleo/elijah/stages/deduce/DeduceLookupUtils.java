@@ -11,7 +11,7 @@ package tripleo.elijah.stages.deduce;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.contexts.FunctionContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.AliasStatementImpl;
@@ -23,8 +23,8 @@ import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry
 import tripleo.elijah.stages.deduce.post_bytecode.IDeduceElement3;
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.Collections;
 import java.util.Objects;

@@ -5,7 +5,7 @@ import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.gen_fn.GenerateFunctions;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class GDM_VariableTableEntry implements GDM_Item {
 	private final GenerateFunctions  generateFunctions;

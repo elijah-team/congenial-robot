@@ -7,7 +7,7 @@
  *
  */
 
-package tripleo.elijah.diagnostic;
+package tripleo.elijah_fluffy.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,9 +18,9 @@ import java.util.List;
 /**
  * Created 12/26/20 5:31 AM
  */
-public interface Diagnostic {
-	static @NotNull Diagnostic withMessage(@NotNull String code, String string, @NotNull Severity severity) {
-		return new Diagnostic() {
+public interface ElDiagnostic {
+	static @NotNull ElDiagnostic withMessage(@NotNull String code, String string, @NotNull Severity severity) {
+		return new ElDiagnostic() {
 
 			@Override
 			public String code() {
@@ -28,7 +28,7 @@ public interface Diagnostic {
 			}
 
 			@Override
-			public @NotNull Locatable primary() {
+			public @NotNull ElLocatable primary() {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -40,7 +40,7 @@ public interface Diagnostic {
 			}
 
 			@Override
-			public @NotNull List<Locatable> secondary() {
+			public @NotNull List<ElLocatable> secondary() {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -55,12 +55,12 @@ public interface Diagnostic {
 	@Nullable String code();
 
 	@NotNull
-	Locatable primary();
+	ElLocatable primary();
 
 	void report(PrintStream stream);
 
 	@NotNull
-	List<Locatable> secondary();
+	List<ElLocatable> secondary();
 
 	@Nullable Severity severity();
 

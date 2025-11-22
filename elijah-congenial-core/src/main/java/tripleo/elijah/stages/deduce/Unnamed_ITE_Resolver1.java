@@ -8,15 +8,15 @@ import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.lang.types.OS_FuncType;
-import tripleo.elijah.util.Mode;
+import tripleo.elijah_fluffy.util.Mode;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry.ITE_Resolver_Result;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.util.List;
 

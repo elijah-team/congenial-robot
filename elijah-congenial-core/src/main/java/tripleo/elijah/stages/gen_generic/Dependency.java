@@ -15,7 +15,7 @@ import tripleo.elijah.stages.gen_fn.AbstractDependencyTracker;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaContainerNC;
 import tripleo.elijah.stages.gen_fn.GenType;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.HashSet;
 import java.util.List;

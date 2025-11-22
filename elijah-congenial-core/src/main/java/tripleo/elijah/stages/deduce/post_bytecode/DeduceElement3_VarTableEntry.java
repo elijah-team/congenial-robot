@@ -4,15 +4,15 @@ import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.AliasStatementImpl;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.instructions.IdentIA;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 

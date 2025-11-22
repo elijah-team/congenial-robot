@@ -6,9 +6,9 @@ import tripleo.elijah.ci.i.CompilerInstructions
 import tripleo.elijah.comp.i.*
 import tripleo.elijah.comp.i.COutputString
 
-import tripleo.elijah.util.Mode
-import tripleo.elijah.util.Ok
-import tripleo.elijah.util.Operation
+import tripleo.elijah_fluffy.util.Mode
+import tripleo.elijah_fluffy.util.Ok
+import tripleo.elijah_fluffy.util.Operation
 
 import java.util.*
 

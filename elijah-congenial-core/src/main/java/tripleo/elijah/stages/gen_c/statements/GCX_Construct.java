@@ -6,9 +6,9 @@ import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.stages.gen_c.GI_ProcIA;
 import tripleo.elijah.stages.gen_c.GenerateC;
-import tripleo.elijah.util.Mode;
+import tripleo.elijah_fluffy.util.Mode;
 import tripleo.elijah.stages.instructions.Instruction;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Operation2;
 
 public class GCX_Construct implements EG_Statement {
 

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.contexts.FunctionContext;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.lang.impl.FuncTypeNameImpl;
@@ -24,8 +24,8 @@ import tripleo.elijah.stages.deduce.post_bytecode.setup_GenType_Action_Arena;
 import tripleo.elijah.stages.deduce.tastic.DT_External_2;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 
@@ -375,7 +375,7 @@ class Resolve_Variable_Table_Entry {
 					return Operation2.success(ns);
 				} else {
 					LOG.err("__MODULE__ should be namespace");
-					return Operation2.failure(Diagnostic.withMessage("9328", "__MODULE__ should be namespace", Diagnostic.Severity.ERROR));
+					return Operation2.failure(ElDiagnostic.withMessage("9328", "__MODULE__ should be namespace", ElDiagnostic.Severity.ERROR));
 				}
 			} else {
 				// not found, so add. this is where AST would come in handy

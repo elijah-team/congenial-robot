@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 /**
  * Created 4/13/21 5:46 AM
  */
-public class CantDecideType implements Diagnostic {
+public class CantDecideType implements ElDiagnostic {
 	private final @NotNull Collection<TypeTableEntry> types;
 	private final          VariableTableEntry         vte;
 
@@ -41,14 +41,14 @@ public class CantDecideType implements Diagnostic {
 	public void report(@NotNull PrintStream stream) {
 		stream.printf("---[%s]---: %s%n", code(), message());
 		// linecache.print(primary);
-		for (Locatable sec : secondary()) {
+		for (ElLocatable sec : secondary()) {
 			//linecache.print(sec)
 		}
 		stream.flush();
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		@NotNull VariableStatementImpl vs = (VariableStatementImpl) vte.getResolvedElement();
 		return vs;
 	}
@@ -58,12 +58,12 @@ public class CantDecideType implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
-		final List<Locatable> c = types.stream()
+	public @NotNull List<ElLocatable> secondary() {
+		final List<ElLocatable> c = types.stream()
 				.map((TypeTableEntry input) -> {
 						 //return input.attached.getElement(); // TODO All elements should be Locatable
 						 //return (TypeName)input.attached.getTypename();
-						 return (Locatable) null;
+						 return (ElLocatable) null;
 					 }
 					)
 				.collect(Collectors.toList());

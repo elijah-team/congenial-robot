@@ -1,7 +1,7 @@
 package tripleo.elijah.comp.notation;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.stages.deduce.DeducePhase;
@@ -14,7 +14,7 @@ import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNode;
 import tripleo.elijah.stages.gen_generic.pipeline_impl.ProcessedNodeImpl;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 

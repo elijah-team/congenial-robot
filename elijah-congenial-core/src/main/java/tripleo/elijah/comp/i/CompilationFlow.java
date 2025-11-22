@@ -2,8 +2,8 @@ package tripleo.elijah.comp.i;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.internal.CompilationImpl;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.util.function.Consumer;

@@ -6,7 +6,7 @@ package tripleo.elijah.lang.impl;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.lang.i.OS_Type;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.HashMap;
 import java.util.Map;

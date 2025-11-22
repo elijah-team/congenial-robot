@@ -6,9 +6,9 @@ import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.CD_FindStdLib;
 import tripleo.elijah.comp.i.CompilationClosure;
 import tripleo.elijah.comp.queries.QuerySourceFileParser;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.io.File;
 import java.util.Objects;

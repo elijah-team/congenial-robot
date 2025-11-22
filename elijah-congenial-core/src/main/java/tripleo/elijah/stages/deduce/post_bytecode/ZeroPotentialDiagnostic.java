@@ -2,14 +2,14 @@ package tripleo.elijah.stages.deduce.post_bytecode;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.io.PrintStream;
 import java.util.List;
 
-public class ZeroPotentialDiagnostic implements Diagnostic {
+public class ZeroPotentialDiagnostic implements ElDiagnostic {
 	@Override
 	public @Nullable String code() {
 		NotImplementedException.raise();
@@ -17,7 +17,7 @@ public class ZeroPotentialDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		NotImplementedException.raise();
 		return null;
 	}
@@ -29,7 +29,7 @@ public class ZeroPotentialDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		NotImplementedException.raise();
 		return null;
 	}

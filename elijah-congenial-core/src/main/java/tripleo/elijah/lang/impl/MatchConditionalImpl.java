@@ -11,7 +11,7 @@ package tripleo.elijah.lang.impl;
 import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.contexts.MatchConditionalContext;
 import tripleo.elijah.contexts.MatchContext;
 import tripleo.elijah.lang.i.*;

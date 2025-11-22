@@ -7,8 +7,8 @@ import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.comp.i.ICompilationAccess;
 import tripleo.elijah.comp.i.IPipelineAccess;
 import tripleo.elijah.comp.i.ProcessRecord;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 public class CR_RunBetterAction implements CR_Action {
 	public enum StageToRuntime {

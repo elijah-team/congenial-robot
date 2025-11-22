@@ -10,9 +10,9 @@ import tripleo.elijah.comp.diagnostic.TooManyEz_BeSpecific;
 import tripleo.elijah.comp.i.CompilationClosure;
 import tripleo.elijah.comp.i.ILazyCompilerInstructions;
 import tripleo.elijah.comp.queries.QuerySearchEzFiles;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.util.Maybe;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.util.Maybe;
+import tripleo.elijah_fluffy.util.Operation2;
 
 import java.io.File;
 import java.util.List;
@@ -32,7 +32,7 @@ public class CW_inputIsDirectory {
 
 		switch (ezs.size()) {
 		case 0:
-			final Diagnostic d_toomany = new TooManyEz_ActuallyNone();
+			final ElDiagnostic d_toomany = new TooManyEz_ActuallyNone();
 			final Maybe<ILazyCompilerInstructions> m = new Maybe<>(null, d_toomany);
 			input.accept_ci(m);
 			x.accept(input);
@@ -49,7 +49,7 @@ public class CW_inputIsDirectory {
 			//add_ci(ezs.get(0));
 
 			// more than 1 (negative is not possible)
-			final Diagnostic d_toomany2 = new TooManyEz_BeSpecific();
+			final ElDiagnostic d_toomany2 = new TooManyEz_BeSpecific();
 			final Maybe<ILazyCompilerInstructions> m2 = new Maybe<>(null, d_toomany2);
 			input.accept_ci(m2);
 			x.accept(input);

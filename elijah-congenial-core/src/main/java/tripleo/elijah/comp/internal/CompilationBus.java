@@ -3,7 +3,6 @@ package tripleo.elijah.comp.internal;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.*;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.ArrayList;
 import java.util.List;

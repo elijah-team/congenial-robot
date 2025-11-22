@@ -1,13 +1,13 @@
 package tripleo.elijah.comp.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 
 import java.io.PrintStream;
 import java.util.List;
 
-class TooManyEz_UseFirst implements Diagnostic {
+class TooManyEz_UseFirst implements ElDiagnostic {
 	final String message = "Too many .ez files, using first.";
 
 	@Override
@@ -16,7 +16,7 @@ class TooManyEz_UseFirst implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		return null;
 	}
 
@@ -26,7 +26,7 @@ class TooManyEz_UseFirst implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return null;
 	}
 

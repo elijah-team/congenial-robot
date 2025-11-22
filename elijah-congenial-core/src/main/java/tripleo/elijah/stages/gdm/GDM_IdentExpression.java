@@ -2,7 +2,7 @@ package tripleo.elijah.stages.gdm;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
@@ -12,7 +12,7 @@ import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.List;
 import java.util.function.Consumer;

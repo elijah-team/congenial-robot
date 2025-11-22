@@ -28,9 +28,9 @@ import tripleo.elijah.stages.gen_fn.EvaContainer.VarTableEntry;
 
 import tripleo.elijah.util.Helpers;
 
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 final class VarTableEntry_UpdatePotentialTypesCB implements VarTableEntry.UpdatePotentialTypesCB {
 	private final @NotNull DeduceTypes2 deduceTypes2;

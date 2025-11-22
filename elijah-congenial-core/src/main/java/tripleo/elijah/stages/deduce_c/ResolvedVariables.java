@@ -7,7 +7,7 @@ import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.gen_fn.EvaContainer;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
-import tripleo.elijah.util.Maybe;
+import tripleo.elijah_fluffy.util.Maybe;
 
 import static tripleo.elijah.util.Helpers.List_of;
 

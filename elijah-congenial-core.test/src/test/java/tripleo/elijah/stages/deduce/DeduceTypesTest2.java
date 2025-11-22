@@ -22,7 +22,7 @@ import tripleo.elijah.nextgen.rosetta.DeducePhase.DeducePhase_deduceModule_Reque
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.test_help.Boilerplate;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.Objects;
 

@@ -1,8 +1,8 @@
 package tripleo.elijah.stages.deduce;
 
-import tripleo.elijah.UnintendedUseException;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 class Times {
 	public static class Once implements T {

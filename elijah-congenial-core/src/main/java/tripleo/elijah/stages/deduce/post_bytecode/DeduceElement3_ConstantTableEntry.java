@@ -3,7 +3,7 @@ package tripleo.elijah.stages.deduce.post_bytecode;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.lang.i.OS_Type;
@@ -15,14 +15,14 @@ import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.stages.instructions.IdentIA;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class DeduceElement3_ConstantTableEntry implements IDeduceElement3 {
 
 	private final    ConstantTableEntry principal;
-	public           DeduceTypes2       deduceTypes2;
-	public           Diagnostic         diagnostic;
-	public           IDeduceElement3    deduceElement3;
+	public DeduceTypes2    deduceTypes2;
+	public ElDiagnostic    diagnostic;
+	public IDeduceElement3 deduceElement3;
 	private          GenType            genType;
 	public           BaseEvaFunction    generatedFunction;
 	public @Nullable OS_Type            osType;

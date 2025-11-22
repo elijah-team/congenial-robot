@@ -15,7 +15,7 @@ import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.factory.comp.CompilationFactory;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 

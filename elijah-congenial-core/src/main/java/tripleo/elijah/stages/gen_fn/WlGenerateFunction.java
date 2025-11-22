@@ -20,7 +20,7 @@ import tripleo.elijah.stages.deduce.Deduce_CreationClosure;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.stages.deduce.NamespaceInvocation;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkManager;
 

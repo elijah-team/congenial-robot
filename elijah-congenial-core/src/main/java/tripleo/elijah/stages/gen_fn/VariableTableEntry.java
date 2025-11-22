@@ -13,8 +13,8 @@ import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.lang.i.OS_Type;
@@ -26,8 +26,8 @@ import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VariableTableEntry;
 import tripleo.elijah.stages.deduce.post_bytecode.PostBC_Processor;
 import tripleo.elijah.stages.instructions.VariableTableType;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -87,7 +87,7 @@ public class VariableTableEntry extends BaseTableEntry1 implements Constructable
 	}
 
 	@Override
-	protected Deferred<OS_Element, Diagnostic, Void> __elementPromise_resolve(final OS_Element resolve, final Function<@Nullable OS_Element, Deferred<OS_Element, Diagnostic, Void>> c, Deferred<OS_Element, Diagnostic, Void> identity) {
+	protected Deferred<OS_Element, ElDiagnostic, Void> __elementPromise_resolve(final OS_Element resolve, final Function<@Nullable OS_Element, Deferred<OS_Element, ElDiagnostic, Void>> c, Deferred<OS_Element, ElDiagnostic, Void> identity) {
 		if (resolve == null) {
 			var vte = this;
 				switch (vte.getVtt()) {

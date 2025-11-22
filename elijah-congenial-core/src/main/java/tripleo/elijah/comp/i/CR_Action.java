@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.internal.CB_Output;
 import tripleo.elijah.comp.internal.CR_State;
 import tripleo.elijah.comp.internal.CompilationRunner;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 public interface CR_Action {
 	void attach(@NotNull CompilationRunner cr);

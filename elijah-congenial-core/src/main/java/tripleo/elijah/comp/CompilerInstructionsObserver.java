@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.i.Compilation;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;

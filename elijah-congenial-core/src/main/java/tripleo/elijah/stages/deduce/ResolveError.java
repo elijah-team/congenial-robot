@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.deduce;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.lang.i.IdentExpression;
 import tripleo.elijah.lang.i.LookupResult;
 import tripleo.elijah.lang.i.LookupResultList;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 /**
  * Created 12/26/20 5:08 AM
  */
-public class ResolveError extends Exception implements Diagnostic {
+public class ResolveError extends Exception implements ElDiagnostic {
 	private final @org.jetbrains.annotations.Nullable IdentExpression  ident;
 	private final                                     LookupResultList lrl;
 	private final @org.jetbrains.annotations.Nullable TypeName         typeName;
@@ -49,14 +49,14 @@ public class ResolveError extends Exception implements Diagnostic {
 	public void report(@NotNull PrintStream stream) {
 		stream.printf("---[%s]---: %s%n", code(), message());
 		// linecache.print(primary);
-		for (Locatable sec : secondary()) {
+		for (ElLocatable sec : secondary()) {
 			//linecache.print(sec)
 		}
 		stream.flush();
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		if (typeName == null) {
 			return ident;
 		} else
@@ -76,9 +76,9 @@ public class ResolveError extends Exception implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return resultsList().stream()
-				.map(e -> (Locatable) e.getElement())
+				.map(e -> (ElLocatable) e.getElement())
 				.collect(Collectors.toList());
 	}
 

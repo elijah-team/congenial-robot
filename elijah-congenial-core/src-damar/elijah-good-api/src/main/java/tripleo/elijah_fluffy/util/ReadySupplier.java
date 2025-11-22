@@ -1,4 +1,4 @@
-package tripleo.elijah;
+package tripleo.elijah_fluffy.util;
 
 import java.util.function.Supplier;
 

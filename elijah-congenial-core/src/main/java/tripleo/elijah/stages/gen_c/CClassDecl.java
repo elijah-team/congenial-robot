@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.ArrayList;
 

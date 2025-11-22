@@ -3,7 +3,7 @@ package tripleo.elijah.comp.internal;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.i.IProgressSink;
 import tripleo.elijah.comp.i.ProgressSinkComponent;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 public class DefaultProgressSink implements IProgressSink {
 	@Override

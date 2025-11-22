@@ -7,9 +7,9 @@ import tripleo.elijah.comp.i.CD_CompilationRunnerStart;
 import tripleo.elijah.comp.i.CR_Action;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationEnclosure;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.util.ArrayList;
 import java.util.List;

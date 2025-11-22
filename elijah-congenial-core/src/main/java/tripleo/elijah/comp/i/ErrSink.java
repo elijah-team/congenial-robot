@@ -9,7 +9,7 @@
 package tripleo.elijah.comp.i;
 
 import org.apache.commons.lang3.tuple.Pair;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface ErrSink {
 
 	void exception(Exception exception);
 
-	void reportDiagnostic(Diagnostic diagnostic);
+	void reportDiagnostic(ElDiagnostic diagnostic);
 
 	List<Pair<Errors, Object>> list();
 

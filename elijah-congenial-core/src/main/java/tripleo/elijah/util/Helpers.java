@@ -8,6 +8,8 @@
  */
 package tripleo.elijah.util;
 
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.TabbedOutputStream;
 import tripleo.vendor.antlr277.CommonToken;
 import tripleo.vendor.antlr277.Token;
 import org.apache.commons.codec.digest.DigestUtils;

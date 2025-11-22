@@ -8,8 +8,8 @@ import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 public class __Add_Proc_Table_Listeners {
 	void add_proc_table_listeners(final @NotNull BaseEvaFunction generatedFunction, final @NotNull ProcTableEntry pte, final DeduceTypes2 aDeduceTypes2) {

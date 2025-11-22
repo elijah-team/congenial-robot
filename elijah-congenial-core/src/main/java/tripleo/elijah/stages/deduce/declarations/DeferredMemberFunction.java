@@ -14,7 +14,7 @@ import org.jdeferred2.Promise;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.i.OS_Element;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
@@ -34,7 +34,7 @@ public class DeferredMemberFunction {
 	private final @NotNull FunctionDef                                 functionDef;
 	private final @NotNull FunctionInvocation                          functionInvocation;
 	private final @NotNull OS_Element                                  parent;
-	private final          DeferredObject<GenType, Diagnostic, Void>   typePromise;
+	private final          DeferredObject<GenType, ElDiagnostic, Void> typePromise;
 	/**
 	 * A {@link tripleo.elijah.stages.deduce.ClassInvocation} or {@link tripleo.elijah.stages.deduce.NamespaceInvocation}.
 	 * useless if parent is a {@link tripleo.elijah.stages.deduce.DeduceTypes2.OS_SpecialVariable} and its
@@ -116,12 +116,12 @@ public class DeferredMemberFunction {
 				'}';
 	}
 
-	public @NotNull Promise<GenType, Diagnostic, Void> typePromise() {
+	public @NotNull Promise<GenType, ElDiagnostic, Void> typePromise() {
 		return typePromise;
 	}
 
 	// for DeducePhase
-	public @NotNull DeferredObject<GenType, Diagnostic, Void> typeResolved() {
+	public @NotNull DeferredObject<GenType, ElDiagnostic, Void> typeResolved() {
 		return typePromise;
 	}
 }

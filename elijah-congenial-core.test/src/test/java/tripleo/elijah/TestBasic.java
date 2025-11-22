@@ -19,7 +19,7 @@ import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.internal.DefaultCompilerController;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.factory.comp.CompilationFactory;
 import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
@@ -111,7 +111,7 @@ public class TestBasic {
 			i++;
 
 			if (l == ErrSink.Errors.DIAGNOSTIC) {
-				((Diagnostic) r).report(System.out);
+				((ElDiagnostic) r).report(System.out);
 			} else {
 				System.out.println(r);
 			}

@@ -29,11 +29,11 @@ import tripleo.elijah.lang.types.OS_UserType;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VarTableEntry;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
-import tripleo.elijah.util.Maybe;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Ok;
-import tripleo.elijah.util.Operation;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Maybe;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Ok;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 /**
  * Created 2/28/21 3:23 AM

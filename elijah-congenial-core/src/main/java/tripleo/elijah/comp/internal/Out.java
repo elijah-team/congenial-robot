@@ -14,8 +14,8 @@ import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.lang.i.ParserClosure;
 import tripleo.elijah.lang.impl.ParserClosureImpl;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
-import tripleo.elijah.util.TabbedOutputStream;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.TabbedOutputStream;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

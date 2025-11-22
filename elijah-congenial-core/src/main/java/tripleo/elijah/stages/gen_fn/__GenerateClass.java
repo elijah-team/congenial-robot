@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 class __GenerateClass {
 	private final ElLog                       LOG;

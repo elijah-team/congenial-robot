@@ -39,7 +39,7 @@ import tripleo.elijah.stages.gen_fn.IClassGenerator;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.stages.logging.LogEntry;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.nio.file.Path;

@@ -1,10 +1,10 @@
 package tripleo.elijah.lang.i;
 
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 
 import java.io.File;
 
-public interface ListExpression extends IExpression, Locatable {
+public interface ListExpression extends IExpression, ElLocatable {
 	@Override
 	int getColumn();
 

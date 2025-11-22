@@ -6,7 +6,7 @@ import tripleo.elijah.lang.i.TypeName;
 import tripleo.elijah.lang.nextgen.names.i.EN_Usage;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_IsTypeName;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class DR_Type {
 	private final BaseEvaFunction evaFunction;

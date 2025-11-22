@@ -1,16 +1,16 @@
-package tripleo.elijah;
+package tripleo.elijah_fluffy.util;
 
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.FailCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public class Eventual<P> {
-	private final DeferredObject<P, Diagnostic, Void> prom = new DeferredObject<>();
+	private final DeferredObject<P, ElDiagnostic, Void> prom = new DeferredObject<>();
 
 	public void resolve(final P p) {
 		prom.resolve(p);
@@ -24,7 +24,7 @@ public class Eventual<P> {
 		ev.register(this);
 	}
 
-	public void fail(final Diagnostic d) {
+	public void fail(final ElDiagnostic d) {
 		prom.reject(d);
 	}
 
@@ -43,11 +43,11 @@ public class Eventual<P> {
 		return prom.isPending();
 	}
 
-	public void reject(final Diagnostic aX) {
+	public void reject(final ElDiagnostic aX) {
 		System.err.println("8899 [Eventual::reject] "+aX);
 	}
 
-	public void onFail(final FailCallback<? super Diagnostic> aO) {
+	public void onFail(final FailCallback<? super ElDiagnostic> aO) {
 		prom.fail(aO);
 	}
 

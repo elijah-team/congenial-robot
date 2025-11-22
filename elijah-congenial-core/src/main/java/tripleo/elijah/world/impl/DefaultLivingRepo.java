@@ -13,7 +13,7 @@ import tripleo.elijah.lang.impl.OS_PackageImpl;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.util.CompletableProcess;
+import tripleo.elijah_fluffy.util.CompletableProcess;
 import tripleo.elijah.util.ObservableCompletableProcess;
 import tripleo.elijah.world.i.*;
 

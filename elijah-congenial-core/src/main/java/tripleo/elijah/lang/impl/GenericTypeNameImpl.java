@@ -16,7 +16,7 @@ import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.Qualident;
 import tripleo.elijah.lang.i.TypeModifiers;
 import tripleo.elijah.lang.i.TypeName;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.io.File;
 

@@ -12,7 +12,7 @@ import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.stages.gen_fn.EvaNode;
 import tripleo.elijah.stages.gen_fn.IEvaFunctionBase;
 import tripleo.elijah.stages.gen_fn.IdentTableEntry;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class GI_VariableStatement implements GenerateC_Item {
 	private       EvaNode               _evaNode;

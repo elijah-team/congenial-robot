@@ -11,7 +11,7 @@ import tripleo.elijah.lang2.BuiltInTypes;
 import tripleo.elijah.lang2.SpecialFunctions;
 import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 import tripleo.util.range.Range;
 
 import java.util.ArrayList;

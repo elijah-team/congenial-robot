@@ -6,7 +6,7 @@ import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.i.CB_Action;
 import tripleo.elijah.comp.i.CB_OutputString;
 import tripleo.elijah.comp.i.CR_Action;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 

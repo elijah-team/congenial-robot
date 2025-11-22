@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.stages.deduce.CantDecideType;
@@ -14,9 +14,9 @@ import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.ResolveError;
 import tripleo.elijah.stages.gen_fn.GenType;
 import tripleo.elijah.stages.gen_fn.VariableTableEntry;
-import tripleo.elijah.util.Maybe;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Maybe;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.function.Supplier;
 
@@ -48,7 +48,7 @@ public interface PostBC_Processor {
 
 	void doSetType(DeduceType3 aDeduceType3, ErrSink aErrSink1);
 
-	Promise<DeduceType3, Diagnostic, Void> getType(final ErrSink aErrSink1);
+	Promise<DeduceType3, ElDiagnostic, Void> getType(final ErrSink aErrSink1);
 
 	abstract class __PostBC_Processor__VTE implements PostBC_Processor {
 		private static @NotNull DeduceType3 doNoTypeAttached__single_potential(final VariableTableEntry vte, final DeduceTypes2.@NotNull DeduceClient1 deduceTypes2) {
@@ -149,20 +149,20 @@ public interface PostBC_Processor {
 		}
 
 		@Override
-		public Promise<DeduceType3, Diagnostic, Void> getType(final ErrSink aErrSink) {
-			final Promise<DeduceType3, Diagnostic, Void> dty = postBC_getTypeFor_VTE(vte(), ctx(), aErrSink);
+		public Promise<DeduceType3, ElDiagnostic, Void> getType(final ErrSink aErrSink) {
+			final Promise<DeduceType3, ElDiagnostic, Void> dty = postBC_getTypeFor_VTE(vte(), ctx(), aErrSink);
 			return dty;
 		}
 
 		protected abstract Context ctx();
 
-		private Promise<DeduceType3, Diagnostic, Void> postBC_getTypeFor_VTE(final @NotNull VariableTableEntry vte, final Context fd_ctx, final ErrSink errSink) {
+		private Promise<DeduceType3, ElDiagnostic, Void> postBC_getTypeFor_VTE(final @NotNull VariableTableEntry vte, final Context fd_ctx, final ErrSink errSink) {
 			final DeduceType3                r;
 			final DeduceTypes2.DeduceClient1 deduceClient1     = deduceTypes2();
 			final OS_Type                    vte_type_attached = vte.getType().getAttached();
 
 
-			final DeferredObject<DeduceType3, Diagnostic, Void> rr = new DeferredObject<DeduceType3, Diagnostic, Void>();
+			final DeferredObject<DeduceType3, ElDiagnostic, Void> rr = new DeferredObject<DeduceType3, ElDiagnostic, Void>();
 
 
 			if (vte_type_attached == null) {

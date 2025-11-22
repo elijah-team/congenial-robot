@@ -17,7 +17,7 @@ import tripleo.elijah.lang.nextgen.names.i.EN_Name;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_ClassName;
 import tripleo.elijah.lang.types.OS_UserClassType;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Collection;

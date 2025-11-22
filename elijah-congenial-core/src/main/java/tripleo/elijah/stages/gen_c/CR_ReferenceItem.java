@@ -1,10 +1,10 @@
 package tripleo.elijah.stages.gen_c;
 
-import tripleo.elijah.Eventual;
+import tripleo.elijah_fluffy.util.Eventual;
 import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.stages.gen_fn.BaseTableEntry;
 import tripleo.elijah.stages.instructions.InstructionArgument;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Operation2;
 
 public interface CR_ReferenceItem {
 	String getArg();

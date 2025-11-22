@@ -2,7 +2,7 @@ package tripleo.elijah.comp;
 
 import com.google.common.base.MoreObjects;
 import tripleo.elijah.comp.i.ILazyCompilerInstructions;
-import tripleo.elijah.util.Maybe;
+import tripleo.elijah_fluffy.util.Maybe;
 
 import java.io.File;
 

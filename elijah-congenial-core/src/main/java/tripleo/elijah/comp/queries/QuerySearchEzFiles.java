@@ -6,7 +6,7 @@ import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.i.CompilationClosure;
 import tripleo.elijah.comp.internal.SourceFileParserParams;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Operation2;
 
 import java.io.File;
 import java.io.FilenameFilter;

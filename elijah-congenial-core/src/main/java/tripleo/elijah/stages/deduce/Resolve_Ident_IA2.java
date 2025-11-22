@@ -11,12 +11,12 @@ package tripleo.elijah.stages.deduce;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.ReadySupplier_1;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.comp.DefaultEventualRegister;
 import tripleo.elijah.comp.i.ErrSink;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
 import tripleo.elijah.lang.nextgen.names.impl.ENU_LookupResult;
@@ -32,6 +32,8 @@ import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.*;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.Operation2;
 
 import java.util.List;
 
@@ -143,7 +145,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 		if (idte2.type == null) {
 			if (el instanceof @NotNull final VariableStatementImpl vs) {
 				var op = ia2_IdentIA_VariableStatement(idte2, vs, ectx);
-				if (op.mode() == Mode.FAILURE) {
+				if (op.mode() == tripleo.elijah_fluffy.util.Mode.FAILURE) {
 					return RIA_STATE.RETURN;
 				}
 			} else if (el instanceof FunctionDef) {
@@ -164,7 +166,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 		return RIA_STATE.NEXT;
 	}
 
-	private Operation2<Ok> ia2_IdentIA_VariableStatement(@NotNull IdentTableEntry idte, @NotNull VariableStatementImpl vs, @NotNull Context ctx) {
+	private tripleo.elijah_fluffy.util.Operation2<tripleo.elijah_fluffy.util.Ok> ia2_IdentIA_VariableStatement(@NotNull IdentTableEntry idte, @NotNull VariableStatementImpl vs, @NotNull Context ctx) {
 		var clr = deduceTypes2._inj().new_RIA_Clear_98(idte, vs, ctx, this);
 		return clr.run();
 	}
@@ -180,7 +182,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 			ctx  = aCtx;
 		}
 
-		public Operation2<Ok> run() {
+		public tripleo.elijah_fluffy.util.Operation2<tripleo.elijah_fluffy.util.Ok> run() {
 			try {
 				final boolean has_initial_value = vs.initialValue() != IExpression.UNASSIGNED;
 				if (!vs.typeName().isNull()) {
@@ -189,16 +191,16 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 					typeName_is_null_with_initial_value();
 				} else {
 					LOG.err("1936 Empty Variable Expression");
-					final Diagnostic d = Diagnostic.withMessage("1936", "Empty Variable Expression", Diagnostic.Severity.ERROR);
-					return Operation2.failure(d);
+					final ElDiagnostic d = ElDiagnostic.withMessage("1936", "Empty Variable Expression", ElDiagnostic.Severity.ERROR);
+					return tripleo.elijah_fluffy.util.Operation2.failure(d);
 				}
 			} catch (ResolveError aResolveError) {
 				LOG.err("1937 resolve error " + vs.getName());
 				//aResolveError.printStackTrace();
 				errSink.reportDiagnostic(aResolveError);
-				return Operation2.failure(aResolveError);
+				return tripleo.elijah_fluffy.util.Operation2.failure(aResolveError);
 			}
-			return Operation2.success(Ok.instance());
+			return Operation2.success(tripleo.elijah_fluffy.util.Ok.instance());
 		}
 
 		private void typeName_is_not_null(final boolean has_initial_value) throws ResolveError {
@@ -291,7 +293,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 						invocation = phase.registerClassInvocation(attached1.getClassOf(), null, new ReadySupplier_1<>(deduceTypes2)); // TODO will fail one day
 						// TODO dont know if next line is right
 						final Operation<ClassInvocation> oi = DeduceTypes2.ClassInvocationMake.withGenericPart(attached1.getClassOf(), null, (NormalTypeName) tte.genType.getNonGenericTypeName(), deduceTypes2);
-						assert oi.mode() == Mode.SUCCESS;
+						assert oi.mode() == tripleo.elijah_fluffy.util.Mode.SUCCESS;
 
 						final ClassInvocation invocation2 = oi.success();
 						int                   y           = 2;
@@ -416,7 +418,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 	//						@NotNull ProcTableEntry pte = ((ProcIA) ia2).getEntry(); // README ectx seems to be set up already
 						return;
 					} else
-						throw new NotImplementedException();
+						throw new tripleo.elijah_fluffy.util.NotImplementedException();
 				}
 				foundElement.doFoundElement(el);
 			}
@@ -531,7 +533,7 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 		} catch (ResolveError aResolveError) {
 			aResolveError.printStackTrace();
 			int y = 2;
-			throw new NotImplementedException();
+			throw new tripleo.elijah_fluffy.util.NotImplementedException();
 			//fd.reject(aResolveError);
 		}
 	}
@@ -575,14 +577,14 @@ public class Resolve_Ident_IA2 extends DefaultEventualRegister {
 				} catch (ResolveError aResolveError) {
 					aResolveError.printStackTrace();
 					int y = 2;
-					throw new NotImplementedException();
+					throw new tripleo.elijah_fluffy.util.NotImplementedException();
 				}
 			}
 			case USER_CLASS -> ectx = attached1.getClassOf().getContext();
 			default -> {
 				final TypeName typeName = attached1.getTypeName();
 				errSink.reportError("1442 Don't know " + typeName.getClass().getName());
-				throw new NotImplementedException();
+				throw new tripleo.elijah_fluffy.util.NotImplementedException();
 			}
 			}
 		}

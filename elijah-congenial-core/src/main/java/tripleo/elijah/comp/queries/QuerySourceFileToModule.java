@@ -7,8 +7,8 @@ import tripleo.elijah.comp.i.Compilation;
 import tripleo.elijah.comp.internal.Out;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.nextgen.query.QueryDatabase;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
 import tripleo.elijjah.ElijjahLexer;
 import tripleo.elijjah.ElijjahParser;
 

@@ -14,8 +14,8 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import tripleo.elijah.Eventual;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.nextgen.reactive.DefaultReactive;
@@ -29,9 +29,9 @@ import tripleo.elijah.stages.gen_generic.IDependencyReferent;
 import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.Holder;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Holder;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.world.impl.DefaultLivingFunction;
 import tripleo.util.range.Range;
 

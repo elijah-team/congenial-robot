@@ -20,7 +20,7 @@ import tripleo.elijah.stages.garish.GarishClass;
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.Old_GenerateResult;
-import tripleo.elijah.util.LazySupplier;
+import tripleo.elijah_fluffy.util.LazySupplier;
 
 import java.io.File;
 import java.util.function.Supplier;

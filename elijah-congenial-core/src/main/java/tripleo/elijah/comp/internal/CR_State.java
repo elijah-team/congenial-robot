@@ -22,8 +22,8 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import tripleo.elijah.Eventual;
-import tripleo.elijah.EventualRegister;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.EventualRegister;
 import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.CompilerInput;
 import tripleo.elijah.comp.EvaPipeline;

@@ -12,7 +12,7 @@ import com.google.common.base.Supplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.DebugFlags;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.NormalTypeName;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.lang.i.TypeName;
@@ -22,7 +22,7 @@ import tripleo.elijah.nextgen.outputstatement.EG_Statement;
 import tripleo.elijah.nextgen.outputstatement.EX_Explanation;
 import tripleo.elijah.stages.gen_c.statements.*;
 import tripleo.elijah.stages.pp.PP_Function;
-import tripleo.elijah.util.Mode;
+import tripleo.elijah_fluffy.util.Mode;
 import tripleo.elijah.stages.deduce.nextgen.DR_Ident;
 import tripleo.elijah.stages.deduce.nextgen.DR_Item;
 import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_VariableTableEntry;
@@ -34,8 +34,8 @@ import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.BufferTabbedOutputStream;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.work.WorkList;
 
 import java.util.ArrayList;
@@ -457,7 +457,7 @@ public class Generate_Code_For_Method {
 		final Operation2<OS_Type>               diag1  = de_vte.decl_test_001(gf.cheat());
 
 		if (diag1.mode() == Mode.FAILURE) {
-			final Diagnostic      diag_ = diag1.failure();
+			final ElDiagnostic    diag_ = diag1.failure();
 			final GCFM_Diagnostic diag  = (GCFM_Diagnostic) diag_;
 
 			switch (diag.severity()) {

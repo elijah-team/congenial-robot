@@ -1,14 +1,14 @@
-package tripleo.elijah.util;
+package tripleo.elijah_fluffy.util;
 
 import com.google.common.base.MoreObjects;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 
 public class Maybe<T> {
-	public final @Nullable Diagnostic exc;
-	public final @Nullable T          o;
+	public final @Nullable ElDiagnostic exc;
+	public final @Nullable T            o;
 
-	public Maybe(final @Nullable T o, final Diagnostic exc) {
+	public Maybe(final @Nullable T o, final ElDiagnostic exc) {
 		if (o == null) {
 			if (exc == null) {
 				throw new IllegalStateException("Both o and exc are null!");

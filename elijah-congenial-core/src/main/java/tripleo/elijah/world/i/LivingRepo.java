@@ -10,7 +10,7 @@ import tripleo.elijah.lang.impl.BaseFunctionDef;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_fn.EvaNamespace;
-import tripleo.elijah.util.CompletableProcess;
+import tripleo.elijah_fluffy.util.CompletableProcess;
 import tripleo.elijah.world.impl.DefaultLivingClass;
 import tripleo.elijah.world.impl.DefaultLivingFunction;
 import tripleo.elijah.world.impl.DefaultLivingNamespace;

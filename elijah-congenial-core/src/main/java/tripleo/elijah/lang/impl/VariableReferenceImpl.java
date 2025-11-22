@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.ExpressionKind;
 import tripleo.elijah.lang.i.OS_Expression;
 import tripleo.elijah.lang.i.OS_Type;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 public class VariableReferenceImpl extends AbstractExpression
 		implements OS_Expression, tripleo.elijah.lang.i.VariableReference {

@@ -8,8 +8,8 @@ import tripleo.elijah.stateful.DefaultStateful;
 import tripleo.elijah.stateful.State;
 import tripleo.elijah.stateful.StateRegistrationToken;
 import tripleo.elijah.stateful._RegistrationTarget;
-import tripleo.elijah.util.Operation;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.function.Supplier;
 

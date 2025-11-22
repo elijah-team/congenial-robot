@@ -3,14 +3,14 @@ package tripleo.elijah.stages.deduce.tastic;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
 import tripleo.elijah.lang.i.NamespaceStatement;
 import tripleo.elijah.lang.i.TypeName;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.gen_fn.*;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.List;
 

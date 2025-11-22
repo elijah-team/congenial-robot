@@ -12,8 +12,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.lang.i.AccessNotation;
 import tripleo.elijah.lang.i.ClassStatement;
 import tripleo.elijah.lang.i.FunctionDef;
@@ -21,7 +21,7 @@ import tripleo.elijah.lang.i.VariableStatement;
 import tripleo.elijah.stages.deduce.FunctionMapDeferred;
 import tripleo.elijah.stages.gen_fn_r.RegisterClassInvocation_env;
 import tripleo.elijah.stages.gen_generic.*;
-import tripleo.elijah.util.Maybe;
+import tripleo.elijah_fluffy.util.Maybe;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -33,8 +33,8 @@ import java.util.Map;
  * Created 3/16/21 10:45 AM
  */
 public abstract class EvaContainerNC extends AbstractDependencyTracker implements EvaContainer, IDependencyReferent {
-	static @NotNull Diagnostic                                 _def_VarNotFound     = new VarNotFound();
-	private final   Dependency                                 dependency           = new Dependency(this);
+	static @NotNull ElDiagnostic _def_VarNotFound = new VarNotFound();
+	private final   Dependency   dependency       = new Dependency(this);
 	public @NotNull Map<ClassStatement, EvaClass>              classMap             = new HashMap<ClassStatement, EvaClass>();
 	public @NotNull Map<FunctionDef, EvaFunction>              functionMap          = new HashMap<FunctionDef, EvaFunction>();
 	public          boolean                                    generatedAlready     = false;
@@ -93,14 +93,14 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		return functionMap.get(fd);
 	}
 
-	static class VarNotFound implements Diagnostic {
+	static class VarNotFound implements ElDiagnostic {
 		@Override
 		public @Nullable String code() {
 			return null;
 		}
 
 		@Override
-		public @NotNull Locatable primary() {
+		public @NotNull ElLocatable primary() {
 			return null;
 		}
 
@@ -110,7 +110,7 @@ public abstract class EvaContainerNC extends AbstractDependencyTracker implement
 		}
 
 		@Override
-		public @NotNull List<Locatable> secondary() {
+		public @NotNull List<ElLocatable> secondary() {
 			return null;
 		}
 

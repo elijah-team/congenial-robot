@@ -11,7 +11,7 @@ import tripleo.elijah.lang.impl.AliasStatementImpl;
 import tripleo.elijah.stages.deduce.DeduceLookupUtils;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.ResolveError;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class DG_AliasStatement implements DG_Item {
 	private final          AliasStatementImpl                          aliasStatement;

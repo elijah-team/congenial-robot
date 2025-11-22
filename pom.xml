@@ -22,9 +22,6 @@
 		<jacoco.version>0.8.9</jacoco.version>
 		<guava.version>32.0.0-jre</guava.version>
 
-		<buffers.version>0.0.3</buffers.version>
-		<range.version>0.0.3b</range.version>
-
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<kotlin.version>2.1.10</kotlin.version>
 	</properties>
@@ -63,14 +60,6 @@
 			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.gitlab.tripleo1</groupId>
-			<artifactId>buffers</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.gitlab.Tripleo</groupId>
-			<artifactId>range</artifactId>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -104,16 +93,6 @@
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
 				<version>5.20.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.gitlab.tripleo1</groupId>
-				<artifactId>buffers</artifactId>
-				<version>3038ff102c</version>
-			</dependency>
-			<dependency>
-				<groupId>com.gitlab.Tripleo</groupId>
-				<artifactId>range</artifactId>
-				<version>0.0.3b</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

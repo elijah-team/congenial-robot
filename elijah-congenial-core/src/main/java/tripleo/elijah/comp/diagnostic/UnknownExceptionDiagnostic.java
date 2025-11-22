@@ -1,15 +1,15 @@
 package tripleo.elijah.comp.diagnostic;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Diagnostic;
-import tripleo.elijah.diagnostic.Locatable;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.io.PrintStream;
 import java.util.List;
 
-public class UnknownExceptionDiagnostic implements Diagnostic {
+public class UnknownExceptionDiagnostic implements ElDiagnostic {
 	private final Operation2<WorldModule> m;
 
 	public UnknownExceptionDiagnostic(final Operation2<WorldModule> aM) {
@@ -22,7 +22,7 @@ public class UnknownExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull Locatable primary() {
+	public @NotNull ElLocatable primary() {
 		return null/*m*/;
 	}
 
@@ -32,7 +32,7 @@ public class UnknownExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
-	public @NotNull List<Locatable> secondary() {
+	public @NotNull List<ElLocatable> secondary() {
 		return null;
 	}
 

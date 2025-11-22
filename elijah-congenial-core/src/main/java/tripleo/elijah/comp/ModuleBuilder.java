@@ -9,8 +9,8 @@ import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.lang.impl.OS_ModuleImpl;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.world.i.WorldModule;
 
 public class ModuleBuilder {

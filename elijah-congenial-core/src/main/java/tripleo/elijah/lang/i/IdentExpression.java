@@ -2,12 +2,12 @@ package tripleo.elijah.lang.i;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 import tripleo.elijah.lang.impl.IdentExpressionImpl;
 import tripleo.elijah.lang.nextgen.names.i.EN_Name;
 import tripleo.elijah.util.Helpers;
 
-public interface IdentExpression extends IExpression, OS_Element, Resolvable, Locatable {
+public interface IdentExpression extends IExpression, OS_Element, Resolvable, ElLocatable {
 	@Contract("_ -> new")
 	static @NotNull IdentExpression forString(String string) {
 		return new IdentExpressionImpl(Helpers.makeToken(string), "<inline-absent2>");

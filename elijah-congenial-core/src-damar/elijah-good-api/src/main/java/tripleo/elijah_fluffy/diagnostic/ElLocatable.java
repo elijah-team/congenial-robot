@@ -7,7 +7,7 @@
  *
  */
 
-package tripleo.elijah.diagnostic;
+package tripleo.elijah_fluffy.diagnostic;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -20,7 +20,7 @@ import java.io.File;
  * <p>
  * Created 12/26/20 5:32 AM
  */
-public interface Locatable {
+public interface ElLocatable {
 	int getColumn();
 
 	int getColumnEnd();

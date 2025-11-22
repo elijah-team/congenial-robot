@@ -1,4 +1,4 @@
-package tripleo.elijah.util;
+package tripleo.elijah_fluffy.util;
 
 @SuppressWarnings({"Singleton", "FinalClass"})
 public final class Ok {

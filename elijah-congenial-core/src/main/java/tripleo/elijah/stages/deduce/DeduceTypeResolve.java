@@ -12,9 +12,9 @@ package tripleo.elijah.stages.deduce;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.PromiseReadySupplier;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.PromiseReadySupplier;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.AbstractCodeGen;
 import tripleo.elijah.lang.i.MatchConditional;
@@ -24,11 +24,11 @@ import tripleo.elijah.stages.instructions.IdentIA;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.IntegerIA;
 import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.function.Supplier;
 
-import static tripleo.elijah.util.SimplePrintLoggerToRemoveSoon.*;
+import static tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon.*;
 
 /**
  * Created 11/18/21 12:02 PM
@@ -88,7 +88,7 @@ public class DeduceTypeResolve {
 			typeResolution().then(x -> {
 				if (!typeResolution().isResolved()) bte_pte.typeDeferred().resolve(x);
 			});
-			typeResolution().onFail((Diagnostic x) -> bte_pte.typeDeferred().reject(x));
+			typeResolution().onFail((ElDiagnostic x) -> bte_pte.typeDeferred().reject(x));
 		}
 	}
 

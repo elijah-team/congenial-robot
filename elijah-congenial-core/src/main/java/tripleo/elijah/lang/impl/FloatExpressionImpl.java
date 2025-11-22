@@ -17,8 +17,8 @@ package tripleo.elijah.lang.impl;
 import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.List;
 

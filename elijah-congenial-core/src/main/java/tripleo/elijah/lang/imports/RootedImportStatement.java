@@ -5,7 +5,7 @@ import tripleo.elijah.contexts.ImportContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.QualidentImpl;
 import tripleo.elijah.lang.impl.QualidentListImpl;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;

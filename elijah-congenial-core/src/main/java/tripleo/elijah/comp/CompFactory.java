@@ -5,7 +5,7 @@ import tripleo.elijah.ci.LibraryStatementPart;
 import tripleo.elijah.lang.i.OS_Module;
 import tripleo.elijah.lang.i.Qualident;
 import tripleo.elijah.nextgen.inputtree.EIT_ModuleInput;
-import tripleo.elijah.util.Operation2;
+import tripleo.elijah_fluffy.util.Operation2;
 import tripleo.elijah.world.i.WorldModule;
 
 import java.io.File;

@@ -13,7 +13,7 @@ import tripleo.elijah.lang.i.CaseConditional;
 import tripleo.elijah.lang.i.Context;
 import tripleo.elijah.lang.i.LookupResultList;
 import tripleo.elijah.lang.impl.ContextImpl;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 /**
  * Created 9/24/20 6:11 PM

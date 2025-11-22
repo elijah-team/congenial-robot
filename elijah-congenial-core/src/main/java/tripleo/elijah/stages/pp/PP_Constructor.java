@@ -1,6 +1,6 @@
 package tripleo.elijah.stages.pp;
 
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.stages.gen_c.DeducedBaseEvaFunction;
 import tripleo.elijah.stages.gen_c.DeducedEvaConstructor;
 

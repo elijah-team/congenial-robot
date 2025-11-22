@@ -13,17 +13,17 @@ import org.jdeferred2.Promise;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.VariableStatementImpl;
-import tripleo.elijah.util.Mode;
+import tripleo.elijah_fluffy.util.Mode;
 import tripleo.elijah.stages.deduce.nextgen.DR_Variable;
 import tripleo.elijah.stages.deduce.tastic.FCA_Stop;
 import tripleo.elijah.stages.gen_fn.BaseEvaFunction;
 import tripleo.elijah.stages.gen_fn.DeferredObject2;
 import tripleo.elijah.stages.gen_fn.ProcTableEntry;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Operation;
 
 /**
  * Created 11/30/21 11:56 PM

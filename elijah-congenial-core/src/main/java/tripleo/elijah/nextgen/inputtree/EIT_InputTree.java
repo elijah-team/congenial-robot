@@ -2,7 +2,7 @@ package tripleo.elijah.nextgen.inputtree;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.CompilerInput;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,8 +7,8 @@ import tripleo.elijah.stages.deduce.post_bytecode.DeduceElement3_IdentTableEntry
 import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.instructions.InstructionArgument;
 import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 
 import java.util.Map;
 

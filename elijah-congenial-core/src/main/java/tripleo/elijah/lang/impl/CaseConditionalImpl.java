@@ -11,12 +11,12 @@ package tripleo.elijah.lang.impl;
 import tripleo.vendor.antlr277.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.contexts.CaseContext;
 import tripleo.elijah.contexts.SingleIdentContext;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang2.ElElementVisitor;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

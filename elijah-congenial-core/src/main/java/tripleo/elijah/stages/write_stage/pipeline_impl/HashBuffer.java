@@ -2,10 +2,10 @@ package tripleo.elijah.stages.write_stage.pipeline_impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.util.Mode;
+import tripleo.elijah_fluffy.util.Mode;
 import tripleo.elijah.stages.gen_generic.DoubleLatch;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Operation;
 import tripleo.util.buffer.DefaultBuffer;
 
 import java.util.concurrent.Executor;

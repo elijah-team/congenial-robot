@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.i.CompilerInstructions;
 import tripleo.elijah.comp.internal.CompilationRunner;
 import tripleo.elijah.comp.internal.SourceFileParserParams;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Operation;
 
 public class QuerySourceFileParser {
 	private final CompilationRunner cr;

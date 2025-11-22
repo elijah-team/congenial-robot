@@ -12,13 +12,11 @@ import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
 import tripleo.elijah.stages.gen_generic.CodeGenerator;
-import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
 import tripleo.elijah.stages.gen_generic.ICodeRegistrar;
-import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.Maybe;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Maybe;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 import tripleo.elijah.world.impl.DefaultLivingNamespace;
 
 /**

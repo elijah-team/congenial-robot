@@ -14,7 +14,7 @@ import tripleo.elijah.lang.i.ExpressionKind;
 import tripleo.elijah.lang.i.IExpression;
 import tripleo.elijah.lang.i.OS_Type;
 import tripleo.elijah.util.Helpers;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class StringExpressionImpl extends AbstractExpression implements tripleo.elijah.lang.i.StringExpression {
 

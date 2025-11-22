@@ -10,7 +10,6 @@
 package tripleo.elijah.stages.deduce;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Preconditions;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -20,14 +19,14 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.Eventual;
-import tripleo.elijah.ReadySupplier_1;
-import tripleo.elijah.UnintendedUseException;
+import tripleo.elijah_fluffy.util.Eventual;
+import tripleo.elijah_fluffy.util.ReadySupplier_1;
+import tripleo.elijah_fluffy.util.UnintendedUseException;
 import tripleo.elijah.comp.Finally;
 import tripleo.elijah.comp.i.CompilationEnclosure;
 import tripleo.elijah.comp.i.ErrSink;
 import tripleo.elijah.comp.i.IPipelineAccess;
-import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah_fluffy.diagnostic.ElDiagnostic;
 import tripleo.elijah.lang.LangGlobals;
 import tripleo.elijah.lang.i.*;
 import tripleo.elijah.lang.impl.*;
@@ -62,10 +61,10 @@ import tripleo.elijah.stages.gen_generic.pipeline_impl.GenerateResultSink;
 import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.inter.ModuleThing;
 import tripleo.elijah.stages.logging.ElLog;
-import tripleo.elijah.util.Holder;
-import tripleo.elijah.util.NotImplementedException;
-import tripleo.elijah.util.Operation;
-import tripleo.elijah.util.SimplePrintLoggerToRemoveSoon;
+import tripleo.elijah_fluffy.util.Holder;
+import tripleo.elijah_fluffy.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.Operation;
+import tripleo.elijah_fluffy.util.SimplePrintLoggerToRemoveSoon;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
@@ -2917,11 +2916,11 @@ public class DeduceTypes2 {
 			return new GenTypeImpl(aAttached, aOSType, aB, aX, aDt2, aErrSink, aPhase);
 		}
 
-		public Diagnostic new_ResolveError(final TypeName aX, final LookupResultList aLrl) {
+		public ElDiagnostic new_ResolveError(final TypeName aX, final LookupResultList aLrl) {
 			return new ResolveError(aX, aLrl);
 		}
 
-		public Diagnostic new_Diagnostic_8884(final VariableTableEntry aVte, final BaseEvaFunction aGf) {
+		public ElDiagnostic new_Diagnostic_8884(final VariableTableEntry aVte, final BaseEvaFunction aGf) {
 			return new DeduceElement3_VariableTableEntry.Diagnostic_8884(aVte, aGf);
 		}
 
@@ -2973,7 +2972,7 @@ public class DeduceTypes2 {
 			return new OS_SpecialVariable(aEntry, aVariableTableType, aGeneratedFunction);
 		}
 
-		public Diagnostic new_Diagnostic_8885(final VariableTableEntry aVte) {
+		public ElDiagnostic new_Diagnostic_8885(final VariableTableEntry aVte) {
 			return new DeduceElement3_VariableTableEntry.Diagnostic_8885(aVte);
 		}
 
@@ -2989,7 +2988,7 @@ public class DeduceTypes2 {
 			return new DerivedClassInvocation(aDeclAnchor, aDeclaredInvocation, aDeduceTypes2);
 		}
 
-		public Diagnostic new_ResolveError(final IdentExpression aIdent, final LookupResultList aLrl) {
+		public ElDiagnostic new_ResolveError(final IdentExpression aIdent, final LookupResultList aLrl) {
 			return new ResolveError(aIdent, aLrl);
 		}
 
@@ -3033,7 +3032,7 @@ public class DeduceTypes2 {
 			return new ProcTableListener(aPte, aGeneratedFunction, aO);
 		}
 
-		public DeferredObject<GenType, Diagnostic, Void> new_DeferredObject__GenType() {
+		public DeferredObject<GenType, ElDiagnostic, Void> new_DeferredObject__GenType() {
 			return new DeferredObject<>();
 		}
 

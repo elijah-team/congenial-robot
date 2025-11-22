@@ -7,8 +7,8 @@ import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.gen_fn.GenType;
-import tripleo.elijah.util.Mode;
-import tripleo.elijah.util.Operation;
+import tripleo.elijah_fluffy.util.Mode;
+import tripleo.elijah_fluffy.util.Operation;
 
 import java.text.MessageFormat;
 import java.util.List;

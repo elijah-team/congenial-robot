@@ -4,7 +4,7 @@ import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.stages.gen_fn.EvaClass;
 import tripleo.elijah.stages.gen_generic.GenerateResultEnv;
-import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah_fluffy.util.NotImplementedException;
 
 public class WhyNotGarish_Class implements WhyNotGarish_Item {
 	private final EvaClass                                 gc;

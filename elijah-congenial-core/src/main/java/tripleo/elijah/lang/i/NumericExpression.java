@@ -1,8 +1,8 @@
 package tripleo.elijah.lang.i;
 
-import tripleo.elijah.diagnostic.Locatable;
+import tripleo.elijah_fluffy.diagnostic.ElLocatable;
 
-public interface NumericExpression extends IExpression, Locatable {
+public interface NumericExpression extends IExpression, ElLocatable {
 	@Override
 		// IExpression
 	ExpressionKind getKind();
