@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="TestBasic.testBasic_listfolders3" type="JUnit" factoryName="JUnit" singleton="false" nameIsGenerated="true">
-    <module name="tripleo.elijah.core" />
+    <module name="elijah-congenial-core" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="tripleo.elijah.*" />

@@ -3,13 +3,11 @@ Elijah congenial-robot
 
 The elijah-lang compiler.
 
-[https://github.com/elijah-team/congenial-robot](https://github.com/elijah-team/congenial-robot)
+https://github.com/elijah-team/congenial-robot
 
 ```shell
-E=`mktemp -d`
 git clone https://github.com/elijah-team/congenial-robot -b 2023-congenial-12wp $E
-#mkdir $E/COMP
-(cd $E && nix-shell -p maven jdk17 --pure --command "mvn test")
+./mvnw test
 ```
 
 This project is licensed under LGPL.
