@@ -7,8 +7,7 @@
 	<artifactId>congenial-robot</artifactId>
 	<version>congenial.2025-1118</version>
 
-	<!-- TODO 12/31 naming here -->
-	<name>eljc-almost-congenial-robot</name>
+	<name>congenial-robot PARENT</name>
 	<url>http://github.com/elijah-team/congenial-robot</url>
 
 	<properties>
@@ -19,19 +18,10 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-
-		<!--<jacoco.version>0.8.9</jacoco.version>-->
-
-		<!-- for edu 2022.2 -->
-		<!--		<kotlin.version>1.7.10</kotlin.version>-->
-		<!--<kotlin.version>1.9.21</kotlin.version>-->
+		<kotlin.version>2.1.20</kotlin.version>
 	</properties>
 
 	<modules>
-		<!--
-		<module>annotation-processing</module>
-		<module>annotation-user</module>
-		-->
 		<module>elijah-congenial-core</module>
 		<module>elijah-congenial-core.test</module>
 	</modules>
@@ -58,20 +48,14 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
-
-		<!-- https://search.maven.org/artifact/fr.inria.gforge.spoon.labs/gumtree-spoon-ast-diff/1.69/jar-->
 		<dependency>
 			<groupId>fr.inria.gforge.spoon.labs</groupId>
 			<artifactId>gumtree-spoon-ast-diff</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
@@ -80,23 +64,15 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.github.JCTools.JCTools</groupId>
+			<artifactId>jctools-core</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!--
-		<dependency>
-			<groupId>com.github.spotbugs</groupId>
-			<artifactId>spotbugs-annotations</artifactId>
-		</dependency>
-		-->
-
-		<dependency>
-			<groupId>com.github.JCTools.JCTools</groupId>
-			<artifactId>jctools-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -157,20 +133,12 @@
 				<version>0.24</version>
 			</dependency>
 
-			<dependency>
-				<groupId>com.github.elijah-team.lombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>master-SNAPSHOT</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<!-- https://search.maven.org/artifact/fr.inria.gforge.spoon.labs/gumtree-spoon-ast-diff/1.69/jar-->
-
 			<!--
 			<dependency>
-				<groupId>com.github.elijah-team.lombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>master-SNAPSHOT</version>
+			<groupId>com.github.elijah-team.lombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>master-SNAPSHOT</version>
+			<scope>provided</scope>
 			</dependency>
 			-->
 
@@ -232,12 +200,6 @@
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
 				<version>2.13.2</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.elijah-team.congenial-upper</groupId>
-				<!--<artifactId>congenial-robot</artifactId>-->
-				<artifactId>elijah-congenial-upper</artifactId>
-				<version>637a62ea07</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
