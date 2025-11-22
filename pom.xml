@@ -92,6 +92,12 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.github.elijah-team.congenial-upper</groupId>
+				<artifactId>elijah-congenial-upper</artifactId>
+				<version>637a62ea07</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
 				<version>4.0.0-M1</version>

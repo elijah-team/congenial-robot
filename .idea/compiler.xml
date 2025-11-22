@@ -18,7 +18,7 @@
         <module name="tripleo.elijah.congenial.core" />
         <module name="test" />
       </profile>
-      <profile name="Annotation profile for eljc-almost-congenial-robot" enabled="true">
+      <profile name="Annotation profile for congenial-robot PARENT" enabled="true">
         <sourceOutputDir name="../generated-sources/annotations" />
         <sourceTestOutputDir name="../generated-test-sources/test-annotations" />
         <module name="tripleo.elijah.congenial.core.test" />
