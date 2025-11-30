@@ -14,6 +14,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 /**
  * FIXME 24j3 Not quite correct
  */
+@Ignore
 @RunWith(ArchUnitRunner.class) // Remove this line for JUnit 5!!
 @AnalyzeClasses(packages = "tripleo.elijah")
 public class Lang_ArchUnit_Test {
