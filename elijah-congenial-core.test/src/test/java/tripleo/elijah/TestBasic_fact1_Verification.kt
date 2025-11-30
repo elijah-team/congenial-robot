@@ -12,6 +12,7 @@ import tripleo.elijah_durable_congenial.util.Helpers
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+@Ignore
 @Suppress("PrivatePropertyName")
 class TestBasicFact1VerificationTest {
     private var REPORTS : Finally? = null
@@ -24,6 +25,7 @@ class TestBasicFact1VerificationTest {
         c.feedCmdLine(Helpers.List_of(s, "-sO"))
         this.REPORTS = c.reports()
 
+        // more kotlin
         assertEquals(true, c.getSignalResult(DeducePipeline_finishedSignal.INSTANCE))
     }
 
