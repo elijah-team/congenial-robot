@@ -129,7 +129,7 @@
 								<sourceDir>src-bnxn/tripleo-reactive/src/main/java</sourceDir>
 								<sourceDir>src/main/lombok</sourceDir>
 								<sourceDir>target/generated-sources/delombok</sourceDir>
-								<sourceDir>xtend-gen/src/main/java</sourceDir>
+								<!--<sourceDir>xtend-gen/src/main/java</sourceDir>-->
 								<sourceDir>target/generated-sources/annotations</sourceDir>
 								<sourceDir>target/generated-sources/kapt</sourceDir>
 								<sourceDir>target/generated-sources/kaptKotlin</sourceDir>

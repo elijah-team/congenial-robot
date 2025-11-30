@@ -15,11 +15,10 @@
 	<version>congenial.2023-12</version>
 
 	<!--
-	<modelVersion>4.0.0</modelVersion>
 	<parent>
-	<groupId>tripleo.elijah</groupId>
-	<artifactId>congenial-robot</artifactId>
-	<version>congenial.2023-12</version>
+		<groupId>tripleo.elijah</groupId>
+		<artifactId>congenial-robot</artifactId>
+		<version>congenial.2023-12</version>
 	</parent>
 	-->
 
@@ -51,12 +50,6 @@
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.20.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>20030911</version>
 		</dependency>
 
 		<dependency>
@@ -92,7 +85,7 @@
 
 	<build>
 		<plugins>
-<!--
+			<!--
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
@@ -106,9 +99,9 @@
 					</execution>
 				</executions>
 			</plugin>
--->
+			-->
 
-<!--
+			<!--
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
@@ -126,7 +119,7 @@
 					</execution>
 				</executions>
 			</plugin>
--->
+			-->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -166,6 +159,7 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
+<!--
 							<sourceDirs>
 
 								<sourceDir>src/main/java</sourceDir>
@@ -186,6 +180,7 @@
 								<sourceDir>target/generated-sources/kaptKotlin</sourceDir>
 
 							</sourceDirs>
+-->
 						</configuration>
 					</execution>
 					<execution>
