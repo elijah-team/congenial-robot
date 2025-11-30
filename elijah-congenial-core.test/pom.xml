@@ -76,29 +76,32 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<!--
+		<pluginManagement>
+			<plugins>
+				<!--<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.4.2</version>
+				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>3.6.0</version>
-					<executions>
-						<execution>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>add-source</goal>
-							</goals>
-							<configuration>
-								<sources>
-									<source>./src-bnxn/elijah-nextgen-outputstatement/src/main/java</source>
-									<source>./src-bnxn/elijah-stateful/src/main/java</source>
-								</sources>
-							</configuration>
-						</execution>
-					</executions>
+					<version>3.6.1</version>
+				</plugin>-->
+				<plugin>
+					<groupId>org.jetbrains.kotlin</groupId>
+					<artifactId>kotlin-maven-plugin</artifactId>
+					<version>${kotlin.version}</version>
 				</plugin>
-				-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
+		<plugins>
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
@@ -132,7 +135,6 @@
 					<jvmTarget>1.8</jvmTarget>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
