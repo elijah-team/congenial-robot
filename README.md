@@ -35,6 +35,7 @@ LINEAGE
 TODO
 -----
 
-- Convert to ant
-- Finish vision
-- Stop fuddling
+1. Add tools
+2. Convert to ant
+3. Finish vision
+4. Stop fuddling
