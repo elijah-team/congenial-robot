@@ -7,8 +7,6 @@ https://github.com/elijah-team/congenial-robot
 
 ```shell
 git clone https://github.com/elijah-team/congenial-robot
-# note this for merge purposes
-# git switch 2023-congenial-12wp
 ./mvnw test
 ```
 
