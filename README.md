@@ -32,10 +32,18 @@ LINEAGE
 
 `Congenial` - Testablility/verification
 
-TODO
------
+TODO #2
+--------
 
 1. Add tools
-2. Convert to ant
-3. Finish vision
-4. Stop fuddling
+2. Separation
+3. Verification
+4. Inference
+
+
+TODO #1
+--------
+
+1. Convert to ant
+2. Finish vision
+3. Stop fuddling
