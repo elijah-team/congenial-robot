@@ -8,29 +8,6 @@
           <entry name="$PROJECT_DIR$/lib/avaje/avaje-jsonb-generator-1.5.jar" />
         </processorPath>
       </profile>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="tripleo.elijah.elijah-nextgen-outputstatement" />
-        <module name="main" />
-        <module name="tripleo.small" />
-        <module name="tripleo.elijah.congenial.core" />
-        <module name="test" />
-      </profile>
-      <profile name="Annotation profile for congenial-robot PARENT" enabled="true">
-        <sourceOutputDir name="../generated-sources/annotations" />
-        <sourceTestOutputDir name="../generated-test-sources/test-annotations" />
-        <module name="tripleo.elijah.congenial.core.test" />
-        <module name="tripleo.elijah.congenial.core.test.main" />
-        <module name="tripleo.elijah.congenial.core.test.test" />
-      </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="GENERATE_NO_WARNINGS" value="true" />
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="tripleo.elijah.core" options="" />
-    </option>
   </component>
 </project>
