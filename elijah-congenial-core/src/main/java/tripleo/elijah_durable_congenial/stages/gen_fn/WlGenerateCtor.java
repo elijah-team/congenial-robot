@@ -32,13 +32,19 @@ import java.util.List;
  * Created 7/3/21 6:24 AM
  */
 public class WlGenerateCtor implements WorkJob {
-	private final @Nullable IdentExpression   constructorName;
-	private final           ICodeRegistrar    codeRegistrar;
-	private final @NotNull  GenerateFunctions generateFunctions;
-	private final @NotNull  FunctionInvocation functionInvocation;
-	@Getter
-	private final Eventual<EvaConstructor> resultPromise = new Eventual<>();
-	private       boolean                  _isDone = false;
+	private final @Nullable IdentExpression          constructorName;
+	private final           ICodeRegistrar           codeRegistrar;
+	private final @NotNull  GenerateFunctions        generateFunctions;
+	private final @NotNull  FunctionInvocation       functionInvocation;
+	private final           Eventual<EvaConstructor> resultPromise = new Eventual<>();
+	private                 boolean                  _isDone       = false;
+
+	public WlGenerateCtor(final OS_Module aModule,
+						  final IdentExpression aNameNode,
+						  final FunctionInvocation aFunctionInvocation,
+						  final @NotNull Deduce_CreationClosure aCl) {
+		this(aCl.generatePhase().getGenerateFunctions(aModule), aFunctionInvocation, aNameNode, aCl.generatePhase().getCodeRegistrar());
+	}
 
 	@Contract(pure = true)
 	public WlGenerateCtor(@NotNull GenerateFunctions aGenerateFunctions,
@@ -50,11 +56,15 @@ public class WlGenerateCtor implements WorkJob {
 		constructorName    = aConstructorName;
 		codeRegistrar      = aCodeRegistrar;
 
-		resultPromise.then(result -> _isDone=true);
+		resultPromise.then(result -> _isDone = true);
 	}
 
-	public WlGenerateCtor(final OS_Module aModule, final IdentExpression aNameNode, final FunctionInvocation aFunctionInvocation, final @NotNull Deduce_CreationClosure aCl) {
-		this(aCl.generatePhase().getGenerateFunctions(aModule), aFunctionInvocation, aNameNode, aCl.generatePhase().getCodeRegistrar());
+	public @NotNull FunctionInvocation getFunctionInvocation() {
+		return functionInvocation;
+	}
+
+	public Eventual<EvaConstructor> getResultPromise() {
+		return resultPromise;
 	}
 
 	private boolean getPragma(String aAuto_construct) {
@@ -173,7 +183,7 @@ public class WlGenerateCtor implements WorkJob {
 				public void onDone(@NotNull EvaClass result) {
 
 					codeRegistrar.registerFunction1(gf);
-					//gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
+					// gf.setCode(generateFunctions.module.getCompilation().nextFunctionCode());
 
 					gf.setClass(result);
 					result.constructors.put(cd, gf);

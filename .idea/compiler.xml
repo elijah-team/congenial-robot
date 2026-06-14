@@ -8,6 +8,18 @@
           <entry name="$PROJECT_DIR$/lib/avaje/avaje-jsonb-generator-1.5.jar" />
         </processorPath>
       </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="tripleo.elijah.congenial.core" />
+      </profile>
+      <profile name="Annotation profile for congenial-robot PARENT" enabled="true">
+        <sourceOutputDir name="../generated-sources/annotations" />
+        <sourceTestOutputDir name="../generated-test-sources/test-annotations" />
+        <module name="tripleo.elijah.congenial.core.test.main" />
+        <module name="tripleo.elijah.congenial.core.test.test" />
+      </profile>
     </annotationProcessing>
   </component>
 </project>
