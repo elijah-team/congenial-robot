@@ -58,12 +58,12 @@
 		<dependency>
 			<groupId>com.github.elijah-team.congenial-upper</groupId>
 			<artifactId>elijah-congenial-upper</artifactId>
-			<version>637a62ea07</version>
+			<version>8c459892ac5f270def1728c85019c1a91b35ea55</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
-			<version>26.0.2-1</version>
+			<version>26.1.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
