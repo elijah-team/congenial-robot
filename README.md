@@ -117,4 +117,3 @@ https://github.com/elijah-team/congenial-robot/commit/2f2f936d6d014e46699df90296
 Fiddle with mergify (pull #92) (branch w/240802-002)
 * just giving it another shot
 * no idea why i can't figure any of this out
-* i use arch, btw
