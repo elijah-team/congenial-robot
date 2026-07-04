@@ -20,7 +20,10 @@ GOALS
 
 - Less noise
 - More verification
-  - on the road to correctness
+  - got detoured on the road to correctness
+  - concentrate less on EDC_*/integration and
+    more on the output (viz COMP)
+- More coroutines (eta tbd)
 
 
 LINEAGE
@@ -32,18 +35,28 @@ LINEAGE
 
 `Congenial` - Testablility/verification
 
+
+TODO #3
+--------
+
+1. Be more visual
+2. Be more correct
+3. Be more complete
+4. Be less hungry
+
+
 TODO #2
 --------
 
 1. Add tools
 2. Separation
 3. Verification
-4. Inference
+4. Inference and Characterization
 
 
 TODO #1
 --------
 
-1. Convert to ant
+1. Convert to ant (nts: the runConfig's; and congenial-upper,mal,etc)
 2. Finish vision
 3. Stop fuddling
