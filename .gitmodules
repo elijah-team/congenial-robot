@@ -1,0 +1,3 @@
+[submodule "eton"]
+	path = eton
+	url = https://github.com/V9vek/Eton-Desktop
